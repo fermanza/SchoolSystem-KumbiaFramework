@@ -1,0 +1,99 @@
+<center>
+<br />
+<br />
+<table style="font-size:11px;" class="bordeAzul2" width="50%">
+	<tr>
+		<th width="250" height="25" bgcolor="#FFCA5B" align="center" rowspan="2">Registro</th>
+		<th width="250" height="25" bgcolor="#FFCA5B" align="center" rowspan="2">Nombre</th>
+		<th width="250" height="25" bgcolor="#FFCA5B" align="center" rowspan="2">Carrera</th>
+		<th width="100" height="25" bgcolor="#FFCA5B" align="center" colspan="2">Primer Parcial</th>
+		<th width="100" height="25" bgcolor="#FFCA5B" align="center" colspan="2">Segundo Parcial</th>
+		<th width="100" height="25" bgcolor="#FFCA5B" align="center" colspan="2">Tercer Parcial</th>
+		<th width="100" height="25" bgcolor="#FFCA5B" align="center" colspan="2">Promedio Final</th>
+		<th width="250" height="25" bgcolor="#FFCA5B" align="center" rowspan="2">Seleccionar Alumno</th>
+	</tr>
+	<tr>
+		<th width="50" height="25" bgcolor="#FFCA5B" align="center">Calif</th>
+		<th width="50" height="25" bgcolor="#FFCA5B" align="center">Faltas</th>
+		<th width="50" height="25" bgcolor="#FFCA5B" align="center">Calif</th>
+		<th width="50" height="25" bgcolor="#FFCA5B" align="center">Faltas</th>
+		<th width="50" height="25" bgcolor="#FFCA5B" align="center">Calif</th>
+		<th width="50" height="25" bgcolor="#FFCA5B" align="center">Faltas</th>
+		<th width="50" height="25" bgcolor="#FFCA5B" align="center">Calif</th>
+		<th width="50" height="25" bgcolor="#FFCA5B" align="center">Faltas</th>
+	</tr>
+	<?php
+		$i = 0;
+		foreach( $alumnos as $al ){
+	?>
+		<tr>
+			<td width="250" height="25" bgcolor="#FFCA5B"
+					align="center"><?= $al -> registro ?></td>
+			<td width="250" height="25" bgcolor="#FFCA5B"
+					align="center"><?= utf8_encode( $al -> vcNomAlu ) ?></td>
+			<td width="250" height="25" bgcolor="#FFCA5B"
+					align="center"><?= utf8_encode( $al -> nombre_carrera ) ?></td>
+			<td width="50" height="25" bgcolor="#FFCA5B"
+					align="center"><?php if( $al -> calificacion1 == 300 ){ echo "-"; } elseif( $al -> calificacion1 == 999 ){ echo "NP"; } else{ echo $al -> calificacion1; } ?></td>
+			<td width="50" height="25" bgcolor="#FFCA5B"
+					align="center"><?= $al -> faltas1 ?></td>
+			<td width="50" height="25" bgcolor="#FFCA5B"
+					align="center"><?php if( $al -> calificacion2 == 300 ){ echo "-"; } elseif( $al -> calificacion2 == 999 ){ echo "NP"; } else{ echo $al -> calificacion2; } ?></td>
+			<td width="50" height="25" bgcolor="#FFCA5B"
+					align="center"><?php if( $al -> faltas2 == 0 && $al -> calificacion2 == 300 ){ echo "-"; } else{ echo $al -> faltas2; } ?></td>
+			<td width="50" height="25" bgcolor="#FFCA5B"
+					align="center"><?php if( $al -> calificacion3 == 300 ){ echo "-"; } elseif( $al -> calificacion3 == 999 ){ echo "NP"; } else{ echo $al -> calificacion3; } ?></td>
+			<td width="50" height="25" bgcolor="#FFCA5B"
+					align="center"><?php if( $al -> faltas3 == 0 && $al -> calificacion3 == 300 ){ echo "-"; } else{ echo $al -> faltas3; } ?></td>
+			<td width="50" height="25" bgcolor="#FFCA5B"
+					align="center"><?php if( $al -> calificacion == 300 ){ echo "-"; } elseif( $al -> calificacion == 999 ){ echo "NP"; } else{ echo $al -> calificacion; } ?></td>
+			<td width="50" height="25" bgcolor="#FFCA5B"
+					align="center"><?php if( $al -> faltas == 0 && $al -> calificacion == 300 ){ echo "-"; } else{ echo $al -> faltas; } ?></td>
+			<td width="250" height="25" bgcolor="#FFCA5B" align="center">
+				<input type="radio" name="alumnoRadio<?php echo "[$i]" ?>"
+					id="alumnoRadio<?php echo "[$i]" ?>" value="<?= $al -> registro ?>">
+			</td>
+		</tr>
+	<?
+			$i++;
+		}
+	?>
+</table>
+<br />
+<br />
+<table>
+	<tr class="azul">
+		<th width="350" class="bordeAzul2">Habilitar para todo el grupo
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="alumnoRadioTodos"
+				id="alumnoRadioTodos">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</th>
+	</tr>
+	<tr class="azul">
+		<th width="350" class="bordeAzul2">D&iacute;a que se cierra la captura
+			<select name="fechaFin" id="fechaFin" class="lista">
+				<?php
+					foreach ( $fechas as $fecha ){
+				?>
+						<option value="<? echo $fecha; ?>">
+							<? echo date ("Y-m-d H:i:s", $fecha); ?>
+						</option>
+				<?php
+					}
+				?>
+			</select></th>
+	</tr>
+	<tr>
+		<th width="350" height="25" align="center">
+			<input class="res" type="reset" value="Borrar Selecci&oacute;n"> 
+			<input type="submit" name="Habilitar"
+				id="Habilitar" value="Habilitar"></th>
+		</td>
+	</tr>
+</table>
+</form>
+<br />
+</center>

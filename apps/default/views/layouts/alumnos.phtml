@@ -1,0 +1,46 @@
+<tr>
+        <td style="background-color: #0559b7; color: #FFFFFF;" class="menu">
+        	<center>
+            <?= link_to('alumno/informacion','INFORMACION') ?> | 
+			<?
+			if ( Session::get_data('plantel') == 'C' ){
+			?>
+				<?= link_to('alumno/horario','HORARIO') ?> | 
+			<?
+			}
+			else{
+			?>
+				<?= link_to('alumno/horarioT','HORARIO') ?> |
+			<?
+			}
+			?>
+            <?= link_to('alumno/oferta','CURSOS') ?> | 
+            <?= link_to('alumnoselecc/','SELECCION') ?> | 
+			<?
+			if ( Session::get_data('plantel') == 'C' ){
+			?>
+				<?= link_to('alumno/calificaciones','CALIFICACIONES') ?> | 
+			<?
+			}
+			else{
+			?>
+				<?= link_to('alumno/calificacionesT','CALIFICACIONES') ?> | 
+			<?
+			}
+			?>
+            <?= link_to('alumno/kardex','KARDEX') ?> | 
+			<?= link_to('alumno/cambiarContrasena','CAMBIAR CONTRASE&Ntilde;A') ?> | 
+            <?= link_to('alumno/salir','SALIR') ?>
+            </center>
+		</td>
+      </tr>
+	  <tr>
+		<td height="1">
+		</td>
+	  </tr>
+	  <tr>
+		<td align="center">
+		<?= content(); ?>
+		</td>
+	  </tr>
+	  

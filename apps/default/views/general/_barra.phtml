@@ -1,0 +1,19 @@
+<?php
+if(Session::get('statusAlumno') == "SinDocumentos"){?>
+  <div class="menu">
+    <a href="<?= KUMBIA_PATH ?>general/ingresar" onmouseover="toolTip('Ingresar al Sistema de Control Escolar<br><br>CETI Plantel Colomos',this)">Ingresar al sistema</a>
+  <div>
+<?php
+}else
+{
+?>
+<div class="menu">
+	<a href="https://www.ceti.mx/?menu=6" onmouseover="toolTip('Información para Aspirantes al CETI',this)">Aspirantes</a>
+	&nbsp;&nbsp;&nbsp;<span style="color:F27822">|</span>&nbsp;&nbsp;&nbsp;
+	<a href="<?= KUMBIA_PATH ?>general/descargas" onmouseover="toolTip('Sección de descargas para una mejor experiencia con el<br> Sistema de Control Escolar - CETI Plantel Colomos',this)">Descargas</a>
+	&nbsp;&nbsp;&nbsp;<span style="color:F27822">|</span>&nbsp;&nbsp;&nbsp;	
+	<a href="<?= KUMBIA_PATH ?>general/ingresar" onmouseover="toolTip('Ingresar al Sistema de Control Escolar<br><br>CETI Plantel Colomos',this)">Ingresar al sistema</a>
+<div>
+<?php
+}
+?>

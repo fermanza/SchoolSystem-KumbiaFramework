@@ -1,0 +1,135 @@
+
+<br><br><br>
+<table border=1>
+  <tr>
+    <td>
+	  TOTAL PAGOS OTROS
+	</td>
+	<td>
+	  <?php 
+	  	if(isset($otroPago)  == true)
+  	      echo $otroPago; 
+		  
+		else
+		 echo "0";
+	  ?>
+	</td>
+  </tr>
+  <tr>
+    <td>
+	  TOTAL PAGOS OTROS EXTRAS - TITULOS
+	</td>
+	<td>
+	  <?php 
+	    if(isset($tituloExtra)  == true)
+  	      echo $tituloExtra; 	 
+
+		else
+		 echo "0";		  
+	  ?>
+	</td>
+  </tr>
+  <tr>
+    <td>
+	  TOTAL PAGOS OTROS REINSCRIPCION - INSCRIPCION
+	</td>
+	<td>
+	  <?php 
+	
+	    if(isset($re_inscripcion) == true)
+  	      echo $re_inscripcion; 
+		  
+		else
+		 echo "0";
+	  ?>
+	</td>
+  </tr>
+  <tr>
+    <td>
+	  TOTAL PAGOS OTROS CURSOS
+	</td>
+	<td>
+	  <?php 
+	
+	    if(isset($cursoAcreNiv) == true)
+  	      echo $cursoAcreNiv; 
+		  
+		else
+		 echo "0";
+	  ?>
+	</td>
+  </tr>
+</table>
+<br><br><br>
+<table border=1>
+  <tr>
+    <td>
+	  TOTAL PAGOS CAJA
+	</td>
+	<td>
+	  <?php 
+	    if(isset($cajaPago) == true)
+  	      echo $cajaPago; 
+		  
+		else
+		 echo "0";
+	  ?>
+	</td>
+  </tr>
+  <tr>
+    <td>
+	  TOTAL PAGOS CAJA EXTRAS - TITULOS
+	</td>
+	<td>
+	  <?php
+	    if(isset($tituloExtraC) == true)
+  	      echo $tituloExtraC; 
+		  
+		else
+		 echo "0";
+
+	  ?>
+	</td>
+  </tr>
+  <tr>
+    <td>
+	  TOTAL PAGOS CAJA CURSOS
+	</td>
+	<td>
+	  <?php 
+	    if(isset($cursosANC) == true)
+	      echo $cursosANC; 
+		  
+		else
+		 echo "0";
+	  ?>
+	</td>
+  </tr>
+  <tr>
+    <td>
+	  TOTAL PAGOS CAJA GLOBALES
+	</td>
+	<td>
+	  <?php 
+	    if(isset($examenGlob) == true)
+	      echo $examenGlob; 
+		  
+		else
+		 echo "0";
+	  ?>
+	</td>
+  </tr>
+</table>
+<br><br><br>
+<table border=1>
+  <tr>
+    <td>
+	  TOTAL DE PAGOS EN ARCHIVO
+	</td>
+	<td>
+	  <?php echo $pagosTotal; ?>
+	</td>
+  </tr>
+</table>
+<br><br><br>
+ 

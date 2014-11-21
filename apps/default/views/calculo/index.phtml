@@ -1,0 +1,635 @@
+<script language="JavaScript">
+
+    function confirmar(){
+
+        if( window.confirm( "¿Estás Seguro de que deseas continuar?" ) ){
+                return true;
+        }
+
+        return false;
+    }
+
+</script>
+
+<div align="center">
+    <br />
+    <br />
+    <br />
+    <table align="center">
+            <tr>
+                    <th width="750"><div align="justify">
+
+                            <h3>Bienvenido al área de Cálculo</h3>
+                    </th>
+            </tr>
+            <tr>
+                    <td>
+                            De Click en donde usted desee entrar...
+                            <br />
+                            <br />
+                            <br />
+                            <br />
+                    <td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Modificar Calificaciones de los parciales, se le pedir&aacute; que ingrese el
+                            número de nómina del profesor.&nbsp;&nbsp;</p>
+                            <a href ="<?= KUMBIA_PATH ?>calculo/ingresarCurso/">Corregir Calificaciones</a>
+                            <br />
+                            <br />
+                            <br />
+                    <td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Se corregiran los cursos. Todos los alumnos que su situacion de
+                            algún curso est&eacute; mal, ser&aacute; corregido, es muy recomendable hacer un respaldo
+                            de la base de datos antes de ejecutar este script. (Se le pedir&aacute; su
+                            confirmaci&oacute;n al dar click en el link)&nbsp;&nbsp;</p>
+                            <a href ="<?= KUMBIA_PATH ?>calculo/corregirEyT/" onClick="return confirmar();">
+                            Corregir Extras, Titulos, Regularizaci&oacute;n Directa</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Se pasarán las materias de XExtraordinarios que tengan
+                            estado = 'OK' y el periodo sea 12009. Es muy recomendable hacer un respaldo
+                            de la base de datos antes de ejecutar este script. (Se le pedir&aacute; su
+                            confirmaci&oacute;n al dar click en el link)&nbsp;&nbsp;</p>
+                            <a href ="<?= KUMBIA_PATH ?>calculo/pasarAKardexIngXExt/" onClick="return confirmar();">
+                            Pasar a KardexIng de XExtraoardinarios</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Se crearán los horarios de los alumnos para la selección 32009. <b>NO</b> dar click
+                            en el siguiente enlace si no se sabe que se está haciendo...</p>
+                            <a href ="<?= KUMBIA_PATH ?>calculo/cllenarSeleccionTiempo/" onClick="return confirmar();">
+                            Llenar la tabla de Seleccion_Tiempo</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Se llenara XAlumnoAgenda con los registros que hay en la tabla de
+                            Seleccion_Tiempo, del periodo 32009. Si ya existen estos registros con ese periodo
+                            no se volverá a llenar. De cualquier forma es recomendable hacer respaldos antes
+                            de ejecutar este script. Es necesario haber ejecutado con anterioridad el script de
+                            Seleccion Tiempo, aunque no olvidar que el script que llena Seleccion Tiempo no valida
+                            si ya existe ese registro en ese periodo, por lo que si se ejecuta 2 veces, se insertaran
+                            2 veces, lo cual afecataría a este script también.</p>
+                            <a href ="<?= KUMBIA_PATH ?>calculo/cllenarXAlumnoAgenda/" onClick="return confirmar();">
+                            Llenar la tabla de XAlumnoAgenda</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Se llenara XAlumnoAgenda con los registros que tengan periodo de ingreso
+                            32009. Si ya existen estos registros con ese periodo no se volverá a llenar.
+                            De cualquier forma es recomendable hacer respaldos antes de ejecutar este script.
+                            </p>
+                            <a href ="<?= KUMBIA_PATH ?>calculo/cllenarXAlumnoAgendaPrimerIngreso/" onClick="return confirmar();">
+                            Llenar la tabla de XAlumnoAgenda con la Info de Alumnos con miPerIng = 32009</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Se llenarán los alumnos de primer ingreso, revisar el controlador
+                            Calculo la funcion cllenarPrimerIngreso(), para ver cuáles son los registros
+                            que se llenarán</p>
+                            <br />
+                            <form method="POST" action="<?= KUMBIA_PATH ?>calculo/InscribirALosDePrimero12012/" onSubmit="return validar(this);">
+                                    <p>Inscribir a los alumnos de primero.</p>
+                                    <input type ="text" name="clavecurso" id ="clavecurso">
+                                    <br />
+                                    <input type ="submit">
+                            </form>
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Se desinscribirán los alumnos que esten en los cursos reservados para primero
+                            </p>
+                            <form method="POST" action="<?= KUMBIA_PATH ?>calculo/cdesinscribir/" onSubmit="return validar(this);">
+                                    <p>Desinscribir a los alumnos que se metieron a los cursos que
+                                    estaban reservados para los de primero</p>
+                                    <input type ="text" name="clavecurso" id ="clavecurso">
+                                    <br />
+                                    <input type ="submit">
+                            </form>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Checar pagos que se hicieron en el periodo 32009 para ingresar...
+                            </p>
+                                    <p>Se leera del TXT del banco, para ver quién pago, este script debe<br />
+                                    de distinguir entre alumnos de tecnólogo y alumnos de ingeniería</p>
+                                    <a href ="<?= KUMBIA_PATH ?>pagos/verificarPagoInicio/" onClick="return confirmar();">Ir al Script</a>
+                            </form>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Poner estado de OK
+                            </p>
+                                    <p>Los registros que esten en Temporal2 se pasarán a Alumnos con situación ok</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/compararTemporal2/" onClick="return confirmar();">Ir al Script</a>
+                            </form>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Poner estado real de enTipo en Alumnos
+                            </p>
+                                    <p>Poner el estado real de enTipo en Alumnos, para esto se hará una consulta a xalumnocursos</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/ponerEnTipoEnAlumnos/" onClick="return confirmar();">Ir al Script</a>
+                            </form>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Poner estado real de enTipo2 en Alumnos
+                            </p>
+                                    <p>Poner el estado real de enTipo2 en Alumnos, para esto se hará una consulta a xalumnocursos</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/ponerEnTipoEnAlumnos2/" onClick="return confirmar();">Ir al Script</a>
+                            </form>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Poner los cursos del 32009 a xPermisosCaptura
+                            </p>
+                                    <p>Todos los cursos que estén xcursos del 32009 se insertarán en xpermisoscaptura. No se volverá
+                                    a insertar el mismo curso, si es que existe en xcursos...(Colomos)</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/llenarXPermisosCapturaColomos/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            </form>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Poner los cursos del 32009 a xtPermisosCaptura
+                            </p>
+                                    <p>Todos los cursos que estén xtcursos del 32009 se insertarán en xtpermisoscaptura. No se volverá
+                                    a insertar el mismo curso, si es que existe en xtcursos... (Tonala)</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/llenarXTPermisosCapturaTonala/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            </form>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Se llenarán los alumnos de Tonala, revisar el controlador
+                            Calculo la funcion cllenarTonala(), para ver cuáles son los registros
+                            que se llenarán</p>
+                            <br />
+                            <form method="POST" action="<?= KUMBIA_PATH ?>calculo/cllenarTonala/" onSubmit="return validar(this);">
+                                    <p>Inscribir a los alumnos de tonala.</p>
+                                    <input type ="text" name="clavecurso" id ="clavecurso">
+                                    <br />
+                                    <input type ="submit">
+                            </form>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Revisar que cursos tienen 2 horas.</p>
+                            <br />
+                                    <p>Se le pone 2 a xalumnoagenda, en las horas que se cruzan.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/cChecarDoblesHoras/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Ponerles el pago en alumnos.</p>
+                            <br />
+                                    <p>Todos los alumnos que aparescan en Temporal2, significa
+                                    que tienen el pago bien hecho.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/ponerPagoEnAlumnos/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Corregir el cupo en xcursos.</p>
+                            <br />
+                                    <p>Todos los xcursos que tengan mal el cupo.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/corregirElCupoEnXCursos/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Corregir las materias del kardex.</p>
+                            <br />
+                                    <p>Se borrarán los renglones que se repita el registro junto con la materia.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/borrarMateriasRepetidasEnKardex/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Poner el periodo en la tabla historial_alumno.</p>
+                            <br />
+                                    <p>Se podrán los periodos en la tabla historial_alumno, tomando como referencia
+                                    el campo fecha.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/ponerPeriodoEnHistorialAlumno/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Llenar la tabla de seleccion_tiempo para el periodo de captura 12010.</p>
+                            <br />
+                                    <p>Se crearán nuevos campos para la seleccion del periodo de captura del 12010,
+                                    está tabla se usa para ir dando permisos de captura de materias a los mejores promedios.
+                                    Sólo los alumnos Regulares se tomarán en cuenta. Es MUY importante que no se
+                                    vuelva a ejecutar este script si ya fue ejecutado. Si desea volver a ejecutarlo
+                                    favor de revisar el código para nuevos tiempos de captura, así como borrar
+                                    todos los registros que correspondan al 12010.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/llenarSeleccionTiempoPara12010Regulares/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Llenar la tabla de seleccion_tiempo para el periodo de captura 12010.</p>
+                            <br />
+                                    <p>Se crearán nuevos campos para la seleccion del periodo de captura del 12010,
+                                    está tabla se usa para ir dando permisos de captura de materias a los mejores promedios.
+                                    Sólo los alumnos Regulares se tomarán en cuenta. Es MUY importante que no se
+                                    vuelva a ejecutar este script si ya fue ejecutado. Si desea volver a ejecutarlo
+                                    favor de revisar el código para nuevos tiempos de captura, así como borrar
+                                    todos los registros que correspondan al 12010.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/llenarSeleccionTiempoPara12010Irregulares/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Pasar a kardex las materias que pasaron los alumnos del periodo 32009.</p>
+                            <br />
+                                    <p>Si ya se ejecutó el script, y se vuelve a ejecutar no se volverán
+                                    a pasar los datos a la tabla de kardex_ing. De cualquier forma se
+                                    recomienda revisar antes el código y hacer pruebas para asegurar
+                                    que si sea así.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/pasarAKardexIng2/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Pasar a la tabla de Xextraordinarios, todas las materias que hayan
+                                    sido reprobadas del periodo 32009.</p>
+                            <br />
+                                    <p>Si esa materia con ese registro ya fue pasada a Xextraordinarios, no
+                                    se repetirán los datos.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/llenarExtraordinariosDel32009Colomos/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Pasar a la tabla de XTextraordinarios Tonala, todas las materias que hayan
+                                    sido reprobadas del periodo 32009.</p>
+                            <br />
+                                    <p>Si esa materia con ese registro ya fue pasada a XTextraordinarios, no
+                                    se repetirán los datos.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/llenarExtraordinariosDel32009Tonala/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Pasar los kardex del 32009 a KardexIng de datos.</p>
+                            <br />
+                                    <p>Todos los registros que existan en el KardexIng de escolar, y no
+                                    esten en KardexIng de datos.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/pasarDeKardexIng32009ADatosKardexIng/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Pasar los kardex del 32009 a KardexIng de escolar.</p>
+                            <br />
+                                    <p>Todos los registros que existan en el KardexIng de datos, y no
+                                    esten en KardexIng de escolar.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/pasarDeKardexIng32009AEscolarKardexIng/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Sumar calificaciones y faltas de xalumnocursos del 32009.</p>
+                            <br />
+                                    <p>Sumar calificacion1, calificacion2 y calificacion3 a calificacion
+                                    en xalumnocursos del periodo 32009. También suma faltas1, faltas2 y
+                                    faltas3.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/sumarCalif1Calif2Calif3/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Poner la situacion 32009.</p>
+                            <br />
+                                    <p>Calificar la situacion del 32009. A pesar de esto es
+                                    necesario correr el script de "calculo/corregirEyT".</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/calificarSituacion32009/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Agendar el tiempo a seleccionTiempo Tonala.</p>
+                            <br />
+                                    <p>Agendar el tiempo a los alumnos de Tonala.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/seleccionTiempoTonala/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>PonerTitulosEnExtraordinariosQueCursaronEn32009YNoCargaronEn12009Colomos.</p>
+                            <br />
+                                    <p>Que los maestros puedan capturar los titulos.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/PonerTitulosEnExtraordinariosQueCursaronEn32009YNoCargaronEn12009Colomos/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>PonerTitulosEnExtraordinariosQueCursaronEn32009YNoCargaronEn12009Tonala.</p>
+                            <br />
+                                    <p>Que los maestros puedan capturar los titulos.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/PonerTitulosEnExtraordinariosQueCursaronEn32009YNoCargaronEn12009Tonala/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>corregirCalifDeExtraSiEsLaMismaEnXalumnocursos.</p>
+                            <br />
+                                    <p>Corregir la calificacion de los xextras.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/corregirCalifDeExtraSiEsLaMismaEnXalumnocursos/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Que los profesores puedan capturar los Titulos Pasados.</p>
+                            <br />
+                                    <p>Poner los tiempos de captura para los Titulos pasados,
+                                    es decir alumnos que hayan presentado en los periodos pasados
+                                    y no lo hayan pasado, y debieron cargar esa materia en el periodo actual.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/ponerPermisosenXPermLosTitulosRaros/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Borrar registros duplicados en seleccionTiempo.</p>
+                            <br />
+                                    <p>Borrar los registros repetidos en seleccionTiempo.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/borrarDoblesEnSeleccionTiempo/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Borrar los que no van en SeleccionTiempo.</p>
+                            <br />
+                                    <p>Borrar los registros que tengan titulos reprobados.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/borrarDeSeleccionTiempoLosQueNoTenganCalifEnTitulo/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Inscribir a los alumnos de primer ingreso del periodo 12010.</p>
+                            <br />
+                                    <p>Se debe checar primero el controlador de Calculo en la
+                                    función "InscribirALosDePrimero12010" para poder ver cuáles registros
+                                    son los que se está trayendo, y de está forma saber que alumnos se van a
+                                    inscribir según el curso que uno esté proporcionando.</p>
+                            <form method="POST" action="<?= KUMBIA_PATH ?>calculo/InscribirALosDePrimero12010/"
+                                            onSubmit="return validar(this);">
+                                    <p>Inscribir a los alumnos de primero.</p>
+                                    <input type ="text" name="clavecurso" id ="clavecurso">
+                                    <br />
+                                    <input type ="submit">
+                            </form>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Crear las cuentas en Usuarios.</p>
+                            <br />
+                                    <p>Se crearán las cuentas en Usuarios. Si un usuario con ese registro
+                                    ya existe, no volverá a ser creado.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/crearCuentasDePrimerIngreso12010EnLaTablaDeUsuarios/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Crear los registros en Alumnos.</p>
+                            <br />
+                                    <p>Se crearán las filas en alumnos segun los admitidos.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/crearLosAlumnosAdmitidosEnAlumnos/"
+                                                    onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+    <h3>Favor de ingresar su preregistro para poder pagar su inscripci&oacute;n.<br />
+    El preregistro se encuentra en la lista de admitidos por continuaci&oacute;n de estudios.</h3>
+    <br />
+    <form method="POST" action="<?= KUMBIA_PATH ?>pagos/fichaPreRegistro"
+                    onSubmit="return validarEntero(registro)">
+            <input type="text" name="registro" id="registro" size="30" maxlength="8" >&nbsp;
+            <input type="submit" name="enviar" value="Imprimir Ficha PreRegistro">
+    </form>
+    <br />&nbsp;
+
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Crear actas dobles para los cursos del periodo 12010.</p>
+                            <br />
+                                    <p>Se opto por hacer dobles las actas de los cursos 12010.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>
+                                                    calculo/crearLasActasParaLasMateriasDelPlan2000YNoDejarlasJuntasConLasDelPlan2007/"
+                                                            onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+            <tr>
+                    <td>
+                            <p>Pasar los cursos de Xcursos a Xccursos.</p>
+                            <br />
+                                    <p>Se pasaran los cursos de Xcursos a Xccursos y a
+                                        Xchorascursos con la finalidad de tener
+                                        una unica tabla donde se guarden los cursos.</p>
+                                    <a href ="<?= KUMBIA_PATH ?>calculo/XcursosAXccursos/" onClick="return confirmar();">Ir al Script</a>
+                            <br />
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+			
+            <tr>
+                    <td>
+                            <p class="letraRoja">Inscribir a los alumnos de primero</p>
+                            <br />
+                            <form method="POST" action="<?= KUMBIA_PATH ?>calculo/inscribir_primeros/">
+                                    <p>Inscribir a los alumnos de primero.</p>
+                                    curso_id <input type ="text" name="curso_id" id ="curso_id" size="100">
+                                    <br />
+									registros<input type ="text" name="registros" id ="registros" size="100">
+									<br />
+                                    <input type ="submit">
+                            </form>
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+			
+            <tr>
+                    <td>
+                            <p class="letraRoja">Inscribir a los alumnos de primero Tonalá</p>
+                            <br />
+                            <form method="POST" action="<?= KUMBIA_PATH ?>calculo/inscribir_primeros_tonala/">
+                                    <p>Inscribir a los alumnos de primero.</p>
+                                    curso_id <input type ="text" name="curso_id" id ="curso_id" size="100">
+                                    <br />
+									registros<input type ="text" name="registros" id ="registros" size="100">
+									<br />
+                                    <input type ="submit">
+                            </form>
+                            <br />
+                            <br />
+                    </td>
+            </tr>
+    </table>
+
+</div>

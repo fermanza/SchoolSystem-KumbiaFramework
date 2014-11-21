@@ -1,0 +1,58 @@
+<style type="text/css">
+	.listadoMaterias a{
+		display: block;
+		text-decoration: none;
+		color: #000000;
+		font-weight: bold;
+	}
+	.listadoMaterias a:hover{
+		text-decoration: underline;		
+	}
+</style>
+
+<?= render_partial("info"); ?>
+<br>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+	LISTAS DE ASISTENCIA
+</div>
+<br />
+<div>
+	<div>
+		<table width="100%" style="font-size:11px;">
+			<tr>
+				<td width="325" class="listadoMaterias" valign="top">
+					<table width="100%" class="bordeazul" style="font-size:11px;">
+						<tr class="naranja">
+							<th colspan="5">LISTADO DE MATERIAS</th>						
+						</tr>
+						<tr class="azul">
+							<th width="30">Acta</th>
+							<th colspan="3">Materia</th>
+							<th width="30">Grupo</th>
+						</tr>
+						<?php 
+						$Materias = new MateriasHorarios();					
+						$Grupos = new Grupos();
+						foreach($horarios as $h){
+							$materia = $Materias -> find_first("id = ".$h -> materia_id);
+							$grupo = $Grupos -> find_first("id = ".$h -> grupo_id);
+							echo tr_color('#CCDEFF', '#FFFFFF');
+							echo '<td>'.$h -> id.'</td>';
+							echo '<td>'.link_to_remote('&nbsp;&nbsp;'.$materia -> nombre, "update: listadoAlumnos", "action: tgoprofesor/listado/".$h->id).'</td>';
+							echo '<td>'.link_to_remote('Ver', "update: listadoAlumnos", "action: tgoprofesor/listado/".$h->id).'</td>';
+							echo '<td><center>'.link_to("tgoprofesor/listado/".$h->id."/1","Descargar<br/>".img_tag("excel.png","width: 20","border: 0")).'</center></td>';
+							echo '<td>'.$grupo -> nombre.'</td>';
+						} 
+						?>
+					</table>
+				</td>
+				<td width="600">
+					<div id="listadoAlumnos">
+					
+					</div>
+				</td>
+			</tr>		
+		</table>
+	</div>
+</div>

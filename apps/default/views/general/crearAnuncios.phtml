@@ -1,0 +1,118 @@
+<div>
+<br /><br />
+<table border="0" cellpadding="0" cellspacing="0" width="900" >
+	<tr>
+		<td style="font-family: Verdana;">
+		
+
+<link rel="stylesheet" type="text/css" href="<?= KUMBIA_PATH ?>public/images/stylee.css" />
+<!-- jQuery -->
+<script type="text/javascript" src="<?= KUMBIA_PATH ?>public/jquery/jquery-1.4.2.min.js"></script>
+
+<!-- markItUp! -->
+<script type="text/javascript" src="<?= KUMBIA_PATH ?>public/markitup/jquery.markitup.js"></script>
+<!-- markItUp! toolbar settings -->
+<script type="text/javascript" src="<?= KUMBIA_PATH ?>public/markitup/sets/default/set.js"></script>
+<!-- markItUp! skin -->
+<link rel="stylesheet" type="text/css" href="<?= KUMBIA_PATH ?>public/markitup/skins/markitup/style.css" />
+<!--  markItUp! toolbar skin -->
+<link rel="stylesheet" type="text/css" href="<?= KUMBIA_PATH ?>public/markitup/sets/default/style.css" />
+</head>
+<body>
+
+<!--
+<script type="text/javascript">
+$(document).ready(function()	{
+	// Add markItUp! to your textarea in one line
+	// $('textarea').markItUp( { Settings }, { OptionalExtraSettings } );
+	$('#html').markItUp(myHtmlSettings);
+	
+	// You can add content from anywhere in your page
+	// $.markItUp( { Settings } );	
+	$('.add').click(function() {
+ 		$.markItUp( { 	openWith:'<opening tag>',
+						closeWith:'<\/closing tag>',
+						placeHolder:"New content"
+					}
+				);
+ 		return false;
+	});
+	
+	// And you can add/remove markItUp! whenever you want
+	// $(textarea).markItUpRemove();
+	$('.toggle').click(function() {
+		if ($("#markItUp.markItUpEditor").length === 1) {
+ 			$("#markItUp").markItUpRemove();
+			$("span", this).text("get markItUp! back");
+		} else {
+			$('#markItUp').markItUp(mySettings);
+			$("span", this).text("remove markItUp!");
+		}
+ 		return false;
+	});
+});
+</script>
+-->
+
+<link rel="stylesheet" type="text/css" href="<?= KUMBIA_PATH ?>markitup/skins/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="<?= KUMBIA_PATH ?>markitup/sets/html/style.css" />
+
+<script type="text/javascript" src="<?= KUMBIA_PATH ?>jquery/jquery.js"></script>
+<script type="text/javascript" src="<?= KUMBIA_PATH ?>markitup/jquery.markitup.js"></script>
+<script type="text/javascript" src="<?= KUMBIA_PATH ?>markitup/sets/html/set.js"></script>
+
+<script language="javascript">
+$(document).ready(function()	{
+   $('#html').markItUp(myHtmlSettings);
+});
+</script>
+
+
+<div id="html">
+<div class="markItUp" id="markItUpHtml">
+<div class="markItUpContainer">
+<div class="markItUpHeader">
+	<ul>
+		<li class="markItUpButton markItUpButton1 "><a title="Heading 1 [Ctrl+1]" accesskey="1" href="">Heading 1</a></li>
+		<li class="markItUpButton markItUpButton2 "><a title="Heading 2 [Ctrl+2]" accesskey="2" href="">Heading 2</a></li>
+		<li class="markItUpButton markItUpButton3 "><a title="Heading 3 [Ctrl+3]" accesskey="3" href="">Heading 3</a></li>
+		<li class="markItUpButton markItUpButton4 "><a title="Heading 4 [Ctrl+4]" accesskey="4" href="">Heading 4</a></li>
+		<li class="markItUpButton markItUpButton5 "><a title="Heading 5 [Ctrl+5]" accesskey="5" href="">Heading 5</a></li>
+		<li class="markItUpButton markItUpButton6 "><a title="Heading 6 [Ctrl+6]" accesskey="6" href="">Heading 6</a></li>
+		<li class="markItUpButton markItUpButton7 "><a title="Paragraph" href="">Paragraph</a></li>
+		<li class="markItUpSeparator">---------------</li>
+		<li class="markItUpButton markItUpButton8 "><a title="Bold [Ctrl+B]" accesskey="B" href="">Bold</a></li>
+		<li class="markItUpButton markItUpButton9 "><a title="Italic [Ctrl+I]" accesskey="I" href="">Italic</a></li>
+		<li class="markItUpButton markItUpButton10 "><a title="Stroke through [Ctrl+S]" accesskey="S" href="">Stroke through</a></li>
+		<li class="markItUpSeparator">---------------</li>
+		<li class="markItUpButton markItUpButton11 "><a title="Ul" href="">Ul</a></li>
+		<li class="markItUpButton markItUpButton12 "><a title="Ol" href="">Ol</a></li>
+		<li class="markItUpButton markItUpButton13 "><a title="Li" href="">Li</a></li>
+		<li class="markItUpSeparator">---------------</li>
+		<li class="markItUpButton markItUpButton14 "><a title="Picture [Ctrl+P]" accesskey="P" href="">Picture</a></li>
+		<li class="markItUpButton markItUpButton15 "><a title="Link [Ctrl+L]" accesskey="L" href="">Link</a></li>
+		<li class="markItUpSeparator">---------------</li><li class="markItUpButton markItUpButton16 "><a title="Clean" href="">Clean</a></li>
+		<li class="markItUpButton markItUpButton17 preview"><a title="Preview" href="">Preview</a></li>
+	</ul>
+</div>
+<textarea rows="20" cols="80" id="html" class="markItUpEditor">
+
+markItUp!
+</textarea>
+<div class="markItUpFooter">
+	<div class="markItUpResizeHandle">
+	</div>
+</div>
+<iframe class="markItUpPreviewFrame">
+</iframe>
+</div>
+</div>
+</div>
+
+
+
+		</td>
+	</tr>
+</table>
+<br /><br />
+</div>

@@ -1,0 +1,32 @@
+<br />
+
+<table border="1" cellpadding="1" cellspacing="1" style="font-size: 10px; width:500px">
+	<tr class="fondoazul">
+		<th colspan="2" align="center" height="25">Prerrequisitos Para <?php echo $matt -> clave." ".utf8_encode($matt -> nombre); ?>
+		</th></tr>
+	<tr class="fondonaranja">
+		<th height="25" align="center">Materia</th>
+		<th height="25">Acreditada en Kardex</th>
+	</tr>
+<?php
+foreach( $prerrequisitos as $p ){
+?>
+<tr>
+	<td style="width:300px;" align="left">
+		&nbsp;
+		<?php 
+			if( !isset($p -> clave) ) echo utf8_encode($p -> nombre);
+			else echo $p -> clave." ".utf8_encode($p -> nombre)." ";
+		?>
+	</td>
+	<td style="width:100px;" align="center">
+	<?php
+		if( $p -> silatiene == 1 ){echo "<img src='".KUMBIA_PATH."img/ok.gif' />";}
+		else{echo "<img src='".KUMBIA_PATH."img/delete.gif' />";}
+	?>
+	</td>
+</tr>
+<?php
+}
+?>
+</table>

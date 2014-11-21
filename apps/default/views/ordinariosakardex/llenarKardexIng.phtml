@@ -1,0 +1,108 @@
+<center>
+<table>
+	<tr>
+		<td width="750"><div align="justify">
+		<?
+		if ( 1 ){
+			$periodo = 12009;
+			
+			$xalumnocursos = new Xalumnocursos();
+			
+			$day = date ("d");
+			$month = date ("m");
+			$year = date ("Y");
+			$date1 = date ("Y-m-d", mktime(0, 0, 0, $month, $day, $year));
+			
+			$k=0;
+			
+//			foreach ($xalumnocursos -> find("periodo = ".$periodo." and situacion = 'ORDINARIO' and curso ='MCT1643'")as $xalumnocurso){
+			foreach ($xalumnocursos -> find("periodo = ".$periodo." and situacion = 'ORDINARIO' 
+					and calificacion >= 70 and calificacion <=100 and curso = 'MCT1550'")as $xalumnocurso){
+//			foreach ($xalumnocursos -> find("periodo = ".$periodo." and situacion = 'REGULARIZACION'")as $xalumnocurso){
+			
+				$k ++;
+				// Se hace en partes ya que el query es muy grande y excede el tiempo de espera...
+				/*
+				// Primero
+				if ( $k > 2000 )
+					break;
+				*/
+				/*
+				// Segundo
+				if ( $k <= 2000 )
+					continue;
+				
+				if  ( $k > 4000 )
+					break;
+				*/
+				/*
+				// Tercero
+				if ( $k <= 4000 )
+					continue;
+				*/
+				
+				$kardexes = new KardexIng();
+				$xcursos = new Xcursos();
+				$materiasIng = new Materiasing();
+				$kardexIng = new KardexIng();
+				
+				$kardexes -> registro = $xalumnocurso -> registro;
+				
+				foreach ($xcursos -> find( "clavecurso = '".$xalumnocurso -> curso."'") as $xcurso){
+					$temp = "";
+					$temp = $xcurso -> materia;
+					$temp2 = $xcurso -> materia;
+					echo "xcurso->materia: ".$xcurso -> materia."<br />";
+					
+					if ( $temp[2] == '-' ){
+						$kardexes -> clavemat = $xcurso -> materia;
+						echo "primerIF";
+					}
+					else
+						if ( $temp[3] == '-' ){
+							$kardexes -> clavemat = $xcurso -> materia;
+							echo "SegundoIF";
+						}
+						else{
+							$temp2 = substr ($temp, 0, 3);
+							$kardexes -> clavemat = $temp2;
+							echo "tercerIF";
+						}
+						
+					echo "temp: ".$temp2."<br /><br />";
+					
+					$kardexes -> nivel = '0';
+					foreach ($materiasIng -> find( "clavemat = '".$temp2."'" ) as $materiaIng)
+						$kardexes -> nivel = $materiaIng -> nivel;
+				}
+				if ( $kardexes -> nivel == "" || $kardexes -> nivel == null )
+					$kardexes -> nivel = '0';
+				
+				if ( $kardexIng -> find_first ("registro= ".$kardexes -> registro.
+												" and clavemat= '".$kardexes -> clavemat."' 
+												and periodo= 12009") ){
+					
+					echo "<br />Ya existia: ".$kardexes -> registro." clavmat: ".$kardexes -> clavemat." perio: 12009<br />";
+				}
+				else{
+					$kardexes -> periodo = 12009;
+					$kardexes -> tipo_de_ex = 'D';
+//					$kardexes -> tipo_de_ex = 'R';
+					$kardexes -> promedio = $xalumnocurso -> calificacion;
+					$kardexes -> fecha_reg = $date1;
+					echo "<br />reg: ".$kardexes -> registro."<br />";
+					// Guardar en KardexIng
+					$kardexes -> save();
+				}
+			}
+			
+			echo "<br /><br />Se llenaron los Kardex correctamente";
+			echo "<br />Counter: ".$k;
+		}
+		else
+			echo "Checar if para poder ejecutar script";
+		?>
+		</td>
+	</tr>
+</table>
+</center>

@@ -1,0 +1,151 @@
+<!--Tabla donde se muestra el reporte general-->
+<center>
+  <table border="1" style="width:100%;" CELLPADDING=6>
+    <tr class="naranja">
+      <td colspan="4" align="center">
+	    REPORTE DE CONCEPTOS <?php echo $solicitante; ?>  	
+	  </td>
+	</tr>
+	<tr bgcolor="#EAE8E8">
+	  <td>
+	    &nbsp;&nbsp;Conceptos de ventanilla
+	  </td>
+	  <td align="center">
+	    <?php 
+		  foreach($ventanillaConcep AS $value)
+		    $conVentanilla = $value -> totalConceptoV; 
+			
+			echo $conVentanilla;
+		?>
+	  </td>
+	  <td>
+	    &nbsp;&nbsp;Monto Total Ventanilla
+	  </td>
+	  <td>
+		&nbsp;&nbsp;$&nbsp;<?php 
+		  foreach($totalVenMonto AS $value)
+		    $montoTotalVen = $value -> montoVentanilla;
+			
+		    echo $montoTotalVen; 
+		?>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    &nbsp;&nbsp;Conceptos de caja
+	  </td>
+	  <td align="center">
+	    <?php 
+		  foreach($conceptoCaja AS $value)
+		    $conCaja = $value -> totalConceptoC;
+		   
+		    echo $conCaja; 
+		?>
+	  </td>
+	  <td>
+	    &nbsp;&nbsp;Monto Total Caja
+	  </td>
+	  <td>
+		 &nbsp;&nbsp;$&nbsp;<?php 
+		  foreach($montoCajaTotal AS $value)
+		    $montoTotalCaja = $value -> montoCaja;
+			
+		    echo $montoTotalCaja; 
+		?>
+	  </td>
+	</tr>
+	<tr bgcolor="#EAE8E8" style="font-weight:bold;">
+	  <td>
+	    &nbsp;&nbsp;Total de conceptos solicitados
+	  </td>
+	  <td align="center">
+	    <?php echo $totalConceptos; ?>
+	  </td>
+	  <td>
+	   &nbsp;&nbsp;Monto Total
+	  </td>
+	  <td>
+	    &nbsp;&nbsp;$&nbsp;<?php echo $montoTotal; ?>
+	  </td>
+	</tr>
+  </table>
+  
+  <!--Muestra los conceptos solicitados con el detalle-->
+  <table border=1 style="margin-top:30px; width:100%;">
+    <tr class="naranja">
+	  <td colspan="6" align="center">
+	    Conceptos Solicitados
+	  </td>
+	</tr>
+    <tr style="background:#F9B240; color:#FFFFFF;font-weight:bold; font-size: 15px;" align="center">
+	  <td>
+	    Concepto
+	  </td>
+	  <td>
+	    Nombre Concepto
+	  </td>
+	  <td>
+	    Tipo Tramite
+	  </td>
+	  <td>
+	    Costo
+	  </td>
+	  <td>
+	    Cantidad
+	  </td>
+	  <td>
+	    Monto Total
+	  </td>
+	</tr>
+	<?php
+	 //echo $conceptosGeneral[0]; die();
+	  foreach($conceptosGeneral AS $x)
+	  {
+	    //echo $value -> concepto; die();
+	     var_dump($x -> concepto); die();
+	
+	    //Se le agregan ceros al codigo para que quede de 4 digitos
+	    if(strlen($value -> concepto) == 1)
+		   $codConcepto = "000".$value -> concepto;
+		   
+		else if(strlen($value -> concepto) == 2)
+		   $codConcepto = "00".$value -> concepto;
+		   
+		else if(strlen($value -> concepto) == 3)
+		   $codConcepto = "0".$value -> concepto;
+		   
+		else
+		  $codConcepto = $value -> concepto;
+		
+        //Se valida el tipo de tramite		
+		if($value -> tipo_tramite == 1)
+		   $tipoTramite = "Ventanilla";
+		   
+		else
+		   $tipoTramite = "Caja";
+	?>
+	<tr style="font-size:15px;">
+	  <td align="center">
+	    <?php echo $codConcepto; ?>
+	  </td>
+	  <td>
+	    &nbsp;<?php echo utf8_encode($value -> nombre); ?>
+	  </td>
+	  <td align="center">
+	    <?php echo $tipoTramite;?>
+	  </td>
+	  <td>
+	    &nbsp;&nbsp;<?php echo "$ ".$value -> costo;?>
+	  </td>
+	  <td align="center">
+	    <?php echo $value -> cantidad;?>
+	  </td>
+	  <td>
+	    &nbsp;&nbsp;<?php echo "$ ".$value -> total;?>
+	  </td>
+	</tr>
+	<?php
+	  }
+	?>
+  </table>
+</center>

@@ -1,0 +1,62 @@
+<?= stylesheet_link_tag('ventana/ventanaPopUp', true); ?>
+
+<div id="tipoTitulos">
+<div id="fijo" >
+  <div id="headerTittle">TITULOS A PAGAR</div>
+  <div id="contenido" >
+    <table style="width:95%; font-family:arial; font-size:12px; margin-top:40px;">
+	  <tr style="font-weight:bold; color:#FFFFFF; text-align:center;">
+	    <td bgcolor="#939292" height="35px">
+		  AGREGAR
+		</td>
+		<td bgcolor="#939292" height="35px">
+		  MATERIAS
+		</td>
+		<td bgcolor="#939292" height="35px">
+		  CURSO
+		</td>
+		<td bgcolor="#939292" height="35px">
+		  TIPO
+		</td>
+	  </tr>
+<?php
+	 if($msg != "0")
+     {
+       echo "<tr style='background-color: #E5E3E3; height:40px;'>"; 
+	   echo "<td colspan='7' align='center' ><b>".$msg."</b></td>";
+	   echo "</tr>";
+     }
+    
+else{
+     foreach($titulos AS $value)
+	 {
+	    echo tr_color('#FFFFFF','#E5E3E3'); 
+		//if($value -> Agregado == 'False')
+          echo '<td align="center" height="35px;"><input type="checkbox" name="titulo'.$value -> id.'" id="titulo'.$value -> id.'" onclick="AgregarTitulos('.$concepto -> id.','.$concepto -> costo.','.$value -> curso_id.')"/></td>';
+	    
+		//else
+		  //echo '<td align="center" height="35px;" style="font-weight:bold;">LA FICHA YA FUE GENERADA</td>';
+		
+		echo '<td height="35px;"><div id="nombre'.$value -> id.'">&nbsp;&nbsp;'.utf8_encode($value -> nombre).'&nbsp;(&nbsp;'.$value -> materia.'&nbsp;)</div></td>';
+		echo '<td align="center" height="35px;">&nbsp;&nbsp;'.$value -> curso.'&nbsp;&nbsp;</td>';
+		echo '<td align="center" height="35px;">&nbsp;&nbsp;'.$value -> situacion.'&nbsp;&nbsp;</td>';
+	    echo "</tr>";
+		
+		echo "<script type='text/javascript'>
+				for(var i=0; i < countT; i++){
+				  document.getElementById('titulo'+miArrayT[i]).checked = 'True';
+				}
+			  </script>";
+	 }
+}
+?>
+	</table>
+	<br/><br/><br/>
+	
+	<!--<input type="button" class="common_button" id="agregar" name="agregar" value="AGREGAR" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+	<center>
+      <input type="button" class="common_button"  style="width:150px;" id="cerrar" name="cerrar" value="Cerrar" onclick="cerrarVentanaTitulos()"/>
+	</center>
+  </div>
+</div>
+</div>

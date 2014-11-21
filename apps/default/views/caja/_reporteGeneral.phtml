@@ -1,0 +1,81 @@
+<center>
+  <table id="tablaGeneral" style="width:100%; font-family:arial; font-size:12px; margin-top:10px; float:left;">
+    <thead>
+	  <tr>
+		<th>CONCEPTO</th>
+		<th>NOMBRE CONCEPTO</th>
+		<th>PERIODO</th>
+		<th>CANTIDAD</th>
+		<th>COSTO</th>
+		<th>TOTAL</th>
+	  </tr>
+	</thead>
+<?php 
+	    //Iniciamos la variable montoTotal en 0
+		$montoTotal = 0;
+		$idCount = 1;
+		foreach($reporteCaja AS $value)
+		{
+		  //Validacion nivel
+		  if($value -> nivel == "1")
+			$nivel = "TECN&Oacute;LOGO";
+			
+		  else
+			$nivel = "INGENIER&Iacute;A";
+		  //Termina validacion nivel
+		  
+		  //Validacion de caracteres de los conceptos
+		  if(strlen($value -> conceptoRef) == 1)
+			$concepto = "000".$value -> conceptoRef;
+
+		  else if(strlen($value -> conceptoRef) == 2)	
+			$concepto = "00".$value -> conceptoRef;	  
+			
+		  else if(strlen($value -> conceptoRef) == 3)	
+			$concepto = "0".$value -> conceptoRef;	 
+
+		  else
+			$concepto = $value -> conceptoRef;	  
+		  //Termina validacion conceptos
+		  
+          //Obtiene el nobre del periodo
+		  $Periodos = new Periodos();
+		  $nombrePeriodo = Periodos::nombre_periodo($value -> periodo);
+		  //Termina nombre periodo
+		  
+		  //Obtiene la cantidad por concepto solicitado
+	      $cajaTramites = new CajaTramites();
+		  $countConcepto = CajaTramites::count_reporte_general($fechaD, $fechaH, $value -> conceptoRef, $value -> nivel);
+		  
+		  //Suma los costos para obtener el monto total
+		  $total = $countConcepto * $value -> costo;
+          //Se realiza la suma del monto total
+		  $montoTotal = $montoTotal + $total;
+		  
+        echo "<tr id=".$idCount."> 
+                <td width='auto' align='center' >".$concepto."</td> 
+                <td width='auto' >&nbsp;&nbsp;&nbsp;".utf8_encode($value -> nombre)."</td> 
+                <td width='auto' align='center'>".$nombrePeriodo."</td> 
+                <td width='auto' align='center'>".$countConcepto."</td> 
+                <td width='auto'>&nbsp;&nbsp;&nbsp;$&nbsp;".number_format($value -> costo,2)."</td> 
+                <td width='auto'>&nbsp;&nbsp;&nbsp;$&nbsp;".number_format($total,2)."</td> 
+             </tr>"; 
+			
+		  $idCount++;
+		}
+?>
+  </table>
+</center>
+
+<script type='text/javascript'>
+//Funcion que sirve para generar un DataTable
+$q(document).ready( function () {
+  var id = -1;
+  $q('#tablaGeneral').dataTable({ bJQueryUI: true,
+                            "sPaginationType": "full_numbers",
+							bRetrieve : true,
+							bDestroy : true
+                          })		
+});
+</script>
+

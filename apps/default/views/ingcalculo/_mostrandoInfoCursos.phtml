@@ -1,0 +1,57 @@
+<? echo "valorPAraBuscar: ".$valorParaBuscar ?>
+<center><br><br>
+	<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 10px;" >
+		<tr>
+			<th width="85" height="25" bgcolor="#FFCA5B">&nbsp;Clave Curso</th>
+			<th width="150" height="25" bgcolor="#FFCA5B">&nbsp;Clave Materia</th>
+			<th width="150" height="25" bgcolor="#FFCA5B">&nbsp;Nombre Materia</th>
+			<th width="150" height="25" bgcolor="#FFCA5B">&nbsp;N&oacute;mina Profesor</th>
+			<th width="150" height="25" bgcolor="#FFCA5B">&nbsp;Nombre Profesor</th>
+			<th width="150" height="25" bgcolor="#FFCA5B">&nbsp;Parciales</th>
+			<th width="150" height="25" bgcolor="#FFCA5B">&nbsp;Extra y Titulo</th>
+		</tr>
+		<?
+		$i = 0;
+		foreach( $mainInfo as $info ){
+			$i++;
+			echo "<tr>";
+		?>
+				<td width="175" height="50" align="center"
+					<? if( ($i % 2) == 0 ) echo "bgcolor='#C3C3C3'"; else echo "bgcolor='#EEEEEE'"; ?>>
+					<?= $info -> clavecurso; ?>
+				</td>
+				<td width="175" height="50" align="center"
+					<? if( ($i % 2) == 0 ) echo "bgcolor='#C3C3C3'"; else echo "bgcolor='#EEEEEE'"; ?>>
+					<? echo utf8_encode($info -> clave); ?>
+				</td>
+				<td width="175" height="50" align="center"
+					<? if( ($i % 2) == 0 ) echo "bgcolor='#C3C3C3'"; else echo "bgcolor='#EEEEEE'"; ?>>
+					<?echo utf8_encode($info -> matnombre); ?>
+				</td>
+				<td width="175" height="50" align="center"
+					<? if( ($i % 2) == 0 ) echo "bgcolor='#C3C3C3'"; else echo "bgcolor='#EEEEEE'"; ?>>
+					<? echo utf8_encode($info -> nomina); ?>
+				</td>
+				<td width="175" height="50" align="center"
+					<? if( ($i % 2) == 0 ) echo "bgcolor='#C3C3C3'"; else echo "bgcolor='#EEEEEE'"; ?>>
+					<? echo utf8_encode($info -> nombre); ?>
+				</td>
+				<td width="175" height="50" align="center"
+					<? if( ($i % 2) == 0 ) echo "bgcolor='#C3C3C3'"; else echo "bgcolor='#EEEEEE'"; ?>>
+					<? if( $activarParcial[1] ) echo "<a href='".KUMBIA_PATH."ingcalculo/corrigiendoCalificaciones/1/".$info -> clavecurso."/".$plantel."'>1</a>"; ?>
+					<? if( $activarParcial[2] ) echo "<a href='".KUMBIA_PATH."ingcalculo/corrigiendoCalificaciones/2/".$info -> clavecurso."/".$plantel."'>2</a>"; ?>
+					<? if( $activarParcial[3] ) echo "<a href='".KUMBIA_PATH."ingcalculo/corrigiendoCalificaciones/3/".$info -> clavecurso."/".$plantel."'>3</a>"; ?>
+					<? if( $activarParcial[4] ) echo "<a href='".KUMBIA_PATH."ingcalculo/corrigiendoCalificaciones/4/".$info -> clavecurso."/".$plantel."'>4</a>"; ?>
+					<? if( $activarParcial[5] ) echo "<a href='".KUMBIA_PATH."ingcalculo/corrigiendoCalificaciones/5/".$info -> clavecurso."/".$plantel."'>5</a>"; ?>
+				</td>
+				<td width="175" height="50" align="center"
+					<? if( ($i % 2) == 0 ) echo "bgcolor='#C3C3C3'"; else echo "bgcolor='#EEEEEE'"; ?>>
+					<?= $info -> nomina; ?>
+				</td>
+		<?
+			echo "</tr>";
+		}
+		?>
+	</table>
+<br />
+</center>

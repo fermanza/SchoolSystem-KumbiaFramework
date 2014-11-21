@@ -1,0 +1,132 @@
+<style type="text/css">
+	.cielo{
+		background:#EFEFEF;
+		text-transform:uppercase;
+		font-weight:bold;
+	}
+</style>
+<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td style="font-family: Verdana;">
+					<br>
+					<div style="color: #1569C7; font-size: 14px;" align="left">
+					<?= img_tag("adorno.gif","border: 0") ?> <b>ASPIRANTES - REPORTE DE ASPIRANTES</b></div>
+					<div style="color: #000000; font-size: 11px;" align="justify">
+					<br>
+						En esta sección una secretaría podrá dar de alta y consultar cada uno
+						de los aspirantes, así como consultar distintos reportes y estadísticas
+						sobre este rubro.
+						<br/><br/>
+						<div style="color: #000000; font-size: 20px;" align="center"><b>FEBRERO - JUNIO, 2010</b></div>
+						<br/>
+						<center>
+				<table>
+					<tr>
+						<th colspan="8" align="center" height="20" bgcolor="#F9B240"><b>INGENIER&Iacute;A</b></a></th>
+					</tr>
+					
+					<tr>
+						<!--
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/reporte/tgo/200" style="font-size:10px;text-decoration: none; color:#FFFFFF;">200</b></a></td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/reporte/tgo/400" style="font-size:10px;text-decoration: none; color:#FFFFFF;">400</b></a></td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/reporte/tgo/500" style="font-size:10px;text-decoration: none; color:#FFFFFF;">500</b></a></td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/reporte/tgo/600" style="font-size:10px;text-decoration: none; color:#FFFFFF;">600</b></a></td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/reporte/tgo/700" style="font-size:10px;text-decoration: none; color:#FFFFFF;">700</b></a></td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/reporte/tgo/800" style="font-size:10px;text-decoration: none; color:#FFFFFF;">800</b></a></td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/reporte/tgo/801" style="font-size:10px;text-decoration: none; color:#FFFFFF;">801</b></a></td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/reporte/tgo/804" style="font-size:10px;text-decoration: none; color:#FFFFFF;">804</b></a></td>
+						-->
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8">
+						<b><a href="<?= KUMBIA_PATH ?>aspirantes/reporte/I/400"
+								style="font-size:10px;text-decoration: none; color:#FFFFFF;">400</b></a>
+						</td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8">
+						<b><a href="<?= KUMBIA_PATH ?>aspirantes/reporte/I/600"
+								style="font-size:10px;text-decoration: none; color:#FFFFFF;">600</b></a>
+						</td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8">
+						<b><a href="<?= KUMBIA_PATH ?>aspirantes/reporte/I/801"
+								style="font-size:10px;text-decoration: none; color:#FFFFFF;">801</b></a>
+						</td>
+					</tr>
+				</table>
+				<br>
+				
+				
+				<table>
+					<tr>
+				<?php
+					for($i=0;$i<$total;$i++){ 
+				?>
+					<?php if($i!=$actual/10){ ?>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b>
+								<a href="<?= KUMBIA_PATH ?>aspirantes/reporte/<?= $nivel ?>/<?= $carrerita ?>/<?= $i*10 ?>"
+										style="font-size:10px;text-decoration: none; color:#FFFFFF;"><?= $i+1 ?></b></a>
+							</td>
+					<?php } else { ?>
+						<td align="center" width="25" height="25" bgcolor="#F9B240" style="font-size:10px;text-decoration: none; color:#000000;"><b><?= $i+1 ?></b></td>
+					<?php } ?>
+				<?php
+					}
+				?>
+				</tr>
+				</table>
+				<br/>
+	<?php if($aspirantes){ ?>
+<table border="1">
+	<tr>
+		<th colspan="5" height="25" class="fondoazul" height="25" style="font-size:14px;"><?= $carrera ?></font></th>
+	</tr>
+	<tr>
+		<th class="fondonaranja" height="25">
+			Folio
+		</th>
+		<th class="fondonaranja" height="25">
+			Ficha
+		</th>
+		<th class="fondonaranja" height="25">
+			Nombre
+		</th>
+		<th class="fondonaranja" height="25" colspan="2">
+			Folio Ceneval
+		</th>
+	</tr>
+	<?php foreach($aspirantes as $aspirante){ ?>
+	<form method="POST" action="<?= KUMBIA_PATH ?>aspirantes/cenevalazo">
+	<input type="hidden" name="id" value="<?= $aspirante -> id ?>">
+	<input type="hidden" name="carrera" value="<?= $carrerita ?>">
+	<input type="hidden" name="actual" value="<?= $actual ?>">
+	<tr>
+		<th width="50" height="25" style="font-size:11px;">
+			<a href="<?= KUMBIA_PATH ?>aspirantes/consulta/<?= $aspirante -> folio ?>/<?= $aspirante -> nivel ?>"><?= $aspirante -> folio ?></a>
+		</th>
+		<th width="50" style="font-size:11px;">
+			<?= $aspirante -> ficha ?>
+		</th>
+		<th width="300" align="left" style="font-size:11px;">
+			&nbsp;<?= $aspirante -> paterno ?> <?= $aspirante -> materno ?> <?= $aspirante -> nombre ?>
+		</th>
+		<th width="125" style="font-size:11px;">
+			<input type="text" name="ceneval" style="width:120px; text-align:center" value="<?= $aspirante -> ceneval ?>">
+		</th>
+		<th width="50" style="font-size:11px;">
+			<input type="submit" value="OK" style="width:50px; text-align:center">
+		</th>
+	</tr>
+	</form>
+	<?php } ?>
+</table>
+<br/><br/>
+<b>TOTAL DE ASPIRANTES: <?= $total*25 ?></b>
+<?
+	}
+	else{
+?>
+	<B>NO EXISTEN ASPIRANTES REGISTRADOS PARA ESTA CARRERA</B>
+<?
+	}
+?>
+</td>
+			</tr>
+		</table>
+		<br><br>

@@ -1,0 +1,563 @@
+<script language="JavaScript1.2">
+
+function dibujar(valor, i, j){
+	
+	//document.getElementById(td).innerHTML=this.style.backgroundColor='#333333'=; //return value
+	var body = document.getElementById("td["+i+"]["+j+"]");
+	if( valor > 0 ){
+        body.addClassName("griss");
+	}
+	else{
+		body.removeClassName("griss");
+		body.removeClassName("bordeegriss");
+		body.addClassName("bordee");
+	}
+	
+	/*
+	function accesibiliza(){
+    var body = document.getElementsByTagName("body")[0];
+    var class_name = "accesible";
+    if(body.hasClassName( class_name ))//ya la tiene. Remueve
+        body.removeClassName( class_name );
+    else //no la tiene. Agrega.
+        body.addClassName( class_name );
+	}
+	*/
+
+}
+
+  function TrimLeft( str ) {
+    var resultStr = "";
+    var i = len = 0;
+     if (str+"" == "undefined" || str == null)
+          return null;
+     str += "";
+       if (str.length == 0)
+           resultStr = "";
+       else {
+           len = str.length;
+           while ((i <= len) && (str.charAt(i) == " "))
+                 i++;
+        resultStr = str.substring(i, len);
+      }
+  return resultStr;
+}
+
+function TrimRight( str ) {
+	var resultStr = "";
+	var i = 0;
+	  if (str+"" == "undefined" || str == null)
+		   return null;
+	  str += "";
+	  if (str.length == 0)
+		  resultStr = "";
+	  else {
+		   i = str.length - 1;
+		   while ((i >= 0) && (str.charAt(i) == " "))
+		   i--;
+	  resultStr = str.substring(0, i + 1);
+	 }
+	return resultStr;
+}
+function Trim2( str ) {
+	var resultStr = "";
+
+	resultStr = TrimLeft(str);
+	resultStr = TrimRight(resultStr);
+
+	return resultStr;
+}
+
+function validateFields(){
+	
+	var err = "";
+	var i;
+	var j;
+	var aux = 0;
+
+	if ( document.Formulario1.profesor.value == -1 ){
+		err +="Seleccione el profesor que impartirá dicho curso\n";
+	}
+	if ( document.Formulario1.materias.value == -1 ){
+		err +="Seleccione una materia del plan 2000 ó plan 2007\n";
+	}
+	if ( document.Formulario1.minimo.value == -1 ){
+		err +="Seleccione el mínimo de alumnos con los que"+
+				" se abrirá el curso\n";
+	}
+	if ( document.Formulario1.maximo.value == -1 ){
+		err +="Seleccione el cupo máximo de alumnos\n";
+	}
+	if ( document.Formulario1.primeringreso.value == -1 ){
+		err +="Favor de indicar si el curso que se está abriendo"+
+				" es para alumnos de primer ingreso o no\n";
+	}
+	
+	for( i = 7; i < 22; i++ ){
+		for( j = 1; j < 7; j++ ){
+			if( document.Formulario1.elements["salon"+"["+i+"]["+j+"]"].value != -1 )
+				aux++;
+		}
+	}
+	if ( document.Formulario1.presencial.value == -1 ){
+		err +="Favor de indicar si el curso es presencial\n";
+	}
+	if ( document.Formulario1.presencial.value == 0 ){
+		// Aumento aux, ya que si el curso no es presencial,
+		//no será necesario indicar horas...
+		aux++;
+	}
+	
+	if( aux == 0 ){
+		err += "Debe seleccionar al menos una hora para este curso\n";
+	}
+	
+	if( err != "" ){
+		alert(err);
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+</script>
+
+
+<style type="text/css">
+
+.lista {
+/*
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin: 1px;
+	padding: 1px;
+	color: #000000;
+	*/
+	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	/*border: 1px outset #E0E0E0;
+	margin: 1px;
+	padding: 1px;
+	*/
+	border: #000000; 
+	border-style: solid; 
+	border-top-width: 1px; 
+	border-right-width: 1px; 
+	border-bottom-width: 1px; 
+	border-left-width: 1px;
+	
+	background-color: #EAEAF0;
+	/*background-color: #C6C6D7;*/
+
+}
+
+</style>
+
+<?= render_partial("info"); ?>
+
+<br />
+<br />
+<?= render_partial("menucursos"); ?>
+<br />
+<br />
+<form action="<?= KUMBIA_PATH ?>capturarcursos/creandoCursoEspejo"
+		method = "post" onSubmit="return validateFields();" name="Formulario1" id="Formulario1">
+<table align="center">
+	<tr>
+		<td colspan="3" valign="center" class="encabezadoo">
+			<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+					ADMINISTRACIÓN DE HORARIOS: "<?= $periodoCompleto ?>"
+					<div id="content"></div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" valign="center" class="encabezadoo">
+			<?php  echo "Crear grupo espejo del curso ".$nombreDelCurso; ?>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" valign="center" class="encabezadoo">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<br />
+			<select name="profesor" id="profesor" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;
+					- - Profesor que Impartirá el Curso - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $maestros as $maestro ){
+					$seleccionado = "";
+					if( !isset( $maestro -> nomina) ){
+						continue;
+					}
+					if( $maest -> nomina == $maestro -> nomina )
+						$seleccionado = "selected";
+				?>
+					<option value="<?= $maestro -> nomina ?>" <? echo $seleccionado; ?>>
+						<? echo $maestro -> nomina." - ".$maestro -> nombre ?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+			<br />
+		</td>
+	</tr>
+	<?
+	if( $materiaaa == 2007 ){
+	?>
+	<tr>
+		<td colspan="3">
+			<br />
+			<select name="materias" id="materias" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Materias Plan 2000 - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;
+				</option>
+				<?
+				foreach( $materias2000 as $mat00 ){
+				?>
+					<option value="<?= $mat00 -> clave ?>">
+						<? echo $mat00 -> clave." - ".$mat00 -> nombre; ?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+			<br /><br />
+		</td>
+	</tr>
+	<?
+	}
+	if( $materiaaa == 2000 ){
+	?>
+	<tr>
+		<td colspan="3">
+			<select name="materias" id="materias" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Materias Plan 2007 - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;
+				</option>
+				<?
+				foreach( $materias2007 as $mat07 ){
+				?>
+					<option value="<?= $mat07 -> clave ?>">
+						<? echo $mat07 -> clave." - ".$mat07 -> nombre ?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+			<br /><br />
+		</td>
+	</tr>
+	<?
+	}
+	?>
+	<tr>
+		<td align="center">
+			<select name="minimo" id="minimo" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - M&iacute;nimo Alumnos - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				for( $k = 5; $k < 21; $k++ ){
+					$seleccionado = "";
+					if( $cursoo -> minimo == $k )
+						$seleccionado = "selected";
+				?>
+					<option value="<?= $k ?>" <?= $seleccionado ?>>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						- - <?
+							if( $k < 10 )
+								echo '0'.$k;
+							else
+								echo $k;
+						?> - -
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</option>
+				<?
+				}
+				?>
+			</select>
+			<br /><br />
+		</td>
+		<td align="center">
+			<select name="maximo" id="maximo" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;
+					- - M&aacute;ximo Alumnos - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				for( $k = 20; $k < 51; $k++ ){
+					$seleccionado = "";
+					if( $cursoo -> maximo == $k )
+						$seleccionado = "selected";
+				?>
+					<option value="<?= $k ?>" <?= $seleccionado ?>>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;
+						- - <?= $k ?> - -
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;
+					</option>
+				<?
+				}
+				?>
+			</select>
+			<br /><br />
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<select name="primeringreso" id="primeringreso" class="lista"
+			<?php 
+			if( $yaHayAlumnos == 1 ){
+				echo "disabled";
+			} 
+			?>>
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Primer Ingreso - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<option value="0" 
+				<?
+				if( $cursoo -> activo == 0 )
+					echo "selected";
+				?>>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;
+					- - Si - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;
+				</option>
+				<option value="1"
+				<?
+				if( $cursoo -> activo == 1 )
+					echo "selected";
+				?>>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;
+					- - No - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;
+				</option>
+			</select>
+		</td>
+		<td align="center">
+			<select name="presencial" id="presencial" class="lista"
+			<?php 
+			if( $yaHayAlumnos == 1 ){
+				echo "disabled";
+			} 
+			?>>
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Curso Presencial - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;
+				</option>
+				<option value="1" <? if( $cursoo -> asesoria == 0 ) echo "selected"; ?>>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;
+					- - Si - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;
+				</option>
+				<option value="0" <? if( $cursoo -> asesoria == 1 ) echo "selected"; ?>>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;
+					- - No - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;
+				</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			&nbsp;
+		</td>
+	</tr>
+</table>
+<table align="center" cellspacing="4" class="naranjaa3">
+	<tr>
+
+		<th width="200" align="center" class="azull2">Horas</th>
+		<th width="200" align="center" class="azull2">Lunes</th>
+		<th width="200" align="center" class="azull2">Martes</th>
+		<th width="200" align="center" class="azull2">Miercoles</th>
+		<th width="200" align="center" class="azull2">Jueves</th>
+		<th width="200" align="center" class="azull2">Viernes</th>
+		<th width="200" align="center" class="azull2">S&aacute;bado</th>
+	</tr>
+	<?
+	for( $i = 7; $i < 22; $i++ ){
+	?>
+		<tr>
+		<td align="center" class="naranjaa2">
+			<br /><? echo $i.":00 - ".($i + 1).":00" ?><br />&nbsp;
+		</td>
+			<?
+				for( $j = 1; $j < 7; $j++ ){
+					$seleccionado = "";
+					if( isSet($horas[$j][$i]) ){
+						$seleccionado = "selected";
+					?>
+						<td align="center" id="td<? echo "[$i][$j]" ?>" name="td<? echo "[$i][$j]" ?>"
+							<?
+							if( $seleccionado != "" )
+								echo "class=\"bordeegriss\"";
+							else
+								echo "class=\"bordee\"";
+							?> >
+						<br />
+						<select name="salon[<?echo $i;?>][<?echo $j;?>]"
+								id="salon[<?echo $i;?>][<?echo $j;?>]" class="lista"
+								onChange="dibujar(this.value, <? echo $i.", ".$j; ?>)"
+								<?php 
+								if( $yaHayAlumnos == 1 ){
+									echo "disabled";
+								}
+								?>>
+						<option value="-1">- - Aula - -</option>
+					<?
+						foreach( $salones as $sal ){
+					?>
+							<option value="<?= $sal -> id ?>"
+								<?
+								if( isSet($salon[$j][$i]) && ($salon[$j][$i] -> id == $sal -> id) )
+									echo $seleccionado;
+								?>>
+								<?= $sal -> edificio.":".$sal -> nombre ?>
+							</option>
+					<?
+						}
+						echo "</select>";
+						if( isSet( $horas[$j][$i] ) && ($horas[$j][$i] -> presencial == 0) ){
+					?>
+							<br />
+							Hora Virtual<input type="checkbox" name="horapresencial[<?echo $i;?>][<?echo $j;?>]"
+									id="horapresencial[<?echo $i;?>][<?echo $j;?>]" checked />
+					<?			
+						}
+						else{
+					?>
+							<br />
+							Hora Virtual<input type="checkbox" name="horapresencial[<?echo $i;?>][<?echo $j;?>]"
+									id="horapresencial[<?echo $i;?>][<?echo $j;?>]" />
+					<?			
+						}
+					?>
+							<br />&nbsp;
+						</td>
+					<?php
+					}
+					else{
+					?>
+						<td align="center" id="td<? echo "[$i][$j]" ?>" name="td<? echo "[$i][$j]" ?>" class="bordee">
+							<div id="divtd<? echo "[$i][$j]" ?>">
+							<br />
+							Mostrar salones
+							<input type="radio" name="radio<? echo "[$i][$j]" ?>" id="radio<? echo "[$i][$j]" ?>" value="1">
+							<input type="hidden" value="0" id="flag1<? echo "[$i][$j]" ?>" />
+							<?
+							print "<script type=\"text/javascript\">
+							new Event.observe(\"radio[$i][$j]\", \"click\", function(){
+							new AJAX.viewRequest({
+								action: \"capturarcursos/mostrarSalones/$i/$j\",
+								container: \"divtd[$i][$j]\"
+							})
+							})
+							</script>";
+					?>
+							<br />&nbsp;
+							</div>
+						</td>
+				<?php
+					}
+				?>
+			<?
+				}
+			?>
+	</tr>
+	<?
+	}
+	?>
+	<tr>
+		<td colspan="10" align="center">
+			<br />
+			<input type="hidden" name="yaHayAlumnos" id="yaHayAlumnos"
+					value="<?php echo $yaHayAlumnos; ?>">
+			<input type="hidden" name="cursoID" id="cursoID"
+					value="<?php echo $cursoo -> id; ?>">
+			<input type="submit" value="Crear Curso Espejo">
+			<br /><br />
+		</td>
+	</tr>
+</table>
+</form>

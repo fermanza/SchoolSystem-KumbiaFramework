@@ -1,0 +1,83 @@
+<script language="JavaScript">
+	
+	function eliminar(){
+		
+		if( window.confirm( "¿Estás Seguro de que deseas eliminar dicho curso?" ) ){
+			return true;
+		}
+		
+		return false;
+	}
+
+</script>
+
+
+<br />
+<br />
+<br />
+<br />
+<?= render_partial("regresarAlHorarioProfesor"); ?>
+<br />
+<br />
+<br />
+Nota: Los alumnos que aparescan en color rojo significa que tienen un adeudo con su colegiatura.
+<br />
+
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center">
+	<br />
+	<br />
+	<tr>
+		<th class="azull4" width="20" colspan="6">
+			Clavecurso <?= $cursoClave ?>
+		</th>
+	</tr>
+	<tr>
+		<th class="azull4" width="50">
+			No.
+		</th>
+		<th class="azull4" width="75">
+			Registro
+		</th>
+		<th class="azull4" width="75">
+			Plan 00 &oacute; 07
+		</th>
+		<th class="azull4" width="125">
+			Nombre
+		</th>
+		<th class="azull4" width="150">
+			Materia
+		</th>
+		<th class="azull4" width="125">
+			Carrera
+		</th>
+	</tr>
+	<!--
+	$this -> registroAlumno[$i]		= $xalumncur -> registro;
+	$this -> nombreAlumno[$i]		= $alumno -> vcNomAlu;
+	$this -> materiaAlumno[$i]		= $mat -> nombre;
+	$this -> carreraAlumno[$i]		= $carrera -> vcNomEsp;
+	-->
+	<?
+	$i = 0;
+	foreach( $registroAlumno as $registro ){
+		if( $pago[$i] == 0 )
+			$estilo="style=\"color:red\"";
+		else
+			$estilo ="";
+	?>
+		<tr>
+			<td width="50" align="center" <?= $estilo ?> ><? echo $i + 1; ?></td>
+			<td width="75" align="center" <?= $estilo ?> ><?= $registro ?></td>
+			<td width="75" align="center" <?= $estilo ?> ><?= $planAlumno[$i] ?></td>
+			<td width="125" align="center" <?= $estilo ?> ><?= $nombreAlumno[$i] ?></td>
+			<td width="150" align="center" <?= $estilo ?> ><?= $materiaAlumno[$i] ?></td>
+			<td width="125" align="center" <?= $estilo ?> ><?= $carreraAlumno[$i] ?></td>
+		</tr>
+	<?
+		$i++;
+	}
+	?>
+</table>
+</div>
+<br />
+<br />

@@ -1,0 +1,194 @@
+<?= render_partial("info"); ?>
+<?php
+	$x=1;
+	
+	function horario($maestro, $auxiliar){
+		$horarios = new Horarios();
+		
+		if($horarios -> count("maestro_id=".$maestro." AND auxiliar=".$auxiliar)==0){
+			return '';
+		}
+		else{
+			$horario = $horarios -> find_first("maestro_id=".$maestro." AND auxiliar=".$auxiliar);
+			return $horario;
+		}
+	}
+	
+	function materia($maestro, $auxiliar){
+		$horarios = new Horarios();
+		
+		if($horarios -> count("maestro_id=".$maestro." AND periodo=12009")>0){
+			$horarios = $horarios -> find("maestro_id=".$maestro." AND periodo=12009");
+			if($horarios) foreach($horarios as $horario){
+				$horas = new Horas();
+				if($horas -> count("horario_id=".$horario -> id." AND auxiliar=".$auxiliar)){
+					$hora = $horas -> find_first("horario_id=".$horario -> id." AND auxiliar=".$auxiliar);
+					
+					$materias = new MateriasHorarios();
+					$materia = $materias -> find_first("id=".$hora -> materia_id);
+					
+					return $materia -> nombre;
+				}
+			}
+		}
+		
+		return '-';
+	}
+	
+	function grupo($maestro, $auxiliar){
+		$horarios = new Horarios();
+		
+		if($horarios -> count("maestro_id=".$maestro." AND periodo=12009")>0){
+			$horarios = $horarios -> find("maestro_id=".$maestro." AND periodo=12009");
+			if($horarios) foreach($horarios as $horario){
+				$horas = new Horas();
+				if($horas -> count("horario_id=".$horario -> id." AND auxiliar=".$auxiliar)){
+					$hora = $horas -> find_first("horario_id=".$horario -> id." AND auxiliar=".$auxiliar);
+					
+					$grupos = new Grupos();
+					$grupo = $grupos -> find_first("id=".$hora -> grupo_id);
+					return $grupo -> nombre;
+				}
+			}
+		}
+		
+		return '-';
+	}
+	
+	function salon($maestro, $auxiliar){
+		$horarios = new Horarios();
+		
+		if($horarios -> count("maestro_id=".$maestro." AND periodo=12009")>0){
+			$horarios = $horarios -> find("maestro_id=".$maestro." AND periodo=12009");
+			if($horarios) foreach($horarios as $horario){
+				$horas = new Horas();
+				if($horas -> count("horario_id=".$horario -> id." AND auxiliar=".$auxiliar)){
+					$hora = $horas -> find_first("horario_id=".$horario -> id." AND auxiliar=".$auxiliar);
+					
+					$salones = new Salones();
+					$salon = $salones -> find_first("id=".$hora -> salon_id);
+					return $salon -> corto;
+				}
+			}
+		}
+		
+		return '-';
+	}
+	
+?>
+<br>
+<style type="text/css">
+	SELECT, INPUT{
+		font-size:10px;
+	}
+</style>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+	ADMINISTRACIÓN DE HORARIOS
+	<div align="right">
+		<form method="POST" action="<?= KUMBIA_PATH ?>tgocoordinador/horarios1">
+			<select name="profesor">
+				<?php if($maestros) foreach($maestros as $maestro1){ ?>
+					<option value="<?= $maestro1 -> id ?>"><?= utf8_encode($maestro1 -> nombre) ?></option>
+				<?php } ?>
+			</select>
+			<input type="submit" value="Horario">
+		</form>
+	</div>
+	<?php $horas = array("7:00 - 7:55","7:55 - 8:50","9:30 - 10:25","10:25 - 11:20","11:20 - 12:15","12:15 - 13:10","13:10 - 14:05","14:05 - 15:00","15:00 - 15:55","15:55 - 16:50","16:50 - 17:45","17:45 - 18:40","18:40 - 19:35","19:35 - 20:30"); ?>
+		<?php if($turno=='M'){ ?>
+					<table border="1" style="font-size:10px;" class="bordeazul">
+						<th height="20" class="naranja" colspan="7">
+							<?= utf8_encode($propietario) ?>
+						</th>
+						<tr>
+							<td width="100" align="center" class="azul">&nbsp;</td>
+							<th width="150" align="center" class="azul">Lunes</th>
+							<th width="150" align="center" class="azul">Martes</th>
+							<th width="150" align="center" class="azul">Miercoles</th>
+							<th width="150" align="center" class="azul">Jueves</th>
+							<th width="150" align="center" class="azul">Viernes</th>
+							<th width="150" align="center" class="azul">Sábado</th>
+						</tr>
+						<?php for($i=0;$i<2;$i++){ ?>
+						<tr>
+							<th height="125" class="naranja"><?= $horas[$i] ?></th>
+							<?php for($j=1;$j<7;$j++){ ?>
+							<?= form_remote_tag("tgocoordinador/abrirhorario/".$x."/".$maestro -> id,"update: horario".$x) ?>
+								<?php if(materia($maestro -> id, $x)=="-"){	?>
+									<td bgcolor="#FFFFFF" align="center" style="font-weight:none;">
+								<?php } else { ?>
+									<th bgcolor="#CCCCCC">
+								<?php }	?>
+										<div id="horario<?= $x ?>">
+											<?php if(materia($maestro -> id, $x)=="-"){	?>
+												&nbsp;
+											<?php } else { ?>
+												<?= materia($maestro -> id, $x); ?><br><br><?= grupo($maestro -> id, $x); ?> - <?= salon($maestro -> id, $x); ?><br><br>
+											<?php }	?>
+											<?php $x++; ?>
+											<input type="submit" name="boton" value="Modificar">
+										</div>
+									</td>
+							<?= end_form_tag() ?>
+							<?php } ?>
+						</tr>
+						<?php } ?>
+						<tr>
+							<th height="10" class="naranja">8:50 - 9:30</th>
+							<th colspan="6" class="negro">RECESO</th>
+						</tr>
+						<?php for($i=2;$i<8;$i++){ ?>
+						<tr>
+							<th height="125" class="naranja"><?= $horas[$i] ?></th>
+							<?php for($j=1;$j<7;$j++){ ?>
+							<?= form_remote_tag("tgocoordinador/abrirhorario/".$x."/".$maestro -> id,"update: horario".$x) ?>
+								<?php if(materia($maestro -> id, $x)=="-"){	?>
+									<td bgcolor="#FFFFFF" align="center" style="font-weight:none;">
+								<?php } else { ?>
+									<th bgcolor="#CCCCCC">
+								<?php }	?>
+										<div id="horario<?= $x ?>">
+											<?php if(materia($maestro -> id, $x)=="-"){	?>
+												&nbsp;
+											<?php } else { ?>
+												<?= materia($maestro -> id, $x); ?><br><br><?= grupo($maestro -> id, $x); ?> - <?= salon($maestro -> id, $x); ?><br><br>
+											<?php }	?>
+											<?php $x++; ?>
+											<input type="submit" name="boton" value="Modificar">
+										</div>
+									</td>
+							<?= end_form_tag() ?>
+							<?php } ?>
+						</tr>
+						<?php } ?>
+						<tr>
+							<th height="10" class="naranja">TARDE</th>
+							<th colspan="6" class="negro">TURNO VESPERTINO</th>
+						</tr>
+						<?php for($i=8;$i<14;$i++){ ?>
+						<tr>
+							<th height="125" class="naranja"><?= $horas[$i] ?></th>
+							<?php for($j=1;$j<7;$j++){ ?>
+							<?= form_remote_tag("tgocoordinador/abrirhorario/".$x."/".$maestro -> id,"update: horario".$x) ?>
+								<?php if(materia($maestro -> id, $x)=="-"){	?>
+									<td bgcolor="#FFFFFF" align="center" style="font-weight:none;">
+								<?php } else { ?>
+									<th bgcolor="#CCCCCC">
+								<?php }	?>
+										<div id="horario<?= $x ?>">
+											<?php if(materia($maestro -> id, $x)=="-"){	?>
+												&nbsp;
+											<?php } else { ?>
+												<?= materia($maestro -> id, $x); ?><br><br><?= grupo($maestro -> id, $x); ?> - <?= salon($maestro -> id, $x); ?><br><br>
+											<?php }	?>
+											<?php $x++; ?>
+											<input type="submit" name="boton" value="Modificar">
+										</div>
+									</td>
+							<?= end_form_tag() ?>
+							<?php } ?>
+						</tr>
+						<?php } ?>
+					</table><br>
+			<?php } ?>

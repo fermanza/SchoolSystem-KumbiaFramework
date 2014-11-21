@@ -1,0 +1,19 @@
+ <?php
+	$Divisiones = new Divisiones();
+	$divisiones = $Divisiones -> find();
+	echo form_tag('salones/infraestructuraXLS');
+	echo '<select name="division_id">';
+	foreach($divisiones as $division){
+		echo '<option value="'.$division -> id.'">'.$division -> nombre.'</option>';
+	}
+	echo '</select>';
+	echo '<select name="dia">';
+		echo '<option value="1">Lunes</option>';
+		echo '<option value="2">Martes</option>';
+		echo '<option value="3">Miercoles</option>';
+		echo '<option value="4">Jueves</option>';
+		echo '<option value="5">Viernes</option>';
+	echo '</select>';
+	echo submit_tag('Ver');
+	echo '</form>';
+?>

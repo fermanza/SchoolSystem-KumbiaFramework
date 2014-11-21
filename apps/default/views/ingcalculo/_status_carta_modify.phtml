@@ -1,0 +1,63 @@
+<?php echo form_remote_tag("ingcalculo/status_carta", "update: materias", "name: Formulario1") ?>
+<?php
+if( $reconsideracionBaja->procede==1 )
+	$texto_status_carta = "Aprobada";
+else
+	$texto_status_carta = "No Aprobada";
+?>
+<h4>Su carta actualmente est&aacute; como: 
+<span id="texto_status_carta" name="texto_status_carta" class="letraRoja"><?= $texto_status_carta ?></span>
+</h4>
+<table cellspacing="1" cellpadding="1" style="font-size: 12px;" align="center">
+	<tr class="azul">
+		<th class="bordeAzul2">
+			Favor de indicar si desea cambiar el estatus de la carta.
+		</td>
+	</tr>
+	<tr>
+		<td  class="centrar">
+			<select id="procede" name="procede">
+					<option value="1">- - Procede - -</option>
+					<option value="2">- - No Procede - -</option>
+			</select>
+		</td>
+	</tr>
+	<tr align="center">
+		<input type="hidden" id="registro" name="registro" value="<?= $alumno->miReg ?>" />
+		<td colspan="2"><input type="submit" value="Guardar" 
+		onClick="var procede = document.getElementById('procede').value;
+		if(procede == 1) document.getElementById('texto_status_carta').innerHTML = 'Aprobada';
+		else document.getElementById('texto_status_carta').innerHTML = 'No Aprobada';" />
+		</td>
+	</tr>
+</table>
+</form>
+<br />
+
+<?
+if( $reconsideracionBaja->procede==1 ){
+	print "<script type=\"text/javascript\">
+		new AJAX.viewRequest({
+			action: \"ingcalculo/render_condicionados_materias/\",
+			container: \"materias\"
+		});
+	</script>";
+}
+else{
+	print "<script type=\"text/javascript\">
+			document.getElementById('materias').innerHTML = '';
+	</script>";
+}
+?>
+<script type=\"text/javascript\">
+	function render_status() {
+		aler('render_statusss');
+		var procede = document.getElementById('procede').value;
+		if(procede == 1){
+			document.getElementById('texto_status_carta').innerHTML = 'Aprobada';
+		}
+		else{
+			document.getElementById('texto_status_carta').innerHTML = 'No Aprobada';
+		}
+	}
+</script>

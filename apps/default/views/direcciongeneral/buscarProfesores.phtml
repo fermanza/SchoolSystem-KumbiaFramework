@@ -1,0 +1,47 @@
+<div>
+<?php
+	$Divisiones = new Divisiones();
+	$divisiones = $Divisiones -> find();
+	echo form_remote_tag('direcciongeneral/profesoresXDivision','update: midiv');
+	echo '<select name="division_id">';
+	foreach($divisiones as $division){
+		echo '<option value="'.$division -> id.'">'.$division -> nombre.'</option>';
+	}
+	echo '</select>';
+	echo submit_tag('Ver');
+	echo '</form>';
+?>
+<div id="midiv"></div>
+</div>
+<br />
+<br />
+<br />
+<?php echo form_remote_tag("direcciongeneral/buscandoProfesores", "update: listado") ?>
+<center>
+<table class="bordeAzul" style="font-size:11px;">
+	<tr class="naranja">
+		<th colspan="3">BUSCADOR DE PROFESORES</th>
+	</tr>
+	<tr class="azul">
+		<th>NOMINA</th>
+		<th>y/o</th>
+		<th>NOMBRE</th>
+	</tr>
+	<tr>
+		<th><?= text_field_tag("nomina") ?></th>
+		<th class="grisClaro">&nbsp;</th>
+		<th><?= text_field_tag("nombre") ?></th>
+	</tr>
+	<tr class="grisClaro">
+		<td colspan="3">
+			<center>
+				<?php echo submit_tag("Buscar") ?>
+			</center>
+		</td>
+	</tr>	
+</table>
+<?php echo end_form_tag() ?>
+</center>
+<br />
+<div id='listado'>
+</div>

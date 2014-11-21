@@ -1,0 +1,65 @@
+<style type="text/css">
+	.listadoTutorados *{
+		font-size: 11px;
+	}
+	
+	.listadoTutorados form{
+		margin: 0px;
+		padding: 0px;
+	}
+</style>
+<center>
+<div class="listadoTutorados">
+<br>
+<br>
+<table style="font-size: 11px; width: 600px;" class="bordeazul">
+<tr class="naranja">
+	<th colspan="4">LISTADO DE ALUMNOS DEL PROFESOR <?= $nomina ?></th>
+</tr>
+<tr class="azul">
+	<th>Foto</th>
+	<th>Registro</th>
+	<th>Nombre</th>
+	<th>&nbsp;</th>
+</tr>
+ <?php
+ 
+$Tutorias = new Tutorias();
+$Alumnos = new Alumnos();
+
+if($tutorias = $Tutorias -> find("nomina = ".$nomina)){	
+	foreach($tutorias as $t){
+		$Alumnos -> find_first("registro = ".$t -> registro);
+		echo tr_color('#EEEDDD','#FFFDFD');
+		echo "<td><center>";
+		$entro=0;
+		$foto = "fotos/".$t -> registro.".JPG";
+		$foto1 = "fotos/".$t -> registro.".jpg";					
+		if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto)){					
+			echo img_tag($foto, "width: 100");
+			$entro=1;
+		}
+		if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto1)){					
+			echo img_tag($foto1, "width: 100");
+			$entro=1;
+		}
+		if ($entro == 0){
+			echo "Sin Foto";
+		}
+		echo "</center></td>";
+		echo '<th>'.$t -> registro.'</th>';
+		echo '<th>'.$Alumnos -> nombre_completo.'</th>';		
+		echo '<th>';
+		echo form_remote_tag("tgotutor/eliminarAlumno/".$t -> id."/1", "update: info");		
+		echo submit_tag("Eliminar");
+		echo end_form_tag();
+		echo '</th>';
+	}
+}else{
+	echo '<th colspan="4"><center><h3>No hay alumnos asignados</h3></center></th>';
+}
+ ?>
+ </table>
+<br></br>
+ <div>
+ </center>

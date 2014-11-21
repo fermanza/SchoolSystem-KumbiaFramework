@@ -1,0 +1,49 @@
+<style type="text/css">
+	.linknegrita a:hover{
+		font-weight: bold;
+		text-decoration: none;
+		color:#000000;
+	}
+	.linknegrita a{
+		font-weight: none;
+		text-decoration: none;
+		color:#000000;
+	}
+</style>
+
+<script type='text/javascript'>
+function preguntar(){
+	// Si el usuario confirma, la contraseña se hará la misma que su registro, por lo que el usuario deberá cambiar su contraseña...
+	if( confirm("La contraseña del alumno se reseteará y será la misma que la de su registro, desea continuar?") ){
+		return true;
+	}
+	return false;
+}
+</script>
+
+	<table border="0" cellpadding="0" cellspacing="0" align="center">
+	<br /><br />
+		<tr>
+			<?
+			if ( $usuarioo != null ){
+			?>
+				<td style="font-family: Verdana;" align="center">
+				<h3><? echo $usuarioo -> registro ?> su contraseña es: <? echo $usuarioo -> clave ?></h3>
+				<form method="POST" action="<?= KUMBIA_PATH ?>ventanilla/resetearcontrasena/" onSubmit="return preguntar();">
+					<input type="hidden" id="registro" name="registro" value="<?php echo $usuarioo -> registro ?>" />
+					<input type="submit" value="Resetear Contrasena" />
+				</form>
+				</td>
+			<?
+			}
+			else{
+			?>
+				<td style="font-family: Verdana;" align="center">
+				<h3>Favor de checar el registro, ya que ese registro no existe como usuario.</h3>
+				</td>
+			<?
+			}
+			?>
+		</tr>
+	</table>
+	<br><br>

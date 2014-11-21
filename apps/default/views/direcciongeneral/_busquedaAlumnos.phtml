@@ -1,0 +1,41 @@
+<center>
+<table style="font-size:11px;" class="bordeAzul">
+	<tr class="naranja">
+		<th colspan="4">
+			ALUMNOS ENCONTRADOS
+		</th>
+	</tr>
+	<tr class="azul">
+		<th>&nbsp;</th>
+		<th>REGISTRO</th>
+		<th>NOMBRE</th>
+		<th>GRUPO Y NIVEL</th>
+		
+	</tr>
+	<?php
+		foreach($alumnos as $a){
+			echo "<tr>";
+			echo "<td><center>";
+			$entro=0;
+			$foto = "fotos/".$a -> registro.".JPG";
+			$foto1 = "fotos/".$a -> registro.".jpg";					
+			if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto)){					
+				echo img_tag($foto, "width: 100");
+				$entro=1;
+			}
+			if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto1)){					
+				echo img_tag($foto1, "width: 100");
+				$entro=1;
+			}
+			if ($entro == 0){
+				echo "Sin Foto";
+			}
+			echo "</center></td>";
+	?>	
+		<th><?= $a -> registro ?></th>
+		<th><?= link_to("tgoprofesor/convertirAAlumno/".$a -> registro."/2",utf8_encode($a -> nombre_completo)) ?></th>
+		<th><?= $a -> semestre." - ".$a -> grupo ?></th>		
+	</tr>
+	<?php } ?>
+</table>
+</center>

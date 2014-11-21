@@ -1,0 +1,184 @@
+<?php 
+//header("content-disposition: attachment;filename=lista.xls"); 
+?>
+<center><br><br>
+<style type="text/css">
+	.gris td{
+		background: #DDDDDD;
+		font-weight: bold;
+		text-align: center;
+	}
+</style>
+<table border="1">
+	<tr>
+		<td colspan="38" bgcolor="#f9ac42" style="color:#ffffff">
+			<center><h2>EVALUACIÓN DOCENTE DEL: AGO DIC 2008</h2></center>
+		</td>
+	</tr>
+	<tr>
+        <td colspan="9" bgcolor="#004b96" style="color:#ffffff">
+        	<center>DATOS</center>
+        </td>
+		<td colspan="21" bgcolor="#004b96" style="color:#ffffff">
+			<center>PROMEDIO DE LAS PREGUNTAS</center>
+        </td>
+		<td colspan="8" bgcolor="#004b96" style="color:#ffffff">
+			<center>PROMEDIO DE LOS RUBROS</center>
+        </td>
+    </tr>
+	<tr class="gris">
+        <td>
+        	NÓMINA
+        </td>
+		<td>
+			NOMBRE
+        </td>
+		<td>
+			NO. DE ALUMNOS <br>TOTALES
+        </td>			
+		<td>
+			NO. DE ALUMNOS <br>QUE EVALUARON
+        </td>
+		<td>
+			PLANTEL
+        </td>
+		<td>
+			CARRERA
+        </td>
+		<td>
+			MATERIA
+        </td>
+		<td>
+			SEMESTRE
+        </td>
+		<td>
+			PROMEDIO GENERAL
+        </td>
+		<?php
+			for($i=1;$i<22;$i++){
+		?>
+		<td>
+			<center><?= $i  ?></center>
+        </td>
+		<?php
+			}
+		?>
+		<td>
+			ORGANIZACIÓN DEL <br>CURSO
+		</td>
+		<td>
+			RESPONSABILIDAD <br>DEL PROFESOR
+		</td>
+		<td>
+			CONOCIMIENTO Y <br>DOMINIO DEL TEMA
+		</td>
+		<td>
+			DESARROLLO DE <br>TÉCNICAS DIDÁCTICAS
+		</td>
+		<td>
+			COMUNICACIÓN Y RELACIONES <br>INTERPERSONALES
+		</td>
+		<td>
+			EVALUACIÓN DEL <br>APRENDIZAJE
+		</td>
+		<td>
+			VALORACIÓN GENERAL <br>DEL PROFESOR
+		</td>
+		<td>
+			PROMEDIO
+		</td>
+    </tr>
+	<?php
+	$Xcursos = new Xcursos();
+	$xcursos = $Xcursos -> find("periodo = 32008 ORDER BY nomina ASC"); // LIMIT 0, 5
+	foreach($xcursos as $xc){
+		$Maestros = new Maestros();
+		$Evaluacion = new Evaluacion();		
+		$Materia = new Materia();
+		$Materiasing = new Materiasing();
+		$m = $Maestros -> find_first("nomina = ".$xc -> nomina);
+		$ma = $Materia -> find_first("clave = '".$xc ->materia."'");
+		$maing = $Materiasing -> find_first("clavemat = '".$xc ->materia."'");
+		?>
+	<tr>
+		<td><?= $xc -> nomina ?></td>
+		<td><?=  $m -> nombre ." ".$m -> paterno." ".$m -> materno ?></td>
+		<td><?= $xc -> cupo - $xc -> disponibilidad ?></td>
+		<?php $evaluacion_cuantos = $Evaluacion -> count("curso = '".$xc -> clavecurso."' and periodo = 32008") ?>
+		<td><?= $evaluacion_cuantos ?></td>
+		<td>COLOMOS</td>
+		<td><?=  $maing -> especialidad ?></td>
+		<td><?=  $ma -> nombre ?></td>
+		<td>N/A</td>
+		<td>PENDIENTE</td>
+		<?php 
+		for($l=1;$l<8;$l++){
+				$s[$l]=0;//seccion
+				$c[$l]=0;//contador
+			}
+		$promTotal=0;
+		for($j=1;$j<22;$j++){
+		//$prom = $Evaluacion -> find_by_sql("SELECT SUM(p".$j.") FROM evaluacion WHERE curso = '".$xc -> clavecurso."' and periodo = '32008'"); 
+			$Evaluacion = new Evaluacion();
+			$evaluacion = $Evaluacion -> find("curso = '".$xc -> clavecurso."' and periodo = 32008");
+			$sumatoria=0;//limpio la sumatoria cada vez que entra
+			//limpia el arreglo para los promedios de las secciones
+			
+			foreach($evaluacion as $e){				
+				$pree = "p".$j;
+				$sumatoria = $sumatoria + $e -> $pree;
+				if ($j == 1 || $j == 4 || $j == 5){
+					$s[1]= $s[1] + $e -> $pree;
+					$c[1]++;					
+				}
+				if ($j == 2 || $j == 9 || $j == 14){
+					$s[2]= $s[2] + $e -> $pree;
+					$c[2]++;
+				}
+				if ($j == 3 || $j == 7){
+					$s[3]= $s[3] + $e -> $pree;
+					$c[3]++;
+				}
+				if ($j == 6 || $j == 8 || $j == 1 || $j == 19){
+					$s[4]= $s[4] + $e -> $pree;
+					$c[4]++;
+				}
+				if ($j == 11 || $j == 12 || $j == 13){
+					$s[5]= $s[5] + $e -> $pree;
+					$c[5]++;
+				}
+				if ($j == 15 || $j == 16 || $j == 17 || $j == 18){
+					$s[6]= $s[6] + $e -> $pree;
+					$c[6]++;
+				}
+				if ($j == 20 || $j == 21){
+					$s[7]= $s[7] + $e -> $pree;
+					$c[7]++;
+				}
+			}
+			if ($evaluacion_cuantos != 0)
+				$prom = $sumatoria/$evaluacion_cuantos;			
+			else
+				$prom= " "; 		
+				?>						
+			<td><? echo substr($prom, 0, 4) ?></td>
+			
+		<?php
+			$promTotal=$promTotal+$prom;
+		
+		}		
+		for($j=1;$j<8; $j++){
+			if ($c[$j] == 0){
+				$entre = 1;
+			}else{
+				$entre = $c[$j];
+			}
+			echo '<td>'.substr((($s[$j])/($entre)),0,4).'</td>';			
+		}
+		?>		
+		<td><?= substr(($promTotal/21),0,4) ?></td>
+	</tr>
+	<?php	
+	}
+	?>
+</table>

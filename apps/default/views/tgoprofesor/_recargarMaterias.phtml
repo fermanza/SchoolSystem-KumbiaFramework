@@ -1,0 +1,14 @@
+<table width="100%" cellpadding="1" cellspacing="1" class="bordeazul">
+<?php 
+	$bandera=0;
+		foreach($materias as $m){
+			if ($bandera == 0){
+				echo '<tr><th class="naranja" >Materias Nivel '.$m -> nivel.'</th></tr>';
+				$bandera=1;			
+			}
+			echo tr_color('#EEEFFF','#DDDDDD');
+			echo "<td>".link_to_remote("&nbsp;".$m ->nombre,"update: informacionMateria","action: tgoprofesor/informacionMateria/".$m ->id)."</td>";
+		} 
+		$bandera=0;
+		?>
+</table>		

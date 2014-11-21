@@ -1,0 +1,51 @@
+		<style type="text/css">
+			.linknegrita a:hover{
+				font-weight: bold;
+				text-decoration: none;
+				color:#000000;
+			}
+			.linknegrita a{
+				font-weight: none;
+				text-decoration: none;
+				color:#000000;
+			}
+		</style>
+<script type='text/javascript'>
+	function registro() {
+		var folio = prompt("Introduce el número de FOLIO de la solicitud de aspirante");
+		window.location.href = '<?= KUMBIA_PATH ?>aspirantes/registro/'+folio;
+	}
+	function modificacion() {
+		var folio = prompt("Introduce el número de FOLIO de la solicitud de aspirante");
+		window.location.href = '<?= KUMBIA_PATH ?>aspirantes/modificacion/'+folio;
+	}
+	function consulta() {
+		var folio = prompt("Introduce el número de FOLIO de la solicitud de aspirante");
+		window.location.href = '<?= KUMBIA_PATH ?>aspirantes/consulta/'+folio;
+	}
+	
+	function confirmar(){
+	
+		if( window.confirm( "¿Estás Seguro de que deseas continuar?" ) ){
+			return true;
+		}
+		
+		return false;
+	}
+</script>
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+		<tr>
+			<td>
+				<p>Número de Registro</p>
+				
+				<form method="POST" action="<?= KUMBIA_PATH ?>ventanilla/checarEstado2/" onSubmit="return confirmar();">
+					<input type ="text" name="registro" id ="registro">
+					<br />
+					<input type ="submit">
+				</form>
+				<br />
+			</td>
+		</tr>
+		</table>
+		<br><br>

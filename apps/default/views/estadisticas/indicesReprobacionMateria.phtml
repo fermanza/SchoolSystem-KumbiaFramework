@@ -1,0 +1,42 @@
+<table>
+	<tr>
+		<td>
+			&nbsp;
+		</td>
+	<tr>
+</table>
+<br />
+<br />
+<?php render_partial("menuestadisticas"); ?>
+<br />
+<br />
+<?= form_remote_tag("estadisticas/indicesReprobacionMateria2", "update: cursoEncontrado", "name: Formulario0") ?>
+<select name="parcial" id="parcial" class="listaParcial">
+	<option value="1">Primer Parcial</option>
+	<option value="2">Segundo Parcial</option>
+	<option value="3">Tercer Parcial</option>
+</select>
+<br />
+<br />
+
+<table cellspacing="1" cellpadding="1" style="font-size: 12px;" align="center">
+	<tr>
+		<td align="center">
+			<h3>Introduzca el nombre de la materia que desea buscar</h3>
+			<br />&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			<input type="text" name="buscarmateria" id="buscarmateria" >
+			<input type="submit" value="Buscar Materia">
+		</td>
+	</tr>
+</table>
+</form>
+
+<div id="cursoEncontrado">
+</div>
+
+<br />&nbsp;
+<br />&nbsp;

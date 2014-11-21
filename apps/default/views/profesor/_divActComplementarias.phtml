@@ -1,0 +1,38 @@
+<table>
+	<tr class="naranja">
+		<th class="bordeAzul2">
+			Lista de Actividades Disponibles
+		</td>
+	</tr>
+	<tr class="naranja">
+		<td class="bordeAzul2">
+			<form action="<?= KUMBIA_PATH ?>tgoprofesor/asignandoNuevaActividad" method="post" 
+				name="FormularioAsigNueva" id="FormularioAsigNueva">
+			<select name="listaactividades" id="listaactividades" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccionar Actividad - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $listaActividades as $lista ){
+				?>
+					<option value="<?= $lista -> clave ?>">
+					<?
+						echo htmlentities( $lista -> clave." - ".$lista -> actividad );
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+			<input type="hidden" id="horasActComplementaria" 
+				name="horasActComplementaria" value="<?= $horasParaActComplementarias ?>" />
+			</form>
+		</td>
+	</tr>
+</table>

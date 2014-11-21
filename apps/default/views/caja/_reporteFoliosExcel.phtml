@@ -1,0 +1,175 @@
+<?php
+	header('Content-type: application/vnd.ms-excel');
+	header("content-disposition: attachment;filename=Reporte_Folios.xls");
+	
+	$cajaTramites = new CajaTramites();
+  
+	//Obtiene fecha de impresion
+	list($anioImp,$mesImp,$diaImp)= split("/", date('Y/m/d'));
+	$nombreMesImp = CajaTramites::nombre_mes($mesImp);
+	
+	//Obtiene fecha de inicio (Desde) de reporte
+	list($anioDesde,$mesDesde,$diaDesde)= split("/", $fechaD);
+	$nombreMesD = CajaTramites::nombre_mes($mesDesde);
+			  
+	//Obtiene fecha final (Hasta) del reporte
+	list($anioHasta,$mesHasta,$diaHasta)= split("/", $fechaH);
+	$nombreMesH = CajaTramites::nombre_mes($mesHasta);
+			  
+?>
+<center>
+  <table style="width:100%; font-family:arial; font-size:12px; margin-top:10px; float:left; margin-bottom:80PX;">
+    <tr>
+	  <td >
+	    <img src="http://ase.ceti.mx/ingenieria/public/img/CETI_n.jpg" align="left" width="250" height="205" />
+	  </td>
+	  <td colspan="7" style="font-weight:bold; text-align:center; font-size:35px;">
+	    CENTRO DE ENSEÑANZA TECNICA INDUSTRIAL
+	  </td>
+	</tr>
+    <tr>
+	  <td colspan="8" style="text-align:center; font-size:25px;">
+	    MODULO DE CAJA PLANTEL COLOMOS
+	  </td>
+	</tr>
+    <tr>
+	  <td colspan="8" style="text-align:center; font-size:25px;" height="50px;">
+	  </td>
+	</tr>
+    <tr>
+	  <td colspan="6" style="font-weight:bold; text-align:center; font-size:20px;">
+	   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CORTE POR FOLIOS
+	  </td>
+	  <td colspan="2" style="text-align:center; font-size:20px;">
+	    Fecha de Impresión : <?php echo $diaImp." / ".$nombreMesImp." / ".$anioImp;?>
+	  </td>
+	</tr>
+    <tr>
+	  <td colspan="7" style="text-align:center; font-size:25px;" height="50px;">
+	  </td>
+	</tr>
+    <tr >
+	  <td colspan="4">
+	  </td>
+	  <td colspan="2" style="border-color: #000000; border-width:1px; border-right:0px; border-style: solid; font-weight:bold; text-align:center; font-size:20px;">
+	    CORTE CAJA
+	  </td>
+	  <td style="border-color: #000000; border-width:1px; border-right:0px; border-left:0px; border-style: solid; font-weight:bold; text-align:left; font-size:20px;">
+	    DEL : <?php echo $diaDesde." / ".$nombreMesD." / ".$anioDesde;?>
+	  </td>
+	  <td style="border-color: #000000; border-width:1px; border-style: solid; border-left:0px; solid; font-weight:bold;text-align:center; font-size:20px;">
+	    AL : <?php echo $diaHasta." / ".$nombreMesH." / ".$anioHasta;?>
+	  </td>
+	</tr>
+    <tr>
+	  <td colspan="7" style="text-align:center; font-size:25px;" height="50px;">
+	  </td>
+	</tr>
+    <tr style="font-weight:bold; color:#FFFFFF; text-align:center;">
+	  <td bgcolor="#969494" height="30">
+		FOLIO
+	  </td>
+	  <td bgcolor="#969494" height="30">
+		REGISTRO
+	  </td>
+	  <td bgcolor="#969494" height="30">
+		NIVEL
+	  </td>
+	  <td bgcolor="#969494" height="30">
+	    PERIODO SOLICITADO
+	  </td>
+	  <td bgcolor="#969494" height="30">
+	    CONCEPTO
+	  </td>
+	  <td bgcolor="#969494" height="30">
+	    NOMBRE CONCEPTO
+	  </td>
+	  <td bgcolor="#969494" height="30">
+	    COSTO
+	  </td>
+	  <td bgcolor="#969494" height="30">
+	    ESTATUS PAGO
+	  </td>
+	  <td bgcolor="#969494" height="30">
+	    FECHA TRAMITE
+	  </td>
+	</tr>
+<?php 
+	if(count($reporteCaja) == 0 || $reporteCaja == NULL)
+	{
+	   echo tr_color('#E5E3E3','#FFFFFF'); 
+	   echo '<td  width="50" align="center" colspan="7" style="font-weight:bold;" height="35px;">NO SE ENCONTRARON REGISTROS</td>';
+	   echo "</tr>";
+	}
+	
+	else
+	{
+	    $montoTotal = 0;
+		foreach($reporteCaja AS $value)
+		{
+		  //Validacion nivel
+		  if($value -> nivel == "1")
+			$nivel = "TECN&Oacute;LOGO";
+			
+		  else
+			$nivel = "INGENIER&Iacute;A";
+		  //Termina validacion nivel
+		  
+		  //Validacion de caracteres de los conceptos
+		  if(strlen($value -> concepto) == 1)
+			$concepto = "000".$value -> concepto;
+
+		  else if(strlen($value -> concepto) == 2)	
+			$concepto = "00".$value -> concepto;	  
+			
+		  else if(strlen($value -> concepto) == 3)	
+			$concepto = "0".$value -> concepto;	 
+
+		  else
+			$concepto = $value -> concepto;	  
+		  //Termina validacion conceptos
+		  
+           //Validacion del registro	
+           if($value -> registro == 41 || $value -> registro == "")
+             $registroRef = "SIN REGISTRO";	
+         
+           else
+		      $registroRef = $value -> registro;	
+			  
+          //Obtiene el nobre del periodo
+		  $Periodos = new Periodos();
+		  
+		  if($value -> periodo != null | $value -> periodo != "")
+		    $nombrePeriodo = Periodos::nombre_periodo($value -> periodo);
+		        
+		  else
+		    $nombrePeriodo = "";
+		 
+		  //Suma los costos para obtener el monto total
+		  $montoTotal = $montoTotal + $value -> costo;
+		  
+          //Validacion del estatus de pago
+		  if($value -> status_pago == "1")
+		    $statusPago = "PAGADO";
+				
+		  else
+		    $statusPago = "SIN PAGAR";
+          //Termina validacion de estatus de pago	
+		  
+		  echo tr_color('#FFFFFF','#E5E3E3'); 
+		  echo '<td align="center" height="30">'.$value -> idTramite.'</td>';
+		  echo '<td align="center" height="30">'.$registroRef.'</td>';
+		  echo '<td align="center" height="30">'.$nivel.'</td>';
+		  echo '<td align="center" height="30">'.$nombrePeriodo.'</td>';
+		  echo '<td align="center" height="30">'.$concepto.'</td>';
+		  echo '<td align="center" height="30">'.$value -> nombre.'</td>';
+		  echo '<td align="center" height="30">'.number_format($value -> costo,2).'</td>';
+		  echo '<td align="center" height="30">'.$statusPago.'</td>';
+		  echo '<td align="center" height="30">'.substr($value -> fecha_tramite,0,11).'</td>';
+		  echo "</tr>";
+		}
+
+    }
+?>
+  </table>
+</center>

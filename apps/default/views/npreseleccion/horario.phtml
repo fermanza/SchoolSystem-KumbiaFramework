@@ -1,0 +1,57 @@
+<center><br><br>
+<table>
+	<tr>
+		<td width="900" align="left">
+			<div style="font-size: 14px;"><b>Horario del profesor (<?= $periodo ?>)</b></div>
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B"><b>&nbsp;Número de nómina: </b></td>
+					<td width="600" bgcolor="#EEEEEE">&nbsp;<?= $nomina ?></td>
+				</tr>
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B">&nbsp;<b>Nombre del profesor: </b></td>
+					<td width="600" bgcolor="#EEEEEE">&nbsp;<?= $profesor -> paterno ?><?= $profesor -> materno ?><?= $profesor -> nombre ?></td>
+				</tr>
+			</table>
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr bgcolor="#FFCA5B">
+					<th width="75" height="50" align="center">No.</th>
+					<th width="100" align="center">No. Curso</th>
+					<th width="200" align="center">Materia</th>
+					<th width="75" align="center">LUN</th>
+					<th width="75" align="center">MAR</th>
+					<th width="75" align="center">MIE</th>
+					<th width="75" align="center">JUE</th>
+					<th width="75" align="center">VIE</th>
+					<th width="75" align="center">SAB</th>
+				</tr>
+				<?php foreach($mihorario as $horario){ $i++; if($i%2==0){$bg = "#EEEEEE";}else{$bg = "#FFFFFF";} ?>
+				<tr>
+					<td width="75" height="50" align="center" bgcolor="<?= $bg ?>"><?= $i ?></td>
+					<td width="100" align="center" bgcolor="<?= $bg ?>"><?= $horario -> division ?><?= $horario -> id ?></td>
+					<td width="300" align="center" bgcolor="<?= $bg ?>"><?= $horario -> materia ?><br><?= $materia[$horario -> materia]; ?></td>
+					<td width="75" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> lunesi!=0 || $horario -> lunesf != 0){ ?> <?= $horario -> lunesi ?>:00<br><?= $horario -> lunesf ?>:00<?php } else { echo "&nbsp;"; } ?></th>
+					<td width="75" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> martesi!=0 || $horario -> martesf != 0){ ?> <?= $horario -> martesi ?>:00<br><?= $horario -> martesf ?>:00<?php } else { echo "&nbsp;"; } ?></th>
+					<td width="75" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> miercolesi!=0 || $horario -> miercolesf != 0){ ?> <?= $horario -> miercolesi ?>:00<br><?= $horario -> miercolesf ?>:00<?php } else { echo "&nbsp;"; } ?></th>
+					<td width="75" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> juevesi!=0 || $horario -> juevesf != 0){ ?> <?= $horario -> juevesi ?>:00<br><?= $horario -> juevesf ?>:00<?php } else { echo "&nbsp;"; } ?></th>
+					<td width="75" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> viernesi!=0 || $horario -> viernesf != 0){ ?> <?= $horario -> viernesi ?>:00<br><?= $horario -> viernesf ?>:00<?php } else { echo "&nbsp;"; } ?></th>
+					<td width="75" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> sabadoi!=0 || $horario -> sabadof != 0){ ?> <?= $horario -> sabadoi ?>:00<br><?= $horario -> sabadof ?>:00<?php } else { echo "&nbsp;"; } ?></th>
+				</tr>
+				<tr>
+					<td colspan="3" align="center" bgcolor="<?= $bg ?>">&nbsp;</th>
+					<td width="75" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> lunesi!=0 || $horario -> lunesf != 0){ ?> <?= $horario -> luness ?><?php } else { echo "&nbsp;"; } ?></th>
+					<td width="75" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> martesi!=0 || $horario -> martesf != 0){ ?> <?= $horario -> martess ?><?php } else { echo "&nbsp;"; } ?></th>
+					<td width="75" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> miercolesi!=0 || $horario -> miercolesf != 0){ ?> <?= $horario -> miercoless ?><?php } else { echo "&nbsp;"; } ?></th>
+					<td width="75" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> juevesi!=0 || $horario -> juevesf != 0){ ?> <?= $horario -> juevess ?><?php } else { echo "&nbsp;"; } ?></th>
+					<td width="75" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> viernesi!=0 || $horario -> viernesf != 0){ ?> <?= $horario -> vierness ?><?php } else { echo "&nbsp;"; } ?></th>
+					<td width="75" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> sabadoi!=0 || $horario -> sabadof != 0){ ?> <?= $horario -> sabados ?><?php } else { echo "&nbsp;"; } ?></th>
+				</tr>
+				<?php } ?>
+			</table>
+		</td>
+	</tr>
+</table>
+<br>
+</center>

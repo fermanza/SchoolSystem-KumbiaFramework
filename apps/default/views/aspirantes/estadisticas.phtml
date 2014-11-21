@@ -1,0 +1,829 @@
+		<style type="text/css">
+			.linknegrita a:hover{
+				font-weight: bold;
+				text-decoration: none;
+				color:#000000;
+			}
+			.linknegrita a{
+				font-weight: none;
+				text-decoration: none;
+				color:#000000;
+			}
+		</style>
+<script type='text/javascript'>
+function registro() {
+	var folio = prompt("Introduce el número de FOLIO de la solicitud de aspirante");
+	window.location.href = '<?= KUMBIA_PATH ?>aspirantes/registro/'+folio;
+}
+function modificacion() {
+	var folio = prompt("Introduce el número de FOLIO de la solicitud de aspirante");
+	window.location.href = '<?= KUMBIA_PATH ?>aspirantes/modificacion/'+folio;
+}
+function consulta() {
+	var folio = prompt("Introduce el número de FOLIO de la solicitud de aspirante");
+	window.location.href = '<?= KUMBIA_PATH ?>aspirantes/consulta/'+folio;
+}
+
+</script>
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td style="font-family: Verdana;">
+					<br>
+					<div style="color: #1569C7; font-size: 14px;" align="left">
+					<?= img_tag("adorno.gif","border: 0") ?> <b>ASPIRANTES - ESTADÍSTICAS</b></div>
+					<div style="color: #000000; font-size: 11px;" align="justify">
+					<br>
+						En esta sección una secretaría podrá dar de alta y consultar cada uno de los aspirantes,
+						así como consultar distintos reportes y estadísticas sobre este rubro.
+						<br/><br/>
+						<div style="color: #000000; font-size: 20px;" align="center"><b><?= $periodoo ?></b></div>
+						<br/>
+						<center>
+						
+						<table border="0" style="font-size:12px;">
+						<tr>
+							<th width="300" class="fondoazul" align="center"><center>
+								<b>TOTAL DE ASPIRANTES</b>
+							</center></th>
+							<td width="20">&nbsp;
+								
+							</td>
+							<th width="150" class="fondoazul">
+								<b>HOMBRES</b>
+							</th>
+							<th width="150" class="fondoazul">
+								<b>MUJERES</b>
+							</th>
+						</tr>
+						<tr>
+						<td width="300" height="40" valign="middle" style="vertical-align:top; font-size:30px;"  class="fondonaranja" align="center"><center>
+							<?= $todos ?>
+						<center></td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td width="150" height="40" valign="top" style="vertical-align:top;font-size:30px;"  class="fondonaranja" align="center"><center>
+							<?= $hombresIng ?>
+						</td>
+						<td width="150" height="40" valign="top" style="vertical-align:top;font-size:30px;"  class="fondonaranja" align="center"><center>
+							<?= $mujeresIng ?>
+						</td>
+						</tr>
+						</table>
+						<br />
+						
+						<table border="0" style="font-size:12px;">
+						<tr>
+							<th colspan="2" width="225" class="fondoazul" height="20">
+								<b>ING INDUSTRIAL</b>
+							</th>
+							<td width="20">&nbsp;
+							  
+						    </td>
+							<th colspan="2" width="225" class="fondoazul">
+								<b>ING MECATR&Oacute;NICA</b>
+							</th>
+						</tr>
+						<tr>
+						<td colspan="2" width="220" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrial ?>
+						</td>
+						<td width="20">&nbsp;
+						  
+						  </td>
+						<td colspan="2" width="220" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronica ?>
+						</td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						<td width="20">&nbsp;
+						  
+						  </td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialHombres ?>
+						</td>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialMujeres ?>
+						</td>
+						<td width="20">&nbsp;
+						  
+						  </td>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaHombres ?>
+						</td>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaMujeres ?>
+						</td>
+						</tr>
+						</table>
+						
+						<BR />
+						<table border="0" style="font-size:12px;">
+						  <tr>
+						    <th width="225" height="20" colspan="2" align="center" class="fondoazul"><center>
+						      <b>ING DESARROLLO DE SOFTWARE</b>
+						      </center></th>
+						    <td width="20">&nbsp;</td>
+						    <th colspan="2" width="225" class="fondoazul"> <b>ING DISE&Ntilde;O ELECTRONICO</b> </th>
+					      </tr>
+						  <tr>
+						    <td colspan="2" width="220" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?= $software ?>
+						      <center></td>
+						    <td width="20">&nbsp;</td>
+						    <td colspan="2" width="220" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?= $electronico ?></td>
+					      </tr>
+						  <tr>
+						    <td width="110" height="20" valign="middle" style="vertical-align:top; font-size:14px;" class="fondonaranja" align="center"><center>
+						      HOMBRES </td>
+						    <td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+						      MUJERES </td>
+						    <td width="20">&nbsp;</td>
+						    <td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+						      HOMBRES </td>
+						    <td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+						      MUJERES </td>
+					      </tr>
+						  <tr>
+						    <td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?= $softwareHombres ?></td>
+						    <td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?= $softwareMujeres ?></td>
+						    <td width="20">&nbsp;</td>
+						    <td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?= $electronicoHombres ?></td>
+						    <td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?= $electronicoMujeres ?></td>
+					      </tr>
+						  </table>
+						<BR />
+						<table border="0" style="font-size:12px;">
+						<tr>
+							<th colspan="2" width="225" class="fondoazul" height="20">
+								<b>ING INDUSTRIAL VESPERTINO</b>
+							</th>
+							<td width="20">&nbsp;
+								
+						  </td>
+							<th colspan="2" width="225" class="fondoazul">
+								<b>ING INDUSTRIAL MATUTINO</b>
+							</th>
+						</tr>
+						<tr>
+						<td colspan="2" width="220" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialVespertino ?>
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td colspan="2" width="220" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialMatutino ?>
+						<center></td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialHombresVesp ?>
+						</td>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialMujeresVesp ?>
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialHombresMat ?>
+						</td>
+						<td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialMujeresMat ?>
+						</td>
+						</tr>
+						</table>
+						
+						
+						<table border="0" style="font-size:12px;">
+						<tr>
+							<th colspan="2" width="225" class="fondoazul" height="20">
+								<b>ING MECATRONICA COLOMOS</b>
+							</th>
+							<td width="20">&nbsp;
+								
+							</td>
+							<th colspan="2" width="225" class="fondoazul">
+								<b>ING MECATRONICA TONALA</b>
+							</th>
+						</tr>
+						<tr>
+						<td colspan="2" width="220" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaColomos ?>
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td colspan="2" width="220" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaTonala ?>
+						<center></td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaHombresColomos ?>
+						</td>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaMujeresColomos ?>
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaHombresTonala ?>
+						</td>
+						<td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaMujeresTonala ?>
+						</td>
+						</tr>
+						</table>
+						<br />
+						
+						<!-- Pago de Derecho -->
+						<hr />
+						<h2>PAGO DE DERECHO</h2>
+						<table border="0" style="font-size:12px;">
+						<tr>
+							<th width="300" class="fondoazul" align="center"><center>
+								<b>TOTAL DE ASPIRANTES</b>
+							</center></th>
+							<td width="20">&nbsp;
+								
+							</td>
+							<th width="150" class="fondoazul">
+								<b>HOMBRES</b>
+							</th>
+							<th width="150" class="fondoazul">
+								<b>MUJERES</b>
+							</th>
+						</tr>
+						<tr>
+						<td width="300" height="40" valign="middle" style="vertical-align:top; font-size:30px;"  class="fondonaranja" align="center"><center>
+							<?= $todosPD ?>
+						<center></td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td width="150" height="40" valign="top" style="vertical-align:top;font-size:30px;"  class="fondonaranja" align="center"><center>
+							<?= $hombresTodosPD ?>
+						</td>
+						<td width="150" height="40" valign="top" style="vertical-align:top;font-size:30px;"  class="fondonaranja" align="center"><center>
+							<?= $mujeresTodosPD ?>
+						</td>
+						</tr>
+						</table>
+						<br />
+						
+						<table border="0" style="font-size:12px;">
+						<tr>
+							<th colspan="2" width="225" class="fondoazul" height="20">
+								<b>ING INDUSTRIAL</b>
+							</th>
+							<td width="20">&nbsp;
+							  
+						    </td>
+							<th colspan="2" width="225" class="fondoazul">
+								<b>ING MECATR&Oacute;NICA</b>
+							</th>
+						</tr>
+						<tr>
+						<td colspan="2" width="220" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialPD ?>
+						</td>
+						<td width="20">&nbsp;
+						  
+						  </td>
+						<td colspan="2" width="220" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaPD ?>
+						</td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						<td width="20">&nbsp;
+						  
+						  </td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialHombresPD ?>
+						</td>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialMujeresPD ?>
+						</td>
+						<td width="20">&nbsp;
+						  
+						  </td>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaHombresPD ?>
+						</td>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaMujeresPD ?>
+						</td>
+						</tr>
+						</table>
+						
+						
+						<BR />
+						<table border="0" style="font-size:12px;">
+						  <tr>
+						    <th width="225" height="20" colspan="2" align="center" class="fondoazul"><center>
+						      <b>ING DESARROLLO DE SOFTWARE</b>
+						      </center></th>
+						    <td width="20">&nbsp;</td>
+						    <th colspan="2" width="225" class="fondoazul"> <b>ING DISE&Ntilde;O ELECTRONICO</b></th>
+					      </tr>
+						  <tr>
+						    <td colspan="2" width="220" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?= $softwarePD ?>
+						      <center></td>
+						    <td width="20">&nbsp;</td>
+						    <td colspan="2" width="220" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?= $electronicoPD ?></td>
+					      </tr>
+						  <tr>
+						    <td width="110" height="20" valign="middle" style="vertical-align:top; font-size:14px;" class="fondonaranja" align="center"><center>
+						      HOMBRES </td>
+						    <td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+						      MUJERES </td>
+						    <td width="20">&nbsp;</td>
+						    <td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+						      HOMBRES </td>
+						    <td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+						      MUJERES </td>
+					      </tr>
+						  <tr>
+						    <td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?= $softwareHombresPD ?></td>
+						    <td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?=  $softwareMujeresPD ?></td>
+						    <td width="20">&nbsp;</td>
+						    <td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?=  $electronicoHombresPD ?></td>
+						    <td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?= $electronicoMujeresPD ?></td>
+					      </tr>
+						  </table>
+						<BR />
+						<table border="0" style="font-size:12px;">
+						<tr>
+							<th colspan="2" width="225" class="fondoazul" height="20">
+								<b>ING INDUSTRIAL VESPERTINO</b>
+							</th>
+							<td width="20">&nbsp;
+								
+							</td>
+							<th colspan="2" width="225" class="fondoazul">
+								<b>ING INDUSTRIAL MATUTINO</b>
+							</th>
+						</tr>
+						<tr>
+						<td colspan="2" width="220" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialVespertinoPD ?>
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td colspan="2" width="220" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialMatutinoPD ?>
+						<center></td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialHombresVespPD ?>
+						</td>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialMujeresVespPD ?>
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialHombresMatPD ?>
+						</td>
+						<td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialMujeresMatPD ?>
+						</td>
+						</tr>
+						</table>
+						
+						
+						<table border="0" style="font-size:12px;">
+						<tr>
+							<th colspan="2" width="225" class="fondoazul" height="20">
+								<b>ING MECATRONICA COLOMOS</b>
+							</th>
+							<td width="20">&nbsp;
+								
+							</td>
+							<th colspan="2" width="225" class="fondoazul">
+								<b>ING MECATRONICA TONALA</b>
+							</th>
+						</tr>
+						<tr>
+						<td colspan="2" width="220" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaColomosPD ?>
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td colspan="2" width="220" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaTonalaPD ?>
+						<center></td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaHombresColomosPD ?>
+						</td>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaMujeresColomosPD ?>
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaHombresTonalaPD ?>
+						</td>
+						<td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaMujeresTonalaPD ?>
+						</td>
+						</tr>
+						</table>
+						<br />
+						
+						
+						<!-- Continuación de Estudios -->
+						<hr />
+						<h2>CONTINUACI&Oacute;N DE ESTUDIOS</h2>
+						<table border="0" style="font-size:12px;">
+						<tr>
+							<th width="300" class="fondoazul" align="center"><center>
+								<b>TOTAL DE ASPIRANTES</b>
+							</center></th>
+							<td width="20">&nbsp;
+								
+							</td>
+							<th width="150" class="fondoazul">
+								<b>HOMBRES</b>
+							</th>
+							<th width="150" class="fondoazul">
+								<b>MUJERES</b>
+							</th>
+						</tr>
+						<tr>
+						<td width="300" height="40" valign="middle" style="vertical-align:top; font-size:30px;"  class="fondonaranja" align="center"><center>
+							<?= $todosCE ?>
+						<center></td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td width="150" height="40" valign="top" style="vertical-align:top;font-size:30px;"  class="fondonaranja" align="center"><center>
+							<?= $hombresTodosCE ?>
+						</td>
+						<td width="150" height="40" valign="top" style="vertical-align:top;font-size:30px;"  class="fondonaranja" align="center"><center>
+							<?= $mujeresTodosCE ?>
+						</td>
+						</tr>
+						</table>
+						<br />
+						
+						<table border="0" style="font-size:12px;">
+						<tr>
+							<th colspan="2" width="225" class="fondoazul" height="20">
+								<b>ING INDUSTRIAL</b>
+							</th>
+							<td width="20">&nbsp;
+							  
+						    </td>
+							<th colspan="2" width="225" class="fondoazul">
+								<b>ING MECATR&Oacute;NICA</b>
+							</th>
+						</tr>
+						<tr>
+						<td colspan="2" width="220" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialCE ?>
+						</td>
+						<td width="20">&nbsp;
+						  
+						  </td>
+						<td colspan="2" width="220" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaCE ?>
+						</td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						<td width="20">&nbsp;
+						  
+						  </td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialHombresCE ?>
+						</td>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialMujeresCE ?>
+						</td>
+						<td width="20">&nbsp;
+						  
+						  </td>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaHombresCE ?>
+						</td>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaMujeresCE ?>
+						</td>
+						</tr>
+						</table>
+						
+						<BR />
+						<table border="0" style="font-size:12px;">
+						  <tr>
+						    <th width="225" height="20" colspan="2" align="center" class="fondoazul"><center>
+						      <b>ING DESARROLLO DE SOFTWARE</b>
+						      </center></th>
+						    <td width="20">&nbsp;</td>
+						    <th colspan="2" width="225" class="fondoazul"> <b>ING DISE&Ntilde;O ELECTRONICO</b></th>
+					      </tr>
+						  <tr>
+						    <td colspan="2" width="220" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?= $softwareCE ?>
+						      <center></td>
+						    <td width="20">&nbsp;</td>
+						    <td colspan="2" width="220" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?= $electronicoCE ?></td>
+					      </tr>
+						  <tr>
+						    <td width="110" height="20" valign="middle" style="vertical-align:top; font-size:14px;" class="fondonaranja" align="center"><center>
+						      HOMBRES </td>
+						    <td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+						      MUJERES </td>
+						    <td width="20">&nbsp;</td>
+						    <td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+						      HOMBRES </td>
+						    <td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+						      MUJERES </td>
+					      </tr>
+						  <tr>
+						    <td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?=  $softwareHombresCE ?></td>
+						    <td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?= $softwareMujeresCE ?></td>
+						    <td width="20">&nbsp;</td>
+						    <td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?=  $electronicoHombresCE ?></td>
+						    <td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+						      <?= $electronicoMujeresCE ?></td>
+					      </tr>
+						  </table>
+						<BR />
+						<table border="0" style="font-size:12px;">
+						<tr>
+							<th colspan="2" width="225" class="fondoazul" height="20">
+								<b>ING INDUSTRIAL VESPERTINO</b>
+							</th>
+							<td width="20">&nbsp;
+								
+							</td>
+							<th colspan="2" width="225" class="fondoazul">
+								<b>ING INDUSTRIAL MATUTINO</b>
+							</th>
+						</tr>
+						<tr>
+						<td colspan="2" width="220" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialVespertinoCE ?>
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td colspan="2" width="220" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialMatutinoCE ?>
+						<center></td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialHombresVespCE ?>
+						</td>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialMujeresVespCE ?>
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialHombresMatCE ?>
+						</td>
+						<td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $industrialMujeresMatCE ?>
+						</td>
+						</tr>
+						</table>
+						
+						
+						<table border="0" style="font-size:12px;">
+						<tr>
+							<th colspan="2" width="225" class="fondoazul" height="20">
+								<b>ING MECATRONICA COLOMOS</b>
+							</th>
+							<td width="20">&nbsp;
+								
+							</td>
+							<th colspan="2" width="225" class="fondoazul">
+								<b>ING MECATRONICA TONALA</b>
+							</th>
+						</tr>
+						<tr>
+						<td colspan="2" width="220" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaColomosCE ?>
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td colspan="2" width="220" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaTonalaCE ?>
+						<center></td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							HOMBRES
+						</td>
+						<td width="110" height="20" valign="top" style="vertical-align:top;font-size:14px;" class="fondonaranja" align="center"><center>
+							MUJERES
+						</td>
+						</tr>
+						
+						<tr>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaHombresColomosCE ?>
+						</td>
+						<td width="110" height="40" valign="top" style="vertical-align:top;font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaMujeresColomosCE ?>
+						</td>
+						<td width="20">&nbsp;
+							
+						</td>
+						<td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaHombresTonalaCE ?>
+						</td>
+						<td width="110" height="40" valign="middle" style="vertical-align:top; font-size:30px;" class="fondonaranja" align="center"><center>
+							<?= $mecatronicaMujeresTonalaCE ?>
+						</td>
+						</tr>
+						</table>
+						<br />
+						
+						</center>
+					</div>
+				</td>
+			</tr>
+		</table>

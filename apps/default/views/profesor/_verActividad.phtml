@@ -1,0 +1,24 @@
+<table width="200">
+	<tr class="naranja">
+		<th class="bordeAzul2" colspan="3">
+		<h2>Ver Actividad: <? echo htmlentities($actividadMaestro -> nombreActividad) ?></h2>
+		</th>
+	</tr>
+	<tr class="naranja">
+		<th class="bordeAzul2" width="100">Horas Reales</th>
+		<th class="bordeAzul2" width="100">Semana</th>
+	</tr>
+	<?
+	if( isset($actividadhoras) ){
+		foreach( $actividadhoras as $ahoras ){
+		?>
+		<tr>
+			<th class="bordeAzul2" width="100"><?= $ahoras -> horasreales ?></th>
+			<th class="bordeAzul2" width="100"><?= $ahoras -> semana ?></th>
+		</tr>
+		<?
+		}
+	}
+	?>
+</table>
+<br />

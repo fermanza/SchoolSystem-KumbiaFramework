@@ -1,0 +1,174 @@
+<style type="text/css">
+	* {
+		font-size: 11px;
+	}
+	.imprimir a{
+		text-align: center;
+		font-size: 12px;
+		display: block;
+		border: 2px solid #1569C7;
+		background-color: #FFCA5B;
+		width: 250px;
+		font-weight: bold;
+		color: #000000;
+		text-decoration: none;
+	}
+	
+	.imprimir a:hover{
+		text-decoration: underline;
+	}
+</style>
+<?php 
+$Periodo = new Periodos();	
+if($Periodo -> find_first("activo = 1")){			
+	$periodo = $Periodo -> periodo;
+}else{ echo "No se encontro ningun periodo activo<br />"; }	
+?>
+<?= render_partial("info"); ?>
+<?php $maestro_id = Session::get_data("registro") ?>
+<br>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;HORARIO DE PROFESOR
+</div>
+<br>
+<div class="imprimir">
+	<center>
+	<a href="<?= KUMBIA_PATH ?>tgoprofesor/horarioPDF/<?= Session::get_data("registro") ?>">IMPRIMIR HORARIO</a>
+	</center>
+</div>
+<br />
+<div>
+	
+	<?php $horas = array("7:00 - 7:55","7:55 - 8:50","9:30 - 10:25","10:25 - 11:20","11:20 - 12:15","12:15 - 13:10","13:10 - 14:05","14:05 - 15:00","15:00 - 15:55","15:55 - 16:50","16:50 - 17:45","17:45 - 18:40","18:40 - 19:35","19:35 - 20:30"); ?>
+	<table border="1" style="font-size:10px;" class="bordeazul" width="100%">
+		<th height="20" class="naranja" colspan="7">
+			TURNO MATUTINO
+		</th>
+		<tr>
+			<td width="10%" align="center" class="azul">&nbsp;</td>
+			<th width="15%" align="center" class="azul">Lunes</th>
+			<th width="15%" align="center" class="azul">Martes</th>
+			<th width="15%" align="center" class="azul">Miercoles</th>
+			<th width="15%" align="center" class="azul">Jueves</th>
+			<th width="15%" align="center" class="azul">Viernes</th>
+			<th width="15%" align="center" class="azul">Sabado</th>
+		</tr>
+		<?php for($i=0;$i<2;$i++){ ?>
+		<tr>			
+			<th height="75" class="naranja"><?= $horas[$i] ?></th>
+		<?php
+			for($d=1; $d<7; $d++){
+				$Horas = new Horas();
+				if ($hora = $Horas -> find_first("periodo = ".$periodo." and maestro_id = $maestro_id and dia = $d and hora = $i+1")){
+					?>
+					<th height="75" class="gris">
+						<?php
+						$Grupos = new Grupos();
+						$Salones = new Salones();
+						$Materias = new MateriasHorarios();
+						$grupo = $Grupos -> find_first("id = ".$hora -> grupo_id);
+						$salon = $Salones -> find_first("id = ".$hora -> salon_id);
+						$materia = $Materias -> find_first("id = ".$hora -> materia_id);
+						
+						echo utf8_decode('<span style="color:#1569C7">'.$materia -> nombre.'</span><br>Grupo: '.$grupo -> nombre.'<br> Salon: '.$salon -> corto); 
+						?>
+					</th>
+					<?php
+				}else {
+					?>
+					<th height="25" height="75" >
+						&nbsp;
+					</th>
+					<?php
+				}				
+			}
+		?>
+		</tr>
+		<?php } ?>
+		<tr>
+			<th height="10" class="naranja">8:50 - 9:30</th>
+			<th colspan="6" class="negro">RECESO</th>
+		</tr>
+		<?php for($i=2;$i<8;$i++){ ?>
+		<tr>
+			<th height="75" class="naranja"><?= $horas[$i] ?></th>			
+			<?php
+			for($d=1; $d<7; $d++){
+				$Horas = new Horas();
+				if ($hora = $Horas -> find_first("periodo = ".$periodo." and maestro_id = $maestro_id and dia = $d and hora = $i+1")){
+					?>
+					<th height="75" class="gris">
+						<?php
+						$Grupos = new Grupos();
+						$Salones = new Salones();
+						$Materias = new MateriasHorarios();
+						$grupo = $Grupos -> find_first("id = ".$hora -> grupo_id);
+						$salon = $Salones -> find_first("id = ".$hora -> salon_id);
+						$materia = $Materias -> find_first("id = ".$hora -> materia_id);
+						
+						echo utf8_decode('<span style="color:#1569C7">'.$materia -> nombre.'</span><br>Grupo: '.$grupo -> nombre.'<br> Salon: '.$salon -> corto); 
+						?>
+					</th>
+					<?php
+				}else {
+					?>
+					<th height="75">
+						&nbsp;
+					</th>
+					<?php
+				}				
+			}
+			?>
+		</tr>
+		<?php } ?>
+	</table>
+	<br/>
+	<table border="1" style="font-size:10px;" class="bordeazul" width="100%">
+	<th height="20" class="naranja" colspan="7">
+			TURNO VESPERTINO
+		</th>
+		<tr>
+			<td width="10%" align="center" class="azul">&nbsp;</td>
+			<th width="15%" align="center" class="azul">Lunes</th>
+			<th width="15%" align="center" class="azul">Martes</th>
+			<th width="15%" align="center" class="azul">Miercoles</th>
+			<th width="15%" align="center" class="azul">Jueves</th>
+			<th width="15%" align="center" class="azul">Viernes</th>
+			<th width="15%" align="center" class="azul">Sabado</th>
+		</tr>
+		<?php for($i=8;$i<14;$i++){ ?>
+		<tr>
+			<th height="75" class="naranja"><?= $horas[$i] ?></th>
+			<?php
+			for($d=1; $d<7; $d++){
+				$Horas = new Horas();
+				if ($hora = $Horas -> find_first("periodo = ".$periodo." and maestro_id = $maestro_id and dia = $d and hora = $i+1")){
+					?>
+					<th height="75" class="gris">
+						<?php
+						$Grupos = new Grupos();
+						$Salones = new Salones();
+						$Materias = new MateriasHorarios();
+						$grupo = $Grupos -> find_first("id = ".$hora -> grupo_id);
+						$salon = $Salones -> find_first("id = ".$hora -> salon_id);
+						$materia = $Materias -> find_first("id = ".$hora -> materia_id);
+						
+						echo '<span style="color:#1569C7">'.$materia -> nombre.'</span><br>Grupo: '.$grupo -> nombre.'<br> Salon: '.$salon -> corto; 
+						?>
+					</th>
+					<?php
+				}else {
+					?>
+					<th height="75">
+						&nbsp;
+					</th>
+					<?php
+				}				
+			}
+			?>
+		</tr>
+		<?php } ?>
+	</table>
+</div>
+<br />
+<br />

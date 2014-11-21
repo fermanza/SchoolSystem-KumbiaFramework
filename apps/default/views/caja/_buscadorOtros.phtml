@@ -1,0 +1,68 @@
+<?php
+$title = "Seleciconar el tipo de persona que deseas buscar";
+?>
+<table width="900" class="formulario" style="margin-top:35px;">
+    <tr> 
+      <td height="25" > 
+        <h2 id="titulo" >Buscador de <?= $tipo ?></h2> <input type="hidden" readonly="readonly" name="tipoper" id="tipoper" value="<?php echo $tipoPersona; ?>"/>
+        <span id="subtitulo">
+          <?php echo $title;?>
+        </span>
+      </td> 
+    </tr>  
+    <tr>
+      <td>
+        <div style="background: none repeat scroll 0 0 #F6F6F6; color: #000000; padding: 10px;" id="contenido2">
+		  <select id="typeOther" name="typeOther" style="width:200px;" onchange="selectTypeOther();">
+		    <option value="0">Seleccionar</option>
+		    <option value="1">Proped&eacute;utico</option>
+			<option value="2">Ex-Alumnos</option>
+			<option value="3">Externos</option>
+		  </select>
+        </div>
+      </td>
+    </tr>
+</table>
+
+
+<!--Se coloca la div donde se mostrara los que solicitan propedeuticos-->
+<div id="usuarioPrope">
+</div>
+
+<style type="text/css">    
+    #listadoConceptos{
+        font-size: 12px;
+        width: 100%;
+        height: 370px;
+        overflow: auto;
+        background-color: #FFFFFF;
+    }
+    #listadoConceptos table{
+        font-size: 12px;
+    }
+    #listadoConceptos td{
+        border-bottom: 1px solid #CCCCCC;
+		height:35px;
+    }
+    #listadoConceptos tr:hover{
+        background-color: #13539B;
+        color: #ffffff;
+    }
+    #listadoConceptos img{
+        border: 0px;
+    }
+    #complementario{
+        padding: 3px;
+        font-size: 12px;
+        /*background-color: #FFFFFF;*/
+        height: 150px;
+        overflow: auto;
+    }
+    #pagos{
+        padding: 3px;
+        font-size: 12px;
+        min-height: 400px;
+        background-color: #FFFFFF;
+    }
+</style>
+<br/><br/>

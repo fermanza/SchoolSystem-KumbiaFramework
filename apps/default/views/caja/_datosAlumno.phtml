@@ -1,0 +1,53 @@
+<center>
+<table width="715" class="bordeAzul" style="font-size:11px;">
+	<tr class="naranja">
+		<th colspan="7">
+			ALUMNOS ENCONTRADOS		</th>
+	</tr>
+	<tr class="azul">
+		<th width="22">&nbsp;</th>
+		<th width="70">REGISTRO</th>
+		<th width="176">NOMBRE</th>
+		<th width="103">GRUPO Y NIVEL</th>
+		<th width="58">CARRERA</th>
+		
+		
+	    <th width="125">TIPO DE ALUMNO</th>
+
+	</tr>
+	<?php
+		foreach($alumnos as $a){
+			echo "<tr>";
+			echo "<td><center>";
+			$entro=0;
+			$foto = "fotos/".$a -> registro.".JPG";
+			$foto1 = "fotos/".$a -> registro.".jpg";					
+			if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto)){					
+				echo img_tag($foto, "width: 100");
+				$entro=1;
+			}
+			if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto1)){					
+				echo img_tag($foto1, "width: 100");
+				$entro=1;
+			}
+			if ($entro == 0){
+				echo "Sin Foto";
+			}
+			echo "</center></td>";
+	?>	
+		<th><?= $a -> registro ?></th>
+		<th><?= link_to("ventanilla/convertirAAlumno/".$a -> registro."/6",utf8_encode($a -> nombre_completo)) ?></th>
+		<th><?= $a -> semestre." - ".$a -> grupo ?></th>	
+		<th><?= $a -> especialidad ?></th>
+        <? if ($a->estado=='OK'){	?>
+        <th  onmouseover="toolTip('Promedio 12011:<?= promedio($a->registro) ?>',this)"><?= $a -> tipo ?></th>
+        <? } else if (($a->estado=='BD')||($a->estado=='EG')){	?>	
+        <th  onmouseover="toolTip('Promedio 12011:<?= promedio($a->registro) ?>',this)"><?= $a -> estado ?></th>
+        <? } else { ?>
+		<th  onmouseover="toolTip('Promedio 12011: <?= promedio($a->registro) ?>',this)"><?= "alumno no activo"; ?></th>	
+        <? } ?>
+       
+	</tr>
+	<?php } ?>
+</table>
+</center>

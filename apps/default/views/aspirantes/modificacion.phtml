@@ -1,0 +1,677 @@
+<?php
+	function checado($var){
+		if ($var == 'si'){
+			return 'checked';
+		}else{
+			return '';
+		}
+	}
+?>
+<style type="text/css">
+	.cielo{
+		background:#EFEFEF;
+		text-transform:uppercase;
+		font-weight:bold;
+	}
+</style>
+<script type='text/javascript'>
+function validar(){
+  	
+	var err = "";
+	var check ="";
+	
+	if (document.Formulario1.curp.value=="") {
+		err += "El campo carrera no debe quedar vacio\n";
+  	}
+	//var curp = document.Formulario1.elements['curp'];
+	//alert(curp.size);
+	if( document.Formulario1.curp.value.length < 18 ){
+		err += "La CURP debe tener 18 caracteres\n";
+	}
+	
+	var fecha_actual = new Date();
+	if( (fecha_actual.getFullYear() - document.Formulario1.anioo.value) < 18 ){
+		if( !confirm("El alumno es menor de edad, se desea proseguir para la captura de su información?") ){
+			return false;
+		}
+	}
+	// Si es numero me devuelve false.
+	// Si es cadena me devuelve true.
+	if( isNaN(document.Formulario1.exterior.value) ){
+		err += "El campo de número exterior debe contener sólo caracteres numéricos\n";
+	}
+	
+	if (document.Formulario1.folioceneval.value < 0) {
+		err += "El folio del ceneval no puede ser negativo\n";
+  	}
+	check = document.Formulario1.folioceneval.value.length;
+	for ( var i = 0; i < check; i++ ){
+		if ( document.Formulario1.folioceneval.value[i] == "." ){
+			err +="El folio del ceneval no puede contener décimales\n";
+			break;
+		}
+	}
+	
+	if( err != "" ){
+		alert(err);
+		return false;
+	}
+	else{
+		return true;
+	}
+	
+	/*
+	if (formulario.paterno.value=="") {
+		alert("El campo apellido paterno no debe quedar vacio");
+		formulario.paterno.focus();
+		return false;
+  	}
+	
+	if (formulario.materno.value=="") {
+		alert("El campo apellido materno no debe quedar vacio");
+		formulario.materno.focus();
+		return false;
+  	}
+	
+	if (formulario.nombre.value=="") {
+		alert("El campo nombre no debe quedar vacio");
+		formulario.nombre.focus();
+		return false;
+  	}
+		
+	if (formulario.sexo.value=="") {
+		alert("Debes elegir un genero");
+		formulario.sexo.focus();
+		return false;
+  	}
+	
+	if (formulario.calle.value=="") {
+		alert("El campo calle no debe quedar vacio");
+		formulario.calle.focus();
+		return false;
+  	}
+	
+	if (formulario.exterior.value=="") {
+		alert("El campo exterior no debe quedar vacio");
+		formulario.exterior.focus();
+		return false;
+  	}
+	
+	if (formulario.cp.value=="") {
+		alert("El campo codigo postal no debe quedar vacio");
+		formulario.cp.focus();
+		return false;
+  	}
+	
+	if (formulario.municipio.value=="") {
+		alert("El campo municipio no debe quedar vacio");
+		formulario.municipio.focus();
+		return false;
+  	}
+	
+	if (formulario.estado.value=="") {
+		alert("El campo estado no debe quedar vacio");
+		formulario.estado.focus();
+		return false;
+  	}
+	
+	if (formulario.telefono.value=="") {
+		alert("El campo telefono no debe quedar vacio");
+		formulario.telefono.focus();
+		return false;
+  	}
+	
+	if (formulario.correo.value=="") {
+		alert("El campo correo electrónico no debe quedar vacio");
+		formulario.correo.focus();
+		return false;
+  	}
+	
+	if (formulario.nacimiento.value=="") {
+		alert("El campo lugar de nacimiento no debe quedar vacio");
+		formulario.nacimiento.focus();
+		return false;
+  	}
+	
+	if (formulario.curp.value=="") {
+		alert("El campo curp de nacimiento no debe quedar vacio");
+		formulario.curp.focus();
+		return false;
+  	}
+	*/
+}
+
+
+</script><center>
+<form method="POST" action="<?= KUMBIA_PATH.$controller_name ?>/registrar/<?= $folio ?>/<?= $tipoAspirante ?>" 
+name="Formulario1" id="Formulario1" onSubmit="return validar();">
+<table border="1" align="center">
+	<br />
+	<tr>
+		<th colspan="5" class="fondoazul" height="25" style="font-size:14px;">DATOS ACADÉMICOS</font></th>
+	</tr>
+	<tr>
+		<th class="fondonaranja">
+			Folio
+		</th>
+		<th class="fondonaranja">
+			Ficha
+		</th>
+		<th class="fondonaranja">
+			Periodo
+		</th>
+	</tr>
+	<tr>
+		<th>
+			<input type="text" style="width:75px; text-align:center; color:#000;" name="folio" value="<?= $folio ?>" class="cielo" disabled>
+		</th>
+		<th>
+			<input type="text" style="width:75px; text-align:center; color:#000;" name="ficha" value="<?= $ficha ?>" class="cielo" disabled>
+		</th>
+		<th>
+			<input type="text" style="width:75px; text-align:center; color:#000;" name="periodo" value="<?= $periodo ?>" class="cielo" disabled>
+		</th>
+	<tr>
+		<th class="fondonaranja">
+			Carrera Opc1
+		</th>
+		<th colspan="2">
+			<select name="carreraa1" style="width:440px; font-weight:none;" class="cielo">
+				<optgroup label="NIVEL INGENIERÍA">
+				<option value="0" <?php if($opc1==0 && $nivel=='I') echo "SELECTED"; ?>></option>
+				<?
+				foreach( $carrerasDisp as $carrDisp ){
+				?>
+				<option value="<?= $carrDisp -> id ?>" <?php if( $opc1 == $carrDisp->id ) echo "SELECTED" ?>>
+					<?= $carrDisp -> idcarrera ?> - <?= $carrDisp -> nombre ?> - 
+					<? if( $carrDisp -> plantel == "C" ){ echo "Colomos"; } else if( $carrDisp -> plantel == "T" ){ echo "Tonala"; } else{ echo ""; } ?> - 
+					<? if( $carrDisp -> turno == "V" ){ echo "Vespertino"; } else if( $carrDisp -> turno == "M" ){ echo "Matutino"; } else{ echo ""; }?>
+				</option>
+				<?
+				}
+				?>
+			</select>
+		</th>
+	</tr>
+	<tr>
+		<th class="fondonaranja">
+			Carrera Opc2
+		</th>
+		<th colspan="2">
+			<select name="carreraa2" style="width:440px; font-weight:none;" class="cielo" DISABLED>
+				<optgroup label="NIVEL INGENIERÍA">
+				<option value="0" <?php if($opc2==0 && $nivel=='I') echo "SELECTED"; ?>></option>
+				<option value="1" <?php if($opc2==1 && $nivel=='I') echo "SELECTED"; ?>>400 - INGENIERIA INDUSTRIAL - COLOMOS - VESPERTINO</option>
+				<option value="2" <?php if($opc2==2 && $nivel=='I') echo "SELECTED"; ?>>400 - INGENIERIA INDUSTRIAL - COLOMOS - MATUTINO</option>
+				<option value="3" <?php if($opc2==3 && $nivel=='I') echo "SELECTED"; ?>>600 - INGENIERIA EN ELECTRÓNICA</option>
+				<option value="4" <?php if($opc2==4 && $nivel=='I') echo "SELECTED"; ?>>801 - INGENIERIA EN MECATRÓNICA - COLOMOS</option>
+				<option value="5" <?php if($opc2==5 && $nivel=='I') echo "SELECTED"; ?>>801 - INGENIERIA EN MECATRÓNICA - TONALA</option>
+			</select>
+		</th>
+	</tr>
+	<tr>
+		<th class="fondonaranja">
+			Carrera Opc3
+		</th>
+		<th colspan="2">
+			<select name="carreraa3" style="width:440px; font-weight:none;" class="cielo" DISABLED>
+				<optgroup label="NIVEL INGENIERÍA">
+				<option value="0" <?php if($opc3==0 && $nivel=='I') echo "SELECTED"; ?>></option>
+				<option value="1" <?php if($opc3==1 && $nivel=='I') echo "SELECTED"; ?>>400 - INGENIERIA INDUSTRIAL - COLOMOS - VESPERTINO</option>
+				<option value="2" <?php if($opc3==2 && $nivel=='I') echo "SELECTED"; ?>>400 - INGENIERIA INDUSTRIAL - COLOMOS - MATUTINO</option>
+				<option value="3" <?php if($opc3==3 && $nivel=='I') echo "SELECTED"; ?>>600 - INGENIERIA EN ELECTRÓNICA</option>
+				<option value="4" <?php if($opc3==4 && $nivel=='I') echo "SELECTED"; ?>>801 - INGENIERIA EN MECATRÓNICA - COLOMOS</option>
+				<option value="5" <?php if($opc3==5 && $nivel=='I') echo "SELECTED"; ?>>801 - INGENIERIA EN MECATRÓNICA - TONALA</option>
+			</select>
+		</th>
+	</tr>
+</table><br><br>
+<table border="1" align="center">
+	<tr>
+		<th colspan="5" class="fondoazul" height="25" style="font-size:14px;">DATOS PERSONALES</font></th>
+	</tr>
+	<tr>
+		<td rowspan="2" width="150" class="fondoazul">
+			<b>&nbsp;NOMBRE:</b>
+		</td>
+		<th class="fondonaranja">
+			Apellido Paterno
+		</th>
+		<th class="fondonaranja">
+			Apellido Materno
+		</th>
+		<th colspan="2" class="fondonaranja">
+			Nombre(s)
+		</th>
+	</tr>
+	<tr>
+		<th>
+			<input type="text" style="width:125px" name="paterno" class="cielo" value="<?= $paterno ?>">
+		</th>
+		<th>
+			<input type="text" style="width:125px" name="materno" class="cielo" value="<?= $materno ?>">
+		</th>
+		<th colspan="2">
+			<input type="text" style="width:260px" name="nombre" class="cielo" value="<?= $nombre ?>">
+		</th>
+	</tr>
+	<tr>
+		<td rowspan="6" class="fondoazul">
+			<b>&nbsp;DOMICILIO:</b>
+		</td>
+		<th colspan="2" class="fondonaranja">
+			Calle
+		</th>
+		<th class="fondonaranja">
+			Número Exterior
+		</th>
+		<th class="fondonaranja">
+			Número Interior
+		</th>
+		
+	</tr>
+	<tr>
+		<th colspan="2">
+			<input type="text" style="width:262px;" name="calle" class="cielo" value="<?= $calle ?>">
+		</th>
+		<th>
+			<input type="text" style="width:125px" name="exterior" class="cielo" value="<?= $exterior ?>">
+		</th>
+		<th>
+			<input type="text" style="width:125px" name="interior" class="cielo" value="<?= $interior ?>">
+		</th>
+	</tr>
+	<tr>
+		<th class="fondonaranja">
+			Colonia
+		</th>
+		<th class="fondonaranja">
+			Código postal
+		</th>
+		<th class="fondonaranja">
+			Municipio
+		</th>
+		<th class="fondonaranja">
+			Estado
+		</th>
+		
+	</tr>
+	<tr>
+		<th>
+			<input type="text" style="width:125px" name="colonia" class="cielo" value="<?= $colonia ?>">
+		</th>
+		<th>
+			<input type="text" style="width:125px" name="cp" class="cielo" value="<?= $cp ?>">
+		</th>
+		<th>
+			<input type="text" style="width:125px" name="municipio" class="cielo" value="<?= $municipio ?>">
+		</th>
+		<th>
+			<input type="text" style="width:125px" name="estado" class="cielo" value="<?= $estado ?>">
+		</th>
+	</tr>
+	<tr>
+		<th class="fondonaranja" colspan="2">
+			Lugar Nacimiento
+		</th>
+		<th class="fondonaranja" colspan="2">
+			Fecha de Nacimiento
+		</th>
+	</tr>
+	<tr>
+		<th colspan="2">
+			<input type="text" style="width:258px" name="lugarNacimiento" class="cielo" value="<?= $lugarNacimiento ?>">
+		</th>
+		<th class="fondonaranja" colspan="2">
+			<select id="diaa" name="diaa" class="cielo">
+			<?
+				for( $i = 1; $i < 32; $i++ ){
+					if( $i == $diaa ) $selected = "SELECTED";
+					else $selected = "";
+					echo "<option value=\"$i\" $selected>$i</option>";
+				}
+			?>
+			</select>
+			<select id="mess" name="mess" class="cielo">
+				
+				<option value="1" <? if( $mess == "01" ) echo "SELECTED"; ?>>ENERO</option>
+				<option value="2" <? if( $mess == "02" ) echo "SELECTED"; ?>>FEBRERO</option>
+				<option value="3" <? if( $mess == "03" ) echo "SELECTED"; ?>>MARZO</option>
+				<option value="4" <? if( $mess == "04" ) echo "SELECTED"; ?>>ABRIL</option>
+				<option value="5" <? if( $mess == "05" ) echo "SELECTED"; ?>>MAYO</option>
+				<option value="6" <? if( $mess == "06" ) echo "SELECTED"; ?>>JUNIO</option>
+				<option value="7" <? if( $mess == "07" ) echo "SELECTED"; ?>>JULIO</option>
+				<option value="8" <? if( $mess == "08" ) echo "SELECTED"; ?>>AGOSTO</option>
+				<option value="9" <? if( $mess == "09" ) echo "SELECTED"; ?>>SEPTIEMBRE</option>
+				<option value="10" <? if( $mess == "10" ) echo "SELECTED"; ?>>OCTUBRE</option>
+				<option value="11" <? if( $mess == "11" ) echo "SELECTED"; ?>>NOVIEMBRE</option>
+				<option value="12" <? if( $mess == "12" ) echo "SELECTED"; ?>>DICIEMBRE</option>
+			</select>
+			<select id="anioo" name="anioo" class="cielo">
+			<?
+				for( $i = 1940; $i < 2012; $i++ ){
+					if( $i == $anioo ) $selected = "SELECTED";
+					else $selected = "";
+					echo "<option value=\"$i\" $selected>$i</option>";
+				}
+			?>
+			</select>
+		</th>
+	</tr>
+	<tr>
+		<td rowspan="4" class="fondoazul">
+			<b>&nbsp;CONTACTO:</b>
+		</td>
+		<th class="fondonaranja">
+			Teléfono
+		</th>
+		<th class="fondonaranja">
+			Celular
+		</th>
+		<th colspan="2" class="fondonaranja">
+			E-mail
+		</th>
+	</tr>
+	<tr>
+		<th>
+			<input type="text" style="width:125px" name="telefono" class="cielo" value="<?= $telefono ?>">
+		</th>
+		<th>
+			<input type="text" style="width:125px" name="celular" class="cielo" value="<?= $celular ?>">
+		</th>
+		<th colspan="2">
+			<input type="text" style="width:260px" name="correo" class="cielo" value="<?= $correo ?>">
+		</th>
+	</tr>
+	<tr style="display:none;">
+		<td rowspan="4" class="fondoazul">
+			<b>&nbsp;Información:</b>
+		</td>
+		<th colspan="2" class="fondonaranja">
+			Genero
+		</th>
+		<th colspan="2" class="fondonaranja">
+			Estado civil
+		</th>
+	</tr>
+	<tr style="display:none;">
+		<th colspan="2">
+			<select name="sexo" style="width:265px" class="cielo">
+				<option value="H" <?php if($sexo=='H') echo "SELECTED"; ?>>Hombre</option>
+				<option value="M" <?php if($sexo=='M') echo "SELECTED"; ?>>Mujer</option>
+			</select>
+		</th>
+		<th colspan="2">
+			<select name="estadocivil" style="width:265px" class="cielo">
+				<option value="SOLTERO" <?php if($estadocivil=="SOLTERO") echo "SELECTED"; ?>>Soltero(a)</option>
+				<option value="CASADO" <?php if($estadocivil=="CASADO") echo "SELECTED"; ?>>Casado(a)</option>
+				<option value="DIVORCIADO" <?php if($estadocivil=="DIVORCIADO") echo "SELECTED"; ?>>Divorciado(a)</option>
+				<option value="VIUDO" <?php if($estadocivil=="VIUDO") echo "SELECTED"; ?>>Viudo(a)</option>
+				<option value="UNION LIBRE" <?php if($estadocivil=="UNION LIBRE") echo "SELECTED"; ?>>Unión libre</option>
+			</select>
+		</th>
+	</tr>
+	<tr style="display:none;">
+		<th colspan="2" class="fondonaranja">
+			Fecha de nacimiento
+		</th>
+		<th colspan="2" class="fondonaranja">
+			Lugar de nacimiento
+		</th>
+	</tr>
+	<tr style="display:none;">
+		<th colspan="2">
+			<select name="d" style="width:60px" class="cielo">
+				<?php for($i=1;$i<32;$i++){ ?>
+					<option value="<?php if($i<10) { echo '0'; } ?><?= $i ?>"  <?php if($d==$i) echo "SELECTED"; ?>><?= $i ?></option>
+				<?php } ?>
+			</select>
+			<select name="m" style="width:130px" class="cielo">
+				<option value="01" <?php if($m==1) echo "SELECTED"; ?>>Enero</option>
+				<option value="02" <?php if($m==2) echo "SELECTED"; ?>>Febrero</option>
+				<option value="03" <?php if($m==3) echo "SELECTED"; ?>>Marzo</option>
+				<option value="04" <?php if($m==4) echo "SELECTED"; ?>>Abril</option>
+				<option value="05" <?php if($m==5) echo "SELECTED"; ?>>Mayo</option>
+				<option value="06" <?php if($m==6) echo "SELECTED"; ?>>Junio</option>
+				<option value="07" <?php if($m==7) echo "SELECTED"; ?>>Julio</option>
+				<option value="08" <?php if($m==8) echo "SELECTED"; ?>>Agosto</option>
+				<option value="09" <?php if($m==9) echo "SELECTED"; ?>>Septiembre</option>
+				<option value="10" <?php if($m==10) echo "SELECTED"; ?>>Octubre</option>
+				<option value="11" <?php if($m==11) echo "SELECTED"; ?>>Noviembre</option>
+				<option value="12" <?php if($m==12) echo "SELECTED"; ?>>Diciembre</option>
+			</select>
+			<select name="a" style="width:68px" class="cielo">
+				<?php for($i=1995;$i>1960;$i--){ ?>
+					<option value="<?php if($i<10) { echo '0'; } ?><?= $i ?>" <?php if($a==$i) echo "SELECTED"; ?>><?= $i ?></option>
+				<?php } ?>
+			</select>
+		</th>
+		<th colspan="2">
+			<input type="text" style="width:260px" name="nacimiento" class="cielo" value="<?= $lugar_nacimiento ?>">
+		</th>
+	</tr>
+	<tr>
+		<th colspan="2" class="fondonaranja">
+			Pais Nacimiento
+		</th>
+		<th colspan="2" class="fondonaranja">
+		</th>
+	</tr>
+	<tr>
+		<th colspan="2" style="text-align: left;">
+			<input type="text" style="width:260px" name="paisnacimiento" 
+				id="paisnacimiento" class="cielo" value="<?= $paisnacimiento ?>">
+		</th>
+		<th colspan="2" class="fondonaranja">
+		</th>
+	</tr>
+	<tr>
+		<td rowspan="9" width="150" class="fondoazul">
+			<b>&nbsp;DOCUMENTACION:</b>
+		</td>
+		<th colspan="2" class="fondonaranja" style="text-align: left;">
+			<input type="checkbox" name="fotos" value="si" <?= checado($fotos) ?>> Fotografias
+		</th>		
+		<th colspan="2" class="fondonaranja" style="text-align: left;">
+			<input type="checkbox" name="constanciae" value="si" <?= checado($constanciae) ?>> Constancia de Estudios
+		</th>
+	</tr>
+	<tr>		
+		<th colspan="2" class="fondonaranja" style="text-align: center;">
+			<!-- <input type="checkbox" name="certificadoo" value="si" <?= checado($certificadoo) ?>> -->
+			Certificado Original<br />
+			<select name="certificadoo" class="lista">
+				<option value="no" <? if( $certificadoo == "no" )echo "SELECTED"; ?>>- - No - -</option>
+				<option value="si" <? if( $certificadoo == "si" )echo "SELECTED"; ?>>- - Si - -</option>
+			</select>
+			<br />
+			Certificado Copia<br />
+			<select name="certificadoc" class="lista">
+				<option value="no" <? if( $certificadoc == "no" )echo "SELECTED"; ?>>- - No - -</option>
+				<option value="si" <? if( $certificadoc == "si" )echo "SELECTED"; ?>>- - Si - -</option>
+			</select>
+		</th>
+		<th colspan="2" class="fondonaranja" style="text-align: left;">
+			<input type="checkbox" name="certificadom" value="si" <?= checado($certificadom) ?>> Certificado Medico
+		</th>
+	</tr>
+	<tr>
+		<th colspan="2" class="fondonaranja" style="text-align: center;">
+			<!-- <input type="checkbox" name="certificadoo" value="si"> -->
+			Acta de Nacimiento Original<br />
+			<select name="acta" class="lista">
+				<option value="no" <? if( $acta == "no" )echo "SELECTED"; ?>>- - No - -</option>
+				<option value="si" <? if( $acta == "si" )echo "SELECTED"; ?>>- - Si - -</option>
+			</select>
+			<br />
+			Acta de Nacimiento Copia<br />
+			<select name="actac" class="lista">
+				<option value="no" <? if( $actac == "no" )echo "SELECTED"; ?>>- - No - -</option>
+				<option value="si" <? if( $actac == "si" )echo "SELECTED"; ?>>- - Si - -</option>
+			</select>
+		</th>
+		</th>
+		<th colspan="2" class="fondonaranja" style="text-align: left;">
+			<input type="checkbox" name="constanciab" value="si" <?= checado($constanciab) ?>> Constancia de Buena Conducta
+		</th>
+	</tr>
+	<tr>		
+		<th colspan="2" class="fondonaranja" style="text-align: left;">
+			<input type="checkbox" name="curpcopia" value="si" <?= checado($curpcopia) ?>> Curp Copia
+		</th>
+		<th colspan="2" class="fondonaranja" style="text-align: left;">
+		</th>
+	</tr>
+	<tr>		
+		<th colspan="2" class="fondonaranja" style="text-align: left;">
+			&nbsp;&nbsp;&nbsp;CURP <br />
+			&nbsp;&nbsp;&nbsp;<input type="text" style="width:225px" maxlength="18" name="curp" class="cielo" value="<?= $curp ?>"><br>
+		</th>
+		<th colspan="2" class="fondonaranja" style="text-align: left;">
+			<input type="checkbox" name="ficha_pago" value="si" 
+					<?= checado($fichaPago) ?>> Ficha de Pago<br />
+			<input type="checkbox" name="carta_compromiso" value="si" 
+					<?= checado($cartaCompromiso) ?>> Carta Compromiso<br />
+			<input type="checkbox" name="deteccion_drogas" value="si" 
+					<?= checado($comprobanteAntidoping) ?>> Comprobante Antidoping<br />
+		</th>
+	</tr>
+	<tr>		
+		<th colspan="2" class="fondonaranja" style="text-align: left;">
+			&nbsp;&nbsp;&nbsp;ESCUELA PROCEDENCIA<br />
+			&nbsp;&nbsp;&nbsp;<input type="text" style="width:225px" name="procedencia" class="cielo" value="<?= $procedencia ?>"><br>
+			&nbsp;&nbsp;&nbsp;Promedio Bachillerato<br />
+			&nbsp;&nbsp;&nbsp;<input type="text" style="width:225px" name="promedioprepa" class="cielo" value="<?= $promedioprepa ?>"><br>
+		</th>
+		<th colspan="2" class="azul" style="text-align: center;">
+			<h3>TIPO DE SANGRE:</h3>
+			<select name="sangre" class="lista">
+			<?
+				$selected = "";
+				$selected1 = "";
+				$selected2 = "";
+				$selected3 = "";
+				$selected4 = "";
+				$selected5 = "";
+				$selected6 = "";
+				$selected7 = "";
+				$selected8 = "";
+				if( $sangre == "-1" )
+					$selected = "selected";
+				if( $sangre == "O+" )
+					$selected1 = "selected";
+				if( $sangre == "A+" )
+					$selected2 = "selected";
+				if( $sangre == "B+" )
+					$selected3 = "selected";
+				if( $sangre == "AB+" )
+					$selected4 = "selected";
+				if( $sangre == "O-" )
+					$selected5 = "selected";
+				if( $sangre == "A-" )
+					$selected6 = "selected";
+				if( $sangre == "B-" )
+					$selected7 = "selected";
+				if( $sangre == "AB-" )
+					$selected8 = "selected";
+			?>
+				<option value="-1" <? echo $selected ?>>- - Tipo de Sangre - -</option>
+				<option value="O+" <? echo $selected1 ?>>O Positivo</option>
+				<option value="A+" <? echo $selected2 ?>>A Positivo</option>
+				<option value="B+" <? echo $selected3 ?>>B Positivo</option>
+				<option value="AB+" <? echo $selected4 ?>>AB Positivo</option>
+				<option value="O-" <? echo $selected5 ?>>O Negativo</option>
+				<option value="A-" <? echo $selected6 ?>>A Negativo</option>
+				<option value="B-" <? echo $selected7 ?>>B Negativo</option>
+				<option value="AB-" <? echo $selected8 ?>>AB Negativo</option>
+			</select>
+		</th>
+	</tr>
+	<?
+		$selected1 = "";
+		$selected2 = "";
+		if ( $plantel == "colomos" )
+			$selected1 = "selected";
+		else
+			$selected2 = "selected";
+	?>
+	<tr>
+		<th colspan="2" class="fondonaranja" style="text-align: left;">
+			Plantel:&nbsp;
+			<select name="plantel" id="plantel" class="floatright lista">
+				<option value="-1" style='text-align:center;'>- - Plantel - -</option>
+				<option value="1" style='text-align:center;' <? echo $selected1 ?>>Ingenieria Colomos</option>
+				<option value="2" style='text-align:center;'<? echo $selected2 ?>>Ingenieria Tonala</option>
+			</select>
+		</th>
+<?
+		$selsexo1 = "";
+		$selsexo2 = "";
+		if ( $sexo == "H" || $sexo == "h" )
+			$selsexo1 = "selected";
+		else
+			$selsexo2 = "selected";
+?>
+		<th colspan="2" class="fondonaranja" style="text-align: left;">
+			<select name="sexo" id="sexo" class="lista">
+				<option value="-1" style='text-align:center;'>- - Sexo - -</option>
+				<option value="H" style='text-align:center;' <? echo $selsexo1 ?>>Masculino</option>
+				<option value="M" style='text-align:center;' <? echo $selsexo2 ?>>Femenino</option>
+			</select>
+		</th>
+	</tr>
+	<?
+		$selected1 = "";
+		$selected2 = "";
+		$selected3 = "";
+		if ( $plantelorigen == "colomos" )
+			$selected1 = "selected";
+		else if ( $plantelorigen == "tonala" )
+			$selected2 = "selected";
+		else
+			$selected3 = "selected";
+	?>
+	<tr>
+		<th colspan="2" class="fondonaranja" style="text-align: left;">
+			Plantel Origen:&nbsp;
+			<select name="plantelorigen" id="plantelorigen" class="floatright lista">
+				<option value="-1" style='text-align:center;'>- - Plantel Origen - -</option>
+				<option value="1" style='text-align:center;' <? echo $selected1 ?>>Tecn&oacute;logo Colomos</option>
+				<option value="2" style='text-align:center;'<? echo $selected2 ?>>Tecn&oacute;logo Tonala</option>
+				<option value="3" style='text-align:center;'<? echo $selected3 ?>>NO APLICA</option>
+			</select>
+		</th>
+		<th colspan="2" class="lista" style="text-align: left;">
+			Registro Tecn&oacute;logo: <input type="text" id="registro_tecnologo" name="registro_tecnologo" maxlength="12" value ="<?= $registro_tecnologo ?>" />
+		</th>
+	</tr>
+	<tr>
+		<th colspan="2" class="fondonaranja">
+			Folio Ceneval
+		</th>
+		<th colspan="2" class="fondonaranja">
+			Estado Prepa
+		</th>
+	</tr>
+	<tr>
+		<th colspan="2" class="fondonaranja" style="text-align: left;">
+			<input type="text" style="width:260px; text-align:center; color:#000;" 
+				name="folioceneval" id="folioceneval" value="<?= $folioceneval ?>" class="cielo">
+		</th>
+		<th colspan="2" class="fondonaranja" style="text-align: left;">
+			<input type="text" style="width:260px; text-align:center; color:#000;" 
+				name="estadoprepa" id="estadoprepa" value="<?= $estadoprepa ?>" class="cielo">
+		</th>
+	</tr>
+	<tr>
+		<td colspan ="5" height ="50" align="center" valign="center">
+			<input type="submit" value="Actualizar Aspirante" style="text-transform:uppercase; background:#EEE;">
+		</td>
+	</tr>
+</table>
+<br>
+<br><br>
+<?= end_form_tag() ?>
+<?php
+	render_partial("regresar");
+?>

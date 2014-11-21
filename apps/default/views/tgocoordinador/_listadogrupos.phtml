@@ -1,0 +1,53 @@
+				<table border="1" style="font-size:10px;" class="bordeazul">
+					<tr>
+						<th width="440" colspan="5" class="naranja">
+							GRUPOS REGISTRADOS PARA ESTE SEMESTRE
+						</th>
+					</tr>
+					<tr>
+						<th width="50" class="azul">
+							Nombre
+						</th>
+						<th class="azul">
+							Especialidad
+						</th>
+						<th width="20" height="20" class="gris">
+							<center>
+							<?= link_to_remote('<img src="'.KUMBIA_PATH.'public/img/prev.gif" border=0>',"update: listado","action: tgocoordinador/gruposajax/".$p1); ?>
+							</center>
+						</th>
+						<th width="20" height="20" class="gris">
+							<center>
+							<?= link_to_remote('<img src="'.KUMBIA_PATH.'public/img/next.gif" border=0>',"update: listado","action: tgocoordinador/gruposajax/".$p2); ?>
+							</center>
+						</th>
+					</tr>
+					<?php if($listado) foreach($listado as $grupo){ ?>
+					<tr>
+						<td width="50" height="20" align="center">
+							<?= $grupo -> nombre ?>
+						</td>
+						<td width="340">
+							<?php if($especialidades) foreach($especialidades as $especialidad){ ?>
+								<?php if($especialidad -> id == $grupo -> especialidad_id){?>&nbsp;<?= $especialidad -> nombre ?><?php } ?>
+							<?php } ?>
+							
+						</td>
+						<th width="20" height="20">
+							<center>
+							<?= link_to_remote('<img src="'.KUMBIA_PATH.'public/img/calendar.gif" border=0>',"update: jornada","action: tgocoordinador/jornadagrupo/".$grupo -> id); ?>
+							</center>
+						</th>
+						<th width="20" height="20">
+							<center>
+							<!-- 
+								Para desactuvar el borrar
+							<img src="<?= KUMBIA_PATH ?>public/img/delete.png" border=0>
+							--> 
+							<?php //echo link_to_remote('<img src="'.KUMBIA_PATH.'public/img/delete.png" border=0>',"update: listado","action: tgocoordinador/quitargrupo/".$grupo -> id, "confirm: Estas seguro que quieres Borrar este Grupo?"); 
+							?>
+							</center>
+						</th>
+					</tr>
+					<?php } ?>
+				</table>

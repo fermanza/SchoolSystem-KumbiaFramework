@@ -1,0 +1,208 @@
+<script language="JavaScript1.2">
+
+function dibujar(valor, i, j){
+	
+	//document.getElementById(td).innerHTML=this.style.backgroundColor='#333333'=; //return value
+	var body = document.getElementById("td["+i+"]["+j+"]");
+	if( valor > 0 ){
+        body.addClassName("griss");
+	}
+	else{
+		body.removeClassName("griss");
+	}
+	
+	/*
+	function accesibiliza(){
+    var body = document.getElementsByTagName("body")[0];
+    var class_name = "accesible";
+    if(body.hasClassName( class_name ))//ya la tiene. Remueve
+        body.removeClassName( class_name );
+    else //no la tiene. Agrega.
+        body.addClassName( class_name );
+	}
+	*/
+
+}
+
+  function TrimLeft( str ) {
+    var resultStr = "";
+    var i = len = 0;
+     if (str+"" == "undefined" || str == null)
+          return null;
+     str += "";
+       if (str.length == 0)
+           resultStr = "";
+       else {
+           len = str.length;
+           while ((i <= len) && (str.charAt(i) == " "))
+                 i++;
+        resultStr = str.substring(i, len);
+      }
+  return resultStr;
+}
+
+function TrimRight( str ) {
+	var resultStr = "";
+	var i = 0;
+	  if (str+"" == "undefined" || str == null)
+		   return null;
+	  str += "";
+	  if (str.length == 0)
+		  resultStr = "";
+	  else {
+		   i = str.length - 1;
+		   while ((i >= 0) && (str.charAt(i) == " "))
+		   i--;
+	  resultStr = str.substring(0, i + 1);
+	 }
+	return resultStr;
+}
+function Trim2( str ) {
+	var resultStr = "";
+
+	resultStr = TrimLeft(str);
+	resultStr = TrimRight(resultStr);
+
+	return resultStr;
+}
+
+function validateFields(){
+	
+	var err = "";
+	var i;
+	var j;
+	var aux = 0;
+
+	if ( document.Formulario1.profesor.value == -1 ){
+		err +="Seleccione el profesor que impartirá dicho curso\n";
+	}
+	if ( document.Formulario1.materias2007.value == -1 &&
+			document.Formulario1.materias2000.value == -1 ){
+		err +="Seleccione una materia del plan 2000 ó plan 2007\n";
+	}
+	if ( document.Formulario1.minimo.value == -1 ){
+		err +="Seleccione el mínimo de alumnos con los que"+
+				" se abrirá el curso\n";
+	}
+	if ( document.Formulario1.maximo.value == -1 ){
+		err +="Seleccione el cupo máximo de alumnos\n";
+	}
+	if ( document.Formulario1.primeringreso.value == -1 ){
+		err +="Favor de indicar si el curso que se está abriendo"+
+				" es para alumnos de primer ingreso o no\n";
+	}
+	
+	for( i = 7; i < 22; i++ ){
+		for( j = 1; j < 7; j++ ){
+			if( document.Formulario1.elements["salon"+"["+i+"]["+j+"]"].value != -1 )
+				aux++;
+		}
+	}
+	if ( document.Formulario1.presencial.value == -1 ){
+		err +="Favor de indicar si el curso es presencial\n";
+	}
+	if ( document.Formulario1.presencial.value == 0 ){
+		// Aumento aux, ya que si el curso no es presencial,
+		//no será necesario indicar horas...
+		aux++;
+	}
+	
+	if( aux == 0 ){
+		err += "Debe seleccionar al menos una hora para este curso\n";
+	}
+	
+	if( err != "" ){
+		alert(err);
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+</script>
+
+
+<center><br><br>
+<form id="Formulario1" name="Formulario1"
+		action="<?= KUMBIA_PATH ?>profesor/capturandoCapturaEspecial"
+				method="post" onSubmit="return validateFields();">
+<table align="center">
+	<tr>
+		<td width="900" align="center">
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" align="center">
+				<tr>
+					<td width="500" height="25" bgcolor="#FFCA5B" align="center">
+						<h2>&nbsp;Habilitar captura para profesores&nbsp;</h2>
+					</td>
+				</tr>
+			</table>
+			<br />
+			<br />
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" align="center" >
+				<tr>
+					<th width="250" height="25" bgcolor="#FFCA5B" align="center">Inicio</th>
+					<th width="250" height="25" bgcolor="#FFCA5B" align="center">Fin</th>
+					<th width="250" height="25" bgcolor="#FFCA5B" align="center">Parcial</th>
+					<th width="250" height="25" bgcolor="#FFCA5B" align="center">Seleccionar Parcial</th>
+				</tr>
+					<?php
+						$i = 0;
+						foreach( $inicio as $init ){
+					?>
+						<tr>
+							<th width="250" height="25" bgcolor="#FFCA5B"
+									align="center"><?= date("Y-m-d H:i:s", $init) ?></th>
+							<th width="250" height="25" bgcolor="#FFCA5B"
+									align="center"><?= date("Y-m-d H:i:s", $fin[$i]) ?></th>
+							<th width="250" height="25" bgcolor="#FFCA5B"
+									align="center"><?= $parcial[$i] ?></th>
+							<th width="250" height="25" bgcolor="#FFCA5B"
+									align="center"><input type="radio" name="parcial<?= $parcial[$i] ?>"
+										id="parcial<?= $parcial[$i] ?>" value="<?= $parcial[$i] ?>">
+							</th>
+						</tr>
+					<?
+							$i++;
+						}
+					?>
+			</table>
+			<br />
+			<select name="plantel" id="plantel" class="lista">
+				<option value="-1">&nbsp;- - Seleccione un plantel - -&nbsp;</option>
+				<?php
+				if( $plantelAux == 1 ){
+				?>
+					<option value="t">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Tonala - -
+					</option>
+				<?php
+				}
+				?>
+				<option value="c">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				- - Colomos - -
+				</option>
+			</select>
+		</td>
+	</tr>
+</table>
+<div id ="cursos" name="cursos">
+</div>
+<?
+	print "<script type=\"text/javascript\">
+	new Event.observe(\"plantel\", \"change\", function(){
+	var plantel = document.Formulario1.plantel.value;
+	new AJAX.viewRequest({
+		action: \"profesor/cursosCapturaEspecial/\"+".plantel."+\"\",
+		container: \"cursos\"
+	})
+	})
+	</script>";
+?>
+
+<br><br>
+</center>
+

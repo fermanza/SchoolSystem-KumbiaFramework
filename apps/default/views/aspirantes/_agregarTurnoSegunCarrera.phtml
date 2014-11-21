@@ -1,0 +1,27 @@
+<?
+	for( $j = 0; $j < $i; $j++ ){
+		if( $carreras[$j] -> turno == "V" && $carreras[$j-1] -> turno != $carreras[$j] -> turno ){
+			echo "<input type=\"radio\" name=\"turnooo$opcion\" id=\"turnooo$opcion\" value=\"V\" group=\"$opcion\">Vespertino";
+			
+		}
+		else if( $carreras[$j-1] -> turno != $carreras[$j] -> turno ){
+			echo "<input type=\"radio\" name=\"turnooo$opcion\" id=\"turnooo$opcion\" value=\"M\" group=\"$opcion\">Matutino";
+		}
+	}
+	
+?>
+
+<?
+	echo "<script type=\"text/javascript\">
+	new Event.observe(\"carreraa$opcion\", \"change\", function(){
+	var carrera = document.Formulario1.carreraa$opcion.value;
+	var plantel = document.Formulario1.plantelll$opcion.value;
+	var turno = document.Formulario1.turnooo$opcion.value;
+	alert('aaa');
+	new AJAX.viewRequest({
+		action: \"aspirantes/agregarPlantelSegunCarrera1/\"+".carrera."+\"/\"+".plantel."+\"/\"+".turno."+\"/2\",
+		container: \"carreradiv2\"
+	})
+	})
+	</script>";
+?>

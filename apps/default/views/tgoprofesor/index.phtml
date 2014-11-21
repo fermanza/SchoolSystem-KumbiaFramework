@@ -1,0 +1,86 @@
+<style type="text/css">
+	.materias *{
+		font-size: 11px;
+	}
+	.materias a {
+		color: #000000;
+		display:block;
+	}
+	.masMaterias a{
+		padding-left: 15px;
+	}
+</style>
+<?= render_partial("info"); ?>
+<br>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp; Inicio
+</div>
+<div class="materias">
+	<center>
+	<table width="50%" cellpadding="1" cellspacing="1" border="1" class="bordeazul">
+		<tr>
+			<th class="naranja">
+				Materias Disponibles en Tu Divisi&oacute;n
+			</th>	
+		</tr>
+		<tr>
+			<th class="azul">
+				Niveles
+			</th>
+		</tr>
+		<tr>
+			<td class="gris">
+				<table width="100%" cellpadding="0" cellspacing="0" border="1">
+					<tr>
+						<th><?= link_to_remote("1","update: materias","action: tgoprofesor/recargarMaterias/1"); ?></th>
+						<th><?= link_to_remote("2","update: materias","action: tgoprofesor/recargarMaterias/2"); ?></th>
+						<th><?= link_to_remote("3","update: materias","action: tgoprofesor/recargarMaterias/3"); ?></th>
+						<th><?= link_to_remote("4","update: materias","action: tgoprofesor/recargarMaterias/4"); ?></th>
+						<th><?= link_to_remote("5","update: materias","action: tgoprofesor/recargarMaterias/5"); ?></th>
+						<th><?= link_to_remote("6","update: materias","action: tgoprofesor/recargarMaterias/6"); ?></th>
+						<th><?= link_to_remote("7","update: materias","action: tgoprofesor/recargarMaterias/7"); ?></th>
+						<th><?= link_to_remote("8","update: materias","action: tgoprofesor/recargarMaterias/8"); ?></th>
+					</tr>
+				</table>
+			</td>
+		</tr>		
+	</table>
+	<br/>
+	<table width="100%" cellpadding="0" cellspacing="0" style="font-size:12px;">
+		<tr>
+			<td width="48%" valign="top">	
+				<div id="materias" class="masMaterias">
+					<table width="100%" cellpadding="1" cellspacing="1"  class="bordeazul">
+					<?php 
+					$nivel=1;
+					foreach($materias as $m){
+						if ($nivel == $m -> nivel){
+							echo '<tr><th class="naranja" >Materias Nivel '.$nivel.'</th></tr>';							
+							$nivel++;
+						}
+						echo tr_color('#EEEFFF','#DDDDDD');
+						echo utf8_decode("<td>".link_to_remote("&nbsp;".$m ->nombre,"update: informacionMateria","action: tgoprofesor/informacionMateria/".$m ->id)."</td>");						
+					} ?>	
+					</table>
+				</div>
+			</td>
+			<td width="4%">
+				&nbsp;
+			</td>
+			<td class="48%" valign="top">
+				<table width="100%" cellpadding="1" cellspacing="1"  class="bordeazul">
+					<tr>
+						<th class="naranja">Información de la Materia</th>
+					</tr>					
+					<tr>
+						<td>
+							<div id="informacionMateria"><center>Selecciona una materia para consultar su Información</center></div>
+						</td>
+					</tr>					
+				</table>
+			</td>
+		</tr>			
+	</table>
+	</center>
+	<br/><br/>
+</div>

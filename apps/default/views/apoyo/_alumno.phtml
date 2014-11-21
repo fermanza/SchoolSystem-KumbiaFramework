@@ -1,0 +1,62 @@
+
+<?
+
+echo "<br />nombre: ".$alumno -> vcNomAlu;
+
+?>
+ <?= form_remote_tag("apoyo/guardarCambioEstado", "update: resultado") ?>
+<table class="bordeAzul" style="font-size: 10px; width: 100%;">
+	<tr class="naranja">
+		<th colspan="6">INFORMACION DEL ALUMNO</th>		
+	</tr>
+	<tr class="azul">
+		<th>Registro</th>
+		<th width="300">Alumno</th>
+		<th>Estado Actual</th>
+		<th>Nuevo Estado</th>
+		<th>Fecha del Movimiento</th>
+		<th>&nbsp;</th>
+	</tr>
+	<tr class="grisClaro">
+		<th><?= $alumno -> miReg ?></th>
+		<th><?= $alumno -> vcNomAlu ?></th>
+		<th><?php
+			$HistorialAlumno = new HistorialAlumno();
+			if($HistorialAlumno -> find_first("registro = ".$alumno -> miReg, " order: id DESC")){
+				$Situaciones = new Situaciones();
+				$Situaciones -> find_first("id = ".$HistorialAlumno -> situacion_id);
+				echo $Situaciones -> nombre;
+			}else{
+				echo $alumno -> stSit;
+			}
+		?>
+		</th>
+		<th><?php
+		if($situaciones){
+		?>
+			<select name="nuevaSituacion">
+		<?php
+			
+			foreach($situaciones as $s){			
+				echo '<option value="'.$s -> id.'">'.$s -> nombre.'</option>';
+			}					
+		?>
+			</select>
+			<?php } ?>
+		</th>
+		<?php
+		if($HistorialAlumno -> fecha != ''){
+			$fecha = $HistorialAlumno -> fecha;
+		}else{
+			$fecha = "2009-02-15";
+		}
+		
+		?>
+		<th><input type="text" name="fecha" value="<?= $fecha ?>"></th>
+		<th>
+			<input type="hidden" name="registro" value="<?= $alumno -> miReg?>">
+			<input type="submit" value="GUARDAR">
+		</th>
+	</tr>	
+ </table>
+ <?= end_form_tag() ?>

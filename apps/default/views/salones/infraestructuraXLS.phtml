@@ -1,0 +1,73 @@
+<?php
+header("content-disposition: attachment;filename=infraestructura".$division_id.$dia.".xls"); 
+?>
+<table cellpadding="0" cellspacing="0" style="font-size: 9px; border: 1px dotted #666666;">
+	<tr>
+		<td colspan="15" style="background-color: #ffca5b; color:#333333">
+			<img width="120" src="http://ase.ceti.mx/tecnologo/public/img/cira/logo.jpg" align="left" ><center><h2>CENTRO DE ENSEÑANZA TÉCNICA INDUSTRIAL</h2></center>
+		</td>
+	</tr>
+<?php
+	switch($dia){
+		case 1: $diaNombre = "LUNES";
+				break;
+		case 2: $diaNombre = "MARTES";
+				break;
+		case 3: $diaNombre = "MIERCOLES";
+				break;
+		case 4: $diaNombre = "JUEVES";
+				break;
+		case 5: $diaNombre = "VIERNES";
+				break;		
+	}
+?>
+	<tr>
+		<td colspan="15" style="background-color: #0559b7; color:#ffffff">
+			<center><h3><?= $Division -> nombre ?><br />CONCENTRADO DE HORARIOS DEL DIA <?= $diaNombre." ".date("d.m.y") ?> </h3></center>
+		</td>
+	</tr>	
+	<tr style="background-color: #AAAAAA; color: #0559b7;">
+		<th style="border: 1px dotted #666666;">SALON</th>
+		<th style="border: 1px dotted #666666;">7:00 -<br />7:55</th>
+		<th style="border: 1px dotted #666666;">7:55 -<br />8:50</th>
+		<th style="border: 1px dotted #666666;">9:30 -<br />10:25</th>
+		<th style="border: 1px dotted #666666;">10:25 -<br />11:20</th>
+		<th style="border: 1px dotted #666666;">11:20 -<br />12:15</th>
+		<th style="border: 1px dotted #666666;">12:15 -<br />13:10</th>
+		<th style="border: 1px dotted #666666;">13:10 -<br />14:05</th>
+		<th style="border: 1px dotted #666666;">14:05 -<br />15:00</th>
+		<th style="border: 1px dotted #666666;">15:00 -<br />15:55</th>
+		<th style="border: 1px dotted #666666;">15:55 -<br />16:50</th>
+		<th style="border: 1px dotted #666666;">16:50 -<br />17:45</th>
+		<th style="border: 1px dotted #666666;">17:45 -<br />18:40</th>
+		<th style="border: 1px dotted #666666;">18:40 -<br />19:35</th>
+		<th style="border: 1px dotted #666666;">19:35 -<br />20:30</th>		
+	</tr>
+<?php
+	$Hora = new Horas();
+	$Horario = new Horarios();
+	$Maestro = new Maestros();
+	$Grupo = new Grupos();
+	$Periodo = new Periodos();
+	if($Periodo -> find_first("activo = 1")){			
+		$periodo = $Periodo -> periodo;		
+	}else{ echo "No se encontro ningun periodo activo<br />"; }
+	foreach($salones as $salon){
+		echo tr_color('#EEEEEE','#CCCCCC');
+		echo '<td style="border: 1px dotted #666666;">'.$salon -> corto.'</td>';
+		for($i=1; $i<15; $i++){			
+			if($Hora -> find_first("salon_id = ".$salon -> id." and dia = ".$dia." and hora = ".$i." and periodo = ".$periodo)){
+				if($Horario -> find_first($Hora -> horario_id)){
+					$Grupo -> find_first($Horario -> grupo_id);
+					$Maestro -> find_first($Horario -> maestro_id);
+					echo '<th width="55" style="background-color: #FFFFFF; border: 1px solid #333333; padding:2px;">'.trim($Maestro -> id).'<hr><center><b>'.$Grupo -> nombre.'</b></center></th>';
+				}else{
+					echo '<td style="border: 1px dotted #666666;">&nbsp;</td>';
+				}
+			}else{
+				echo '<td style="border: 1px dotted #666666;">&nbsp;</td>';
+			}
+		}
+	}
+?>
+</table>

@@ -1,0 +1,71 @@
+<br /><br />
+<h2 class="centrar">CURSOS INTERSEMESTRALES</h2>
+<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 10px;" width="750">
+	<tr bgcolor="#FFCA5B">
+		<th width="25" height="25" rowspan="2" align="center">&nbsp;</th>
+		<th width="250" rowspan="2" align="center">Materia</th>
+		<th width="250" rowspan="2" align="center">Profesor</th>
+	</tr>
+	<tr bgcolor="#FFCA5B">
+		<th width="125" align="center">CALIFICACI&Oacute;N</th>
+		<th width="125" align="center">FALTAS</th>
+		<th width="125" align="center">Pagar Curso Intersemestral</th>
+	</tr>
+	<?php
+	$i = 0;
+	foreach( $cursos_intersemestrales_alumno as $ialumno ){
+
+		if($i%2==0) $bg = "#EEEEEE";
+		else $bg = "#FFFFFF";
+	?>
+	<tr> 
+		<td width="25" height="40" align="center" bgcolor="<?= $bg ?>"><?= $i + 1 ?></td>
+		<td width="250" align="center" bgcolor="<?= $bg ?>">
+			<?= $ialumno -> clave_materia ?> (<?= $ialumno -> clavecurso ?>)
+			<br />
+			<b><?php echo htmlentities($ialumno -> nombre_materia); ?></b>
+			<br />
+			<b><?php
+			if( strtoupper($ialumno -> tipo_ex) == "NIV" ) echo "CURSO DE NIVELACI&Oacute;N";
+			else echo "CURSO DE ACREDITACI&Oacute;N";
+			?></b>
+		</td>
+		<td width="250" align="center" bgcolor="<?= $bg ?>">
+			<?php echo htmlentities($ialumno -> nombre_maestro) ?>
+		</td>
+		<td width="250" align="center" bgcolor="<?= $bg ?>">
+			<?php
+			switch($ialumno -> calificacion){
+				case 300: $ialumno -> faltas = "-"; $ialumno -> calificacion = "-"; break;
+				case 500: $ialumno -> faltas = "-"; $ialumno -> calificacion = "PND"; break;
+				case 999: $ialumno -> calificacion = "NP"; $p1 += 0; break;
+				// default: $p1 += $calificacion[$i-1] -> calificacion1;
+			}
+			echo $ialumno -> calificacion;
+			?>
+		</td>
+		<td width="250" align="center" bgcolor="<?= $bg ?>">
+			<?= $ialumno -> faltas ?>
+		</td>
+		<td align="center" bgcolor="<?= $bg ?>">
+			<?php
+			if( (!$BajaDefinitiva)){ // && Session::get('registro') == 10310395
+			?>
+				<!--<form method="POST"
+						action="<?= KUMBIA_PATH ?>pagos/ficha/<?php if( strtoupper($ialumno -> tipo_ex) == "NIV" ) echo "95"; else echo "94"; ?>/
+						<? echo $registro."/".$ialumno -> clave_materia."/".$ialumno -> cursoID ?>">
+						<?php
+						if( isset($buscaralumno) ) echo '<input type="submit" name="Ficha Intersemestral" value="Imprimir Intersemestral" disabled>';
+						else echo '<input type="submit" name="Ficha Intersemestral" value="Imprimir Intersemestral">';
+						?>
+				</form>-->
+			<?php
+			}
+			?>
+		</td>
+	<?php
+		$i++;
+		}
+	?>
+	</tr>
+</table>

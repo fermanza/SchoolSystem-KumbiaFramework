@@ -1,0 +1,48 @@
+<?
+if( Session::get_data('tipousuario') == "TUTOR" ){
+	include("tutor.phtml");
+}
+else if( Session::get_data('tipousuario') == "INGCALCULO" ){
+	include("ingcalculo.phtml");
+}
+else{
+?>
+
+<?= stylesheet_link_tag('menu/menu_style', true); ?>
+<tr>
+	<th>
+	<div class="menu">
+		<?php
+		if( Session::get_data('tipousuario') == "PROFESOR" && Session::get_data('coordinador') != "OK" ){
+			include("menu_profesores.phtml");
+		}
+		if( Session::get_data('coordinador') == "OK" ){
+			include("menu_coordinadores.phtml");
+        }
+		if( Session::get_data('tipousuario') == "OBSERVADOR" ){
+			include("menu_observador.phtml");
+		}
+		if( Session::get_data('tipousuario') == "GOE" ){
+			include("menu_goe.phtml");
+		}
+		if( Session::get_data('tipousuario') == "DIRECCION" ){
+			include("menu_direccion.phtml");
+		}
+		if( Session::get_data('tipousuario') == "CULTURA" ){
+			include("menu_cultura.phtml");
+		}
+		?>
+	</div>
+	</th>
+</tr>
+<tr>
+	<td height="1"></td>
+</tr>
+<tr>
+	<td align="center">
+		<?= content(); ?>
+	</td>
+</tr>
+<?
+}
+?>

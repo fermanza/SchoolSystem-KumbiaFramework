@@ -1,0 +1,50 @@
+<center>
+<form method="POST"
+		action="<?= KUMBIA_PATH ?>apoyo/editar_periodo/">
+<table class="bordeAzul" style="font-size: 10px; width:500px;">
+	<tr class="naranja">
+		<th colspan="6">HISTORIAL DEL ALUMNO</th>
+	</tr>
+	<tr class="azul">
+		<th>REGISTRO</th>
+		<th>SITUACI&Oacute;N</th>
+		<th>FECHA DEL MOVIMIENTO</th>
+		<th>REFERENCIA TRAMITE</th>
+		<th>Periodo</th>
+		<!-- <th>Editar</th> -->
+	</tr>
+	<?php 
+	$Situaciones = new Situaciones();
+	$cont = 0;
+	foreach($alumno1 as $a){ 
+		$cont++;
+		if($cont%2){
+			$class= 'class="grisClaro" ';
+		}else{
+			$class="";
+		}
+		if($Situaciones -> find_first("id = ".$a -> situacion_id)){
+			
+		}
+	?>
+	<tr <?= $class ?>>
+		<th><?= $a -> registro ?></th>
+		<th><?= $Situaciones -> nombre ?></th>
+		<th><?= $a -> fecha ?></th>
+		<th><?= $a -> referencia ?></th>
+		<th><?= $a -> periodo ?></th>
+		<!-- <th><input type="text" name="nuevo_periodo" id="nuevo_periodo" /></th> -->
+	</tr>
+	<?php
+	}
+	?>
+	<!--
+	<tr>
+		<th colspan="5">
+			<input type="submit" value="Editar Periodo" />
+		</th>
+	</tr>
+	-->
+</table>
+</form>
+</center>

@@ -1,0 +1,43 @@
+<form action="asignarhorario/<?= $maestro ?>" method="post" onsubmit="return ajaxRemoteForm(this, &quot;horario<?= $tmp ?>&quot;, {  });">
+	<input type="hidden" name="tmp" value="<?= $tmp ?>">
+	<select name="materia" style="width:110px;">
+			<!-- <option value="<?= $materia_id ?>"><?= $clave ?> <?php if($clave!="" && $materia != ""){ echo "-"; }?> <?= utf8_encode($materia) ?></option> -->
+			<option value="0"> </option>
+		<?php
+			foreach($materias as $materia){
+			
+			?>
+				<option value="<?= $materia -> id ?>"><?= $materia -> clave ?> - <?= utf8_encode($materia -> nombre) ?></option>
+			<?php
+			}
+		?>
+	</select>	
+	<br><br>	
+	<select name="grupo" style="width:45px;">
+		<!-- <option value="<?= $grupoid ?>"><?= $grupo ?></option> -->
+		<option value="0"> </option>
+		<?php
+			foreach($grupos as $grupo){
+			
+			?>
+				<option value="<?= $grupo -> id ?>"><?= $grupo -> nombre ?></option>
+			<?php
+			}
+		?>
+	</select>
+	&nbsp;&nbsp;&nbsp;
+	<select name="salon" style="width:45px;">
+		<!--  <option value="<?= $salonid ?>"><?= $salon ?></option> -->
+		<option value="0"> </option>
+		<?php
+			foreach($salones as $salon){
+			
+			?>
+				<option value="<?= $salon -> id ?>"><?= $salon -> nombre ?></option>
+			<?php
+			}
+		?>
+	</select>	
+	<br><br>	
+	<input type="submit" value="Actualizar">
+<?= end_form_tag() ?>

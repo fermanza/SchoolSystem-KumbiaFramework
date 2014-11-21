@@ -1,0 +1,229 @@
+<style type="text/css">
+	a{
+		text-decoration: none;
+		font-weight: bold;
+		color: #000099;	
+	}
+	a:hover{
+		text-decoration: underline;
+	}
+	
+	.apoyo *{
+		font-size: 11px;
+	}
+	.apoyo input[type = "text"]{
+		width: 100%;
+	}
+	.tickets *{
+		font-size: 11px;
+		padding: 0px;
+		margin: 0px;
+	}
+	.accion td{
+		text-align: center;
+	}
+	.noBorde table{
+		border: 0px;
+	}
+	.ticketContenido{
+		padding: 10px;
+	}
+	textarea	{
+					width: 100%;
+				}
+</style>
+<!--<script type="text/javascript" src="<?= KUMBIA_PATH ?>public/tiny_mce/tiny_mce.js"></script> 
+<script type="text/javascript"> 
+	tinyMCE.init({
+		mode : "textareas",
+		theme : "simple"
+	});
+</script> -->
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp; APOYO ACADEMICO	
+</div>
+<div class="apoyo">
+	<?= form_remote_tag("tgoprofesor/buscar","update: tikects") ?>
+	<table cellpadding="1" cellspacing="1" class="bordeazul" width="100%">
+		<tr>
+			<th colspan="3" class="naranja">BUSCADOR DE TICKETS</th>
+		</tr>
+		<tr>
+			<th class="azul">Numero de Tikect</th>		
+			<th class="azul">Registro</th>
+		</tr>
+		<tr>
+			<td><input type="text" name="numero"></td>
+			<td><input type="text" name="registro"></td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<center>
+					<input type="submit" style="width:20%" value="Buscar">
+				</center>
+			</td>
+		</tr>
+	</table>
+	<?= end_form_tag() ?>
+</div>
+<br/><br/><br/>
+<div class="tickets" id="tikects">
+	<?php
+	$i=0;
+		foreach($ticket as $t){		
+			$i++;	
+	?>
+	<div id="ticket<?= $i ?>">
+	<table cellpadding="1" cellspacing="1" class="bordeazul" width="100%" id="<?= $i ?>">
+		<tr>
+			<th class="naranja">Numero</th>
+			<th class="naranja">Usuario</th>
+			<th class="naranja">Rivisado por:</th>
+			<th class="naranja">Fue Abierto</th>
+			<th class="naranja">Ultima Revisión</th>
+			<th class="naranja">Estado</th>
+		</tr>
+		<?php 
+			if ($t -> fecha_in == "1969-12-31 19:00:00"){
+				$fecha_ac = "No se ha revisado";				
+				$class = "verde";
+			}else{
+				$class = "amarillo";
+				$fecha_ac = $t -> fecha_in;				
+			}
+			
+			if ($t -> fecha_final == "1969-12-31 19:00:00"){
+				$fecha_fin = "Abierto";
+			}else{
+				$fecha_fin = "En Proceso";
+			}
+			
+			if ($t -> estado == "Cerrado")
+				$class = "rojo";
+
+			$Maestros = new Maestros();
+			$Usuarios = new Usuarios();
+			$usuario = $Usuarios -> find_first("".$t -> dirigido_a);
+			
+			$dueno = $usuario -> usuario;
+			
+			if($usuario -> usuario == 0){
+				$a_cargo="CALCULO";				
+			}else{
+				if ($maestro = $Maestros -> find_first("id = '".$usuario -> usuario."'")){
+					$a_cargo = $maestro -> nombre;
+				}else{
+					$a_cargo="NO SE ENCONTRO EL USUARIO";
+				}
+			}
+			?>
+		<tr>
+			<th class="azul"><?= $t -> id ?></th>
+			<th class="azul"><?= $t -> usuario_id ?></th>
+			<th class="azul"><?= $a_cargo ?></th>
+			<th class="azul"><?= $t -> fecha_at ?></th>
+			<th class="azul"><?= $fecha_ac ?></th>
+			<th class="<?= $class ?>"><?= $t -> estado ?></th>
+		</tr>
+		<tr>			
+			<td colspan="6" class="ticketContenido"><?= $t-> contenido ?></td>
+		</tr>
+		<tr>
+			<td colspan="6"  class="grisClaro">				
+				<table cellpadding="0" cellspacing="0" border="0" width="100%">
+					<tr class="accion">												
+
+						<td>
+							<?php 
+							echo form_remote_tag("tgocalculo/digidoA","update: ticket".$i);
+							
+							$Maestros = new Maestros();
+							$maestros = $Maestros -> find("order: nombre");
+							?>
+							<select name="dirigido_a">										
+								<option value="0">CALCULO</option>	
+									<optgroup label="JEFE DE NIVEL">
+										<?php
+										$Usuario = new Usuarios();
+										if($usuario = $Usuario -> find_first("tipo = 'JEFE'")){
+										
+											if ($maestros = $Maestros -> find_first("id = ".$usuario -> usuario)){								
+										?> 
+											<option value="<?= $usuario -> id ?>"><?= $maestros -> nombre.' - '.$usuario -> usuario ?></option>									
+										<?php 
+											}
+										} ?>
+										
+									</optgroup>
+									<optgroup label="COORDINADORES">			
+									<?php
+									$Usuario = new Usuarios();
+									$usuario = $Usuario -> find("tipo = 'COORDINADOR'");
+									 									
+									foreach($usuario as $u){ 
+										$Maestros = new Maestros();	
+										if ($maestros = $Maestros -> find_first("id = ".$u -> usuario ." ORDER BY nombre ASC")){
+											$Divisiones = new Divisiones();
+											if($d = $Divisiones -> find_first("maestro_id = ".$u -> usuario)){
+												$div = $d -> id." - ";
+											}else{
+												$div = "";
+											}
+										?> 
+											<option value="<?= $u -> id ?>"><?= utf8_encode($div.$maestros -> nombre.' - '.$u -> usuario) ?></option>									
+										<?php }?>
+									<?php 								
+									}
+									?>
+									</optgroup>
+									<optgroup label="PROFESORES">
+									<?php
+									
+									$Maestros = new Maestros();
+									$maestros = $Maestros -> find("order: nombre ASC"); 
+									
+									foreach($maestros as $m){ 
+										$Usuario = new Usuarios();
+										if ($usuario = $Usuario -> find_first("usuario like '".$m -> id."' and tipo = 'PROFESOR'")){								
+										?> 
+											<option value="<?= $usuario -> id ?>"><?= $m -> nombre.' - '.$usuario -> usuario ?></option>									
+										<?php }?>
+									<?php } ?>
+									</optgroup>
+							</select>
+							
+							<input type="hidden" name="id" value="<?= $t -> id ?>" >
+							<?php if (Session::get_data("registro") != $dueno) {
+								$desactivar = "disabled";
+								}else{
+									$desactivar = "";
+								}
+									?>
+							<input type="submit" value="Redirigirlo" <?= $desactivar ?>>							
+							</form>							
+						</td>
+						<td><a onclick="document.formulario<?= $i ?>.respuesta.disabled=!document.formulario<?= $i ?>.respuesta.disabled; document.formulario<?= $i ?>.respuesta.value='';document.formulario<?= $i ?>.respuesta.focus();"><?= img_tag("edit.gif") ?><br/>&nbsp;Responder</a></td>
+						<td><?= link_to_remote("action: tgocalculo/ticketSolucionado/".$t->id,img_tag("ok.gif")."<br/>&nbsp;Solucionado", "update: ticket".$i) ?></td>
+					</tr>
+				</table>
+				
+				<div id="responder<?= $i ?>">
+					<?= form_remote_tag("tgocalculo/responder","update: responder".$i, "name: formulario".$i) ?>
+						<textarea type="submit" name="respuesta" rows="5" disabled>
+							<?= $t -> respuesta ?>
+						</textarea>
+						<input type="hidden" name="id" value="<?= $t -> id ?>" >
+						<center><input style="width:200px;" type="submit" value="enviar"></center>
+					</form> 
+				</di>
+			</td>			
+		</tr>						
+	</table>
+	</div>
+	<br/>	
+	<br/><br/>
+	<?php
+		}
+	?>
+</div>
+

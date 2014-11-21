@@ -1,0 +1,10 @@
+<center>
+<?php
+	render_partial("/kardex/introkardex_utf8");
+	if( $editable == 4 ){
+		echo "<br />";
+		render_partial("/kardex/imprimirKardex");
+	}
+	render_partial("/kardex/kardex_utf8");
+?>
+</center>

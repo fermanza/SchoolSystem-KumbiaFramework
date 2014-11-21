@@ -1,0 +1,137 @@
+<!--Tabla donde se muestran los tramites-->
+  <table width="100%"  class="listado">
+    <tr>
+      <td align="center" bgcolor="#13539B" width="8%">
+	    <font style="font-weight:bold; color: #FFFFFF;">C&oacute;digo</font>
+	  </td>
+	  <td align="center" bgcolor="#13539B" width="35%">
+	    <font style="font-weight:bold; color: #FFFFFF;">Conepto</font>
+	  </td>
+	  <td width="10%" align="center" bgcolor="#13539B">
+	    <font style="font-weight:bold; color: #FFFFFF;">Estatus Tramite&nbsp;</font>
+	  </td>
+	  <td width="8%" align="center" bgcolor="#13539B">
+	    <font style="font-weight:bold; color: #FFFFFF;">Estatus Pago</font>
+	  </td>
+	  <td align="center" bgcolor="#13539B" width="50%">
+	    <font style="font-weight:bold; color: #FFFFFF;">Acci&oacute;n</font>
+	  </td>
+    </tr>
+<?php
+	if(count($getTramites) == 0)
+	{
+?>
+	  <tr style="background-color: #DDDBDB; height:50px;">
+	     <td colspan="5" align="center">
+		   No se encontraron registros
+		 <td>
+	   </tr>
+<?php
+    }
+?>
+<?php 
+  //$showTramites = CajaTramites::show_Tramites();
+  $contador = 0;
+  
+  foreach($getTramites as $value)
+  {
+    //Se le da color al tr
+    if($contador%2 == 0)
+      $color = "background-color: #DDDBDB;";
+		
+	else
+	  $color = "background-color: #FCFCFC;";
+    
+    //Se valida la cantidad de digitos del concepto
+	if(strlen($value -> concepto) == 1)
+	  $concepto = "000".$value -> concepto;
+	  
+	else if(strlen($value -> concepto) == 2)
+	  $concepto = "00".$value -> concepto;
+	  
+	else if(strlen($value -> concepto) == 3)
+	  $concepto = "0".$value -> concepto;
+	  
+	else
+	  $concepto = $value -> concepto;
+	 
+
+	//Se valida el estatus del pago
+	if($value -> status_pago == 0)
+	{
+	  $statusPago = "Sin Pagar";
+	  $disabledP = "disabled='disabled'";
+	  $disabledE = "disabled='disabled'";
+	}
+	
+	else
+	{
+	  $statusPago = "Pagado";
+	  $disabledP = "";
+	  $disabledE = "";
+	  $disabledR = "";
+	}  
+
+	//Se valida el estatus del tramite
+	if($value -> status_tramite == 0)
+	{
+	  $statusTramite = "Solicitado";
+	  $chekedP = "";
+	  $chekedR = "";
+	  $chekedE = "";
+	}
+	  
+	else if($value -> status_tramite == 1)
+	{
+	  $statusTramite = "En Proceso";
+	  $chekedP = "checked='True'";
+	  $chekedR = "";
+	  $chekedE = "";
+	}
+	
+	else if($value -> status_tramite == 2)
+	{
+	  $statusTramite = "Realizado";
+	  $chekedR = "checked='True'";
+	  $chekedE = "";
+	  $chekedP = "";
+	  $disabledP = "disabled='disabled'";
+	}
+	  
+	else
+	{
+	  $statusTramite = "Entregado";
+	  $chekedE = "checked='True'";
+	  $chekedR = "";
+	  $chekedP = "";
+	  $disabledP = "disabled='disabled'";
+	  $disabledR = "disabled='disabled'";
+	}
+?>
+    <tr style="<?php echo $color;?> height:50px;">
+	  <td width="8%" align="center" align="center">
+		<?= $concepto ?>
+	  </td>
+	  <td width="35%" align="left">
+	   &nbsp;<?php echo htmlspecialchars($value -> nombre); ?>
+	  </td>
+	  <td width="10%" align="center">
+        <?php echo $statusTramite; ?>
+	  </td>
+	  <td width="8%" align="center">
+	    <?php echo $statusPago; ?>
+	  </td>
+	  <td width="50%" align="center">
+	    &nbsp;&nbsp;Proceso&nbsp;&nbsp;<input type="radio" value="<?php echo $value -> id; ?>" id="<?php echo "proceso".$value -> id; ?>" name="<?php echo "status".$value -> id; ?>" <?php echo $chekedP;?> <?php echo $disabledP;?> onclick="updateTramite(1,<?php echo $value -> id; ?>);" />
+	    &nbsp;&nbsp;Realizado&nbsp;&nbsp;<input type="radio" value="<?php echo $value -> id; ?>" id="<?php echo "realizado".$value -> id; ?>" name="<?php echo "status".$value -> id; ?>" <?php echo $chekedR;?> <?php echo $disabledR;?> onclick="updateTramite(2,<?php echo $value -> id; ?>);"/>
+	    &nbsp;&nbsp;Entregado&nbsp;&nbsp;<input type="radio" value="<?php echo $value -> id; ?>" id="<?php echo "entregado".$value -> id; ?>" name="<?php echo "status".$value -> id; ?>" <?php echo $chekedE;?> <?php echo $disabledE;?> onclick="updateTramite(3,<?php echo $value -> id; ?>);"/>
+	  </td>
+    </tr>
+
+<?php
+    ++$contador;
+	
+	
+  }
+?>
+</table>

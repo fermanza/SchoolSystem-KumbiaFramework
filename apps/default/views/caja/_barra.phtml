@@ -1,0 +1,25 @@
+<div class="menu">	
+ <?php if((Session::get("tipo")=="ALUMNO")){?>
+	<a href="<?= KUMBIA_PATH ?>caja/alumnoConcepto">Solicitar Tramites</a>
+	&nbsp;&nbsp;<span style="color:F27822">|</span>&nbsp;&nbsp;
+	<a href="<?= KUMBIA_PATH ?>caja/fichasPago">Imprimir Fichas</a>
+	&nbsp;&nbsp;<span style="color:F27822">|</span>&nbsp;&nbsp;
+    <a href="<?= KUMBIA_PATH ?>tgoalumno/index">Regresar</a>
+<?php 
+  }  
+
+  else{
+?>
+	<a href="<?= KUMBIA_PATH ?>caja/index">Solicitar Tramites</a>
+	&nbsp;&nbsp;<span style="color:F27822">|</span>&nbsp;&nbsp;
+	<a href="<?= KUMBIA_PATH ?>caja/verTramites">Ver Tramites</a>
+	&nbsp;&nbsp;<span style="color:F27822">|</span>&nbsp;&nbsp;
+	<a href="<?= KUMBIA_PATH ?>caja/imprimirFichas">Imprimir Fichas</a>
+	&nbsp;&nbsp;<span style="color:F27822">|</span>&nbsp;&nbsp;
+	<a href="<?= KUMBIA_PATH ?>caja/reportes">Reporte Tramites</a>
+	&nbsp;&nbsp;<span style="color:F27822">|</span>&nbsp;&nbsp;
+	<a href="<?= KUMBIA_PATH ?>ventanilla/index">Regresar</a>
+<?php
+ }
+?>	
+<div>

@@ -1,0 +1,53 @@
+<center>
+<table style="font-size:11px;" class="bordeAzul">
+	<tr class="naranja">
+		<th colspan="5">
+			PROFESORES ENCONTRADOS
+		</th>
+	</tr>
+	<tr class="azul">
+		<th>&nbsp;</th>
+		<th>NOMINA</th>
+		<th>NOMBRE</th>
+		<th>DIVISION</th>
+		<th>HORARIO</th>
+		
+	</tr>
+	<?php
+		$MaestroDivisiones = new MaestroDivisiones();
+		$Divisiones = new Divisiones();
+		foreach($maestros as $m){
+			if($MaestroDivisiones -> find_first("maestro_id = ".$m -> id)){
+				if($Divisiones -> find_first($MaestroDivisiones -> division_id)){
+					$division_nombre = $Divisiones -> nombre;
+				}else{
+					$division_nombre = "N.I.";
+				}
+				echo "<tr>";
+				echo "<td><center>";
+				$entro=0;
+				$foto = "fotos/".$m -> id.".JPG";
+				$foto1 = "fotos/".$m -> id.".jpg";					
+				if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto)){					
+					echo img_tag($foto, "width: 100");
+					$entro=1;
+				}
+				if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto1)){					
+					echo img_tag($foto1, "width: 100");
+					$entro=1;
+				}
+				if ($entro == 0){
+					echo "Sin Foto";
+				}
+				echo "</center></td>";
+		?>	
+				<th><?= $m -> id ?></th>
+				<td><b><?= utf8_encode($m -> nombre) ?></b></td>
+				<td><?= $division_nombre ?></td>
+				<th><?= link_to("tgoprofesor/horarioPDF/".$m -> id,"Imprimir Horario") ?></th>				
+			</tr>
+	<?php 
+			}
+		} ?>
+</table>
+</center>

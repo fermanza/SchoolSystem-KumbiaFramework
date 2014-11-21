@@ -1,0 +1,74 @@
+<style type="text/css">
+    .listado{
+        font-size: 13px;
+    }
+    .listado a{
+        display: block;
+        text-decoration: none;
+        color: #333333;
+    }
+    .listado a:hover{
+        text-decoration: none;
+        color: #FFFFFF;
+    }
+    .listado tr:hover *{
+        background-color: #F5B353;
+        color: #FFFFFF;
+		font-weight: bold;
+    }
+    .listado img{
+        padding-right: 20px;
+    }
+    .listado img:hover{
+        width: 30px;
+		height: 30px;
+    }
+    .listado .titulo{
+        background-color: #F5B353;
+        color: #FFFFFF;
+        font-weight: bold;
+        text-align: center;
+    }
+    .listado .titulo td{
+        padding: 10px;
+    }
+    .listado td *{
+        padding-left: 3px;
+        vertical-align: middle;
+    }
+</style>
+
+<table width="900" class="listado">
+    <tr class="titulo">
+        <td style="width:393px; height:40px;">Nombre</td>
+        <td style="width:88px; height:40px;">Registro</td>
+        <td style="text-align: center;width:97; height:40px;">Estado Alumno</td>
+        <td style="width:333px; height:40px;">Especialidad</td>
+    </tr>
+    <?php 
+    foreach($listado as $l){
+
+        echo tr_color('#EFEFEF','BFBFBF');   
+        echo '<td style="width:393px; height:40px;" >';
+        $foto = "fotos/".$l -> miReg.".JPG";
+		$foto1 = "fotos/".$l -> miReg.".jpg";					
+		if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto)){					
+			echo link_to_remote('caja/llenado/'.$tipo.'/'.$l -> miReg,
+                                img_tag($foto, 'style: width: 30px; height:30px;').' '.utf8_encode($l -> vcNomAlu),
+                                'update: formu').'</td>';
+		}elseif(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto1)){					
+			echo link_to_remote('caja/llenado/'.$tipo.'/'.$l -> miReg,
+                                img_tag($foto1, 'style: width: 30px; height:30px;').' '.utf8_encode($l -> vcNomAlu),
+                                'update: formu').'</td>';			
+		}else{
+            echo link_to_remote('caja/llenado/'.$tipo.'/'.$l -> miReg,
+                                img_tag('icons/usr1.png', 'style: width: 30px; height:30px;').' '.utf8_encode($l -> vcNomAlu),
+                                'update: formu').'</td>';
+		}  
+        echo '<td style="width:88px; height:40px;">'.$l -> miReg.'</td>
+              <td style="text-align: center;width:97; height:40px; ">'.$l -> stSit.'</td>
+              <td style="width:333px; height:40px;">'.utf8_encode(Especialidades::nombre($l -> especialidad)).'</td>';      
+     ?>
+    <?php } ?>
+	
+</table>

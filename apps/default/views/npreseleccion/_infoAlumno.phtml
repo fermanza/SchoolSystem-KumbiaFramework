@@ -1,0 +1,14 @@
+<center>
+	<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+		<tr>
+			<td width="180" height="25" bgcolor="#FFCA5B"><b>&nbsp;N&uacute;mero de registro: </b></td>
+			<td width="100" bgcolor="#EEEEEE">&nbsp;<?= $miReg ?></td>
+			<td width="75" height="25" bgcolor="#FFCA5B"><b>&nbsp;Carrera: </b></td>
+			<td width="225" bgcolor="#EEEEEE">&nbsp;<?= $carrera ?><? if( isset($areadeformacion) ) echo " en ".$areadeformacion; ?></td>
+		</tr>
+		<tr>
+			<td width="180" height="25" bgcolor="#FFCA5B">&nbsp;<b>Nombre del alumno: </b></td>
+			<td width="480" colspan="3" bgcolor="#EEEEEE">&nbsp;<?php echo htmlentities($vcNomAlu, ENT_QUOTES) ?></td>
+		</tr>
+	</table>
+</center>

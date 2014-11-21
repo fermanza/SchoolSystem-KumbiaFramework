@@ -1,0 +1,894 @@
+</br>
+<center>
+	<div style="font-size:15px;font-weight:bold;"><font color="red">*</font> Campos Obligatorios.</div>
+	<div style="font-size:10px;font-weight:bold;">El bot&oacute;n de modificaci&oacute;n solo se activa al llenar los campos obligatorios</div>
+</center>
+<?php echo form_remote_tag('actualizacioning/actualizaDatos','update: informacion'); ?>
+<div class="demo">
+  <div id="tabs">
+    <ul>
+	  <li><a href="#tabs-1">Datos Personales</a></li>
+	  <li><a href="#tabs-2">Datos de Aspirantes</a></li>
+	  <li><a href="#tabs-3">Datos Familiares</a></li>
+	  <li><a href="#tabs-4">Datos Trabajo</a></li>
+	  <li><a href="#tabs-5">Datos Medicos</a></li>
+	</ul>
+	<div id="tabs-1">
+	  <p>
+	  <center>
+	  <!--Informacion personal del alumno-->
+		<table class="tabla" style="text-align:right">
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;">Registro :&nbsp;</td>
+				<td style="text-align:left">&nbsp;&nbsp;&nbsp;<?php echo $registro; ?></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;">Plantel :&nbsp;</td>
+				<td style="text-align:left">&nbsp;&nbsp;&nbsp;<?php echo $plantelE; ?></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;">Nombre/s :&nbsp;</td>
+				<td style="text-align:left">&nbsp;&nbsp;&nbsp;<?php echo $nombre; ?></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;">Apellido Paterno :&nbsp;</td>
+				<td style="text-align:left">&nbsp;&nbsp;&nbsp;<?php echo $paterno; ?></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;">Apellido Materno :&nbsp;</td>
+				<td style="text-align:left">&nbsp;&nbsp;&nbsp;<?php echo $materno; ?></td>
+			</tr>
+			<tr >
+				<td style="font-weight: bold;">Carrera :&nbsp;</td>
+				<td style="text-align:left">&nbsp;&nbsp;&nbsp;<?php echo $nombreCarrera; ?></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>CURP :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="curp" name="curp" value="<?php echo $curp; ?>" style="width:334px;" /></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Domicilio :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="domicilio" name="domicilio" value="<?php echo $domicilio; ?>" style="width:334px;" /></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Numero Exterior :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="numExterior" name="numExterior" onkeypress="ValidNum(event);" value="<?php echo $numero_exterior; ?>" style="width:334px;" onkeypress="javascript:return ValidNum(event)"/></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;">Numero Interior :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="numInterior" name="numInterior" value="<?php echo $numero_interior; ?>" style="width:334px;" onkeypress="javascript:return ValidNum(event)" /></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Colonia :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="colonia" name="colonia" value="<?php echo $colonia; ?>" style="width:334px;" /></td>
+			</tr>
+			
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Municipio :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="ciudad" name="ciudad" value="<?php echo $ciudadAlumno; ?>" style="width:334px;" /></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Estado :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="estado" name="estado" value="<?php echo $estadoAlumno; ?>" style="width:334px;" /></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Codigo Postal :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="cp" name="cp" value="<?php echo $cp; ?>" style="width:334px;" onkeypress="ValidNum(event);" /></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Tel. Casa :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="telCasa" name="telCasa" value="<?php echo $telefono; ?>" style="width:334px;" onkeypress="javascript:return ValidNum(event)"/></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;">Celular :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="celular" name="celular" value="<?php echo $celPersonal; ?>" style="width:334px;" onkeypress="javascript:return ValidNum(event)"/></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;">Tel&eacute;fono Familiar :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="telFamiliar" name="telFamiliar" value="<?php echo $telefono_otro; ?>" style="width:334px;" onkeypress="javascript:return ValidNum(event)"/></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Estado Civil :&nbsp;</td>
+				<td style="text-align:left">
+					<select id="estadoCivil" name="estadoCivil" style="width:340px;">
+						<?php 
+							$valores = array();
+							$valores[0] = "SOLTERO";
+							$valores[1] = "CASADO";
+							$valores[2] = "DIVORCIADO";
+							$valores[3] = "VIUDO";
+							$valores[4] = "UNION LIBRE";
+							
+							$nombres = array();
+							$nombres[0] = "Soltero(a)";
+							$nombres[1] = "Casado(a)";
+							$nombres[2] = "Divorciado(a)";
+							$nombres[3] = "Viudo(a)";
+							$nombres[4] = "Uni&oacute;n Libre";
+							
+							for($i=0;$i<count($valores);$i++){
+								if( $estadocivil == $valores[$i] ){
+									echo '<option value="'.$estadocivil.'">'.$nombres[$i].'</option>';
+								}
+							}
+							for($i=0;$i<count($valores);$i++){
+								if( $estadocivil != $valores[$i] ){
+									echo '<option value="'.$valores[$i].'">'.$nombres[$i].'</option>';
+								}
+							}
+						?>
+					</select>
+				</td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Nacionalidad :&nbsp;</td>
+				<td style="text-align:left">
+					<select id="nacionalidad" name="nacionalidad" style="width:340px;">
+						<?php if( $nacionalidadAl == "M" ){?>
+							<option value="M">Mexicano(a)</option>
+							<option value="E">Extranjero(a)</option>
+						<?php }else{ ?>
+							<option value="E">Extranjero(a)</option>
+							<option value="M">Mexicano(a)</option>
+						<?php } ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Correo Personal :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="correoPersonal" name="correoPersonal" value="<?php echo $correoPersonal; ?>" style="width:334px;"/></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Fecha de Nacimiento :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="fechaNacimiento" name="fechaNacimiento" value="<?php echo $fnacimiento; ?>" style="width:232px;"/>&nbsp;9999-99-99</td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Ciudad de Nacimiento :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="ciudadNacimiento" name="ciudadNacimiento" value="<?php echo $ciudadNacimiento; ?>" style="width:334px;"/></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Estado de Nacimiento :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="estadoNac" name="estadoNac" value="<?php echo $estadoNac; ?>" style="width:334px;"/></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Pais de Nacimiento :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="paisNacimiento" name="paisNacimientoAl" value="<?php echo $paisNacimientoAl; ?>" style="width:334px;"/></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Correo :&nbsp;</td>
+				<td style="text-align:left"><input type="text" id="correoIntitucional" name="correoIntitucional" value="<?php echo $correoPersonal; ?>" style="width:334px;"/></td>
+			</tr>
+			<tr >
+				<td style="font-weight: bold;">
+					<div id="modPersonal" style="display:none;" ><?php echo submit_tag('Modificar'); ?></div>
+					<div id="btnpersonal"><input type="button" value="Modificar" disabled="true"/></div>
+					<input type="hidden" id="Gpersonal" name="Gpersonal" value="0"/>
+				</td>
+				
+			</tr>
+		</table>
+		</center>
+	  </p>
+	</div>
+	<div id="tabs-2">
+		<p>
+			<center>
+			<table class="tabla" style="text-align:right">
+				<tr bgcolor="#DDDDDD">
+					<td style="font-weight: bold;">Tipo de Ingreso:&nbsp;</td>
+					<td style="text-align:center">
+						<select id="tipoIngreso" name="tipoIngreso" style="width:256px;">
+						<?php 
+							$valores = array();
+							$valores[0] = "EXAMEN";
+							$valores[1] = "CONTINUIDAD DE ESTUDIOS";
+							$valores[2] = "EQUIVALENCIA DE ESTUDIOS";
+							$valores[3] = "CURSO DE NIVELACION";
+							
+							$nombres = array();
+							$nombres[0] = "Examen";
+							$nombres[1] = "Continuidad de estudios";
+							$nombres[2] = "Equivalencia de estudios";
+							$nombres[3] = "Curso de Nivelaci&oacute;n";
+							
+							for($i=0;$i<count($valores);$i++){
+								if( $tipoIngreso == $valores[$i] ){
+									echo '<option value="'.$tipoIngreso.'">'.$nombres[$i].'</option>';
+								}
+							}
+							for($i=0;$i<count($valores);$i++){
+								if( $tipoIngreso != $valores[$i] ){
+									echo '<option value="'.$valores[$i].'">'.$nombres[$i].'</option>';
+								}
+							}
+						?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td style="font-weight: bold;">Folio:&nbsp;</td>
+					<td style="text-align:center"><input type="text" id="folio" name="folio" value="<?php echo $folio; ?>" style="width:250px;" onkeypress="javascript:return ValidNum(event)" /></td>
+				</tr>
+				<tr bgcolor="#DDDDDD">
+					<td style="font-weight: bold;">Ficha de Aspirante:&nbsp;</td>
+					<td style="text-align:center"><input type="text" id="ficha" name="ficha" value="<?php echo $ficha; ?>" style="width:250px;" onkeypress="javascript:return ValidNum(event)"/></td>
+				</tr>
+				<tr>
+					<td style="font-weight: bold;">Periodo de Tr&aacute;mite:&nbsp;</td>
+					<td style="text-align:center"><input type="text" id="periodo" name="periodo" value="<?php echo $periodo; ?>" style="width:250px;" onkeypress="javascript:return ValidNum(event)"/></td>
+				</tr>
+				<tr bgcolor="#DDDDDD">
+					<td style="font-weight: bold;">Folio Ceneval:&nbsp;</td>
+					<td style="text-align:center"><input type="text" id="folioceneval" name="folioceneval" value="<?php echo $folioceneval; ?>" style="width:250px;" onkeypress="javascript:return ValidNum(event)"/></td>
+				</tr>
+				<tr>
+					<td style="font-weight: bold;">Carrera de Tr&aacute;mite:&nbsp;</td>
+					<td style="text-align:center">
+						<select id="carreraTramite" name="carreraTramite" style="width:256px;">
+						<?php 
+							$XalumnosPersonal = new XAlumnosPersonal();
+							$a = 0;
+							$valores = array();
+							$nombres = array();
+							
+							$carreras = $XalumnosPersonal -> find_all_by_sql('SELECT clave, nombre FROM carrera');
+							
+							foreach($carreras AS $nombresCarrreras){
+								$valores[$a] = $nombresCarrreras -> clave;
+								$nombres[$a] = utf8_encode($nombresCarrreras -> nombre);
+								$a++;
+							}
+							
+							for($i=0;$i<count($valores);$i++){
+								if( $carreraNom == $valores[$i] ){
+									echo '<option value="'.$carreraNom.'">'.$nombres[$i].'</option>';
+								}
+							}
+							for($i=0;$i<count($valores);$i++){
+								if( $carreraNom != $valores[$i] ){
+									echo '<option value="'.$valores[$i].'">'.$nombres[$i].'</option>';
+								}
+							}
+						?>
+						</select>
+					</td>
+				</tr>
+				<tr bgcolor="#DDDDDD">
+					<td style="font-weight: bold;">Escuela de Procedencia:&nbsp;</td>
+					<td style="text-align:center"><input type="text" id="procedencia" name="procedencia" value="<?php echo $procedencia; ?>" style="width:250px;"/></td>
+				</tr>
+				<tr>
+					<td style="font-weight: bold;">Del a&ntilde;o al a&ntilde;o:&nbsp;</td>
+					<td style="text-align:center">
+						<input type="text" id="anio1" name="anio1" value="<?php echo $anio1; ?>" style="width:119px;"/>
+						<input type="text" id="anio2" name="anio2" value="<?php echo $anio2; ?>" style="width:119px;"/>
+					</td>
+				</tr>
+				<tr bgcolor="#DDDDDD">
+					<td style="font-weight: bold;">Promedio de la escuela de Procedencia:&nbsp;</td>
+					<td style="text-align:center"><input type="text" id="promedioprepa" name="promedioprepa" value="<?php echo $promedioprepa; ?>" style="width:250px;" onkeypress="javascript:return ValidNum(event)"/></td>
+				</tr>
+				<tr>
+					<td style="font-weight: bold;">Municipio Escuela de Procedencia:&nbsp;</td>
+					<td style="text-align:center"><input type="text" id="municipioEscuela" name="municipioEscuela" value="<?php echo $municipioEscuela; ?>" style="width:250px;"/></td>
+				</tr>
+				<tr bgcolor="#DDDDDD">
+					<td style="font-weight: bold;">Estado Escuela de procedencia:&nbsp;</td>
+					<td style="text-align:center"><input type="text" id="estadoprepa" name="estadoprepa" value="<?php echo $estadoprepa; ?>" style="width:250px;"/></td>
+				</tr>
+				<tr>
+					<td style="font-weight: bold;">Continuidad de estudios</td>
+					<td style="text-align:center;">
+						<input type="radio" id="continuidadSi" name="continuidad" value="SI" <?php if( $periodoEgreso != "" ) echo "checked"; ?> />&nbsp;SI&nbsp;
+						<input type="radio" id="continuidadNo" name="continuidad" value="NO" <?php if( $periodoEgreso == "" ) echo "checked"; ?> />&nbsp;NO
+					</td>
+				</tr>
+				<tr bgcolor="#DDDDDD">
+					<td style="font-weight: bold;"><font color="#FF0000">*</font>Periodo de Egreso CETI Tgo:&nbsp;</td>
+					<td style="text-align:center"><input type="text" id="periodoEgreso" name="periodoEgreso" value="<?php echo $periodoEgreso; ?>" style="width:250px;" onkeypress="javascript:return ValidNum(event)"/></td>
+				</tr>
+				<tr>
+					<td style="font-weight: bold;"><font color="#FF0000">*</font>Reg. Tgo CETI:&nbsp;</td>
+					<td style="text-align:center"><input type="text" id="registro_tecnologo" name="registro_tecnologo" value="<?php echo $registro_tecnologo; ?>" style="width:250px;" onkeypress="javascript:return ValidNum(event)" /></td>
+				</tr>
+				<tr  bgcolor="#DDDDDD">
+					<td style="font-weight: bold;"><font color="#FF0000">*</font>Plantel Egreso:&nbsp;</td>
+					<td style="text-align:center">
+						<select id="plantel" name="plantel" style="width:256px;">
+							<?php if($plantel = "colomos"){?>
+								<option value="colomos">Colomos</option>
+								<option value="tonala">Tonala</option>
+							<?php } else{ ?>
+								<option value="tonala">Tonala</option>
+								<option value="colomos">Colomos</option>
+							<?php } ?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td style="font-weight: bold;"><font color="#FF0000">*</font>Carrera de Egreso</td>
+					<td style="text-align:center">
+						<select id="carreraEgreso" name="carreraEgreso" style="width:256px;">
+						<?php 
+							$XalumnosPersonal = new XAlumnosPersonal();
+							$b = 0;
+							$valoresIng = array();
+							$nombresIng = array();
+							
+							$carrerasIng = $XalumnosPersonal -> find_all_by_sql('SELECT DISTINCT(clave), nombre FROM carrera');
+							
+							foreach($carrerasIng AS $nombresCarrreras){
+								$valoresIng[$b] = $nombresCarrreras -> clave;
+								$nombresIng[$b] = utf8_encode($nombresCarrreras -> nombre);
+								$b++;
+							}
+							
+							for($i=0;$i<count($valoresIng);$i++){
+								if( $clave == $valoresIng[$i] ){
+									echo '<option value="'.$clave.'">'.$nombresIng[$i].'</option>';
+								}
+							}
+							for($i=0;$i<count($valoresIng);$i++){
+								if( $clave != $valoresIng[$i] ){
+									echo '<option value="'.$valoresIng[$i].'">'.$nombresIng[$i].'</option>';
+								}
+							}
+						?>
+						</select>
+					</td>
+				</tr>
+				<tr bgcolor="#DDDDDD">
+					<td style="font-weight: bold; ">
+						<div id="modAspirante" style="display:none;"><?php echo submit_tag('Modificar'); ?></div>
+						<div id="btnaspirante"><input  type="button" value="Modificar" disabled="true"/></div>
+						<input type="hidden" id="Gaspirante" name="Gaspirante" value="0"/>
+					</td>
+					
+				</tr>
+			</table>
+			</center>
+		</p>
+	</div>
+	<div id="tabs-3">
+	  <p>
+		<center>
+		<!--Datos personales de los padres del alumno-->
+		<table class="tabla" style="text-align:right">
+			<tr >
+				<td colspan="2" bgcolor="#0559B7" style="font-weight: bold;color:#FFFFFF;text-align:center;">DATOS PERSONALES DEL PADRE, MADRE O TUTOR</td>
+				<td bgcolor="#FFFFFF"></td>
+				<td colspan="2" bgcolor="#0559B7" style="font-weight: bold;color:#FFFFFF;text-align:center;">DATOS PERSONALES DEL PADRE, MADRE O TUTOR</td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Nombre:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="nombreFamiliar" name="nombreFamiliar" value="<?php echo $nombre_pariente; ?>" style="width:250px;" /></td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Nombre:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="nombreFamiliar2" name="nombreFamiliar2" value="<?php echo $nombre_pariente2; ?>" style="width:250px;" /></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Apellido Paterno:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="apellido_paterno" name="apellido_paterno" value="<?php echo $apellido_paterno; ?>" style="width:250px;" /></td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Apellido Paterno:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="apellido_paterno2" name="apellido_paterno2" value="<?php echo $apellido_paterno2; ?>" style="width:250px;" /></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Apellido Materno:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="apellido_materno" name="apellido_materno" value="<?php echo $apellido_materno; ?>" style="width:250px;" /></td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Apellido Materno:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="apellido_materno2" name="apellido_materno2" value="<?php echo $apellido_materno2; ?>" style="width:250px;" /></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Parentesco:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="parentesco" name="parentesco" value="<?php echo $parentesco; ?>" style="width:250px;" /></td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Parentesco:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="parentesco2" name="parentesco2" value="<?php echo $parentesco_pariente2; ?>" style="width:250px;" /></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;">Correo:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="correoFamiliar" name="correoFamiliar" value="<?php echo $correo; ?>" style="width:250px;" /></td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;">Correo:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="correoFamiliar2" name="correoFamiliar2" value="<?php echo $correo_pariente2; ?>" style="width:250px;" /></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Nacionalidad:&nbsp;</td>
+				<td style="text-align:center">
+					<select id="nacionalidadFamiliar" name="nacionalidadFamiliar" style="width:256px;">
+						<?php if( $nacionalidad == "E" ){?>
+							<option value="E">Extranjero(a)</option>
+							<option value="M">Mexicano(a)</option>
+						<?php }else{ ?>
+							<option value="M">Mexicano(a)</option>
+							<option value="E">Extranjero(a)</option>
+						<?php } ?>
+					</select>
+				</td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Nacionalidad:&nbsp;</td>
+				<td style="text-align:center">
+					<select id="nacionalidadFamiliar2" name="nacionalidadFamiliar2" style="width:256px;">
+						<?php if( $nacionalidad == "E" ){?>
+							<option value="E">Extranjero(a)</option>
+							<option value="M">Mexicano(a)</option>
+						<?php }else{ ?>
+							<option value="M">Mexicano(a)</option>
+							<option value="E">Extranjero(a)</option>
+						<?php } ?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Pais de Nacimiento:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="paisFamiliar" name="paisFamiliar" value="<?php echo $paisNacimiento; ?>" style="width:250px;" /></td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Pais de Nacimiento:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="paisFamiliar2" name="paisFamiliar2" value="<?php echo $paisNacimiento_pariente2; ?>" style="width:250px;" /></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Grado de estudios:&nbsp;</td>
+				<td style="text-align:center">
+					<select id="gradoEstudios" name="gradoEstudios" style="width:256px;">
+						<?php 
+							$valores = array();
+							$valores[0] = "SIN ESTUDIOS";
+							$valores[1] = "PRIMARIA";
+							$valores[2] = "SECUNDARIA";
+							$valores[3] = "BACHILLERATO GENERAL";
+							$valores[4] = "BACHILLERATO TECNICO";
+							$valores[5] = "LICENCIATURA";
+							$valores[6] = "MAESTRIA";
+							$valores[7] = "DOCTORADO";
+							
+							$nombres = array();
+							$nombres[0] = "Sin estudios";
+							$nombres[1] = "Primaria";
+							$nombres[2] = "Secundaria";
+							$nombres[3] = "Bachillerato general";
+							$nombres[4] = "Bachillerado T&eacute;cnico";
+							$nombres[5] = "Licenciatura/Ingenier&iacute;a";
+							$nombres[6] = "Maestr&iacute;a";
+							$nombres[7] = "Doctorado";
+							
+							for($i=0;$i<count($valores);$i++){
+								if( $grado_estudios == $valores[$i] ){
+									echo '<option value="'.$grado_estudios.'">'.$nombres[$i].'</option>';
+								}
+							}
+							for($i=0;$i<count($valores);$i++){
+								if( $grado_estudios != $valores[$i] ){
+									echo '<option value="'.$valores[$i].'">'.$nombres[$i].'</option>';
+								}
+							}
+						?>
+					</select>
+				</td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Grado de estudios:&nbsp;</td>
+				<td style="text-align:center">
+					<select id="gradoEstudiosFamiliar" name="gradoEstudiosFamiliar" style="width:256px;">
+						<?php 
+							$valores = array();
+							$valores[0] = "SIN ESTUDIOS";
+							$valores[1] = "PRIMARIA";
+							$valores[2] = "SECUNDARIA";
+							$valores[3] = "BACHILLERATO GENERAL";
+							$valores[4] = "BACHILLERATO TECNICO";
+							$valores[5] = "LICENCIATURA";
+							$valores[6] = "MAESTRIA";
+							$valores[7] = "DOCTORADO";
+							
+							$nombres = array();
+							$nombres[0] = "Sin estudios";
+							$nombres[1] = "Primaria";
+							$nombres[2] = "Secundaria";
+							$nombres[3] = "Bachillerato general";
+							$nombres[4] = "Bachillerado T&eacute;cnico";
+							$nombres[5] = "Licenciatura/Ingenier&iacute;a";
+							$nombres[6] = "Maestr&iacute;a";
+							$nombres[7] = "Doctorado";
+							
+							
+							for($i=0;$i<count($valores);$i++){
+								if( $grado_estudios_pariente2 == $valores[$i] ){
+									echo '<option value="'.$grado_estudios_pariente2.'">'.$nombres[$i].'</option>';
+								}
+							}
+							for($i=0;$i<count($valores);$i++){
+								if( $grado_estudios_pariente2 != $valores[$i] ){
+									echo '<option value="'.$valores[$i].'">'.$nombres[$i].'</option>';
+								}
+							}
+						?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Calle y N&uacute;mero:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="calleNumeroFamiliar" name="calleNumeroFamiliar" value="<?php echo $calle_numero; ?>" style="width:250px;" /></td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Calle y N&uacute;mero:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="calleNumeroFamiliar2" name="calleNumeroFamiliar2" value="<?php echo $calle_numero_pariente2; ?>" style="width:250px;" /></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Colonia:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="coloniaFamiliar" name="coloniaFamiliar" value="<?php echo $colonia_pariente; ?>" style="width:250px;" /></td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Colonia:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="coloniaFamiliar2" name="coloniaFamiliar2" value="<?php echo $colonia_pariente2; ?>" style="width:250px;" /></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Ciudad:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="ciudadFamiliar" name="ciudadFamiliar" value="<?php echo $ciudadP; ?>" style="width:250px;" /></td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Ciudad:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="ciudadFamiliar2" name="ciudadFamiliar2" value="<?php echo $ciudad_pariente2; ?>" style="width:250px;" /></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Estado:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="estadoFamiliar" name="estadoFamiliar" value="<?php echo $estadoP; ?>" style="width:250px;" /></td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Estado:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="estadoFamiliar2" name="estadoFamiliar2" value="<?php echo $estado_pariente2; ?>" style="width:250px;" /></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Tel&eacute;fono Casa:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="telefonoFamiliar" name="telefonoFamiliar" value="<?php echo $telefono_casa; ?>" style="width:250px;" onkeypress="ValidNum(event);" /></td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Tel&eacute;fono Casa:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="telFamiliar2" name="telFamiliar2" value="<?php echo $telefono_casa_pariente2; ?>" style="width:250px;" onkeypress="ValidNum(event);" /></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Celular:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="celularFamiliar" name="celularFamiliar" value="<?php echo $celular; ?>" style="width:250px;" onkeypress="ValidNum(event);" /></td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Celular:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="celFamiliar" name="celFamiliar" value="<?php echo $celular_pariente2; ?>" style="width:250px;" onkeypress="ValidNum(event);" /></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Ocupaci&oacute;n:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="ocupacionFamiliar" name="ocupacionFamiliar" value="<?php echo $ocupacion; ?>" style="width:250px;" /></td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Ocupaci&oacute;n:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="ocupacionFamiliar2" name="ocupacionFamiliar2" value="<?php echo $ocupacion_pariente2; ?>" style="width:250px;" /></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;">Tel&eacute;fono de trabajo:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="telTrabajoFamiliar" name="telTrabajoFamiliar" value="<?php echo $telefono_trabajo; ?>" style="width:250px;" onkeypress="ValidNum(event);"/></td>
+				
+				<td bgcolor="#FFFFFF"></td>
+				
+				<td style="font-weight: bold;">Tel&eacute;fono de trabajo:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="telTrabajoFamiliar2" name="telTrabajoFamiliar2" value="<?php echo $telefono_trabajo_pariente2; ?>" style="width:250px;" onkeypress="ValidNum(event);"/></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold; " colspan="2" >
+					<div id="modTutores" style="display:none;"><?php echo submit_tag('Modificar'); ?></div>
+					<div id="btnTutores"><input type="button" value="Modificar" disabled="true"/></div>
+					<input type="hidden" id="GTutores" name="GTutores" value="0"/>
+				</td>
+			</tr>
+		</table>
+		</center>
+	  </p>
+	</div>
+	<div id="tabs-4">
+	  <p>
+		<center>
+		<!--Informacion laboral del alumno-->
+		<table class="tabla" style="text-align:right">
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Trabaja el estudiante:&nbsp;</td>
+				<td style="text-align:center">
+					<select id="trabaja" name="trabaja" style="width:334px;" onchange="javascript:return mostrarDatos()">
+						<?php if( $nombre_empresa == "" ){ ?>
+							<option value="NO">NO</option>
+							<option value="SI">SI</option>
+						<?php }else{?>
+							<option value="SI">SI</option>
+							<option value="NO">NO</option>
+						<?php }?>
+					</select>
+				</td>
+			</tr>
+		</table>
+		<table class="tabla" id="datosTrabajo" style="width: 530px;text-align:right;display:<?php if( $nombre_empresa == "" ){ echo 'none'; }else{ echo 'block'; }?>">
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Empresa:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="empresa" name="empresa" value="<?php echo $nombre_empresa; ?>" style="width:334px;" /></td>
+			</tr>
+			<tr  bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Domicilio:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="DomicilioEmpresa" name="DomicilioEmpresa" value="<?php echo $domicilio_empresa; ?>" style="width:334px;" /></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Colonia:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="coloniaEmpresa" name="coloniaEmpresa" value="<?php echo $colonia_empresa; ?>" style="width:334px;" /></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Ciudad:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="ciudadEmpresa" name="ciudadEmpresa" value="<?php echo $ciudad_empresa; ?>" style="width:334px;" /></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Estado:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="estadoEmpresa" name="estadoEmpresa" value="<?php echo $estado_empresa; ?>" style="width:334px;" /></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Codigo Postal:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="cpEmpresa" name="cpEmpresa" value="<?php echo $cp_empresa; ?>" style="width:334px;" onkeypress="ValidNum(event);"/></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tel&eacute;fono Trabajo:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="telefonoEmpresa" name="telefonoEmpresa" value="<?php echo $telenofo_empresa; ?>" style="width:334px;" onkeypress="ValidNum(event);"/></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Horario Entrada:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="horarioEntrada" name="horarioEntrada" value="<?php echo $horario_entrada; ?>" style="width:334px;"/></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Horario Salida:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="horarioSalida" name="horarioSalida" value="<?php echo $horario_salida; ?>" style="width:334px;"/></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Puesto:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="puesto" name="puesto" value="<?php echo $puesto; ?>" style="width:334px;"/></td>
+			</tr>
+			<tr >
+				<td style="font-weight: bold;" colspan="2" id="btnTrabajo">
+					<input type="button" value="Modificar" disabled="true"/>
+					<input type="hidden" id="GTrabajo" name="GTrabajo" value="0"/>
+				</td>
+				<td style="font-weight: bold;display:none;" colspan="2" id="modTrabajo">
+					<?php echo submit_tag('Modificar'); ?>
+				</td>
+			</tr>
+		</table>
+		</center>
+	  </p>
+	</div>
+	<div id="tabs-5">
+	  <p>
+		<!--informacion del seguro social-->
+		<table class="tabla" style="text-align:right">
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;width: 490px;"><font color="#FF0000">*</font>&#191;Cuentas con alg&uacute;n tipo de seguridad social?&nbsp;</td>
+				<td style="text-align:center;width: 337px;">
+					<input type="radio" id="seguroSi" name="seguro" value="SI" <?php if( $seguro == "SI" ) echo "checked"; ?> onclick="javascript:return seguroAlm()"/>Si&nbsp;
+					<input type="radio" id="seguroNo" name="seguro" value="NO" <?php if( $seguro != "SI" ) echo "checked"; ?> onclick="javascript:return seguroAlm()"/>No
+				</td>
+			</tr>
+		</table>
+		<table class="tabla" style="text-align:right;display:<?php echo $seguroSi; ?>;" id="tablaSeguro">
+			<tr >
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>N&uacute;m. Afiliaci&oacute;n:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="numAfiliacion" name="numAfiliacion" value="<?php echo $noAfiliacion; ?>" style="width:334px;"/></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>N&uacute;mero de Cl&iacute;nica:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="numeroClinica" name="numeroClinica" value="<?php echo $numClinica; ?>" style="width:334px;"/></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Vigencia de la seguridad social:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="vigenciaSeguro" name="vigenciaSeguro" value="<?php echo $vigencia; ?>" style="width:334px;"/></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Tipo de Sangre:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="tipoSangre" name="tipoSangre" value="<?php echo $sangre; ?>" style="width:334px;"/></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>&#191;Por cu&aacute;l dependencia tienes seguro?&nbsp;</td>
+				<td style="text-align:center">
+					<select id="tipoSeguro" name="tipoSeguro" onchange="javascript:return habilitarTxtOtro('tipoSeguro','otroSeguro','fechaMovimiento');" style="width:340px;">
+						<?php 
+							$valores = array();
+							$valores[0] = "IMSS";
+							$valores[1] = "ISSSTE";
+							$valores[2] = "SEDENA";
+							$valores[3] = "SEMAR";
+							$valores[4] = "IMSS SEGURO FACULTATIVO";
+							$valores[5] = "OTRO";
+							
+							$nombres = array();
+							$nombres[0] = "IMSS";
+							$nombres[1] = "ISSSTE";
+							$nombres[2] = "SEDENA";
+							$nombres[3] = "SEMAR";
+							$nombres[4] = "IMSS SEGURO FACULTATIVO";
+							$nombres[5] = "OTRO";
+							
+							for($i=0;$i<count($valores);$i++){
+								if( $dependencia == $valores[$i] ){
+									echo '<option value="'.$dependencia.'">'.$nombres[$i].'</option>';
+								}
+							}
+							for($i=0;$i<count($valores);$i++){
+								if( $dependencia != $valores[$i] ){
+									echo '<option value="'.$valores[$i].'">'.$nombres[$i].'</option>';
+								}
+							}
+						?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;">Especifique Cual&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="otroSeguro" name="otroSeguro" value="<?php echo $otroSeguro; ?>" style="width:334px;background-color: #CCCCCC;" readonly="readonly"/></td>				
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;">Fecha de Movimiento:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="fechaMovimiento" name="fechaMovimiento" value="<?php echo $numClinica; ?>" style="width:334px;background-color: #CCCCCC;" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>&#191;Por parte de quien tiene seguridad social?&nbsp;</td>
+				<td style="text-align:center">
+					<select id="padresSeguro" name="porParte" style="width:340px;">
+						<?php 
+							$valores = array();
+							$valores[0] = "PADRES";
+							$valores[1] = "TRABAJO";
+							$valores[2] = "CONYUGE";
+							$valores[3] = "ESCUELA";
+							
+							$nombres = array();
+							$nombres[0] = "Padres";
+							$nombres[1] = "Trabajo";
+							$nombres[2] = "C&oacute;nyuge";
+							$nombres[3] = "Escuela";
+							
+							for($i=0;$i<count($valores);$i++){
+								if( $parteDeQuien == $valores[$i] ){
+									echo '<option value="'.$parteDeQuien.'">'.$nombres[$i].'</option>';
+								}
+							}
+							for($i=0;$i<count($valores);$i++){
+								if( $parteDeQuien != $valores[$i] ){
+									echo '<option value="'.$valores[$i].'">'.$nombres[$i].'</option>';
+								}
+							}
+						?>
+					</select>
+				</td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Enfermedad Cr&oacute;nica:&nbsp;</td>
+				<td style="text-align:center">
+					<input type="radio" id="EnfermedadNo" name="enfermedad" value="NO" <?php if( $enfermedad_cronica == "NO" ) echo "checked"; ?> onclick="javascript:return habilitarTxt('especificar_enfermedad','0');"/>No&nbsp;
+					<input type="radio" id="EnfermedadSi" name="enfermedad" value="SI" <?php if( $enfermedad_cronica == "SI" ) echo "checked"; ?> onclick="javascript:return habilitarTxt('especificar_enfermedad','1');"/>Si
+				</td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;">Especificar:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="especificar_enfermedad" name="especificar_enfermedad" style="width:334px;background-color: #CCCCCC;" value="<?php echo $especificar_enfermedad; ?>" readonly="readonly"/></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>Alergias:&nbsp;</td>
+				<td style="text-align:center">
+					<input type="radio" id="alergiasNo" name="alergias" value="NO" <?php if( $alergias == "NO" ) echo "checked"; ?> onclick="javascript:return habilitarTxt('especifica_alergias','0');"/>No&nbsp;
+					<input type="radio" id="alergiasSi" name="alergias" value="SI" <?php if( $alergias == "SI" ) echo "checked"; ?> onclick="javascript:return habilitarTxt('especifica_alergias','1');"/>Si
+				</td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;">Especificar:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="especifica_alergias" name="especifica_alergias" style="width:334px;background-color: #CCCCCC;" value="<?php echo $especifica_alergias; ?>" readonly="readonly"/></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>&#191;Tiene alg&uacute;n tipo de capaciodad diferente?&nbsp;</td>
+				<td style="text-align:center">
+					<input type="radio" id="capacidad_diferenteNo" name="capacidad_diferente" value="NO" <?php if( $capacidad_diferente == "NO" ) echo "checked"; ?> onclick="javascript:return habilitarTxt('especifica_capacidad','0');"/>No&nbsp;
+					<input type="radio" id="capacidad_diferenteSi" name="capacidad_diferente" value="SI" <?php if( $capacidad_diferente == "SI" ) echo "checked"; ?> onclick="javascript:return habilitarTxt('especifica_capacidad','1');"/>Si
+				</td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;">Especificar:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="especifica_capacidad" name="especifica_capacidad" style="width:334px;background-color: #CCCCCC;" value="<?php echo $especifica_capacidad; ?>" readonly="readonly"/></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;"><font color="#FF0000">*</font>&#191;Utilizas alg&uacute;n auxiliar o pr&oacute;tesis para tu desplazamiento?&nbsp;</td>
+				<td style="text-align:center">
+					<input type="radio" id="protesisNo" name="protesis" value="NO" <?php if( $protesis == "NO" ) echo "checked"; ?> onclick="javascript:return habilitarTxt('especifica_protesis','0');"/>No&nbsp;
+					<input type="radio" id="protesisSi" name="protesis" value="SI" <?php if( $protesis == "SI" ) echo "checked"; ?> onclick="javascript:return habilitarTxt('especifica_protesis','1');"/>Si
+				</td>
+			</tr>
+			<tr>
+				<td style="font-weight: bold;">Especificar:&nbsp;</td>
+				<td style="text-align:center"><input type="text" id="especifica_protesis" name="especifica_protesis" style="width:334px;background-color: #CCCCCC;" value="<?php echo $especifica_protesis; ?>" readonly="readonly"/></td>
+			</tr>
+			<tr bgcolor="#DDDDDD">
+				<td style="font-weight: bold;" >
+					<div id="modMedico" style="display:none;"><?php echo submit_tag('Modificar'); ?></div>
+					<div id="btnMedico"><input type="button" value="Modificar" disabled="true"/></div>
+					<input type="hidden" id="GMedico" name="GMedico" value="0"/>
+				</td>
+				
+			</tr>
+		</table>
+		
+	  </p>
+	</div>
+  </div>
+</div>
+
+<?php echo end_form_tag(); ?>
+
+<script type="text/javascript">
+	/*
+	* Funcion para la validacion en las mascaras. jquery
+	*/
+    $q(function() {
+        //$q.mask.definitions['~'] = "[+-]";
+        $q("#celular").mask("0449999999999");
+		$q("#fechaNacimiento").mask("9999-99-99");
+        $q("#vigenciaSeguro").mask("9999-99-99");
+        $q("#fechaMovimiento").mask("9999-99-99");
+        $q("#anio2").mask("9999");
+        $q("#anio1").mask("9999");
+        $q("#cp").mask("99999");
+        $q("#telefonoFamiliar").mask("99999999");
+        $q("#telCasa").mask("99999999");
+        $q("#telFamiliar").mask("99999999");
+        $q("#telFamiliar2").mask("99999999");
+        $q("#celularFamiliar").mask("9999999999");
+        $q("#celFamiliar").mask("9999999999");
+        $q("#telTrabajoFamiliar").mask("99999999");
+        $q("#telTrabajoFamiliar2").mask("99999999");
+        $q("#cpEmpresa").mask("99999");
+        $q("#telefonoEmpresa").mask("99999999");
+        $q("#horarioEntrada").mask("99:99");
+        $q("#horarioSalida").mask("99:99");
+		$q("#curp").mask("aaaa999999aaaaaa99")
+        //$q("#numeroClinica").mask("999"); 
+    });
+	
+</script>
+
+<script>
+  $q(function() {
+	$q( "#tabs" ).tabs();
+  });
+</script>
+
+<script type="text/javascript">
+
+	//Funcion que activa el boton de modificacion
+ 	intervalFunction = setInterval(
+						function(){
+						//funcion que valida los campos obligatorios.
+						var respuesta = validaDatos();
+			
+						},2000);
+
+	checarInput();
+</script>

@@ -1,0 +1,38 @@
+<?= render_partial("capturarcursos/info"); ?>
+
+<br />
+<br />
+<?= render_partial("menuintersemestrales"); ?>
+<br />
+<br />
+<!--
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+-->
+<!--
+<script src="<?= KUMBIA_PATH ?>javascript/kumbia/jquery.js"></script>
+-->
+<!--
+<script src="<?= KUMBIA_PATH ?>javascript/kumbia/cursos_nivelacion_inscripcion_alumnos.js"></script>
+-->
+
+<form action= "<?=KUMBIA_PATH ?>capturarcursos/cursos_intersemestrales_inscribir_alumno" method="post" name="Form1" id="Form1">
+<table class="centrar">
+	<tr>
+		<td valign="center" class="encabezadoo">
+			<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+			ADMINISTRACIÓN DE CURSOS INTERSEMESTARLES: "<?php echo $periodoCompleto ?>"
+			<h2>Curso creado Exitosamente "<?php echo $clavecurso ?>"</h2>
+			<?php echo $nombre_materia." ".$clave_materia; ?>
+		</td>
+	</tr>
+	<tr>
+		<td valign="center" class="encabezadoo">
+			<input id="clavecurso" name="clavecurso" type="hidden" value="<?php echo $clavecurso ?>" />
+			<br />
+			<br />
+			<input id="submitir" name="submitir" type="submit" value="Empezar a Inscribir a los Alumnos" />
+		</td>
+	</tr>
+</table>
+<br />
+<br />

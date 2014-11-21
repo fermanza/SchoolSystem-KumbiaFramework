@@ -1,0 +1,81 @@
+<?
+/*
+if( $areaTemp -> areadeformacion_id == 0 ){
+?>
+<?
+	echo javascript_library_tag("areadeformacionParaPreseleccion");
+	$arrayAreas = "";
+	$i = 0;
+	foreach( $posiblesAreasDeFormacion as $posibles ){
+		if( $i > 0 )
+			$arrayAreas .= "/";
+		$arrayAreas .= $posibles;
+		$i++;
+	}
+	$arrayMaterias = "";
+	$i = 0;
+	$j = 0;
+	foreach( $arrayConMateriasDeSuArea as $mat ){
+		foreach( $mat as $m ){
+			if( $i > 0 )
+				$arrayMaterias .= ",";
+			$arrayMaterias .= substr($m, 0, 25);
+			$i++;
+		}
+		$i = 0;
+		$arrayMaterias .= "/";
+		$j++;
+	}
+	if( $mostrarAreasDeFormacion == 1 ){
+?>
+	<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<?
+		echo stylesheet_link_tag("areasdeformacion");
+		echo "<script type='text/javascript'>
+			escogerAreaDeFormacion('".$carrera_id."', '".$arrayMaterias."', '".$arrayAreas."');
+		</script>";
+	}else if( $YaContestoPreguntaIntersemestral != 1 ){
+?>
+	<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<?
+		echo stylesheet_link_tag("preguntarIntersemestral");
+		echo "<script type='text/javascript'>
+			preguntarIntersemestral();
+		</script>";
+	}
+}
+*/
+?>
+<br />
+<?= render_partial("infoAlumno"); ?>
+<?
+if( ($areaTemp == 0 && isset($areaTemp)) || $mostrarAreasDeFormacion == 1 ){
+	if( $mostrarAreasDeFormacion == 1 ){
+?>
+		<?= render_partial("escogerAreaDeFormacion"); ?>
+<?
+	}
+?>
+	<br />
+	<?
+	if( $mostrarAreasDeFormacion != 1 ){
+	?>
+		<?= render_partial("captura"); ?>
+	<?
+	}
+	?>
+<?
+}
+else if( $YaContestoPreguntaIntersemestral != 1 ){
+?>
+	<?= render_partial("preguntarIntersemestral"); ?>
+	<br />
+<?
+}
+else{
+?>
+	<br />
+	<?= render_partial("captura"); ?>
+<?
+}
+?>

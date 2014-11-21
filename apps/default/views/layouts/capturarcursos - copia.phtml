@@ -1,0 +1,68 @@
+<tr>
+    <th background="/ingenieria/public/img/cira/barraIng.jpg" class="barra_menu">
+		<?php
+		if( Session::get_data('tipousuario') == "PROFESOR" ){
+		?>
+			<?= link_to('profesor/informacion','Informaci&oacute;n') ?> <span style="color: rgb(242, 120, 34);">|</span> 
+			<?= link_to('profesor/listas','Listas') ?> <span style="color: rgb(242, 120, 34);">|</span>
+			<?= link_to('profesor/horario','Horario') ?> <span style="color: rgb(242, 120, 34);">|</span>
+			<?= link_to('profesor/captura','Captura') ?> <span style="color: rgb(242, 120, 34);">|</span>
+			<?= link_to('profesor/tutorados','Tutorados') ?> <span style="color: rgb(242, 120, 34);">|</span>
+			<?= link_to('profesor/historico','Historico') ?> <span style="color: rgb(242, 120, 34);">|</span>
+        <?php
+		}
+		if( Session::get_data('coordinador') == "OK" ){
+			$categoria = 2;
+			$tipousuario = 2;
+		}
+		if( Session::get_data('tipousuario') == "OBSERVADOR" ){
+			$categoria = 4;
+			$tipousuario = 0;
+		}
+		
+		if( isset($categoria) && ($categoria == 2 && $tipousuario == 2) ){
+			echo link_to('capturarcursos/','Coordinador')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/buscarAlumno','Buscar Alumno')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/autorizarCruces','Autorizar Cruces')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/permisosCapturaEspeciales','Correci&oacute;n de Captura')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/autorizarCargasDeMaterias','Cargar Materias')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			// echo link_to('profesor/titulosPendientes','Titulos Pendientes')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/abrirSeleccionAlumno','Abrir Selecci&oacute;n Alumno')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			// echo link_to('profesor/creditosSemestrePasado','Cr&eacute;ditos Sem Pasado')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/cambiarContrasenaZopilote','Contrase&ntilde;a Zopilote')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('estadisticas/indicesReprobacionListado','Estad&iacute;sticas de Captura')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('capturarcursos/masCupoEnCursosCyT','Abrir Cupo en Cursos')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/capturarListaActividad','Asignar Actividades a los Profesores')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesoreshorario/horarioPorProfesor','Imprimir Horario de Profesores')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/cambiarSalonesAPrimero','Cambiar de Salon a los de Primero')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+        }
+		else if( Session::get_data('coordinador') == "OK" ){
+			echo link_to('profesor/buscarAlumno','Buscar Alumno')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+		}
+		
+		if( isset($categoria) && $categoria == 4 && $tipousuario == 0 ){
+			echo link_to('profesor/informacion','Informaci&oacute;n')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/buscarAlumno','Buscar Alumno')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('estadisticas/indicesReprobacionListado','Estad&iacute;sticas de Captura')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/cambiarContrasena','Cambiar Contrase&ntilde;a')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+		}
+		
+		if( Session::get_data('tipousuario') == "PROFESOR" ){
+		?>
+			<?= link_to('profesor/encuestas','Encuestas') ?> <span style="color: rgb(242, 120, 34);">|</span> 
+			<?= link_to('profesor/cambiarContrasena','Cambiar Contrase&ntilde;a') ?> <span style="color: rgb(242, 120, 34);">|</span>
+			<?= link_to('profesor/cambiarCorreo','Cambiar Correo') ?> <span style="color: rgb(242, 120, 34);">|</span>
+			<?= link_to('profesor/salir','Salir') ?>
+		<?
+		}
+		?>
+    </th>
+</tr>
+<tr>
+	<td height="1"></td>
+</tr>
+<tr>
+	<td align="center">
+		<?= content(); ?>
+	</td>
+</tr>

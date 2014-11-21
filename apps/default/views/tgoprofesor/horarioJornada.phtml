@@ -1,0 +1,61 @@
+<br />
+<br />
+<center>
+<?= form_remote_tag("tgocoordinador/capturarHorarioJornada/".$nomina, "update: horarioJornada") ?>
+<table class="bordeazul">
+	<tr class="naranja">
+		<th>LUNES</th>
+		<th>MARTES</th>
+		<th>MIERCOLES</th>
+		<th>JUEVES</th>
+		<th>VIRNES</th>
+		<th>SABADO</th>
+	</tr>
+	<?php
+	if ($horarioJornada -> lunes == ""){
+		$l ="- - -";
+	}else{
+		$l =$horarioJornada -> lunes;
+	}
+	if ($horarioJornada -> martes == ""){
+		$m ="- - -";
+	}else{
+		$m =$horarioJornada -> martes;
+	}
+	if ($horarioJornada -> miercoles == ""){
+		$mi ="- - -";
+	}else{
+		$mi =$horarioJornada -> miercoles;
+	}
+	if ($horarioJornada -> jueves == ""){
+		$j ="- - -";
+	}else{
+		$j =$horarioJornada -> jueves;
+	}
+	if ($horarioJornada -> viernes == ""){
+		$v ="- - -";
+	}else{
+		$v =$horarioJornada -> viernes;
+	}
+	if ($horarioJornada -> sabado == ""){
+		$s ="- - -";
+	}else{
+		$s =$horarioJornada -> sabado;
+	}
+	
+	?>
+	<tr>
+		<td><input type="text" name="lunes" value="<?= $l ?>"></td>
+		<td><input type="text" name="martes" value="<?= $m ?>"></td>
+		<td><input type="text" name="miercoles" value="<?= $mi ?>"></td>
+		<td><input type="text" name="jueves" value="<?= $j ?>"></td>
+		<td><input type="text" name="viernes" value="<?= $v ?>"></td>
+		<td><input type="text" name="sabado" value="<?= $s ?>"></td>
+	</tr>
+</table>
+<input type="submit" value="Guardar">
+<?= end_form_tag() ?>
+</center>
+<br />
+<br />
+<br />

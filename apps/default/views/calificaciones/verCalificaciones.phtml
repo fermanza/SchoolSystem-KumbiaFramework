@@ -1,0 +1,75 @@
+<style type="text/css">
+    .contenido {
+        margin: 10px;
+        font-size: 12px;
+    }
+    .titulo{
+    	font-size: 20px;
+		font-weight: bold;
+		color: #333333;
+		background: #FFCA5B;
+		padding: 5px 15px 5px 15px;		
+		text-align: center;
+    }
+	input[type="text"]{
+		width:150px;
+	}
+	select{
+		width:150px;
+	}
+</style>
+<div class="titulo">
+Administrador de Calificaciones	
+</div>
+<div class="contenido">
+    <?= form_tag("calificaciones/viendoCalificaciones") ?>
+    <table>
+        <tr>
+            <th>
+            	Registro 
+            </th>
+            <td>
+				<select name="registro" id="registro">
+					<option value ="-1">- - Escoger Alumno - - </option>
+					<?
+					for( $i = 0; $i < count($alumno); $i++ ){
+					?>
+						<option value="<?= $alumno[$i] -> miReg ?>">
+							<?
+							if( $alumno[$i] -> enPlantel == "N" )
+								$plantel = "T";
+							else
+								$plantel = "C";
+							?>
+							<? echo $alumno[$i] -> miReg.
+									"&nbsp;&nbsp;&nbsp;".substr( $alumno[$i] -> vcNomAlu, 0, 15).
+										"&nbsp;&nbsp;&nbsp;Plantel: ".$plantel.
+											"&nbsp;&nbsp;Ingreso: ".$alumno[$i] -> miPerIng; ?>
+						</option>
+					<?
+					}
+					?>
+				</select>
+            </td>
+        </tr>
+        <tr>
+            <th>
+           	    Per&iacute;odo 
+            </th>
+            <td>
+                <select name="periodo">                    
+                    <option value="12008" selected="selected">Feb-Jun 08</option>
+                    <option value="32008">Ago-Dic 08</option>
+					<option value="12009">Feb-Jun 09</option>
+					<option value="32009">Ago-Dic 09</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <?=	submit_tag("Buscar") ?>
+            </td>
+        </tr>
+    </table>
+    <?= end_form_tag() ?>
+</div>

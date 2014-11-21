@@ -1,0 +1,221 @@
+<script language="JavaScript">
+	
+	function eliminar(){
+		
+		if( window.confirm( "¿Estás Seguro de que deseas eliminar dicho curso?" ) ){
+			return true;
+		}
+		
+		return false;
+	}
+
+</script>
+
+<?= render_partial("info"); ?>
+
+<br />
+<br />
+<br />
+<br />
+<?= render_partial("menucursos"); ?>
+<br />
+<br />
+<br />
+
+<?= form_remote_tag("capturarcursos/buscarElCurso","update: cursostodos", "name: Formulario0") ?>
+<table cellspacing="1" cellpadding="1" style="font-size: 12px;" align="center">
+	<tr>
+		<td align="center">
+			<input type="text" name="buscarcurso" id="buscarcurso" >
+			<input type="submit" value="Buscar Curso">
+		</td>
+	</tr>
+</table>
+</form>
+
+<br />
+<br />
+<div id="cursostodos">
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center">
+	<br />
+	<br />
+	<tr>
+		<th class="azull4" width="20">
+			Borrar
+		</th>
+		<th class="azull4" width="20">
+			Editar
+		</th>
+		<th class="azull4" width="20">
+			Curso
+		</th>
+		<th class="azull4" width="300">
+			Materia
+		</th>
+		<th class="azull4" width="180">
+			Profesor
+		</th>
+		<th class="azull4" width="50">
+			Cupo
+		</th>
+		<th class="azull4" width="50" colspan="6">
+			Horario
+		</th>
+	</tr>
+	<?
+	for( $i = 0; $i < count($cursos); $i ++ ){
+	?>
+	<tr>
+		<td class="bordee" rowspan="2">
+			<form action="<?= KUMBIA_PATH ?>capturarcursos/borrarCurso"
+					method="post" onSubmit="return delete1();">
+				<input type="image" src="<?= KUMBIA_PATH ?>img/delete2.gif"
+					border="0" onClick="return eliminar()">
+				<input type="hidden" id="deleteID" name="deleteID"
+						value="<? echo $cursos[$i] -> clavecurso; ?>">
+			</form>
+		</td>
+		<td class="bordee" rowspan="2">
+			<form action="<?= KUMBIA_PATH ?>capturarcursos/editarCurso" method="post">
+				<input type="image" src="<?= KUMBIA_PATH ?>img/edit.gif" border="0">
+				<input type="hidden" id="editID" name="editID"
+						value="<? echo $cursos[$i] -> clavecurso; ?>">
+			</form>
+		</td>
+		<td class="bordee" rowspan="2">
+			<h5><a href="#" ><? echo $cursos[$i] -> clavecurso; ?></a></h5>
+		</td>
+		<td class="bordee" width="300" rowspan="2">
+			<?
+			if( $materias[$i] -> plan == 2000 )
+				echo "Plan2000: ";
+			else
+				echo "Plan2007";
+			echo $materias[$i]->clave." - ".$materias[$i] -> nombre;
+			/*
+			if( isSet( $materias2000[$i] -> clave ) )
+				echo "Plan 2000: ".$materias2000[$i]->clave." - ".$materias2000[$i] -> nombre."<br />";
+			if( isSet( $materias2007[$i] -> clave ) )
+				echo "Plan 2007: ".$materias2007[$i]->clave." - ".$materias2007[$i] -> nombre;
+			*/
+			?>
+			<br />&nbsp;
+			<form action="<?= KUMBIA_PATH ?>capturarcursos/listadoDeAlumnos"
+					method="post">
+				<input type="submit" value="Listado de Alumnos Inscritos">
+				<input type="hidden" id="cursoID" name="cursoID"
+						value="<? echo $cursos[$i] -> clavecurso; ?>">
+			</form>
+		</td>
+		<td class="bordee" width="180" rowspan="2">
+			<? echo "(".$maestros[$i]->nomina.") ".$maestros[$i] -> nombre; ?>
+		</td>
+		<td class="bordee" rowspan="2">
+			<? echo "Max: ".$cursos[$i] -> cupo; ?><br />
+			<? echo "Disp: ".$cursos[$i] -> disponibilidad; ?><br />
+			<? echo "Insc: ".($cursos[$i] -> cupo - $cursos[$i] -> disponibilidad); ?>
+		</td>
+		<th class="azull2" width="30">
+			Lunes
+		</td>
+		<th class="azull2" width="30">
+			Martes
+		</td>
+		<th class="azull2" width="30">
+			Mi&eacute;rcoles
+		</td>
+		<th class="azull2" width="30">
+			Jueves
+		</td>
+		<th class="azull2" width="30">
+			Viernes
+		</td>
+		<th class="azull2" width="30">
+			S&aacute;bado
+		</td>
+	</tr>
+	<tr>
+			<?
+			
+			for( $k = 1; $k < 7; $k++ ){
+				$dia[$k] = 0;
+			}
+			if( !isSet($horas[$cursos[$i] -> id]) ){
+				echo "<td class='bordee' colspan='6'><h2>Curso no presencial</h2></td>";
+			}
+			else{
+				for( $j = 0; $j < count($horas[$cursos[$i] -> id]); $j ++ ){
+					
+					// Así accedo al dia del curso
+					//$horas[$cursos[$i] -> id][$j] -> dia
+					
+					// Así accedo a la hora del curso
+					//$horas[$cursos[$i] -> id][$j] -> hora
+					
+					// Así accedo al curso, que estoy viendo actualmente
+					//$cursos[$i] -> id]
+					
+					// Dia del curso
+					//$horas[$cursos[$i] -> id][$j] -> dia
+					
+					for( $k = 1; $k < 7; $k++ ){
+						if( $dia[$k] == 0 ){
+							if( $k >= $horas[$cursos[$i] -> id][$j] -> dia ){
+								break;
+							}
+							else if( $k != $horas[$cursos[$i] -> id][$j] -> dia ){
+								echo "<td class='bordee'>&nbsp;</td>";
+								$dia[$k] = 1;
+							}
+						}
+					}
+					
+					if( $dia[$horas[$cursos[$i] -> id][$j] -> dia] == 0 ){
+						// Pongo en la variable auxiliar el número del día de
+						//la semana, de este curso, para saber si pongo un nuevo <td> o no...
+						$dia[$horas[$cursos[$i] -> id][$j] -> dia] = 1;
+						echo "<td class='bordee'>";
+					}
+					
+					if( !isSet($horas[$cursos[$i] -> id][$j+1]) ){
+						echo $horas[$cursos[$i] -> id][$j] -> hora."-".
+								($horas[$cursos[$i] -> id][$j] -> hora + 1)."<br />".
+										$salon[$cursos[$i] -> id][$j] -> edificio.":".
+												$salon[$cursos[$i] -> id][$j] ->nombre."<br />";
+						echo "</td>";
+					}
+					else if( $horas[$cursos[$i] -> id][$j] != null ){
+						
+						if( $horas[$cursos[$i] -> id][$j+1] != null ){
+							echo $horas[$cursos[$i] -> id][$j] -> hora."-".
+									($horas[$cursos[$i] -> id][$j] -> hora + 1)."<br />".
+											$salon[$cursos[$i] -> id][$j] -> edificio.":".
+													$salon[$cursos[$i] -> id][$j] ->nombre."<br />";
+						}
+						else{
+							echo $horas[$cursos[$i] -> id][$j] -> hora."-".
+									($horas[$cursos[$i] -> id][$j] -> hora + 1)."<br />".
+											$salon[$cursos[$i] -> id][$j] -> edificio.":".
+													$salon[$cursos[$i] -> id][$j] ->nombre."<br />";
+							echo "</td>";
+						}
+					}
+					
+					if( !isSet($horas[$cursos[$i] -> id][$j+1]) ){
+						for( $k = 1; $k < 7; $k++ ){
+							if( $dia[$k] == 0 ){
+								echo "<td class='bordee'>&nbsp;</td>";
+							}
+						}
+					}
+				}
+			}
+			?>
+	</tr>
+	<?
+	}
+	?>
+</table>
+</div>
+<br />
+<br />

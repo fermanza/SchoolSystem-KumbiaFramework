@@ -1,0 +1,314 @@
+<?php
+	$x=1;
+	
+	function horario($grupo, $auxiliar){
+		$horarios = new Horarios();
+		$Periodo = new Periodos();
+		if($Periodo -> find_first("activo = 1")){			
+			$periodo = $Periodo -> periodo;
+		}else{ echo "No se encontro ningun periodo activo<br />"; }
+		
+		if($horarios -> count("periodo = ".$periodo." and grupo_id=".$grupo." AND auxiliar=".$auxiliar)==0){
+			return '';
+		}
+		else{
+			$horario = $horarios -> find_first("periodo = ".$periodo." and grupo_id=".$grupo." AND auxiliar=".$auxiliar);
+			return $horario;
+		}
+	}
+	
+	function materia($grupo, $auxiliar){
+		$horarios = new Horarios();
+		$Periodo = new Periodos();
+		if($Periodo -> find_first("activo = 1")){			
+			$periodo = $Periodo -> periodo;
+		}else{ echo "No se encontro ningun periodo activo<br />"; }
+		
+		if($horarios -> count("grupo_id=".$grupo." AND periodo=".$periodo)>0){
+			$horarios = $horarios -> find("grupo_id=".$grupo." AND periodo=".$periodo);
+			if($horarios) foreach($horarios as $horario){
+				$horas = new Horas();
+				if($horas -> count("horario_id=".$horario -> id." AND auxiliar=".$auxiliar)){
+					if($hora = $horas -> find_first("periodo = ".$periodo." and horario_id=".$horario -> id." AND auxiliar=".$auxiliar)){
+						$materias = new MateriasHorarios();
+						$materia = $materias -> find_first("id=".$hora -> materia_id);
+						return $materia -> nombre;
+					}
+				}
+			}
+		}
+		
+		return '-';
+	}
+	
+	function grupo($grupo, $auxiliar){
+		$horarios = new Horarios();
+		$Periodo = new Periodos();
+		if($Periodo -> find_first("activo = 1")){			
+			$periodo = $Periodo -> periodo;
+		}else{ echo "No se encontro ningun periodo activo<br />"; }
+		
+		if($horarios -> count("grupo_id=".$grupo." AND periodo=".$periodo)>0){
+			$horarios = $horarios -> find("grupo_id=".$grupo." AND periodo=".$periodo);
+			if($horarios) foreach($horarios as $horario){
+				$horas = new Horas();
+				if($horas -> count("horario_id=".$horario -> id." AND auxiliar=".$auxiliar)){
+					if($hora = $horas -> find_first("periodo = ".$periodo." and horario_id=".$horario -> id." AND auxiliar=".$auxiliar)){					
+						$grupos = new Grupos();
+						$grupo = $grupos -> find_first("id=".$hora -> grupo_id);
+						return $grupo -> nombre;
+					}
+				}
+			}
+		}
+		
+		return '-';
+	}
+	
+	function salon($grupo, $auxiliar){
+		$horarios = new Horarios();
+		$Periodo = new Periodos();
+		if($Periodo -> find_first("activo = 1")){			
+			$periodo = $Periodo -> periodo;
+		}else{ echo "No se encontro ningun periodo activo<br />"; }
+		
+		if($horarios -> count("grupo_id=".$grupo." AND periodo=".$periodo)>0){
+			$horarios = $horarios -> find("grupo_id=".$grupo." AND periodo=".$periodo);
+			if($horarios) foreach($horarios as $horario){
+				$horas = new Horas();
+				if($horas -> count("horario_id=".$horario -> id." AND auxiliar=".$auxiliar)){
+					if($hora = $horas -> find_first("periodo = ".$periodo." and horario_id=".$horario -> id." AND auxiliar=".$auxiliar)){					
+						$salones = new Salones();
+						$salon = $salones -> find_first("id=".$hora -> salon_id);
+						return $salon -> corto;
+					}
+				}
+			}
+		}
+		
+		return '-';
+	}
+	
+	function salon2($grupo, $auxiliar){
+		$horarios = new Horarios();
+		$Periodo = new Periodos();
+		if($Periodo -> find_first("activo = 1")){			
+			$periodo = $Periodo -> periodo;
+		}else{ echo "No se encontro ningun periodo activo<br />"; }
+		
+		if($horarios -> count("grupo_id=".$grupo." AND periodo=".$periodo)>0){
+			$horarios = $horarios -> find("grupo_id=".$grupo." AND periodo=".$periodo);
+			if($horarios) foreach($horarios as $horario){
+				$horas = new Horas();
+				if($horas -> count("horario_id=".$horario -> id." AND auxiliar=".$auxiliar)){
+					if($hora = $horas -> find_first("periodo = ".$periodo." and horario_id=".$horario -> id." AND auxiliar=".$auxiliar)){					
+						$salones = new Salones();
+						$salon = $salones -> find_first("id=".$hora -> salon_id);
+						return $horario;
+					}
+				}
+			}
+		}
+		return '-';
+	}
+	
+?>
+<br>
+<style type="text/css">
+	SELECT, INPUT{
+		font-size:10px;
+	}
+</style>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+	ADMINISTRACIÓN DE HORARIOS
+</div>
+<center>
+<table class="bordeazul"  style="font-size:11px">
+<tr class="naranja">
+	<th>No.</th>
+	<th>Horario id</th>
+	<th>Grupo id</th>
+	<th>Materia id</th>
+	<th>Nomina</th>
+	<th>Clave</th>
+	<th>Nombre</th>
+	<th>Horas</th>
+	<th>Especialidad</th>
+	<th>No. alumnos</th>
+<tr>
+<?php
+	$Periodo = new Periodos();
+	if($Periodo -> find_first("activo = 1")){			
+		$periodo = $Periodo -> periodo;
+	}else{ echo "No se encontro ningun periodo activo<br />"; }
+	if($ok == "OK"){
+		echo "<br><br>";
+		if($actas){ 
+			$num=0;
+			
+			foreach($actas as $acta){			
+				$num++;
+				$espe ="";
+				echo tr_color('#CCDEFF', '#FFFFFF');
+				$Horario = new Horarios();
+				$Horas1 = new Horas();
+				$Materia = new MateriasHorarios();
+				$Ma = new Materias();
+				$cal = new Calificaciones();
+				
+				
+				$horario = $Horario -> find_first("id = ".$acta." and periodo = ".$periodo);
+				$contador = $Horas1 -> count("horario_id = ".$acta." and periodo = ".$periodo);
+				$materia = $Materia -> find_first("id = ".$horario -> materia_id);
+				if($ma = $Ma -> find("conditions: clave = '".$materia -> clave."' and especialidad_id < 900 ", "order: especialidad_id ASC")){
+						foreach($ma as $ma1){
+							$espe = $espe.' '.$ma1 ->especialidad_id.'-<span style="color: #CC0000">'.$ma1->nivel.'</span><br>';
+						}
+				}else{
+					$espe ="";
+				}
+				echo "<th>".$num."</th><th>".$acta."</th><th>".$horario -> grupo_id."</th><th>".$horario -> materia_id."</th><th>".$horario -> maestro_id."</th><th>".$materia -> clave."</th><th>".$materia -> nombre."</th><th>".$contador."</th><th>&nbsp;".$espe."</th>";
+				$lll=$cal -> count("horario_id = ".$horario -> id);				
+				echo '<th>'.$lll.'</th>';
+			}
+		}
+	?>
+	<tr class="naranja">
+	<th>No.</th>
+	<th>Horario id</th>
+	<th>Grupo id</th>
+	<th>Materia id</th>
+	<th>Nomina</th>
+	<th>Clave</th>
+	<th>Nombre</th>
+	<th>Horas</th>
+	<th>Especialidad</th>
+<tr>
+</table>
+</center>
+<br><br><br>
+	ALUMNOS CANDIDATOS<BR><BR>
+<form method="POST" action="<?= KUMBIA_PATH ?>grupo/cargaregular">
+	<table border="1" style="font-size:11px">
+		<tr class="naranja">
+			<th>
+				No.
+			</th>
+			<th>
+				Registro
+			</th>
+			<th>
+				Nombre
+			</th>
+			<th>
+				Grupo
+			</th>
+			<th>
+				Tipo
+			</th>
+			<th>
+				&nbsp;
+			</th>
+		</tr>
+		<?php $no=0; ?>
+		<?php if($alumnos) foreach($alumnos as $alumno){ ?>		
+			<?= tr_color('#CCDEFF', '#FFFFFF') ?>
+			<?php $no++ ?>
+			<th>
+				<?= $no ?>
+			</th>
+			<th>
+				<?= $alumno -> registro ?>
+			</th>
+			<th>
+				<?= $alumno -> nombre_completo ?>
+			</th>
+			<th>
+				<?= $alumno -> situacion ?>
+			</th>
+			<th>
+				<?= $alumno -> tipo ?>
+			</th>
+			<th>
+				<input type="checkbox" name="alumnos[<?= $alumno -> registro ?>]" value="<?= $alumno -> registro ?>">
+			</th>
+		<?php } ?>
+	</table>
+	<br><br>
+	<?php
+		if($actas){ 
+			foreach($actas as $acta){
+			?>
+				<input type="hidden" name="actas[<?= $acta ?>]" value="<?= $acta ?>">
+			<?php
+			}
+		}
+	?>
+	<input type="hidden" name="grupo" value="<?= $gpo ?>">
+	<input type="submit" value="Agregar Alumnos">
+	</form>
+	<?php
+	}
+?>
+<br><br>
+<?php $horas = array("7:00 - 7:55","7:55 - 8:50","9:30 - 10:25","10:25 - 11:20","11:20 - 12:15","12:15 - 13:10","13:10 - 14:05","14:05 - 15:00","15:00 - 15:55","15:55 - 16:50","16:50 - 17:45","17:45 - 18:40","18:40 - 19:35","19:35 - 20:30"); ?>
+	
+<table border="1" style="font-size:10px;" class="bordeazul">
+	<th height="20" class="naranja" colspan="7">
+		<?= utf8_encode($especialidad) ?>
+	</th>
+	<tr>
+		<td width="100" align="center" class="azul">&nbsp;</td>
+		<th width="150" align="center" class="azul">Lunes</th>
+		<th width="150" align="center" class="azul">Martes</th>
+		<th width="150" align="center" class="azul">Miercoles</th>
+		<th width="150" align="center" class="azul">Jueves</th>
+		<th width="150" align="center" class="azul">Viernes</th>
+		<th width="150" align="center" class="azul">Sábado</th>
+	</tr>
+	<?php for($i=0;$i<14;$i++){ ?>
+	<tr>
+		<th height="125" class="naranja"><?= $horas[$i] ?></th>
+		<?php for($j=1;$j<7;$j++){ ?>
+			<?php if(materia($grupoid, $x)=="-" && materia($grupobasicasid, $x) =="-"){	?>
+				<td bgcolor="#FFFFFF" align="center" style="font-weight:none;">
+			<?php } else { ?>
+				<th bgcolor="#CCCCCC">
+			<?php }	?>
+					<div id="horario<?= $x ?>">
+						<?php if(materia($grupoid, $x)=="-"){	?>
+							<?php if(materia($grupobasicasid, $x)=="-"){	?>
+								&nbsp;
+							<?php } else { 
+									$horarioN = salon2($grupobasicasid, $x);
+									$Maestro = new Maestros();
+									$Maestro -> find_first("id = ".$horarioN -> maestro_id);
+							?>
+								<?= materia($grupobasicasid, $x); ?><br><br><?= grupo($grupobasicasid, $x); ?> - <?= salon($grupobasicasid, $x); ?>--> <?= $horarioN -> id.'<br><br><span style="color: #000099">'.$Maestro -> nombre.'</span>' ?><br><br>
+							<?php }	?>
+						<?php } else { 
+									$horarioN=salon2($grupoid, $x);
+									$Maestro = new Maestros();
+									$Maestro -> find_first("id = ".$horarioN -> maestro_id);
+							
+						?>
+						
+							<?= utf8_decode(materia($grupoid, $x)); ?><br><br><?= grupo($grupoid, $x); ?> - <?= salon($grupoid, $x); ?> --> <?= $horarioN -> id.'<br><br><span style="color: #000099">'.$Maestro -> nombre.'</span>' ?><br><br>
+						<?php }	?>
+						<?php $x++; ?>
+					</div>
+				</td>
+		<?php } ?>
+	</tr>
+	<?php } ?>
+</table><br>
+<?php if($xcurso==0){ ?>
+	<center>
+		<form method="POST" action="<?= KUMBIA_PATH ?>grupo/autorizar/<?= $gpo ?>">
+			<input type="submit" value="AUTORIZAR HORARIO">
+		</form>
+	</center>
+<?php } ?>
+<br>
+			

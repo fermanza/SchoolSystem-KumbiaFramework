@@ -1,0 +1,296 @@
+<center>
+<table cellpadding="1" cellspacing="1" style="font-size:12px" width="900" class="bordeazul"> 
+	<tr class="naranja">
+    	<th colspan="40">Alumnos  en Regular, Irregular, Proceso y Baja por Materia del Periodo <?= $periodo -> nombre ?></th>
+    </tr>    
+    <?php
+	//echo '<tr><th colspan="9">Regulares</th></tr>';
+	$contador = 0;
+	$contadorr = 0;
+	$ar= NULL;
+	$ai= NULL;
+	$ap= NULL;
+	$ba= NULL;
+	for($x=1;$x<4;$x++){
+		for($y=0;$y<9;$y++){
+			for($z=1;$z<9;$z++){
+				$ar[$x][$y][$z]=0;
+				$ai[$x][$y][$z]=0;
+				$ap[$x][$y][$z]=0;
+				$ba[$x][$y][$z]=0;		
+			}
+		}
+	}
+	$Alumno = new Alumnos();
+	/*
+	*
+	*    ALUMNOS REGULARES
+	*
+	*/
+	foreach($regulares as $r){
+		$Alumno -> find_first('registro = '.$r);		
+		//echo $Alumno -> registro." - ".$Alumno -> plan." - ".$Alumno -> semestre." - ".$Alumno -> especialidad."<br>";
+		switch($Alumno -> plan){
+			case 'PE98': $x = 1;
+						break;
+			case 'PE03': $x = 2;
+						break;
+			case 'PE07': $x = 3;
+						break;
+		}
+		$y = $Alumno -> semestre;
+		switch($Alumno -> especialidad){
+			case 200: $z = 1;
+						break;
+			case 400: $z = 2;
+						break;
+			case 500: $z = 3;
+						break;
+			case 600: $z = 4;
+						break;
+			case 700: $z = 5;
+						break;
+			case 800: $z = 6;
+						break;						
+			case 801: $z = 7;
+						break;
+			case 804: $z = 8;
+						break;
+		}
+		$ar[$x][$y][$z] = $ar[$x][$y][$z] + 1;
+		$contadorr++;
+		$contador++;
+	}
+
+
+	/*
+	*
+	*    ALUMNOS IRREGULARES
+	*
+	*/
+	foreach($irregulares as $r){
+		$Alumno -> find_first('registro = '.$r);		
+		//echo $Alumno -> registro." - ".$Alumno -> plan." - ".$Alumno -> semestre." - ".$Alumno -> especialidad."<br>";
+		switch($Alumno -> plan){
+			case 'PE98': $x = 1;
+						break;
+			case 'PE03': $x = 2;
+						break;
+			case 'PE07': $x = 3;
+						break;
+		}
+		$y = $Alumno -> semestre;
+		switch($Alumno -> especialidad){
+			case 200: $z = 1;
+						break;
+			case 400: $z = 2;
+						break;
+			case 500: $z = 3;
+						break;
+			case 600: $z = 4;
+						break;
+			case 700: $z = 5;
+						break;
+			case 800: $z = 6;
+						break;						
+			case 801: $z = 7;
+						break;
+			case 804: $z = 8;
+						break;
+		}
+		$ai[$x][$y][$z] = $ai[$x][$y][$z] + 1;
+		$contador++;
+	}
+	
+	
+	/*
+	*
+	*    ALUMNOS PROCESO
+	*
+	*/
+	foreach($procesos as $r){
+		$Alumno -> find_first('registro = '.$r);		
+		//echo $Alumno -> registro." - ".$Alumno -> plan." - ".$Alumno -> semestre." - ".$Alumno -> especialidad."<br>";
+		switch($Alumno -> plan){
+			case 'PE98': $x = 1;
+						break;
+			case 'PE03': $x = 2;
+						break;
+			case 'PE07': $x = 3;
+						break;
+		}
+		$y = $Alumno -> semestre;
+		switch($Alumno -> especialidad){
+			case 200: $z = 1;
+						break;
+			case 400: $z = 2;
+						break;
+			case 500: $z = 3;
+						break;
+			case 600: $z = 4;
+						break;
+			case 700: $z = 5;
+						break;
+			case 800: $z = 6;
+						break;						
+			case 801: $z = 7;
+						break;
+			case 804: $z = 8;
+						break;
+		}
+		$ap[$x][$y][$z] = $ap[$x][$y][$z] + 1;
+		$contador++;
+	}
+	
+	/*
+	*
+	*    ALUMNOS EN BAJA
+	*
+	*/
+	foreach($baja as $r){
+		$Alumno -> find_first('registro = '.$r);		
+		//echo $Alumno -> registro." - ".$Alumno -> plan." - ".$Alumno -> semestre." - ".$Alumno -> especialidad."<br>";
+		switch($Alumno -> plan){
+			case 'PE98': $x = 1;
+						break;
+			case 'PE03': $x = 2;
+						break;
+			case 'PE07': $x = 3;
+						break;
+		}
+		$y = $Alumno -> semestre;
+		switch($Alumno -> especialidad){
+			case 200: $z = 1;
+						break;
+			case 400: $z = 2;
+						break;
+			case 500: $z = 3;
+						break;
+			case 600: $z = 4;
+						break;
+			case 700: $z = 5;
+						break;
+			case 800: $z = 6;
+						break;						
+			case 801: $z = 7;
+						break;
+			case 804: $z = 8;
+						break;
+		}
+		$ba[$x][$y][$z] = $ba[$x][$y][$z] + 1;
+		$contador++;
+	}
+	
+	
+	/****  IMPRESION  ****/
+	for($x=1;$x<4;$x++){
+		switch($x){
+			case 1: $plan = 'PLAN 1998';
+						break;
+			case 2: $plan = 'PLAN 2003';
+						break;
+			case 3: $plan = 'PLAN 2007';
+						break;
+		}
+		echo '<tr style="background-color: #000000; color: #FFFFFF;"><th colspan="40">'.$plan.'</th></tr>';
+		?>
+		<tr class="azul">
+            <th rowspan="2">Semestre</th>
+            <th colspan="4">200</th>
+            <th rowspan="11" style="background-color: #444444;">&nbsp;</th>
+            <th colspan="4">400</th>
+            <th rowspan="11" style="background-color: #444444;">&nbsp;</th>
+            <th colspan="4">500</th>
+            <th rowspan="11" style="background-color: #444444;">&nbsp;</th>
+            <th colspan="4">600</th>
+            <th rowspan="11" style="background-color: #444444;">&nbsp;</th>
+            <th colspan="4">700</th>
+            <th rowspan="11" style="background-color: #444444;">&nbsp;</th>
+            <th colspan="4">800</th>
+            <th rowspan="11" style="background-color: #444444;">&nbsp;</th>
+            <th colspan="4">801</th>
+            <th rowspan="11" style="background-color: #444444;">&nbsp;</th>
+            <th colspan="4">804</th>
+        </tr>
+        <tr style="background-color: #ABCDEF; color: #000000;">
+        	<?php 
+			for($kl = 1; $kl <9; $kl++) { 
+	            echo '<th>R</th><th>I</th><th>P</th><th>BA</th>';
+			}
+			?>
+        </tr>
+		
+		<?php
+		for($y=1;$y<10;$y++){			
+			echo tr_color('#AAAAAA','#CCCCCC');
+				if ($y == 9)
+					echo '<th class="grisClaro">EGRESADOS</th>';
+				else
+					echo '<th class="grisClaro">'.($y).'</th>';
+			for($z=1;$z<9;$z++){						
+				echo '<th style="background-color: #00AA00">'.$ar[$x][$y-1][$z].'</th>';
+				echo '<th style="background-color: #FF9966">'.$ai[$x][$y-1][$z].'</th>';
+				echo '<th style="background-color: #ff6600">'.$ap[$x][$y][$z].'</th>';
+				echo '<th style="background-color: #993333">'.$ba[$x][$y][$z].'</th>';
+			}
+		}		
+	}
+	
+	
+	//echo $ar[1][1][1]." - ".$ar[1][1][2];
+	/*
+	foreach($regulares as $r){
+		echo tr_color('#CCCCCC','#EEEEEE');
+		$Alumno -> find_first('registro = '.$r);
+		echo '<th>'.$r.'</th>';
+		echo '<th>'.$Alumno -> especialidad.'</th>';
+		echo '<th>'.$Alumno -> plan.'</th>';
+		echo '<th>#</th>';
+	}*/
+?>
+<tr>
+	<th colspan="40" style="background-color: #000000;">&nbsp;</th>
+</tr>
+<?php
+	$Extras = new $Extras();
+	$extrasFaltantes = $Extras -> count('calificacion = 300');
+?>
+<tr>
+	<th colspan="5" class="naranja">Extras Faltantes por calificar </th>
+    <th colspan="4" class="azul"><?= $extrasFaltantes ?></th>
+    <th colspan="31" style="background-color: #000000;">&nbsp;</th>
+</tr>
+<tr>
+	<th colspan="5" class="naranja">Total de Alumnos Regurales </th>
+    <th colspan="4" class="azul"><?= $contadorr ?></th>
+    <th colspan="31" style="background-color: #000000;">&nbsp;</th>
+</tr>
+<tr>
+	<th colspan="5" class="naranja">Total de alumnos Irregulares </th>
+    <th colspan="4" class="azul"><?= $conti ?></th>
+    <th colspan="31" style="background-color: #000000;">&nbsp;</th>
+</tr>
+<tr>
+	<th colspan="5" class="naranja">Total de Alumnos en Proceso </th>
+    <th colspan="4" class="azul"><?= $contp ?></th>
+    <th colspan="31" style="background-color: #000000;">&nbsp;</th>
+</tr>
+<tr>
+	<th colspan="5" class="naranja">Total de Alumnos en Baja </th>
+    <th colspan="4" class="azul"><?= $contb ?></th>
+    <th colspan="31" style="background-color: #000000;">&nbsp;</th>
+</tr>
+<tr>
+	<th colspan="5" class="naranja">Suma Total de alumnos </th>
+    <th colspan="4" class="azul"><?= ($contadorr + $conti + $contp + $contb) ?></th>
+    <th colspan="31" style="background-color: #000000;">&nbsp;</th>
+</tr>
+</table>
+</center>
+
+<?php /*
+echo  " = ".."<br>";
+echo "  = ".$conti."<br>";
+echo " = ".$contp."<br>";
+echo " = ".$contb."<br>";
+echo "= ".."<br><br><br>"; */ ?>

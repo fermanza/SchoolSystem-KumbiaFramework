@@ -1,0 +1,60 @@
+<?php echo javascript_include_tag('kumbia/validar_input_kardex') ?>
+
+<div id="mostrandoInfo">
+<?php echo form_remote_tag("ingcalculo/agregarMateriaKardex","update: mostrandoInfo", "name: Formulario0") ?>
+<!-- <form action="<?= KUMBIA_PATH ?>ingcalculo/agregarMateriaKardex" method="post" name="Formulario1" id="Formulario1"> -->
+<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+	<tr>
+		<th width="250" height="25" bgcolor="#FFCA5B">&nbsp;Clave de Materia</th>
+		<th width="100" height="25" bgcolor="#FFCA5B">&nbsp;Periodo</th>
+		<th width="100" height="25" bgcolor="#FFCA5B">&nbsp;Tipo de Ex&aacute;men</th>
+		<th width="100" height="25" bgcolor="#FFCA5B">&nbsp;Promedio</th>
+	</tr>
+	<tr>
+		<th width="250" bgcolor="#EEEEEE">
+			<select name="clave" id="clave" class="lista">
+				<?
+				foreach( $materias as $materia ){
+				?>
+					<option value="<?= $materia -> clave ?>">
+						<?= $materia -> clave ?> - <? echo htmlentities($materia -> nombre) ?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+		</th>
+		<th width="100" bgcolor="#EEEEEE">
+			<input type="text" name="periodo" id="periodo" value="" maxlength="5" />
+		</th>
+		<th width="100" bgcolor="#EEEEEE">
+			<select name="tipo_de_ex" id="tipo_de_ex" class="lista">
+				<option value="D">Ordinario (D)</option>
+				<option value="E">Extraordinario (E)</option>
+				<option value="T">Titulo de Suficiencia (T)</option>
+				<option value="R">Regularizaci&oacute;n (R)</option>
+				<option value="A">Acreditaci&oacute;n (A)</option>
+				<option value="V">Revalidaci&oacute;n (V)</option>
+				<option value="EQ">Equivalencia (EQ)</option>
+				<option value="EG">Examen Global (EG)</option>
+				<option value="NIV">Nivelaci&oacute;n (NIV)</option>
+				<option value="ACR">Acreditaci&oacute;n (ACR)</option>
+				<option value="DP">Derecho de Pasante (DP)</option>
+				<option value="CO">Convalidaci&oacute;n (CO)</option>
+				<option value="I">Intersemestral (I)</option>
+			</select>
+		</th>
+		<th width="100" bgcolor="#EEEEEE">
+			<input type="text" name="promedio" id="promedio" value="" maxlength="3" />
+		</th>
+	</tr>
+	<tr>
+		<th width="300" bgcolor="#EEEEEE" colspan="4">
+			<input type="hidden" id="registro" name="registro" value="<?php echo $alumno -> miReg ?>" />
+			<input type="submit" value="Agregar Materia" onClick="return preguntar_envio()" />
+		</th>
+	</tr>
+</table>
+</form>
+<br />
+</div>

@@ -1,0 +1,189 @@
+<table width="98%" style="font-size: 12px;" >
+  <tr>
+    <td align="center" bgcolor="#13539B" width="10%"><font color="#FFFFF">No. CONCEPTO</font></td>
+	<td align="center" bgcolor="#13539B" width="70%"><font color="#FFFFF">CONCEPTO</font></td>
+	<td align="center" bgcolor="#13539B"><font color="#FFFFF">&nbsp;&nbsp;CANTIDAD&nbsp;&nbsp;</font></td>
+	<td align="center" bgcolor="#13539B"><font color="#FFFFFF">OBSERVACIONES</font></td>
+	<td align="center" bgcolor="#13539B" width="20%"><font color="#FFFFF">AGREGAR</font></td>
+  </tr>
+<?php 
+//Se inicia la variable en cero
+$result = 0; 
+
+$search = CajaConceptos::status();
+
+if($result == false && $search == "Sin busqueda"){
+
+
+  if($conceptos = CajaConceptos::reporte(Session::get("registro"), 5)){
+
+    foreach($conceptos as $c){
+	
+	if(strlen($c -> id) == 1)
+	  $concepto = "00".$c -> id;
+	  
+	else if(strlen($c -> id) == 2)
+	  $concepto = "0".$c -> id;
+	  
+	else if(strlen($c -> id) == 3)
+	  $concepto = $c -> id;
+	  
+	/*else
+	  $concepto = $c -> id;*/
+
+//if($concepto == 16 )	  
+   //$observaciones = "<div style='color:#D30A11; font-weight:bold; font-size: 12px;'>Es obligatorio que realices el pago de la credencial de alumno</div>";
+
+if($concepto == 5 )	  
+   $observaciones = "<div style='color:#D30A11; font-weight:bold; font-size: 12px;'>Es obligatorio que pagues los recargos</div>";
+
+else
+  $observaciones = htmlentities($c -> observaciones);  
+?>
+ 
+    <tr>
+	    <td width="11%" align="center">
+		  &nbsp;&nbsp;<?= $concepto ?>
+		</td>
+        <td width="20%">&nbsp;&nbsp;<?= htmlentities($c -> nombre) ?></td>
+
+<?php
+
+  if($c -> id == 3 || $c -> id == 16 || $c -> id == 102){
+
+ ?>
+	<td align="center">
+	  <select id="conceptCan<?= $c -> id?>" name="conceptCan<?= $c -> id?>" style="width:50px;">
+		<option value="1">1</option>
+	  </select>
+	</td>
+ 
+<?php 
+  }
+  
+  else if($c -> id == 58 || $c -> id == 51  || $c -> id == 94  || $c -> id == 95 || $c -> id == 106 || $c -> id == 54)
+  {
+ 
+?>
+		<td align="center">
+		  ---------<!--<input type="button" class="common_button" id="conceptCan<?//= $c -> id?>" name="conceptCan<?//= $c -> id?>" value="VER" onclick="muestraExtras()"/>-->
+		</td>
+<?php
+  }
+  else
+  {
+?>
+	<td align="center">
+	  <select id="conceptCan<?= $c -> id?>" name="conceptCan<?= $c -> id?>" style="width:50px;">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+	  </select>
+	</td>
+<?php
+  }
+?>
+	<td width="40%" align="LEFT"><?php echo $observaciones; ?>&nbsp;</td>
+    <td width="40%" align="center">
+<?php
+  if($c -> id == 58)
+  {
+?>
+	<input type="button" class="common_button" id="conceptCan<?= $c -> id?>" name="conceptCan<?= $c -> id?>" value="VER" onclick="muestraExtras()"/>
+<?php
+  }
+  else if($c -> id == 51)
+  {
+?>
+	<input type="button" class="common_button" id="conceptCan<?= $c -> id?>" name="conceptCan<?= $c -> id?>" value="VER" onclick="muestraTitulos()"/>
+<?php
+  }
+  
+  else if($c -> id == 54)
+  { 
+?>
+    <input type="button" class="common_button" id="conceptCan<?= $c -> id?>" name="conceptCan<?= $c -> id?>" value="VER" onclick="muestraderechoPas()"/>
+<?php
+  }
+  else if($c -> id == 94)
+  {
+?>
+	<input type="button" class="common_button" id="conceptCan<?= $c -> id?>" name="conceptCan<?= $c -> id?>" value="VER" onclick="muestraCursosACR()"/>
+<?php
+  }
+  else if($c -> id == 95)
+  {
+?>
+	<input type="button" class="common_button" id="conceptCan<?= $c -> id?>" name="conceptCan<?= $c -> id?>" value="VER" onclick="muestraCursosNIV()"/>
+<?php
+  }
+  else if($c -> id == 106)
+  {
+?>
+    <input type="button" class="common_button" id="conceptCan<?= $c -> id?>" name="conceptCan<?= $c -> id?>" value="VER" onclick="muestraExamenGlobal()"/>
+<?php
+  }
+  else
+  {
+	echo link_to_remote('caja/complementario/'.$c -> id,img_tag('icons/add.png','width: 20px'),'update: complementario');
+  }
+?>
+		</td>
+    </tr>
+
+<?php
+    }
+  } 
+
+
+else{
+
+ if(count($result) > 0){
+    foreach($result as $c){
+
+	if(strlen($c -> id) == 1)
+	  $concepto = "000".$c -> id;
+	  
+	else if(strlen($c -> id) == 2)
+	  $concepto = "00".$c -> id;
+	  
+	else if(strlen($c -> id) == 3)
+	  $concepto = "0".$c -> id;
+	  
+	else
+	  $concepto = $c -> id;
+	
+?>
+    <tr>
+	    <td width="20%" align="center">&nbsp;&nbsp;<?= $concepto?></td>
+        <td width="50%">&nbsp;&nbsp;<?= $c -> nombre ?></td>
+		<td>
+		  <select id="conceptCan<?= $c -> id?>" name="conceptCan<? $c -> id?>">
+		    <option value="1">1</option>
+		    <option value="2">2</option>
+		    <option value="3">3</option>
+		    <option value="4">4</option>
+		    <option value="5">5</option>
+		  </select>
+		</td>
+        <td width="30%" align="center"><?= link_to_remote('caja/complementario/'.$c -> id,img_tag('icons/add.png','width: 20px'),'update: complementario') ?></td>
+    </tr>
+<?php
+    }
+  }
+  
+  else{
+?> 
+    <tr>
+       <td width="50%" align="center" colspan="5">&nbsp;&nbsp;No se encontraron conceptos a pagar&nbsp;&nbsp;</td>
+    </tr>
+<?php
+  }  
+
+ $result = NULL;
+}
+}
+?>
+</table>

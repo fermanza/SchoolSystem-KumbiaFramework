@@ -1,0 +1,35 @@
+<?= render_partial("autorizarCruces"); ?>
+
+<center>
+<table>
+	<?
+	if( $autorizacion == 1 ){
+	?>
+	<tr class="naranja" width="200">
+		<th class="bordeAzul2"><h2>Cursos en Com&uacute;n Autorizados</h2>a
+		<?
+			echo "Cusos en com&uacute;n: ".$curso111." ".$curso222;
+		?>
+		</th>
+	</tr>
+	<?
+	}
+	else{
+	?>
+		<tr class="naranja" width="200">
+			<th class="bordeAzul2">
+				<h2>Cursos en Com&uacute;n No Autorizados</h2>
+				Debido ah que uno de los cursos ya tiene asignado<br />
+				su curso en com&uacute;n y no se le puede asignar<br />
+				otro curso en com&uacute;n
+			</th>
+		</tr>
+	<?
+	}
+	?>
+</table>
+<br />
+<?= render_partial("regresarAutorizarCruces"); ?>
+<br />
+<br />
+</center>

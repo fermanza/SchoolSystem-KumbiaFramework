@@ -1,0 +1,177 @@
+<style type="text/css">
+    .form_aspirantes {
+        width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        border: 0px #000 solid;
+        font-size: 14px;
+        padding: 0;
+    }
+    
+    .form_aspirantes table, .form_aspirantes tr, .form_aspirantes td {
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+    
+    .form_aspirantes input[ type = "submit" ] {
+        width: 200px;
+    }
+</style>
+<?= form_tag("aspirantes/guardar")?>
+<table class="form_aspirantes">
+    <tr class="fondonaranja">
+		<th>
+			Datos Personales
+		</th>
+	</tr>
+	<tr class="fondonaranja">
+        <td>
+            Nombre <input type="text" style="width:200px"> 
+			Apellido Paterno <input type="text" style="width:125px">    
+			Apellido Paterno <input type="text" style="width:125px">
+        </td>
+    </tr>
+	<tr class="fondonaranja">
+		<td>
+			Domicilio<input type="text" style="width:400px">
+			Colonia<input type="text" style="width:200px">
+		</td>
+	</tr>
+	<tr class="fondonaranja">
+		<td>			
+			CP<input type="text" style="width:100px">
+			Municipio<input  type="text" style="width:250px">
+			Estado<input  type="text" style="width:250px">
+		</td>
+	</tr>
+	<tr class="fondonaranja">
+		<td>
+			Telefono<input type="text" style="width:200px">
+			e-mail<input type="text" style="width:400px">
+		</td>
+	</tr>
+	<tr class="fondonaranja">
+		<td>
+			Telefono Celular<input type="text" style="width:200px">
+			Telefono Familiar<input type="text" style="width:200px">
+		</td>
+	</tr>
+	<tr class="fondonaranja">
+		<td>
+			Estado Civil
+			<select  type="text" style="width:150px">
+				<option>Soltero</option>
+				<option>Casado</option>
+				<option>Otro</option>
+			</select>
+			Sexo
+			<select type="text" style="width:150px">
+				<option>Masculino</option>
+				<option>Femenino</option>
+			</select>
+			Fecha de Nacimiento<input type="text" style="width:200px">
+		</td>
+	</tr>
+	<tr class="fondonaranja">
+		<td>
+			Lugar de Nacimiento<input type="text" style="width:200px">
+			CURP<input type="text" style="width:300px">
+		</td>
+	</tr>
+	<tr class="fondonaranja">
+		<th>
+			Datos Escolares
+		</th>
+	</tr>
+	<tr class="fondonaranja">
+		<td>
+			<table>
+				<tr class="fondonaranja">					
+					<td rowspan="2" style="width:100px"><center>NIVEL</center></td>
+					<td rowspan="2" style="width:200px"><center>ESCUELA</center></td>
+					<td rowspan="2" style="width:150px"><center>MUNICIPIO</center></td>
+					<td rowspan="2" style="width:150px"><center>ESTADO</center></td>
+					<td rowspan="2" style="width:100px"><center>TIPO</center></td>
+					<td colspan="2" style="width:100px"><center>CURSO (AÑOS)</center></td>
+				</tr>
+				<tr>
+					<td style="width:50px">DEL</td>
+					<td style="width:50px">AL</td>
+				</tr>
+				<tr>
+					<td style="width:100px">Primaria</td>
+					<td style="width:200px"><input type="text" style="width:200px"></td>
+					<td style="width:150px"><input type="text" style="width:150px"></td>
+					<td style="width:150px"><input type="text" style="width:150px"></td>
+					<td style="width:100px">
+						<select style="width:100px">
+							<option value="F">FEDERAL</option>
+							<option value="E">ESTATAL</option>
+							<option value="P">PARTICULAR</option>
+							<option value="O">OTRO</option>
+						</select>
+					</td>
+					<td><input type="text" style="width:50px"></td>
+					<td><input type="text" style="width:50px"></td>
+				</tr>
+				<tr>
+					<td style="width:100px">Secundaria</td>
+					<td style="width:200px"><input type="text" style="width:200px"></td>
+					<td style="width:150px"><input type="text" style="width:150px"></td>
+					<td style="width:150px"><input type="text" style="width:150px"></td>
+					<td style="width:100px">
+						<select style="width:100px">
+							<option value="F">FEDERAL</option>
+							<option value="E">ESTATAL</option>
+							<option value="P">PARTICULAR</option>
+							<option value="O">OTRO</option>
+						</select>
+					</td>
+					<td><input type="text" style="width:50px"></td>
+					<td><input type="text" style="width:50px"></td>
+				</tr>
+				<tr>
+					<td style="width:100px">Bachillerato</td>
+					<td style="width:200px"><input type="text" style="width:200px"></td>
+					<td style="width:150px"><input type="text" style="width:150px"></td>
+					<td style="width:150px"><input type="text" style="width:150px"></td>
+					<td style="width:100px">
+						<select style="width:100px">
+							<option value="F">FEDERAL</option>
+							<option value="E">ESTATAL</option>
+							<option value="P">PARTICULAR</option>
+							<option value="O">OTRO</option>
+						</select>
+					</td>
+					<td><input type="text" style="width:50px"></td>
+					<td><input type="text" style="width:50px"></td>
+				</tr>
+				<tr>
+					<td style="width:100px">Otros</td>
+					<td style="width:200px"><input type="text" style="width:200px"></td>
+					<td style="width:150px"><input type="text" style="width:150px"></td>
+					<td style="width:150px"><input type="text" style="width:150px"></td>
+					<td style="width:100px">
+						<select style="width:100px">
+							<option value="F">FEDERAL</option>
+							<option value="E">ESTATAL</option>
+							<option value="P">PARTICULAR</option>
+							<option value="O">OTRO</option>
+						</select>
+					</td>
+					<td><input type="text" style="width:50px"></td>
+					<td><input type="text" style="width:50px"></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+    <tr>
+        <td>
+            <center>
+                <?= submit_tag("Guardar") ?>
+            </center>
+        </td>
+    </tr>
+</table>
+<?= end_form_tag() ?>

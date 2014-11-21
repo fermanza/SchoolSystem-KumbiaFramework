@@ -1,0 +1,249 @@
+<center><br><br>
+<table>
+	<tr>
+		<td width="900" align="left">
+			<div style="font-size: 14px;"><b>Horario del profesor (<?= $periodo ?>)</b></div>
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B"><b>&nbsp;Número de nómina: </b></td>
+					<td width="600" bgcolor="#EEEEEE">&nbsp;<?= $nomina ?></td>
+				</tr>
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B">&nbsp;<b>Nombre del profesor: </b></td>
+					<td width="600" bgcolor="#EEEEEE">&nbsp;<?= $profesor -> paterno ?><?= $profesor -> materno ?><?= $profesor -> nombre ?></td>
+				</tr>
+			</table>
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr bgcolor="#FFCA5B">
+					<th width="75" height="50" align="center">No.</th>
+					<th width="100" align="center">No. Curso</th>
+					<th width="200" align="center">Materia</th>
+					<th width="50" align="center">CUPO</th>
+					<th width="75" align="center">LUN</th>
+					<th width="75" align="center">MAR</th>
+					<th width="75" align="center">MIE</th>
+					<th width="75" align="center">JUE</th>
+					<th width="75" align="center">VIE</th>
+					<th width="75" align="center">SAB</th>
+				</tr>
+				<?php
+				$i = -1;
+				
+				foreach( $xccur as $xcc ){
+					$i++;
+					if($i%2==0){
+						$bg = "#EEEEEE";
+					}
+					else{
+						$bg = "#FFFFFF";
+					}
+				?>
+				<tr>
+					<td width="75" height="50" align="center" bgcolor="<?= $bg ?>"><?php echo ($i + 1) ?></td>
+					<td width="100" align="center" bgcolor="<?= $bg ?>"><?= $xcc -> clavecurso ?></td>
+					<td width="300" align="center" bgcolor="<?= $bg ?>">
+						<b><?= $materias[$i] -> clave; ?> - <?= $materias[$i] -> nombre; ?><br />
+						<br><br><?= $maestros[$i] -> nombre; ?>
+						<form action="<?= KUMBIA_PATH ?>profesor/listadoDeAlumnos"
+								method="post">
+							<input type="submit" value="Listado de Alumnos Inscritos">
+							<input type="hidden" id="cursoID" name="cursoID"
+									value="<? echo $xcc -> clavecurso; ?>">
+						</form>
+					</td>
+					<td width="50" height="50" align="center" bgcolor="<?= $bg ?>">
+						<? echo "Max: ".$xcc -> cupo; ?><br />
+						<? echo "Disp: ".$xcc -> disponibilidad; ?><br />
+						<? echo "Insc: ".($xcc -> cupo - $xcc -> disponibilidad); ?><br />
+						<? echo substr( ((($xcc -> cupo - $xcc -> disponibilidad)*100) / $xcc -> cupo), 0, 5 )."%Lleno"; ?>
+					</td>
+					<?
+					
+					for( $k = 1; $k < 7; $k++ ){
+						$dia[$k] = 0;
+					}
+					if( !isSet($horas[$xcc -> id]) ){
+						echo "<td class='bordee' colspan='6'><h2>Curso no presencial</h2></td>";
+					}
+					else{
+						for( $j = 0; $j < count($horas[$xcc -> id]); $j ++ ){
+							
+							// Así accedo al dia del curso
+							//$horas[$cursos[$i] -> id][$j] -> dia
+							
+							// Así accedo a la hora del curso
+							//$horas[$cursos[$i] -> id][$j] -> hora
+							
+							// Así accedo al curso, que estoy viendo actualmente
+							//$cursos[$i] -> id]
+							
+							// Dia del curso
+							//$horas[$cursos[$i] -> id][$j] -> dia
+							
+							for( $k = 1; $k < 7; $k++ ){
+								if( $dia[$k] == 0 ){
+									if( $k >= $horas[$xcc -> id][$j] -> dia ){
+										break;
+									}
+									else if( $k != $horas[$xcc -> id][$j] -> dia ){
+										echo "<td align=\"center\" bgcolor=\" $bg \">&nbsp;</td>";
+										$dia[$k] = 1;
+									}
+								}
+							}
+							
+							if( $dia[$horas[$xcc -> id][$j] -> dia] == 0 ){
+								// Pongo en la variable auxiliar el número del día de
+								//la semana, de este curso, para saber si pongo un nuevo <td> o no...
+								$dia[$horas[$xcc -> id][$j] -> dia] = 1;
+								echo "<td align=\"center\" bgcolor=\"$bg\">";
+							}
+							
+							if( !isSet($horas[$xcc -> id][$j+1]) ){
+								echo $horas[$xcc -> id][$j] -> hora."-".
+										($horas[$xcc -> id][$j] -> hora + 1)."<br />".
+												$salon[$xcc -> id][$j] -> edificio.":".
+														$salon[$xcc -> id][$j] ->nombre."<br />";
+								echo "</td>";
+							}
+							else if( $horas[$xcc -> id][$j] != null ){
+								
+								if( $horas[$xcc -> id][$j+1] != null ){
+									echo $horas[$xcc -> id][$j] -> hora."-".
+											($horas[$xcc -> id][$j] -> hora + 1)."<br />".
+													$salon[$xcc -> id][$j] -> edificio.":".
+															$salon[$xcc -> id][$j] ->nombre."<br />";
+								}
+								else{
+									echo $horas[$xcc -> id][$j] -> hora."-".
+											($horas[$xcc -> id][$j] -> hora + 1)."<br />".
+													$salon[$xcc -> id][$j] -> edificio.":".
+															$salon[$xcc -> id][$j] ->nombre."<br />";
+									echo "</td>";
+								}
+							}
+							
+							if( !isSet($horas[$xcc -> id][$j+1]) ){
+								for( $k = 1; $k < 7; $k++ ){
+									if( $dia[$k] == 0 ){
+										echo "<td align=\"center\" bgcolor=\"$bg\">&nbsp;</td>";
+									}
+								}
+							}
+						}
+					}
+					?>
+				</tr>
+				<?php
+				} // foreach( $xtcur as $xtc )
+				
+				// Horario de maestros de Tonala
+				
+				$i = -1;
+				if( isset($xtcur) )
+				foreach( $xtcur as $xtc ){
+					$i++;
+					if($i%2==0){
+						$bg = "#EEEEEE";
+					}
+					else{
+						$bg = "#FFFFFF";
+					}
+				?>
+				<tr>
+					<td width="75" height="50" align="center" bgcolor="<?= $bg ?>"><?php echo ($i + 1) ?></td>
+					<td width="100" align="center" bgcolor="<?= $bg ?>"><?= $xtc -> clavecurso ?></td>
+					<td width="300" align="center" bgcolor="<?= $bg ?>">
+						<b><?= $tmaterias[$i] -> clave; ?> - <?= $tmaterias[$i] -> nombre; ?><br />
+						<br><br><?= $tmaestros[$i] -> nombre; ?>
+						<form action="<?= KUMBIA_PATH ?>profesor/tlistadoDeAlumnos"
+								method="post">
+							<input type="submit" value="Listado de Alumnos Inscritos">
+							<input type="hidden" id="cursoID" name="cursoID"
+									value="<? echo $xtc -> clavecurso; ?>">
+						</form>
+					</td>
+					<td width="50" height="50" align="center" bgcolor="<?= $bg ?>">
+						<? echo "Max: ".$xtc -> cupo; ?><br />
+						<? echo "Disp: ".$xtc -> disponibilidad; ?><br />
+						<? echo "Insc: ".($xtc -> cupo - $xtc -> disponibilidad); ?><br />
+						<? echo substr( ((($xtc -> cupo - $xtc -> disponibilidad)*100) / $xtc -> cupo), 0, 5 )."%Lleno"; ?>
+					</td>
+					<?
+					
+					for( $k = 1; $k < 7; $k++ ){
+						$dia[$k] = 0;
+					}
+					if( !isSet($thoras[$xtc -> id]) ){
+						echo "<td class='bordee' colspan='6'><h2>Curso no presencial</h2></td>";
+					}
+					else{
+						for( $j = 0; $j < count($thoras[$xtc -> id]); $j ++ ){
+							
+							for( $k = 1; $k < 7; $k++ ){
+								if( $dia[$k] == 0 ){
+									if( $k >= $thoras[$xtc -> id][$j] -> dia ){
+										break;
+									}
+									else if( $k != $thoras[$xtc -> id][$j] -> dia ){
+										echo "<td align=\"center\" bgcolor=\"$bg\">&nbsp;</td>";
+										$dia[$k] = 1;
+									}
+								}
+							}
+							
+							if( $dia[$thoras[$xtc -> id][$j] -> dia] == 0 ){
+								// Pongo en la variable auxiliar el número del día de
+								//la semana, de este curso, para saber si pongo un nuevo <td> o no...
+								$dia[$thoras[$xtc -> id][$j] -> dia] = 1;
+								echo "<td align=\"center\" bgcolor=\"$bg\">";
+							}
+							
+							if( !isSet($thoras[$xtc -> id][$j+1]) ){
+								echo $thoras[$xtc -> id][$j] -> hora."-".
+										($thoras[$xtc -> id][$j] -> hora + 1)."<br />".
+												$tsalon[$xtc -> id][$j] -> edificio.":".
+														$tsalon[$xtc -> id][$j] ->nombre."<br />";
+								echo "</td>";
+							}
+							else if( $thoras[$xtc -> id][$j] != null ){
+								
+								if( $thoras[$xtc -> id][$j+1] != null ){
+									echo $thoras[$xtc -> id][$j] -> hora."-".
+											($thoras[$xtc -> id][$j] -> hora + 1)."<br />".
+													$tsalon[$xtc -> id][$j] -> edificio.":".
+															$tsalon[$xtc -> id][$j] ->nombre."<br />";
+								}
+								else{
+									echo $thoras[$xtc -> id][$j] -> hora."-".
+											($thoras[$xtc -> id][$j] -> hora + 1)."<br />".
+													$tsalon[$xtc -> id][$j] -> edificio.":".
+															$tsalon[$xtc -> id][$j] ->nombre."<br />";
+									echo "</td>";
+								}
+							}
+							
+							if( !isSet($thoras[$xtc -> id][$j+1]) ){
+								for( $k = 1; $k < 7; $k++ ){
+									if( $dia[$k] == 0 ){
+										echo "<td align=\"center\" bgcolor=\"$bg\">&nbsp;</td>";
+									}
+								}
+							}
+						}
+					}
+					?>
+				</tr>
+				<?php
+				} // foreach( $xtcur as $xtc )
+				?>
+		</td>
+	</tr>
+</table>
+<!-- Intersemestrales -->
+<?php if( isset($icursos) ) render_partial("mostrar_cursos_intersemestrales_horario"); ?>
+
+<br>
+</center>

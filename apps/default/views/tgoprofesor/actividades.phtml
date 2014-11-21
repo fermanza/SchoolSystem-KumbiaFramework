@@ -1,0 +1,176 @@
+<style type="text/css">
+	.imprimir a{
+		text-align: center;
+		font-size: 12px;
+		display: block;
+		border: 2px solid #1569C7;
+		background-color: #FFCA5B;
+		width: 380px;
+		font-weight: bold;
+		color: #000000;
+		text-decoration: none;
+	}
+	
+	.imprimir a:hover{
+		text-decoration: underline;
+	}
+</style>
+<?= render_partial("info"); ?>
+<br>
+<div id="encabezado">
+    <img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp; Actividades
+</div>
+<br />
+<div class="imprimir">
+	<center>
+	<a href="<?= KUMBIA_PATH ?>tgoprofesor/programa">IMPRIMIR PROGRAMA DE TRABAJO ACADÉMICO</a>
+	</center>
+</div>
+<br>
+<div>
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr valign="top">
+            <td width="48%">
+            	<?= form_remote_tag("tgoprofesor/agregaractividad/1", "update: listadoActividades") ?>
+	            	<table width="100%" cellpadding="1" cellspacing="1" class="bordeazul" style="font-size:12px;">
+	            		<tr>
+	            			<th class="naranja" colspan="2">
+	            				Listado de Actividades Programaticas Disponibles
+	            			</th>
+	            		</tr>
+						<tr>
+							<th class="azul">
+								Actividad
+							</th>
+							<th class="azul">
+								Horas
+							</th>
+						</tr>
+						<tr>
+							<td width="90%">								
+								<select name="actividad_id" style="width:100%; font-size:10px;">									
+								<?php foreach($actividades as $a) { 
+									echo utf8_decode(option_tag($a->id, $a-> categoria." - ".$a-> actividad));
+								 } ?>
+								</select>
+							</td>
+							<td width="10%">
+								<select name="horas" style="width:100%; font-size:10px;">									
+								<?php for($i=1; $i<41; $i++) { 
+									echo utf8_decode(option_tag($i, $i));
+								 } ?>
+								</select>
+							</td>							
+						</tr>
+						<tr>
+							<th colspan="2" class="azul">
+								Objetivo de la Actividad
+							</th>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<textarea name="objetivo" style="width:100%; font-size:10px;"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<th colspan="2" class="azul">
+								Meta de la Actividad <span style="color:#00FF00">(Indicar la Evidencia)</span>.
+							</th>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<textarea name="meta"  style="width:100%; font-size:10px;"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<center>
+									<input type="submit" value="Agregar" style="width:30%;">							
+								</center>	
+							</td>
+						</tr>						
+	            	</table>										
+				</form>
+			</td>
+			<td>&nbsp;</td>
+			<td width="48%">
+				<?= form_remote_tag("tgoprofesor/agregaractividad/2", "update: listadoActividades") ?>
+	            	<table width="100%" cellpadding="1" cellspacing="1" class="bordeazul" style="font-size:12px;">
+	            		<tr>
+	            			<th class="naranja" colspan="2">
+	            				Agregar una nueva Actividad Programatica Especial	
+	            			</th>
+	            		</tr>
+						<tr>
+							<th class="azul">
+								Agregar Nombre de la Actividad
+							</th>
+							<th class="azul">
+								Horas
+							</th>
+						</tr>
+						<tr>
+							<td width="90%">								
+								<input type="text" name="actividad" style="width:100%; font-size:10px;">									
+							</td>
+							<td width="10%">
+								<select name="horas" style="width:100%; font-size:10px;">									
+								<?php for($i=1; $i<41; $i++) { 
+									echo utf8_decode(option_tag($i, $i));
+								 } ?>
+								</select>
+							</td>							
+						</tr>
+						<tr>
+							<th colspan="2" class="azul">
+								Objetivo de la Actividad
+							</th>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<textarea name="objetivo" style="width:100%; font-size:10px;"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<th colspan="2" class="azul">
+								Meta de la Actividad <span style="color:#00FF00">(Indicar la Evidencia)</span>.
+							</th>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<textarea name="meta"  style="width:100%; font-size:10px;"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<center>
+									<input type="submit" value="Agregar" style="width:30%;">							
+								</center>	
+							</td>
+						</tr>						
+	            	</table>										
+				</form>
+            </td>
+			<td width="1%">
+				&nbsp;
+			</td>            
+        </tr>
+		<tr>
+			<td width="100%" colspan="3">
+            	<table>
+            		<tr>
+            			<td width="600"  valign="top">
+							<div id="listadoActividades">
+				            	<?= render_partial("listadoActividades") ?>										
+							</div>
+						</td>
+						<td width="20">&nbsp;</td>
+						<td width="400">
+							<div id="accionActividad">&nbsp;</div>
+						</td>
+					</tr>
+				</table>
+            </td>
+		</tr>
+    </table>
+</div>

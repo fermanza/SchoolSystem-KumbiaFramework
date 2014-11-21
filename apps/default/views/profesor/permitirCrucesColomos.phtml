@@ -1,0 +1,146 @@
+<script language="JavaScript1.2">
+function validar( Objeto ){	
+	var check;
+	var err = "";
+	check = Objeto.value.length;
+	
+	if( check < 1 ){
+		window.alert( "Favor de Ingresar su Registro" );
+		Objeto.value = "";
+		Objeto.focus( );
+		return false;
+	}
+	if( isNaN( Objeto.value ) ){
+		window.alert( "El Registro sólo debe contener números" );
+		Objeto.value = "";
+		Objeto.focus( );
+		return false;
+	}
+	else{
+		if (Objeto.value < 0){
+			window.alert( "El Registro no tiene números negativos" );
+			Objeto.value = "";
+			Objeto.focus( );
+			return false;
+		}
+	}
+	for ( var i = 0; i < check; i++ ){
+		if ( Objeto.value[i] == "." ){
+			window.alert ("El Registro no tiene números decimáles");
+			Objeto.value = "";
+			Objeto.focus ( );
+			return false;
+		}
+	}
+	if (document.Formulario2.horas.value==-1) {
+		err += "Favor de seleccionar una hora\n";
+  	}
+	if (document.Formulario2.curso.value==-1) {
+		err += "Favor de seleccionar un curso\n";
+  	}
+	if( err != "" ){
+		alert(err);
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+
+function setIt( Objeto ){
+	if( Objeto.value == "" )
+		Objeto.value = "Registro";	
+}
+function clearIt( Objeto ){
+	if( Objeto.value == "Registro" )
+		Objeto.value = "";
+}
+</script>
+
+<?= render_partial("autorizarCruces"); ?>
+
+<center>
+<form method="post" action="permitiendoCruces/" name ="Formulario2" id="Formulario2" onSubmit="return validar(registro)">
+
+<table class="bordeAzul2" style="font-size:11px;">
+	<br />
+	<tr class="naranja">
+		<th colspan="2" class="bordeAzul2">Permitir cruces de una hora Colomos</th>
+	</tr>
+	<tr class="azul">
+		<th class="bordeAzul2">
+			<input type="text" name="registro" id="registro" onblur="setIt(this)" onfocus="clearIt(this)" value="Registro"  class="input2" />
+			<!--
+			<select name="registro" id="registro" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccionar Alumno - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $alumn as $al ){
+				?>
+					<option value="<?= $al -> miReg ?>">
+					<?
+						echo $al -> miReg."&nbsp;-&nbsp;".$al -> enPlan.
+								"&nbsp;-&nbsp;".htmlentities
+										(substr( $al -> vcNomAlu, 0, 30));
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+			-->
+		</th>
+		<th class="bordeAzul2">
+			<select name="curso" id="curso" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Clave Curso - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $xccursos as $xcc ){
+				?>
+					<option value="<?= $xcc -> clavecurso ?>">
+					<?
+						echo $xcc -> clavecurso."&nbsp;-&nbsp;";
+						echo "Materia: ".$xcc -> materia."&nbsp;&nbsp;&nbsp;";
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+		</th>
+	</tr>
+	<tr class="naranja">
+		<th class="bordeAzul2">¿Cu&aacute;ntas Horas?</th>
+		<td class="bordeAzul2" align="center">
+			<select name="horas" id="horas" class="lista">
+				<option value="-1">&nbsp;- - Hora - -&nbsp;
+				<option value="1">&nbsp;- - 1 - -&nbsp;</option>
+				<option value="6">&nbsp;- - Cruce Especial - -&nbsp;</option>
+			</select>
+		</td>
+	</tr>
+	<tr class="grisClaro">
+		<td colspan="3" class="bordeAzul2" align="center">
+			<?php echo submit_tag("Permitir Cruce") ?>
+		</td>
+	</tr>
+</table>
+</form>
+<br />
+<br />&nbsp;
+</center>
+<br />

@@ -1,0 +1,91 @@
+<style type="text/css">
+	.promocion table{
+		font-size: 12px;
+		padding: 0px;
+	}
+	.promocion select{
+		width: 100%;
+		font-size: 12px;
+	}
+</style>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp; Promocion
+</div>
+<div class="promocion">
+<center>
+	<table width="100%">
+		<tr>
+			<td width="200" valign="top">				
+				<?= form_remote_tag('tgocalculo/semestre','update: info') ?>
+				<table width="100%" class="bordeAzul" cellpadding="1" cellspacing="1">
+					<tr>
+						<th colspan="2" class="naranja">
+							Semestre a Promocionar							
+						</th>
+					</tr>
+					<tr class="azul">
+						<td>Semestre</td>
+						<td>
+							<select name="semestre">
+								<option value=""></option>
+								<?php for($i=1;$i<9;$i++){ ?>
+									<option value="<?= $i ?>"><?= $i ?></option>
+								<?php } ?>
+							</select>
+						</td>
+					</tr>
+					<tr class="azul">
+						<td>registro</td>
+						<td>
+							<input type="text" name="registro" />
+						</td>
+					</tr>
+					<tr class="azul">					
+						<td colspan="2"><center><input type="submit" value="Evaluar" /></center></td>
+					</tr>
+				</table>
+				<form>
+			</td>
+			<td>				
+				<div id="info"></div>
+				<?php echo img_tag("spinner.gif","id: spinner", "style: display: none;"); ?>				
+			</td>
+		</tr>
+	</table>
+</center>
+<!--
+<div style="" id="div_mreg"> MOSTRAR REGISTROS</div> 
+ <script type="text/javascript">
+ $('div_mreg').observe('click',function(){
+  new AJAX.viewRequest({action: "tgocalculo/semestre", container: "info", callbacks:
+   {
+    before: function(){
+       $('div_spinner').show()
+    },
+    success: function(){
+       $('div_spinner').hide()
+    },
+    oncomplete: function(){
+     new Effect.BlindDown('info',
+     {
+     duration: 0.8
+     });
+    }
+  }
+  })
+ })
+ </script>
+ <script type='text/javascript'>
+					new AJAX.viewRequest({
+						action: "tgocalculo/semestre",
+						container: "info",
+						callbacks: {
+							before: "$('spinner').show()",
+							success: "$('spinner').hide()",
+							complete: "new Effect.BlindDown('info',{duration: 0.8})"
+						}
+					})
+				</script>
+ 
+ -->
+<div>

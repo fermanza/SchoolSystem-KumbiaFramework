@@ -1,0 +1,132 @@
+<?= render_partial("capturarcursos/info"); ?>
+
+<br />
+<br />
+<?= render_partial("menuintersemestrales"); ?>
+<br />
+<br />
+
+<script src="<?= KUMBIA_PATH ?>javascript/kumbia/cursos_intersemestrales_inscripcion_alumnos.js"></script>
+<script src="<?= KUMBIA_PATH ?>javascript/kumbia/jquery.js"></script>
+<script src="<?= KUMBIA_PATH ?>javascript/kumbia/cursos_intersemestrales_inscripcion_alumnos2.js"></script>
+
+<form action="<?= KUMBIA_PATH ?>capturarcursos/cursos_intersemestrales_inscribir_alumno" 
+		method = "post" name="Formulario1" id="Formulario1" onsubmit="return cursos_intersemestrales_validar_inscripcion_alumnos();">
+<table class="centrar">
+	<tr>
+		<td valign="center" class="encabezadoo">
+			<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+			ADMINISTRACIÓN DE CURSOS INTERSEMESTARLES: "<?php echo $periodoCompleto ?>"
+			<h2>Clavecurso: "<?php echo $clavecurso ?>"&nbsp;<?php echo $nombre_materia." ".$clave_materia; ?></h2>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<br />
+			<input type="text" name="alumnos" id="alumnos" class="lista" size="20" maxlength="15"/>
+			<!--
+			<select name="alumnos" id="alumnos" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccione alumnos para inscribirlos al curso - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $alumnos as $alumno ){
+				?>
+					<option value="<?php echo $alumno -> miReg ?>">
+						<?php
+							echo $alumno -> miReg." - ".
+									$alumno -> vcNomAlu." - ".
+										$alumno -> carrera_nombre." - ".
+											$alumno -> plan_de_estudios;
+						?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+			-->
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<br />
+			<select name="tipo_ex" id="tipo_ex" class="lista">
+				<option value="-1">
+					- - Tipo De Examen - -
+				</option>
+				<option value="ACR">
+					- - Acreditación - -
+				</option>
+				<option value="NIV">
+					- - Nivelación - -
+				</option>
+			</select>
+			<br /><br />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input id="clavecurso" name="clavecurso" type="hidden" value="<?php echo $clavecurso ?>" />
+			<input id="submitir" name="submitir" type="submit" value="Inscribir Alumno" />
+
+		</td>
+	</tr>
+</table>
+</form>
+
+<br />
+
+<div id="div_cargando" name="div_cargando" style="margin: 0 0 0 75%;">
+</div>
+<div id="editando" name="editando">
+</div>
+<div class="centrar" id="mensajes" name="mensajes">
+<?php if(isset($mensajes)) echo $mensajes ?>
+</div>
+
+<h3 class="centrar">Alumnos Inscritos hasta el momento</h3>
+<div class="centrar bloque" id="listado_alumnos" name="listado_alumnos">
+	<div class="centrar">
+		<div class="fondonaranja" style="width: 75px; float: left; margin-right: 5px; margin-left: 3px;">Registro</div>
+		<div class="fondonaranja" style="width: 150px; float: left; margin-right: 5px">Nombre</div>
+		<div class="fondonaranja" style="width: 100px; float: left; margin-right: 5px">Carrera</div>
+		<div class="fondonaranja" style="width: 100px; float: left; margin-right: 5px">Plan De Estudios</div>
+		<div class="fondonaranja" style="width: 100px;  float: left; margin-right: 5px">Tipo De Examen</div>
+		<div class="fondonaranja" style="width: 125px;  float: left; margin-right: 5px">Fecha Inscripci&oacute;n</div>
+		<div class="fondonaranja" style="width: 175px;  float: left; margin-right: 2px">Qui&eacute;n Inscribi&oacute; al Alumno</div>
+		<div class="fondonaranja" style="width: 60px;  float: left; margin-right: 2px">Eliminar</div>
+		<div style="clear:both"></div>
+	</div>
+	<div class="centrar" id="listado_inscritos" name="listado_inscritos">
+			<?php
+				$i = 0;
+				foreach( $alumnosinscritos as $inscritos ){
+					echo "<div class='centrar' style='float: left;' id='row".$i."' id='row".$i."'>";
+					echo "<div class='centrar' id='registro".$i."' style='width: 75px; float: left; margin-right: 5px; margin-left: 3px;'>".$inscritos -> miReg."</div>";
+					echo "<div class='centrar' id='nombre".$i."' style='width: 150px; float: left; margin-right: 5px'>".substr($inscritos -> vcNomAlu, 0, 20)."</div>";
+					echo "<div class='centrar' style='width: 100px; float: left; margin-right: 5px'>".substr($inscritos -> carrera_nombre, 0, 12)."</div>";
+					echo "<div class='centrar' style='width: 100px; float: left; margin-right: 5px'>".$inscritos -> enPlan."</div>";
+					echo "<div class='centrar' id='tipo_ex".$i."' style='width: 100px; float: left; margin-right: 5px'>".$inscritos -> tipo_ex."</div>";
+					echo "<div class='centrar' style='width: 125px; float: left; margin-right: 5px'>".$inscritos -> creado_at."</div>";
+					echo "<div class='centrar' style='width: 175px; float: left; margin-right: 2px'>".substr($inscritos -> nomina." - ".$inscritos -> maestro_nombre, 0, 25)."</div>";
+					echo "<div class='centrar' style='width: 60px; float: left; margin-right: 2px'>"."
+							<input type='image' src='".KUMBIA_PATH."img/delete.gif' id='inter_al_id_delete' 
+							name='inter_al_id_delete' value='".$inscritos -> inter_al_id."' onclick='delete_alumno(this.value, ".$i.")' />"."</div>";
+					echo "</div>";
+					echo "<div style='clear:both'></div>";
+					$i++;
+				}
+			?>
+	</div>
+	<div style="clear: both">
+	</div>
+</div>
+<br />
+<br />

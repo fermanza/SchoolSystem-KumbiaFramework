@@ -1,0 +1,306 @@
+<div>
+<br /><br />
+<table border="0" cellpadding="0" cellspacing="0" width="900" >
+	<tr>
+		<td style="font-family: Verdana;">
+		
+
+<link rel="stylesheet" type="text/css" href="<?= KUMBIA_PATH ?>public/images/stylee.css" />
+<!-- jQuery -->
+<script type="text/javascript" src="<?= KUMBIA_PATH ?>public/jquery/jquery-1.4.2.min.js"></script>
+
+<!-- markItUp! -->
+<script type="text/javascript" src="<?= KUMBIA_PATH ?>public/markitup/jquery.markitup.js"></script>
+<!-- markItUp! toolbar settings -->
+<script type="text/javascript" src="<?= KUMBIA_PATH ?>public/markitup/sets/default/set.js"></script>
+<!-- markItUp! skin -->
+<link rel="stylesheet" type="text/css" href="<?= KUMBIA_PATH ?>public/markitup/skins/markitup/style.css" />
+<!--  markItUp! toolbar skin -->
+<link rel="stylesheet" type="text/css" href="<?= KUMBIA_PATH ?>public/markitup/sets/default/style.css" />
+</head>
+<body>
+
+<!--
+<script type="text/javascript">
+$(document).ready(function()	{
+	// Add markItUp! to your textarea in one line
+	// $('textarea').markItUp( { Settings }, { OptionalExtraSettings } );
+	$('#html').markItUp(myHtmlSettings);
+	
+	// You can add content from anywhere in your page
+	// $.markItUp( { Settings } );	
+	$('.add').click(function() {
+ 		$.markItUp( { 	openWith:'<opening tag>',
+						closeWith:'<\/closing tag>',
+						placeHolder:"New content"
+					}
+				);
+ 		return false;
+	});
+	
+	// And you can add/remove markItUp! whenever you want
+	// $(textarea).markItUpRemove();
+	$('.toggle').click(function() {
+		if ($("#markItUp.markItUpEditor").length === 1) {
+ 			$("#markItUp").markItUpRemove();
+			$("span", this).text("get markItUp! back");
+		} else {
+			$('#markItUp').markItUp(mySettings);
+			$("span", this).text("remove markItUp!");
+		}
+ 		return false;
+	});
+});
+</script>
+-->
+
+<link rel="stylesheet" type="text/css" href="<?= KUMBIA_PATH ?>markitup/skins/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="<?= KUMBIA_PATH ?>markitup/sets/html/style.css" />
+
+<script type="text/javascript" src="<?= KUMBIA_PATH ?>jquery/jquery.js"></script>
+<script type="text/javascript" src="<?= KUMBIA_PATH ?>markitup/jquery.markitup.js"></script>
+<script type="text/javascript" src="<?= KUMBIA_PATH ?>markitup/sets/html/set.js"></script>
+
+
+<script type="text/javascript">
+$(document).ready(function()	{
+	$('#html').markItUp(myHtmlSettings);
+	
+	$('#tabs').tabs();
+});
+</script>
+<div id="container">
+	<div id="superheader">
+			<div class="wrapper">
+		<h6><a href="http://www.jaysalvat.com">www.jaysalvat.com</a></h6>
+<!--
+		<ul>
+		<li class="markitup current"><a href="http://markitup.jaysalvat.com/">markItUp!</a></li>
+		<li class="gopicknik "><a href="http://gopicnik.jaysalvat.com/">Go Picnik</a></li>
+		</ul>
+-->	
+	</div>	</div>
+	
+	<div id="header">
+			<div class="wrapper">
+		<h1><a href="http://markitup.jaysalvat.com">markItUp!</a></h1>
+		<p>Universal markUp editor</p>
+		<div id="beta">Stable version</div>
+	</div>	</div>                   
+
+  <div id="content">
+    <h1>Examples</h1>
+    <h2>Html set</h2>
+    <p>Basic example of Html configuration.</p>
+	<p>
+<div class="html">
+<div id="markItUpHtml" class="markItUp">
+<div class="markItUpContainer">
+<div class="markItUpHeader">
+<ul><li class="markItUpButton markItUpButton1 ">
+<a href="" accesskey="1" title="Heading 1 [Ctrl+1]">Heading 1</a></li>
+<li class="markItUpButton markItUpButton2 "><a href="" accesskey="2" title="Heading 2 [Ctrl+2]">Heading 2</a></li>
+<li class="markItUpButton markItUpButton3 "><a href="" accesskey="3" title="Heading 3 [Ctrl+3]">Heading 3</a></li>
+<li class="markItUpButton markItUpButton4 "><a href="" accesskey="4" title="Heading 4 [Ctrl+4]">Heading 4</a></li>
+<li class="markItUpButton markItUpButton5 "><a href="" accesskey="5" title="Heading 5 [Ctrl+5]">Heading 5</a></li>
+<li class="markItUpButton markItUpButton6 "><a href="" accesskey="6" title="Heading 6 [Ctrl+6]">Heading 6</a></li>
+<li class="markItUpButton markItUpButton7 "><a href="" title="Paragraph">Paragraph</a></li>
+<li class="markItUpSeparator">---------------</li>
+<li class="markItUpButton markItUpButton8 "><a href="" accesskey="B" title="Bold [Ctrl+B]">Bold</a></li>
+<li class="markItUpButton markItUpButton9 "><a href="" accesskey="I" title="Italic [Ctrl+I]">Italic</a></li>
+<li class="markItUpButton markItUpButton10 "><a href="" accesskey="S" title="Stroke through [Ctrl+S]">Stroke through</a></li>
+<li class="markItUpSeparator">---------------</li><li class="markItUpButton markItUpButton11 "><a href="" title="Ul">Ul</a></li>
+<li class="markItUpButton markItUpButton12 "><a href="" title="Ol">Ol</a></li>
+<li class="markItUpButton markItUpButton13 "><a href="" title="Li">Li</a></li>
+<li class="markItUpSeparator">---------------</li>
+<li class="markItUpButton markItUpButton14 "><a href="" accesskey="P" title="Picture [Ctrl+P]">Picture</a></li>
+<li class="markItUpButton markItUpButton15 "><a href="" accesskey="L" title="Link [Ctrl+L]">Link</a></li>
+<li class="markItUpSeparator">---------------</li>
+<li class="markItUpButton markItUpButton16 "><a href="" title="Clean">Clean</a></li>
+<li class="markItUpButton markItUpButton17 preview"><a href="" title="Preview">Preview</a></li>
+</ul></div><textarea class="markItUpEditor" id="html" cols="80" rows="20">&lt;h2&gt;markItUp! Universal markup editor&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src="../markitup/preview/picture.png" alt="markItUp! logo" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;markItUp!&lt;/strong&gt; is a javascript over jQuery plug-in which allow you to turn any textarea in a markup editor.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;markItUp!&lt;/strong&gt; is a lightweight fully customizable engine made to easily fit all developers needs in their CMS, blogs, forums or websites.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Html, Textile, Wiki Syntax, Markdown, BBcode&lt;/em&gt; or even your own Markup system can be easily implemented.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;integrate it easily&lt;/li&gt;
+&lt;li&gt;customize buttons and macros to fit all your need&lt;/li&gt;
+&lt;li&gt;customize keyboard shortcuts&lt;/li&gt;
+&lt;li&gt;customize toolbar and css look and feel
+&lt;ul&gt;
+    &lt;li&gt;skins&lt;/li&gt;
+    &lt;li&gt;icons&lt;/li&gt;
+    &lt;li&gt;dropdown menus&lt;/li&gt;
+    &lt;li&gt;separators&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;use the engine from anywhere in the page&lt;/li&gt;
+&lt;li&gt;implement any markup language even your own&lt;/li&gt;
+&lt;li&gt;implement your own javascript macros even the most advanced&lt;/li&gt;
+&lt;li&gt;allows multi-line edition&lt;/li&gt;
+&lt;li&gt;preview ajax result dynamically in any markup parser&lt;/li&gt;
+&lt;li&gt;offers userfriendly experience and effectiveness&lt;/li&gt;
+&lt;/ul&gt;
+</textarea><div class="markItUpFooter"><div class="markItUpResizeHandle"></div></div></div></div></div> 
+</p>
+
+	<div class="ui-tabs ui-widget ui-widget-content ui-corner-all" id="tabs">
+		<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+			<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#ui-tabs-1"><span>Html</span></a></li>
+			<li class="ui-state-default ui-corner-top"><a href="#ui-tabs-2"><span>Json</span></a></li>
+			<li class="ui-state-default ui-corner-top"><a href="#ui-tabs-3"><span>Css</span></a></li>
+		</ul><div class="ui-tabs-panel ui-widget-content ui-corner-bottom" id="ui-tabs-1"><h4>Css</h4>
+<p>See CSS tab for more details...</p>
+<pre>&lt;link rel="stylesheet" type="text/css" href="markitup/skins/markitup/style.css" /&gt;
+&lt;link rel="stylesheet" type="text/css" href="markitup/sets/<b class="highlight">html</b>/style.css" /&gt;
+</pre>
+
+<h4>Javascript</h4>
+<p>See JSon tab for more details. on set.js file.</p>
+<pre>&lt;script type="text/javascript" src="jquery.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="markitup/jquery.markitup.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="markitup/sets/<b class="highlight">html</b>/set.js"&gt;&lt;/script&gt;
+
+&lt;script language="javascript"&gt;
+$(document).ready(function()	{
+   <b class="highlight">$('#html').markItUp(myHtmlSettings);</b>
+});
+&lt;/script&gt;
+</pre>
+<h4>Html</h4>
+<pre>&lt;textarea id="<b class="highlight">html</b>" cols="80" rows="20"&gt;
+	...html stuff...
+&lt;/textarea&gt;
+</pre></div><div class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" id="ui-tabs-2"></div><div class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" id="ui-tabs-3"></div>
+	</div>
+ </div>
+  
+  <div id="sidebar">
+	  	<div class="menu">
+		<h4>Where to go</h4>
+		<ul>
+			<li class="homepage"><a title="Homepage" class="" href="../../home/">Homepage<em></em></a></li>
+			<li class="documentation"><a title="Doc" class="" href="../../documentation/">Documentation<em></em></a></li>
+			<li class="examples"><a title="Examples" class="current" href="../../examples/">Examples<em></em></a></li>
+			<li class="downloads"><a style="left: 0px;" title="Downloads" class="" href="../../downloads/">Downloads<em></em></a></li>
+		</ul> 
+	</div>	
+	<!--
+	<div class="digg">
+		<script type="text/javascript">
+			digg_url = 'http://markitup.jaysalvat.com/';
+		</script>
+		<script src="http://digg.com/tools/diggthis.js" type="text/javascript"></script> 
+	</div>
+	-->
+		<div class="download">
+		<h4>Download  the latest</h4>
+ 		<h5><a href="../../downloads/">markItUp! pack 1.1.8</a></h5>
+		<small>Aug, 27 2010</small>
+		<a class="button" href="../..//downloads/download.php?id=releases/latest"><b>markItUp! pack 1.1.8</b><br> Download now!</a>
+	</div> 
+		<script type="text/javascript">
+	(function(){
+	  var bsa = document.createElement('script');
+		 bsa.type = 'text/javascript';
+		 bsa.async = true;
+		 bsa.src = '//s3.buysellads.com/ac/bsa.js';
+	  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+	})();
+	</script>
+	<div class="ads">
+		<h4>Sponsors</h4>
+		<small><a href="http://buysellads.com/buy/detail/5053">Your ad here?</a></small>
+		<div id="bsap_1248117" class="bsap_1248117 bsap"><a href="http://stats.buysellads.com/click.go?z=1248117&amp;b=575504&amp;g=&amp;s=&amp;sw=1280&amp;sh=1024&amp;br=firefox,3.5,win&amp;r=0.4060197504363505&amp;link=http://www.insitecreation.com/insitecreation.aspx" onmouseover="window.status = 'http://www.insitecreation.com/insitecreation.aspx'; return true;" onmouseout="window.status=''; return true;" class="ad1 odd" title="Build an impressive Web 2.0 site!" id="bsa_575504" target="_blank"><img src="http://s3.buysellads.com/1236136/36598-1284461307.jpg" alt="Build an impressive Web 2.0 site!" width="125" height="125"></a><a href="http://stats.buysellads.com/click.go?z=1248117&amp;b=549743&amp;g=&amp;s=&amp;sw=1280&amp;sh=1024&amp;br=firefox,3.5,win&amp;r=0.1654575870073588&amp;link=http://www.innovastudio.com/editor.aspx" onmouseover="window.status = 'http://www.innovastudio.com/editor.aspx'; return true;" onmouseout="window.status=''; return true;" class="ad2 even" title="Replace html textarea into Rich Text Editor" id="bsa_549743" target="_blank"><img src="http://s3.buysellads.com/1248117/34612-1282534885.gif" alt="Replace html textarea into Rich Text Editor" width="125" height="125"></a></div>
+	</div>    
+    	<div class="news">
+		<h4>What's new ?</h4>
+        					<h5><a href="/downloads/">markItUp! 1.1.8 update</a></h5>
+				<small>Apr, 27 2010</small>
+        <p>
+		
+		markItUp! 1.1.8 is out! Thanks for your contributions on <a href="http://github.com/markitup/1.x/">Github</a>.
+		
+		</p>  
+		        					<h5><a href="/downloads/">Markitup upload plugin for Coldfusion</a></h5>
+				<small>Apr, 12 2010</small>
+        <p>
+		
+		Saravana Muthu did a great job with his upload plugin for Coldfusion. Easy to adapt to your favorite server-side language. Thanks Saravana!
+		
+		</p>  
+		        					<h5><a href="/downloads/">markItUp! 1.1.7 update</a></h5>
+				<small>Apr, 06 2010</small>
+        <p>
+		
+		markItUp! 1.1.7 is released and fixes some Webkit bugs.
+		
+		</p>  
+		        					<h5><a href="http://github.com/markitup/1.x/">markItUp! on Github</a></h5>
+				<small>Mar, 04 2010</small>
+        <p>
+		
+		Due to popular demand, markItUp! source is now <a href="http://github.com/markitup/1.x/">available on Github</a>. Enjoy!
+		
+		</p>  
+		      
+        <p><a class="feed" href="http://feeds.feedburner.com/jaysalvat/markitup">Rss feed</a></p>
+	</div> 
+    	<div class="download">
+		<h4>Buy me a beer!</h4>
+        <p>Support the project! Making a donation will motivate me to keep this project going and allow for further development.</p>
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<table class="donate">
+  <tbody><tr>
+    <td style="padding: 2px;"><strong>Amount</strong></td>
+    <td style="padding: 2px;"><input name="amount" value="5.00" size="6" style="text-align: right;" type="text"></td>
+    <td style="padding: 2px;">
+	<select name="currency_code">
+  	<option value="EUR">€</option>
+  	<option value="USD">$</option>
+  	</select>
+	</td>
+    <td><input name="submit" value="Support the project" type="submit"></td>
+  </tr>
+</tbody></table>
+  <input name="cmd" value="_xclick" type="hidden">
+  <input name="business" value="jay.salvat@gmail.com" type="hidden">
+  <input name="item_name" value="markItUp" type="hidden">
+  <input name="item_number" value="MARKITUP-DONATE" type="hidden">
+  <input name="no_shipping" value="1" type="hidden">
+  <input name="no_note" value="1" type="hidden">
+  <input name="tax" value="0" type="hidden">
+  <input name="bn" value="PP-DonationsBF" type="hidden">
+  <input name="lc" value="US" type="hidden">
+</form>	</div>   </div>
+  
+  <div id="footer">
+	<a name="contact" id="contact"></a>
+<div class="wrapper">
+  	<p>© <a href="http://markitup.jaysalvat.com"><strong>markItUp!</strong></a> and <a href="http://www.jaysalvat.com">Jay Salvat</a></p>
+	<ul>
+		<li><a href="../../home/">Homepage</a></li>
+		<li><a href="../../documentation/">Documentation</a></li>
+		<li><a href="../../examples/">Examples</a></li>
+		<li><a href="../../downloads/">Downloads</a></li>
+		<li><a href="#jay.salvat%7Cgmail.com" class="mailto">Contact me!</a></li>
+	</ul> 
+	
+	<div id="contactWarning">
+		<h5>Important note:</h5>
+		<p>Feel free to contact me for feedbacks, bug reports and suggestions!</p>
+		<p>But sorry, due to a huge lack of time, <b>help and answers to technical questions will be provided to <em>donators only</em></b>. Thanks!</p>
+		
+		<ul>
+			<li><a class="ok" href="#">I understand!</a></li>
+			<li><a class="close" href="#">Close</a></li>
+		</ul>
+	</div>
+</div>  </div>
+</div>

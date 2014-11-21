@@ -1,0 +1,114 @@
+<center><br><br>
+<table>
+	<tr>
+		<td width="900" align="left">
+			<div style="font-size: 14px;"><b>Horario del alumno (<?= $periodo ?>)</b></div>
+			<hr><br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr>
+					<td width="150" height="25" bgcolor="#FFCA5B">&nbsp;<b>Nombre del alumno: </b></td>
+					<td width="400" colspan="3" bgcolor="#EEEEEE">&nbsp;<?= $alumno ?> (<?= $registro ?>)</td>
+					<td width="150" height="25" bgcolor="#FFCA5B"><b>&nbsp;Promedio: </b></td>
+					<td width="100" bgcolor="#EEEEEE">&nbsp;<?= $promedio ?></td>
+				</tr>
+				<tr>
+					<td width="150" height="25" bgcolor="#FFCA5B"><b>&nbsp;Especialidad: </b></td>
+					<td width="400" colspan="3" bgcolor="#EEEEEE">&nbsp;<?= $especialidad ?></td>
+					<td width="150" height="25" bgcolor="#FFCA5B"><b>&nbsp;Número de créditos: </b></td>
+					<td width="100" bgcolor="#EEEEEE">&nbsp;<?= $ncreditos ?></td>
+				</tr>
+			</table>
+			<br>
+			<?
+				for ( $j = 1; $j <= $cuantosCursos; $j++ ){
+					if ( $tmp[$j] -> clavecurso != "" ){
+						echo "<br />Curso: ".$tmp[$j] -> clavecurso;
+						echo "<br />Profesor: ".$profesor[$j] -> nombre;
+						echo "<br />Materia: ".$materia[$j];
+						echo "<br />";
+					}
+				}
+				echo "CuantosCursos: ".$cuantosCursos;
+			?>
+			<table border="1" cellpadding="2" cellspacing="2" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr bgcolor="#FFCA5B">
+					<th width="20" height="50" align="center">HORA</th>
+					<!--
+					<th width="100" align="center">No. Curso</th>
+					<th width="200" align="center">Materia</th>
+					-->
+					<th width="60" align="center" colspan="2">LUN</th>
+					<th width="60" align="center" colspan="2">MAR</th>
+					<th width="60" align="center" colspan="2">MIE</th>
+					<th width="60" align="center" colspan="2">JUE</th>
+					<th width="60" align="center" colspan="2">VIE</th>
+					<th width="60" align="center" colspan="2">SAB</th>
+				</tr>
+				<?php
+				$k = 1;
+				echo "<tr>";
+				echo "<td width='20' height='70' align='center'>".$k."</td>";
+				$j =0;
+				for( $i = 1; $i <= 42; $i++ ){
+					
+					if ($j == 6){
+						echo "</tr><tr>";
+						$k ++;
+						$j=0;
+						echo "<td width='20' height='70' align='center'>".$k."</td>";
+					}
+					
+					if ( $nombremat[$i] != "" ){
+						$nombremateria	= '<span style="color:#1569C7; font-size:12px;">'.$nombremat[$i].'</span>';
+						$curso			= 'Curso: <span style="color:#FFFFFF;">'.$clavcurso[$i].'</span>';
+						$salonn			= 'Salon: <span style="color:#FFFFFF;">'.$salon[$i].'</span>';
+						$clavemateria	= 'Clave Materia: <span style="color:#FFFFFF;">'.$clavemat[$i].'</span>';
+						$class 			= "gris";
+						
+						if ( $bloque[$i] == 1 ){
+							$colspan	= 1;
+						}
+						elseif ( $bloque[$i] == 2 ){
+							$colspan	= 1;
+						}
+						else{
+							$colspan	= 2;
+						}
+					}
+					else{
+						$nombremateria	= "&nbsp;";
+						$curso			= "&nbsp;";
+						$salonn			= "&nbsp;";
+						$clavemateria	= "&nbsp;";
+						$class 			= "";
+						$colspan		= 2;
+					}
+					?>
+					<th height="60" class="<?= $class ?>" colspan="<?= $colspan ?>">
+						<?= $nombremateria ?><br><?= $curso ?><br><?= $salonn ?><br><?= $clavemateria ?>
+					</th>
+				<?
+					$j++;
+					if ( $bloque[$i] == 1 ){
+						$nombremateria2	= '<span style="color:#1569C7; font-size:12px;">'.$nombremat2[$i].'</span>';
+						$curso2			= 'Curso2: <span style="color:#FFFFFF;">'.$clavcurso2[$i].'</span>';
+						$salonn2		= 'Salon2: <span style="color:#FFFFFF;">'.$salon2[$i].'</span>';
+						$clavemateria2	= 'Clave Materia2: <span style="color:#FFFFFF;">'.$clavemat2[$i].'</span>';
+						$class2 		= "gris";
+				?>
+					<th height="60" class="<?= $class ?>" colspan="<?= $colspan ?>">
+							<?= $nombremateria2 ?><br><?= $curso2 ?><br><?= $salonn2 ?><br><?= $clavemateria2 ?>
+					</th>
+				<?
+					}
+				?>
+				<?php
+					
+				}
+				?>
+			</table>
+		</td>
+	</tr>
+</table>
+<br>
+</center>

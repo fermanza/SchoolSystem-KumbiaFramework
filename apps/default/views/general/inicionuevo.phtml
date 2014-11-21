@@ -1,0 +1,226 @@
+<script language="JavaScript1.2">
+
+function validarEntero( Objeto ){
+	
+	var check;
+	check = Objeto.value.length;
+	
+	if( check < 1 ){
+		window.alert( "Favor de Ingresar su PreRegistro" );
+		Objeto.value = "";
+		Objeto.focus( );
+		return false;
+	}
+	
+	if( isNaN( Objeto.value ) ){
+		window.alert( "El PreRegistro sólo debe contener números" );
+		Objeto.value = "";
+		Objeto.focus( );
+		return false;
+	}
+	else{
+		if (Objeto.value < 0){
+			window.alert( "El PreRegistro no tiene números negativos" );
+			Objeto.value = "";
+			Objeto.focus( );
+			return false;
+		}
+	}
+	
+	for ( var i = 0; i < check; i++ ){
+		if ( Objeto.value[i] == "." ){
+			window.alert ("El PreRegistro no tiene números decimáles");
+			Objeto.value = "";
+			Objeto.focus ( );
+			return false;
+		}
+	}
+}
+
+function setIt( Objeto ){
+	if( Objeto.value == "" )
+		Objeto.value = "Registro";	
+}
+
+function clearIt( Objeto ){
+	Objeto.value = "";
+}
+
+</script>
+
+<style type="text/css">
+	.a a{
+		color: #404040;
+		background: #f27822;
+		padding: 10px;
+		font-weight: bold;
+	}
+</style>
+<div>
+<br /><br />
+<table border="0" cellpadding="0" cellspacing="0" width="900" >
+	<tr>
+		<td style="font-family: Verdana;">
+
+<div class="">
+
+<br />
+	<div class="side-aa">
+		<div id="mylogin">
+		<form method="POST" action="<?= KUMBIA_PATH ?>seguridad/iniciarsesion">
+			<h1 class="mylogin1">Iniciar Sesi&oacute;n</h1>
+			<input type="text" onblur="setIt(this)" onfocus="clearIt(this)" size="16" value="Registro" name="registro" id="registro" class="input">
+			<br />
+			<input type="password" onblur="setIt(this)" onfocus="clearIt(this)" size="16" value="Registro" name="password" id="password" class="input">
+			<input type="image" border="0" alt="Log In" src="<?= KUMBIA_PATH ?>img/button_go.gif" value="Enter" name="LoginUserSubmitNewEvent">
+			<br /><br />
+			<b>&iquest;Perdiste tu contraseña?</b>
+			<br><br>
+			Si a&uacute;n no cuentas con una contraseña de acceso o la has olvidado,
+			deber&aacute;s acudir con una identificación oficial al <b>Departamento
+			de Apoyo Académico</b> para obtener una contraseña nueva.
+		</form>
+		</div>
+		<div id="reticulas">
+			<h2>Plan 2000</h2>
+			<h3>Reticula Electrónica</h3>
+			<h3>Reticula Metatrónica</h3>
+			<h3>Reticula Industrial</h3>
+		</div>
+		<div id="reticulas">
+			<h2>Plan 2007</h2>
+			<h3>Reticula Electrónica</h3>
+			<h3>Reticula Metatrónica</h3>
+			<h3>Reticula Industrial</h3>
+		</div>
+	</div>
+	<div class="side-bb">
+		<h1 class="centrar">Avisos Generales</h1>
+		<div align="center" width="500" class="fondoazull">
+			<h2>Salones sugeridos para evitar cruces en la selecci&oacute;n de materias</h2>
+			<img src="http://ase.ceti.mx/ingenieria/public/img/salones32010/IngMecatronica.JPG" width="500" >
+			<br />
+			<img src="http://ase.ceti.mx/ingenieria/public/img/salones32010/IngIndustrial.JPG" width="500" >
+			<br />
+			<img src="http://ase.ceti.mx/ingenieria/public/img/salones32010/IngElectronica.JPG" width="500" >
+			<br />
+			<h3>Atentamente</h3>
+			<h3>Subdirecci&oacute;n de Operaci&oacute;n Académica y
+			Departamento de Servicios de Apoyo Académico.</h3>
+			<br />&nbsp;
+		</div>
+		<hr />
+
+		<!--
+		<div align="center" style="background-color: #910000; color: #EEEEEE;  font-size: 14px;">
+		-->
+		<div align="center" width="500" class="fondonaranjaa">
+			<h2>&iexcl;AVISO IMPORTANTE!</h1>
+			
+		<b>Se les comunica a los alumnos seg&uacute;n su condici&oacute;n acad&eacute;mica siguiente,
+		el calendario<br />
+		para captura de horario: <br />
+		Regulares e Irregulares que no alcanzaron a capturar horario se abrir&aacute; nuevamente&nbsp;
+		<span style="color: #009B4E"><b>del 15 al 11 de Agosto&nbsp;</b></span>(La saturaci&oacute;n de los cursos queda a cargo de los coordinadores)
+		<br /><br />
+		Condicionados deber&aacute;n asistir en la semana <span style="color: #009B4E"><b>del 9 al 20 de Agosto</b></span> directamente
+		con su coordinador correspondiente a su carrera. (La ficha de pago para condicionados quedar&aacute; habilitada apartir del 2 de Agosto).
+
+		<br />
+		<br />
+		Atte: <br />
+		Apoyo Académico
+			<br />&nbsp;
+			<br />
+		</div>
+		<hr />
+		<!--
+		<div align="center" style="background-color: #1569c7; color: #dddddd;  font-size: 14px;">
+		-->
+		<div align="center" width="500" class="fondoazull">
+			<h2>Alumnos Beneficiados con Beca Institucional en este Ciclo Feb-Jun 2010</h2>
+			
+			<h3>Si fuiste beneficiado con alguno de los siguientes tipos de Beca Institucional:</h3>
+			
+			<div align="left">
+			<h4>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			a) Beca de Apoyo a la Continuaci&oacute;n de Estudios
+			</h4>
+			<h4>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			b) Reinscripci&oacute;n
+			</h4>
+			<h4>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			c) Inscripci&oacute;n
+			</h4>
+			</div>
+			<br />
+			<h3>
+			Es posible que puedas realizar la renovación de tu beca si cumples con los siguientes requisitos:</h3>
+			<div align="left">
+			<h4>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			- Promedio mayor o igual a 75 obtenido del semestre Feb-Jun 2010</h4>
+			<h4>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			- No contar con Reportes de Indisciplina</h4>
+			<h4>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			- Entregar la solicitud de Beca debidamente llenada y seleccionada la opción de renovaci&oacute;n</h4>
+			<h4>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			- Acudir a Trabajo Social para adquirir el formato de no adeudo en la Biblioteca y tu<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			Coordinaci&oacute;n</h4>
+			</div>
+			<br />
+			<h3>Atentamente</h3>
+			<h3>Subdirecci&oacute;n de Operaci&oacute;n Académica y
+			Departamento de Servicios de Apoyo Académico.</h3>
+			<br />&nbsp;
+		</div>
+		<hr />
+		
+		
+		<!--
+		<div align="center" style="background-color: #1569c7; color: #dddddd;  font-size: 14px;">
+		-->
+		<div align="center" width="500" class="fondonaranjaa">
+		<h2>¡Alumnos!</h1>
+		<br />
+		<h3>Activa tu cuenta de correo&nbsp;<span style="color: #009B4E" >@live.ceti.mx</span>
+		¡Aprovecha los beneficios que Microsoft tiene para ti!
+		Correo solo disponible para alumnos</h3>
+		<a href="http://archivos.ceti.mx/correo.alumnos" class ="linksobreazul">Click aqui</a>
+
+		<br />
+		<h2>A T E N T A M E N T E</h2>
+		<h2>Subdireccion de Operacion Acad&eacute;mica</h2>
+		<br />
+		&nbsp;
+		</div>
+		<hr />
+
+	</div>
+	<br />&nbsp;
+		</td>
+	</tr>
+</table>
+<br /><br />
+</div>

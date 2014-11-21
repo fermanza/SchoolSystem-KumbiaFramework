@@ -1,0 +1,92 @@
+
+	<br>
+	<table width="709" height="100" border="1" align="center" cellpadding="1">
+                <!--
+				<tr>
+					<th style="background: #CCCCCC">
+						<h1 style="color: #CC0000; ">AVISO IMPORTANTE</h1>
+						<h3>FE DE ERRATAS</h3>
+SI IMPRIMISTE LA FICHA DE PAGO CON APORTACIÓN VOLUNTARIA AL PATRONATO CON <br> <span style="font-size: 14px ;color: #CC0000;">NUMERO DE EMPRESA CEP ( 0168030061 )</span> 
+FAVOR DE REIMPRIMIR Y PAGAR LA FICHA DE PAGO CON <span style="font-size: 14px ;color: #CC0000;">NUMERO DE EMPRESA CEP ( 01042 )</span> ESTA ULTIMA ES LA CORRECTA<br>						
+					<img width="350px" src="<?= KUMBIA_PATH ?>public/img/ficha_correcta.jpg" >
+					</th>
+				</tr>
+				<tr>
+					<td>
+						&nbsp;
+					</td>
+				</tr>-->
+				<tr>
+                    <th bgcolor="#CCCCCC">
+                        <H1 style="color:#FF0000;">FICHA DE PAGO</H1>
+						<br />
+						<h3>Segunda prorroga para pago de Inscripción  o Reincripción del 26 de Febrero al 06 de Marzo con recargo de $300.00 pesos.
+							Este pago debe cubrirse directamente en la caja del plantel correspondiente<br><br>
+							De no cubrir dicho adeudo no apareceras como alumno en listas definitivas de tus materias. 
+						</h3>
+                    </th>
+                </tr>
+                <tr>
+                    <th width="700" style="color:#0000FF;">
+                        
+						INTRODUCE TU NUMERO DE REGISTRO
+                        <br><BR>
+                        <form method="POST" action="https://apps.ceti.mx/ingenieria/alumno/fichaPago">
+                            <input type="text" name="registro" size="30" maxlength="7">&nbsp;
+							<input type="submit" name="enviar">
+                           
+                        </form>
+                    </th>
+                </tr>
+	</table>
+
+<br><br>
+<table border="0" cellpadding="0" cellspacing="0" width="770" >
+			<tr>
+				<td style="font-family: Verdana;">
+					<br>
+					<div style="color: #1569C7; font-size: 14px;" align="left">
+					<?= img_tag("adorno.gif","border: 0") ?> <b>INICIAR SESIÓN</b></div>
+					<div style="color: #000000; font-size: 11px;" align="justify">
+					<br>
+						<center>
+
+						<form method="POST" action="<?= KUMBIA_PATH ?>seguridad/iniciarsesion">
+							<table border="1" cellpadding="1" cellspacing="1" style="font-size: 10px;">
+								<tr><th width="600" colspan="3" height="40" bgcolor="#e9ab17" style="color:#000000">CENTRO DE INFORMACIÓN DE RECURSOS ADMINISTRATIVOS</th></tr>
+								<tr>
+									<th colspan="2" height="25" bgcolor="#1569c7" style="color: #FFFFFF;">INICIAR SESION</th>
+									<th height="25" bgcolor="#1569c7" style="color: #FFFFFF;">AYUDA</th>
+								</tr>
+								<tr>
+									<td width="150" align="left"><b>&nbsp;Código (Registro): </b></td>
+									<td width="150"><input type="text" name="registro" size="21" style="font-weight: bold; font-size: 12px;"></td>
+									<td width="300" rowspan="3"><center>						
+									<table style="font-size:11px;">
+										<tr>
+											<td width="280"><div align="justify">
+												<b>¿Perdiste tu contraseña?</b>
+												<br><br>
+												Si aún no cuentas con una contraseña de acceso o la has olvidado, deberás acudir con una identificación oficial al <b>Departamento de Apoyo Académico</b> para obtener una contraseña nueva.
+										
+											</td>
+										</tr>
+									</table>
+									</center>
+									</th>
+								</tr>
+								<tr>
+									<td width="150" align="left"><b>&nbsp;Contraseña: </b></td>
+									<td width="150"><input type="password" name="password" size="21" style="font-weight: bold; font-size: 12px;"></td>
+								</tr>
+								<tr>
+									<th colspan="2"><br><input type="submit" value="INGRESAR" style="color: #000000;background: #FFCA5B;"></form></th>
+								</tr>
+					
+			</table>
+		</form>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<br><br>

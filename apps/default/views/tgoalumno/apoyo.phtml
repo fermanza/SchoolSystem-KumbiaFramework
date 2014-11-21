@@ -1,0 +1,188 @@
+<!--<script type="text/javascript" src="<?= KUMBIA_PATH ?>public/tiny_mce/tiny_mce.js"></script> 
+<script type="text/javascript"> 
+	tinyMCE.init({
+		mode : "textareas",
+		theme : "simple"
+	});
+</script> -->
+<?= render_partial("info"); ?>
+<br>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp; APOYO ACADEMICO
+</div>
+<br />
+<div class="azul" style="padding: 10px; margin:10px;">
+<h1>Aviso Importante</h1>
+<p>Favor de solo madar un ticket y esperar hasta que se te resuleva y ser muy especifico en el problema que se tiene. <br/><br/>
+ Los cambios de grupo NO ESTAN AUTORIZADOS, el grupo en el que aparece en tus materias asignadas es a donde debes de presentarte, ya que ese sera tu grupo asignado.</p>
+<p><center><b>Área de Cálculo</b></center></p>
+</div>
+<br />
+<div class="apoyo">	
+	<div id="midiv">
+	<br/>
+	<?php echo form_remote_tag("tgoalumno/generarTicket", "update: midiv") ?>
+	<table width="100%" class="bordeazul">		
+		<tr>
+			<th class="naranja" colspan="6">SOLICITA ATENCIÓN Y/O REVISIÓN DE KARDEX</th>
+		</tr>
+		<tr>
+			<th colspan="4" class="azul">
+				&nbsp;
+			</th>
+			<th colspan="2" class="azul">
+				Kardex
+			</th>
+		</tr>
+		<tr  valign="top">
+			<td colspan="4">
+				<table width="100%" border="0" cellpadding="1" cellspacing="1">
+					<tr>
+						<td width="50%">
+							<input type="checkbox" name="opcion1" value="TIRA DE MATERIAS"><b>TIRA DE MATERIAS</b>
+						</td>
+						<td width="50%">
+							<input type="checkbox" name="opcion2" value="ASIGNACIÓN DE MATERIAS IRREGULARES"><b>ASIGNACIÓN DE MATERIAS IRREGULARES</b>
+						</td>
+					</tr>
+					<tr>
+						<td width="50%">
+							<input type="checkbox" name="opcion3" value="CALIFICACIONES PENDIENTES"><b>CALIFICACIONES PENDIENTES</b>
+						</td>
+						<td width="50%">
+							<input type="checkbox" name="opcion4" value="PROBLEMAS EN WEB / NO TIENE ACCESO"><b>PROBLEMAS EN WEB / NO TIENE ACCESO</b>
+						</td>
+					</tr>
+					<tr>
+						<td width="50%">
+							<input type="checkbox" name="opcion5" value="CAMBIO DE GRUPO"><b>CAMBIO DE GRUPO</b>
+						</td>
+						<td width="50%">
+							<input type="checkbox" name="opcion6" value="NO APARECEN EN LISTAS O ACTAS"><b>NO APARECEN EN LISTAS O ACTAS</b>
+						</td>
+					</tr>
+					<tr>
+						<td width="50%">
+							<input type="checkbox" name="opcion7" value="FICHA DE PAGO"><b>FICHA DE PAGO</b>
+						</td>
+						<td width="50%">
+							<input type="checkbox" name="opcion8" value="CAMBIO DE CARRERA"><b>CAMBIO DE CARRERA</b>
+						</td>
+					</tr>
+					<tr>
+						<td width="50%">
+							<input type="checkbox" name="opcion9" value="CORRECCIONES"><b>CORRECCIONES</b>
+						</td>
+						<td width="50%">
+							<input type="checkbox" name="opcion10" value="APLICACIÓN DE PAGO DE INSCRIPCIÓN - REINSCRIPCIÓN"><b>APLICACIÓN DE PAGO DE INSCRIPCIÓN - REINSCRIPCIÓN</b>
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td colspan="2">
+				<table width="100%">
+					<tr>
+						<td width="100%">
+							<input type="checkbox" name="opcion11" value="MATERIAS DE MÁS"><b>MATERIAS DE MÁS</b>
+						</td>
+					</tr>
+					<tr>
+						<td width="100%">
+							<input type="checkbox" name="opcion12" value="MATERIAS DE MENOS"><b>MATERIAS DE MENOS</b>
+						</td>
+					</tr>
+					<tr>
+						<td width="100%">
+							<input type="checkbox" name="opcion13" value="NO ACTUALIZADO"><b>NO ACTUALIZADO</b>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<th colspan="6" class="AZUL">OBSERVACIONES</th>
+		</tr>
+		<tr>
+			<td colspan="6"><textarea name="observaciones" rows="5" style="width: 100%;"></textarea></td>
+		</tr>
+		<tr>
+			<td colspan="6">
+				<center>
+				<input type="submit" value="Enviar" style="width: 100px;">
+				</center>
+			</td>
+		</tr>
+	</table>
+	</form>
+	<br><br>
+	</div>
+
+	<?php foreach($tickets as $t){?>
+		<table class="bordeazul" width="100%">
+			<tr>
+				<th class="naranja">Numero de Ticket</th>
+				<th class="naranja">Estado</th>
+				<th class="naranja">Esta siendo revisado por:</th>
+				<th class="naranja">Fecha de envio</th>
+				<th class="naranja">Ultima Revison</th>	
+				<th class="naranja">Fecha fin</th>
+			</tr>
+			<?php 
+			if ($t -> fecha_in == "1969-12-31 19:00:00"){
+				$fecha_ac = "No se ha revisado";				
+				$class = "verde";
+			}else{
+				$class = "amarillo";
+				$fecha_ac = $t -> fecha_in;
+				
+			}			
+			if ($t -> fecha_final == "1969-12-31 19:00:00"){
+				$fecha_fin = "No se ha resuelto";
+			}else{
+				$fecha_fin = $t -> fecha_final;
+			}
+			if ($t -> estado == "Cerrado")
+				$class = "rojo";
+				
+			$Maestros = new Maestros();
+			$Usuarios = new Usuarios();
+			$usuario = $Usuarios -> find_first("".$t -> dirigido_a);
+			
+			if($usuario -> usuario == 0){
+				$a_cargo="CALCULO";				
+			}else{
+				if ($maestro = $Maestros -> find_first("id = '".$usuario -> usuario."'")){
+					$a_cargo = $maestro -> nombre;
+				}else{
+					$a_cargo="NO SE ENCONTRO EL USUARIO";
+				}
+			}
+			
+			?>
+			
+			<tr class="grisClaro">
+				<th><?= $t -> id ?></th>
+				<th  class="<?= $class ?>"><?= $t -> estado ?></th>
+				<th><?= $a_cargo ?></th>
+				<th><?= $t -> fecha_at ?></th>
+				<th><?= $fecha_ac ?></th>
+				<th><?= $fecha_fin ?></th>
+			</tr>
+			<tr>
+				<th colspan="6" class="azul">Observaciones</th>	
+			</tr>			
+			<tr>
+				<td colspan="6"  class="grisClaro"><?= $t -> contenido ?></td>
+			</tr>
+			<tr>
+				<th colspan="6" class="azul">Respuestas</th>	
+			</tr>			
+			<tr>
+				<td colspan="6"  class="grisClaro"><?= utf8_decode($t -> respuesta) ?></td>
+			</tr>
+		</table>
+		<br/><br/><br/>
+	<?php } ?>
+
+</div>
+

@@ -1,0 +1,41 @@
+<center>
+  <table style="width:80%; font-family:arial; font-size:12px; margin-left:100px; margin-top:10px; float:left; margin-bottom:80PX;">
+    <tr style="font-weight:bold; color:#FFFFFF; text-align:center;">
+	  <td bgcolor="#F7B64C" height="35px">
+		REGISTRO
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px">
+		NOMBRE COMPLETO
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px">
+		ESPECIALIDAD
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px">
+		IMPRIMIR
+	  </td>
+	</tr>
+
+<?php 
+
+	if(count($result) == 0 || $result == NULL)
+	{
+	   echo tr_color('#E5E3E3','#FFFFFF'); 
+	   echo '<td  width="50" align="center" colspan="4" style="font-weight:bold;" height="35px;">NO SE ENCONTRARON REGISTROS</td>';
+	   echo "</tr>";
+	}
+	
+	else
+	{
+		foreach($result AS $value)
+		{
+		  echo tr_color('#FFFFFF','#E5E3E3'); 
+		  echo '<td align="center" height="35px;">'.$value -> registro.'</td>';
+		  echo '<td align="center" height="35px;">'.utf8_encode($value -> nombre_completo).'</td>';
+		  echo '<td align="center" height="35px;">'.utf8_encode($value -> carrera).'</td>';
+		  echo '<td align="center" height="35px;">&nbsp;&nbsp;'.link_to("ventanilla/imprimir_credencial_PDF/".$value -> registro,"".img_tag("exportaradobe.jpg", "border: 0","height: 37px;","cursor:pointer;","title: IMPRIMIR CREDENCIAL PROVICIONAL", "target: _blank")).'</td>';
+		  echo "</tr>";
+		}
+    }
+?>
+  </table>
+</center>

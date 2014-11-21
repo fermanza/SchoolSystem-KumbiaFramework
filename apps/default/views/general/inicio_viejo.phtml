@@ -1,0 +1,158 @@
+<script language="JavaScript1.2">
+
+function validarEntero( Objeto ){
+	
+	var check;
+	check = Objeto.value.length;
+	
+	if( check < 1 ){
+		window.alert( "Favor de Ingresar su PreRegistro" );
+		Objeto.value = "";
+		Objeto.focus( );
+		return false;
+	}
+	
+	if( isNaN( Objeto.value ) ){
+		window.alert( "El PreRegistro sólo debe contener números" );
+		Objeto.value = "";
+		Objeto.focus( );
+		return false;
+	}
+	else{
+		if (Objeto.value < 0){
+			window.alert( "El PreRegistro no tiene números negativos" );
+			Objeto.value = "";
+			Objeto.focus( );
+			return false;
+		}
+	}
+	
+	for ( var i = 0; i < check; i++ ){
+		if ( Objeto.value[i] == "." ){
+			window.alert ("El PreRegistro no tiene números decimáles");
+			Objeto.value = "";
+			Objeto.focus ( );
+			return false;
+		}
+	}
+}
+
+function setIt( Objeto ){
+	if( Objeto.value == "" )
+		Objeto.value = "Registro";	
+}
+function clearIt( Objeto ){
+	if( Objeto.value == "Registro" )
+		Objeto.value = "";
+}
+
+</script>
+
+<style type="text/css">
+	.a a{
+		color: #404040;
+		background: #f27822;
+		padding: 10px;
+		font-weight: bold;
+	}
+</style>
+<div>
+<br /><br />
+<table border="0" cellpadding="0" cellspacing="0" width="900" >
+	<tr>
+		<td style="font-family: Verdana;">
+
+<div class="">
+
+<br />
+	<div>
+	<div class="side-aa">
+		<div id="reticulas00">
+			<h2>Plan 2000</h2>
+			<h3><a href="<?= KUMBIA_PATH ?>files/reticulas00/plan_ing_elect_comp_ago_2000.pdf" 
+				target="_blank">Reticula Electr&oacute;nica en Computaci&oacute;n</a></h3>
+			<h3><a href="<?= KUMBIA_PATH ?>files/reticulas00/plan_ing_elect_manufactura_ago_2000.pdf" 
+				target="_blank">Reticula Electr&oacute;nica Manufactura</a></h3>
+			<h3><a href="<?= KUMBIA_PATH ?>files/reticulas00/plan_ing_ind_instrumentacion_ago_2000.pdf" 
+				target="_blank">Reticula Industrial Instrumentaci&oacute;n</a></h3>
+			<h3><a href="<?= KUMBIA_PATH ?>files/reticulas00/plan_ing_ind_mecanica_ago_2000.pdf" 
+				target="_blank">Reticula Industrial Mec&aacute;nica</a></h3>
+			<h3><a href="<?= KUMBIA_PATH ?>files/reticulas00/plan_ing_mecatronica_ago_2000.pdf" 
+				target="_blank">Reticula Mecatr&oacute;nica</a></h3>
+		</div>
+		<div id="reticulas">
+			<h2>Plan 2007</h2>
+			<h3><a href="<?= KUMBIA_PATH ?>files/reticulas/Reticula_Electronica_2007.pdf" target="_blank">Reticula Electrónica</a></h3>
+			<h3><a href="<?= KUMBIA_PATH ?>files/reticulas/Reticula_Mecatronica_2007.pdf" target="_blank">Reticula Mecatrónica</a></h3>
+			<h3><a href="<?= KUMBIA_PATH ?>files/reticulas/Reticula_Industrial_2007.pdf" target="_blank">Reticula Industrial</a></h3>
+		</div>
+	</div>
+	<div class="side-bb">
+        
+		<div align="center" width="500" class="fondonaranjaa">
+		<h2>¡Alumnos!</h2>
+		<br />
+		<img src="<?= KUMBIA_PATH ?>img/nuevas-fechas-calendario.jpg" border="0" width="490"/>
+		
+		<br />
+		<h2>A T E N T A M E N T E</h2>
+		<h2>Departamento de Servicios de Apoyo Académico.</h2>
+		<br />
+		&nbsp;
+		</div>
+        <hr /> 
+		
+		<!-- fondonaranjaa -->
+		<!-- 009B4E -->
+		<!-- class ="linksobrenaranja" -->
+		<!-- fondoazull -->
+		<!-- FD8806 -->
+		<div align="center" width="500" class="fondoazull">
+		<h2>¡Alumnos!</h2>
+		<br />
+		<h3>Activa tu cuenta de correo&nbsp;<span style="color: #FD8806" >@live.ceti.mx</span>
+		¡Aprovecha los beneficios que Microsoft tiene para ti!
+		Correo solo disponible para alumnos</h3>
+		<a href="http://archivos.ceti.mx/correo.alumnos" class ="linksobreazul">Click aqui</a>
+
+		<br />
+		<h2>A T E N T A M E N T E</h2>
+		<h2>Subdireccion de Operacion Acad&eacute;mica</h2>
+		<br />
+		&nbsp;
+		</div>
+		<hr />
+
+	</div>
+	</div>
+	<br />&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="side-aaa">
+			<div id="mylogin">
+			<form method="POST" action="<?= KUMBIA_PATH ?>seguridad/iniciarsesion">
+				<h1 class="mylogin1">Iniciar Sesi&oacute;n</h1>
+				<input type="text" onblur="setIt(this)" onfocus="clearIt(this)" size="16" value="Registro" name="login" id="login" class="input">
+				<br />
+				<input type="password" onblur="setIt(this)" onfocus="clearIt(this)" size="16" value="Registro" name="password" id="password" class="input">
+				<input type="image" border="0" alt="Log In" src="<?= KUMBIA_PATH ?>img/button_go.gif" value="Enter" name="LoginUserSubmitNewEvent">
+			</form>
+			</div>
+			</div>
+			<div class="side-bbb">
+			<div id="mylogin">
+				<h2><b>&iexcl;Ayuda!</b></h2>
+				<b>&iquest;Perdiste tu contraseña?</b>
+				<br><br>
+				Si a&uacute;n no cuentas con una contraseña de acceso o la has olvidado,
+				deber&aacute;s acudir con una identificación oficial al <b>Departamento
+				de Apoyo Académico</b> para obtener una contraseña nueva.
+			</div>
+			</div>
+		</td>
+	</tr>
+</table>
+<br /><br />
+</div>

@@ -1,0 +1,16 @@
+<h2>Buscando por: <?= $tipoBusquedaa ?> </h2>
+<?= form_remote_tag("ingcalculo/mostrandoInfoCursos","update: mostrandoInfoCursos", "name: Formulario0") ?>
+<table cellspacing="1" cellpadding="1" style="font-size: 12px;" align="center">
+	<tr>
+		<td align="center">
+			<input type="text" name="valorParaBuscar" id="valorParaBuscar" size="30" maxlength="80" />
+			<input type="hidden" name="tipoBusquedaa" id="tipoBusquedaa" value="<?= $tipoBusqueda ?>" />
+			<input type="hidden" name="plantell" id="plantell" value="<?= $plantell ?>" />
+			<input type="submit" value="Buscar" />
+		</td>
+	</tr>
+</table>
+</form>
+
+<div id="mostrandoInfoCursos">
+</div>

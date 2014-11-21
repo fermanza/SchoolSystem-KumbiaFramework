@@ -1,0 +1,90 @@
+<style type="text/css">
+	.listadoGAlumnos td{
+		padding: 2px;
+	}
+	
+	.listadoGAlumnos th{
+		padding: 2px;
+	}
+	
+	.listadoGAlumnos input[type="text"]{
+		width: 40px;
+	}
+</style>
+<div class="listadoGAlumnos">
+<?php
+	$a = Session::get_data('registro');
+	if ($a == 2118 ){
+		if($listas){
+			echo form_remote_tag("tgoprofesor/calificar", "update: listadoAlumnos");
+			?>			
+			<table class="bordeazul" width="100%" style="font-size:10px;">
+			<tr class="naranja">
+				<th colspan="7">ALUMNOS PARA CALIFICAR DEL PARCIAL NUMERO <?= $parcial ?></th>			
+			</tr>
+			<tr class="azul">
+				<th>&nbsp;</th>
+				<th>Foto</th>
+				<th>Registro</th>
+				<th>Nombre</th>
+				<th>Especialidad</th>
+				<th width="20">Calificaci&oacute;n</th>
+				<th width="20">Faltas</th>
+			</tr>
+			<?php				
+				$Alumnos = new Alumnos();		
+				$Especialidades = new Especialidades();
+				$cc=0;
+				$idcal= null;
+				foreach($listas as $li){
+					if($alumno = $Alumnos -> find_first("registro = ".$li -> registro)){
+						$cc++;
+						echo tr_color('#CCDEFF', '#FFFFFF');
+						echo '<td><b>'.$cc.'</b></td>';
+						echo "<td><center>";
+						$entro=0;
+						$foto = "fotos/".$li -> registro.".JPG";
+						$foto1 = "fotos/".$li -> registro.".jpg";					
+						if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto)){					
+							echo img_tag($foto, "width: 75");
+							$entro=1;
+						}
+						if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto1)){					
+							echo img_tag($foto1, "width: 75");
+							$entro=1;
+						}
+						if ($entro == 0){
+							echo "Sin Foto";
+						}						
+						$idcal[$cc] = $li -> registro;
+						echo '<td>'.$li -> registro.'</td>';
+						echo '<td><b>'.utf8_encode($alumno -> nombre_completo).'</b></td>';
+						if($esp = $Especialidades -> find_first("id = ".$alumno ->especialidad)){
+							$nomEsp = $esp -> nombre;
+						}else{
+							$nomEsp ="";
+						}
+						echo '<td>'.$nomEsp.'</td>';
+						echo '<td><center><input type="text" name="calf'.$li -> id.'" value="NR"></center></td>';
+						echo '<td><center><input type="text" name="faltas'.$li -> id.'" value="0"></center></td>';
+						
+					}
+				}
+			?>
+			<tr>
+				<input type="hidden" name="idcal" value="<? $idcal ?>">
+				<td colspan="6">&nbsp;</td>
+				<td> <?php echo submit_tag("Envio") ?></td>
+			</tr>
+			</table>
+			<?php echo end_form_tag() ?>
+			<?php
+		}else{
+			echo "<h2>No hay alumnos asignados aun</h2>";
+		}
+	}else{
+		echo "<h3>No es fecha oficial para realizar la captura de calificaciones de el parcial ".$parcial."</h3>";
+	}
+?>
+</div>
+<br><br>

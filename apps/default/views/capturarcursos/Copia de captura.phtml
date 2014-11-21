@@ -1,0 +1,447 @@
+<center><br><br>
+<table>
+	<tr>
+		<td width="900" align="left">
+			<div style="font-size: 14px;"><div style="color: #FF0000;"><b>AVISO IMPORTANTE: </b></div>
+			<br>
+			<div style="font-size: 14px;"><b>Lista de cursos del profesor (<?= $periodo ?>)</b></div>
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B"><b>&nbsp;Número de nómina: </b></td>
+					<td width="600" bgcolor="#EEEEEE">&nbsp;<?= $nomina ?></td>
+				</tr>
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B">&nbsp;<b>Nombre del profesor: </b></td>
+					<td width="600" bgcolor="#EEEEEE">&nbsp;<?= $profesor ?></td>
+				</tr>
+			</table>
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr bgcolor="#FFCA5B">
+					<th width="100" height="25"  align="center">No.</th>
+					<th width="100" align="center">No. Curso</th>
+					<th width="200" align="center">Materia</th>
+					<th width="150" align="center">1er. Parcial</th>
+					<th width="150" align="center">2do. Parcial</th>
+					<th width="150" align="center">3er. Parcial</th>
+				</tr>
+			<?php 
+				$i = 0;
+				if($xcursos) foreach($xcursos as $curso){
+					$i++; 
+					if($i%2==0){
+						$bg = "#EEEEEE";
+					}
+					else{
+						$bg = "#FFFFFF";
+					}
+			?>
+				<tr>
+					<td width="100" height="20" align="center" bgcolor="<?= $bg ?>"><?= $i ?></td>
+					<td width="100" align="center" bgcolor="<?= $bg ?>"><?= $curso -> clavecurso ?></td>
+					<td width="200" align="center" bgcolor="<?= $bg ?>"><?= $cursos[$i-1] ?></td>
+					<td width="150" align="center" bgcolor="<?= $bg ?>"><br>
+							<?php if($permiso[$curso -> clavecurso] -> activa1==0){ ?>
+								<form method="POST" action="capturando/<?= $curso -> clavecurso ?>">
+								<input type="submit" value="CAPTURAR1" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+							<?php } else { ?>
+									<?php if($permiso[$curso -> clavecurso] -> inicio1<time() && $permiso[$curso -> clavecurso] -> fin1>time()){ ?>
+										<?php if($permiso[$curso -> clavecurso] -> ncapturas1 < $permiso[$curso -> clavecurso] -> maxcapturas1){ ?>
+											<form method="POST" action="capturando/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="acta/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+										<?php } ?>
+									<?php } else { ?>
+										<?php if($permiso[$curso -> clavecurso] -> ncapturas1 > 0){ ?>
+											<form method="POST" action="acta/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="capturando/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+										<?php } ?>
+									<?php } ?>
+							<?php } ?>
+							<input type="hidden" name="clave" value="<?= $curso -> materia ?>">
+							<input type="hidden" name="materia" value="<?= $cursos[$i-1] ?>">
+							<input type="hidden" name="parcial" value="1">
+						</form>
+					</td>
+					<td width="150" align="center" bgcolor="<?= $bg ?>"><br>
+							<?php if($permiso[$curso -> clavecurso] -> activa2==0){ ?>
+								<form method="POST" action="capturando/<?= $curso -> clavecurso ?>">
+								<input type="submit" value="CAPTURAR2" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+							<?php } else { ?>
+									<?php if($permiso[$curso -> clavecurso] -> inicio2<time()+3600*24*5 && $permiso[$curso -> clavecurso] -> fin2>time()){ ?>
+										<?php if($permiso[$curso -> clavecurso] -> ncapturas2 < $permiso[$curso -> clavecurso] -> maxcapturas2){ ?>
+											<form method="POST" action="capturando/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="acta/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+										<?php } ?>
+									<?php } else { ?>
+										<?php if($permiso[$curso -> clavecurso] -> ncapturas2 > 0){ ?>
+											<form method="POST" action="acta/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="capturando/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+										<?php } ?>
+									<?php } ?>
+							<?php } ?>
+							<input type="hidden" name="clave" value="<?= $curso -> materia ?>">
+							<input type="hidden" name="materia" value="<?= $cursos[$i-1] ?>">
+							<input type="hidden" name="parcial" value="2">
+						</form>
+					</td>
+					<td width="150" align="center" bgcolor="<?= $bg ?>"><br>
+							<?php if($permiso[$curso -> clavecurso] -> activa3==0){ ?>
+								<form method="POST" action="capturando/<?= $curso -> clavecurso ?>">
+								<input type="submit" value="CAPTURAR3" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+							<?php } else { ?>
+									<?php if($permiso[$curso -> clavecurso] -> inicio3<time() && $permiso[$curso -> clavecurso] -> fin3>time()){ ?>
+										<?php if($permiso[$curso -> clavecurso] -> ncapturas3 < $permiso[$curso -> clavecurso] -> maxcapturas3){ ?>
+											<form method="POST" action="capturando/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="acta/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+										<?php } ?>
+									<?php } else { ?>
+										<?php if($permiso[$curso -> clavecurso] -> ncapturas3 > 0){ ?>
+											<form method="POST" action="acta/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="capturando/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+										<?php } ?>
+									<?php } ?>
+							<?php } ?>
+							<input type="hidden" name="clave" value="<?= $curso -> materia ?>">
+							<input type="hidden" name="materia" value="<?= $cursos[$i-1] ?>">
+							<input type="hidden" name="parcial" value="3">
+						</form>
+					</td>
+				</tr>
+			<?php 
+				}
+			?>
+				
+				<!-- Tonala -->
+				
+			<?php
+				$i = 0;
+				if($txcursos) foreach($txcursos as $curso){
+					$i++;
+					if($i%2==0){
+						$bg = "#EEEEEE";
+					}
+					else{
+						$bg = "#FFFFFF";
+					}
+			?>
+				<tr>
+					<td width="100" height="20" align="center" bgcolor="<?= $bg ?>"><?= $i ?></td>
+					<td width="100" align="center" bgcolor="<?= $bg ?>"><?= $curso -> clavecurso ?></td>
+					<td width="200" align="center" bgcolor="<?= $bg ?>"><?= $tcursos[$i-1] ?></td>
+					<td width="150" align="center" bgcolor="<?= $bg ?>"><br>
+							<?php if($tpermiso[$curso -> clavecurso] -> activa1==0){ ?>
+								<form method="POST" action="tcapturando/<?= $curso -> clavecurso ?>">
+								<input type="submit" value="CAPTURAR1" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+							<?php } else { ?>
+									<?php if($tpermiso[$curso -> clavecurso] -> inicio1<time() && $tpermiso[$curso -> clavecurso] -> fin1>time()){ ?>
+										<?php if($tpermiso[$curso -> clavecurso] -> ncapturas1 < $tpermiso[$curso -> clavecurso] -> maxcapturas1){ ?>
+											<form method="POST" action="tcapturando/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="tacta/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+										<?php } ?>
+									<?php } else { ?>
+										<?php if($tpermiso[$curso -> clavecurso] -> ncapturas1 > 0){ ?>
+											<form method="POST" action="tacta/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="tcapturando/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+										<?php } ?>
+									<?php } ?>
+							<?php } ?>
+							<input type="hidden" name="tclave" value="<?= $curso -> materia ?>">
+							<input type="hidden" name="tmateria" value="<?= $tcursos[$i-1] ?>">
+							<input type="hidden" name="tparcial" value="1">
+						</form>
+					</td>
+					<td width="150" align="center" bgcolor="<?= $bg ?>"><br>
+							<?php if($tpermiso[$curso -> clavecurso] -> activa2==0){ ?>
+								<form method="POST" action="tcapturando/<?= $curso -> clavecurso ?>">
+								<input type="submit" value="CAPTURAR2" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+							<?php } else { ?>
+									<?php if($tpermiso[$curso -> clavecurso] -> inicio2<time()+3600*24*5 && $tpermiso[$curso -> clavecurso] -> fin2>time()){ ?>
+										<?php if($tpermiso[$curso -> clavecurso] -> ncapturas2 < $tpermiso[$curso -> clavecurso] -> maxcapturas2){ ?>
+											<form method="POST" action="tcapturando/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="tacta/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+										<?php } ?>
+									<?php } else { ?>
+										<?php if($tpermiso[$curso -> clavecurso] -> ncapturas2 > 0){ ?>
+											<form method="POST" action="tacta/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="tcapturando/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+										<?php } ?>
+									<?php } ?>
+							<?php } ?>
+							<input type="hidden" name="tclave" value="<?= $curso -> materia ?>">
+							<input type="hidden" name="tmateria" value="<?= $tcursos[$i-1] ?>">
+							<input type="hidden" name="tparcial" value="2">
+						</form>
+					</td>
+					<td width="150" align="center" bgcolor="<?= $bg ?>"><br>
+							<?php if($tpermiso[$curso -> clavecurso] -> activa3==0){ ?>
+								<form method="POST" action="tcapturando/<?= $curso -> clavecurso ?>">
+								<input type="submit" value="CAPTURAR3" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+							<?php } else { ?>
+									<?php if($tpermiso[$curso -> clavecurso] -> inicio3<time() && $tpermiso[$curso -> clavecurso] -> fin3>time()){ ?>
+										<?php if($tpermiso[$curso -> clavecurso] -> ncapturas3 < $tpermiso[$curso -> clavecurso] -> maxcapturas3){ ?>
+											<form method="POST" action="tcapturando/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="tacta/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+										<?php } ?>
+									<?php } else { ?>
+										<?php if($tpermiso[$curso -> clavecurso] -> ncapturas3 > 0){ ?>
+											<form method="POST" action="tacta/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="tcapturando/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+										<?php } ?>
+									<?php } ?>
+							<?php } ?>
+							<input type="hidden" name="tclave" value="<?= $curso -> materia ?>">
+							<input type="hidden" name="tmateria" value="<?= $tcursos[$i-1] ?>">
+							<input type="hidden" name="tparcial" value="3">
+						</form>
+					</td>
+				</tr>
+				<?php } ?>
+				
+				
+			</table>
+			<center><br><h2>EXTRAORDINARIOS Y TITULOS</h2></center>
+			
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr bgcolor="#FFCA5B">
+					<th width="100" height="25"  align="center">No.</th>
+					<th width="100" align="center">No. Curso</th>
+					<th width="250" align="center">Materia</th>
+					<th width="150" align="center">Extraordinarios</th>
+					<th width="150" align="center">Titulos de suficiencia</th>
+				</tr>
+				<?php
+				$i=0;
+				foreach($xcursos as $curso){
+					$i++;
+					if($i%2==0){
+						$bg = "#EEEEEE";
+					}
+					else{
+						$bg = "#FFFFFF";
+					}
+				?>
+				<tr>
+					<td width="100" height="20" align="center" bgcolor="<?= $bg ?>"><?= $i ?></td>
+					<td width="100" align="center" bgcolor="<?= $bg ?>"><?= $curso -> clavecurso ?></td>
+					<td width="250" align="center" bgcolor="<?= $bg ?>"><?= $cursos[$i-1] ?></td>
+					<td width="150" align="center" bgcolor="<?= $bg ?>">
+							<?php if($extras[$i-1]>0){ ?>
+							<br>
+							<?php if($permiso[$curso -> clavecurso] -> activa4==0){ ?>
+								<form method="POST" action="capturandoextras/<?= $curso -> clavecurso ?>">
+								<input type="submit" value="CAPTURAR3" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+							<?php } else { ?>
+									<?php if($permiso[$curso -> clavecurso] -> inicio4<time() && $permiso[$curso -> clavecurso] -> fin4>time()){ ?>
+										<?php if($permiso[$curso -> clavecurso] -> ncapturas4 < $permiso[$curso -> clavecurso] -> maxcapturas4){ ?>
+											<form method="POST" action="capturandoextras/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="actaextras/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;" >
+										<?php } ?>
+									<?php } else { ?>
+										<?php if($permiso[$curso -> clavecurso] -> ncapturas4 > 0){ ?>
+											<form method="POST" action="actaextras/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;" >
+										<?php } else { ?>
+											<form method="POST" action="capturandoextras/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+										<?php } ?>
+									<?php } ?>
+							<?php } ?>
+							<input type="hidden" name="clave" value="<?= $curso -> materia ?>">
+							<input type="hidden" name="materia" value="<?= $cursos[$i-1] ?>">
+							<input type="hidden" name="parcial" value="4">
+						</form>
+							<?php } else { echo "&nbsp;"; }?>
+					</td>
+					<td width="150" align="center" bgcolor="<?= $bg ?>">
+						<?php if($titulos[$i-1]>0){ ?>
+							<br>
+							<?php if($permiso[$curso -> clavecurso] -> activa5==0){ ?>
+								<form method="POST" action="capturandotitulos/<?= $curso -> clavecurso ?>">
+								<input type="submit" value="CAPTURAR" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+							<?php } else { ?>
+									<?php if($permiso[$curso -> clavecurso] -> inicio5<time() && $permiso[$curso -> clavecurso] -> fin5>time()){ ?>
+										<?php if($permiso[$curso -> clavecurso] -> ncapturas5 < $permiso[$curso -> clavecurso] -> maxcapturas5){ ?>
+											<form method="POST" action="capturandotitulos/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="actatitulos/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+										<?php } ?>
+									<?php } else { ?>
+										<?php if($permiso[$curso -> clavecurso] -> ncapturas5 > 0){ ?>
+											<form method="POST" action="actatitulos/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="capturandotitulos/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+										<?php } ?>
+									<?php } ?>
+							<?php } ?>
+							<input type="hidden" name="clave" value="<?= $curso -> materia ?>">
+							<input type="hidden" name="materia" value="<?= $cursos[$i-1] ?>">
+							<input type="hidden" name="parcial" value="5">
+						</form>
+						<?php } else { echo "&nbsp;"; }?>
+					</td>
+				</tr>
+				<?php } ?>
+				
+				
+				<?
+				$i=0;
+				foreach($txcursos as $curso){
+					$i++;
+					if($i%2==0){
+						$bg = "#EEEEEE";
+					}
+					else{
+						$bg = "#FFFFFF";
+					}
+				?>
+				<tr>
+					<td width="100" height="20" align="center" bgcolor="<?= $bg ?>"><?= $i ?></td>
+					<td width="100" align="center" bgcolor="<?= $bg ?>"><?= $curso -> clavecurso ?></td>
+					<td width="250" align="center" bgcolor="<?= $bg ?>"><?= $tcursos[$i-1] ?></td>
+					<td width="150" align="center" bgcolor="<?= $bg ?>">
+							<?php
+							if($textras[$i-1]>0){
+							?>
+							<br>
+							<?php 
+								if($tpermiso[$curso -> clavecurso] -> activa4==0){
+							?>
+								<form method="POST" action="capturandoextras/<?= $curso -> clavecurso ?>">
+								<input type="submit" value="CAPTURAR3" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+							<?php
+								}
+								else{
+							?>
+									<?php if($tpermiso[$curso -> clavecurso] -> inicio4<time() && $tpermiso[$curso -> clavecurso] -> fin4>time()){ ?>
+										<?php if($tpermiso[$curso -> clavecurso] -> ncapturas4 < $tpermiso[$curso -> clavecurso] -> maxcapturas4){ ?>
+											<form method="POST" action="capturandoextras/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #000000;background: #FFCA5B;">
+										<?php } else { ?>
+											<form method="POST" action="actaextras/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;" >
+										<?php } ?>
+									<?php } else { ?>
+										<?php if($tpermiso[$curso -> clavecurso] -> ncapturas4 > 0){ ?>
+											<form method="POST" action="actaextras/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;" >
+										<?php } else { ?>
+											<form method="POST" action="capturandoextras/<?= $curso -> clavecurso ?>">
+												<input type="submit" value="CAPTURAR" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+										<?php } ?>
+									<?php } ?>
+							<?php
+								}
+							?>
+							<input type="hidden" name="clave" value="<?= $curso -> materia ?>">
+							<input type="hidden" name="materia" value="<?= $cursos[$i-1] ?>">
+							<input type="hidden" name="parcial" value="4">
+						</form>
+							<?php
+							}
+							else {
+								echo "&nbsp;";
+							}
+							?>
+					</td>
+					<td width="150" align="center" bgcolor="<?= $bg ?>">
+						<?php
+						if($ttitulos[$i-1]>0){
+						?>
+							<br>
+							<?php
+								if($permiso[$curso -> clavecurso] -> activa5==0){
+							?>
+								<form method="POST" action="capturandotitulos/<?= $curso -> clavecurso ?>">
+								<input type="submit" value="CAPTURAR" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+							<?php
+								}
+								else{
+							?>
+								<?php
+									if($permiso[$curso -> clavecurso] -> inicio5<time() && $permiso[$curso -> clavecurso] -> fin5>time()){
+								?>
+									<?php if($permiso[$curso -> clavecurso] -> ncapturas5 < $permiso[$curso -> clavecurso] -> maxcapturas5){ ?>
+										<form method="POST" action="capturandotitulos/<?= $curso -> clavecurso ?>">
+											<input type="submit" value="CAPTURAR" style="color: #000000;background: #FFCA5B;">
+									<?php } else { ?>
+										<form method="POST" action="actatitulos/<?= $curso -> clavecurso ?>">
+											<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+									<?php } ?>
+								<?php
+									}
+									else{
+								?>
+									<?php if($permiso[$curso -> clavecurso] -> ncapturas5 > 0){ ?>
+										<form method="POST" action="actatitulos/<?= $curso -> clavecurso ?>">
+											<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+									<?php } else { ?>
+										<form method="POST" action="capturandotitulos/<?= $curso -> clavecurso ?>">
+											<input type="submit" value="CAPTURAR" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+									<?php } ?>
+								<?php
+									}
+								}
+								?>
+							<input type="hidden" name="clave" value="<?= $curso -> materia ?>">
+							<input type="hidden" name="materia" value="<?= $cursos[$i-1] ?>">
+							<input type="hidden" name="parcial" value="5">
+						</form>
+						<?php
+						}
+						else{
+							echo "&nbsp;";
+						}
+						?>
+					</td>
+				</tr>
+				<?php } ?>
+			</table>
+		</td>
+	</tr>
+</table>
+<br><br>
+</center>

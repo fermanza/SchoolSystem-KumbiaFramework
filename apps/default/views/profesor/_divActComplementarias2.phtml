@@ -1,0 +1,97 @@
+<table>
+	<tr class="naranja">
+		<th class="bordeAzul2" colspan="3">
+			Lista de Actividades Disponibles
+		</td>
+	</tr>
+	<tr class="naranja">
+		<td class="bordeAzul2" colspan="3">
+			<select name="listaactividades" id="listaactividades" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccionar Actividad - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $listaActividades as $lista ){
+				?>
+					<option value="<?= $lista -> clave ?>">
+					<?
+						echo htmlentities( $lista -> clave." - ".$lista -> actividad );
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+			Horas Para Actividad
+			<input type="text" value="0" name="horasParaCursosAparte2" 
+				id="horasParaCursosAparte2" onBlur="validarHoras()" maxlength="3" size="3" />
+			<input type="hidden" id="horasParaCursosAparte" 
+				name="horasParaCursosAparte" value="<?= $horasParaCursosAparte ?>" />
+			&nbsp;
+		</td>
+	</tr>
+	<tr class="naranja">
+		<td class="bordeAzul2" align='center'>
+			Objetivo<br />
+			<input type="text" value="" name="objetivoActComp1" id="objetivoActComp1" size='35' maxlength='100'>
+		</td>
+		<td class="bordeAzul2" align='center'>
+			Meta<br />
+			<input type="text" value="" name="metaActComp1" id="metaActComp1" size='35' maxlength='100'>
+		</td>
+		<td class="bordeAzul2" align='center'>
+			Evidencia<br />
+			<input type="text" value="" name="evidenciaActComp1" id="evidenciaActComp1" size='35' maxlength='100'>
+		</td>
+	</tr>
+	<tr class="naranja">
+		<td class="bordeAzul2" colspan="3">
+			<select name="listaactividades2" id="listaactividades2" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccionar Actividad - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $listaActividades as $lista ){
+				?>
+					<option value="<?= $lista -> clave ?>">
+					<?
+						echo htmlentities( $lista -> clave." - ".$lista -> actividad );
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+			Horas Para Actividad
+			<input type="text" value="0" name="horasParaCursosAparte3" 
+				id="horasParaCursosAparte3" onBlur="validarHoras()" maxlength="3" size="3" />
+			&nbsp;
+		</td>
+	</tr>
+	<tr class="naranja">
+		<td class="bordeAzul2" align='center'>
+			Objetivo<br />
+			<input select="text" value="" name="objetivoActComp2" id="objetivoActComp2" size='35' maxlength='100'>
+		</td>
+		<td class="bordeAzul2" align='center'>
+			Meta<br />
+			<input type="text" value="" name="metaActComp2" id="metaActComp2" size='35' maxlength='100'>
+		</td>
+		<td class="bordeAzul2" align='center'>
+			Evidencia<br />
+			<input type="text" value="" name="evidenciaActComp2" id="evidenciaActComp2" size='35' maxlength='100'>
+		</td>
+	</tr>
+</table>

@@ -1,0 +1,126 @@
+<br />
+<br />
+<br />
+<table border="1" align="center">
+	<tr>
+		<td class="azull2" width="150px" align="center">
+			<a class="linksobreazul" href="<?= KUMBIA_PATH ?>asignarEspecialidad/alumnosConEsp"><? echo "Regresar" ?></a>
+		</td>
+	</tr>
+</table>
+<br />
+<br />
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center">
+	<tr>
+		<th class="azull4" width="200">
+			Registro
+		</th>
+		<th class="azull4" width="200">
+			Nombre del Alumno
+		</th>
+		<th class="azull4" width="200">
+			Carrera
+		</th>
+		<th class="azull4" width="200">
+			Especialidad
+		</th>
+	</tr>
+	<tr>
+		<td class="bordee">
+			<?= $alumno -> miReg ?>
+		</td>
+		<td class="bordee">
+			<?= $alumno -> vcNomAlu ?>
+		</td>
+		<td class="bordee">
+			<? echo utf8_encode($carrera -> nombre) ?>
+		</td>
+		<td class="bordee">
+			<? echo utf8_encode($areadeformacion -> nombreareaformacion) ?>
+		</td>
+	</tr>
+</table>
+<br />
+<?
+if( isset($mEspDeSuCarreraYEsp) ){
+?>
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center">
+	<tr>
+		<th class="azull4" width="600" colspan="2">
+			Materias Especializantes que est&aacute;n en su Kardex y son de su Carrera y Especialidad
+		</th>
+	</tr>
+	<tr>
+		</th>
+		<th class="azull4" width="300">
+			Materia
+		</th>
+		<th class="azull4" width="300">
+			Especialidad a la que pertenece
+		</th>
+	</tr>
+	<?
+	foreach( $mEspDeSuCarreraYEsp as $mesp ){
+	?>
+	<tr>
+		<td class="bordee">
+			<? echo $mesp -> clave." - ".utf8_encode($mesp -> nombre) ?>
+		</td>
+		<td class="bordee">
+			<? echo utf8_encode($mesp -> nombreareaformacion) ?>
+		</td>
+	</tr>
+	<?
+	}
+	?>
+</table>
+<?
+}
+?>
+<br />
+<?
+if( isset($mEspQueNoSonDeSuEsp) ){
+?>
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center">
+	<tr>
+		<th class="azull4" width="600" colspan="2">
+			Materias Especializantes que est&aacute;n en su Kardex y NO son de su Carrera NI Especialidad
+		</th>
+	</tr>
+	<tr>
+		</th>
+		<th class="azull4" width="300">
+			Materia
+		</th>
+		<th class="azull4" width="450">
+			Especialidades a la que pertenece
+		</th>
+	</tr>
+	<?
+	foreach( $mEspQueNoSonDeSuEsp as $mesp ){
+	?>
+	<tr>
+		<td class="bordee">
+			<? echo $mesp -> clave." - ".utf8_encode($mesp -> nombre) ?>
+		</td>
+		<td class="bordeeLeft">
+			<?
+			$k = 0;
+			foreach( $espDeMEspQueNoSonDeSuCarrera[$mesp -> clave] as $esp ){
+				if( $k > 0 )
+					echo "<br />";
+				echo ($k+1).". ".utf8_encode(" <b>CARRERA:</b> ".$esp -> nombre.", <b>ESPECIALIDAD:</b> ".$esp -> nombreareaformacion);
+				$k++;
+			}
+			?>
+		</td>
+	</tr>
+	<?
+	}
+	?>
+</table>
+<?
+}
+?>
+<br />
+<br />

@@ -1,0 +1,419 @@
+body{
+	 background: #CCCCCC;
+}
+img {
+	border: none;
+}
+.centrar{
+	text-align: center
+}
+.banner{
+	width: 1000px;
+	border: 0px;
+	border-color: #0559B7;
+	background: #FFFFFF;
+}
+.barra_menu{
+	color:#FFFFFFF; 
+	font-family:Verdana; 
+	font-size: 11px;
+	width:1000px;
+	height:30px;
+}
+.barra_menu a{
+	color:#FFF;
+	text-decoration: none;
+}
+.barra_menu a:hover{
+	color:#FFF;
+	text-decoration: underline;
+}
+.menu a{
+	color:#FFF;
+	text-decoration: none;
+}
+.menu a:hover{
+	color:#FFF;
+	text-decoration: underline;
+}
+.naranja{
+	background:#FFCA5B;
+	font-weight:bold;
+}
+.grisClaro{
+	background:#DDDDDD;
+}
+.gris{
+	background:#BBBBBB;
+}
+.blanco{
+	background:#CCCCCC;
+}
+.azul{
+	background:#1569C7;
+	color:#FFFFFF;
+}
+.negro{
+	background:#000000;
+	color:#FFFFFF;
+}
+.verde{
+	background:#00aa00;
+}
+.amarillo{
+	background:#ffff00;
+}
+.rojo{
+	background:#aa0000;
+}
+.bordeazul{
+	border: solid 1px #003399;
+}
+.bordeAzul2{
+	border: solid 1px #003399;
+}
+.bordeazul th{
+	border: solid 1px #003399;
+}
+.bordeazul td{
+	border: solid 1px #003399;
+}
+.materias *{
+	font-size: 12px;
+}
+.materias a{
+	text-decoration:none;
+	font-weight: bold;
+}
+.materias a:hover{
+	text-decoration:underline;
+}
+.apoyo *{
+	font-size: 11px;
+}
+a.linksobreazul:link {
+	color:#FFFFFF
+	/* unvisited link */
+}
+a.linksobreazul:visited {
+	color:#C0C0C0
+	/* visited link */
+}
+a.linksobreazul:hover {
+	color:#000000
+	/* mouse over link */
+}
+a.linksobreazul:active {
+	color:#00FFFF
+	/* selected link */
+}
+.naranjaa{
+	background:#FF9650; /* FF8D0F  FF8F2B    FF9650*/
+	font-weight:bold;
+}
+.naranjaa2{
+	background:#f27822; /*  F8CA8F  FA B8 76  F6CF8E   FFC671 FFCF75   FBA960*/
+	border: 1px outset #1569C7;
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 11px
+}
+.bordee{
+	border: 2px outset #1569C7;
+	text-align: center;
+	font-size: xx-small
+/*
+  border: #ff7006;
+  border-style: solid; 
+  border-top-width: 1px; 
+  border-right-width: 1px; 
+  border-bottom-width: 1px; 
+  border-left-width: 1px;
+  font-size: 8px
+*/
+}
+.bordeeLeft{
+	border: 2px outset #1569C7;
+	text-align: left;
+	font-size: xx-small
+}
+.bordeegriss{
+	border: 2px outset #1569C7;
+	text-align: center;
+	font-size: xx-small;
+	background:#C0C0C0
+}
+.azull{
+	background:#1569C7; /* 15 69 c7     */
+	font-weight:bold;
+	color: #dddddd
+}
+.azull2{
+	background:#1569C7; /* 15 69 c7     */
+	border: 4px outset #1569C7;
+	font-weight:bold;
+	color: #dddddd;
+}
+.azull3{
+	border: 1px outset #0000A0;
+	font-weight:bold;
+	color: #000000;
+}
+.azull4{
+	background:#1569C7; /* 15 69 c7     */
+	border: 3px outset #1569C7;
+	font-weight:bold;
+	color: #dddddd;
+	font-size: x-small
+}
+.griss{
+	background:#C0C0C0;
+}
+.blancoo{
+	background:#FFFFFF;
+}
+.encabezadoo{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #1569C7;
+	text-align: center
+}
+.negritaa{
+	text-align: center;
+	font-weight: bold;
+}
+.negritaaFondo{
+	text-align: center;
+	font-weight: bold;
+	color: #FF0000
+}
+.lista {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	border: #000000; 
+	border-style: solid; 
+	border-top-width: 1px; 
+	border-right-width: 1px; 
+	border-bottom-width: 1px; 
+	border-left-width: 1px;
+	background-color: #EAEAF0;
+}
+.listaParcial{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	border: #000000; 
+	border-style: solid; 
+	border-top-width: 1px; 
+	border-right-width: 1px; 
+	border-bottom-width: 1px; 
+	border-left-width: 1px;
+	background-color: #EAEAF0;
+	margin: 0 0 0 45%;
+}
+.exportarExcel{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	width: 60;
+	margin: 0 0 0 83%;
+}
+.alinearDerechaPaginacion{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	width: 60;
+	margin: 0 0 0 70%;
+}
+#centrar{
+	width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+#navi li {
+	list-style:none;
+	margin:0;
+	padding:0;
+	margin:2px;
+	padding:0;
+	display: list-item;
+	width:345px;
+	padding:4px 0;
+	text-decoration:none;
+	text-align:left;
+	font-size:11px;
+	color:#00000;
+	background-color:#DDDDDD;
+	float:right;
+}
+#navi2 li {
+	list-style:none;
+	margin:0;
+	padding:0;
+	margin:2px;
+	padding:0;
+	display: list-item;
+	width:345px;
+	padding:4px 0;
+	text-decoration:none;
+	text-align:left;
+	font-size:11px;
+	color:#00000;
+	background-color:#DDDDDD;
+	float:right;
+}
+#navi3  {
+	list-style:none;
+	margin:0;
+	padding:0;
+	margin:2px;
+	padding:0;
+	display: list-item;
+	width: 345px;
+	padding:4px 0;
+	text-decoration:none;
+	text-align:center;
+	font-size:14px;
+	color:#FFFFFF;
+	background-color:#1569C7;
+}
+/*
+#wrapper {
+	text-align: left;
+	margin: 0px auto;
+	padding: 0px;
+	border:0;
+	width: 700px;
+	background: url("/path/to/your/background_cols.gif") repeat;
+}
+*/
+#side-a {
+	float: left;
+	width: 350px;
+}
+#side-b {
+	margin: 0;
+	float: left;
+	width: 350px;
+	height: 1% /* Holly hack for Peekaboo Bug */
+}
+#izquierdaConEspacio{
+
+}
+.side-aa{
+	float: left;
+	width: 150px;
+	/*height: 1600px; */
+	padding:2px;
+}
+.side-bb{ 
+	float: left;
+	width: 400px;
+/*	height: 1670px; */
+}
+#mylogin {
+	background-image:url(http://ase.ceti.mx/ingenieria/img/login_bg.gif);
+	border:1px solid #CCCCCC;
+	margin-bottom:12px;
+	padding:10px 10px 14px 10px;
+	float: left;
+	text-align:left;
+	height: 215px;
+}
+.side-aaa{
+	margin-top: 2px;
+	float: left;
+	width: 150px;
+	/*height: 1600px; */
+}
+.side-bbb{
+	margin-top: 2px;
+	float: left;
+	width: 250px;
+/*	height: 1670px; */
+}
+#reticulas00{
+	border:1px solid #CCCCCC;
+	margin-bottom:10px;
+	padding:10px 10px 12px;
+	background-image: url(http://ase.ceti.mx/ingenieria/img/locator00_bg.gif);
+	text-align:left
+}
+#reticulas{
+	border:1px solid #CCCCCC;
+	margin-bottom:10px;
+	padding:10px 10px 12px;
+	background-image: url(http://ase.ceti.mx/ingenieria/img/locator_bg.gif);
+	text-align:left
+}
+.myloginh1 {
+	color:#333333;
+	display:block;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	margin:0 0 6px;
+	padding:0;
+}
+.input {
+	color:#666666;
+	margin:0px 4px 4px 0px;
+}
+.input2 {
+	color:#666666;
+	margin:2px 2px 2px 2px;
+}
+.fondoazull{
+	background-color: #1569c7;
+	color: #dddddd; 
+	font-size: 12px;
+	border:1px solid #CCCCCC;
+	margin-bottom:12px;
+	padding:10px 10px 14px;
+	/* text-shadow:  #6374AB 20px -12px 2px; */
+	-moz-box-shadow: 8px 6px 6px gray;
+	-webkit-box-shadow: 8px 6px 6px gray;
+    box-shadow: 8px 6px 6px gray;
+}
+.fondonaranjaa{
+	background-color: #ffca5b;
+	color: #333333; 
+	font-size: 12px;
+	border:1px solid #CCCCCC;
+	margin-bottom:12px;
+	-moz-box-shadow: 8px 6px 6px gray;
+	-webkit-box-shadow: 8px 6px 6px gray;
+    box-shadow: 8px 6px 6px gray;
+}
+#listadoCursos{
+	border:1px solid #CCCCCC;
+	margin-bottom:1px;
+	padding:1px 0px 1px;
+	background-image: url(http://ase.ceti.mx/ingenieria/img/locator_bg.gif);
+}
+.marco{
+	border:1px solid #CCCCCC;
+}
+#header div#store_menu ul li:hover, #header div#store_menu ul li.selected {
+	background-image: url('/images/site/menu_hover_state.png');
+	height: 35px;
+	background-color: transparent;
+}
+#header div#store_menu ul li:hover span, #header div#store_menu ul li.selected span{
+	display: block;
+	height: 13px;
+	width: 20px;
+	margin-top: 2px;
+	background: url('/images/site/bubble_tip.png')no-repeat;
+}
+#header div#store_menu ul li:hover a, #header div#store_menu ul li.selected a{
+	color: #000;
+}
+.letraRoja{
+	color: #ED1C24;
+	font-weight: bold
+}
+.letraRoja11px {
+	color: #ED1C24;
+	font-size: 11px;
+	font-weight: bold
+}

@@ -1,0 +1,119 @@
+ <div>
+	 <center>
+		<table width="900" class="bordeAzul" style="font-size: 11px;">
+			<tr class="azul">
+				<th colspan="13">
+					CALIFICACION FINAL DE LA ACTA #<?= $acta ?>
+					<?php 
+						$Horario = new Horarios();
+						$Materia = new MateriasHorarios();			
+						$Ponderada = new MateriasPonderadas();
+						
+						if($Horario -> find_first($acta)){							
+							if($Materia -> find_first($Horario -> materia_id)){
+								$suma=0;
+								$suma = $Horario -> horas1 + $Horario -> horas2 + $Horario -> horas3;
+								echo " - ".$Materia -> nombre."<br> Horas clase impartidas: ".$suma;
+								if($Ponderada -> find_first("materia_id = ".$Horario -> materia_id)){
+									echo "<br> :: Ponderacion: &nbsp;&nbsp;&nbsp; 1ra: ".$Ponderada -> ponderacion1."%&nbsp;&nbsp;&nbsp; 2da: ".$Ponderada -> ponderacion2."%&nbsp;&nbsp;&nbsp; 3ra: ".$Ponderada -> ponderacion3."% ::";
+								}else{
+									echo "<br> :: Sin Ponderacion ::";
+								}
+							}
+						}
+						
+						
+					?>
+				</th>
+			</tr>
+			<tr class="naranja">
+				<th rowspan="2">FOTO</th>
+				<th rowspan="2">REGISTRO</th>
+				<th rowspan="2">NOMBRE</th>
+				<th rowspan="2">TIPO</th>
+				<th colspan="6">CALIFIACIONES PARCIALES</th>
+				<th rowspan="2">FALTAS</th>
+				<th rowspan="2">CALIFIACION<br>FINAL</th>
+				<th rowspan="2">SITUACION<br>FINAL</th>
+			</tr>
+			<tr class="grisClaro">
+				<th>Faltas</th>
+				<th>1ro</th>
+				<th>Faltas</th>
+				<th>2do</th>
+				<th>Faltas</th>
+				<th>3ro</th>				
+			</tr>
+			<?php 
+			foreach($calificaciones as $c){
+				echo tr_color('#FFFFCC','#FFFFFF','#CCFFFF');
+			?>
+				<td>
+				<?php 
+					$entro = 0;
+					$foto = "fotos/".$c -> registro.".JPG";
+					$foto1 = "fotos/".$c -> registro.".jpg";					
+					if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto)){					
+						echo img_tag($foto, "width: 75");
+						$entro=1;
+					}
+					if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto1)){					
+						echo img_tag($foto1, "width: 75");
+						$entro=1;
+					}
+					if ($entro == 0){
+						echo "Sin Foto";
+					}
+				?>
+				</td>
+				<th><?= $c -> registro ?></th>
+				<?php 
+				$Alumno = new Alumnos();
+				$Alumno -> find_first("registro = ".$c -> registro);
+				?>
+				<td><?= utf8_encode($Alumno -> nombre_completo) ?></td>
+				<th><?= $c -> tipo ?></th>
+				<td><center><?= $c -> faltas1 ?></center></td>
+				<th><?= $c -> calificacion1 ?></th>
+				<td><center><?= $c -> faltas2 ?></center></td>
+				<th><?= $c -> calificacion2 ?></th>
+				<td><center><?= $c -> faltas3 ?></center></td>
+				<th><?= $c -> calificacion3 ?></th>
+				
+				<td><center><?= $c -> faltas ?></center></td>				
+				<?php
+				$style="";
+				$style2="";
+				if($c -> calificacion < 70){
+					$style='style="color: #990000"';
+				}else{
+					$style='style="color: #009900"';
+				}
+				if($c -> situacion == 'OR'){
+					$style2='style="color: #009900; font-weight: bold;"';
+				}else{
+					$style2='style="color: #990000; font-weight: bold;"';
+				}
+				
+				?>
+				<th <?= $style ?>><?= $c -> calificacion ?></th>
+				<td <?= $style2 ?>><?= $c -> situacion ?></td>				
+			<?php
+			}
+			?>
+		</table>	
+		</center>				
+	<h2 style="font-size: 14px;">ABREVIACIONES PARA EL CAMPO DE SITUACION</h2> 
+	<div class="abreviaciones" style="text-align: left; font-weight: bold; font-size:12px;">	
+	- = "SIN INFORMACION"<br/> 
+	OR = "ORDINARIO"<br/> 
+	EF = "EXTRAORDINARIO POR FALTAS"<br/> 
+	EC = "EXTRAORDINARIO POR CALIFICACION"<br/> 
+	TF = "TITULO POR FALTAS"<br/> 
+	TC = "TITULO POR CALIFICACION"<br/> 
+	RE = "REGULARIZACION DIRECTA"<br/> 
+	BA = "BAJA DEFINITIVA"<br/> 
+	</div> 
+	<br/><br/> 
+		<br/>	 
+ </div>

@@ -1,0 +1,77 @@
+			<div id="datos">
+			<div style="color: #000000; font-size: 20px;" align="center">
+				<b><?= $periodoo ?></b></div>
+			<br/>
+			<br />
+			<table border="0" style="font-size:12px;" align="center">
+			<tr>
+				<th width="50" class="fondoazul" align="center">
+					<b>FICHA</b>
+				</th>
+				<th width="50" class="fondoazul" align="center">
+					<b>FOLIO</b>
+				</th>
+				<th width="150" class="fondoazul" align="center">
+					<b>TIPO ASPIRANTE</b>
+				</th>
+				<th width="150" class="fondoazul" align="center">
+					<b>CARRERA</b>
+				</th>
+				<th width="100" class="fondoazul" align="center">
+					<b>PLANTEL</b>
+				</th>
+				<th width="300" class="fondoazul" align="center">
+					<b>NOMBRE</b>
+				</th>
+				<th width="100" class="fondoazul" align="center">
+					<b>CONSULTAR</b>
+				</th>
+			</tr>
+			<?php
+				for( $i = 0; $i < $iiii; $i++ ){
+			?>
+				<tr>
+					<td width="50" valign="top" 
+							style="vertical-align:top;" class="fondonaranja" align="center">
+						<? echo $ficha[$i] ?>
+					</td>
+					<td width="50" valign="top" 
+							style="vertical-align:top;" class="fondonaranja" align="center">
+						<? echo $folio[$i] ?>
+					</td>
+					<td width="150" valign="top" 
+							style="vertical-align:top;" class="fondonaranja" align="center">
+						<?
+						if( $tipoAspirante[$i] == 1 )
+							echo "Pago de Derecho";
+						else if( $tipoAspirante[$i] == 2 )
+							echo "Continuaci&oacute;n de Estudios";
+						?>
+					</td>
+					<td width="150" valign="top" 
+							style="vertical-align:top;" class="fondonaranja" align="center">
+						<? echo $carrera[$i] ?>
+					</td>
+					<td width="100" valign="top" 
+							style="vertical-align:top;" class="fondonaranja" align="center">
+						<? echo $plantel[$i] ?>
+					</td>
+					<td width="300" valign="top" 
+							style="vertical-align:top;" class="fondonaranja" align="center">
+						<? echo utf8_encode($nombre[$i]." ".$paterno[$i]." ".$materno[$i]);  ?>
+					</td>
+					<td width="100" valign="top" 
+							style="vertical-align:top;" class="fondonaranja" align="center">
+						<form method="POST" 
+								action="<?= KUMBIA_PATH ?>aspirantes/consulta/
+												<? echo $folio[$i] ?>/<? echo $tipoAspirante[$i] ?>/">
+							<input type="submit" value="consultar">
+							<input type="hidden" value="<?= $periodoNumero ?>" name="periodoNumero" id="periodoNumero">
+						</form>
+					</td>
+				</tr>
+			<?
+				}
+			?>
+			</table>
+			</div>

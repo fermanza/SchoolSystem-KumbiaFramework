@@ -1,0 +1,125 @@
+<div id="optionSearch">
+  <font style="font-weight:bold;">Tipo de usuario a buscar&nbsp;:</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <input type="radio" id="Alumno" name="tipoUsuario" onclick="showTypeSearch();"/>&nbsp;&nbsp;Alumnos&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <input type="radio" id="Aspirante" name="tipoUsuario" onclick="showTypeSearch();"/>&nbsp;&nbsp;Aspirantes
+</div>
+<div class="formulario"  id="aspiranteSearch" style="margin-top:50px; display:none;">
+<?= form_remote_tag('caja/buscarAlumno','update: busqueda') ?>
+<table width="300" cellpadding="0" cellspacing="3" id="contenido">
+    <tr>
+        <th>FICHA</th>
+        <td><?= text_field_tag('ficha','id: texto', 'onkeypress: javascript:return ValidNum(event)') ?></td>
+    </tr>
+    <tr>
+        <th>FOLIO</th>
+        <td><?= text_field_tag('folio','id: texto', 'onkeypress: javascript:return ValidNum(event)') ?></td>
+    </tr>
+    <tr>
+        <th>NOMBRE(s)</th>
+        <td><?= text_field_tag('nombre','id: texto', 'onkeypress: javascript: return validLetters(event)') ?></td>
+    </tr>
+    <tr>
+        <th>A. PATERNO</th>
+        <td><?= text_field_tag('paterno','id: texto', 'onkeypress: javascript: return validLetters(event)') ?></td>
+    </tr>
+    <tr>
+        <th>A. MATERNO</th>
+        <td><?= text_field_tag('materno','id: texto', 'onkeypress: javascript: return validLetters(event)') ?></td>
+    </tr>
+    <tr>
+        <th>REGISTRO</th>
+        <td><?= text_field_tag('registro','id: texto', 'onkeypress: javascript:return ValidNum(event)') ?></td>
+        <td><?= hidden_field_tag('tipoBusqueda','value: aspirante') ?></td>
+    </tr>
+    <tr>
+        <th>PERIODO</th>
+        <td>
+            <select name="periodo">
+                <option value="todos">TODOS</option>
+                <option value="32012">32012</option>
+				<option value="12012">12012</option>
+                <option value="32011">32011</option>
+                <option value="12011">12011</option>
+                <option value="32010">32010</option>
+                <option value="12010">12010</option>
+                <option value="32009">32009</option>
+                <option value="12009">12009</option>
+                <option value="32008">32008</option>            
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><?= submit_tag('BUSCAR','id: boton')?></td>
+    </tr>
+</table>
+</div>
+
+<div class="formulario"  id="alumnoSearch" style="margin-top:50px; display:none;">
+  <?php echo form_remote_tag("caja/buscarAlumno", "update: listado") ?>
+	<table class="bordeAzul" style="font-size:11px;">
+		<tr class="naranja">
+			<th colspan="3">BUSCADOR DE ALUMNO</th>
+		</tr>
+		<tr class="azul">
+			<th>REGISTRO</th>
+			<th>y/o</th>
+			<th>NOMBRE</th>
+		</tr>
+		<tr>
+			<th><?= text_field_tag("registro", "onkeypress: javascript:return ValidNum(event)", "maxlength: 15") ?></th>
+			<th class="grisClaro">&nbsp;</th>
+			<th><?= text_field_tag("nombre", "onkeypress: javascript: return validLetters(event)", "maxlength: 70") ?></th>
+			<th><?= hidden_field_tag("tipoBusqueda", "value: alumno") ?></th>
+		</tr>
+		<tr class="grisClaro">
+			<td colspan="3">
+				<center>
+					<?php echo submit_tag("Buscar") ?>
+				</center>
+			</td>
+		</tr>	
+	</table>
+  <?php echo end_form_tag() ?>
+</div>
+<div id="busqueda"></div>
+<div id="listado"></div>
+
+<script type='text/javascript'>
+//Funcion que muestra el formulario de busqueda segun el tipo de alumno
+function showTypeSearch()
+{
+  if(document.getElementById('Alumno').checked == true)
+  {
+    document.getElementById('alumnoSearch').style.display = "block";
+	document.getElementById('aspiranteSearch').style.display = "none";
+  }
+  
+  else
+  {
+    document.getElementById('aspiranteSearch').style.display = "block";
+	document.getElementById('alumnoSearch').style.display = "none";
+  }
+}
+
+//funcion que valida que solo se puedan ingresar numeros
+function ValidNum(e)
+{
+  var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+    return ((tecla > 47 && tecla < 58) || tecla == 8);
+}
+
+//Funcion que valida que solo se pueda introducir letras
+function validLetters(e)
+{
+  var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+      
+  if(tecla == 8)
+    return true;
+    
+    var patron = /[A-Za-z\s]/;
+	var x = String.fromCharCode(tecla);
+	return patron.test(x)
+}
+
+</script> 

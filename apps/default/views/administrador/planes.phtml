@@ -1,0 +1,196 @@
+		<table border="0" cellpadding="0" cellspacing="0" width="770">
+			<tr>
+				<td style="font-family: Verdana;">
+					<br>
+					<div style="color: #1569C7; font-size: 14px;" align="left"><b><?= img_tag("adorno.gif","border: 0") ?> PLANES DE ESTUDIO</b></div>
+					<div style="color: #000000; font-size: 11px;" align="justify">
+						<br>
+						Las carreras ofrecidas por nuestra institución, estan clasificadas en diferentes modelos de acuerdo al plan de estudios con el que trabajan, para tecnólogo existen el modelo 1998 y 2007, y para Ingeniería tenemos el 2000 y 2007.
+						<br><br>
+						<div style="color: #FF0000; font-size: 18px;" align="center"><b><?= $mensaje ?></b></div>
+						<br>
+					</div>
+					<div style="color: #000000; font-size: 11px;" align="center">
+						<?php if($modelo1998) { ?>
+						<table border="1" cellpadding="1" cellspacing="1" width="650">
+							<tr>
+								<th colspan="4" align="center" height="25" class="fondoazul">
+									MODELO ACADÉMICO 1998
+								</th>
+							</tr>
+							<tr>
+								<th align="center" height="25" class="fondonaranja">
+									Clave
+								</th>
+								<th align="center" height="25" class="fondonaranja">
+									Nombre
+								</th>
+								
+								<th colspan="2" align="center" height="25" class="fondonaranja">
+									&nbsp;
+								</th>
+							</tr>
+							
+							<?php foreach($modelo1998  as $carrera){ $k++; if( $k % 2 == 0){ $bg="#FFFFFF"; } else{ $bg="#DDDDDD"; } ?>
+							<tr>
+								<th align="center" height="25" width="50" bgcolor="<?= $bg ?>">
+									<?= $carrera -> clave ?>
+								</th>
+								<th align="left" height="25" width="450" bgcolor="<?= $bg ?>">
+									&nbsp;<?php if($carrera -> clavenivel=="I") echo "INGENIERÍA "; else echo "TECNÓLOGO EN "; ?><?= $carrera -> nombre ?>
+								</th>
+								<th align="center" height="25" width="100" bgcolor="<?= $bg ?>">
+									<a href="<?= KUMBIA_PATH ?>administrador/carreraplan/<?= $carrera -> id ?>/<?= $carrera -> modelo ?>">
+										PLAN <?= $carrera -> modelo ?>
+									</a>
+								</th>
+								<form action="<?= KUMBIA_PATH ?>administrador/eliminarCarrera" method="POST">
+								<th align="center" height="25" bgcolor="#FFFFFF">
+									<input type="hidden" name="id" value="<?= $carrera -> id ?>">
+									<input type="image" src="<?= KUMBIA_PATH ?>public/img/delete.jpg" width="25" height="25" border="0">
+								</th>
+								</form>
+								
+							</tr>
+							<?php } ?>
+						</table>
+						<?php } ?>
+						<?php if($modelo2000) { ?>
+						<table border="1" cellpadding="1" cellspacing="1" width="650">
+							<tr>
+								<th colspan="4" align="center" height="25" class="fondoazul">
+									MODELO ACADÉMICO 2000
+								</th>
+							</tr>
+							<tr>
+								<th align="center" height="25" class="fondonaranja">
+									Clave
+								</th>
+								<th align="center" height="25" class="fondonaranja">
+									Nombre
+								</th>
+								
+								<th colspan="2" align="center" height="25" class="fondonaranja">
+									&nbsp;
+								</th>
+							</tr>
+							
+							<?php foreach($modelo2000  as $carrera){ $k++; if( $k % 2 == 0){ $bg="#FFFFFF"; } else{ $bg="#DDDDDD"; } ?>
+							<tr>
+								<th align="center" height="25" width="50" bgcolor="<?= $bg ?>">
+									<?= $carrera -> clave ?>
+								</th>
+								<th align="left" height="25" width="450" bgcolor="<?= $bg ?>">
+									&nbsp;<?php if($carrera -> clavenivel=="I") echo "INGENIERÍA "; else echo "TECNÓLOGO EN "; ?><?= $carrera -> nombre ?>
+								</th>
+								<th align="center" height="25" width="100" bgcolor="<?= $bg ?>">
+									<a href="<?= KUMBIA_PATH ?>administrador/carreraplan/<?= $carrera -> id ?>/<?= $carrera -> modelo ?>">
+										PLAN <?= $carrera -> modelo ?>
+									</a>
+								</th>
+								<form action="<?= KUMBIA_PATH ?>administrador/eliminarCarrera" method="POST">
+								<th align="center" height="25" bgcolor="#FFFFFF">
+									<input type="hidden" name="id" value="<?= $carrera -> id ?>">
+									<input type="image" src="<?= KUMBIA_PATH ?>public/img/delete.jpg" width="25" height="25" border="0">
+								</th>
+								</form>
+								
+							</tr>
+							<?php } ?>
+						</table>
+						<?php } ?>
+						<?php if($modelo2007) { ?>
+						<br>
+						<table border="1" cellpadding="1" cellspacing="1" width="650">
+							<tr>
+								<th colspan="4" align="center" height="25" class="fondoazul">
+									MODELO ACADÉMICO 2007
+								</th>
+							</tr>
+							<tr>
+								<th align="center" height="25" class="fondonaranja">
+									Clave
+								</th>
+								<th align="center" height="25" class="fondonaranja">
+									Nombre
+								</th>
+								
+								<th colspan="2" align="center" height="25" class="fondonaranja">
+									&nbsp;
+								</th>
+							</tr>
+							
+							<?php foreach($modelo2007  as $carrera){ $k++; if( $k % 2 == 0){ $bg="#FFFFFF"; } else{ $bg="#DDDDDD"; } ?>
+							<tr>
+								<th align="center" height="25" width="50" bgcolor="<?= $bg ?>">
+									<?= $carrera -> clave ?>
+								</th>
+								<th align="left" height="25" width="450" bgcolor="<?= $bg ?>">
+									&nbsp;<?php if($carrera -> clavenivel=="I") echo "INGENIERÍA "; else echo "TECNÓLOGO EN "; ?><?= $carrera -> nombre ?>
+								</th>
+								<th align="center" height="25" width="100" bgcolor="<?= $bg ?>">
+									<a href="<?= KUMBIA_PATH ?>administrador/carreraplan/<?= $carrera -> id ?>/<?= $carrera -> modelo ?>">
+										PLAN <?= $carrera -> modelo ?>
+									</a>
+								</th>
+								<form action="<?= KUMBIA_PATH ?>administrador/eliminarCarrera" method="POST">
+								<th align="center" height="25" bgcolor="#FFFFFF">
+									<input type="hidden" name="id" value="<?= $carrera -> id ?>">
+									<input type="image" src="<?= KUMBIA_PATH ?>public/img/delete.jpg" width="25" height="25" border="0">
+								</th>
+								</form>
+								
+							</tr>
+							<?php } ?>
+						</table>
+						<?php } ?>
+						<?php if($edicion==1){ ?>
+						<br>
+						<table border="1" cellpadding="1" cellspacing="1" width="550">						
+							<form action="<?= KUMBIA_PATH ?>administrador/registrarCarrera" method="POST">
+							<tr>
+								<th colspan="4" align="center" height="25" class="fondoazul">
+									REGISTRAR NUEVA CARRERA
+								</th>
+							</tr>
+							<tr>
+								<th align="center" width="125" height="20" class="fondonaranja">
+									Nivel
+								</th>
+								<th align="center" width="75"  height="20" class="fondonaranja">
+									Clave
+								</th>
+								<th align="center" width="325" height="20" class="fondonaranja">
+									Nombre
+								</th>
+							</tr>
+							<tr>
+								<th align="center" width="125" height="25" class="fondonaranja">
+									<select name="nivel">
+										<option value="">&nbsp;</option>
+										<option value="T">TECNÓLOGO</option>
+										<option value="I">INGENIERÍA</option>
+									</select>
+								</th>
+								<th align="center" width="75"  height="25" class="fondonaranja">
+									<input type="text" name="clave" size="5" maxlength="3">
+								</th>
+								<th align="center" width="325" height="25" class="fondonaranja">
+									<input type="text" name="nombre" size="45">
+								</th>
+							</tr>
+							<tr>
+								<th colspan="4" align="center" height="30" bgcolor="<?= $bg ?>" class="fondonaranja">
+									<input type="submit" value="Registrar Carrera" class="boton">
+									<input type="hidden" name="plantel" value="<?= $plantel -> clave ?>">
+								</th>
+							</tr>
+							</form>
+						</table>
+						<?php } ?>
+					</div>
+				</td>
+			</tr>
+		</table>
+	
+		<br><br>

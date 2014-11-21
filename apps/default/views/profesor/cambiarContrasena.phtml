@@ -1,0 +1,67 @@
+<div id ="centrar">
+	<h2 class="letraRoja">
+		<?
+		switch($vacia){
+			case 1: echo "No se aceptan contrase&ntilde;as vacias"; break;
+			case 2: echo "Su nueva contrase&ntilde;a no puede ser igual a la anterior"; break;
+			case 3: echo "Por motivos de seguridad su contrase&ntilde;a debe ser mayor o igual a 6
+			c&aacute;racteres y menor a 15 caracteres"; break;
+		}
+		?>
+	</h2>
+	<?
+	if( isset($last) ){
+		if( $last == 0 )
+			echo "<h2 class='letraRoja'>".$date."</h2>";
+		else
+			echo "<h2 class='letraRoja'>Por motivos de seguridad es necesario renovar su contrase&ntilde;a cada mes,
+			la &uacute;ltima vez que lo hizo fue el: ".$date." favor de renovarla ahora mismo</h2>";
+	}
+	?>
+<br />
+</div>
+<center>
+<form action="<?= KUMBIA_PATH ?>profesor/cambiandoContrasena" method="post">
+<table>
+	<tr>
+		<td width="900" align="left">
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" align="center">
+				<tr>
+					<td width="500" height="25" bgcolor="#FFCA5B" align="center">
+						<h2>&nbsp;Cambiar contrase&ntilde;a:</h2>
+					</td>
+				</tr>
+			</table>
+			<br />
+			<br />
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" align="center" >
+				<tr>
+					<th width="250" height="25" bgcolor="#FFCA5B" align="center">Nombre del profesor:</th>
+					<th width="250" align="center"><?= $maestro -> nombre ?></th>
+				</tr>
+				<tr>
+					<th width="250" height="25" bgcolor="#FFCA5B" align="center">N&oacute;mina:</th>
+					<th width="250" align="center"><?= $maestro -> nomina ?></th>
+				</tr>
+				<tr>
+					<th width="250" height="25" bgcolor="#FFCA5B" align="center">Contrase&ntilde;a Actual:</th>
+					<th width="250" align="center"><?= $usuario -> clave ?></th>
+				</tr>
+				<tr>
+					<th width="250" height="25" bgcolor="#FFCA5B" align="center">Nueva Contrase&ntilde;a:</th>
+					<th width="250" align="center">
+						<input type="text" name="contrasena" id="contrasena">
+					</th>
+				</tr>
+				<tr bgcolor="#FFCA5B">
+					<td colspan="2" align="center">
+							<input type="submit" value="Cambiar Contrase&ntilde;a" >
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</form>
+<br><br>
+</center>

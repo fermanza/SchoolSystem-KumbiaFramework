@@ -1,0 +1,99 @@
+<script language="JavaScript">	
+function setIt( Objeto ){
+	if( Objeto.value == "" && Objeto.name == "nombreAlumno" )
+		Objeto.value = "Nombre Alumno";
+	if( Objeto.value == "" && Objeto.name == "registroAlumno" )
+		Objeto.value = "Registro Alumno";
+}
+function clearIt( Objeto ){
+	if( Objeto.value == "Registro Alumno" || Objeto.value == "Nombre Alumno" )
+		Objeto.value = "";
+}
+
+</script>
+<br />
+<br />
+
+<?php //echo form_remote_tag("ingcalculo/corrigiendoKardex","update: mostrandoInfo", "name: Formulario0") ?>
+<form action="<?= KUMBIA_PATH ?>impresiones/imprimir_certificado" method="post" name="Formulario0" id="Formulario0">
+<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 10px;" >
+	
+	<tr>
+		<td width="120" bgcolor="#FFCA5B" align="left">&nbsp;Registro:</td>
+		<td width="100" bgcolor="#EEEEEE" align="center">
+			<input type="text" name="registroAlumno" id="registroAlumno" class="input" size="40"  />
+		</td>
+	</tr>
+	
+	<tr>
+		<td width="120" bgcolor="#FFCA5B" align="left">&nbsp;No. Certificado:</td>
+		<td width="100" bgcolor="#EEEEEE" align="center">
+			<input type="text" id="numero" name="numero" class="input" size="40" />
+		</td>
+	</tr>
+	
+	<tr>
+		<td width="120" bgcolor="#FFCA5B" align="left">&nbsp;Curp:</td>
+		<td width="100" bgcolor="#EEEEEE" align="center">
+			<input type="text" id="curp" name="curp" class="input" size="40" />
+		</td>
+	</tr>
+	
+	<tr>
+		<td width="120" bgcolor="#FFCA5B" align="left">&nbsp;Tipo:</td>
+		<td width="100" bgcolor="#EEEEEE" align="center">
+			<select id="tipo" name="tipo" class="lista">
+				<option value="T">Certificado de Terminaci&oacute;n de Estudios</option>
+				<option value="P">Certificado Parcial de Estudios</option>
+				<option value="D">Duplicao Certificado de Terminaci&oacute;n de Estudios</option>
+			</select>
+		</td>
+	</tr>
+	
+	<tr>
+		<td width="120" bgcolor="#FFCA5B" align="left">&nbsp;Seleccione una fecha:</td>
+		<td width="100" bgcolor="#EEEEEE" align="center">
+<link rel="stylesheet" type="text/css" media="all" class="input" href="<?= KUMBIA_PATH ?>css/jsDatePick_ltr.min.css" />
+<!-- 
+	OR if you want to use the calendar in a right-to-left website
+	just use the other CSS file instead and don't forget to switch g_jsDatePickDirectionality variable to "rtl"!
+	
+	<link rel="stylesheet" type="text/css" media="all" href="jsDatePick_ltr.css" />
+-->
+<script type="text/javascript" src="<?= KUMBIA_PATH ?>javascript/kumbia/jsDatePick.min.1.3.js"></script>
+<!-- 
+	After you copied those 2 lines of code , make sure you take also the files into the same folder :-)
+    Next step will be to set the appropriate statement to "start-up" the calendar on the needed HTML element.
+    
+    The first example of Javascript snippet is for the most basic use , as a popup calendar
+    for a text field input.
+-->
+<script type="text/javascript">
+	window.onload = function(){
+		new JsDatePick({
+			useMode:2,
+			target:"inputField",
+			dateFormat:"%d-%M-%Y"
+			/*selectedDate:{				This is an example of what the full configuration offers.
+				day:5,						For full documentation about these settings please see the full version of the code.
+				month:9,
+				year:2006
+			},
+			yearsRange:[1978,2020],
+			limitToToday:false,
+			cellColorScheme:"beige",
+			dateFormat:"%m-%d-%Y",
+			imgPath:"img/",
+			weekStartDay:1*/
+		});
+	};
+</script>
+    <input type="text" size="40" id="inputField" name="inputField" />
+	</tr>
+	
+	<tr align="center">
+		<td colspan="2"><input type="submit" value="Imprimir Certificado" /></td>
+	</tr>
+</table>
+</form>
+<br />

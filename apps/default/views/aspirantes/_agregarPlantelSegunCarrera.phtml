@@ -1,0 +1,11 @@
+<?
+	for( $j = 0; $j < $i; $j++ ){
+		if( $carreras[$j] -> plantel == "C" && $carreras[$j-1] -> plantel != $carreras[$j] -> plantel ){
+			echo "<input type=\"radio\" name=\"plantelll$opcion\" id=\"plantelll$opcion\" value=\"C\" group=\"pla$opcion\">Colomos";
+			
+		}
+		else if( $carreras[$j-1] -> plantel != $carreras[$j] -> plantel ){
+			echo "<input type=\"radio\" name=\"plantelll$opcion\" id=\"plantelll$opcion\" value=\"T\" group=\"pla$opcion\">Tonala";
+		}
+	}
+?>

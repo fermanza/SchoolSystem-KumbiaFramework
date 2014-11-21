@@ -1,0 +1,177 @@
+<style type="text/css">
+	select{
+		width: 100%;
+	}
+	input[type="text"]{
+		width: 80%;
+	}
+	td{
+		font-weight:bold;
+	}
+</style>
+<br />
+
+<br />
+<span style="font-size: 10px;">* Ejemplo fecha:  2009-03-17 00:00:00 <br /> a&ntilde;o - mes - dia &nbsp;&nbsp;&nbsp; hora - min - seg</span>
+<br />&nbsp;<br />
+<?php echo form_remote_tag("apoyo/guardarPeriodo", "update: contenido") ?>
+<center>
+<table class="bordeAzul"  style="font-size:10px; width: 800px;" >
+	<tr>
+		<th colspan="4" class="naranja">
+		 NUEVO PERIODO
+		</th>
+	</tr>
+	<tr>
+		<td class="azul" width="200">
+			Activo
+		</td>
+		<td class="grisClaro">
+			<center>
+			<select name="activo">
+				<option value="0">NO</option>
+				<option value="1">SI</option>				
+			</select>
+			</center>
+		</td>
+		<td class="azul" width="200">
+			Inicio Evaluacion Semanal
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("inicioEvaluacionSemanal") ?>
+		</td>
+	</tr>
+	<tr>
+		<td class="azul">
+			Periodo
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="periodo" />
+		</td>
+		<td class="azul">
+			Fin Evaluacion Semanal
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("finEvaluacionSemanal") ?>
+		</td>
+	</tr>
+	<tr>
+		<td class="azul">
+			Nombre
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="nombre" />
+		</td>
+		<td class="azul">
+			Inicio AutoEvaluacion
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("inicioAutoevaluacion1") ?>
+		</td>
+	</tr>
+	<tr>
+		<td class="azul">
+			Inicio Primer Parcial
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("inicio1parcial") ?>
+		</td>
+		<td class="azul">
+			Fin AutoEvaluacion
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("finAutoevaluacion1") ?>
+		</td>
+	</tr>
+	<tr>
+		<td class="azul">
+			Fin Primer Parcial
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("fin1parcial") ?>
+		</td>
+		<td class="azul">
+			Inicio AutoEvaluacion 2
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("inicioAutoevaluacion2") ?>
+		</td>		
+	</tr>
+	<tr>
+		<td class="azul">
+			Inicio Segundo Parcial
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("inicio2parcial") ?>
+		</td>
+		<td class="azul">
+			Fin AutoEvaluacion 2
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("finAutoevaluacion2") ?>
+		</td>
+	</tr>
+	<tr>
+		<td class="azul">
+			Fin Segundo Parcial
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("fin2parcial") ?>
+		</td>
+		<td class="azul">
+			Inicio AutoEvaluacion 3
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("inicioAutoevaluacion3") ?>
+		</td>
+	</tr>
+	<tr>
+		<td class="azul">
+			Inicio Tercer Parcial
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("inicio3parcial") ?>
+		</td>
+		<td class="azul">
+			Fin AutoEvaluacion 3
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("finAutoevaluacion3") ?>
+		</td>
+	</tr>
+	<tr>
+		<td class="azul">
+			Fin Tercer Parcial
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("fin3parcial") ?>
+		</td>
+		<td class="azul">
+			Inicio Evaluacion Docente
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("inicioEvaluacionDocente") ?>
+		</td>
+	</tr>
+	<tr>
+		<td class="gris" colspan="2">
+			&nbsp;
+		</td>
+		<td class="azul">
+			Fin Evaluacion Docente
+		</td>
+		<td class="grisClaro">
+			<?= date_field_tag("finEvaluacionDocente") ?>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4" class="grisClaro">
+			<center>	
+				<input type="hidden" value="0" name="recargo">
+				<input type="submit" value="Guardar">			
+			<center>
+		</td>
+	</tr>
+</table>
+</form>
+</center>

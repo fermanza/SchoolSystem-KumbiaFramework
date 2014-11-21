@@ -1,0 +1,46 @@
+<script language="JavaScript">	
+function setIt( Objeto ){
+	if( Objeto.value == "" && Objeto.name == "nombreAlumno" )
+		Objeto.value = "Nombre Alumno";
+	if( Objeto.value == "" && Objeto.name == "registroAlumno" )
+		Objeto.value = "Registro Alumno";
+}
+function clearIt( Objeto ){
+	if( Objeto.value == "Registro Alumno" || Objeto.value == "Nombre Alumno" )
+		Objeto.value = "";
+}
+
+</script>
+<center><br /><br />
+<h3 class="letraRoja">Cartas de Reconsideraci&oacute;n de Baja</h3>
+
+<?php echo form_remote_tag("ingcalculo/buscar_alumno_condicionados","update: status_carta", "name: Formulario0") ?>
+<table>
+	<tr class="azul">
+		<th class="bordeAzul2">
+			Escoja al Alumno.
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="text" name="registroAlumno" id="registroAlumno" value="Registro Alumno" 
+					onblur="setIt(this)" onfocus="clearIt(this)" class="input" />
+			<input type="text" name="nombreAlumno" id="nombreAlumno" value="Nombre Alumno"
+					onblur="setIt(this)" onfocus="clearIt(this)" class="input" />
+		</td>
+	</tr>
+	<tr align="center">
+		<td colspan="2"><input type="submit" value="Buscar Alumno" /></td>
+	</tr>
+</table>
+<br />
+<br />
+</form>
+
+<div id ="status_carta" name="status_carta">
+</div>
+
+<div id ="materias" name="materias">
+</div>
+
+</center>

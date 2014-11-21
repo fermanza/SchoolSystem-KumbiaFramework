@@ -1,0 +1,268 @@
+<center>
+<table>
+	<tr>
+		<td width="900"><div align="justify">
+			<br>
+			<div style="font-size: 14px;"><div style="color: #1569C7;"><?= img_tag("adorno.gif","border: 0") ?><b>BOLETA DE CALIFICACIONES (<?= $periodo ?>)</b></div>
+			<hr /><br />
+			<div style="font-size: 12px;">
+			En esta secci&oacute;n el alumno encontrar&aacute; su boleta de califiaci&oacute;n para el ciclo actual, donde podr&aacute; ver las calificaciones parciales que vaya obteniendo.
+			</div>
+			<br />
+			<div class="letraRoja11px"><? //if(isset($avisoServicioSocial)) echo $avisoServicioSocial; ?></div>
+			<br />
+			<?= render_partial("alumno/info_alumno"); ?>
+			<br />
+			<?php
+			if($cursos>0){
+			?>
+             
+            
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 10px;" width="750">
+				<tr bgcolor="#FFCA5B">
+					<th width="25" height="25" rowspan="2" align="center">&nbsp;</th>
+					<th width="200" rowspan="2" align="center">Materia</th>
+					<th width="200" rowspan="2" align="center">Profesor</th>
+					<th width="50" rowspan="2" align="center">Estatus</th>
+					<th width="50" colspan="2" align="center">1er. Parcial</th>
+					<th width="50" colspan="2" align="center">2do. Parcial</th>
+					<th width="50" colspan="2" align="center">3er. Parcial</th>
+					<th width="50" colspan="2" align="center">Final</th>
+					<th rowspan="2" align="center">Situaci&oacute;n</th>
+				</tr>
+				<tr bgcolor="#FFCA5B">
+					<th width="25" align="center">F1</th>
+					<th width="25" align="center">C1</th>
+					<th width="25" align="center">F2</th>
+					<th width="25" align="center">C2</th>
+					<th width="25" align="center">F3</th>
+					<th width="25" align="center">C3</th>
+					<th width="25" align="center">FAL</th>
+					<th width="25" align="center">CAL</th>
+				</tr>
+				<?php
+				$p=0;$p1=0;$p2=0;$p3=0; $n=0; $i=0;
+				foreach($mihorario as $horario){
+					$n++; $i++;
+					if($i%2==0){ $bg = "#EEEEEE"; }else{ $bg = "#FFFFFF"; }
+				?>
+				<tr style="font-size: 10px;"> 
+					<td width="25" height="40" align="center" bgcolor="<?= $bg ?>"><?= $i ?></td>
+					<td width="200" align="center" bgcolor="<?= $bg ?>"><?= $horario -> materia ?> (<?= $horario -> clavecurso ?>)<br><b><?php echo htmlentities($materia[$i-1] -> nombre); ?></b></td>
+					<td width="200" align="center" bgcolor="<?= $bg ?>"><?php echo htmlentities($profesor[$i-1] -> nombre) ?></td>
+					<td width="50" align="center" bgcolor="<?= $bg ?>"><?php echo $xalumnocursos[$i-1] -> tipo; ?></td>
+					<?php 
+						switch($xalumnocursos[$i-1] -> calificacion1){
+							case 300: $xalumnocursos[$i-1] -> faltas1 = "-"; $xalumnocursos[$i-1] -> calificacion1 = "-"; $p1 += 0; break;
+							case 500: $xalumnocursos[$i-1] -> faltas1 = "-"; $xalumnocursos[$i-1] -> calificacion1 = "PND"; $p1 += 0; break;
+							case 999: $xalumnocursos[$i-1] -> calificacion1 = "NP"; $p1 += 0; break;
+							default: $p1 += $xalumnocursos[$i-1] -> calificacion1;
+						}
+					?>
+					<td width="25" align="center" bgcolor="<?= $bg ?>"><?php if($xalumnocursos[$i-1] -> calificacion1<70){echo "<font color=\"#FF0000\">";} echo $xalumnocursos[$i-1] -> faltas1 ?></th>
+					<td width="25" align="center" bgcolor="<?= $bg ?>"><?php if($xalumnocursos[$i-1] -> calificacion1<70){echo "<font color=\"#FF0000\">";} echo $xalumnocursos[$i-1] -> calificacion1 ?></th>
+					
+					<?php 
+						switch($xalumnocursos[$i-1] -> calificacion2){
+							case 300: $xalumnocursos[$i-1] -> faltas2 = "-"; $xalumnocursos[$i-1] -> calificacion2 = "-"; $p2 += 0; break;
+							case 500: $xalumnocursos[$i-1] -> faltas2 = "-"; $xalumnocursos[$i-1] -> calificacion2 = "PND"; $p2 += 0; break;
+							case 999: $xalumnocursos[$i-1] -> calificacion2 = "NP"; $p2 += 0; break;
+							default: $p2 += $xalumnocursos[$i-1] -> calificacion2;
+						}
+					?>
+					<td width="25" align="center" bgcolor="<?= $bg ?>"><?php if($xalumnocursos[$i-1] -> calificacion2<70){echo "<font color=\"#FF0000\">";} echo $xalumnocursos[$i-1] -> faltas2 ?></th>
+					<td width="25" align="center" bgcolor="<?= $bg ?>"><?php if($xalumnocursos[$i-1] -> calificacion2<70){echo "<font color=\"#FF0000\">";} echo $xalumnocursos[$i-1] -> calificacion2 ?></th>
+					
+					<?php 
+						switch($xalumnocursos[$i-1] -> calificacion3){
+							case 300: $xalumnocursos[$i-1] -> faltas3 = "-"; $xalumnocursos[$i-1] -> calificacion3 = "-"; $p3 += 0; break;
+							case 500: $xalumnocursos[$i-1] -> faltas3 = "-"; $xalumnocursos[$i-1] -> calificacion3 = "PND"; $p3 += 0; break;
+							case 999: $xalumnocursos[$i-1] -> calificacion3 = "NP"; $p3 += 0; break;
+							default: $p3 += $xalumnocursos[$i-1] -> calificacion3;
+						}
+					?>
+					<td width="25" align="center" bgcolor="<?= $bg ?>"><?php if($xalumnocursos[$i-1] -> calificacion3<70){echo "<font color=\"#FF0000\">";} echo $xalumnocursos[$i-1] -> faltas3 ?></th>
+					<td width="25" align="center" bgcolor="<?= $bg ?>"><?php if($xalumnocursos[$i-1] -> calificacion3<70){echo "<font color=\"#FF0000\">";} echo $xalumnocursos[$i-1] -> calificacion3 ?></th>
+					
+					<?php 
+						switch($xalumnocursos[$i-1] -> calificacion){
+							case 300: $xalumnocursos[$i-1] -> faltas = "-"; $xalumnocursos[$i-1] -> calificacion = "-"; $p += 0; break;
+							case 500: $xalumnocursos[$i-1] -> faltas = "-"; $xalumnocursos[$i-1] -> calificacion = "PND"; $p += 0; break;
+							case 999: $xalumnocursos[$i-1] -> calificacion = "NP"; $p += 0; break;
+							default: $p += $xalumnocursos[$i-1] -> calificacion;
+						}
+					?>
+					<td width="25" align="center" bgcolor="<?= $bg ?>"><b><?php if($xalumnocursos[$i-1] -> calificacion<70){echo "<font color=\"#FF0000\">";} echo $xalumnocursos[$i-1] -> faltas."/".$horas[$i-1] ?></th>
+					<td width="25" align="center" bgcolor="<?= $bg ?>"><b><?php if($xalumnocursos[$i-1] -> calificacion<70){echo "<font color=\"#FF0000\">";} echo $xalumnocursos[$i-1] -> calificacion ?></th>
+					<td align="center" bgcolor="<?= $bg ?>"><b>&nbsp;<?= $xalumnocursos[$i-1] -> situacion ?>&nbsp;</b></td>
+				</tr>
+				<?php } ?>
+				<tr style="font-size: 10px;"> 
+					<td colspan="4" width="475" align="right" bgcolor="<?= $bg ?>">&nbsp;</td>
+					<th colspan="2" width="50" align="center" bgcolor="<?= $bg ?>"><?php printf("%.2f",$p1/$n); ?></th>
+					<th colspan="2" width="50" align="center" bgcolor="<?= $bg ?>"><?php printf("%.2f",$p2/$n); ?></th>
+					<th colspan="2" width="50" align="center" bgcolor="<?= $bg ?>"><?php printf("%.2f",$p3/$n); ?></th>
+					<th colspan="2" width="50" align="center" bgcolor="<?= $bg ?>"><?php if($p==0){ echo "-"; }else{ printf("%.2f",$p/$n);} ?></th>
+					<th bgcolor="<?= $bg ?>">&nbsp;</th>
+				</tr>
+			</table>
+			<?php if($extras>0){ ?>
+			<br><br>
+			<CENTER><H2>EXTRAORDINARIOS Y TITULOS DE SUFICIENCIA</H2></CENTER>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 10px;" width="750">
+				<tr bgcolor="#FFCA5B">
+					<th width="25" height="25" rowspan="2" align="center">&nbsp;</th>
+					<th width="250" rowspan="2" align="center">Materia</th>
+					<th width="250" rowspan="2" align="center">Profesor</th>
+					<th width="50" colspan="3" align="center">&nbsp;</th>
+				</tr>
+				<tr bgcolor="#FFCA5B">
+					<th width="125" align="center">Extraordinario</th>
+					<th width="125" align="center">Titulo de suficiencia</th>
+					<th width="125" align="center">Pagar Extra/Titulo</th>
+				</tr>
+				<?php
+				$p1=0;$p2=0;$p3=0; $p=0; $n=0; $i=0;
+				foreach($cursillos as $curso){
+					$n++;
+					$i++;
+					if($i%2==0) $bg = "#EEEEEE";
+					else $bg = "#FFFFFF";
+				?>
+						<?php
+							if((($xalumnocursos[$i-1] -> situacion!="EXTRAORDINARIO FALTAS" && $xalumnocursos[$i-1] -> situacion!="TITULO FALTAS") && 
+									$xalumnocursos[$i-1] -> calificacion>=70) ||
+											$xalumnocursos[$i-1] -> situacion=="REGULARIZACION DIRECTA" || 
+													$xalumnocursos[$i-1] -> situacion=="EXTRAORDINARIO POR FALTAS"){
+								continue;
+							}
+						?>
+				<tr style="font-size: 10px;"> 
+					<td width="25" height="40" align="center" bgcolor="<?= $bg ?>"><?= $i ?></td>
+					<td width="250" align="center" bgcolor="<?= $bg ?>">
+						<?= $materia[$i-1] -> clave ?> (<?= $curso -> clavecurso ?>)<br><b><?php echo htmlentities($materia[$i-1] -> nombre) ?></b>
+					</td>
+					<td width="250" align="center" bgcolor="<?= $bg ?>"><?php echo htmlentities($profesor[$i-1] -> nombre) ?></td>
+					<td align="center" bgcolor="<?= $bg ?>"><b>
+						<?php
+							if($xalumnocursos[$i-1] -> calificacion>=70 && 
+									$xalumnocursos[$i-1] -> situacion!="EXTRAORDINARIO FALTAS"){
+								echo " - ";
+							}
+							else{
+								echo $extra[$i-1];
+							}
+						?>
+					</b></td>
+					<td align="center" bgcolor="<?= $bg ?>"><b>
+						<?php
+							if($xalumnocursos[$i-1] -> calificacion>=70){
+								echo " - ";
+							}
+							else{
+								echo $titulo[$i-1];
+							}
+						?>
+					</b></td>
+					<td align="center" bgcolor="<?= $bg ?>"><b>
+						<?php
+							if( $extra[$i - 1] != " - " && (!$BajaDefinitiva)){ // && Session::get('registro') == 12110022 
+								?>
+								<!--<form method="POST"
+									action="<?= KUMBIA_PATH ?>pagos/ficha/58/<? echo $registro."/".$materia[$i-1] -> clave."/".$curso -> curso_id ?>"><?php
+									if( isset($buscaralumno) ) echo ''; //'<input type="submit" name="Ficha" value="Imprimir Extra" disabled>';
+									else echo link_to('caja/alumnoConcepto','Caja', "target=_blank"); //'<input type="submit" name="Ficha" value="Imprimir Extra">';
+									?>
+								</form>-->
+								<?
+							}
+							if( $titulo[$i - 1] != " - " && (!$BajaDefinitiva) ){
+								?>
+								<!--<form method="POST"
+									action="<?= KUMBIA_PATH ?>pagos/ficha/51/<? echo $registro."/".$materia[$i-1] -> clave."/".$curso -> curso_id ?>"><?php
+									if( isset($buscaralumno) ) echo' '; //'<input type="submit" name="Ficha" value="Imprimir Titulo" disabled>';
+									else echo link_to('caja/alumnoConcepto','Caja', "target=_blank"); //'<input type="submit" name="Ficha" value="Imprimir Titulo">';
+									?>
+								</form>-->
+								<?
+							}
+						?>
+					</b></td>
+				<?php } ?>
+			</table>
+			<?php
+				}
+				else{
+					echo "&nbsp;" ;
+				}
+				
+				if( isSet($titulosAnteriores) ){
+				?>
+				<br><br>
+				<H3>MATERIAS REPROBADAS EN EL PERIODO <?= $anterior ?>,
+				Y NO FUERON CARGADAS EN EL<br />PERIODO <?= $actual ?>, POR LO QUE ES
+				NECESARIO ACREDITARLAS EN TITULO DE<br />SUFICIENCIA, YA QUE
+				SI NO FUERA AS&Iacute; SE LES DAR&Aacute; DE BAJA.</H3>
+				<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 10px;" width="750">
+					<tr bgcolor="#FFCA5B">
+						<th width="25" height="25" rowspan="2" align="center">&nbsp;</th>
+						<th width="250" rowspan="2" align="center">Materia</th>
+						<th width="250" rowspan="2" align="center">Profesor</th>
+						<th width="50" colspan="3" align="center">&nbsp;</th>
+					</tr>
+					<tr bgcolor="#FFCA5B">
+						<th width="125" align="center" colspan="2">Pagar Titulo de Suficiencia</th>
+					</tr>
+				
+					</tr>
+					<?php
+					$titAnt = 0;
+					foreach( $titulosAnteriores as $tit ){
+					$i++;
+					?>
+						<tr>
+							<td width="25" height="40" align="center" bgcolor="<?= $bg ?>"><?= $i ?></td>
+							<td width="250" align="center" bgcolor="<?= $bg ?>">
+								<?= $tit -> materia ?> (<?= $tit -> curso ?>)<br><b><?= $titulosAntMateria[$titAnt] -> nombre ?></b>
+							</td>
+							<td width="250" align="center" bgcolor="<?= $bg ?>">
+								<?= $titulosAntProf[$titAnt] -> nombre ?>
+							</td>
+							<td align="center" bgcolor="<?= $bg ?>" width="50"><b><? echo $califTitAnteriores[$titAnt] -> calificacion ?></b></td>
+							<td width="50">
+								<?php
+								if( (!$BajaDefinitiva) ){
+								?>
+									<!--<form method="POST" 
+										action="<?= KUMBIA_PATH ?>pagos/ficha/51/<? echo $tit -> registro."/".$tit -> materia."/".$tit -> id ?>">
+										<?php
+										if( isset($buscaralumno) ) echo ''; //'<input type="submit" name="Ficha" value="Imprimir Titulo" disabled>';
+										else echo link_to('caja/alumnoConcepto','Caja', "target=_blank"); //'<input type="submit" name="Ficha" value="Imprimir Titulo">';
+										?>
+									</form>-->
+								<?php
+								}
+								?>
+							</td>
+						</tr>
+					<?
+						$titAnt ++ ;
+					}
+					?>
+				</table>
+				<?
+				}
+			} else { ?>
+				<br><b><center><h3>NO TIENES CURSOS REGISTRADOS PARA ESTE PERIODO</h3></center></b><br>
+			<?php } ?>
+			<!-- Cursos Intersemestrales -->
+			<?php
+			if( isset($cursos_intersemestrales_alumno) && count($cursos_intersemestrales_alumno) > 0 ){
+				if( isset($buscaralumno) ) render_partial("alumno/mostrar_cursos_intersemestrales");
+				else render_partial("mostrar_cursos_intersemestrales");
+			}
+			?>
+		</td>
+	</tr>
+</table>
+</center><br>

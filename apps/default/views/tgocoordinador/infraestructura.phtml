@@ -1,0 +1,54 @@
+<?= render_partial("info"); ?>
+<br>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+	CONTROL DE INFRAESTRUCTURA
+	<br><br>
+	<table border="0">
+		<tr>
+			<td width="440" valign="top">
+				<div id="listado">
+					<table border="1" style="font-size:10px;" class="bordeazul">
+					<tr>
+						<th width="440" colspan="5" class="naranja">
+							AULAS, LABORATORIOS Y TALLERES DISPONIBLES
+						</th>
+					</tr>
+					<tr>
+						<th width="60" class="azul">
+							Edificio
+						</th>
+						<th class="azul" width="400">
+							Nombre
+						</th>
+						<th width="20" height="20" class="gris">
+							<?= link_to_remote('<img src="'.KUMBIA_PATH.'public/img/prev.gif" border=0>',"update: listado","action: tgocoordinador/infraestructuraajax/".$p1); ?>
+						</th>
+						<th width="20" height="20" class="gris">
+							<?= link_to_remote('<img src="'.KUMBIA_PATH.'public/img/next.gif" border=0>',"update: listado","action: tgocoordinador/infraestructuraajax/".$p2); ?>
+						</th>
+					</tr>
+					<?php if($listado) foreach($listado as $salon){ ?>
+					<tr>
+						<td width="60" height="20" align="center">
+							<?= $salon -> modulo ?>
+						</td>
+						<td width="400">
+							&nbsp;<?= $salones[$salon -> id] ?>
+						</td>
+						<th width="40" height="20" colspan="2">
+							<?= link_to_remote('<img src="'.KUMBIA_PATH.'public/img/calendar.gif" border=0>',"update: jornada","action: tgocoordinador/jornadasalon/".$salon -> id); ?>
+						</th>
+					</tr>
+					<?php } ?>
+				</table>
+				</div>
+			</td>
+			<td width="50">&nbsp;</td>
+			<td width="460" valign="top">
+				<div id="jornada">
+					<?= render_partial("horario"); ?>
+				</div>
+			</td>
+		</tr>
+	</table>

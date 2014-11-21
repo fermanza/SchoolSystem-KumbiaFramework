@@ -1,0 +1,54 @@
+<!--Se llaman los archivos JS y CSS-->
+<?= stylesheet_link_tag('dialog_box'); ?>
+<?= javascript_library_tag('dialog_box'); ?>
+
+<style type="text/css">
+	#demos{
+		width:800px;
+		height: 55px;
+		margin:10px auto 0 auto;
+		padding:30px;
+		border:1px solid #DFDFDF;
+		font:normal 12px Arial, Helvetica, sans-serif
+	}
+	#demos h3{
+		border-bottom:1px solid #DFDFDF;
+		padding-bottom:7px;
+		margin:10px 0
+	}
+
+</style>
+<br/><br/>
+<div style="color: #1569C7; font-size: 14px;" align="left">
+  <?= img_tag("adorno.gif","border: 0") ?> <b>REACTIVAR FORMULARIO DE ACTUALIZACION DE DATOS</b>
+  <hr/><br/>
+</div>
+<br/>
+<div id="demos">
+    <h3>Ingresa el registro del alumno que deseas reactivar el formulario de actualizacion de datos.<br/></h3>
+    <?php echo form_remote_tag('ventanilla/buscarAlumnoInfo','update: muestraDatosAlumno', 'success: mensajeAlerta();'); ?>
+        <input type="text" id="registro" name="registro" maxlength="10" style="width:191px;" onkeypress="javascript:return ValidNum(event)"/>
+		 &nbsp;&nbsp;&nbsp;<?php echo submit_tag('BUSCAR ALUMNO','id: boton','class: common_button', 'style: margin-left: 10px');?> 
+   <?php echo end_form_tag(); ?>
+</div>
+<br/><br/>
+<!--En la siguiente div se mostrra el reporte seleccionado-->
+<div id="muestraDatosAlumno" name="muestraDatosAlumno">
+</div>
+
+<script type='text/javascript'>
+//funcion que valida que solo se puedan ingresar numeros
+function ValidNum(e)
+{
+  var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+    return ((tecla > 47 && tecla < 58) || tecla == 8);
+}
+  
+//Funcion que muestra el mensaje ventana emergente con mensaje
+function mensajeAlerta(){
+  if(document.getElementById('status').value == "FALSE"){
+	  showDialog('ERROR',document.getElementById('msg').value,'error',2);
+  }
+}
+  
+</script> 

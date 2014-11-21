@@ -1,0 +1,367 @@
+		<table border="0" cellpadding="0" cellspacing="0" width="770">
+			<tr>
+				<td style="font-family: Verdana;">
+					<br>
+					<div style="color: #1569C7; font-size: 14px;" align="left"><b><?= img_tag("adorno.gif","border: 0") ?> PRECURSOS DISPONIBLES</b></div>
+					<div style="color: #000000; font-size: 11px;" align="justify">
+						<br>
+						A continuación se muestra una lista con los cursos registrados en este periodo para la materia consultada, un grupo tiene un profesor asignado, un horario y los alumnos en su momento se inscribirán en el.
+						<br><br>
+					</div>
+					<div style="color: #000000; font-size: 11px;" align="center">
+						<table border="1" cellpadding="1" cellspacing="1" width="650">
+							<tr>
+								<th colspan="4" align="center" height="25" class="fondoazul">
+									INFORMACION DE LA MATERIA
+								</th>
+							</tr>
+							<tr>
+								<th align="left" height="25" width="200" class="fondonaranja">
+									&nbsp;Clave de la materia: 
+								</th>
+								<td align="left" height="25" width="150" bgcolor="#DDDDDD">
+									&nbsp;<?= $materia -> clave ?>
+								</td>
+								<th align="left" height="25" width="150" class="fondonaranja">
+									&nbsp;Plan de estudios: 
+								</th>
+								<td align="left" height="25" width="150" bgcolor="#DDDDDD">
+									&nbsp;<?= "PLAN ".$materia -> plan ?>
+								</td>
+							</tr>
+							<tr>
+								<th align="left" height="25" width="200" class="fondonaranja">
+									&nbsp;Nombre de la materia: 
+								</th>
+								<td align="left" height="25" width="400" bgcolor="#DDDDDD" colspan="3">
+									&nbsp;<?= $materia -> nombre ?>
+								</td>
+
+							</tr>
+							<tr>
+								<th align="left" height="25" width="200" class="fondonaranja">
+									&nbsp;Créditos: 
+								</th>
+								<td align="left" height="25" width="150"	 bgcolor="#DDDDDD">
+									&nbsp;<?= $planmateria -> creditos ?>
+								</td>
+								<th align="left" height="25" width="150" class="fondonaranja">
+									&nbsp;Nivel de estudios: 
+								</th>
+								<td align="left" height="25" width="150"	 bgcolor="#DDDDDD">
+									&nbsp;<?= $nivel ?>
+								</td>
+							</tr>
+							<tr>
+								<th align="left" height="25" width="200" class="fondonaranja">
+									&nbsp;Prerrequisitos: 
+								</th>
+								<td align="left" height="25" width="50" bgcolor="#DDDDDD" colspan="3">
+									&nbsp;<a href="<?= KUMBIA_PATH ?>administrador/vercursos/<?= $prerrequisito -> clave ?>"><b><?= $prerrequisito -> clave ?></b></a>
+								</td>
+
+							</tr>
+						</table>
+
+					</div>
+					<br>
+					<div style="color: #000000; font-size: 11px;" align="center">
+						<table border="1" cellpadding="1" cellspacing="1" width="700">
+							<tr>
+								<th colspan="7" align="center" height="25" class="fondoazul">
+									PRECURSOS DISPONIBLES (<?= $periodo ?>)
+								</th>
+							</tr>
+							<tr style="font-size: 9px;">
+								<th height="25" width="50" class="fondonaranja">
+									NRC 
+								</th>
+								<th height="25" width="250" class="fondonaranja">
+									Profesor
+								</th>
+								<th height="25" width="175" class="fondonaranja">
+									Horario
+								</th>
+								<th height="25" width="100" class="fondonaranja">
+									Preselecciones 
+								</th>
+								<th height="25" width="100" class="fondonaranja">
+									&nbsp;
+								</th>
+								<th height="25" width="25" class="fondonaranja">
+									&nbsp;
+								</th>
+							</tr>
+							<?php if($cursos) foreach($cursos as $curso){ $i++; if($i%2==0) $bg="#DDDDDD"; else $bg="#FFFFFF"; ?>
+							<tr style="font-size: 9px;">
+								<th height="25" width="50" bgcolor=<?= $bg ?>>
+									<?= $curso -> clave ?><?php 
+										switch(strlen($curso -> id)){ 
+											case 0: echo "0000"; break; 
+											case 1: echo "000"; break; 
+											case 2: echo "00"; break; 
+											case 3: echo "0"; break; 
+										}
+									?><?= $curso -> id ?>
+								</th>
+								<th height="25" width="250" bgcolor="<?= $bg ?>">
+									<?= $maestros[$i-1] -> nombre ?> <?= $maestros[$i-1] -> paterno ?> <?= $maestros[$i-1] -> materno ?>
+								</th>
+								<th height="25" width="150" bgcolor="<?= $bg ?>">
+									<?php if($curso -> lunesi > 0) echo "Lun, ".$curso -> lunesi.":00 - ".$curso -> lunesf.":00 (".$curso -> lunesu.")<br>" ?> 
+									<?php if($curso -> martesi > 0) echo "Mar, ".$curso -> martesi.":00 - ".$curso -> martesf.":00 (".$curso -> martesu.")<br>" ?> 
+									<?php if($curso -> miercolesi > 0) echo "Mie, ".$curso -> miercolesi.":00 - ".$curso -> miercolesf.":00 (".$curso -> miercolesu.")<br>" ?> 
+									<?php if($curso -> juevesi > 0) echo "Jue, ".$curso -> juevesi.":00 - ".$curso -> juevesf.":00 (".$curso -> juevesu.")<br>" ?> 
+									<?php if($curso -> viernesi > 0) echo "Vie, ".$curso -> viernesi.":00 - ".$curso -> viernesf.":00 (".$curso -> viernesu.")<br>" ?> 
+									<?php if($curso -> sabadoi > 0) echo "Sab, ".$curso -> sabadoi.":00 - ".$curso -> sabadof.":00 (".$curso -> sabadou.")<br>" ?> 
+								</th>
+								<th height="25" width="100" bgcolor="<?= $bg ?>">
+									<?= $curso -> preselecciones ?> 
+								</th>
+								<?if($curso -> activo == 0){ ?> 
+								<form action="<?= KUMBIA_PATH ?>administrador/publicarCurso" method="POST">
+								<th height="25" width="100" bgcolor="<?= $bg ?>">
+									<input type="submit" value="Publicar" class="boton">
+								</th>
+								</form>
+								<?php } else { ?>
+								<form action="<?= KUMBIA_PATH ?>administrador/despublicarCurso" method="POST">
+								<th height="25" width="100" bgcolor="<?= $bg ?>">
+									<input type="submit" value="Publicar" disabled>
+								</th>
+								</form>
+								<?php } ?>
+								<form action="<?= KUMBIA_PATH ?>administrador/quitarPreCurso" method="POST">
+								<th height="25" width="15" bgcolor="FFFFFF">
+									<input type="hidden" name="clavemateria" value="<?= $curso -> clavemateria ?>">
+									<input type="hidden" name="id" value="<?= $curso -> id ?>">
+									<input type="image" src="<?= KUMBIA_PATH ?>public/img/delete.jpg" width="25" height="25" border="0">
+								</th>
+								</form>
+							</tr>
+							<?php } ?>
+						</table>
+
+					</div>
+					
+					<br>
+					<div style="color: #000000; font-size: 11px;" align="center">
+						<form action="<?= KUMBIA_PATH ?>administrador/registrarPreCurso" method="POST">
+						<input type="hidden" name="clavemateria" value="<?= $materia -> clave ?>">
+						<input type="hidden" name="clave" value="<?= $materia -> division ?>">
+						<input type="hidden" name="plan" value="<?= $plan -> id ?>">
+						<input type="hidden" name="periodo" value="<?= $periodito ?>">
+						<table border="1" cellpadding="1" cellspacing="1" width="700">
+							<tr>
+								<th colspan="7" align="center" height="25" class="fondoazul">
+									AGREGAR UN PRECURSO
+								</th>
+							</tr>
+							<tr style="font-size: 9px;">
+								<th height="25" width="300" class="fondonaranja">
+									Profesor
+								</th>
+								<th height="25" width="200" class="fondonaranja" colspan="4">
+									Horario
+								</th>
+								<th height="25" width="100" class="fondonaranja">&nbsp;</th>
+							</tr>
+							<tr style="font-size: 9px;">
+								<th align="center" height="25" bgcolor="<?= $bg ?>" rowspan="6">
+									<select name="nomina" style="font-size: 12px;">
+										<option value="">&nbsp;</option>
+										<?php if($maestritos) foreach($maestritos as $maestro){ ?>
+											<option value="<?= $maestro -> nomina ?>"><?= $maestro -> paterno ?> <?= $maestro -> materno ?> <?= $maestro -> nombre ?></option>
+										<?php } ?>
+									</select>
+								</th>
+								<th height="25" width="100" bgcolor="<?= $bg ?>">
+									Lunes
+								</th>
+								<th height="25" width="50" bgcolor="<?= $bg ?>">
+									<select name="entrada1" style="font-size: 12px;">
+										<option value="">&nbsp;</option>
+										<option value="07">07</option><option value="07">08</option><option value="07">09</option>
+										<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+										<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+										<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+										<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+									</select>
+								</th>
+								<th height="25" width="50" bgcolor="<?= $bg ?>">
+									<select name="salida1" style="font-size: 12px;">
+										<option value="">&nbsp;</option>
+										<option value="07">08</option><option value="07">09</option>
+										<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+										<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+										<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+										<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+										<option value="22">22</option>
+									</select>
+								</th>
+								<th height="25" width="25" bgcolor="<?= $bg ?>">
+									<input type="text" name="lugar1" maxlength="10" size="5">
+								</th>
+								
+								<th height="30" width="100" bgcolor="<?= $bg ?>" rowspan="6">
+									<input type="submit" value="Agregar" class="boton">
+								</th>
+								
+							</tr>
+							<tr style="font-size: 9px;">
+								<th height="25" width="100" bgcolor="<?= $bg ?>">
+									Martes
+								</th>
+								<th height="25" width="50" bgcolor="<?= $bg ?>">
+									<select name="entrada2" style="font-size: 12px;">
+										<option value="">&nbsp;</option>
+										<option value="07">07</option><option value="08">08</option><option value="09">09</option>
+										<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+										<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+										<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+										<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+									</select>
+								</th>
+								<th height="25" width="50" bgcolor="<?= $bg ?>">
+									<select name="salida2" style="font-size: 12px;">
+										<option value="">&nbsp;</option>
+										<option value="08">08</option><option value="09">09</option>
+										<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+										<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+										<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+										<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+										<option value="22">22</option>
+									</select>
+								</th>
+								<th height="25" width="25" bgcolor="<?= $bg ?>">
+									<input type="text" name="lugar2" maxlength="10" size="5">
+								</th>
+							</tr>
+							
+							<tr style="font-size: 9px;">
+								<th height="25" width="100" bgcolor="<?= $bg ?>">
+									Miercoles
+								</th>
+								<th height="25" width="50" bgcolor="<?= $bg ?>">
+									<select name="entrada3" style="font-size: 12px;">
+										<option value="">&nbsp;</option>
+										<option value="07">07</option><option value="08">08</option><option value="09">09</option>
+										<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+										<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+										<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+										<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+									</select>
+								</th>
+								<th height="25" width="50" bgcolor="<?= $bg ?>">
+									<select name="salida3" style="font-size: 12px;">
+										<option value="">&nbsp;</option>
+										<option value="08">08</option><option value="09">09</option>
+										<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+										<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+										<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+										<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+										<option value="22">22</option>
+									</select>
+								</th>
+								<th height="25" width="25" bgcolor="<?= $bg ?>">
+									<input type="text" name="lugar3" maxlength="10" size="5">
+								</th>
+							</tr>
+							
+							<tr style="font-size: 9px;">
+								<th height="25" width="100" bgcolor="<?= $bg ?>">
+									Jueves
+								</th>
+								<th height="25" width="50" bgcolor="<?= $bg ?>">
+									<select name="entrada4" style="font-size: 12px;">
+										<option value="">&nbsp;</option>
+										<option value="07">07</option><option value="08">08</option><option value="09">09</option>
+										<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+										<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+										<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+										<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+									</select>
+								</th>
+								<th height="25" width="50" bgcolor="<?= $bg ?>">
+									<select name="salida4" style="font-size: 12px;">
+										<option value="">&nbsp;</option>
+										<option value="08">08</option><option value="09">09</option>
+										<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+										<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+										<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+										<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+										<option value="22">22</option>
+									</select>
+								</th>
+								<th height="25" width="25" bgcolor="<?= $bg ?>">
+									<input type="text" name="lugar4" maxlength="10" size="5">
+								</th>
+							</tr>
+							<tr style="font-size: 9px;">
+								<th height="25" width="100" bgcolor="<?= $bg ?>">
+									Viernes
+								</th>
+								<th height="25" width="50" bgcolor="<?= $bg ?>">
+									<select name="entrada5" style="font-size: 12px;">
+										<option value="">&nbsp;</option>
+										<option value="07">07</option><option value="08">08</option><option value="09">09</option>
+										<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+										<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+										<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+										<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+									</select>
+								</th>
+								<th height="25" width="50" bgcolor="<?= $bg ?>">
+									<select name="salida5" style="font-size: 12px;">
+										<option value="">&nbsp;</option>
+										<option value="08">08</option><option value="09">09</option>
+										<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+										<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+										<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+										<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+										<option value="22">22</option>
+									</select>
+								</th>
+								<th height="25" width="25" bgcolor="<?= $bg ?>">
+									<input type="text" name="lugar5" maxlength="10" size="5">
+								</th>
+							</tr>
+							
+							<tr style="font-size: 9px;">
+								<th height="25" width="100" bgcolor="<?= $bg ?>">
+									Sábado
+								</th>
+								<th height="25" width="50" bgcolor="<?= $bg ?>">
+									<select name="entrada6" style="font-size: 12px;">
+										<option value="">&nbsp;</option>
+										<option value="07">07</option><option value="08">08</option><option value="09">09</option>
+										<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+										<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+										<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+										<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+									</select>
+								</th>
+								<th height="25" width="50" bgcolor="<?= $bg ?>">
+									<select name="salida6" style="font-size: 12px;">
+										<option value="">&nbsp;</option>
+										<option value="08">08</option><option value="09">09</option>
+										<option value="10">10</option><option value="11">11</option><option value="12">12</option>
+										<option value="13">13</option><option value="14">14</option><option value="15">15</option>
+										<option value="16">16</option><option value="17">17</option><option value="18">18</option>
+										<option value="19">19</option><option value="20">20</option><option value="21">21</option>
+										<option value="22">22</option>
+									</select>
+								</th>
+								<th height="25" width="25" bgcolor="<?= $bg ?>">
+									<input type="text" name="lugar6" maxlength="10" size="5">
+								</th>
+							</tr>						
+						</table>
+						</form>
+					</div>
+				</td>
+			</tr>
+		</table>
+	
+		<br><br>
+	

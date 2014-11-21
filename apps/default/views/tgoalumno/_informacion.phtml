@@ -1,0 +1,269 @@
+<style type="text/css">
+	#datos_personales *{
+		font-size: 11px;
+	}
+	
+	#datos_personales th{
+		text-align: left;
+		padding-left:5px;		
+	}
+	
+	#datos_personales td{
+		text-align: left;
+		padding-left:0px;
+		color: #000000;
+		font-weight: bold;
+	}
+	
+	#datos_personales input{
+		width: 100%;
+		text-transform: uppercase;
+	}
+	
+	.boton_link{
+		background-color:#FFCA5B;
+		padding: 5px;
+		border: solid 2px #003399;
+		display: block;
+	}
+	
+	.boton_link a{
+		text-decoration: none;
+		color:#000000;
+		font-weight:bold;		
+	}
+	
+	.boton_link a:hover {
+		text-decoration: underline;
+		color: #003399;
+	}
+</style>
+<div id="datos_personales">
+	<br>
+	<?php
+	//$Alumnos = new Alumnos();
+	$Alumnos = new AlumnosInformacion();	
+	
+	$registro = Session::get_data('registro');
+	
+	$nombres = "";
+	$paterno = "";
+	$materno = "";
+	$direccion = "";
+	$colonia = "";
+	$municipio = "";
+	$cp = "";
+	$curp = "";
+	$telefono = "";
+	$celular = "";
+	$sangre = "";
+	$genero = "";
+	$email = "";
+	$fecha_nacimiento = "";
+	$entro = 0;
+	
+	if($Alumnos -> find_first("registro = ".$registro)){
+		$entro = 1;
+		$nombres = $Alumnos -> nombres;
+		$paterno = $Alumnos -> paterno;
+		$materno = $Alumnos -> materno;
+		$direccion = $Alumnos -> direccion;		
+		$colonia = $Alumnos -> colonia;
+		$municipio = $Alumnos -> municipio;
+		$cp = $Alumnos -> cp;
+		$curp = $Alumnos -> curp;		
+		$telefono = $Alumnos -> telefono;
+		$celular = $Alumnos -> celular;
+		$sangre = $Alumnos -> sangre;
+		$genero = $Alumnos -> genero;
+		$email = $Alumnos -> email;
+		$fecha_nacimiento = $Alumnos -> fecha_nacimiento;
+	}else{
+		$Alumnos = new Alumnos();
+		if($Alumnos -> find_first('registro = '.$registro)){			
+			$Aspirantes = new Aspirantes();
+			$entro = 1;
+			if($Aspirantes -> find_first('registro = '.$registro)){			
+				$nombres = $Aspirantes -> nombre;
+				$paterno = $Aspirantes -> paterno;
+				$materno = $Aspirantes -> materno;
+				$direccion = $Aspirantes -> calle." ".$Aspirantes -> exterior;
+				$colonia = $Aspirantes -> colonia;
+				$municipio = $Aspirantes -> municipio;
+				$cp = $Aspirantes -> cp;
+				$curp = $Aspirantes -> curp;
+				$telefono = $Aspirantes -> telefono;
+				$celular = $Aspirantes -> celular;
+				$sangre = $Aspirantes -> sangre;
+				$genero = $Aspirantes -> sexo;
+				$email = $Aspirantes -> correo;
+				$fecha_nacimiento = $Aspirantes -> fecha_nacimiento;
+			}else{
+				$nombres = $Alumnos -> nombre_completo;				
+				$fecha_nacimiento = $Alumnos -> fecha_nacimiento;
+			}	
+		}else{
+			echo '<h3>No se encontro informacion del alumno</h3>';
+		}
+	}
+	if($entro == 1){
+		echo form_remote_tag('tgoalumno/actualizarInformacion','update: datos_personales');
+	?>
+    <center>
+        <table width="400" class="bordeazul" cellpadding="1" cellspacing="1">
+            <tr>
+                <th class="naranja" width="180">
+                	NOMBRES
+                </th>
+				<td class="gris">
+					<?php if ($ajax == 1){ echo '<input type="text" value="'.utf8_encode($nombres).'"  name="nombres" />'; }else{?>					
+					
+					<input type="text" value="<?=  $nombres ?>"  name="nombres" />
+					<?php } ?>
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja" width="180">
+                	APELLIDO PATERNO
+                </th>
+				<td class="gris">
+					<?php if ($ajax == 1){ echo '<input type="text" value="'.utf8_encode($paterno).'"  name="paterno" />'; }else{?>
+					<input type="text" value="<?= $paterno ?>"  name="paterno" />
+					<?php } ?>					
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja" width="180">
+                	APELLIDO MATERNO
+                </th>
+				<td class="gris">
+					<?php if ($ajax == 1){ echo '<input type="text" value="'.utf8_encode($materno).'"  name="materno" />'; }else{?>
+							<input type="text" value="<?= $materno ?>"  name="materno" />
+					<?php } ?>
+					
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja">
+                	DIRECCION
+                </th>
+				<td class="gris">
+					<input type="text" value="<?= $direccion ?>"  name="direccion" />
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja">
+                	COLONIA
+                </th>
+				<td class="gris">
+					<input type="text" value="<?= $colonia ?>"  name="colonia" />
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja">
+                	MUNICIPIO
+                </th>
+				<td class="gris">
+					<input type="text" value="<?= $municipio ?>"  name="municipio" />
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja">
+                	CODIGO POSTAL
+                </th>
+				<td class="gris">
+					<input type="text" value="<?= $cp ?>"  name="cp" />
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja">
+                	CURP
+                </th>
+				<td class="gris">
+					<input type="text" value="<?= $curp ?>"  name="curp" />
+                </td>
+            </tr>
+			<tr>
+                <td class="grisClaro" colspan="2">
+                	<center style="font-size:10px; ">EJEMPLO DE FECHA DE NACIMIENTO  <span style="color: #0559b7;">1991-08-02</span></center>
+                </td>				
+            </tr>
+			<tr>
+                <th class="naranja">
+                	FECHA DE NACIMIENTO
+                </th>
+				<td class="gris">					
+					<input type="text" value="<?= $fecha_nacimiento ?>"  name="fecha_nacimiento" />
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja">
+                	GENERO
+                </th>
+				<td class="gris">
+					<select name="genero">
+						<option value="H" <?php if($genero == 'H'){ echo 'selected'; } ?>>HOMBRE</option>
+						<option value="M" <?php if($genero == 'M'){ echo 'selected'; } ?>>MUJER</option>
+					</select>					
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja">
+                	TELEFONO
+                </th>
+				<td class="gris">
+					<input type="text" value="<?= $telefono ?>"  name="telefono" />
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja">
+                	CELULAR
+                </th>
+				<td class="gris">
+					<input type="text" value="<?= $celular ?>"  name="celular" />
+                </td>
+            </tr>			
+			<tr>
+                <th class="naranja">
+                	E-MAIL
+                </th>
+				<td class="gris">
+					<input type="text" value="<?= $email ?>"  name="email" />
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja">
+                	SANGRE
+                </th>
+				<td class="gris">
+					<select name="sangre">
+						<option value="<?= $sangre ?>" selected><?= $sangre ?></option>
+						<option value="O+">O+</option>
+						<option value="O-">O-</option>
+						<option value="A+">A+</option>
+						<option value="A-">A-</option>
+						<option value="B+">B+</option>
+						<option value="B-">B-</option>
+						<option value="AB+">AB+</option>
+						<option value="AB-">AB-</option>
+					</select>					
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja" colspan="2">
+					<input type="hidden" name="registro" value="<?= $registro ?>"/>
+					<input type="submit" value="Actualizar"/>
+                </td>
+            </tr>
+        </table>
+		<br><!--
+		<span class="boton_link" style="width:100px;">
+			<?= link_to_remote("ACTULIZAR DATOS","action: tgoalumno/actualizar_datos","update: datos_personales") ?>
+
+		</span>-->
+    </center>
+</div>
+<?php
+		echo end_form_tag();
+	}
+?>

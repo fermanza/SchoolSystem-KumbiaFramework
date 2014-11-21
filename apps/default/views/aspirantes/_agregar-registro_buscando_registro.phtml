@@ -1,0 +1,71 @@
+<form id="agregar_registro_agregando" name="agregar_registro_agregando" method="post" action="<?=KUMBIA_PATH?>aspirantes/creandoAlumno">
+<table cellspacing="1" cellpadding="1" style="font-size: 12px;" align="center">
+	<tr class="">
+		<th class="" colspan="7">
+			Datos del Aspirante
+			<br /><br />
+		</td>
+	</tr>
+	<tr class="azul">
+		<th class="bordeAzul2">
+			Ficha
+		</td>
+		<th class="bordeAzul2">
+			Folio
+		</td>
+		<th class="bordeAzul2">
+			Folio Ceneval
+		</td>
+		<th class="bordeAzul2">
+			Tipo de Aspirante
+		</td>
+		<th class="bordeAzul2">
+			Plantel
+		</td>
+		<th class="bordeAzul2">
+			Nombre
+		</td>
+		<th class="bordeAzul2">
+			Nuevo Registro
+		</td>
+	</tr>
+	<tr>
+		<td  class="bordeAzul2 centrar" style="width: 75px">
+			<?= $aspirante->ficha ?>
+		</td>
+		<td  class="bordeAzul2 centrar" style="width: 75px">
+			<?= $aspirante->folio ?>
+		</td>
+		<td  class="bordeAzul2 centrar" style="width: 75px">
+			<?= $aspirante->folioceneval ?>
+		</td>
+		<td  class="bordeAzul2 centrar" style="width: 175px">
+			<?php 
+			if($aspirante->tipoAspirante==1)
+				echo "Pago de Derecho";
+			else
+				echo "Continuaci&oacute;n de Estudios";
+			?>
+		</td>
+		<td  class="bordeAzul2 centrar" style="width: 100px">
+			<?= $aspirante->plantel ?>
+		</td>
+		<td  class="bordeAzul2 centrar" style="width: 300px">
+			<?= $aspirante->paterno." ".$aspirante->materno." ".$aspirante->nombre ?>
+		</td>
+		<td  class="bordeAzul2 centrar" style="width: 100px">
+			<input type="text" id="registro" name="registro" />
+		</td>
+	</tr>
+	<tr align="center">
+		<input type="hidden" id="aspirante_id" name="aspirante_id" value="<?= $aspirante->id ?>" />
+	</tr>
+	</tr>
+</table>
+<br />
+<input type="submit" value="Asignarle nuevo Registro" class="floatright" style="margin-right: 50px;" />
+</form>
+<br />
+<br />
+<br />
+<br />

@@ -1,0 +1,42 @@
+<br /><br />
+<h2 style="margin-left: 20%;">INTERSEMESTRALES</h2>
+<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" class="centrar">
+	<tr bgcolor="#FFCA5B">
+		<th width="100" height="25"  align="center">No.</th>
+		<th width="100" align="center">No. Curso</th>
+		<th width="200" align="center">Materia</th>
+		<th width="150" align="center">Cupo</th>
+	</tr>
+	<?php
+	$i = 0;
+	foreach( $Intersemestrales as $icurso ){
+	if( $i % 2 == 0 ) $bg = "#EEEEEE";
+	else $bg = "#FFFFFF";
+	?>
+		<tr>
+			<td width="100" height="20" align="center" bgcolor="<?= $bg ?>"><?php echo ($i + 1)?></td>
+			<td width="100" align="center" bgcolor="<?= $bg ?>"><?= $icurso -> clavecurso ?></td>
+			<td width="200" align="center" bgcolor="<?= $bg ?>">
+				<?php echo $icurso -> clave." ".$icurso -> nombre_materia ?>
+				<br /><br />
+				<?php echo $icurso -> nombre_profesor ?>
+				<br />
+				<form action="<?= KUMBIA_PATH ?>profesor/intersemestral_listado_alumnos"
+						method="post">
+					<input type="submit" value="Listado de Alumnos Inscritos">
+					<input type="hidden" id="inter_clavecurso" name="inter_clavecurso"
+							value="<? echo $icurso -> clavecurso; ?>">
+				</form>
+			</td>
+			<td width="50" height="50" align="center" bgcolor="<?= $bg ?>">
+				<? echo "Max: ".$icurso -> cupo; ?><br />
+				<? echo "Disp: ".$icurso -> disponibilidad; ?><br />
+				<? echo "Insc: ".($icurso -> cupo - $icurso -> disponibilidad); ?><br />
+				<? echo substr( ((($icurso -> cupo - $icurso -> disponibilidad)*100) / $icurso -> cupo), 0, 5 )."%Lleno"; ?>
+			</td>
+		</tr>
+	<?php
+	$i++;
+	}
+	?>
+</table>

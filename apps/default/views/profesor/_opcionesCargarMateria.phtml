@@ -1,0 +1,84 @@
+<?
+if( $tipoBusqueda == 2 ){
+?>
+<table>
+	<tr class="naranja">
+		<th class="bordeAzul2" width="200" align="center">
+			&iquest;Horario Autorizado?
+		</td>
+		<th class="bordeAzul2" width="200" align="center">
+			&iquest;Qui&eacute;n autoriz&oacute; el horario?
+		</td>
+	</tr>
+	<tr class="naranja">
+		<td class="bordeAzul2" align="center">
+			<?= $cond -> horarioautorizado ?>
+		</td>
+		<td class="bordeAzul2" align="center">
+			<?= $cond -> quienautorizo ?>
+		</td>
+	</tr>
+</table>
+</form>
+<br />
+
+	<h3><? echo $registroo; ?></h3>
+	<table border="0" align="center">
+		<br />
+		<tr>
+			<br />
+			<td class="azull2" width="150px" align="center">
+				Horario
+				<input type="radio" name="horario"
+					id="horario" value="<?= $reg ?>">
+			</td>
+			
+			<td class="azull2" width="150px" align="center">
+				Seleccion Del Alumno
+				<input type="radio" name="seleccion"
+					id="seleccion" value="<?= $reg ?>">
+			</td>
+		</tr>
+		<br />
+		<br />
+	</table>
+
+	<div id="datos2">
+	</div>
+	
+	<?
+		print "<script type=\"text/javascript\">
+		new Event.observe(\"horario\", \"click\", function(){
+		new AJAX.viewRequest({
+			action: \"buscaralumno/horario/".$registroo."\",
+			container: \"datos2\"
+		})
+		})
+		</script>";
+		print "<script type=\"text/javascript\">
+		new Event.observe(\"seleccion\", \"click\", function(){
+		new AJAX.viewRequest({
+			action: \"profesorselecc/seleccion1/".$registroo."\",
+			container: \"datos2\"
+		})
+		})
+		</script>";
+	?>
+	
+<?
+}
+else{
+?>
+	<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="0" align="center">
+		<br />
+		<br />
+		<tr>
+			<th class="azull4" width="20">
+				Borrar
+			</th>
+			
+		</tr>
+	</table>
+<?
+}
+?>

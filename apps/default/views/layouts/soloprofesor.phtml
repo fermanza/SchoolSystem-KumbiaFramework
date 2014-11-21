@@ -1,0 +1,147 @@
+<?
+if( Session::get_data('tipousuario') == "TUTOR" ){
+	include("tutor.phtml");
+}
+else if( Session::get_data('tipousuario') == "INGCALCULO" ){
+	include("ingcalculo.phtml");
+}
+else{
+?>
+
+<?= stylesheet_link_tag('menu/menu_style', true); ?>
+<tr>
+	<th>
+	<div class="menu">
+		<ul>
+		<?php
+		if( Session::get_data('tipousuario') == "PROFESOR" ){
+		?>
+			<?= link_to('profesor/informacion','Informaci&oacute;n') ?> <span style="color: rgb(242, 120, 34);">|</span> 
+			<?= link_to('profesor/listas','Listas') ?> <span style="color: rgb(242, 120, 34);">|</span>
+			<?= link_to('profesor/horario','Horario') ?> <span style="color: rgb(242, 120, 34);">|</span>
+			<?= link_to('profesor/captura','Captura') ?> <span style="color: rgb(242, 120, 34);">|</span>
+			<?= link_to('profesor/tutorados','Tutorados') ?> <span style="color: rgb(242, 120, 34);">|</span>
+			<?= link_to('profesor/historico','Historico') ?> <span style="color: rgb(242, 120, 34);">|</span>
+			<?= link_to('profesor/capturarListaActividad','Asignarse Actividades') ?><span style="color: rgb(242, 120, 34);">|</span>
+        <?php
+		}
+		if( Session::get_data('coordinador') == "OK" ){
+			$categoria = 2;
+			$tipousuario = 2;
+		}
+		if( Session::get_data('tipousuario') == "OBSERVADOR" ){
+			$categoria = 4;
+			$tipousuario = 0;
+		}
+		if( Session::get_data('tipousuario') == "GOE" ){
+			$categoria = 5;
+			$tipousuario = 0;
+		}
+		
+		if( isset($categoria) && ($categoria == 2 && $tipousuario == 2) ){
+			echo link_to('capturarcursos/','Coordinador')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/buscarAlumno','Buscar Alumno')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/autorizarCruces','Autorizar Cruces')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/permisosCapturaEspeciales','Correci&oacute;n de Captura')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/autorizarCargasDeMaterias','Cargar Materias')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			// echo link_to('profesor/titulosPendientes','Titulos Pendientes')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/abrirSeleccionAlumno','Abrir Selecci&oacute;n Alumno')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			// echo link_to('profesor/creditosSemestrePasado','Cr&eacute;ditos Sem Pasado')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/cambiarContrasenaZopilote','Contrase&ntilde;a Zopilote')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('estadisticas/indicesReprobacionListado','Estad&iacute;sticas de Captura')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('capturarcursos/masCupoEnCursosCyT','Abrir Cupo en Cursos')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/capturarListaActividad','Asignarse Actividades')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesoreshorario/horarioPorProfesor','Imprimir Horario de Profesores')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/cambiarSalonesAPrimero','Cambiar de Salon a los de Primero')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+		?>
+			<li><a>Inicio</a>
+				<ul>
+					<li><a href="<?=KUMBIA_PATH?>profesor/informacion">Informaci&oacute;n</a></li>
+				</ul>
+			</li>
+
+			<li><a>Captura</a>
+				<ul>
+					<li><a href="<?=KUMBIA_PATH?>profesor/captura">Captura Calificaciones</a></li>
+					<li><a href="<?=KUMBIA_PATH?>profesor/tutorados">Tutorados</a></li>
+				</ul>
+			</li>
+
+			<li><a>Horarios</a>
+				<ul>
+					<li><a href="<?=KUMBIA_PATH?>profesor/horario">Horario</a></li>
+					<li><a href="<?=KUMBIA_PATH?>profesor/listas">Listas</a></li>
+					<li><a href="<?=KUMBIA_PATH?>profesor/capturarListaActividad">Asignarse Actividades</a></li>
+					<li><a href="<?=KUMBIA_PATH?>profesoreshorario/horarioPorProfesor">Imprimir Horarios Profesor</a></li>
+				</ul>
+			</li>
+			<li><a>Cursos</a>
+				<ul>
+					<li><a href="<?=KUMBIA_PATH?>capturarcursos/captura">Crear Cursos Colomos</a></li>
+					<li><a href="<?=KUMBIA_PATH?>capturarcursos/capturaT">Crear Cursos Tonala</a></li>
+					<li><a href="<?=KUMBIA_PATH?>capturarcursos/cursos_intersemestrales">Crear Cursos Intersemestrales</a></li>
+					<li><a href="<?=KUMBIA_PATH?>capturarcursos/permisosCapturaEspeciales">Correci&oacute;n de Captura</a></li>
+					<li><a href="<?=KUMBIA_PATH?>capturarcursos/masCupoEnCursosCyT">Abrir Cupo en Cursos</a></li>
+				</ul>
+			</li>
+			<li><a href="<?=KUMBIA_PATH?>profesor/informacion">Administraci&oacute;n Alumnos</a>
+				<ul>
+					<li><a href="<?=KUMBIA_PATH?>profesor/buscarAlumno">Buscar Alumno</a></li>
+					<li><a href="<?=KUMBIA_PATH?>profesor/autorizarCruces">Autorizar Cruces</a></li>
+					<li><a href="<?=KUMBIA_PATH?>profesor/abrirSeleccionAlumno">Abrir Selecci&oacute;n Alumno</a></li>
+				</ul>
+			</li>
+			<li><a href="<?=KUMBIA_PATH?>profesor/informacion">Configuraci&oacute;n</a>
+				<ul>
+					<li><a href="<?=KUMBIA_PATH?>profesor/cambiarContrasena">Cambiar Contrase&ntilde;a</a></li>
+					<li><a href="<?=KUMBIA_PATH?>profesor/cambiarContrasenaZopilote">Cambiar Contrase&ntilde;a "Zopilote"</a></li>
+					<li><a href="<?=KUMBIA_PATH?>profesor/cambiarCorreo">Cambiar Correo</a></li>
+				</ul>
+			</li>
+			<li class="floatright">
+				<a href="<?=KUMBIA_PATH?>profesor/salir">
+					<image src="<?=KUMBIA_PATH?>img/log_off.jpg" class="log_off" />
+				</a>
+			</li>
+			</ul>
+		<?php
+        }
+		else if( Session::get_data('coordinador') == "OK" ){
+			echo link_to('profesor/buscarAlumno','Buscar Alumno')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+		}
+		
+		if( isset($categoria) && $categoria == 4 && $tipousuario == 0 ){
+			echo link_to('profesor/informacion','Informaci&oacute;n')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/buscarAlumno','Buscar Alumno')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('estadisticas/indicesReprobacionListado','Estad&iacute;sticas de Captura')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/cambiarContrasena','Cambiar Contrase&ntilde;a')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+		}
+		
+		if( isset($categoria) && $categoria == 5 && $tipousuario == 0 ){
+			echo link_to('profesor/informacion','Informaci&oacute;n')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/buscarAlumno','Buscar Alumno')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+			echo link_to('profesor/cambiarContrasena','Cambiar Contrase&ntilde;a')." <span style=\"color: rgb(242, 120, 34);\">|</span> ";
+		}
+		
+		if( Session::get_data('tipousuario') == "PROFESOR" ){
+		?>
+			<?= link_to('profesor/encuestas','Encuestas') ?> <span style="color: rgb(242, 120, 34);">|</span> 
+			<?= link_to('profesor/cambiarContrasena','Cambiar Contrase&ntilde;a') ?> <span style="color: rgb(242, 120, 34);">|</span>
+			<?= link_to('profesor/cambiarCorreo','Cambiar Correo') ?> <span style="color: rgb(242, 120, 34);">|</span>
+		<?
+		}
+		?>
+	</div>
+	</th>
+</tr>
+<tr>
+	<td height="1"></td>
+</tr>
+<tr>
+	<td align="center">
+		<?= content(); ?>
+	</td>
+</tr>
+<?
+}
+?>

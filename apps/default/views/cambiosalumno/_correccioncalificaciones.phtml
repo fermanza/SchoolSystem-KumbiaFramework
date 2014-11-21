@@ -1,0 +1,47 @@
+</br>
+</br>
+<?= render_partial("cambiosalumno/info_alumno"); ?>
+</br>
+</br>
+<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 10px;" width="750">
+	<tr bgcolor="#FFCA5B">
+		<th width="25" height="25" rowspan="2" align="center">&nbsp;</th>
+		<th width="200" rowspan="2" align="center">Materia</th>
+		<th width="200" rowspan="2" align="center">Profesor</th>
+		<th width="50" rowspan="2" align="center">Estatus</th>
+		<th width="50" colspan="2" align="center">1er. Parcial</th>
+		<th width="50" colspan="2" align="center">2do. Parcial</th>
+		<th width="50" colspan="2" align="center">3er. Parcial</th>
+		<th width="50" colspan="2" align="center">Final</th>
+		<th rowspan="2" align="center">Situaci&oacute;n</th>
+	</tr>
+	<tr bgcolor="#FFCA5B">
+		<th width="25" align="center">F1</th>
+		<th width="25" align="center">C1</th>
+		<th width="25" align="center">F2</th>
+		<th width="25" align="center">C2</th>
+		<th width="25" align="center">F3</th>
+		<th width="25" align="center">C3</th>
+		<th width="25" align="center">FAL</th>
+		<th width="25" align="center">CAL</th>
+	</tr>
+	
+	<?php
+		$p=0;$p1=0;$p2=0;$p3=0; $n=0; $i=0;
+		foreach($mihorario as $horario){
+			$n++; $i++;
+			if($i%2==0){ $bg = "#EEEEEE"; }else{ $bg = "#FFFFFF"; }
+	?>
+	<tr style="font-size: 10px;"> 
+		<td width="25" height="40" align="center" bgcolor="<?= $bg ?>"><?= $i ?></td>
+		<td width="200" align="center" bgcolor="<?= $bg ?>"><?= $horario -> materia ?> (<?= $horario -> clavecurso ?>)<br><b><?php echo htmlentities($materia[$i-1] -> nombre); ?></b></td>
+		<td width="200" align="center" bgcolor="<?= $bg ?>"><?php echo htmlentities($profesor[$i-1] -> nombre) ?></td>
+		<td width="50" align="center" bgcolor="<?= $bg ?>"><?php echo $xalumnocursos[$i-1] -> tipo; ?></td>
+	</tr>
+	
+	<?php }?>
+</table>
+
+
+
+

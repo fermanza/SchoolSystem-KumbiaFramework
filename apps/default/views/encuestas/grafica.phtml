@@ -1,0 +1,45 @@
+<table>
+	<tr>
+		<td>
+			&nbsp;
+		</td>
+	<tr>
+</table>
+<br />
+<br />
+<br />
+
+<form action="<?= KUMBIA_PATH ?>alumno/cambiandoContrasena"
+		method="post" name="Formulario1" id="Formulario1">
+<select name="parcial" id="parcial" class="listaParcial">
+	<option value="1">Primer Parcial</option>
+	<option value="2">Segundo Parcial</option>
+	<option value="3">Tercer Parcial</option>
+</select>
+</form>
+<div id="infoToda">
+<form action="<?= KUMBIA_PATH ?>estadisticas/exportarAExcel/<?= $parcialNum ?>"
+	method="post" name="Formulario2" id="Formulario2">
+</form>
+<h3 align="center"><?= $parcial ?></h3>
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center" width="80%">
+	<tr>
+		<th class="azull4" width="100">
+			Clave Curso
+		</th>
+</table>
+</div>
+
+<br />
+<br />
+<?
+	print "<script type=\"text/javascript\">
+	new Event.observe(\"parcial\", \"change\", function(){
+	var parcial = document.Formulario1.parcial.value;
+	new AJAX.viewRequest({
+		action: \"encuestas/grafica2/\",
+		container: \"infoToda\"
+	})
+	})
+	</script>";
+?>

@@ -1,0 +1,57 @@
+<script language="JavaScript">	
+function setIt( Objeto ){
+	if( Objeto.value == "" && Objeto.name == "nombreAlumno" )
+		Objeto.value = "Nombre Alumno";
+	if( Objeto.value == "" && Objeto.name == "ficha" )
+		Objeto.value = "Ficha";
+	if( Objeto.value == "" && Objeto.name == "folio" )
+		Objeto.value = "Folio";
+	if( Objeto.value == "" && Objeto.name == "folioceneval" )
+		Objeto.value = "Folio Ceneval";
+}
+function clearIt( Objeto ){
+	if( Objeto.value == "Nombre Alumno" || Objeto.value == "Ficha" || Objeto.value == "Folio" ||Objeto.value == "Folio Ceneval" )
+		Objeto.value = "";
+}
+
+</script>
+<center><br /><br />
+<h3 class="letraRoja">Asignar Registro a los Aspirantes del Periodo <?= $periodoo ?></h3>
+
+<?php echo form_remote_tag("aspirantes/buscandoRegistro","update: status_carta", "name: Formulario0") ?>
+<table>
+	<tr class="azul">
+		<th class="bordeAzul2">
+			Buscar al Alumno.
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="text" name="ficha" id="ficha" value="Ficha" 
+					onblur="setIt(this)" onfocus="clearIt(this)" class="input" />
+					
+			<input type="text" name="folio" id="folio" value="Folio" 
+					onblur="setIt(this)" onfocus="clearIt(this)" class="input" />
+					
+			<input type="text" name="folioceneval" id="folioceneval" value="Folio Ceneval" 
+					onblur="setIt(this)" onfocus="clearIt(this)" class="input" />
+					
+			<input type="text" name="nombreAlumno" id="nombreAlumno" value="Nombre Alumno"
+					onblur="setIt(this)" onfocus="clearIt(this)" class="input" />
+		</td>
+	</tr>
+	<tr align="center">
+		<td colspan="2"><input type="submit" value="Buscar Alumno" /></td>
+	</tr>
+</table>
+<br />
+<br />
+</form>
+
+<div id ="status_carta" name="status_carta">
+</div>
+
+<div id ="materias" name="materias">
+</div>
+
+</center>

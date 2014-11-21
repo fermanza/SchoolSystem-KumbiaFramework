@@ -1,0 +1,57 @@
+		<table border="0" cellpadding="0" cellspacing="0" width="770">
+			<tr>
+				<td style="font-family: Verdana;">
+					<br>
+					<div style="color: #1569C7; font-size: 14px;" align="left">
+					<?= img_tag("adorno.gif","border: 0") ?> <b>PLANTELES</b></div>
+					<div style="color: #000000; font-size: 11px;" align="justify">
+						<br>
+						Los planteles serán las sedes que pertenecen al CETI y son la base de toda la administración ya que estos pretenden trabajar de manera autonoma, en este momento solo existen dos, que son: COLOMOS y TONALA.
+						<br><br>
+						<div style="color: #FF0000; font-size: 14px;" align="center"><b><?= $mensaje ?></b></div>
+						<br>
+					</div>
+					<div style="color: #000000; font-size: 11px;" align="center">
+						<table border="1" cellpadding="1" cellspacing="1" width="750">
+							<tr>
+								<th align="center" height="25" class="fondoazul">
+									Id
+								</th>
+								<th align="center" height="25" class="fondoazul">
+									Clave
+								</th>
+								<th align="center" height="25" class="fondoazul">
+									Nombre
+								</th>
+								<th align="center" height="25" colspan="3" class="fondoazul">
+									
+								</th>
+							</tr>
+							<tr>
+								<form action="<?= KUMBIA_PATH ?>administrador/modificarPlantel" method="POST">
+								<th align="center" height="30" width="50" bgcolor="<?= $bg ?>">
+									<input type="text" size="2" name="id" maxlength="2" class="cuadrotextocentrado" value="<?= $plantel -> id ?>" disabled>
+								</th>
+								<th align="center" height="25" width="50" bgcolor="<?= $bg ?>">
+									<input type="text" size="2" name="clave" maxlength="2" class="cuadrotextocentrado" value="<?= $plantel -> clave ?>">
+								</th>
+								<th align="center" height="25" width="225" bgcolor="<?= $bg ?>">
+									<input type="text" size="35" name="nombre" class="cuadrotextocentrado" value="<?= $plantel -> nombre ?>">
+								</th>
+								<th align="center" height="25" width="125" bgcolor="<?= $bg ?>">
+									<input type="submit" value="Modificar" class="boton">
+								</th>
+								</form>
+								<form action="<?= KUMBIA_PATH ?>administrador/reportePlanteles" method="POST">
+								<th align="center" height="25" width="125" bgcolor="<?= $bg ?>">
+									<input type="submit" value="Cancelar" class="boton">
+								</th>
+								</form>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	
+		<br><br>

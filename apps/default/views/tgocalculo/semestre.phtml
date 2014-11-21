@@ -1,0 +1,138 @@
+<center>
+<table width="100%" class="bordeAzul" cellpadding="1" cellspacing="1" style="font-size: 10px;">
+<tr>
+	<th colspan="7" class="naranja">Listado de Alumnos de <?= $semestre ?> semestre</th>
+</tr>
+<?php
+$Historial = new HistorialAlumno();
+$Calificaciones = new Calificaciones();
+$Materias = new MateriasHorarios();
+$Periodos = new Periodos();
+$Extras = new Extras();
+$Alumnos = new Alumnos();
+
+
+$Periodos -> find_first("activo = 0");
+
+foreach($alumnos as $a){	
+	$BajaDefinitiva = 0;
+	$reprobadas = 0;
+	$sinCarga=0;	
+	echo '<tr class="azul">';
+	echo utf8_encode('<td colspan="7" style="font-weight: bold;">'.$a -> registro." - ".$a -> nombre_completo." ".$a -> especialidad."</td>");
+	echo '</tr>';		
+	if($calificaciones = $Calificaciones -> find("registro = ".$a -> registro." and periodo = ".$Periodos -> periodo." and situacion != '-'", "order: horario_id ASC")){
+		echo '<tr class="naranja">';
+		echo '<th width="20" style="background-color: #333333">&nbsp;</th><th>Acta</th><th>Calificacion</th><th>Situacion</th><th>Extra</th><th>Pago</th>';
+		echo '</tr>';
+		foreach($calificaciones as $c){
+			echo tr_color('#DDFFDD','#DDDDDD');
+			echo '<td style="background-color: #333333">&nbsp;</td>';
+			echo '<th>'.$c -> horario_id.'</th>';
+			echo '<th>'.$c -> calificacion.'</th>';
+			echo '<th>'.$c -> situacion.'</th>';
+			if($Extras -> find_first("horario_id = ".$c -> horario_id." and registro = ".$c -> registro)){
+				echo '<th>'.$Extras -> calificacion.'</th><th>'.$Extras -> pago.'</th>';
+			}else{
+				echo '<th colspan="2" style="background-color: #999999">&nbsp;</th>';
+			}
+			if ($c -> situacion != 'BA'){
+				if($c -> situacion == 'RE'){
+					$reprobadas++;
+				}else{					
+					if($c -> calificacion >= 70 && $c -> calificacion<=100){
+						
+					}elseif($Extras -> calificacion >= 70 && $Extras -> calificacion<=100 && $Extras -> pago == 1){
+						
+					}else{				
+						if ($Extras -> tipo == 'T'){
+							$BajaDefinitiva = 1;
+						}
+						$reprobadas++;				
+					}
+				}
+			}else{								
+				$BajaDefinitiva = 1;
+				echo "j2j2";
+			}
+		}			
+	}else{
+		$sinCarga=1;
+	}
+	echo $reprobadas;
+	$Alumnos = new Alumnos();
+	if($Alumnos -> find_first("registro = ".$a -> registro)){			
+		if($reprobadas>0 || $sinCarga == 1){			
+			if($sinCarga == 1){
+				echo '<tr style="background-color: #FF1111"><td colspan="7">Sin Carga</td></tr>';
+				$Alumnos -> estado = "BD";	
+				$Historial = new HistorialAlumno();				
+				$Historial -> registro = $a -> registro;
+				$Historial -> situacion_id = 7;
+				$Historial -> fecha = date("H:i:s");
+				if($Historial -> save()){
+					
+				}else{
+					echo "No se guardo el nuevo historial del alumno".$a -> registro;
+				}
+				
+			}else{
+				if ($BajaDefinitiva == 1){
+					echo '<tr style="background-color: #bb3333"><td colspan="7"><b>BAJA DEFINITIVA</b></td></tr>';					
+					$Alumnos -> estado = 'BD';
+					$Historial = new HistorialAlumno();				
+					$Historial -> registro = $a -> registro;
+					$Historial -> situacion_id = 7;
+					$Historial -> fecha = date("y-m-d");;
+					if($Historial -> save()){
+						
+					}else{
+						echo "No se guardo el nuevo historial del alumno".$a -> registro;
+					}
+				}else{
+					if($reprobadas <3){
+						echo '<tr style="background-color: #FFFF33"><td colspan="7">Irregular con '.$reprobadas.' materias reprobadas</td></tr>';
+						$Alumnos -> tipo = 'I';
+						if($Alumnos -> semestre == 8){
+						
+						}else{
+							$Alumnos -> semestre = $Alumnos -> semestre_anterior + 1;
+						}
+					}else{
+						echo '<tr style="background-color: #bb3333"><td colspan="7">Proceso con '.$reprobadas.' materias reprobadas</td></tr>';
+						$Alumnos -> tipo = 'P';
+					}
+				}
+			}			
+		}else{
+			echo '<tr style="background-color: #33bb33"><td colspan="7">Regular</td></tr>';
+			$Alumnos -> tipo = 'R';
+			if($Alumnos -> semestre == 8){
+				$Alumnos -> estado = 'EG';
+				$Alumnos -> situacion = 'EGRESADO';
+				echo '<tr style="background-color: #33bb33"><td colspan="7">EGRESO</td></tr>';
+				$Historial = new HistorialAlumno();				
+				$Historial -> registro = $a -> registro;
+				$Historial -> situacion_id = 3;
+				$Historial -> fecha = date("y-m-d");
+				if($Historial -> save()){
+					
+				}else{
+					echo "No se guardo el nuevo historial del alumno".$a -> registro;
+				}
+			}else{	
+				$Alumnos -> semestre = $Alumnos -> semestre_anterior + 1;
+			}
+		}
+		if($Alumnos -> save()){
+			
+		}else{
+			echo "No se guardo el nuevo estado de Alumno ".$a -> registro;
+		}
+	}else{
+		echo '<tr><td colspan="7">NO SE ENCONTRO EL REGISTRO'.$a -> registro.'</td></tr>';	
+	}
+	echo '<tr><td colspan="7">&nbsp;</td></tr>';	
+}
+?>
+</center>

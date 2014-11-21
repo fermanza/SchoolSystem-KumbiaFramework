@@ -1,0 +1,87 @@
+<?= render_partial("info"); ?>
+<br>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+	CONTROL DE PROFESORES
+</div>
+<br><br>
+
+<div id="horarioJornada"></div>
+
+<table border="0">
+	<tr>
+		<td width="440" valign="top">
+			<?= form_remote_tag("tgocoordinador/agregarmaestro","update: listado") ?>
+			<table border="1" class="bordeazul" style="font-size:10px;">
+				<tr>
+					<th width="440" height="20" class="naranja">
+						AGREGAR MAESTROS
+					</th>
+				</tr>
+				<tr>
+					<th width="440">
+						<select name="maestro" style="width:350px;">
+							<option value=""></option>
+							<?php if($maestros) foreach($maestros as $maestro) { ?>
+								<option value="<?= $maestro -> id ?>"><?= $maestro -> nombre ?></option>
+							<?php } ?>
+						</select>
+						<input type="submit" value="Agregar">
+					</th>
+				</tr>
+			</table>
+			<?= end_form_tag() ?>
+			<div id="listado">
+				<table border="1" style="font-size:10px;" class="bordeazul">
+				<tr>
+					<th width="440" colspan="6" class="naranja">
+						MAESTROS ASIGNADOS A ESTA DIVISION
+					</th>
+				</tr>
+				<tr>
+					<th width="60" class="azul">
+						Nomina
+					</th>
+					<th class="azul">
+						Nombre
+					</th>					
+					<th width="40" colspan="2" height="20" class="gris">
+						<?= link_to_remote('<img src="'.KUMBIA_PATH.'public/img/prev.gif" border=0>',"update: listado","action: tgocoordinador/profesoresajax/".$p1); ?>
+					</th>
+					<th width="40" colspan="2" height="20" class="gris">
+						<?= link_to_remote('<img src="'.KUMBIA_PATH.'public/img/next.gif" border=0>',"update: listado","action: tgocoordinador/profesoresajax/".$p2); ?>
+					</th>
+				</tr>
+				<?php if($listado) foreach($listado as $maestro){ ?>
+				<tr>
+					<td width="60" height="20" align="center">
+						<?= $maestro -> maestro_id ?>
+					</td>
+					<td width="340">
+						&nbsp;<?= $profesores[$maestro -> maestro_id] ?>
+					</td>
+					<th width="20" height="20">
+						<?= link_to("tgoprofesor/horarioPDF/".$maestro -> maestro_id, img_tag("print.gif")); ?>
+					</th>
+					<th width="20" height="20">
+						<?= link_to_remote('<img src="'.KUMBIA_PATH.'public/img/app.gif" border=0>',"update: horarioJornada","action: tgocoordinador/horarioJornada/".$maestro -> maestro_id."/".$periodo); ?>
+					</th>
+					<th width="20" height="20">
+						<?= link_to_remote('<img src="'.KUMBIA_PATH.'public/img/calendar.gif" border=0>',"update: jornada","action: tgocoordinador/jornada/".$maestro -> maestro_id."/".$periodo); ?>
+					</th>
+					<th width="20" height="20">
+						<?= link_to_remote('<img src="'.KUMBIA_PATH.'public/img/delete.png" border=0>',"update: listado","action: tgocoordinador/quitarmaestro/".$maestro -> id."/".$periodo); ?>
+					</th>
+				</tr>
+				<?php } ?>
+			</table>
+			</div>
+		</td>
+		<td width="50">&nbsp;</td>
+		<td width="460" valign="top">
+			<div id="jornada">
+				<?= render_partial("horario"); ?>
+			</div>
+		</td>
+	</tr>
+</table>

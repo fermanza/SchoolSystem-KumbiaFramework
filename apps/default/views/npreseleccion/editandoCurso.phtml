@@ -1,0 +1,54 @@
+<style type="text/css">
+
+.lista {
+/*
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin: 1px;
+	padding: 1px;
+	color: #000000;
+	*/
+	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	/*border: 1px outset #E0E0E0;
+	margin: 1px;
+	padding: 1px;
+	*/
+	border: #000000; 
+	border-style: solid; 
+	border-top-width: 1px; 
+	border-right-width: 1px; 
+	border-bottom-width: 1px; 
+	border-left-width: 1px;
+	
+	background-color: #EAEAF0;
+	/*background-color: #C6C6D7;*/
+
+}
+
+</style>
+
+<?= render_partial("info"); ?>
+
+<br />
+<br />
+<?= render_partial("menucursos"); ?>
+<br />
+<br />
+<table align="center">
+	<tr>
+		<td colspan="3" valign="center" class="encabezadoo">
+		<?
+			if( $exito == 1 ){
+				echo "<h3>Curso editado exit&oacute;samente...</h3>";
+			}
+			else{
+				echo "<h3>Error:</h3>";
+				echo "<br /><br /><h3>".$error."</h3>";
+			}
+		?>
+		</td>
+	</tr>
+</table>
+</table>

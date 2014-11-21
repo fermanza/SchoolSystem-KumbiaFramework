@@ -1,0 +1,135 @@
+<script>
+function validarSiNumero(numero){
+if (!/^([0-9])*$/.test(numero))
+alert("El valor " + numero + " no es un número");
+}
+</script>
+<style type="text/css">
+	.listadoMaterias a{
+		display: block;
+		text-decoration: none;
+		color: #000000;
+		font-weight: bold;
+	}
+	.listadoMaterias a:hover{
+		text-decoration: underline;		
+	}
+</style>
+<?= render_partial("info"); ?>
+<br>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+	CALIFICACIONES
+</div>
+<br />
+<center>
+	<div class="listadoMaterias">
+		<table width="850" class="bordeazul" style="font-size:11px;">
+			<tr class="naranja">
+				<th colspan="17">LISTADO DE MATERIAS</th>
+			</tr>
+			<tr class="azul">
+				<th rowspan="2" width="30">Acta</th>
+				<th rowspan="2">Materia</th>
+				<th rowspan="2" width="30">Grupo</th>
+				<th colspan="8">Parciales a Calificar</th>
+				<th rowspan="2" colspan="3" width="30">Calificaci&oacute;n Final<br>Ordinaria</th>
+				<th rowspan="2" colspan="3" width="30">Extras, Titulo y Derechos de Pasantia</th>
+				
+			</tr>
+			<tr>
+				<th colspan="2">1ro</th>
+                <th style="background-color:#666666">&nbsp;</th>
+				<th colspan="2">2do</th>
+                <th style="background-color:#666666">&nbsp;</th>
+				<th colspan="2">3ro</th>
+			</tr>
+			<?php 
+			$nomina_habilitada = "742";
+			$Materias = new MateriasHorarios();
+			$Periodo = new Periodos();
+			if($periodo = $Periodo -> find_first("activo = 1")){
+				$fi1=$periodo -> inicio1parcial;
+				$ff1=$periodo -> fin1parcial;
+				$fi2=$periodo -> inicio2parcial;
+				$ff2=$periodo -> fin2parcial;
+				$fi3=$periodo -> inicio3parcial;
+				$ff3=$periodo -> fin3parcial;
+				$fie=$periodo -> inicioExtras;
+				$ffe=$periodo -> finExtras;
+			}
+			$Grupos = new Grupos();
+			foreach($horarios as $h){
+				$materia = $Materias -> find_first("id = ".$h -> materia_id);
+				$grupo = $Grupos -> find_first("id = ".$h -> grupo_id);
+				echo tr_color('#CCDEFF', '#FFFFFF');
+				echo '<td>'.$h -> id.'</td>';
+				echo '<td>'.$materia -> nombre.'</td>';
+				echo '<td>'.$grupo -> nombre.'</td>';
+				$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));  				  				
+				
+				//comparacion para primer parcial
+				if(($fecha_actual > strtotime($fi1)) && ($fecha_actual < strtotime($ff1))){  
+					echo '<td><center>'.link_to_remote('Capturar', "update: listadoAlumnos", "action: tgoprofesor/listadoCalificaciones/".$h->id."/1").'</center></td>';
+					echo '<td><center>'.link_to("tgoprofesor/imprimirCalificaciones/".$h->id."/1", '<img src="'.KUMBIA_PATH.'public/img/print.gif"').'</center></td>';
+				}else{  
+					if(Session::get_data('registro') == $nomina_habilitada ){
+						echo '<td><center>'.link_to_remote('Capturar', "update: listadoAlumnos", "action: tgoprofesor/listadoCalificaciones/".$h->id."/1", "success: new Effect.SlideDown('listadoAlumnos', { duration: 2.0 })").'</center></td>';
+					}else{
+						echo '<td><center>No Disp.</center></td>';
+					}
+					echo '<td><center>'.link_to("tgoprofesor/imprimirCalificaciones/".$h->id."/1", '<img src="'.KUMBIA_PATH.'public/img/print.gif"').'</center></td>';
+				}
+				echo '<th style="background-color:#666666">&nbsp;</th>';
+				
+				//comparacion para segundo parcial
+				if(($fecha_actual > strtotime($fi2)) && ($fecha_actual < strtotime($ff2))){  
+					echo '<td><center>'.link_to_remote('Capturar', "update: listadoAlumnos", "action: tgoprofesor/listadoCalificaciones/".$h->id."/2").'</center></td>';
+					echo '<td><center>'.link_to("tgoprofesor/imprimirCalificaciones/".$h->id."/2", '<img src="'.KUMBIA_PATH.'public/img/print.gif"').'</center></td>';
+				}else{  
+					if(Session::get_data('registro') == $nomina_habilitada ){
+						echo '<td><center>'.link_to_remote('Capturar', "update: listadoAlumnos", "action: tgoprofesor/listadoCalificaciones/".$h->id."/2", "success: new Effect.SlideDown('listadoAlumnos', { duration: 2.0 })").'</center></td>';
+					}else{
+						echo '<td><center>No Disp.</center></td>';
+					}
+					echo '<td><center>'.link_to("tgoprofesor/imprimirCalificaciones/".$h->id."/2", '<img src="'.KUMBIA_PATH.'public/img/print.gif"').'</center></td>';
+				}
+				echo '<th style="background-color:#666666">&nbsp;</th>';
+				
+				//comparacion para tercer parcial
+				if(($fecha_actual > strtotime($fi3)) && ($fecha_actual < strtotime($ff3))){  
+					echo '<td><center>'.link_to_remote('Capturar', "update: listadoAlumnos", "action: tgoprofesor/listadoCalificaciones/".$h->id."/3", "success: new Effect.SlideDown('listadoAlumnos', { duration: 2.0 })").'</center></td>';	
+					echo '<td><center>'.link_to("tgoprofesor/imprimirCalificaciones/".$h->id."/3", '<img src="'.KUMBIA_PATH.'public/img/print.gif"').'</center></td>';
+				}else{ 
+					if(Session::get_data('registro') == $nomina_habilitada ){
+						echo '<td><center>'.link_to_remote('Capturar', "update: listadoAlumnos", "action: tgoprofesor/listadoCalificaciones/".$h->id."/3", "success: new Effect.SlideDown('listadoAlumnos', { duration: 2.0 })").'</center></td>';	
+					}else{
+						echo '<td><center>No Disp.</center></td>';
+					}
+					echo '<td><center>'.link_to("tgoprofesor/imprimirCalificaciones/".$h->id."/3", '<img src="'.KUMBIA_PATH.'public/img/print.gif"').'</center></td>';
+				}				
+				echo '<th style="background-color:#666666">&nbsp;</th>';
+				if($fecha_actual > strtotime($fi3)){  
+					echo '<td><center>'.link_to_remote('Ver Calificacion<br>Ordinaria', "update: listadoAlumnos", "action: tgoprofesor/verCalificacionFinal/".$h->id, "success: new Effect.SlideDown('listadoAlumnos', { duration: 2.0 })").'</center></td>';						
+				}else{
+					echo '<td colspan="2"><center>No Disp.</center></td>';
+				}
+				echo '<th style="background-color:#666666">&nbsp;</th>';
+				//EXTRAS Y TITULOS
+				if((($fecha_actual > strtotime($fie))  && ($fecha_actual < strtotime($ffe))) || ( Session::get_data('registro') == $nomina_habilitada ) ){  
+					echo '<td><center>'.link_to_remote('Capturar', "update: listadoAlumnos", "action: tgoprofesor/listadoCalificaciones/".$h->id."/4", "success: new Effect.SlideDown('listadoAlumnos', { duration: 2.0 })").'</center></td>';	
+					echo '<td><center>'.link_to("tgoprofesor/imprimirCalificaciones/".$h->id."/4", '<img src="'.KUMBIA_PATH.'public/img/print.gif"').'</center></td>';				
+				}else{
+					echo '<td><center>No Disp.</center></td>';
+					echo '<td><center>'.link_to("tgoprofesor/imprimirCalificaciones/".$h->id."/4", '<img src="'.KUMBIA_PATH.'public/img/print.gif"').'</center></td>';				
+				}
+				//echo "actual = ".$fecha_actual." inicio: ".$fecha_inicio." fin: ".$fecha_fin;												
+			} 
+			?>
+		</table>
+	</div>	
+<br>	
+	<div id="listadoAlumnos">
+					
+	</div>
+</center>	

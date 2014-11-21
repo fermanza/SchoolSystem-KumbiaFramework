@@ -1,0 +1,153 @@
+<?= stylesheet_link_tag('dialog_box'); ?>
+<?= stylesheet_link_tag('formularios'); ?>
+<?= javascript_library_tag('dialog_box'); ?>
+<style type="text/css">
+    .caja .seleccionar th{
+        width: 25%;
+    }
+    .caja .seleccionar th a{
+        text-decoration: none;
+        color: #333333;
+    }
+</style>
+<br/>
+<br/>
+<div class="caja">
+   <div style="text-align:left; margin-left:30px; margin-bottom:25px;"> Solicitar concepto para:</div>
+<table width="100%" class="seleccionar">
+  <tr>
+    <th><?= link_to_remote('caja/buscar/alumno',img_tag('icons/usr1.png','width: 30px').'<br /> Alumno','update: buscador'); ?></th>
+    <th><?= link_to_remote('caja/buscar/aspirante',img_tag('icons/usuario1.png','width: 30px').'<br /> Aspirante','update: buscador'); ?></th>
+    <th><?= link_to_remote('caja/buscar/trabajador',img_tag('icons/customer1.png','width: 30px').'<br /> Trabajador','update: buscador'); ?></th>
+    <th><?= link_to_remote('caja/buscar/otro',img_tag('icons/adm1.png','width: 30px').'<br /> Otra Persona','update: buscador'); ?></th>
+  </tr>
+  <tr>
+    <td colspan="4">
+	  <div id="buscadorAlum">
+      </div>
+	  <div id="buscadorAsp">
+	  </div>
+	  <div id="buscadorAlumnoC">
+	  </div>
+	  <div id="buscador">
+	  </div>
+    </td>
+  </tr>
+</table>
+</div>
+
+<script type='text/javascript'>
+//Funcion que sirve para mostrar mensajes de alerta a la hora de realizar la busqueda de ex-alumnos
+function alertmsg(){
+  if(document.getElementById('msgStatus').innerHTML == "FALSE"){
+    
+    showDialog('ALERTA',document.getElementById('msgExAlumnos').innerHTML,'error',3);
+  }
+}
+
+//funcion que valida que solo se puedan ingresar numeros
+function ValidNum(e)
+{
+  var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+    return ((tecla > 47 && tecla < 58) || tecla == 8);
+}
+
+//Funcion que valida que solo se puedan ingresar letras
+function validLetters(e)
+{
+  var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+      
+  if(tecla == 8)
+    return true;
+    
+    var patron = /[A-Za-z\s]/;
+	var x = String.fromCharCode(tecla);
+	
+  return patron.test(x)
+}
+
+//Pone en el formulario el nombre del aspirante
+function nombreAspirante(){
+   document.getElementById('nombrePost').value = document.getElementById('nombre').value;
+}
+
+//Pone en el formulario el nombre del aspirante
+function nombreAspirantePrope(){
+   document.getElementById('nombrePostPrope').value = document.getElementById('nombrePrope').value;
+   document.getElementById('telPostPrope').value = document.getElementById('telefonoPrope').value;
+}
+
+function typeSearch(){
+  if(document.getElementById('busquedaNoCon').checked ==  true)
+     document.getElementById('activoBusqueda').value = 1;
+	
+  else
+    document.getElementById('activoBusqueda').value = 2;
+}
+
+function typeSearchEA(){
+  if(document.getElementById('busquedaNoCon').checked ==  true)
+     document.getElementById('activoBusquedaEA').value = 1;
+	
+  else
+    document.getElementById('activoBusquedaEA').value = 2;
+}
+
+//Valida el tipo de busqueda de un ex-alumno
+function typeSearchExAlumno(){
+ 
+  if(document.getElementById('busquedaRegistro').checked ==  true)
+     document.getElementById('activoBusqueda').value = 1;
+	
+  else
+    document.getElementById('activoBusqueda').value = 2;
+}
+
+
+//Funcion que muestra los datos del Ex-Alumno seleccionado
+function viewDataExAlum(param){
+  new AJAX.viewRequest(
+    {
+	  action: "caja/viewDataExAlum",
+	  container: "viewExAlumnos",
+	  parameters: "registro="+param,
+	}
+  )
+}
+
+
+//Muestra la vista segun el tipo de persona que seleccionaron
+function selectTypeOther(){
+  new AJAX.viewRequest(
+    {
+	  action: "caja/redirectViewOther",
+	  container: "usuarioPrope",
+      parameters: "typeSelect="+document.getElementById('typeOther').value,
+    }
+  )
+}
+
+//Funcion que muestra el form para agregar un ex-alumno al historico
+function viewAgregarExAlumno(){
+  new AJAX.viewRequest(
+    {
+	  action: "caja/viewAgregarExalumno",
+	  container: "addExAlumno"
+	}
+  )
+}
+
+//Funcion que cierra la ventana de formulario de Ex-Alumnos
+//Cierra la ventana de los titulos
+function cerrarVentanaExAl(){
+  document.getElementById("exAlumnoVentana").style.display = "none";
+  document.getElementById("dialog-mask").style.display = "none";
+}
+
+function redirectPagos() {
+ 
+    //setTimeout("location.href = 'http://localhost/ControlEscolarOnLine/tecnologo/caja/tramites';",2000);
+    //setTimeout("location.href = 'http://ase.ceti.mx/tecnologo/caja/tramites';",2100);
+	showDialog('ALERTA','Los conceptos fueron guardados','warning',2);
+  }
+</script> 

@@ -1,0 +1,70 @@
+<center>
+	<table id="tablaTitulos" style="width:100%; font-family:arial; margin-left:0px; font-size:12px; margin-top:80px; float:left; margin-bottom:80px; ">
+		<tr style="font-weight:bold; color:#FFFFFF; text-align:center;">
+		   <td bgcolor="#F7B64C" height="35px" width="131px" colspan="8" align="center">
+			 LISTA DE ALUMNOS AGREGADOS
+		   </td> 
+		</tr>
+		<tr style="font-weight:bold; color:#FFFFFF; text-align:center;">
+		  <td bgcolor="#F7B64C" height="35px" width="100px">
+			REGISTRO
+		  </td>
+		  <td bgcolor="#F7B64C" height="35px" width="174px">
+			NOMBRE
+		  </td>
+		  <td bgcolor="#F7B64C" height="35px" width="110px">
+			APELLIDO PATERNO
+		  </td>
+		  <td bgcolor="#F7B64C" height="35px" width="111px">
+			APELLIDO MATERNO
+		  </td>
+		  <td bgcolor="#F7B64C" height="35px" width="169px">
+			CURP
+		  </td>
+		  <!--<td bgcolor="#F7B64C" height="35px" width="72px">
+			SEMESTRE
+		  </td>-->
+		  <td bgcolor="#F7B64C" height="35px" width="211px">
+			ESPECIALIDAD
+		  </td>
+		  <td bgcolor="#F7B64C" height="35px" width="70px">
+			ACCI&Oacute;N
+		  </td>
+		</tr>
+	</table>
+</center>
+
+<?php
+
+ if(count($result) == 0 || $result == NULL || $result == ""){
+   $result = "";
+ }
+ 
+ else{
+   foreach($result AS $value){
+
+    //Se valida la imagen del alumno
+    /*if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/fotos/".$value -> registro.".JPG"))
+	  $foto = "<img style='width: 80px; height: 80px;' src='../public/img/fotos/".$value -> registro.".JPG' />";
+	  
+	else if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/fotos/".$value -> registro.".jpg"))
+	  $foto = "<img width='80' height='80' src='../public/img/fotos/".$value -> registro.".jpg' />";
+	  
+	else
+	  $foto = "SIN FOTO";
+	  
+	  <td width="101px" height="35px" align="center" style="font-weight:bold;">'.$foto.'</td>
+	*/
+
+
+     echo '<table width="100%"  style="margin-left:0px;  float:left; margin-top:-300px; "><tbody><tr bgcolor="#F9F7F7" style="font-size: 13px;"><td width="101px" height="35px" align="center">'.$value -> registro.'</td><td width="132px" height="35px" align="center">'.utf8_encode($value -> nombres).'</td><td width="112px" height="35px" align="center">'.utf8_encode($value -> a_paterno).'</td><td width="112px" height="35px" align="center">'.utf8_encode($value -> a_materno).'</td><td width="171px" height="35px" align="center">'.$value -> curp.'</td><td width="214px" height="35px" align="center"> TGO. '.utf8_encode($value -> carrera).'</td><td width="61px" align="center"><img src="../public/img/agregar.png"  style="cursor: pointer; width:30px; height:30px;" title="AGREGAR ALUMNO A LA LISTA" onclick="createTableData();"></td></tr></tbody></table>';
+	 echo '<input type="hidden" id="reg" name="reg" value="'.$value -> registro.'" readonly="readonly" maxlength="0"/>'; 
+     echo '<input type="hidden" id="nombre" name="nombre" value="'.utf8_encode($value -> nombres).'" readonly="readonly" maxlength="0"/>';
+     echo '<input type="hidden" id="aPaterno" name="aPaterno" value="'.utf8_encode($value -> a_paterno).'" readonly="readonly" maxlength="0"/>';
+     echo '<input type="hidden" id="aMaterno" name="aMaterno" value="'.utf8_encode($value -> a_materno).'" readonly="readonly" maxlength="0"/>';
+     echo '<input type="hidden" id="curp" name="curp" value="'.$value -> curp.'" readonly="readonly" maxlength="0"/>';
+     echo '<input type="hidden" id="semestre" name="semestre" value="'.$value -> semestre.'"readonly="readonly" maxlength="0"/>';
+     echo '<input type="hidden" id="carrera" name="carrera" value="'.utf8_encode($value -> carrera).'" readonly="readonly" maxlength="0"/>';
+   }
+ }
+?>

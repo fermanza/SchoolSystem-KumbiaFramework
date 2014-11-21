@@ -1,0 +1,37 @@
+<?php
+if($tipo == 1){
+				$AM = new ActividadMaestro();	
+			}
+			if($tipo == 2){
+				$AM = new ActividadMaestroEspecial();	
+			}		
+$AM -> find_first("id = ".$id);		
+?>
+
+<div id="semanasClase">
+<table width="100%" style="font-size:10px;" class="bordeazul">
+	<tr>
+		<th colspan="18" class="naranja">
+			SEMANAS DE CLASE
+		</th>
+	</tr>
+	<tr class="azul">
+		<?php for($h=1;$h < 19;$h++){ 	
+		?>
+		<th><?= $h  ?></th>
+		<?php } ?>
+	</tr>
+	<tr class="gris">
+<?php
+for($h=1;$h < 19;$h++){
+	$var= "s".$h;
+	?>
+
+	<th><center><?= $AM -> $var  ?><center></th>
+	<?php
+}
+?>
+	</tr>
+	</center>
+</table>
+</div>

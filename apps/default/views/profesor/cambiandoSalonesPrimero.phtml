@@ -1,0 +1,27 @@
+<center>
+<table class="bordeAzul2" style="font-size:11px;">
+	<br />
+	<tr class="naranja">
+		<th colspan="2" class="bordeAzul2">Alumnos de Primero</th>
+	</tr>
+	<tr class="azul">
+		<th class="bordeAzul2">
+		<? 
+			if( isset($exito) && $exito == 1){
+				echo "El alumno ".$registro." ha sido cambiado al salón: ".$salon." exitósamente...";
+			}
+			else if( isset($exito) && $exito == 2 ){
+				echo "No puede hacer cambios de salones para alumnos de primero
+				en Tonalá ya que sólo existe un salón para primeros en Tonalá...";
+			}
+			else{
+				echo "Ocurrió un error, favor de contactar al administrador del sistema";
+			}
+		?>
+		</th>
+	</tr>
+</table>
+<br />
+<a href="<?= KUMBIA_PATH ?>profesor/cambiarSalonesAPrimero"><- Regresar</a>
+<br />
+<br />&nbsp;

@@ -1,0 +1,132 @@
+<?php
+    header('Window-target: _blank');
+	header('Content-type: application/vnd.ms-excel');
+	header("content-disposition: attachment;filename=Reporte_Seguro.xls");
+?>
+<center>
+  <table style="width:100%; font-family:arial; font-size:12px; margin-top:10px; float:left; margin-bottom:80PX;" align="center" border=1>
+	<tr style="font-weight:bold; color:#FFFFFF; text-align:center;" height="32">
+	  <td bgcolor="#F7B64C" height="35px" width="131px">
+		&nbsp;&nbsp;&nbsp;No.&nbsp;&nbsp;&nbsp;
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px" width="100px">
+		REGISTRO
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px" width="211px">
+		CARRERA
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px" width="100px">
+		SEMESTRE
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px" width="100px">
+		CLINICA
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px" width="100px">
+		NSS
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px" width="169px">
+		CURP
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px" width="110px">
+		APELLIDO PATERNO
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px" width="111px">
+		APELLIDO MATERNO
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px" width="131px">
+		NOMBRE(S)
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px" width="100px">
+		SEXO
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px" width="169px">
+		FECHA DE ALTA/MOVIMIENTO
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px" width="211px">
+		LUGAR DE NACIMIENTO
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px" width="100px">
+		NIVEL
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px" width="211px">
+		STATUS
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px" width="169px">
+		FECHA DE NACIMIENTO
+	  </td>
+	</tr>
+<?php 
+$count = 1;
+
+	if(count($registros) == 0 || $registros == NULL)
+	{
+	   echo tr_color('#F9F7F7','#FFFFFF'); 
+	   echo '<td align="center" colspan="16" style="font-weight:bold;" height="30">NO SE ENCONTRARON REGISTROS</td>';
+	   echo "</tr>";
+	}
+	
+	else
+	{
+	  	
+		foreach($registros AS $valueR)
+		{  
+		  $objeto = new alumnos();
+		
+		  $datosRegistro = $objeto -> buscar_registro_alumno($valueR -> registro);
+				
+				foreach($datosRegistro AS $value){
+				  
+	  
+				  //Se valida el nivel del alumno
+				  if($value -> nivel == "T")
+				    $nivel = "TECNÓLOGO";
+					
+				  else
+				    $nivel = "INGENIERÍA";
+					
+				  //Se valida sexo del alumno
+				  if($value -> sexo == "H")
+				    $sexo = "HOMBRE";
+					
+				  else if($value -> sexo == "M")
+				    $sexo = "MUJER";
+					
+				  else
+				    $sexo = "";
+					
+					
+				  //Lugar De Nacimiento
+				  if($value->municipioNac != null || $value->municipioNac != "")
+				    $coma = ", ";
+					
+				  else
+				    $coma = "";
+					
+		
+				  echo tr_color('#F9F7F7','#EFEDED'); 
+				  echo '<td align="center" height="30" style="line-height: 50px;">   '.$count.'   </td>';
+				  echo '<td align="center" height="30">'.$value->registro.'</td>';
+				  echo '<td align="center" height="30">'.$value->carrera.'</td>';
+				  echo '<td align="center" height="30">'.$value->semestre.'</td>';
+				  echo '<td align="center" height="30"> </td>';
+				  echo '<td align="center" height="30"> </td>';
+				  echo '<td align="center" height="30">'.$value->curp.'</td>';
+				  echo '<td align="center" height="30">&nbsp;&nbsp;'.$value->a_paterno.'</td>';
+				  echo '<td align="center" height="30">'.$value->a_materno.'</td>';
+				  echo '<td align="center" height="30">'.$value->nombres.'</td>';
+				  echo '<td align="center" height="30">'.$sexo.'</td>';
+				  echo '<td align="center" height="30"> </td>';
+				  echo '<td align="center" height="30">'.$value->municipioNac.$coma.$value->estadoNac.'</td>';
+				  echo '<td align="center" height="30">'.$nivel.'</td>';
+				  echo '<td align="center" height="30"> </td>';
+				  echo '<td align="center" height="30">'.$value->fechaNac.'</td>';
+				  echo "</tr>";
+				  
+				  $count++;
+				}
+		   
+		}
+    }
+?>
+  </table>
+</center>

@@ -1,0 +1,59 @@
+<?php
+if($xls == 1){
+	header("content-disposition: attachment;filename=listadoalumnos".trim($materia -> clave).$grupo -> nombre.".xls"); 
+	}
+?>
+<style type="text/css">
+	.listadoGAlumnos td{
+		padding: 2px;
+	}
+	.listadoGAlumnos th{
+		padding: 2px;
+	}
+</style>
+<div class="listadoGAlumnos">
+<?php
+	if($listas){
+		?>
+		<table class="bordeazul" width="100%" style="font-size:10px;">
+		<tr style="background-color: #ffca5b">
+			<th colspan="4"><?= $materia -> clave." - ".$materia -> nombre." - ".$grupo -> nombre ?></th>			
+		</tr>
+		<tr style="background-color: #1569c7; color:#FFFFFF;">
+			<th>&nbsp;</th>
+			<th>Registro</th>
+			<th>Nombre</th>
+			<th>Especialidad</th>
+		</tr>
+		<?php
+			$Alumnos = new Alumnos();		
+			$Especialidades = new Especialidades();
+			$cc=0;
+			foreach($listas as $li){
+				if($alumno = $Alumnos -> find_first("registro = ".$li -> registro)){
+					$cc++;
+					echo tr_color('#CCDEFF', '#FFFFFF');
+					echo '<td><b>'.$cc.'</b></td>';
+					echo '<td>'.$li -> registro.'</td>';
+					if($xls == 1){
+						echo '<td><b>'.$alumno -> nombre_completo.'</b></td>';
+					}else{
+						echo '<td><b>'.utf8_encode($alumno -> nombre_completo).'</b></td>';
+					}
+					if($esp = $Especialidades -> find_first("id = ".$alumno ->especialidad)){
+						$nomEsp = $esp -> nombre;
+					}else{
+						$nomEsp ="";
+					}
+					echo '<td>'.$nomEsp.'</td>';
+				}
+			}
+		?>
+		</table>
+		<?php
+	}else{
+		echo "<h2>No hay alumnos asignados aun</h2>";
+	}
+?>
+</div>
+<br><br>

@@ -1,0 +1,62 @@
+<br />
+<br />
+<br />
+<br />
+<?= render_partial("regresarAlHorarioProfesor"); ?>
+<br />
+<br />
+
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center">
+	<br />
+	<br />
+	<tr>
+		<th class="azull4" width="20" colspan="6">
+			Clavecurso <?= $clavecurso ?>
+		</th>
+	</tr>
+	<tr>
+		<th class="azull4" width="50">
+			No.
+		</th>
+		<th class="azull4" width="75">
+			Registro
+		</th>
+		<th class="azull4" width="75">
+			Plan 00 &oacute; 07
+		</th>
+		<th class="azull4" width="125">
+			Nombre
+		</th>
+		<th class="azull4" width="150">
+			Materia
+		</th>
+		<th class="azull4" width="125">
+			Carrera
+		</th>
+	</tr>
+	<!--
+	$this -> registroAlumno[$i]		= $xalumncur -> registro;
+	$this -> nombreAlumno[$i]		= $alumno -> vcNomAlu;
+	$this -> materiaAlumno[$i]		= $mat -> nombre;
+	$this -> carreraAlumno[$i]		= $carrera -> vcNomEsp;
+	-->
+	<?
+	$i = 0;
+	foreach( $ListadoAlumnos as $alumno ){
+	?>
+		<tr>
+			<td width="50" align="center"><? echo $i + 1; ?></td>
+			<td width="75" align="center"><?= $alumno -> miReg ?></td>
+			<td width="75" align="center"><?= $alumno -> enPlan ?></td>
+			<td width="125" align="center"><?= $alumno -> vcNomAlu ?></td>
+			<td width="150" align="center"><?= $alumno -> nombre_materia ?></td>
+			<td width="125" align="center"><?= $alumno -> nombre_carrera ?></td>
+		</tr>
+	<?
+		$i++;
+	}
+	?>
+</table>
+</div>
+<br />
+<br />

@@ -1,0 +1,131 @@
+			<?php
+			if($cuantasMaterias>0){
+				$i = 0;
+				foreach($avancePeriodos as $periodo){
+				if(!isset($kardex[$i]))
+					continue;
+			?>
+			<br />
+			<table border="1" cellpadding="1" cellspacing="1" style="font-size: 10px;" align="center" class="centrar">
+				<tr class="fondoazul">
+					<?php
+					if( $editable == 1 ) echo '<th align="center" height="25" colspan="9">';
+					else echo '<th align="center" height="25" colspan="5">';
+					?>
+					PERIODO (
+					<?php
+						if( $periodo[0] == 1 ){
+							echo "FEB - JUN ".substr($periodo,1,4);
+						}
+						elseif ( $periodo[0] == 2){
+							echo "JULIO ".substr($periodo,1,4);
+						}
+						elseif ( $periodo[0] == 3){
+							echo "AGO - DIC ".substr($periodo,1,4);
+						}
+						else{
+							echo "ENERO ".substr($periodo,1,4);
+						}
+					?>&nbsp;)</th>
+				</tr>
+				<tr class="fondonaranja" align="center">
+					<th width="60" height="25">Clave</th>
+					<th width="400">Nombre de la Materia</th>
+					<th width="50">Calificaci&oacute;n</th>
+					<th width="150">Tipo</th>
+					<th width="50">Cr&eacute;ditos</th>
+					<?php
+					if( $editable == 1 ){
+					?>
+						<th width="50">Activo</th>
+						<th width="50">Editar</th>
+						<th width="50">Eliminar</th>
+						<th width="50">Activar<br />Desactivar</th>
+					<?
+					}
+					?>
+				</tr>
+				<?php
+				$j=0;
+				foreach($kardex[$i] as $k){
+				if( ($j % 2) == 0 )
+					$bg = "#EEEEEE";
+				else
+					$bg = "#C3C3C3";
+				?>
+				<tr style="font-size: 10px;" bgcolor="<?= $bg ?>">
+					<td width="60" height="25" bgcolor="<?php echo $bg ?>">
+						<?= $kardex[$i][$j] -> clavemat ?>
+					</td>
+					<td width="400" height="25" bgcolor="<?php echo $bg ?>">
+						<?php if( $editable == 1 ){ ?>
+							&nbsp;<?php echo htmlentities($kardex[$i][$j] -> nombre) ?>&nbsp;
+						<?php } else{ ?>
+							&nbsp;<?php echo utf8_encode($kardex[$i][$j] -> nombre) ?>&nbsp;
+						<?php } ?>
+					</td>
+					<td width="50" height="25" bgcolor="<?php echo $bg ?>">
+						&nbsp;<?= $kardex[$i][$j] -> promedio ?>&nbsp;
+					</td>
+					<td width="150" height="25" bgcolor="<?php echo $bg ?>">
+						<?= $kardex[$i][$j] -> tipo_de_ex ?>
+					</td>
+					<td width="50" align="center" bgcolor="<?= $bg ?>"><?php echo $kardex[$i][$j] -> creditos ?></td>
+					<?php
+					if( $editable == 1 ){
+					?>
+						<td width="50" align="center" bgcolor="<?= $bg ?>" id="td<? echo "[$i][$j]" ?>" name="td<? echo "[$i][$j]" ?>">
+						<?php
+							if( $kardex[$i][$j] -> activo == 1 ) $icon = "active_icon.gif";
+							else $icon = "inactive_icon.gif";
+						?>
+							<image src="<?php echo KUMBIA_PATH ?>/img/<?php echo $icon ?>" border="0"/>
+						</td>
+						<td width="50" align="center" bgcolor="<?= $bg ?>">
+						<?php
+							echo form_remote_tag("ingcalculo/corregirKardex","update: mostrandoInfo", "name: Formulario".$i.$j)
+						?>
+							<input type="image" src="<?= KUMBIA_PATH ?>img/edit.gif" border="0" alt="Editar Materia">
+							<input type="hidden" id="kardexID" name="kardexID"
+									value="<?php echo $kardex[$i][$j] -> id ?>">
+							</form>
+						</td>
+						<td width="50" align="center" bgcolor="<?= $bg ?>">
+						<?php
+							echo form_remote_tag("ingcalculo/eliminarKardex","update: mostrandoInfo", "name: Formulariio".$i.$j)
+						?>
+							<input type="image" src="<?= KUMBIA_PATH ?>img/delete.gif" border="0" alt="Eliminar Materia" onClick="return preguntar_eliminar_kardex()">
+							<input type="hidden" id="delete_kardexID" name="delete_kardexID"
+									value="<?php echo $kardex[$i][$j] -> id ?>">
+							<input type="hidden" id="registro_delete" name="registro_delete"
+									value="<?php echo $alumno -> miReg ?>">
+							</form>
+						</td>
+						<td width="50" align="center" bgcolor="<?= $bg ?>">
+						<?php
+							echo form_remote_tag("ingcalculo/activar_desactivarKardex","update: td[".$i."][".$j."]", "name: Formularioo".$i.$j)
+						?>
+							<input type="image" src="<?= KUMBIA_PATH ?>img/activar_desactivar.jpg" border="0" alt="Eliminar Materia" width="25">
+							<input type="hidden" id="activar_desactivar_kardexID" name="activar_desactivar_kardexID"
+									value="<?php echo $kardex[$i][$j] -> id ?>">
+							</form>
+						</td>
+					<?
+					} // if( $editable == 1 )
+					?>
+				</tr>
+				
+				<?php
+				$j++;
+				}
+				?>
+				</table>
+				<br />
+			<?php
+				$i++;
+				}
+			}
+			else{
+			?>
+				<br><b><center><h3>NO TIENES MATERIAS REGISTRADAS EN TU KARDEX</h3></center></b><br>
+			<?php } ?>

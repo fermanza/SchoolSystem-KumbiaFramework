@@ -1,0 +1,47 @@
+<br />
+<form action="<?= KUMBIA_PATH ?>ingcalculo/problemas_alumnos_crearlos" method="post" name="Form1" id="Form1">
+<table border="1" cellpadding="1" cellspacing="1" style="font-size: 10px;" align="center" class="centrar">
+	<tr class="fondoazul">
+	<th align="center" height="25" colspan="3">
+		<?php
+		?>
+		PERIODO (
+		<?php
+			if( $periodo[0] == 1 ){
+				echo "FEB - JUN ".substr($periodo,1,4);
+			}
+			elseif ( $periodo[0] == 2){
+				echo "JULIO ".substr($periodo,1,4);
+			}
+			elseif ( $periodo[0] == 3){
+				echo "AGO - DIC ".substr($periodo,1,4);
+			}
+			else{
+				echo "ENERO ".substr($periodo,1,4);
+			}
+		?>&nbsp;)</th>
+	</tr>
+	<tr class="fondonaranja" align="center">
+		<th width="50" height="25">Registro</th>
+		<th width="50">Periodo</th>
+		<th width="50">Descripci&oacute;n</th>
+	</tr>
+	<tr style="font-size: 10px;">
+		<td width="50" height="25">
+			<input type="text" id="registro" name="registro" />
+		</td>
+		<td width="50" height="25">
+			<input type="text" id="periodo" name="periodo" value="<?php echo $periodo ?>" class="centrar" disabled />
+		</td>
+		<td width="50" height="25">
+			<select id="descripcion" name="descripcion">
+				<option value="KARDEX" class="centrar">KARDEX</option>
+				<option value="PAGO" class="centrar">PAGO</option>
+			</select>
+		</td>
+	</tr>
+	</table>
+	<input type="submit" value="Guardar Problema" />
+	<br />
+	<br />
+</form>

@@ -1,0 +1,73 @@
+<center>
+<table>
+	<tr>
+		<td width="900" bgcolor="#FFFFFF"><div align="justify">
+			<br>
+			<div style="font-size: 14px;"><div style="color: #1569C7;"><?= img_tag("adorno.gif","border: 0") ?><b>OFERTA DE CURSOS</b></div>
+			<hr><br>
+			<div style="font-size: 11px;">
+				Los cursos elegibles para el siguiente ciclo obedecen exclusivamente a lo previsto en el plan de estudios de la carrera. Las posibilidades reales de elección dependerán de la oferta.
+				<br><br>
+				La cursos disponible para este semestre se presentan a continuación, para tener una mejor organización, hemos filtrado solo los cursos que puedes tomar de acuerdo al plan de estudios, además se muestran los cursos que actualmente estas tomando por si existierá la posibilidad de tener que repetir alguna materia.
+							</div>
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#999999" style="font-size: 11px;" >
+				<tr>
+					<td width="175" height="25" bgcolor="#FFCA5B"><b>&nbsp;Número de registro: </b></td>
+					<td width="75" bgcolor="#EEEEEE">&nbsp;<?= $registro ?></td>
+					<td width="200" height="25" bgcolor="#FFCA5B"><b>&nbsp;Especialidad: </b></td>
+					<td width="300" bgcolor="#EEEEEE">&nbsp;<?= $especialidad ?></td>
+				</tr>
+				<tr>
+					<td width="175" height="25" bgcolor="#FFCA5B">&nbsp;<b>Nombre del alumno: </b></td>
+					<td width="500" colspan="3" bgcolor="#EEEEEE">&nbsp;<?= $alumno ?></td>
+				</tr>
+			</table>
+			<br>
+			<?php foreach($pmaterias as $pmateria){ $i++;  ?>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#999999" style="font-size: 10px;" >
+				<tr bgcolor="#FFCA5B">
+					<th colspan="10" align="center" height="25" class="fondoazul"><?= $pmateria -> clavemateria ?>, <?= $nombres[$i-1] ?></th>
+				</tr>
+				<tr bgcolor="#FFCA5B">
+					<th width="30" height="25">&nbsp;</th>
+					<th width="50" align="center">Curso</th>
+					<th width="200" align="center">Materia</th>
+					<th width="200" align="center">Profesor</th>
+					<th width="45" align="center">LUN</th>
+					<th width="45" align="center">MAR</th>
+					<th width="45" align="center">MIE</th>
+					<th width="45" align="center">JUE</th>
+					<th width="45" align="center">VIE</th>
+					<th width="45" align="center">SAB</th>
+				</tr>
+				<?php foreach($cursos[$i-1] as $horario){ $i++; if($i%2==0){ $bg = "#EEEEEE"; }else{ $bg = "#FFFFFF"; } ?>
+				<tr>
+					<td width="30" height="50" align="center" bgcolor="<?= $bg ?>"><?= $i ?></td>
+					<td width="50" align="center" bgcolor="<?= $bg ?>"><?= $horario -> clave ?><?= $horario -> id ?></td>
+					<td width="200" align="center" bgcolor="<?= $bg ?>"><?= $horario -> clavemateria ?><br><?= $materia[$i-1] -> nombre ?></td>
+					<td width="200" align="center" bgcolor="<?= $bg ?>"><?= $profesor[$i-1] -> nombre ?></td>
+					<td width="45" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> lunesi!=0 || $horario -> lunesf != 0){ ?> <?= $horario -> lunesi ?>:00<br><?= $horario -> lunesf ?>:00<?php } else { echo "&nbsp;"; } ?></th>
+					<td width="45" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> martesi!=0 || $horario -> martesf != 0){ ?> <?= $horario -> martesi ?>:00<br><?= $horario -> martesf ?>:00<?php } else { echo "&nbsp;"; } ?></th>
+					<td width="45" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> miercolesi!=0 || $horario -> miercolesf != 0){ ?> <?= $horario -> miercolesi ?>:00<br><?= $horario -> miercolesf ?>:00<?php } else { echo "&nbsp;"; } ?></th>
+					<td width="45" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> juevesi!=0 || $horario -> juevesf != 0){ ?> <?= $horario -> juevesi ?>:00<br><?= $horario -> juevesf ?>:00<?php } else { echo "&nbsp;"; } ?></th>
+					<td width="45" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> viernesi!=0 || $horario -> viernesf != 0){ ?> <?= $horario -> viernesi ?>:00<br><?= $horario -> viernesf ?>:00<?php } else { echo "&nbsp;"; } ?></th>
+					<td width="45" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> sabadoi!=0 || $horario -> sabadof != 0){ ?> <?= $horario -> sabadoi ?>:00<br><?= $horario -> sabadof ?>:00<?php } else { echo "&nbsp;"; } ?></th>
+				</tr>
+				<tr>
+					<td colspan="4" width="480" align="center" bgcolor="<?= $bg ?>">&nbsp;</th>
+					<td width="45" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> lunesi!=0 || $horario -> lunesf != 0){ ?> <?= $horario -> lunesu ?><?php } else { echo "&nbsp;"; } ?></th>
+					<td width="45" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> martesi!=0 || $horario -> martesf != 0){ ?> <?= $horario -> martesu ?><?php } else { echo "&nbsp;"; } ?></th>
+					<td width="45" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> miercolesi!=0 || $horario -> miercolesf != 0){ ?> <?= $horario -> miercolesu ?><?php } else { echo "&nbsp;"; } ?></th>
+					<td width="45" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> juevesi!=0 || $horario -> juevesf != 0){ ?> <?= $horario -> juevesu ?><?php } else { echo "&nbsp;"; } ?></th>
+					<td width="45" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> viernesi!=0 || $horario -> viernesf != 0){ ?> <?= $horario -> viernesu ?><?php } else { echo "&nbsp;"; } ?></th>
+					<td width="45" align="center" bgcolor="<?= $bg ?>"><?php if($horario -> sabadoi!=0 || $horario -> sabadof != 0){ ?> <?= $horario -> sabadou ?><?php } else { echo "&nbsp;"; } ?></th>
+				</tr>
+				<?php } ?>
+			</table><br>
+			<?php } ?>
+			</div>
+		</div></td>
+	</tr>
+</table>
+</center>

@@ -1,0 +1,95 @@
+<table width="900" class="formulario">
+    <tr> 
+        <td height="25" > 
+            <h2 id="titulo" >Buscador de <?= $tipo ?></h2>
+            <span id="subtitulo">
+                Coloca el registro en el campo indicado o una parte del nombre en el campo correspondiente para realizar una busqueda
+            </span>
+        </td> 
+    </tr>  
+    <tr>
+        <td>
+        <div id="contenido">
+            <table width="100%">
+                <tr>
+                    <td>
+                        <?= form_remote_tag('caja/llenado','update: formu') ?>
+                        <table>
+                            <tr>
+                                <td colspan="2">
+                                <div id="texto_arriba">
+                                    Busqueda por Registro <span id="asterisco">*</span>
+                                </div>     
+                                <?= text_field_tag('registro','id: texto_chico') ?>
+                                <?= hidden_field_tag('tipo','value: '.$tipo,'id: texto_chico') ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <?= submit_tag('Buscar', 'id: boton') ?>
+                                </th>
+                            </tr>
+                        </table>
+                        <?= end_form_tag() ?>
+                    </td>
+
+                    <td>
+                        <?= form_remote_tag('caja/buscarXNombre','update: formu') ?>
+                        <table>
+                            <tr>
+                                <td colspan="2">
+                                <div id="texto_arriba">
+                                    Busqueda por Nombre <span id="asterisco">*</span>
+                                </div>     
+                                <?= text_field_tag('nombre','id: texto_mediano') ?>
+                                <?= hidden_field_tag('tipo','value: '.$tipo,'id: texto_chico') ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <?= submit_tag('Buscar', 'id: boton') ?>
+                                </td>
+                            </tr>
+                        </table>
+                        <?= end_form_tag() ?>
+                    </td>
+                    <td>
+                        <?= form_remote_tag('caja/periodo','update: formu') ?>
+					    <table>
+						  <tr>
+						    <td colspan="2">
+							  <div id="texto_arriba">
+							    Busqueda por periodo <span id="asterisco">*</span>
+							  </div>
+							    <select name="periodo">
+									<option value="todos">TODOS</option>
+									<option value="32012">32012</option>
+									<option value="12012">12012</option>
+									<option value="32011">32011</option>
+									<option value="12011">12011</option>
+									<option value="32010">32010</option>
+									<option value="12010">12010</option>
+									<option value="32009">32009</option>
+									<option value="12009">12009</option>
+									<option value="32008">32008</option>            
+								</select>
+							  <?= hidden_field_tag('tipo','value: '.$tipo,'id: texto_peq')?>
+							</td>
+						  </tr>
+						  <tr>
+						    <td>
+							  <?= submit_tag('buscar', 'id:boton')?>
+							</td>
+						  </tr>
+						</table>
+						<?= end_form_tag()?>
+					</td>
+                </tr>
+            </table>
+        </div>
+        </td>
+    </tr>
+</table>
+<div id="formu">
+
+</div>

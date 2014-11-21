@@ -1,0 +1,33 @@
+<style type="text/css">	
+	*{ 
+		font-size: 11px;
+	}
+	.busqueda input[type="text"]{
+		width: 100%;
+	}
+	.busqueda *{
+		font-size: 11px;
+	}
+	.menuEstadisticas a{
+		text-decoration: none;
+		color: #000000;
+	}
+	.menuEstadisticas a:hover{
+		color: #000099;
+		text-decoration: underline;
+	}			
+</style>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+	Estadisticas
+</div>
+<br><br>
+<div class="menuEstadisticas" >
+<?= link_to("tutor/reporteProfesoresExcel", img_tag("excel.png", "width: 30", "border: 0")) ?> <?= link_to_remote("action: tutor/reporteProfesores","Listado de Profesores y cuantos asignados", "update: reportes") ?>
+
+</div>
+<br>
+<div id="reportes">
+
+</div>
+<br>

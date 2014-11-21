@@ -1,0 +1,44 @@
+<center><br><br>
+<table>
+	<tr>
+		<td width="900" align="left">
+			
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B"><b>&nbsp;Número de curso: </b></td>
+					<td width="600" bgcolor="#EEEEEE">&nbsp;<?= $curso ?></td>
+				</tr>
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B"><b>&nbsp;Profesor: </b></td>
+					<td width="600" bgcolor="#EEEEEE">&nbsp;<?= $profesor ?> (<?= $nomina ?>)</td>
+				</tr>
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B">&nbsp;<b>Materia: </b></td>
+					<td width="600" bgcolor="#EEEEEE">&nbsp;<?= $materia ?> (<?= $clave ?>)</td>
+				</tr>
+			</table>
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr bgcolor="#FFCA5B">
+					<th width="50" height="25" align="center">No.</th>
+					<th width="75" align="center">Registro</th>
+					<th width="300" align="center">Nombre del alumno</th>
+					<th width="250" align="center">Especialidad</th>
+					<th width="75" align="center">Situación</th>
+				</tr>
+				<?php foreach($alumnado as $a){ $i++; if($i%2==0){$bg = "#EEEEEE";}else{$bg = "#FFFFFF";} ?>
+					<tr bgcolor="<?= $bg ?>">
+						<td width="50" height="20" align="center"><?= $i ?></td>
+						<td width="75" align="center"><?= $a["registro"] ?></td>
+						<td width="300" align="center"><?= $a["nombre"] ?></td>
+						<td width="250" align="center"><?= $a["especialidad"] ?></td>
+						<td width="75" align="center"><?= $a["situacion"] ?></td>
+					</tr>
+				<?php } ?>
+			</table>
+		</td>
+	</tr>
+</table>
+<a href="<?= KUMBIA_PATH ?>profesor/listas"><- Regresar</a>
+<br />
+</center>

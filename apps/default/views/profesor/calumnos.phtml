@@ -1,0 +1,95 @@
+<center><br><br>
+<table>
+	<tr>
+		<td width="900"><div align="justify">
+			
+			<div style="font-size: 14px;"><div style="color: #FF0000;"><b>PROFESORES ASIGNADOS A LA COORDINACION: </b></div>
+				<br>
+				Los profesores listados a continuación son aquellos que imparten alguna materia de la coordinación de <?= $coordinacion ?>, podrás consultar los grupos que estan a su cargo y ver la situción actual de cada uno de estos grupos.
+				<br><br>
+				<center>
+				<table border="0" cellpadding="0" cellspacing="0" width="400">
+					<tr>
+						<td><a href="<?= KUMBIA_PATH ?>profesor/calumnos" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('coordinador_r1_c1','','<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c1_f2.gif',1);"><img name="coordinador_r1_c1" src="<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c1.gif" width="99" height="30" border="0" id="coordinador_r1_c1" alt="" /></a></td>
+						<td><a href="<?= KUMBIA_PATH ?>profesor/cprofesores" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('coordinador_r1_c2','','<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c2_f2.gif',1);"><img name="coordinador_r1_c2" src="<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c2.gif" width="100" height="30" border="0" id="coordinador_r1_c2" alt="" /></a></td>
+						<td><a href="<?= KUMBIA_PATH ?>profesor/cgrupos" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('coordinador_r1_c3','','<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c3_f2.gif',1);"><img name="coordinador_r1_c3" src="<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c3.gif" width="100" height="30" border="0" id="coordinador_r1_c3" alt="" /></a></td>
+						<td><a href="<?= KUMBIA_PATH ?>profesor/ccalificaciones" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('coordinador_r1_c4','','<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c4_f2.gif',1);"><img name="coordinador_r1_c4" src="<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c4.gif" width="100" height="30" border="0" id="coordinador_r1_c4" alt="" /></a></td>
+						<td><a href="<?= KUMBIA_PATH ?>profesor/ctutorados" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('coordinador_r1_c5','','<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c5_f2.gif',1);"><img name="coordinador_r1_c5" src="<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c5.gif" width="1" height="30" border="0" id="coordinador_r1_c5" alt="" /></a></td>
+					</tr>
+				</table>
+				<br><br>
+				<center>
+					<div style="font-size: 18px;"><?= $coordinacion; ?></div>
+				<br>				
+				<br>
+					<a href="<?= KUMBIA_PATH ?>profesor/calumnos" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('n1','','<?= KUMBIA_PATH ?>/public/img/numeros/1_f2.gif',1);"><img name="n1" src="<?= KUMBIA_PATH ?>/public/img/numeros/1.gif" width="30" height="30" border="0" id="n1" alt="" /></a>
+					<a href="<?= KUMBIA_PATH ?>profesor/calumnos" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('n2','','<?= KUMBIA_PATH ?>/public/img/numeros/2_f2.gif',1);"><img name="n2" src="<?= KUMBIA_PATH ?>/public/img/numeros/2.gif" width="30" height="30" border="0" id="n2" alt="" /></a>
+					<a href="<?= KUMBIA_PATH ?>profesor/calumnos" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('n3','','<?= KUMBIA_PATH ?>/public/img/numeros/3_f2.gif',1);"><img name="n3" src="<?= KUMBIA_PATH ?>/public/img/numeros/3.gif" width="30" height="30" border="0" id="n3" alt="" /></a>
+					<a href="<?= KUMBIA_PATH ?>profesor/calumnos" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('n4','','<?= KUMBIA_PATH ?>/public/img/numeros/4_f2.gif',1);"><img name="n4" src="<?= KUMBIA_PATH ?>/public/img/numeros/4.gif" width="30" height="30" border="0" id="n4" alt="" /></a>
+				<br>				
+				<br>
+				<table border="0" cellspacing="1" cellpadding="1" style="font-size: 10px;">
+				<tr>
+				<th valign="top">
+				<table border="1" cellspacing="1" cellpadding="1" style="font-size: 10px;">
+					<tr>
+						<th width="50" class="fondonaranja">
+							<b>Nomina</b>
+						</th>
+						<th width="275" class="fondonaranja">
+							<b>Nombre del profesor</b>
+						</th>
+						<th width="60" class="fondonaranja">&nbsp;
+							
+						</th>
+					</tr>
+					<?php $i=0; if($alumnos) foreach($alumnos as $alumno){ $i++; if($i%2==0) continue; ?>
+					<tr>
+						<th width="50" height="20">
+							<?= $alumno -> miReg; ?>
+						</th>
+						<th align="left" width="275">
+							&nbsp;<?= $alumno -> vcNomAlu; ?>
+						</th>
+						<th width="60">
+							<a href="<?= KUMBIA_PATH ?>profesor/entrarcomo">ENTRAR</a>
+						</th>
+					</tr>
+					<?php } ?>
+				</table>
+				</th>
+				<th valign="top">
+				<table border="1" cellspacing="1" cellpadding="1" style="font-size: 10px;">
+					<tr>
+						<th width="50" class="fondonaranja">
+							<b>Nomina</b>
+						</th>
+						<th width="275" class="fondonaranja">
+							<b>Nombre del profesor</b>
+						</th>
+						<th width="60" class="fondonaranja">&nbsp;
+							
+						</th>
+					</tr>
+					<?php $i=0; if($alumnos) foreach($alumnos as $alumno){ $i++; if($i%2==1) continue; ?>
+					<tr>
+						<th width="50" height="20">
+							<?= $alumno -> miReg; ?>
+						</th>
+						<th align="left" width="275">
+							&nbsp;<?= $alumno -> vcNomAlu; ?>
+						</th>
+						<th width="60">
+							<a href="<?= KUMBIA_PATH ?>profesor/entrarcomo">ENTRAR</a>
+						</th>
+					</tr>
+					<?php } ?>
+				</table>
+				</table>
+				</center>
+				<br>
+			</div>
+		</div></td>
+	</tr>
+</table>
+</center>

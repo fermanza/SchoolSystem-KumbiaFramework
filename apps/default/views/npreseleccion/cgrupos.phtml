@@ -1,0 +1,216 @@
+<script language="JavaScript1.2">
+
+	function delete1 (){
+		if( window.confirm( "Estás seguro de que deseas borrar este curso?"+
+							"\n(Sólo se podrán borrar cursos en los que no se haya inscrito ningún alumno)" ) ){
+			return true;
+		}
+		return false;
+	}
+	
+</script>
+
+<center><br><br>
+<table>
+	<tr>
+		<td width="900"><div align="justify">
+			
+			<div style="font-size: 14px;"><div style="color: #FF0000;"><b>CURSOS QUE PERTENECEN A ESTA COORDINACION: </b></div>
+				<br>
+				Los cursos listados a continuación son aquellos en los que se imparte alguna materia de la coordinación de <b><?= $coordinacion ?></b>.
+				Estos cursos solo podrán ser modificados en el periodo de captura por el coordinador correspondiente o en su
+				defecto el jefe de nivel o el personal de calculo.
+				<br><br>
+				<center>
+				<table border="0" cellpadding="0" cellspacing="0" width="400">
+					<tr>
+						<td><a href="<?= KUMBIA_PATH ?>profesor/cgrupos" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('coordinador_r1_c3','','<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c3_f2.gif',1);"><img name="coordinador_r1_c3" src="<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c3.gif" width="100" height="30" border="0" id="coordinador_r1_c3" alt="" /></a></td>
+						<td><a href="<?= KUMBIA_PATH ?>profesor/csalones" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('coordinador_r1_c4','','<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c4_f2.gif',1);"><img name="coordinador_r1_c4" src="<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c4.gif" width="100" height="30" border="0" id="coordinador_r1_c4" alt="" /></a></td>
+					</tr>
+				</table>
+				<br><br>
+				<H5>
+					<a href="<?= KUMBIA_PATH ?>profesor/ccapturagrupos">NUEVO GRUPO</a>
+				</H5>
+				<br>
+				
+				<table>
+					<tr>
+				<?php
+					for($i=0;$i<$total;$i++){
+						if($i!=$actual/50){
+				?>
+							<td align="center" width="25" height="25" bgcolor="#1E5FA8">
+								<b><a href="<?= KUMBIA_PATH ?>profesor/cgrupos/<?= $i*50 ?>" 
+								style="font-size:10px;text-decoration: none; color:#FFFFFF;"><?= $i+1 ?></a>
+								</b>
+							</td>
+				<?php
+						}
+						else{
+				?>
+							<td align="center" width="25" height="25" bgcolor="#F9B240" style="font-size:10px;text-decoration: none; color:#000000;">
+								<b><?= $i+1 ?></b>
+							</td>
+				<?php
+						}
+					}
+				?>
+				</tr>
+				</table>
+				<br><br><font color="#FF0000"><b>Número de cursos encontrados: </b></font><?= $total*50 ?>
+				<br><br>
+				
+				<table border="1" cellspacing="1" cellpadding="1" style="font-size: 10px;">
+					<tr>
+						<th width="50" class="fondonaranja">
+							<b>Borrar</b>
+						</th>
+						<th width="50" class="fondonaranja">
+							<b>Editar</b>
+						</th>
+						<th width="50" class="fondonaranja">
+							<b>Curso</b>
+						</th>
+						<th width="240" class="fondonaranja">
+							<b>Materia</b>
+						</th>
+						<th width="240" class="fondonaranja">
+							<b>Profesor</b>
+						</th>
+						<th width="40" class="fondonaranja">
+							<b>Cupo</b>
+						</th>
+						<th width="180" colspan="6" class="fondonaranja">
+							Horario
+						</th>
+					</tr>
+					<?php $i=0; if($cursos) foreach($cursos as $curso){
+							$i++; if($i%2==0) $bg='bgcolor="#CCCCCC"'; else $bg='bgcolor="#FFFFFF"'; ?>
+					<tr>
+						<th align="center" width="50" rowspan="3" style="font-size:8px;" <?= $bg ?>>
+							<form action="<?= KUMBIA_PATH ?>profesor/cborrarCurso" method="post" onSubmit="return delete1();">
+								<input type="image" src="<?= KUMBIA_PATH ?>img/delete2.gif" border="0">
+								<input type="hidden" id="deleteID" name="deleteID" value="<? echo $curso -> division.$curso -> id; ?>">
+							</form>
+						</th>
+						<th align="center" width="50" rowspan="3" style="font-size:8px;" <?= $bg ?>>
+							<form action="<?= KUMBIA_PATH ?>profesor/ceditarCurso" method="post">
+								<input type="image" src="<?= KUMBIA_PATH ?>img/edit.gif" border="0">
+								<input type="hidden" id="editarID" name="editarID" value="<? echo $curso -> division.$curso -> id; ?>">
+							</form>
+						</th>
+						
+						<th width="50" height="20" rowspan="3" style="font-size:8px;" <?= $bg ?>>
+							<a href="<?= KUMBIA_PATH ?>profesor/cmodificagrupos/ver/<?= $curso -> id; ?>">
+							<?php
+								if($curso -> id <100 && $curso -> id >= 10){
+									$curso -> id = "0".$curso -> id;
+								}
+				
+								if($curso -> id < 10){
+									$curso -> id = "00".$curso -> id;
+								}
+							?>
+							<?= $curso -> division; ?><?= $curso -> id; ?>
+							</a>
+						</th>
+						<th align="left" width="250" rowspan="3" style="font-size:8px;" <?= $bg ?>>
+							&nbsp;<a href="<?= KUMBIA_PATH ?>profesor/cgruposmateria/<?= $claves[$i-1]; ?>" style="font-size:8px;text-decoration: none; color:#000000;"><?= $materias[$i-1]; ?></a>
+						</th>
+						<th align="left" width="250" rowspan="3" style="font-size:8px;" <?= $bg ?>>
+							&nbsp;<a href="<?= KUMBIA_PATH ?>profesor/cgruposprofesor/<?= $nominas[$i-1]; ?>" style="font-size:8px;text-decoration: none; color:#000000;"><?= $maestros[$i-1]; ?></a>
+						</th>
+						<th width="40" rowspan="3" style="font-size:8px;" <?= $bg ?>>
+							<?= $curso -> cupo; ?>
+						</th>
+						<th width="30" class="fondonaranja" style="font-size:8px;">
+							L
+						</th>
+						<th width="30" class="fondonaranja" style="font-size:8px;">
+							M
+						</th>
+						<th width="30" class="fondonaranja" style="font-size:8px;">
+							I
+						</th>
+						<th width="30" class="fondonaranja" style="font-size:8px;">
+							J
+						</th>
+						<th width="30" class="fondonaranja" style="font-size:8px;">
+							V
+						</th>
+						<th width="30" class="fondonaranja" style="font-size:8px;">
+							S
+						</th>
+					</tr>
+					<tr>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> lunesi>0) echo $curso -> lunesi.":00"; else echo "-" ?>
+						</th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> martesi>0) echo $curso -> martesi.":00"; else echo "-" ?>
+						</th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> miercolesi>0) echo $curso -> miercolesi.":00"; else echo "-" ?>
+						</th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> juevesi>0) echo $curso -> juevesi.":00"; else echo "-" ?>
+						</th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> viernesi>0) echo $curso -> viernesi.":00"; else echo "-" ?>
+						</th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> sabadoi>0) echo $curso -> sabadoi.":00"; else echo "-" ?>
+						</th>
+					</tr>
+					<tr>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> lunesf>0) echo $curso -> lunesf.":00"; else echo "-" ?>
+						</th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> martesf>0) echo $curso -> martesf.":00"; else echo "-" ?>
+						</th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> miercolesf>0) echo $curso -> miercolesf.":00"; else echo "-" ?>
+						</th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> juevesf>0) echo $curso -> juevesf.":00"; else echo "-" ?>
+						</th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> viernesf>0) echo $curso -> viernesf.":00"; else echo "-" ?>
+						</th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> sabadof>0) echo $curso -> sabadof.":00"; else echo "-" ?>
+						</th>
+					</tr>
+					<tr>
+						<th colspan="6"></th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> luness>0) echo $salones[$curso -> luness]; else echo "-" ?>
+						</th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> martess>0) echo $salones[$curso -> martess]; else echo "-" ?>
+						</th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> miercoless>0) echo $salones[$curso -> miercoless]; else echo "-" ?>
+						</th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> juevess>0) echo $salones[$curso -> juevess]; else echo "-" ?>
+						</th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> vierness>0) echo $salones[$curso -> vierness]; else echo "-" ?>
+						</th>
+						<th width="30" style="font-size:8px;" <?= $bg ?>>
+							<?php if($curso -> sabados>0) echo $salones[$curso -> sabados]; else echo "-" ?>
+						</th>
+					</tr>
+					<?php } ?>
+				</table>
+				<br>
+				</center>
+				<br>
+			</div>
+		</div></td>
+	</tr>
+</table>
+</center>

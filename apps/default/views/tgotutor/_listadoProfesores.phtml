@@ -1,0 +1,94 @@
+<center>
+<table style="font-size: 11px" border="1">
+<tr>
+	<th colspan="5" class="naranja">LISTADO DE PROFESORES CON SU CANTIDAD DE TUTORADOS</th>	
+</tr>
+<tr>
+	<th class="azul">Nomina</th>
+	<th class="azul">Nombre</th>
+	<th class="azul">Division</th>
+	<th class="azul">No. Tutorados Activos</th>
+	<th class="azul">No. Tutorados No Activos</th>    
+</tr>
+<?php
+$Alumnos = new Alumnos();
+$Tutorias = new Tutorias();
+$Maestro = new Maestros();
+$MaestroDivisiones = new MaestroDivisiones();
+$Divisiones = new Divisiones();
+$tutorias = $Tutorias -> distinct("nomina", "ORDER: nomina ASC");
+$cuantos_total = 0;
+$cuantos_total2 = 0;
+$cuantos_profesores = 0;
+$alumnos = $Alumnos -> count("estado = 'OK'");
+
+foreach($tutorias as $t){
+$Maestro -> find_first("id = ".$t);
+if($MaestroDivisiones -> find_first("maestro_id = ".$t)){
+	$Divisiones -> find_first("id = ".$MaestroDivisiones -> division_id);
+}
+$cuantos2 = $Tutorias -> count("nomina = ".$t);
+$cuantos = $Tutorias -> count_by_sql("select count(nomina) from alumnos as a, tutorias as t where a.registro = t.registro and a.estado = 'ok' and t.nomina = ".$t);
+echo tr_color('#EEEDDD','#FFFDFD');
+?>
+		<td><center><?= $t ?></center></td>
+		<td><b><?= utf8_encode($Maestro -> nombre) ?></b></td>
+		<td><?= utf8_encode($Divisiones -> nombre) ?></td>
+		<?php
+		if ($cuantos < 11){
+			$color='style="color: #BB0000"';
+		}else{
+			$color='';
+		}
+		?>
+		<td><b><center <?= $color ?>><?= $cuantos ?></center></b></td>
+        <?php
+		if ($cuantos2 < 11){
+			$color='style="color: #BB0000"';
+		}else{
+			$color='';
+		}
+		if ($cuantos2 != $cuantos){
+			$pon= 'style="background-color:#666600;"';
+		}else{
+			$pon="";
+		}
+		?>
+		<td <?= $pon ?>><b><center <?= $color ?>><?= $cuantos2 ?></center></b></td>
+<?php
+	$cuantos_total=$cuantos_total + $cuantos;
+	$cuantos_total2=$cuantos_total2 + $cuantos2;
+	$cuantos_profesores++;
+}
+?>
+<tr>
+	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+	<td><b>Total de Alumnos Activos: </b></td>
+	<td><center><b><?= $alumnos ?></b></center></td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+	<td><b>Total de Alumnos Activos con Tutor: </b></td>
+	<td><center><b><?= $cuantos_total ?></b></center></td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+	<td><b>Total de Alumnos No Activos con Tutor: </b></td>
+    <td>&nbsp;</td>
+	<td><center><b><?= $cuantos_total2 ?></b></center></td>    
+</tr>
+<tr>
+	<td>&nbsp;</td>
+   	<td>&nbsp;</td>
+	<td><b>Total de Profesores con Tutorados: </b></td>
+	<td><center><b><?= $cuantos_profesores ?></b></center></td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+</center>
+

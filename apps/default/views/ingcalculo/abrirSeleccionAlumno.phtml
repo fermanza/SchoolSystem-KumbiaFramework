@@ -1,0 +1,70 @@
+<!-- Este formulario sólo se puso para poder acceder desde JavaScript a los valores de los campos -->
+<center><br><br>
+<table>
+	<tr class="naranja">
+		<th class="bordeAzul2">
+			Escoja el tiempo para abrir la selecci&oacute;n del alumno.<br />
+			Para Alumnos condicionados se recomienda abrir la selección con poco tiempo.
+		</td>
+	</tr>
+	<tr class="naranja">
+		<td class="bordeAzul2" align="center">
+			<select name="horas" id="horas" class="lista" align="center">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccionar Tiempo - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<option value="10">- - 10 mins - -</option>
+				<option value="20">- - 20 mins - -</option>
+				<option value="1">- - 1 Hora - -</option>
+				<option value="2">- - 2 Hora - -</option>
+				<option value="3">- - 3 Hora - -</option>
+				<option value="4">- - 4 Hora - -</option>
+				<option value="5">- - 5 Hora - -</option>
+			</select>
+		</td>
+	</tr>
+</table>
+<br />
+<br />
+<table>
+	<tr class="naranja">
+		<th class="bordeAzul2" >
+			Ingresar Registro
+		</td>
+	</tr>
+	<tr class="naranja centrar">
+		<td class="bordeAzul2">
+			<input type="text" id="registro" name="registro" />
+		</td>
+	</tr>
+	<tr class="naranja centrar">
+		<td class="bordeAzul2">
+			<input type="submit" id="submit" name="submit" value="Abrir selecci&oacute;n"/>
+		</td>
+	</tr>
+</table>
+
+
+<br />
+<br />
+
+<div id ="datos" name="datos">
+</div>
+
+</center>
+<?
+		print "<script type=\"text/javascript\">
+		new Event.observe(\"submit\", \"click\", function(){
+			var registro = document.getElementById('registro').value;
+			var horas = document.getElementById('horas').value;
+			new AJAX.viewRequest({
+				action: \"ingcalculo/abrirSeleccionAlumno2/"."\"+".registro."+\"/\"+".horas."+\"\",
+				container: \"datos\"
+			})
+		})
+		</script>";
+?>

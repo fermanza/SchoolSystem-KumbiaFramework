@@ -1,0 +1,28 @@
+</br>
+</br>
+</br>
+<?php echo form_remote_tag('cambiosalumno/buscarAlumno','update: informacion');?>
+<fieldset style="background-color:#DDDDDD; font-size: 11px; font-family:'Verdana'; font-weight: bold;">
+	<legend style="background-color:#DDDDDD; font-size: 11px;font-family:'Verdana'; font-weight: bold;">Cambio de Contrase&ntilde;a</legend>
+	<table>
+		<tr>
+			<td>Registro:&nbsp;</td>
+			<td><?php echo text_field_tag('registro','onkeypress: javascript:return ValidNum(event)'); ?></td>
+			<td>&nbsp;<?php echo submit_tag('BUSCAR'); ?></td>
+		</tr>
+	</table>
+</fieldset>
+<?php echo end_form_tag(); ?>
+
+<div id="informacion"></div>
+</br>
+</br>
+
+<script type="text/javascript">
+	//funcion que valida que solo se puedan ingresar numeros
+	function ValidNum(e)
+	{
+		var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+			return ((tecla > 47 && tecla < 58) || tecla == 8);
+	}
+</script>

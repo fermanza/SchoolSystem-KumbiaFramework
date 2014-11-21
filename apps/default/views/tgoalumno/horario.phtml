@@ -1,0 +1,128 @@
+<?php
+$validacion = 1;
+if ($validacion == 0 ){
+	echo '<center><h2 class="naranja">Esta información estara disponible hasta el dia 13 de Agosto de 2009 a partir de las 3:00 PM</h2></center>';	
+}else{
+?>
+<?= render_partial("info"); ?>
+<br>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp; HORARIO DEL ALUMNO
+</div>
+<br>
+<div>
+	<?php $horas = array("","7:00 - 7:55","7:55 - 8:50","9:30 - 10:25","10:25 - 11:20","11:20 - 12:15","12:15 - 13:10","13:10 - 14:05","14:05 - 15:00","15:00 - 15:55","15:55 - 16:50","16:50 - 17:45","17:45 - 18:40","18:40 - 19:35","19:35 - 20:30"); ?>
+	<table border="1" style="font-size:10px;" class="bordeazul" width="100%">
+		<th height="20" class="naranja" colspan="7">
+			TURNO MATUTINO
+		</th>
+		<tr>
+			<td width="10%" align="center" class="azul">&nbsp;</td>
+			<th width="15%" align="center" class="azul">Lunes</th>
+			<th width="15%" align="center" class="azul">Martes</th>
+			<th width="15%" align="center" class="azul">Miercoles</th>
+			<th width="15%" align="center" class="azul">Jueves</th>
+			<th width="15%" align="center" class="azul">Viernes</th>
+			<th width="15%" align="center" class="azul">Sabado</th>
+		</tr>
+		<?php for($i=1;$i<3;$i++){ ?>
+		<tr>			
+			<th height="25" class="naranja"><?= $horas[$i] ?></th>			
+			<?php for($d=1; $d<7; $d++){	
+					if ($materia[$d][$i]!=""){
+						$texto = '<span style="color:#1569C7; font-size:12px;">'.$materia[$d][$i].'</span>';
+						$texto_grupo='Grupo: <span style="color:#FFFFFF;">'.$grupo[$d][$i].'</span>';
+						$texto_salon='Salon: <span style="color:#FFFFFF;">'.$salon[$d][$i].'</span>';
+						$texto_edificio='Edificio: <span style="color:#FFFFFF;">'.$edificio[$d][$i].'</span>';
+						$class = "gris";
+					}else{
+						$texto = "&nbsp;";
+						$texto_grupo = "&nbsp;";
+						$texto_salon = "&nbsp;";
+						$texto_edificio="&nbsp;";
+						$class = "";
+					}
+					?>
+			<th height="75" class="<?= $class ?>">
+				<?= $texto ?><br><?= $texto_grupo ?><br><?= $texto_edificio ?><br><?= $texto_salon ?>
+			</th>		
+			<?php } ?>
+		</tr>
+		<?php }	?>
+		<tr>
+			<th height="10" class="naranja">8:50 - 9:30</th>
+			<th colspan="6" class="negro">RECESO</th>
+		</tr>
+		<?php for($i=3;$i<9;$i++){ ?>
+		<tr>
+			<th height="25" class="naranja"><?= $horas[$i] ?></th>			
+			<?php for($d=1; $d<7; $d++){	
+					if ($materia[$d][$i]!=""){
+						$texto = '<span style="color:#1569C7; font-size:12px;">'.$materia[$d][$i].'</span>';
+						$texto_grupo='Grupo: <span style="color:#FFFFFF;">'.$grupo[$d][$i].'</span>';
+						$texto_salon='Salon: <span style="color:#FFFFFF;">'.$salon[$d][$i].'</span>';
+						$texto_edificio='Edificio: <span style="color:#FFFFFF;">'.$edificio[$d][$i].'</span>';
+						$class = "gris";
+					}else{
+						$texto = "&nbsp;";
+						$texto_grupo = "&nbsp;";
+						$texto_salon = "&nbsp;";
+						$texto_edificio="&nbsp;";
+						$class = "";
+					}
+					?>
+			<th height="75" class="<?= $class ?>">
+				<?= $texto ?><br><?= $texto_grupo ?><br><?= $texto_edificio ?><br><?= $texto_salon ?>
+			</th>	
+			<?php } ?>
+		</tr>
+		<?php } ?>
+	</table>
+	<br/>
+	
+	
+	
+	<table border="1" style="font-size:10px;" class="bordeazul" width="100%">
+	<th height="20" class="naranja" colspan="7">
+			TURNO VESPERTINO
+		</th>
+		<tr>
+			<td width="10%" align="center" class="azul">&nbsp;</td>
+			<th width="15%" align="center" class="azul">Lunes</th>
+			<th width="15%" align="center" class="azul">Martes</th>
+			<th width="15%" align="center" class="azul">Miercoles</th>
+			<th width="15%" align="center" class="azul">Jueves</th>
+			<th width="15%" align="center" class="azul">Viernes</th>
+			<th width="15%" align="center" class="azul">Sabado</th>
+		</tr>
+		<?php for($i=9;$i<15;$i++){ ?>
+		<tr>
+			<th height="25" class="naranja"><?= $horas[$i] ?></th>			
+			<?php for($d=1; $d<7; $d++){	
+					if ($materia[$d][$i]!=""){
+						$texto = '<span style="color:#1569C7; font-size:12px;">'.$materia[$d][$i].'</span>';
+						$texto_grupo='Grupo: <span style="color:#FFFFFF;">'.$grupo[$d][$i].'</span>';
+						$texto_salon='Salon: <span style="color:#FFFFFF;">'.$salon[$d][$i].'</span>';
+						$texto_edificio='Edificio: <span style="color:#FFFFFF;">'.$edificio[$d][$i].'</span>';
+						$class = "gris";
+					}else{
+						$texto = "&nbsp;";
+						$texto_grupo = "&nbsp;";
+						$texto_salon = "&nbsp;";
+						$texto_edificio="&nbsp;";
+						$class = "";
+					}
+					?>
+			<th height="75" class="<?= $class ?>">
+				<?= $texto ?><br><?= $texto_grupo ?><br><?= $texto_edificio ?><br><?= $texto_salon ?>
+			</th>	
+			<?php				
+			}
+			?>
+		</tr>
+		<?php } ?>
+	</table>
+	<br />
+	<br />
+</div>
+<?php } ?>

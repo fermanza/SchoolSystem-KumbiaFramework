@@ -1,0 +1,105 @@
+<!--Se llaman los archivos JS y CSS-->
+<?= stylesheet_link_tag('dialog_box'); ?>
+<?= stylesheet_link_tag('smoothness/jquery-ui-1.7.2.custom'); ?>
+
+<?= javascript_library_tag('jquery-1.4.4.min'); ?>
+<?= javascript_library_tag('jquery.ui.core'); ?>
+<?= javascript_library_tag('jquery.ui.widget'); ?>
+<?= javascript_library_tag('jquery.ui.datepicker'); ?>
+<?= javascript_library_tag('dialog_box'); ?>
+
+<!--Opcion a realizar la busqueda del registro-->
+<div style="text-align:left; margin-top:30px;">
+<?php echo form_remote_tag('ventanilla/buscarAspirante', 'update: muestraAsp', 'name: formReportes', 'success: mensajeAlerta();')?>
+   <table style="margin-top:50px; margin-left:15px; margin-bottom:50px;">
+     <tr>
+	   <td colspan="3">
+	     <?= img_tag("adorno.gif","border: 0") ?>Buscar por registro del aspirante.
+	   </td>
+	 </tr>
+     <tr>
+	   <td colspan="3">
+	     <br/><br/> 
+	   </td>
+	 </tr>
+     <tr>
+	   <td align="right" style="font-weight:bold; font-family:arial; font-size:13px;">
+	     Registro&nbsp;:&nbsp;
+	   </td>
+	   <td align="left">
+	     &nbsp;<input type="text" id="registro" name="registro" maxlength="10" style="width:191px;" onkeypress="javascript:return ValidNum(event)"/>
+	   </td>
+	   <td>
+	     &nbsp;&nbsp;&nbsp;<?php echo submit_tag('BUSCAR','id: boton','class: common_button');?> 
+	   </td>
+	 </tr>
+   </table>
+ <?php echo end_form_tag()?>
+</div>
+
+<!--En la siguiente div se mostrra el aspirante encontrado-->
+<div id="muestraAsp" name="muestraAsp">
+</div>
+
+
+
+
+
+
+<script type='text/javascript'>
+//funcion que valida que solo se puedan ingresar numeros
+function ValidNum(e)
+{
+  var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+    return ((tecla > 47 && tecla < 58) || tecla == 8);
+}
+  
+  //Funcion que muestra el mensaje ventana emergente con mensaje
+  function mensajeAlerta(){
+	if(document.getElementById('status').value == "FALSE"){
+	  showDialog('ERROR',document.getElementById('msg').value,'error',2);
+	}
+  }
+  
+  
+  //Muestra opciones
+  function muestraOpcionesPro(){
+
+    if(document.getElementById('prorroga').checked == true){
+      document.getElementById('opcionesPro').style.display = "block";
+      document.getElementById('fechaPro').style.display = "block";
+      document.getElementById('motivosPro').style.display = "block";
+	}
+    
+    if(document.getElementById('prorroga').checked == false){
+      document.getElementById('opcionesPro').style.display = "none";
+      document.getElementById('fechaPro').style.display = "none";
+      document.getElementById('motivosPro').style.display = "none";
+	}
+    
+  }
+  
+  
+  
+	//Funcion que cuenta los checkBox que son seleccionados
+	function countCheckBox(obj)
+	{ 
+		max = 2;
+		 
+		a = obj.form.actaPro.checked;
+		b = obj.form.certificadoPro.checked; 
+		c = obj.form.fichaPagoPro.checked; 
+		d = obj.form.certificadoMedPro.checked; 
+		e = obj.form.cartaComPro.checked; 
+		f = obj.form.reglamentoPro.checked; 
+		g = obj.form.antidopingPro.checked; 
+		h = obj.form.extranjeroPro.checked; 
+
+		count = (a ? 1 : 0) + (b ? 1 : 0) + (c ? 1 : 0) + (d ? 1 : 0) + (e ? 1 : 0) + (f ? 1 : 0) + (g ? 1 : 0) + (h ? 1 : 0); 
+
+		if (count > max) {
+		  showDialog('Alerta',"Solo puede seleccionar " + max + " opciones </br> Deseleccione una si desea seleccionar otra",'warning',4);	
+		  obj.checked = false; 
+		} 
+	}
+</script> 

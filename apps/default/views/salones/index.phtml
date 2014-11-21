@@ -1,0 +1,13 @@
+<?php
+	$Divisiones = new Divisiones();
+	$divisiones = $Divisiones -> find();
+	echo form_remote_tag('salones/divisiones','update: midiv');
+	echo '<select name="divisiones_id">';
+	foreach($divisiones as $division){
+		echo '<option value="'.$division -> id.'">'.$division -> nombre.'</option>';
+	}
+	echo '</select>';
+	echo submit_tag('Ver');
+	echo '</form>';
+?>
+<div id='midiv'></div>

@@ -1,0 +1,185 @@
+<style type="text/css"></style>
+<center>
+    <table>
+        <tr>
+            <td width="900" bgcolor="#FFFFFF">
+                <div align="justify">
+                    <br>
+                    <div class="info">
+                        <div style="color: #1569C7;">
+                            <?= img_tag("adorno.gif","border: 0") ?>
+                            <b>SELECCIÓN DE CURSOS</b>
+                        </div>
+                        <hr>
+                        <br>
+                        <div style="font-size: 11px;">
+                            La selección de cursos en este semestre será realizado por los alumnos en el tiempo establecido por el <b>Departamento de Apoyo Académico</b>.
+                        </div>
+                        <br>
+                        <center>
+                            <table border="1" cellpadding="1" cellspacing="1" bordercolor="#999999" style="font-size: 11px;">
+                                <tr height="25">
+                                    <td class="fondoazul">
+                                        No. de Registro:
+                                    </td>
+                                    <td class="fondoamarillo">
+                                        <?= $registro ?>
+                                    </td>
+                                </tr>
+                                <tr height="25">
+                                    <td class="fondoazul">
+                                        Nombre del Alumno:
+                                    </td>
+                                    <td class="fondoamarillo">
+                                        <?= $alumno ?>
+                                    </td>
+                                </tr>
+                                <tr height="25">
+                                    <td class="fondoazul">
+                                        Especialidad: 
+                                    </td>
+                                    <td class="fondoamarillo">
+                                        <?= $especialidad ?>
+                                    </td>
+                                </tr>
+                                <tr height="25">
+                                    <td class="fondoazul">
+                                        Fecha Inicio de Captura:
+                                    </td>
+                                    <td class="fondoamarillo" id="verde">
+                                        <?= $inicio ?>
+                                    </td>
+                                </tr>
+                                <tr height="25">
+                                    <td class="fondoazul">
+                                        Fecha Fin de Captura:
+                                    </td>
+                                    <td class="fondoamarillo" id="rojo">
+                                        <?= $fin ?>
+                                    </td>
+                                </tr>
+                            </table>
+                        </center>
+                        <br/>                        
+                        <h2>Bienvenido al módulo de selección de cursos.</h2>
+                        <p>
+                            Este proceso se realiza en tres pasos, y a continuación se da una 
+                            breve explicación de cada uno de ellos, tomate unos minutos para leer  
+                            este pequeño manual y así evitar tener algun contratiempo a la hora 
+                            de seleccionar tus cursos.
+                        </p>
+                        <br>
+                        <br>
+                        <?= img_tag("adorno.gif","border: 0") ?>
+                        <b style="color: #1569C7;">SELECCIÓN DE CURSOS: </b>
+                        <i style="color:#FF0000;"><b>PASO 1</b>, KARDEX DEL ALUMNO</i>
+                        <hr>
+                        <br>
+                        <p>
+                            El <b>PRIMER PASO</b>
+                            para realizar la selección de cursos para este periodo escolar, 
+                            es verificar que las calificaciones en tu kardex esten completas, para esto deberías revisar  
+                            que esten registradas todas tus materias ya que si faltará alguna podrías tener problemas en la 
+                            selección de cursos.
+                            <br>
+                            <br>
+                            Si te falta por registrar alguna materia, agregala en el formulario que esta a continuación, 
+                            esto servirá para agilizar el proceso de actualización de tu kardex, si tu kardex esta completo 
+                            no es necesario agregar ninguna materia y puedes pasar al paso número 2.
+                        </p>
+                        <br>
+                        <br>
+                        <?= img_tag("adorno.gif","border: 0") ?>
+                        <b style="color: #1569C7;">SELECCIÓN DE CURSOS: </b>
+                        <i style="color:#FF0000;"><b>PASO 2</b>, SELECCIÓN DE MATERIAS</i>
+                        <hr>
+                        <br>
+                        <p>
+                            El <b>SEGUNDO PASO</b>
+                            para realizar la selección de cursos para este periodo escolar, es 
+                            seleccionar las materias que vas a cursar este semestre, en este paso solo seleccionas la materia, 
+                            en un paso posterior seleccionarás el grupo al que deseas asistir.
+                            <br>
+                            <br>
+                            Si tienes alguna materia irregular, esta ya estará registrada tomando en cuenta que el reglamento 
+                            indica que es <b>obligatorio</b>
+                            cursar las materias irregulares para no ir a examen de titulo de suficiencia.
+                            <br>
+                            <br>
+                            Las materias posibles a seleccionar son las que de acuerdo al plan de estudios de tu carrera son seleccionables, 
+                            si alguna materia no aparecierá quiza sea por que te falta alguna materia en kardex, y es necesaria solicitarla 
+                            en el paso 1.
+                            <br>
+                            <br>
+                            Las materias que selecciones deben sumar un <b>mínimo de 30 créditos</b>
+                            y como <b>máximo 64 créditos</b>, 
+                            si estas por terminar la carrera registra los créditos de las materias que tienes pendientes.
+                        </p>
+                        <br>
+                        <br>
+                        <?= img_tag("adorno.gif","border: 0") ?>
+                        <b style="color: #1569C7;">SELECCIÓN DE CURSOS: </b>
+                        <i style="color:#FF0000;"><b>PASO 3</b>, SELECCIÓN DE GRUPOS</i>
+                        <hr>
+                        <br>
+                        <p>
+                            El <b>tercer y último paso</b>
+                            consiste en seleccionar los grupos donde quieres cursar las materias 
+                            seleccionadas en el paso 2, es necesario mencionar que los grupos que selecciones <b>DEBERÁN tener lugares disponibles</b>.
+                            <br>
+                            <br>
+                            Un punto muy importante es este proceso de selección, es que <b>NO deben existir cruces</b>
+                            con los grupos que selecciones.
+                            <br>
+                            <br>
+                            Una vez terminado este paso, la selección esta terminada y deberás imprimir tu horario de cursos para 
+                            cualquier posible aclaración en el futuro.
+                        </p>
+						<?php 
+						if ($acceso!=0){
+							if( Session::get_data('plantel') == 'C' ){
+							?>
+								<center>
+									<form method="post" action="<?= KUMBIA_PATH ?>alumnoselecc/seleccion1">
+										<input type="submit" value="Comenzar Selección" class="boton" style="font-size:20px; height:40px;">
+									</form>
+									<br/>
+								</center>
+							<?
+							}
+							else{
+							?>
+								<center>
+									<form method="post" action="<?= KUMBIA_PATH ?>alumnoselecc/seleccion1T">
+										<input type="submit" value="Comenzar Selección" class="boton" style="font-size:20px; height:40px;">
+									</form>
+									<br/>
+								</center>
+							<?
+							}
+						}
+						else{
+							?>
+						<div style="background:#ffca5b">
+                        <center>
+                        	<br>
+                            <h2 id="rojo">FUERA DEL TIEMPO PARA SELECCIÓN DE CURSOS</h2>
+                            EN ESTOS MOMENTOS NO PUEDES REALIZAR TU SELECCION DE CURSOS
+                            <br>
+                            <br>
+                            POR FAVOR INTENTALO EN EL HORARIO SEÑALADO
+                            <br>
+                            <br>
+                        </center>
+						</div>
+                        <?php
+						}
+						?>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+            </td>
+        </tr>
+    </table>
+</center>

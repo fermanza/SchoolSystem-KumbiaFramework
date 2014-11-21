@@ -1,0 +1,758 @@
+<?php
+if( $escogerareaformacion == 1 ){
+	render_partial("escogerareaformacion");
+}
+else{
+?>
+<style type="text/css">	
+	.nada{
+		padding-left:10px;
+	}
+	select{
+		width:500px;
+	}
+</style>
+<center>
+<table>
+	<tr>
+		<td width="900"><div align="justify">
+			<br>
+			<div style="font-size: 14px;">
+			<?= img_tag("adorno.gif","border: 0") ?><b style="color: #1569C7;">SELECCIÓN DE CURSOS: </b>
+			<i style="color:#FF0000;"><b>PASO 3</b>, SELECCIÓN DE MATERIAS</i><!--  aaa -->
+			<hr><br>
+			<div style="font-size: 11px;">
+				El <b>tercer y último paso</b>
+                consiste en seleccionar los grupos donde quieres cursar las materias 
+                seleccionadas en el paso 2, es necesario mencionar que los grupos que selecciones <b>DEBERÁN tener lugares disponibles</b>.
+                <br>
+                <br>
+                Un punto muy importante es este proceso de selección, es que <b>NO deben existir cruces</b>
+                con los grupos que selecciones.
+                <br>
+                <br>
+                Si debes materias de semestres pasados, se te cargarán en automático y no podrás seleccionar otras materias
+				si no seleccionas primeramente las irregulares.
+                <br>
+                <br>
+                Una vez terminado este paso, la selección esta terminada y deberás imprimir tu horario de cursos para 
+                cualquier posible aclaración en el futuro.
+                <br>
+                <p class="letraRoja">Estimados alumnos plantel CETI Tonal&aacute; a partir de este semestre en curso, las horas de clase serán de 55 minutos.
+				Una vez terminado su horario favor de dirigirse a la coordinaci&oacute;n de Mecatr&oacute;nica en Tonal&aacute;.</p>
+			</div>
+			<br>
+			<table border="1" align="center" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;">
+				<tr>
+					<td width="150" height="25" bgcolor="#FFCA5B">&nbsp;<b>Nombre del alumno: </b></td>
+					<td width="400" colspan="3" bgcolor="#EEEEEE">&nbsp;<?= $alumno -> vcNomAlu ?> (<?= $alumno -> miReg ?>)</td>
+					<td width="150" height="25" bgcolor="#FFCA5B"><b>&nbsp;Promedio: </b></td>
+					<td width="100" bgcolor="#EEEEEE">&nbsp;<?= $promedio ?></td>
+				</tr>
+				<tr>
+					<td width="150" height="25" bgcolor="#FFCA5B"><b>&nbsp;Especialidad: </b></td>
+					<td width="400" colspan="3" bgcolor="#EEEEEE">&nbsp;
+					<?php
+					if( $alumno -> areadeformacion_id != 0 )
+						echo $career -> nombre." ".$career -> nombreareaformacion;
+					else
+						echo $career -> nombre;
+					?>
+					</td>
+					<td width="150" height="25" bgcolor="#FFCA5B"><b>&nbsp;Número de créditos: </b></td>
+					<td width="100" bgcolor="#EEEEEE">&nbsp;<?= $creditos ?></td>
+				</tr>
+			</table>
+			<br />
+			<br />
+			<table border="1" align="center" cellpadding="1" cellspacing="1" style="font-size: 11px;">
+				<tr>
+					<th width="90" align="center" class="azull2">Horas</th>
+					<th width="75" align="center" class="azull2">Lunes</th>
+					<th width="75" align="center" class="azull2">Martes</th>
+					<th width="75" align="center" class="azull2">Miercoles</th>
+					<th width="75" align="center" class="azull2">Jueves</th>
+					<th width="75" align="center" class="azull2">Viernes</th>
+					<th width="75" align="center" class="azull2">S&aacute;bado</th>
+				</tr>
+				<?
+				for( $i = 15; $i < 22; $i++ ){
+				?>
+					<tr>
+					<td align="center" bgcolor="#FFCA5B">
+						<br /><? echo $i.":00 - ".($i + 1).":00" ?><br />&nbsp;
+					</td>
+						<?
+							for( $j = 1; $j < 7; $j++ ){
+						?>
+							<td align="center" id="td<? echo "[$i][$j]" ?>" name="td<? echo "[$i][$j]" ?>" class="bordee">
+							<?php
+									echo $ocupado1[$j][$i];
+							?>
+							</td>
+						<?
+							}
+						?>
+				</tr>
+				<?
+				}
+				?>
+			</table>
+		<?
+			$xsalonsitos = new Xcsalones();
+		?>
+		<?php
+			$tipoPlan = "materia";
+			
+			if( isSet($mensaje) ){
+		?>
+			<center class="fondoamarillo">
+				<h2><?= $mensaje ?></h2>
+			</center>
+		<?php
+			}
+		?>
+		<?php
+			if( isset($seleccion) || isset($materiasIrregulares) ){
+		?>
+				<table align="center" border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;">										
+				<?php
+					foreach( $seleccion as $sel ){
+				?>
+					<tr class="fondoazul">
+						<th colspan="10" align="center" style="font-size:14px;" height="25">
+								<?= $sel -> curso ?>, <?= $seleccionados[$sel -> curso] -> $tipoPlan ?> - 
+										<?= $materiales[$seleccionados[$sel -> curso] -> $tipoPlan] ?>
+					</th>
+					</tr>
+					<tr bgcolor="#FFCA5B">
+						<th class="capturaTitulo">&nbsp;</th>
+						<th class="capturaTitulo">Profesor</th>
+						<th class="capturaTitulo">LUN</th>
+						<th class="capturaTitulo">MAR</th>
+						<th class="capturaTitulo">MIE</th>
+						<th class="capturaTitulo">JUE</th>
+						<th class="capturaTitulo">VIE</th>
+						<th class="capturaTitulo">SAB</th>
+					</tr>
+					<tr>
+						<form action="<?= KUMBIA_PATH ?>alumnoselecc/deseleccionarT" method="post">
+							<input type="hidden" id="clavecurso" name="clavecurso" value="<?= $sel -> curso ?>">
+							<td rowspan="1">
+								<?php if($sel->curso_fijo == 0){ ?><input type="submit" value="Deseleccionar" class="boton"> <?php } ?>
+							</td>
+						</form>
+						
+						<td rowspan="1" width="340" align="center">
+							<?php 
+								 echo $maestros[$sel -> curso]."&nbsp;(".$seleccionados[$sel -> curso] -> nomina.")";
+							?>
+						</td>
+						<?
+						for( $k = 1; $k < 7; $k++ ){
+							$dia[$k] = 0;
+						}
+						if( !isSet( $horas[$seleccionados[$sel -> curso] -> id] ) ){
+							echo "<td class='bordee' colspan='6'><h2>Curso no presencial</h2></td>";
+						}
+						else{
+							for( $j = 0; $j < count($horas[$seleccionados[$sel -> curso] -> id]); $j ++ ){
+								
+								// Así accedo al dia del curso
+								//$horas[$seleccionados[$sel -> curso] -> id][$j] -> dia
+								
+								// Así accedo a la hora del curso
+								//$horas[$seleccionados[$sel -> curso] -> id][$j] -> hora
+								
+								// Así accedo al curso, que estoy viendo actualmente
+								//$seleccionados[$sel -> curso] -> id
+								
+								// Dia del curso
+								//$horas[$seleccionados[$sel -> curso] -> id][$j] -> dia
+								
+								for( $k = 1; $k < 7; $k++ ){
+									if( $dia[$k] == 0 ){
+										if( $k >= $horas[$seleccionados[$sel -> curso] -> id][$j] -> dia ){
+											break;
+										}
+										else if( $k != $horas[$seleccionados[$sel -> curso] -> id][$j] -> dia ){
+											echo "<td class='bordee'>&nbsp;</td>";
+											$dia[$k] = 1;
+										}
+									}
+								}
+								
+								if( $dia[$horas[$seleccionados[$sel -> curso] -> id][$j] -> dia] == 0 ){
+									// Pongo en la variable auxiliar el número del día de
+									//la semana, de este curso, para saber si pongo un nuevo <td> o no...
+									$dia[$horas[$seleccionados[$sel -> curso] -> id][$j] -> dia] = 1;
+									echo "<td class='bordee'>";
+								}
+								
+								if( !isSet($horas[$seleccionados[$sel -> curso] -> id][$j+1]) ){
+									echo "<span class=\"negritaa\">".$horas[$seleccionados[$sel -> curso] -> id][$j] -> hora."-".
+											($horas[$seleccionados[$sel -> curso] -> id][$j] -> hora + 1)."</span><br />".
+													$salon[$seleccionados[$sel -> curso] -> id][$j] -> edificio.":".
+															$salon[$seleccionados[$sel -> curso] -> id][$j] ->nombre."<br />";
+									echo "</td>";
+								}
+								else if( $horas[$seleccionados[$sel -> curso] -> id][$j] != null ){
+									
+									if( $horas[$seleccionados[$sel -> curso] -> id][$j+1] != null ){
+										echo "<span class=\"negritaa\">".$horas[$seleccionados[$sel -> curso] -> id][$j] -> hora."-".
+												($horas[$seleccionados[$sel -> curso] -> id][$j] -> hora + 1)."</span><br />".
+														$salon[$seleccionados[$sel -> curso] -> id][$j] -> edificio.":".
+																$salon[$seleccionados[$sel -> curso] -> id][$j] ->nombre."<br />";
+									}
+									else{
+										echo "<span class=\"negritaa\">".$horas[$seleccionados[$sel -> curso] -> id][$j] -> hora."-".
+												($horas[$seleccionados[$sel -> curso] -> id][$j] -> hora + 1)."</span><br />".
+														$salon[$seleccionados[$sel -> curso] -> id][$j] -> edificio.":".
+																$salon[$seleccionados[$sel -> curso] -> id][$j] ->nombre."<br />";
+										echo "</td>";
+									}
+								}
+								
+								if( !isSet($horas[$seleccionados[$sel -> curso] -> id][$j+1]) ){
+									for( $k = 1; $k < 7; $k++ ){
+										if( $dia[$k] == 0 ){
+											echo "<td class='bordee'>&nbsp;</td>";
+										}
+									}
+								}
+							}
+						} // else  ->  if( !isSet( $horas[$seleccionados[$sel -> curso] -> id] ) )
+						?>
+					</tr>
+				<?php
+					} // foreach($seleccion as $sel)
+				?>
+				</table>
+			<?php
+			 } // if( isset($seleccion) || isset($materiasIrregulares) ){
+			?>
+			<br />
+			<?php
+			$i = 0;
+			if( isset($pendientesIrregulares) ){
+			?>
+			<div class="centrar"><b style="color: #FF0000;"><h2>Materias Irregulares</h2></b></div>
+			<?
+			foreach( $pendientesIrregulares as $mIrreg ){
+				$bandera=0;
+				foreach( $seleccion as $sel ){
+					if( $seleccionados[$sel -> curso] -> materia == $mIrreg ){
+						$bandera=1;
+						break;
+					}
+				}
+				
+				if( $bandera == 1 )
+					continue;
+				$i++;
+			?>
+				<form action="<?= KUMBIA_PATH ?>alumnoselecc/seleccionarT" method="post">
+				<table align="center" border="1" cellpadding="1" cellspacing="1" bordercolor="#999999" style="font-size: 10px;">
+					<tr class="fondoazul">
+						<th colspan="11" align="center" style="font-size:14px;" height="25">
+								<? echo $mIrreg." - ".$mIrregNombre[$mIrreg]; ?>
+						</th>
+					</tr>
+			<!-- Materias Irregulares -->
+			<?php
+				$jj=0;
+				$materiaIrregular = 0;
+				if( $grupos2[$i-1] ){
+					foreach( $grupos2[$i-1] as $grupo ){
+						$materiaIrregular = 1;
+						$jj++
+						?>
+						<tr bgcolor="#FFCA5B">
+							<th class="capturaTitulo">&nbsp;</th>
+							<th class="capturaTitulo">CURSO</th>
+							<th class="capturaTitulo">Profesor</th>
+							<th class="capturaTitulo">CUPO</th>
+							<th class="capturaTitulo">DISP</th>
+							<th class="capturaTitulo">LUN</th>
+							<th class="capturaTitulo">MAR</th>
+							<th class="capturaTitulo">MIE</th>
+							<th class="capturaTitulo">JUE</th>
+							<th class="capturaTitulo">VIE</th>
+							<th class="capturaTitulo">SAB</th>
+						</tr>
+						<?php
+							if( $i % 2 == 0 ){
+								$bg = "#F6F6F6";
+							}
+							else{
+								$bg = "#EEEEEE";
+							}
+						?>
+						<tr>
+							<?php
+							if ( $grupo -> disponibilidad <= 0 ){
+								$idcolor="rojo";
+							}
+							else{
+								$idcolor="verde";
+							}
+							?>
+							<td rowspan="1">
+							<?php
+								if ( $grupo -> disponibilidad > 0 ){
+							?>
+									<input type="radio" name="grupo" value="<?= $grupo -> id ?>"<?php if($jj==1){ echo 'Checked'; }?>>
+									<input type="hidden" name="materia" value="<?= $grupo -> materia ?>">
+							<?php
+								}
+								else{
+									echo "&nbsp;";
+								}
+							?>
+							</td>
+							<td width="340" align="center" bgcolor="<?= $bg ?>">
+								<?php  echo $grupo -> clavecurso; ?>
+							</td>
+							<td width="340" align="center" bgcolor="<?= $bg ?>">
+								<?php  echo $maestros2[$grupo -> nomina]." (".$grupo -> nomina.")"; ?>
+							</td>
+							<td width="100" align="center" bgcolor="<?= $bg ?>">
+								<?= $grupo -> cupo ?>
+							</td>
+							<td width="100" align="center" bgcolor="<?= $bg ?>">
+								<strong>
+									<div id="<?= $idcolor ?>" style="font-size:13px;">
+										<?= $grupo -> disponibilidad ?>
+									</div>
+								</strong>
+							</td>
+								<?
+								for( $k = 1; $k < 7; $k++ ){
+									$dia[$k] = 0;
+								}
+								if( !isSet( $horas2[$grupo -> id] ) ){
+									echo "<td class='bordee' colspan='6'><h2>Curso no presencial</h2></td>";
+								}
+								else{
+									$fondo = "";
+									for( $j = 0; $j < count($horas2[$grupo -> id]); $j ++ ){
+										
+										// Así accedo al dia del curso
+										//$horas2[$grupo -> id][$j] -> dia
+										
+										// Así accedo a la hora del curso
+										//$horas2[$grupo -> id][$j] -> hora
+										
+										// Así accedo al curso, que estoy viendo actualmente
+										//$grupo -> id]
+										
+										// Dia del curso
+										//$horas2[$grupo -> id][$j] -> dia
+										
+										//echo "W: ".$ocupado1[$horas2[$grupo -> id][$j] -> dia] [$horas2[$grupo -> id][$j] -> hora]."***-<br />";
+										
+										for( $k = 1; $k < 7; $k++ ){
+											if( $dia[$k] == 0 ){
+												if( $k >= $horas2[$grupo -> id][$j] -> dia ){
+													break;
+												}
+												else if( $k != $horas2[$grupo -> id][$j] -> dia ){
+													echo "<td class='bordee'>&nbsp;</td>";
+													$dia[$k] = 1;
+												}
+											}
+										}
+										
+										if( $dia[$horas2[$grupo -> id][$j] -> dia] == 0 ){
+											// Pongo en la variable auxiliar el número del día de
+											//la semana, de este curso, para saber si pongo un nuevo <td> o no...
+											$dia[$horas2[$grupo -> id][$j] -> dia] = 1;
+											echo "<td class='bordee'>";
+										}
+										
+										if( !isSet($horas2[$grupo -> id][$j+1]) ){
+											if( $ocupado1
+													[$horas2[$grupo -> id][$j] -> dia]
+														[$horas2[$grupo -> id][$j] -> hora] != 0 ){
+												$fondo="Fondo";
+											}
+											else{
+												$fondo = "";
+											}
+											echo "<span class=\"negritaa".$fondo."\">".$horas2[$grupo -> id][$j] -> hora."-".
+													($horas2[$grupo -> id][$j] -> hora + 1)."</span><br />".
+															$salon2[$grupo -> id][$j] -> edificio.":".
+																	$salon2[$grupo -> id][$j] ->nombre."<br />";
+											echo "</td>";
+										}
+										else if( $horas2[$grupo -> id][$j] != null ){
+											if( $horas2[$grupo -> id][$j+1] != null ){
+												if( $ocupado1
+														[$horas2[$grupo -> id][$j] -> dia]
+															[$horas2[$grupo -> id][$j] -> hora] != 0 ){
+													$fondo="Fondo";
+												}
+												else{
+													$fondo = "";
+												}
+												echo "<span class=\"negritaa".$fondo."\">".$horas2[$grupo -> id][$j] -> hora."-".
+														($horas2[$grupo -> id][$j] -> hora + 1)."</span><br />".
+																$salon2[$grupo -> id][$j] -> edificio.":".
+																		$salon2[$grupo -> id][$j] ->nombre."<br />";
+											}
+											else{
+												if( $ocupado1
+														[$horas2[$grupo -> id][$j] -> dia]
+															[$horas2[$grupo -> id][$j] -> hora] != 0 ){
+													$fondo="Fondo";
+												}
+												else{
+													$fondo = "";
+												}
+												echo "<span class=\"negritaa".$fondo."\">".
+													$horas2[$grupo -> id][$j] -> hora."-".
+														($horas2[$grupo -> id][$j] -> hora + 1)."</span><br />".
+																$salon2[$grupo -> id][$j] -> edificio.":".
+																		$salon2[$grupo -> id][$j] ->nombre."<br />";
+												echo "</td>";
+											}
+										}
+										
+										if( !isSet($horas2[$grupo -> id][$j+1]) ){
+											for( $k = 1; $k < 7; $k++ ){
+												if( $dia[$k] == 0 ){
+													echo "<td class='bordee'>&nbsp;</td>";
+												}
+											}
+										}
+									}
+								} // else  ->  if( !isSet( $horas2[$grupo -> id] ) )
+								?>
+						</tr>
+						<?
+						} // foreach( $grupos2[$i-1] as $grupo )
+						?>
+						<tr>
+							
+							<td colspan="11" width="480" align="center" bgcolor="<?= $bg ?>">
+							<br>
+								<input type="submit" value="Seleccionar grupo" class="boton">
+							<br><br>
+							</td>
+							
+						</tr>
+					<?
+					} // if( $grupos2[$i-1] )
+					// else if( $materiaIrregular == 0 ){
+					else{
+					?>
+						<tr>
+							<td width="750" class="fondoamarillo" id="rojo">
+								<center><h2>NO HAY GRUPOS DE ESTA MATERIA</h2></center>
+							</td>
+						</tr>
+						</table>
+						</form>
+						<br><br>
+					<?php
+					}
+					?>
+			</table>
+			</form>
+			<?php
+				}
+			} // if( $pendientesIrregulares )
+					?>
+			<!-- Fin Materias Irregulares -->
+			
+			<br />
+			<?php
+			$i = 0;
+			if( isset($pendientes) ){
+			?>
+				<div class="centrar"><b style="color: #1569C7;"><h2>Materias Regulares</h2></b></div>
+			<?
+			foreach( $seleccAl as $selAl ){
+				
+				// Si la materia que selecciono es igual a la que tiene
+				//como irregular, no se volverá a mostrar...
+				$auxIrregular = 0;
+				foreach( $materiasIrregulares as $mIrreg ){
+					if( $mIrreg == $selAl -> clavemateria )
+						$auxIrregular++;
+				}
+				if( $auxIrregular != 0 ){
+					continue;
+				}
+				
+				$bandera=0;
+				if( $seleccion ){
+					foreach( $seleccion as $sel ){
+						if( $selAl -> clavemateria == $seleccionados[$sel -> curso] -> materia ){
+							$bandera=1;
+							break;
+						/*
+						if( substr( $selAl -> clavemateria, 0, strlen( $seleccionados[$sel -> curso] -> materia ) ) ==
+								$seleccionados[$sel -> curso] -> materia ){
+						*/
+						}
+					}
+				}
+				
+				
+				if( $bandera==1 )
+					continue;
+				
+				$i++;
+				
+				$pendientes = 1;
+			?>
+				<form action="<?= KUMBIA_PATH ?>alumnoselecc/seleccionarT" method="post">
+				<table align="center" border="1" cellpadding="1" cellspacing="1" bordercolor="#999999" style="font-size: 10px;">
+					<tr class="fondoazul">
+						<th colspan="11" align="center" style="font-size:14px;" height="25">
+								<? echo $selAl -> clavemateria." - ".$seleccAlNombre[$selAl -> clavemateria]->nombre; ?>
+						</th>
+					</tr>
+			<!-- Materias Regulares -->
+			<?php
+				$jj=0;
+				if( $grupos[$i-1] ){
+					foreach( $grupos[$i-1] as $grupo ){
+						$jj++;
+						
+						?>
+						<tr bgcolor="#FFCA5B">
+							<th class="capturaTitulo">&nbsp;</th>
+							<th class="capturaTitulo">CURSO</th>
+							<th class="capturaTitulo">Profesor</th>
+							<th class="capturaTitulo">CUPO</th>
+							<th class="capturaTitulo">DISP</th>
+							<th class="capturaTitulo">LUN</th>
+							<th class="capturaTitulo">MAR</th>
+							<th class="capturaTitulo">MIE</th>
+							<th class="capturaTitulo">JUE</th>
+							<th class="capturaTitulo">VIE</th>
+							<th class="capturaTitulo">SAB</th>
+						</tr>
+						<?php
+							if( $i % 2 == 0 ){
+								$bg = "#F6F6F6";
+							}
+							else{
+								$bg = "#EEEEEE";
+							}
+						?>
+						<tr>
+							<?php
+							if ( $grupo -> disponibilidad <= 0 ){
+								$idcolor="rojo";
+							}
+							else{
+								$idcolor="verde";
+							}
+							?>
+							<td rowspan="1">
+							<?php
+								if ( $grupo -> disponibilidad > 0 ){
+							?>
+									<input type="radio" name="grupo" value="<?= $grupo -> id ?>"<?php if($jj==1){ echo 'Checked'; }?>>
+									<input type="hidden" name="materia" value="<?= $grupo -> $tipoPlan ?>">
+							<?php
+								}
+								else{
+									echo "&nbsp;";
+								}
+							?>
+							</td>
+							<td width="340" align="center" bgcolor="<?= $bg ?>">
+								<?php  echo $grupo -> clavecurso; ?>
+							</td>
+							<td width="340" align="center" bgcolor="<?= $bg ?>">
+								<?php  echo $maestros[$grupo -> nomina]." (".$grupo -> nomina.")"; ?>
+							</td>
+							<td width="100" align="center" bgcolor="<?= $bg ?>">
+								<?= $grupo -> cupo ?>
+							</td>
+							<td width="100" align="center" bgcolor="<?= $bg ?>">
+								<strong>
+									<div id="<?= $idcolor ?>" style="font-size:13px;">
+										<?= $grupo -> disponibilidad ?>
+									</div>
+								</strong>
+							</td>
+								<?
+								for( $k = 1; $k < 7; $k++ ){
+									$dia[$k] = 0;
+								}
+								if( !isSet( $horas[$grupo -> id] ) ){
+									echo "<td class='bordee' colspan='6'><h2>Curso no presencial</h2></td>";
+								}
+								else{
+									$fondo = "";
+									for( $j = 0; $j < count($horas[$grupo -> id]); $j ++ ){
+										
+										// Así accedo al dia del curso
+										//$horas[$grupo -> id][$j] -> dia
+										
+										// Así accedo a la hora del curso
+										//$horas[$grupo -> id][$j] -> hora
+										
+										// Así accedo al curso, que estoy viendo actualmente
+										//$grupo -> id]
+										
+										// Dia del curso
+										//$horas[$grupo -> id][$j] -> dia
+										
+										//echo "W: ".$ocupado1[$horas[$grupo -> id][$j] -> dia] [$horas[$grupo -> id][$j] -> hora]."***-<br />";
+										
+										for( $k = 1; $k < 7; $k++ ){
+											if( $dia[$k] == 0 ){
+												if( $k >= $horas[$grupo -> id][$j] -> dia ){
+													break;
+												}
+												else if( $k != $horas[$grupo -> id][$j] -> dia ){
+													echo "<td class='bordee'>&nbsp;</td>";
+													$dia[$k] = 1;
+												}
+											}
+										}
+										
+										if( $dia[$horas[$grupo -> id][$j] -> dia] == 0 ){
+											// Pongo en la variable auxiliar el número del día de
+											//la semana, de este curso, para saber si pongo un nuevo <td> o no...
+											$dia[$horas[$grupo -> id][$j] -> dia] = 1;
+											echo "<td class='bordee'>";
+										}
+										
+										if( !isSet($horas[$grupo -> id][$j+1]) ){
+											if( $ocupado1
+													[$horas[$grupo -> id][$j] -> dia]
+														[$horas[$grupo -> id][$j] -> hora] != 0 ){
+												$fondo="Fondo";
+											}
+											else{
+												$fondo = "";
+											}
+											echo "<span class=\"negritaa".$fondo."\">".$horas[$grupo -> id][$j] -> hora."-".
+													($horas[$grupo -> id][$j] -> hora + 1)."</span><br />".
+															$salon[$grupo -> id][$j] -> edificio.":".
+																	$salon[$grupo -> id][$j] ->nombre."<br />";
+											echo "</td>";
+										}
+										else if( $horas[$grupo -> id][$j] != null ){
+											if( $horas[$grupo -> id][$j+1] != null ){
+												if( $ocupado1
+														[$horas[$grupo -> id][$j] -> dia]
+															[$horas[$grupo -> id][$j] -> hora] != 0 ){
+													$fondo="Fondo";
+												}
+												else{
+													$fondo = "";
+												}
+												echo "<span class=\"negritaa".$fondo."\">".$horas[$grupo -> id][$j] -> hora."-".
+														($horas[$grupo -> id][$j] -> hora + 1)."</span><br />".
+																$salon[$grupo -> id][$j] -> edificio.":".
+																		$salon[$grupo -> id][$j] ->nombre."<br />";
+											}
+											else{
+												if( $ocupado1
+														[$horas[$grupo -> id][$j] -> dia]
+															[$horas[$grupo -> id][$j] -> hora] != 0 ){
+													$fondo="Fondo";
+												}
+												else{
+													$fondo = "";
+												}
+												echo "<span class=\"negritaa".$fondo."\">".
+													$horas[$grupo -> id][$j] -> hora."-".
+														($horas[$grupo -> id][$j] -> hora + 1)."</span><br />".
+																$salon[$grupo -> id][$j] -> edificio.":".
+																		$salon[$grupo -> id][$j] ->nombre."<br />";
+												echo "</td>";
+											}
+										}
+										
+										if( !isSet($horas[$grupo -> id][$j+1]) ){
+											for( $k = 1; $k < 7; $k++ ){
+												if( $dia[$k] == 0 ){
+													echo "<td class='bordee'>&nbsp;</td>";
+												}
+											}
+										}
+									}
+								} // else  ->  if( !isSet( $horas[$grupo -> id] ) )
+								?>
+						</tr>
+						<?
+						} // foreach( $grupos[$i-1] as $grupo )
+						?>
+						<tr>
+							
+							<td colspan="11" width="480" align="center" bgcolor="<?= $bg ?>">
+							<br>
+							<?
+							if( !isset($pendientesIrregulares) ){
+							?>
+								<input type="submit" value="Seleccionar grupo" class="boton">
+							<?
+							}
+							?>
+							<br><br>
+							</td>
+							
+						</tr>
+					<?
+					
+					} // if( $grupos[$i-1] )
+					// else if( $materiaRegular == 0 ){
+					else{
+					?>
+						<tr>
+							<td width="750" class="fondoamarillo" id="rojo">
+								<center><h2>NO HAY GRUPOS DE ESTA MATERIA</h2></center>
+							</td>
+						</tr>
+						</table>
+						</form>
+						<br><br>
+					<?php
+					}
+					?>
+			</table>
+			</form>
+			<br><br>
+			<?php
+					}
+				}
+			if( $pendientes == 0 && Session::get_data('coordinador')!="OK" ){
+			?>
+				<center>
+					<form method="post" action="<?= KUMBIA_PATH ?>alumno/horario">
+						<input type="submit" value="Terminar Selecci&oacute;n" class="boton" style="font-size:20px; height:40px;">
+					</form>
+					<br/>
+				</center>
+			<?php
+			}
+			?>
+		</td>
+	</tr>
+</table>
+<br />
+			<table>
+				<tr>					
+					<form method="post" action="<?= KUMBIA_PATH ?>alumnoselecc/seleccion2T">
+					<td width="50">						
+						<input type="submit" value="<< Paso 2" class="boton">
+					</td>
+					</form>
+					<td width="50">&nbsp;</td>
+					<td width="650">&nbsp;</td>
+				</tr>
+			</table>
+</center>
+<br />&nbsp;
+<?php
+}
+?>s

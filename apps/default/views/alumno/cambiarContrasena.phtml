@@ -1,0 +1,85 @@
+<script language="JavaScript1.2">
+	function validar(){
+		var pwd = document.getElementById("contrasena").value;
+		
+		if( pwd == "" || pwd == null ){
+			alert( "Escriba una contraseña válida" )
+			return false;
+		}
+	}
+	
+</script>
+<div id ="centrar">
+	<h2 class="letrasRojas"><? if( $vacia == 1 ) echo "No se aceptan contrase&ntilde;as vacias"; ?></h2>
+</div>
+<center>
+<form action="<?= KUMBIA_PATH ?>cambiosalumno/cambiandoContrasena"
+		method="post" onSubmit="return validar();"
+			name="Formulario1" id="Formulario1">
+<table>
+	<tr>
+		<td width="900" align="left">
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" align="center">
+				<tr>
+					<td width="500" height="25" bgcolor="#FFCA5B" align="center">
+						<h2>&nbsp;Cambiar contrase&ntilde;a:</h2>
+					</td>
+				</tr>
+			</table>
+			<br />
+			<br />
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" align="center" >
+				<tr>
+					<th width="250" height="25" bgcolor="#FFCA5B" align="center">Nombre del alumno:</th>
+					<th width="250" align="center"><?= $alumno -> vcNomAlu ?></th>
+				</tr>
+				<tr>
+					<th width="250" height="25" bgcolor="#FFCA5B" align="center">Registro</th>
+					<th width="250" align="center"><?= $alumno -> miReg ?></th>
+				</tr>
+				<tr>
+					<th width="250" height="25" bgcolor="#FFCA5B" align="center">Contrase&ntilde;a Actual:</th>
+					<th width="250" align="center">
+						<div id="ocultarPWD">
+						<br />
+						<input type="hidden" value="1" id="flag" />
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						****************
+						&nbsp;&nbsp;&nbsp;
+						<img id="ocultando" name="ocultando"
+								src="<?= KUMBIA_PATH ?>/img/SpyGlass.png" width="30"
+									align="right" valign="central"
+										title="Ocultar/Ver Contrase&ntilde;a" />
+						<?
+							print "<script type=\"text/javascript\">
+							new Event.observe(\"ocultando\", \"click\", function(){
+							var flag = document.Formulario1.flag.value;
+							new AJAX.viewRequest({
+								action: \"alumno/ocultarVerPWD/\"+".flag."+\"\",
+								container: \"ocultarPWD\"
+							})
+							})
+							</script>";
+						?>
+						</div>
+					</th>
+				</tr>
+				<tr>
+					<th width="250" height="25" bgcolor="#FFCA5B" align="center">Nueva Contrase&ntilde;a:</th>
+					<th width="250" align="center">
+						<input type="password" name="contrasena" id="contrasena">
+					</th>
+				</tr>
+				<tr bgcolor="#FFCA5B">
+					<td colspan="3" align="center">
+							<input type="submit" value="Cambiar Contrase&ntilde;a" >
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</form>
+<br><br>
+</center>

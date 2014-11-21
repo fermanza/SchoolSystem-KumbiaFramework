@@ -1,0 +1,97 @@
+<center>
+  <table id="tablaFolios" style="width:100%; font-family:arial; font-size:12px; margin-top:10px; float:left;">
+    <thead>
+	  <tr>
+		<th>FOLIO</th> 
+		<th>REGISTRO</th> 
+		<th>NIVEL</th> 
+		<th>PERIODO SOLICITADO</th> 
+		<th>CONCEPTO</th>
+		<th>COSTO</th> 
+		<th>REFERENCIA</th>
+		<th>ESTATUS PAGO</th>
+		<th>FECHA TRAMITE</th> 
+	  </tr>
+	</thead>
+<?php 
+	    $montoTotal = 0;
+		$idCountD = 1;
+		
+		foreach($reporteCaja AS $value)
+		{
+
+		  $nivel = "INGENIER&Iacute;A";
+		  
+		  //Termina validacion nivel
+		  
+		  //Validacion de caracteres de los conceptos
+		  if(strlen($value -> concepto) == 1)
+			$concepto = "000".$value -> concepto;
+
+		  else if(strlen($value -> concepto) == 2)	
+			$concepto = "00".$value -> concepto;	  
+			
+		  else if(strlen($value -> concepto) == 3)	
+			$concepto = "0".$value -> concepto;	 
+
+		  else
+			$concepto = $value -> concepto;	  
+		  //Termina validacion conceptos
+		  
+		  //Validacion de tipo de pago
+		  if($value -> status_pago == "1")
+			$statusPago = "PAGADO";
+			
+		  else
+			$statusPago = "SIN PAGAR";
+		  //Termina validacion de tipo de caja
+		
+          //Obtiene el nobre del periodo
+		  $Periodos = new Periodos();
+		  if($value -> periodo != null | $value -> periodo != "")
+		    $nombrePeriodo = Periodos::nombre_periodo($value -> periodo);
+			
+		  else
+		    $nombrePeriodo = "";
+		 
+
+          //Validacion del registro
+          if($value -> registro == 41 || $value -> registro == "")
+            $registroRef = "SIN REGISTRO";	
+		
+		  else
+		     $registroRef = $value -> registro;	
+			 
+		  //Suma los costos para obtener el monto total
+		  $montoTotal = $montoTotal + $value -> costo;
+		  
+          echo "<tr id=".$idCountD."> 
+                  <td width='auto' align='center'>".$value -> idTramite."</td> 
+                  <td width='auto' align='center'>".$registroRef."</td> 
+                  <td width='auto' align='center'>".$nivel."</td> 
+                  <td width='auto' align='center'>".$nombrePeriodo."</td> 
+                  <td width='auto' align='center'>".$concepto."</td> 
+                  <td width='auto' align='left'>&nbsp;$&nbsp;".number_format($value -> costo,2)."</td> 
+                  <td width='auto' align='center'>".$value -> referencia."</td> 
+                  <td width='auto' align='center'>".$statusPago."</td> 
+                  <td width='auto' align='center'>".substr($value -> fecha_tramite,0,11)."</td> 
+                </tr>"; 
+				
+	  $idCountD++;
+	}
+
+?>
+  </table>
+</center>
+
+<script type='text/javascript'>
+//Funcion que sirve para generar un DataTable
+$q(document).ready( function () {
+  var id = -1;
+  $q('#tablaFolios').dataTable({ bJQueryUI: true,
+                            "sPaginationType": "full_numbers",
+							bRetrieve : true,
+							bDestroy : true
+                          })		
+});
+</script>

@@ -1,0 +1,75 @@
+<center>
+<form method="post" action="cambiandoSalonesPrimero/"
+	 name ="Formulario1" id="Formulario1" >
+<? // form_remote_tag("profesor/cursosComunes","update: listado3", "name: Formulario3") ?>
+<table class="bordeAzul2" style="font-size:11px;">
+	<br />
+	<tr class="naranja">
+		<th colspan="2" class="bordeAzul2">Alumnos de Primero</th>
+	</tr>
+	<tr class="azul">
+		<th class="bordeAzul2">
+			<select name="registro" id="registro" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccionar Alumno - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $alumnos as $al ){
+				?>
+					<option value="<?= $al -> miReg ?>">
+					<?
+						echo $al -> miReg."&nbsp;-&nbsp;";
+						echo $al -> vcNomAlu."&nbsp;&nbsp;";
+						echo $al -> salon."&nbsp;&nbsp;";
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+		</th>
+		<th class="bordeAzul2">
+			<select name="salones" id="salones" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccionar Salón - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $primero as $p ){
+				?>
+					<option value="<?= $p -> salon ?>">
+					<?
+						echo $p -> salon."&nbsp;-&nbsp;";
+						if( $p -> plantel == "C" )
+							echo "Colomos";
+						else
+							echo "Tonala";
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+		</th>
+	<tr class="grisClaro">
+		<td colspan="3" class="bordeAzul2" align="center">
+			<?php echo submit_tag("Cambiar de Salón"); ?>
+		</td>
+	</tr>
+</table>
+</form>
+</center>
+<br />
+<br />
+<br />&nbsp;

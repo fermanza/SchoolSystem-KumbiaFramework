@@ -1,0 +1,189 @@
+<?php
+// PLAN CREDITOS
+// * Si en xalumnocursos o xtalumnocursos tiene situacion='BAJA DEFINITIVA', se modifica en alumnos campo stsit='BD';
+// * Si en xalumnocursos o xtalumnocursos tiene mas del 60% de sus materias tomadas este periodo en 'REGULARIZACION DIRECTA', 
+// se modifica en alumnos campo stsit='BD'
+// * Si el alumno reprobo algun Titulo, se modifica en alumnos campo stSit='BD'
+// * Si despues de los extras y titulos, reprueba mas del 60% de sus materias tomadas sumando los extras y titulos reprobados mas las
+// materias en xalumnocursos en Regularizacion Directa, se modica el campo stSit='BD'
+// * Si ninguno de los casos anteriores procede, entonces el alumno queda inscrito en stSit='OK', pero falta validar tiNivel y enTipo.
+// * Si es de creditos y reprueba en extra o en Regularizacion Directa menos del 60% del cantidad total de materias, queda stSit='OK', enTipo='I'
+// * Si es de creditos y aprueba todas sus materias en ordinario o extraordinarios, queda stSit='OK', enTipo='I'
+
+	$Periodos = new Periodos();
+	$Xalumnocursos = new Xalumnocursos();
+	$Xtalumnocursos = new Xtalumnocursos();
+	$periodo = $Periodos->get_periodo_actual_();
+
+	// array_push($registros, 11110286);
+	// array_push($registros, 12110176);
+	// array_push($registros, 12110141);
+	$registros = $Xalumnocursos->get_all_students_by_periodo_plan_creditos($periodo); // Colomos
+	$registros = $Xtalumnocursos->get_all_students_by_periodo_plan_creditos($periodo, $registros); // Tonala
+
+	foreach($registros as $registro){
+		$alumnotmp = new stdClass();
+
+		$alumnotmp->registro = $registro;
+		$Alumnos = new Alumnos();
+		$alumno = $Alumnos->get_relevant_info_from_student($registro);
+		$alumnotmp->vcNomAlu = $alumno->vcNomAlu;
+
+		// Materias que cargó en este semestre, incluye Colomos y Tonalá
+		$materiasSemActual = $Xalumnocursos->get_materias_semestre_by_periodo_colomos_tonala($registro, $periodo);
+		$alumnotmp->semestre_actual = $materiasSemActual;
+		
+		// Materias que tiene en extras
+		$Xextraordinarios = new Xextraordinarios();
+		$materiasExtrasYTit = $Xextraordinarios->get_extras_titulos_cualquier_plantel($registro, $periodo);
+		$alumnotmp->materiasExtrasYTit = $materiasExtrasYTit;
+
+		// Materias reprobadas en extras y no acreditadas en intersemestral
+		$materiasRepC = $Xalumnocursos->reprobadas_extra_yno_acreditadas_en_inter($registro, $periodo);
+		$materiasRDirectaC = $Xalumnocursos->get_materias_regularizacion_directa($registro, $periodo);
+		$alumnotmp->mat_reprobadas_c = $materiasRepC;
+		$alumnotmp->mat_r_directa_c = $materiasRDirectaC;
+
+		$materiasRepT = $Xtalumnocursos->reprobadas_extra_yno_acreditadas_en_inter($registro, $periodo);
+		$materiasRDirectaT = $Xtalumnocursos->get_materias_regularizacion_directa($registro, $periodo);
+		$alumnotmp->mat_reprobadas_t = $materiasRepT;
+		$alumnotmp->mat_r_directa_t = $materiasRDirectaT;
+
+		// Checa si tiene BAJA DEFINITIVA en Colomos y Tonalá
+		if( $Xalumnocursos->get_materia_con_baja_definitiva_by_periodo($registro, $periodo) || 
+				$Xtalumnocursos->get_materia_con_baja_definitiva_by_periodo($registro, $periodo) ){
+			$stsit = 'BD';
+			$alumnotmp->stsit = $stsit;
+			$Alumnos->update_stsit($stsit, $registro);
+			print_table($alumnotmp);
+			continue;
+		}
+
+		// Si el alumno tiene al menos un titulo reprobado su estatus será Bajas
+		$materiasReprobadasTituloC = $Xalumnocursos->get_materias_reprobadas_en_titulo_by_registro($registro, $periodo);
+		$materiasReprobadasTituloT = $Xtalumnocursos->get_materias_reprobadas_en_titulo_by_registro($registro, $periodo);
+		if( (count($materiasReprobadasTituloC)+count($materiasReprobadasTituloT)) > 0 ){
+			$stsit = 'BD';
+			$alumnotmp->stsit = $stsit;
+			$Alumnos->update_stsit($stsit, $registro);
+			print_table($alumnotmp);
+			continue;
+		}
+
+		// Porcentaje máximo que puede tener de materias reprobadas
+		$porcentaje = 40;
+		// ( ((5-(2+1)) * 100) / 5 ) = 60
+		if( ( (count($materiasSemActual)-(count($materiasRepC) + count($materiasRDirectaC) + count($materiasRepT) + count($materiasRDirectaT)) ) 
+				* 100 ) / count($materiasSemActual) < $porcentaje ){
+			// Si entra aquí significa que reprobó más del 60% de materias que tomó
+			$stsit = 'BD';
+			$alumnotmp->stsit = $stsit;
+			$Alumnos->update_stsit($stsit, $registro);
+			print_table($alumnotmp);
+			continue;
+		}
+
+		// Si el alumno reprobó al menos una materia en Extra, o en Regularización Directa, se hace Irregular
+		if( (count($materiasRepC) + count($materiasRDirectaC) + count($materiasRepT) + count($materiasRDirectaT)) > 0 ){
+			$stsit = 'OK';
+			$alumnotmp->stsit = $stsit;
+			$Alumnos->update_stsit($stsit, $registro);
+			$entipo = 'I';
+			$alumnotmp->entipo = $entipo;
+			$Alumnos->update_enTipo($entipo, $registro);
+			print_table($alumnotmp);
+			continue;
+		}
+
+		// Si ninguna de las anteriores procede, significa que será Alumno Regular
+		$stsit = 'OK';
+		$alumnotmp->stsit = $stsit;
+		$Alumnos->update_stsit($stsit, $registro);
+		$entipo = 'R';
+		$alumnotmp->entipo = $entipo;
+		$Alumnos->update_enTipo($entipo, $registro);
+		print_table($alumnotmp);
+
+		// $aux++;
+		// if($aux == 10)
+			// break;
+	}
+?>
+<?php
+function print_table($alumno){
+?>
+<table cellspacing="1" cellpadding="1" style="font-size: 10px;" align="center" class="bordeAzul2">
+	<br />
+	<br />
+	<tr>
+		<th class="bordeAzul2" width="125">
+			Registro
+		</th>
+		<th class="bordeAzul2" width="625" colspan="5">
+			<?= $alumno->registro ?>
+		</th>
+	</tr>
+	<tr>
+		<th class="bordeAzul2" width="125">
+			Nombre
+		</th>
+		<th class="bordeAzul2" width="625" colspan="5">
+			<?= $alumno->vcNomAlu ?>
+		</th>
+	</tr>
+	<?php
+	foreach($alumno->semestre_actual as $mat){
+	?>
+	<tr class="bordeAzul2">
+		<th class="bordeAzul2" width="125">
+			<?php echo $mat->clavecurso." ".$mat->materia ?>
+		</th>
+		<th class="bordeAzul2" width="125">
+			<?php echo "Calif: ".$mat->calificacion1." Faltas1: ".$mat->faltas1; ?>
+		</th>
+		<th class="bordeAzul2" width="125">
+			<?php echo "Calif: ".$mat->calificacion2." Faltas2: ".$mat->faltas2; ?>
+		</th>
+		<th class="bordeAzul2" width="125">
+			<?php echo "Calif3: ".$mat->calificacion2." Faltas3: ".$mat->faltas3; ?>
+		</th>
+		<th class="bordeAzul2" width="125">
+			<?php echo "Calif: ".$mat->calificacion." Faltas: ".$mat->faltas; ?>
+		</th>
+		<th class="bordeAzul2" width="125">
+			<?= $mat->situacion; ?>
+		</th>
+	</tr>
+	<?php
+	}
+	foreach($alumno->materiasExtrasYTit as $mat){
+	?>
+	<tr class="bordeAzul2">
+		<th class="bordeAzul2" width="125">
+			<?php echo "Extras: ".$mat->curso_id ?>
+		</th>
+		<th class="bordeAzul2" width="125" colspan="5" align="left">
+			<?php echo "Calif: ".$mat->calificacion." Estado: ".$mat->estado." Tipo: ".$mat->tipo; ?>
+		</th>
+	</tr>
+	<?php
+	}
+	?>
+	<tr>
+		<th class="bordeAzul2 <?php if($alumno->stsit=="BD") echo "rojo"; else echo "verde"; ?>" 
+		width="50" colspan="6">
+			<?php
+				echo "Estatus: ".$alumno->stsit;
+				if( isset($alumno->entipo) )
+					echo " EnTipo: ".$alumno->entipo;
+			?>
+		</th>
+	</tr>
+</table>
+<br />
+<?php
+}
+?>
+<br />
+<br />
+<br />

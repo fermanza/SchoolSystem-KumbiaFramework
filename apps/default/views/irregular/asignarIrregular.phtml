@@ -1,0 +1,236 @@
+<table width="100%" style="font-size: 10px;" class="bordeAzul">
+	<tr>
+		<th class="naranja">Nombre del alumno:</th>
+		<th class="azul"><?= $alumno -> nombre_completo ?></th>
+		<th class="naranja">Plan:</th>
+		<th class="azul"><?= $alumno -> plan ?></th>
+		<th class="naranja">Especialidad:</th>
+		<th class="azul"><?= $alumno -> especialidad ?></th>
+		<th class="naranja">Grupo:</th>
+		<th class="azul"><?= $alumno -> grupo ?></th>
+		<th class="naranja">Semestre:</th>
+		<th class="azul"><?= $alumno -> semestre ?></th>
+		<th class="naranja">Tipo:</th>
+		<th class="azul"><?= $alumno -> tipo ?></th>
+		<th class="naranja">Estado:</th>
+		<th class="azul"><?= $alumno -> estado ?></th>
+	</tr>
+	<tr>
+		<th colspan="6" class="gris">&nbsp;</th>
+		<th colspan="2" class="grisClaro">Semestre Anterior</th>
+		<th class="naranja">Estado:</th>
+		<th class="azul"><?= $alumno -> estado_anterior ?></th>
+		<th class="gris">Semestre:</th>
+		<th class="grisClaro"><?= $alumno -> semestre_anterior ?></th>
+		<th class="gris">Tipo:</th>
+		<th class="grisClaro"><?= $alumno -> tipo_anterior ?></th>
+	</tr>
+</table>
+<br><br>
+<?php 
+	$Calificaciones = new Calificaciones();
+	$Horarios = new Horarios();
+	$Materias = new MateriasHorarios();
+	$Maestros = new Maestros();
+	$Extras = new Extras();
+	if($calificaciones = $Calificaciones -> find('registro = '.$alumno -> registro.' and periodo = 12009')){
+?>
+<table width="100%" style="font-size: 10px;" class="bordeAzul">
+	<tr class="naranja">
+		<th colspan="13">MATERIAS ASIGANADAS AL ALUMNOS EN EL PERIODO :: 12009 ::</th>		
+	</tr>
+	<tr class="azul">
+		<th>ACTA</th>
+		<th>CLAVE</th>
+		<th>MATERIA</th>
+		<th>TIPO</th>
+		<th>NIVEL</th>
+		<th>PLAN</th>
+		<th>PROFESOR</th>
+		<th>CALIFICACION</th>
+		<th>FALTAS</th>
+		<th>SITUACION FINAL</th>
+		<th>EXTRA/TITULO</th>
+		<th>TIPO</th>
+		<th>PAGO E/T</th>
+	</tr>
+	<?php 
+	foreach($calificaciones as $c){
+		if($h = $Horarios -> find_first($c -> horario_id)){
+			if($m = $Materias -> find_first($h -> materia_id)){
+				if($ma = $Maestros -> find_first($h -> maestro_id)){
+					echo tr_color('#bbbaaa','#dddddd');
+					echo '<td>'.$c -> horario_id.'</td>';
+					echo '<th>'.$m -> clave.'</th>';
+					echo '<td>'.$m -> nombre.'</td>';
+					echo '<th>'.$c -> tipo.'</th>';
+					echo '<td>'.$m -> nivel.'</td>';
+					echo '<th>'.$m -> plan.'</th>';
+					echo '<td>'.$ma -> nombre.'</td>';
+					$estilo = "";
+					if($c -> calificacion >= 70 && $c -> calificacion <= 100){
+						$estilo = 'style="background-color: #006600; color: #ffffff;"';
+					}else{
+						$estilo = 'style="background-color: #660000; color: #ffffff;"';
+					}					
+					?>
+					<th <?= $estilo ?> onmouseover="toolTip('Parcial 1: <?= $c -> calificacion1 ?><br>Parcial 2: <?= $c -> calificacion2 ?><br>Parcial 3: <?= $c -> calificacion3 ?>',this)"><?= $c -> calificacion ?></th>
+					<?php 
+					if($c -> situacion == 'OR'){
+						$estilo2 = 'style="background-color: #009900; color: #ffffff;"';
+					}else{
+						$estilo2 = 'style="background-color: #660000; color: #ffffff;"';
+					}
+					?>
+					<td onmouseover="toolTip('Faltas 1: <?= $c -> faltas1 ?><br>Faltas 2: <?= $c -> faltas2 ?><br>Faltas 3: <?= $c -> faltas3 ?>',this)"><?= $c -> faltas ?></td>					
+					<?php 
+					echo '<td '.$estilo2.'>'.$c -> situacion.'</td>';
+					if($e = $Extras -> find_first('horario_id = '.$h -> id.' and registro = '.$alumno -> registro)){
+						switch($e -> calificacion){
+							case 300: 	echo '<th style="background-color: #000066; color: #ffffff;">NO REPORTADO</th>';
+										break;
+							case 500: 	echo '<th style="background-color: #FFFF00; color: #ffffff;">PENDIENTE</th>';	
+										break;
+							case 999: 	echo '<th style="background-color: #660000; color: #ffffff;">NO PRESENTO</th>';
+										break;
+							default: 	if($e -> calificacion >= 70 && $e -> calificacion <= 100){
+											echo '<th style="background-color: #009900; color: #ffffff;">';
+										}else{
+											echo '<th style="background-color: #660000; color: #ffffff;">';
+										}
+										echo $e -> calificacion.'</th>';
+										break;
+						}	
+						echo '<td>'.$e -> tipo.'</td>';
+						switch($e -> pago){
+							case 0: 	echo '<th style="background-color: #660000; color: #ffffff;">NO PAGO</th>';
+										break;
+							case 1: 	echo '<th style="background-color: #006600; color: #ffffff;">SI PAGO</th>';	
+										break;							
+						}							
+					}else{
+						echo '<th colspan="3" style="background-color: #666666;">&nbsp;</th>';
+					}
+				}else{
+					echo '<tr><th colspan="11">No se encontro al Maestro</th></tr>';
+				}
+			}else{
+				echo '<tr><th colspan="11">No se encontro la Materia</th></tr>';
+			}
+		}else{
+			//echo '<tr><th colspan="9">No se encontro el horario</th></tr>';
+		}		
+	}
+	?>
+</table>
+<br><br>
+<?php
+	}else{
+		echo '<h3>No tiene materias asignadas el semestre pasado</h3>';
+	}	
+	if($calificaciones = $Calificaciones -> find('registro = '.$alumno -> registro.' and periodo = 22009')){
+?>
+<table width="100%" style="font-size: 10px;" class="bordeAzul">
+	<tr class="naranja">
+		<th colspan="12">Cursos de Acreditaci&oacute;n PERIODO :: 12009 ::</th>		
+	</tr>
+	<tr class="azul">
+		<th>ACTA</th>
+		<th>CLAVE</th>
+		<th>MATERIA</th>
+		<th>TIPO</th>
+		<th>NIVEL</th>
+		<th>PLAN</th>
+		<th>PROFESOR</th>
+		<th>CALIFICACION</th>
+		<th>FALTAS</th>
+		<th>EXTRA/TITULO</th>
+		<th>TIPO</th>
+		<th>PAGO E/T</th>
+	</tr>
+	<?php 
+	foreach($calificaciones as $c){
+		if($h = $Horarios -> find_first($c -> horario_id)){
+			if($m = $Materias -> find_first($h -> materia_id)){
+				if($ma = $Maestros -> find_first($h -> maestro_id)){
+					echo tr_color('#bbbaaa','#dddddd');
+					echo '<td>'.$c -> horario_id.'</td>';
+					echo '<th>'.$m -> clave.'</th>';
+					echo '<td>'.$m -> nombre.'</td>';
+					echo '<th>'.$c -> tipo.'</th>';
+					echo '<td>'.$m -> nivel.'</td>';
+					echo '<th>'.$m -> plan.'</th>';
+					echo '<td>'.$ma -> nombre.'</td>';?>
+					<th onmouseover="toolTip('Parcial 1: <?= $c -> calificacion1 ?><br>Parcial 2: <?= $c -> calificacion2 ?><br>Parcial 3: <?= $c -> calificacion3 ?>',this)"><?= $c -> calificacion ?></th>
+					<td onmouseover="toolTip('Faltas 1: <?= $c -> faltas1 ?><br>Faltas 2: <?= $c -> faltas2 ?><br>Faltas 3: <?= $c -> faltas3 ?>',this)"><?= $c -> faltas ?></td>
+					<?php 
+					if($e = $Extras -> find_first('horario_id = '.$h -> id.' and registro = '.$alumno -> registro)){
+						switch($e -> calificacion){
+							case 300: 	echo '<th>NO REPORTADO</th>';
+										break;
+							case 500: 	echo '<th>PENDIENTE</th>';	
+										break;
+							case 999: 	echo '<th>NO PRESENTO</th>';
+										break;
+							default: 	echo '<th>'.$e -> calificacion.'</th>';
+										break;
+						}	
+						echo '<td>'.$e -> tipo.'</td>';
+						switch($e -> pago){
+							case 0: 	echo '<th>NO PAGO</th>';
+										break;
+							case 1: 	echo '<th>SI PAGO</th>';	
+										break;							
+						}							
+					}else{
+						echo '<th colspan="3" style="background-color: #666666;">&nbsp;</th>';
+					}
+				}else{
+					echo '<tr><th colspan="11">No se encontro al Maestro</th></tr>';
+				}
+			}else{
+				echo '<tr><th colspan="11">No se encontro la Materia</th></tr>';
+			}
+		}else{
+			//echo '<tr><th colspan="9">No se encontro el horario</th></tr>';
+		}		
+	}
+	?>
+</table>
+<?php
+	}else{
+		//echo '<h3>No tiene Cursos de Acreditaci&oacute;n</h3>';
+	}
+?>
+
+<br><br>
+<table width="100%">
+	<tr>
+		<td>
+		<?= form_remote_tag("irregular/materiasIrregular", "update: materiasASel") ?>
+		<select name="grupoSeleccionado">
+		<?php						
+			echo option_tag("0", "Seleccione una...", "selected: true");
+			foreach($grupos as $g){		
+				echo option_tag($g -> id, $g -> nombre);
+			} ?>
+		</select>		
+		<input type="hidden" name="registro" value="<?= $alumno -> registro ?>">		
+		<input type="submit" value="Seleccionar">
+		<?= end_form_tag() ?>			
+		</td>
+		<td>
+			<div id="materiasASel"><div>
+		</td>
+	</tr>
+	<tr height="100">
+		<td colspan="2">&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<div id="listadoMaterias">			
+				<?php render_partial("listadoMaterias"); ?>
+			</div>
+		</td>
+	<tr>
+</table>

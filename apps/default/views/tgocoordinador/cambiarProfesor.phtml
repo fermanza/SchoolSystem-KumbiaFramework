@@ -1,0 +1,38 @@
+<style type="text/css">
+	.todo *{
+		font-size: 11px;
+	}
+</style>
+<table class="todo">
+	<tr>
+		<td width="33%">
+<?php echo form_remote_tag("tgocoordinador/materiasProf", "update: materiaProf") 
+?>
+ <select name="maestro_id">
+<?php
+	$Maestros = new Maestros();
+	foreach($md as $m){
+		$maestro = $Maestros -> find_first("id = ".$m -> maestro_id);
+?>
+	<option value="<?= $maestro -> id ?>"><?= $maestro -> nombre." - ".$maestro -> id  ?></option>
+ <?php 
+	}
+?>
+ </select>
+<input type="submit" value="enviar" >
+ <?php echo end_form_tag() ?>
+		</td>
+		<td width="66%" valign="top">
+			 <div id="materiaProf">
+			 
+			 </div>
+		</td>		
+	</tr>
+	<tr>
+		<td colspan="2">
+			<div id="infoCambio">
+			
+			</div>
+		</td>
+	</tr>
+ </table>

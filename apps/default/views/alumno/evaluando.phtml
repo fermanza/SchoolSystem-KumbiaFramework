@@ -1,0 +1,387 @@
+<script language="javascript">
+	function validar(){
+		if(document.formulario.p1.selectedIndex==0 || document.formulario.p2.selectedIndex==0 || document.formulario.p3.selectedIndex==0 || document.formulario.p4.selectedIndex==0 || document.formulario.p5.selectedIndex==0 || document.formulario.p6.selectedIndex==0 || document.formulario.p7.selectedIndex==0 || document.formulario.p8.selectedIndex==0 || document.formulario.p9.selectedIndex==0 || document.formulario.p10.selectedIndex==0 || document.formulario.p11.selectedIndex==0 || document.formulario.p12.selectedIndex==0 || document.formulario.p13.selectedIndex==0 || document.formulario.p14.selectedIndex==0 || document.formulario.p15.selectedIndex==0 || document.formulario.p16.selectedIndex==0 || document.formulario.p17.selectedIndex==0 || document.formulario.p18.selectedIndex==0 || document.formulario.p19.selectedIndex==0 || document.formulario.p20.selectedIndex==0 || document.formulario.p21.selectedIndex==0){
+			alert("Es necesario contestar TODAS las preguntas para poder continuar");
+			return false;
+		}
+		if(!confirm("¿Esta seguro de guardar los datos?\n\nUna vez almacenados no los podrás modificar.")){
+			return false;
+		}
+	}
+</script>
+<center>
+<table>
+	<tr>
+		<td width="900"><div align="justify">
+			<br>
+			<div style="font-size: 14px;color: #1569C7;"><?= img_tag("adorno.gif","border: 0") ?><b>EVALUACION DEL PROFESOR:  <b style="color: #000000;"><?= $profesor ?></b></b></div>
+			<hr><br>
+			<div style="font-size: 11px;">
+			<b>OBJETIVO:</b> El presente instrumento tiene como objetivo evaluar la actividad docente con respecto a la atención de los alumnos en las asignaturas que imparte, así como tener una retroalimentación de su desempeño con el fin de mejorar la calidad académica del CETI.
+			<br><br>
+			<b><i>Escala de evaluación:</i></b><br>
+			&nbsp;&nbsp;&nbsp;<i><u>Excelente:</u></i>  Significa que el cumplimiento SUPERA tus espectativas.<br>
+			&nbsp;&nbsp;&nbsp;<i><u>Muy bueno:</u></i> Significa que cumple COMPLETAMENTE con lo esperado.<br>
+			&nbsp;&nbsp;&nbsp;<i><u>Bueno:</u></i>  Significa que el cumplimiento es aceptable. <br>
+			&nbsp;&nbsp;&nbsp;<i><u>Regular:</u></i>  Significa que escasamente cumple con el punto referido.<br>
+			&nbsp;&nbsp;&nbsp;<i><u>Deficiente:</u></i>  Significa que no cumple con el punto referido.
+			<br><br>
+			<i><b>Agradecemos tu sinceridad y la mayor objetividad al evaluar a cada uno de tus profesores.</b></i>
+			</div>
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#999999" style="font-size: 11px;" >
+				<tr>
+					<td width="175" height="25" bgcolor="#FFCA5B"><b>&nbsp;Número de registro: </b></td>
+					<td width="75" bgcolor="#EEEEEE">&nbsp;<?= $registro ?></td>
+					<td width="150" height="25" bgcolor="#FFCA5B"><b>&nbsp;Especialidad: </b></td>
+					<td width="350" bgcolor="#EEEEEE">&nbsp;<?= $especialidad ?></td>
+				</tr>
+				<tr>
+					<td width="175" height="25" bgcolor="#FFCA5B">&nbsp;<b>Nombre del alumno: </b></td>
+					<td width="500" colspan="3" bgcolor="#EEEEEE">&nbsp;<?= $alumno ?></td>
+				</tr>
+			</table>
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#999999" style="font-size: 10px;" >
+				<tr bgcolor="#FFCA5B">
+					<th width="650" align="center" height="20">Pregunta</th>
+					<th width="100" align="center" height="20">Respuesta</th>
+				</tr>
+				<form name="formulario" method="POST" action="<?= KUMBIA_PATH ?>alumno/evaluar/<?= $curso -> curso ?>">
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#EEEEEE">
+					<b>1.- </b>&iquest;El profesor presentó el curso dando a conocer el programa, objetivos, forma de evaluación, forma de trabajo al lo largo del semestre y bibliografía de apoyo?
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#EEEEEE">
+						<select name="p1">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#FFFFFF">
+					<b>2.- </b>La asistencia y puntualidad del profesor para impartir su clase es:
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#FFFFFF">
+						<select name="p2">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#EEEEEE">
+					<b>3.- </b>El dominio del contenido del programa y preparación del profesor para impartir su clase es:
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#EEEEEE">
+						<select name="p3">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#FFFFFF">
+					<b>4.- </b>El nivel de profundidad y amplitud que el profesor le da a los temas que forman parte del programa de la materia es:
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#FFFFFF">
+						<select name="p4">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#EEEEEE">
+					<b>5.- </b>El nivel de avance en los temas del programa del curso es:
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#EEEEEE">
+						<select name="p5">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#FFFFFF">
+					<b>6.- </b>&iquest;Qué calificación das a las técnicas didácticas que el profesor realiza a lo largo del curso (prácticas, trabajo en equipo, estudios de casos, aprendizaje basado en problemas, desarrollo de proyectos )?
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#FFFFFF">
+						<select name="p6">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#EEEEEE">
+					<b>7.- </b>&iquest;El profesor aclaró las dudas que los alumnos manifestaron en clase con respecto a los contendos del programa?
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#EEEEEE">
+						<select name="p7">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#FFFFFF">
+					<b>8.- </b>Las actividades extraclase que el profesor encarga para el reforzamiento de lo aprendido en el espacio educativo (aula, taller, laboratorio) son:
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#FFFFFF">
+						<select name="p8">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+			
+	<tr>
+					<td width="650" align="left" height="20" bgcolor="#EEEEEE">
+					<b>9.- </b>La disposición que el profesor muestra para dar asesorías extraclase en caso de ser necesario es:
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#EEEEEE">
+						<select name="p9">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#FFFFFF">
+					<b>10.- </b>&iquest;Cómo evalúas la utilidad de las referencias bibliográficas o virtuales que el profesor proporcionó para enriquecer el aprendizaje en el curso?
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#FFFFFF">
+						<select name="p10">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#EEEEEE">
+					<b>11.- </b>&iquest;El profesor muestra un trato imparcial y equitativo con los estudiantes del curso?
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#EEEEEE">
+						<select name="p11">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#FFFFFF">
+					<b>12.- </b>&iquest;En el desarrollo de la clase persiste un ambiente de tolerancia, comunicación y confianza en el que se permita la expresión de las ideas y el intercambio de éstas entre el profesor y los alumnos?
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#FFFFFF">
+						<select name="p12">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#EEEEEE">
+					<b>13.- </b>&iquest;El profesor es ejemplo de conducta que fomente el desarrollo de valores tales como la disciplina, responsabilidad, respeto, honestidad, puntualidad, amistad y solidaridad?
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#EEEEEE">
+						<select name="p13">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#FFFFFF">
+					<b>14.- </b>&iquest;El profesor revisó y entregó a tiempo los trabajos de clase, ejercicios, investigaciones, tareas, etc., proponiendo elementos para mejorar tu aprendizaje, tales como: anotaciones y sugerencias?
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#FFFFFF">
+						<select name="p14">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#EEEEEE">
+					<b>15.- </b>&iquest;El profesor establece con claridad los criterios a considerar para la evaluación de las diversas actividades del curso?
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#EEEEEE">
+						<select name="p15">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#FFFFFF">
+					<b>16.- </b>&iquest;El profesor evalúa conforme a los criterios previamente establecidos?
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#FFFFFF">
+						<select name="p16">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#EEEEEE">
+					<b>17.- </b>La relación entre los temas desarrollados en la clase y los evaluados durante el curso es:
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#EEEEEE">
+						<select name="p17">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#FFFFFF">
+					<b>18.- </b>&iquest;El profesor califica objetivamente los exámenes, revisando y retroalimentando conjuntamente contigo o con el grupo?
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#FFFFFF">
+						<select name="p18">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#EEEEEE">
+					<b>19.- </b>&iquest;En qué medida, la forma en que el profesor desarrolla los contenidos del programa, contribuye a que utilices lo aprendido anteriormente en la adquisición de nuevos conocimientos?
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#EEEEEE">
+						<select name="p19">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#FFFFFF">
+					<b>20.- </b>&iquest;Cómo consideras la posibilidad de tomar otra clase con el mismo profesor?
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#FFFFFF">
+						<select name="p20">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="650" align="left" height="20" bgcolor="#EEEEEE">
+					<b>21.- </b>&iquest;Cómo calificas el curso en general?
+					</td>
+					<td width="100" align="center" height="30" bgcolor="#EEEEEE">
+						<select name="p21">
+							<option value="0"></option>
+							<option value="10">EXCELENTE</option>
+							<option value="9">MUY BUENO</option>
+							<option value="8">BUENO</option>
+							<option value="7">REGULAR</option>
+							<option value="6">DEFICIENTE</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th colspan="2" bgcolor="#FFCA5B" align="center">
+						COMENTARIOS DE LA CLASE Y/O EL PROFESOR
+					</th>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<textarea name="comentarios" cols="91" rows="5"></textarea>
+					</td>
+				</tr>
+			</table><br>
+			
+			<center>
+				<input type="submit" value="Enviar respuestas" onclick="return validar();">
+			</center>
+			</form>
+			<br><br>
+		</td>
+	</tr>
+</table>
+</center>

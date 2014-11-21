@@ -1,0 +1,49 @@
+			<table align="center" border="1" cellspacing="4">
+				<tr>
+					<th colspan="4" align="center" class="naranjaa2">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						AULAS, LABORATORIOS Y TALLERES DISPONIBLES
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</th>
+				</tr>
+				<tr>
+					<td align="center" class="azull2">
+						Edificio
+					</td>
+					<td align="center" class="azull2" width="45%">
+						Nombre
+					</td>
+					<td align="center" class="azull2">
+						<?= link_to_remote
+								("capturarcursos/salonesajax/".$p1,
+								'<img src="'.KUMBIA_PATH.'public/img/left.gif" border=0>',
+									 "update: listasalones"); ?>
+					</td>
+					<td align="center" class="azull2">
+						<?= link_to_remote
+								("capturarcursos/salonesajax/".$p2,
+								'<img src="'.KUMBIA_PATH.'public/img/right.gif" border=0>',
+									"update: listasalones"); ?>
+					</td>
+				</tr>
+					<?
+						for( $i = 0; $i < 25; $i++ ){
+							echo "<tr><td class=\"azull3\">";
+							echo $salones[$i] -> edificio;
+							echo "</td><td class=\"azull3\">";
+							echo $salones[$i] -> nombre;
+							echo "</td><td colspan=\"2\" class=\"azull3\" align=\"center\">";
+					?>
+							<?= link_to_remote("capturarcursos/jornadasalon/".$salones[$i] -> id,
+									'<img src="'.KUMBIA_PATH.'public/img/calendar.gif" border=0>', 
+										"update: horas"); ?>
+							<!--
+							<input type="image" src="<?= KUMBIA_PATH ?>public/img/calendar.gif">
+							-->
+							</td></tr>
+					<?
+							if( !isSet($salones[$i+1]) )
+								break;
+						}
+					?>
+			</table>

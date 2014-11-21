@@ -1,0 +1,83 @@
+<script type="text/javascript">
+function validar(){
+	var err = '';
+	var RadioRequired = document.Formulario1.elements['areadeformacion_id'];
+	var flag = 0;
+	var radioLength = RadioRequired.length;
+	for(var i = 0; i < radioLength; i++){
+		if(RadioRequired[i].checked){
+			flag = 1;
+		}
+	}
+	if (flag == 0){
+		err += 'Favor de seleccionar una especialidad\n';
+	}
+	if( err != '' ){
+		alert(err);
+		return false;
+	}
+	if( !confirm('¿Estás seguro de querer asignar dicha especialidad?')){
+		return false;
+	}
+}
+</script>
+<br />
+<br />
+<?= render_partial("menuAsignarEspecialidad"); ?>
+<br />
+<div id="asignadoEsp" class="centrar">
+<h2 class="centrar">Alumnos sin especialidad que tienen al menos una materia de Cuarto Semestre Cursada en Su Kardex.</h2>
+<br />
+<?= render_partial("buscadorAlumnos"); ?>
+<?= render_partial("paginacionAlumnosSinEsp") ?>
+<br />
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center">
+	<tr>
+		<th class="azull4" width="50">
+			Num
+		</th>
+		<th class="azull4" width="150">
+			Registro
+		</th>
+		<th class="azull4" width="300">
+			Nombre del Alumno
+		</th>
+		<th class="azull4" width="150">
+			Carrera
+		</th>
+		<th class="azull4" width="200">
+			Asignación de Especialidad
+		</th>
+	</tr>
+	<?
+	$i = 0;
+	foreach( $alumnos as $al ){
+		$i++;
+	?>
+	<tr>
+		<td class="bordee">
+			<?= $i ?>
+		</td>
+		<td class="bordee">
+			<?= $al -> miReg ?>
+		</td>
+		<td class="bordee">
+			<?= $al -> vcNomAlu ?>
+		</td>
+		<td class="bordee">
+			<?= $carrera[$i-1] -> nombre ?>
+		</td>
+		<td class="bordee">
+			<?= form_remote_tag("asignarEspecialidad/asignandoEsp","update: asignadoEsp", "name: Formulario".$i) ?>
+				<input type="hidden" name="registro" id="registro" value="<?= $al -> miReg ?>" />
+				<input type="submit" value="Asignar Especialidad" />
+			</form>
+		</td>
+	</tr>
+	<?
+	}
+	?>
+</table>
+</div>
+<br />
+<br />

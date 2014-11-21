@@ -1,0 +1,53 @@
+<table style="width: 800px; font-size: 11px" class="bordeAzul">
+	<tr>
+		<th colspan="6" class="naranja">LISTADO DE ALUMNOS</th>		
+	</tr>
+	<tr class="azul">
+		<th>REGISTRO</th>
+		<th>NOMBRE</th>
+		<th width="150">CARRERA</th>
+		<th>BECA</th>
+		<th>PERIODO</th>
+		<th>PLANTEL</th>
+	</tr>
+<?php
+	$Alumno = new Alumnos();
+	$Esp = new Especialidades();
+	$Beca = new Becas();
+	$xalumnocursos = new Xalumnocursos();
+	$xtalumnocursos = new Xtalumnocursos();
+	$i = 0;
+	foreach($becaAlumno as $ba){ 
+		$i++;
+		$Alumno -> find_first("miReg = ".$ba -> registro);					
+		$Esp -> find_first("idtiesp = ".$Alumno -> idtiEsp);
+		$Beca -> find_first("id = ".$ba -> beca_id);
+		if ($i%2){
+			$class='class="grisClaro"';
+		}else{
+			$class="";
+		}
+	?>
+	
+	<tr <?= $class ?>>
+		<th><?= $ba -> registro ?></th>
+		<th><?= utf8_encode($Alumno -> vcNomAlu) ?></th>
+		<th width="150"><?= utf8_encode($Esp -> vcNomEsp) ?></th>
+		<th><?= $Beca -> categoria." - ".$Beca -> tipo ?></th>
+		<th><?= $ba -> periodo ?></th>
+		<?
+		if( $xalumnocursos -> find_first("periodo = ".$ba -> periodo.
+				" and registro = ".$ba -> registro) ){
+			$plantel = "Colomos";
+		}else if ( $xtalumnocursos -> find_first("periodo = ".$ba -> periodo.
+				" and registro = ".$ba -> registro) ){
+			$plantel = "Tonala";
+		}else{
+			$plantel = "No curso materias en el periodo ".$ba -> periodo;
+		}
+		?>
+		<th><?= $plantel ?></th>
+	</tr>
+	<?php
+	} ?>
+</table>

@@ -1,0 +1,101 @@
+<?php echo javascript_include_tag('kumbia/validar_input_alumno_problemas') ?>
+			<?php
+			if(isset($alumnosProblemas)){
+			?>
+			<br />
+			<table border="1" cellpadding="1" cellspacing="1" style="font-size: 10px;" align="center" class="centrar">
+				<tr class="fondoazul">
+				<th align="center" height="25" colspan="9">
+					<?php
+					?>
+					PERIODO (
+					<?php
+						if( $periodo[0] == 1 ){
+							echo "FEB - JUN ".substr($periodo,1,4);
+						}
+						elseif ( $periodo[0] == 2){
+							echo "JULIO ".substr($periodo,1,4);
+						}
+						elseif ( $periodo[0] == 3){
+							echo "AGO - DIC ".substr($periodo,1,4);
+						}
+						else{
+							echo "ENERO ".substr($periodo,1,4);
+						}
+					?>&nbsp;)</th>
+				</tr>
+				<tr class="fondonaranja" align="center">
+					<th width="50" height="25">Registro</th>
+					<th width="20" height="25">Nombre</th>
+					<th width="50">Periodo</th>
+					<th width="50">Descripci&oacute;n</th>
+					<th width="50">&iquest;Problema Resuelto?</th>
+					<th width="50">Fecha Problema</th>
+					<th width="50">Fecha Resoluci&oacute;n</th>
+					<th width="50">Borrar Problema</th>
+					<th width="50">Problema Solucionado</th>
+				</tr>
+				<?php
+				$j = 0;
+				foreach($alumnosProblemas as $alumno){
+				if( ($j % 2) == 0 )
+					$bg = "#EEEEEE";
+				else
+					$bg = "#C3C3C3";
+				?>
+				<tr style="font-size: 10px;" bgcolor="<?= $bg ?>" id="tr<?php echo "[$j]" ?>" name="tr<?php echo "[$j]" ?>">
+					<td width="50" height="25" bgcolor="<?php echo $bg ?>">
+						<?php echo $alumno -> registro ?>
+					</td>
+					<td width="200" height="25" bgcolor="<?php echo $bg ?>">
+						<?php echo $alumno -> vcNomAlu ?>
+					</td>
+					<td width="50" height="25" bgcolor="<?php echo $bg ?>">
+						<?php echo $alumno -> periodo ?>
+					</td>
+					<td width="50" height="25" bgcolor="<?php echo $bg ?>">
+						<?php echo $alumno -> descripcion ?>
+					</td>
+					<td width="50" height="25" bgcolor="<?php echo $bg ?>">
+						<?php if( $alumno -> aun_con_problemas == 1 ) echo "No"; else echo "Si"; ?>
+					</td>
+					<td width="50" height="25" bgcolor="<?php echo $bg ?>">
+						<?php echo $alumno -> creado_at ?>
+					</td>
+					<td width="50" height="25" bgcolor="<?php echo $bg ?>">
+						<?php echo $alumno -> modificado_at ?>
+					</td>
+					<td width="50" align="center" bgcolor="<?= $bg ?>">
+					<?php
+						echo form_remote_tag("ingcalculo/problema_alumno_eliminar","update: tr[".$j."]", "name: Formulariio".$j)
+					?>
+						<input type="image" src="<?= KUMBIA_PATH ?>img/delete.gif" border="0" alt="Eliminar Problema"
+						onClick="return preguntar_eliminar_problema()">
+						<input type="hidden" id="id_problema" name="id_problema"
+								value="<?php echo $alumno -> id ?>">
+						</form>
+					</td>
+					<td width="50" align="center" bgcolor="<?= $bg ?>">
+					<?php
+						echo form_remote_tag("ingcalculo/problema_alumno_solucion","update: tr[".$j."]", "name: Formularioo".$j)
+					?>
+						<input type="image" src="<?= KUMBIA_PATH ?>img/activar_desactivar.jpg" border="0" alt="Desactivar Problema" width="25">
+						<input type="hidden" id="id_problema" name="id_problema"
+								value="<?php echo $alumno -> id ?>">
+						<input type="hidden" id="row" name="row"
+								value="<?php echo $j ?>">
+						</form>
+					</td>
+				</tr>
+				<?php
+				$j++;
+				}
+				?>
+				</table>
+				<br />
+			<?php
+			}
+			else{
+			?>
+				<br><b><center><h3>NO HAY ALUMNOS CON PROBLEMAS PARA ESTE PERIODO</h3></center></b><br>
+			<?php } ?>

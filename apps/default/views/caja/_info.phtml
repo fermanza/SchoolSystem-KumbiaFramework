@@ -1,0 +1,136 @@
+<center>
+	<table border="0" style="font-size: 10px; width:100%;" bordercolor="#003399" CELLSPACING=1>
+		<tr>
+			<!--<td rowspan="3">
+				<?php
+					$estatus="-";
+					$entro=0;
+					$foto = "fotos/".Session::get_data('registro').".JPG";
+					$foto1 = "fotos/".Session::get_data('registro').".jpg";					
+					if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto)){					
+						echo img_tag($foto, "width: 100");
+						$entro=1;
+					}
+					if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto1)){					
+						echo img_tag($foto1, "width: 100");
+						$entro=1;
+					}
+					if ($entro == 0){
+						echo "Sin Foto";
+					}
+					$Alumnos = new Alumnos();
+					$Periodos = new Periodos();
+					$periodos= $Periodos -> find_first("activo=1");
+					$nombre_corto=$periodos->nombre_corto;
+					if($alumno = $Alumnos -> find_first("registro = ".Session::get_data('registro'))){
+						
+						$nombres = iconv("latin1", "ISO-8859-1", $Alumnos -> nombres);
+						$apaterno = iconv("latin1", "ISO-8859-1", $Alumnos -> a_paterno);
+						$amaterno = iconv("latin1", "ISO-8859-1", $Alumnos -> a_materno);
+						switch ($alumno -> tipo){
+							case 'R': $estatus = "REGULAR";
+								break;
+							case 'I': $estatus = "IRREGULAR";
+								break;
+							case 'P': $estatus = "PROCESO";
+								break;
+							case 'C': $estatus = "CONDICIONADO";
+								break;
+							default: $estatus = "NI";
+						}
+						if ($alumno -> situacion == 'EGRESADO'){
+							$estatus = "<b>EGRESADO</b>";
+							$pago=1;
+							$estado_alumno="EGRESADO";
+						}
+						else if (($alumno -> pago==0) && ($alumno -> condonado==0)){
+						 $pago=0;
+						 $estado_alumno="NO TIENE PAGO INSCRIPCION Y/O REINSCRIPCION";
+						}
+						else if (($alumno -> pago==1) || ($alumno -> condonado==1)) {
+						$pago=1;
+						$estado_alumno="PAGO REALIZADO DE ".$nombre_corto;
+						}
+						
+						
+						$estados=$alumno -> estado;
+					}
+				?>
+			</td>-->
+			<td width="86" height="30px" bgcolor="#F5B353" align="right">&nbsp;<b>Registro :</b>&nbsp;&nbsp;</td>
+			<td width="51" bgcolor="#E8E8E8" align="center">&nbsp;<?= Session::get_data('registro') ?>&nbsp;</td>
+			<td width="75" bgcolor="#F5B353" align="right">&nbsp;<b>Nombre :</b>&nbsp;&nbsp;</td>
+           
+				
+			<td bgcolor="#E8E8E8"  colspan="3" align="center">&nbsp;<?= $nombres." ".$apaterno." ".$amaterno; ?>&nbsp;</td>
+			
+			<td width="75" height="30px" bgcolor="#F5B353" align="right">&nbsp;<b>Tipo Alumno :</b>&nbsp;&nbsp;</td>
+			<th width="34" align="center" bgcolor="#E8E8E8">&nbsp;<?= $estatus ?>&nbsp;</th>
+		</tr>
+		<tr>
+			<td width="86" height="30px" bgcolor="#F5B353" align="right">&nbsp;<b>Turno :</b>&nbsp;&nbsp;</td>
+			<td width="51" bgcolor="#E8E8E8" align="center">&nbsp;<?= Session::get_data('turno') ?>&nbsp;</td>
+			<td width="75" bgcolor="#F5B353" align="right">&nbsp;<b>Especialidad :</b>&nbsp;&nbsp;</td>
+			<?php
+				$Especialidades = new Especialidades();
+				$Especialidades -> find_first("id = ".Session::get_data('especialidad'))
+			?>
+			
+			<td colspan="3" bgcolor="#E8E8E8" align="center">&nbsp;<?= $Especialidades -> nombre ?>&nbsp;</td>
+            <td bgcolor="#F5B353" align="right">&nbsp;<b>Estado Alumno:</b>&nbsp;&nbsp;</td>
+            <td bgcolor="#E8E8E8" align="center"><strong><? echo $estados; ?></strong></td>
+		</tr>
+        <tr>
+			<td width="86" height="30px" bgcolor="#F5B353" align="right">&nbsp;<b>Nivel :</b>&nbsp;&nbsp;</td>
+			<td bgcolor="#E8E8E8" align="center">&nbsp;<?= 	
+			Session::get_data('nivel')
+			
+			?>&nbsp;</td>
+		    <td width="75" height="30px" bgcolor="#F5B353" align="right">&nbsp;<b>Grupo :&nbsp;&nbsp;</b></td>
+			<td width="49" align="center" bgcolor="#E8E8E8">&nbsp;<?php echo Session::get_data('grupo') 
+			?>&nbsp;</td>
+			<td width="73" height="30px" bgcolor="#F5B353" align="right">&nbsp;<b>Correo :</b>&nbsp;&nbsp;</td>
+			<td width="166" align="center" bgcolor="#E8E8E8">&nbsp;a<?= Session::get_data('registro') ?>@live.ceti.mx</td>
+            <td width="75" height="30px" bgcolor="#F5B353" align="right">&nbsp;<b>Plantel :</b>&nbsp;&nbsp;</td>
+            <td colspan="3" height="30px" bgcolor="#E8E8E8" align="center"><?php 
+			if(Session::get_data('plantel') == 'C'){
+				$plantel='COLOMOS';
+			}else{
+				$plantel='TONALA';
+			} ?><?= $plantel; ?></td>
+		</tr>
+		<!--<tr>
+			<td height="20" class="naranja">&nbsp;Tutor: </td>
+			<td height="20" colspan="4" align="center" class="gris">
+			<?	if(Session::get_data('tutor_tutor')!=''){
+			if (Session::get_data('tutor_tutor')=='CARMEN ANGELICA NUÑEZ MORENO'){
+			echo "Tutor temporal:";
+			}
+			?>
+			&nbsp;<?= Session::get_data('tutor_tutor') ?>&nbsp;
+			<?} else{?>
+			&nbsp;<?= Session::get_data('tutor') ?>&nbsp;
+			<? } ?>			</td>
+			<td height="20" class="naranja">&nbsp;Division del Tutor: </td>
+            <?php
+           /* if(Session::get_data('tutor_tutor')!=''){$Division = new Divisiones();
+            $Division -> find_first('id = '.Session::get_data('division'))};
+            ?>
+			<td height="20" colspan="2" align="center" class="gris">
+			<?	if(Session::get_data('tutor_tutor')!=''){?>
+			&nbsp;<?= Session::get_data('division_tutor') ?>&nbsp;
+			<?} else{?>
+			&nbsp;<?= Session::get_data('division') ?>&nbsp;
+			<? }*/?>			</td>
+		</tr>
+		<tr>
+		  <td height="20" class="naranja">&nbsp;Pago del Alumno:</td>
+         
+		  <td height="20" colspan="4" align="center" <? if ($pago==0){?> class="rojo"  <? } else{?>class="gris"<? }?>>
+		  <? echo $estado_alumno; ?></td>
+         
+		  <td height="20" class="gris">&nbsp;</td>
+		  <td height="20" colspan="2" align="center" class="gris">&nbsp;</td>
+	  </tr>-->
+  </table>
+</center>

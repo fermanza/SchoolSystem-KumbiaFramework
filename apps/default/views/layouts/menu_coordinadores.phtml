@@ -1,0 +1,60 @@
+<ul>
+    <li class="li_inicio"><a>Inicio</a>
+        <ul>
+            <li><a href="<?= KUMBIA_PATH ?>profesor/informacion">Informaci&oacute;n</a></li>
+        </ul>
+    </li>
+
+    <li><a>Captura</a>
+        <ul>
+            <li><a href="<?= KUMBIA_PATH ?>profesor/captura">Captura Calificaciones</a></li>
+            <li><a href="<?= KUMBIA_PATH ?>profesor/tutorados">Tutorados</a></li>
+        </ul>
+    </li>
+
+    <li><a>Horarios</a>
+        <ul>
+            <li><a href="<?= KUMBIA_PATH ?>profesor/horario">Horario</a></li>
+            <li><a href="<?= KUMBIA_PATH ?>profesor/listas">Listas</a></li>
+            <li><a href="<?= KUMBIA_PATH ?>profesor/capturarListaActividad">Asignarse Actividades</a></li>
+            <li><a href="<?= KUMBIA_PATH ?>profesoreshorario/horarioPorProfesor">Imprimir Horarios Profesor</a></li>
+			<li><a href="<?= KUMBIA_PATH ?>ingcalculo/seleccionar_materias">Crear Horarios de Alumnos</a></li>
+        </ul>
+    </li>
+    <li><a>Cursos</a>
+        <ul>
+            <li><a href="<?= KUMBIA_PATH ?>capturarcursos/captura">Crear Cursos Colomos</a></li>
+            <li><a href="<?= KUMBIA_PATH ?>capturarcursos/capturaT">Crear Cursos Tonala</a></li>
+            <li><a href="<?= KUMBIA_PATH ?>capturarcursos/cursos_intersemestrales">Crear Cursos Intersemestrales</a></li>
+            <!-- <li><a href="<?= KUMBIA_PATH ?>profesor/permisosCapturaEspeciales">Correci&oacute;n de Captura</a></li> -->
+            <li><a href="<?= KUMBIA_PATH ?>capturarcursos/masCupoEnCursosCyT">Abrir Cupo en Cursos</a></li>
+			<li><a href="<?= KUMBIA_PATH ?>capturarcursos/cupo_en_cursos_plan_rigido">Estad&iacute;sticas de Cursos</a></li>
+            <li><a href="<?= KUMBIA_PATH ?>estadisticas/indicesReprobacionListado">Estad&iacute;sticas de Captura</a></li>
+        </ul>
+    </li>
+    <li><a href="<?= KUMBIA_PATH ?>profesor/informacion">Administraci&oacute;n Alumnos</a>
+        <ul>
+            <li><a href="<?= KUMBIA_PATH ?>profesor/buscarAlumno">Buscar Alumno</a></li>
+            <li><a href="<?= KUMBIA_PATH ?>profesor/autorizarCruces">Autorizar Cruces</a></li>
+<!--            <li><a href="<?= KUMBIA_PATH ?>profesor/abrirSeleccionAlumno">Abrir Selecci&oacute;n Alumno</a></li>-->
+            <?php if (Session::get_data('coordinacion') == "IIM") {
+                ?>
+                <li><a href="<?= KUMBIA_PATH ?>profesor/cambiar_turno_alumno">Cambiar de turno a un Alumno</a></li>
+                <?php
+            }
+            ?>
+        </ul>
+    </li>
+    <li><a href="<?= KUMBIA_PATH ?>profesor/informacion">Configuraci&oacute;n</a>
+        <ul>
+            <li><a href="<?= KUMBIA_PATH ?>profesor/cambiarContrasena">Cambiar Contrase&ntilde;a</a></li>
+            <li><a href="<?= KUMBIA_PATH ?>profesor/cambiarContrasenaZopilote">Cambiar Contrase&ntilde;a "Zopilote"</a></li>
+            <li><a href="<?= KUMBIA_PATH ?>profesor/cambiarCorreo">Cambiar Correo</a></li>
+        </ul>
+    </li>
+    <li class="floatright">
+        <a href="<?= KUMBIA_PATH ?>profesor/salir">
+            <image src="<?= KUMBIA_PATH ?>img/log_off.jpg" class="log_off" />
+        </a>
+    </li>
+</ul>

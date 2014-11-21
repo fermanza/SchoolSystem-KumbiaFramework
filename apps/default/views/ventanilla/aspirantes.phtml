@@ -1,0 +1,146 @@
+		<style type="text/css">
+			.linknegrita a:hover{
+				font-weight: bold;
+				text-decoration: none;
+				color:#000000;
+			}
+			.linknegrita a{
+				font-weight: none;
+				text-decoration: none;
+				color:#000000;
+			}
+		</style>
+<script type='text/javascript'>
+
+function registroPagoDerecho() {
+	var folio = prompt("Introduce el número de FOLIO de la solicitud de aspirante");
+	window.location.href = '<?= KUMBIA_PATH ?>aspirantes/registro/'+folio+'/1';
+}
+function registroContinuacionEstudios() {
+	var folio = prompt("Introduce el número de FOLIO de la solicitud de aspirante");
+	window.location.href = '<?= KUMBIA_PATH ?>aspirantes/registro/'+folio+'/2';
+}
+function modificacion() {
+	var folio = prompt("Introduce el número de FOLIO de la solicitud de aspirante");
+	window.location.href = '<?= KUMBIA_PATH ?>aspirantes/modificacion/'+folio;
+}
+
+</script>
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td style="font-family: Verdana;">
+					<br>
+					<div style="color: #1569C7; font-size: 14px;" align="left">
+					<?= img_tag("adorno.gif","border: 0") ?> <b>ASPIRANTES - PANEL DE CONTROL</b></div>
+					<div style="color: #000000; font-size: 11px;" align="justify">
+					<br>
+						En esta sección una secretaría podrá dar de alta y consultar cada uno de
+						los aspirantes, así como consultar distintos reportes y estadísticas sobre
+						este rubro.
+						<br/><br/>
+						<div style="color: #000000; font-size: 20px;" align="center"><b>AGOSTO - DICIEMBRE, 2012</b></div>
+						<!-- <div style="color: #000000; font-size: 20px;" align="center"><b>AGOSTO - DICIEMBRE, 2011</b></div> -->
+						<br/>
+						<center>
+						<table border="0" style="font-size:12px;">
+						<tr>
+							<th width="225" class="fondoazul">
+								<b>ASPIRANTES</b>
+							</th>
+							<td width="20">
+								&nbsp;
+							</td>
+							<th width="225" class="fondoazul">
+								<b>CONFIGURACION</b>
+							</th>
+							<td width="20">
+								&nbsp;
+							</td>
+							<th width="225" class="fondoazul">
+								<b>ESTADÍSTICAS</b>
+							</th>
+						</tr>
+						<tr>
+						<td width="225" valign="top" style="vertical-align:top;" class="fondonaranja">
+							<ul>
+								<li class="linknegrita">
+									<a href="#" onClick="registroPagoDerecho()">
+										REGISTRAR ASPIRANTE PAGO DERECHO
+									</a>
+								</li><br/>
+							<li class="linknegrita">
+									<a href="#" onClick="registroContinuacionEstudios()">
+										ASPIRANTE CONTINUACI&Oacute;N ESTUDIOS
+									</a>
+								</li><br/>
+								<li class="linknegrita">
+									<a href ="<?= KUMBIA_PATH ?>aspirantes/listaConsulta/32012">CONSULTAR EXPEDIENTE</a>
+								</li><br/>
+								<li class="linknegrita">
+									<a href="#" onClick="modificacion()">MODIFICAR EXPEDIENTE</a>
+								</li><br />
+							</ul>
+						</td>
+						<td width="20">
+							&nbsp;
+						</td>
+						<td width="225" valign="top" style="vertical-align:top;"  class="fondonaranja">
+							<ul>
+								<li class="linknegrita">
+									<a href="#" style="text-decoration:line-through">TALLER DE ORIENTACIÓN</a>
+								</li><br/>
+								<li class="linknegrita">
+									<a href="<?= KUMBIA_PATH ?>aspirantes/config_exani">LLENADO HOJA EXANI</a>
+								</li><br/>
+								<li class="linknegrita">
+									<a href="<?= KUMBIA_PATH ?>aspirantes/config_ceneval">EXAMEN DE ADMISIÓN</a>
+								</li>
+							</ul>
+						</td>
+						<td width="20">
+							&nbsp;
+						</td>
+						<td width="225" valign="top" style="vertical-align:top;"  class="fondonaranja">
+							<ul>
+								<li class="linknegrita">
+									<a href="<?= KUMBIA_PATH ?>aspirantes/estadisticas">NUMERO DE ASPIRANTES</a>
+								</li><br/>
+								<li class="linknegrita">
+									<a href="<?= KUMBIA_PATH ?>aspirantes/reporte">REPORTE DE ASPIRANTES</a>
+								</li><br/>
+								<li class="linknegrita">
+									<a href="<?= KUMBIA_PATH ?>aspirantes/admitidos">DICTAMEN DE ADMITIDOS</a>
+								</li>
+							</ul>
+						</td>
+						</tr>
+						</table>
+						
+						<br />
+						<br />
+						
+						<table>
+							<tr>
+								<th width="225" class="fondoazul">
+									<b>DE ASPIRANTES A ALUMNOS</b>
+								</th>
+							</tr>
+							<tr>
+								<td width="225" valign="top" style="vertical-align:top;" class="fondonaranja">
+								<ul>
+									<li class="linknegrita">
+										<a href ="<?= KUMBIA_PATH ?>aspirantes/agregarRegistro">AGREGAR REGISTRO</a>
+									</li><br />
+									<li class="linknegrita">
+										<a href ="<?= KUMBIA_PATH ?>aspirantes/editarRegistro">EDITAR REGISTRO</a>
+									</li><br />
+								</ul>
+								</td>
+							</tr>
+						</table>
+						</center>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<br><br>

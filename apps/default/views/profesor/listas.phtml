@@ -1,0 +1,65 @@
+<center><br><br>
+<table>
+	<tr>
+		<td width="900" align="left">
+			
+			<div style="font-size: 14px;"><div style="color: #FF0000;"><b>AVISO IMPORTANTE: </b></div>
+			<br>
+			Acorde al reglamento vigente de Ingeniería, el profesor debe registrar la asistencia de cada alumno, utilizando el siguiente formato.&nbsp;
+			Haga <a href="<?= KUMBIA_PATH ?>public/files/FSGC-217-7-INS-007_REV_A.2.xlsx"><b>click aquí</b></a> para descargarlo.</div>
+			<br>
+			<div style="font-size: 14px;"><b>Lista de cursos del profesor ( FEB - JUN 2013)</b></div>
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B"><b>&nbsp;Número de nómina: </b></td>
+					<td width="600" bgcolor="#EEEEEE">&nbsp;<?= $nomina ?></td>
+				</tr>
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B">&nbsp;<b>Nombre del profesor: </b></td>
+					<td width="600" bgcolor="#EEEEEE">&nbsp;<?= $profesor ?></td>
+				</tr>
+			</table>
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr bgcolor="#FFCA5B">
+					<th width="75" height="25" align="center">No.</th>
+					<th width="100" align="center">No. Curso</th>
+					<th width="100" align="center">Materia</th>
+					<th width="250" align="center">Nombre de la materia</th>
+					<th width="75" align="center">Inscritos</th>
+					<th width="150" colspan="2" align="center">Listas de asistencia</th>
+				</tr>
+				<?php
+					$i = 0;
+					foreach($mihorario as $horario){
+					if($i%2==0){$bg = "#EEEEEE";}else{$bg = "#FFFFFF";}
+				?>
+				<tr>
+					<td width="75" height="20" align="center" bgcolor="<?= $bg ?>"><?= $i ?></td>
+					<td width="100" align="center" bgcolor="<?= $bg ?>"><?= $horario -> id ?></td>
+					<td width="100" align="center" bgcolor="<?= $bg ?>"><?= $horario -> materia ?></td>
+					<td width="250" align="center" bgcolor="<?= $bg ?>"><?= $cursos[$i] ?></td>
+					<td width="75" align="center" bgcolor="<?= $bg ?>"><?= $inscritos[$i] ?></th>
+					
+						<td width="75" align="center" bgcolor="<?= $bg ?>">
+						<form method="POST" action="lista<? if( $plantel[$i]== "T" ) echo "t" ?>/<?= $horario -> id ?>">
+							<input type="hidden" name="clave" value="<?= $horario -> materia ?>">
+							<input type="hidden" name="materia" value="<?= $horario->curso_id ?>">
+							<input type="submit" value="HTML" style="color: #000000;background: #FFCA5B;">
+						</td>
+					</form>
+					<form method="POST" action="listaexcel<? if( $plantel[$i]== "T" ) echo "t" ?>/<?= $horario -> id ?>"><td width="75" align="center" bgcolor="<?= $bg ?>">
+						<input type="hidden" name="clave" value="<?= $horario -> materia ?>"><input type="hidden" name="materia" value="<?= $horario->curso_id ?>">
+						<input type="submit" value="EXCEL" style="color: #000000;background: #FFCA5B;"></td>
+					</form>
+				</tr>
+				<?php
+				$i++;
+				} ?>
+			</table>
+		</td>
+	</tr>
+</table>
+<br>
+</center>

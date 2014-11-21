@@ -1,0 +1,39 @@
+<style type="text/css">
+	p{
+		padding: 10px 20px;
+	}
+	#encabezado h1{
+		text-align: center;
+	}
+	#opciones a{
+		color: #FFFFFF;
+		text-decoration: none;
+		font-weight: bold;
+		display: block;
+		
+	}
+	#opciones a:hover{
+		color: #FFCA5B;		
+		background-color: #333333;
+	}	
+</style>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;Periodos
+</div>
+<div id="opciones">
+	<br />
+	<center>
+	<table class="bordeAzul" style="font-size: 13px; width: 900px;">
+		<tr class="azul">
+			<th><?= link_to_remote("apoyo/nuevoPeriodo","Nuevo Periodo","update: contenido")?></th>
+			<th><?= link_to_remote("apoyo/modificarPeriodos","Modificar Periodos","update: contenido")?></th>
+			<th><?= link_to_remote("apoyo/recargos","Activar Recargos","update: contenido")?></th>
+			<th><?= link_to_remote("apoyo/modificacionConceptos","Modificar Conceptos","update: contenido")?></th>
+		</tr>
+	</table>
+	</center>
+</div>
+<div id="contenido">
+
+</div>
+<br>

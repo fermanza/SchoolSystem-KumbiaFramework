@@ -1,0 +1,33 @@
+<script language="JavaScript">	
+function setIt( Objeto ){
+	if( Objeto.value == "" && Objeto.name == "nombreAlumno" )
+		Objeto.value = "Nombre Alumno";
+	if( Objeto.value == "" && Objeto.name == "registroAlumno" )
+		Objeto.value = "Registro Alumno";
+}
+function clearIt( Objeto ){
+	if( Objeto.value == "Registro Alumno" || Objeto.value == "Nombre Alumno" )
+		Objeto.value = "";
+}
+
+</script>
+<br />
+<br />
+
+<?php //echo form_remote_tag("ingcalculo/corrigiendoKardex","update: mostrandoInfo", "name: Formulario0") ?>
+<form action="<?= KUMBIA_PATH ?>servicio_medico/mostrando_seguro_medico" method="post" name="Formulario0" id="Formulario0">
+<table cellspacing="1" cellpadding="1" style="font-size: 12px;" align="center">
+	<tr>
+		<td>
+			<input type="text" name="registroAlumno" id="registroAlumno" value="Registro Alumno" 
+					onblur="setIt(this)" onfocus="clearIt(this)" class="input" />
+			<input type="text" name="nombreAlumno" id="nombreAlumno" value="Nombre Alumno"
+					onblur="setIt(this)" onfocus="clearIt(this)" class="input" />
+		</td>
+	</tr>
+	<tr align="center">
+		<td colspan="2"><input type="submit" value="Buscar Alumno" /></td>
+	</tr>
+</table>
+</form>
+<br />

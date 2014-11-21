@@ -1,0 +1,93 @@
+
+<br />
+<br />
+<?php render_partial("menuestadisticas"); ?>
+<br />
+<br />
+<br />
+
+<?php // form_remote_tag("estadisticas/buscarElCurso","update: cursostodos", "name: Formulario0") ?>
+<table cellspacing="1" cellpadding="1" style="font-size: 12px;" align="center">
+	<tr>
+		<td align="center">
+			<input type="text" name="buscarcurso" id="buscarcurso" >
+			<input type="submit" value="Buscar Curso">
+		</td>
+	</tr>
+</table>
+<!--
+</form>
+-->
+
+<br />
+<br />
+<div id="cursostodos">
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center" width="80%">
+	<tr>
+		<th class="azull4" width="100">
+			Clave Curso
+		</th>
+		<th class="azull4" width="300">
+			Materia
+		</th>
+		<th class="azull4" width="300">
+			Maestro
+		</th>
+		<th class="azull4" width="20">
+			Horas Clase
+		</th>
+		<th class="azull4" width="20">
+			Total Alumnos
+		</th>
+		<th class="azull4" width="20">
+			Alumnos con NP
+		</th>
+		<th class="azull4" width="20">
+			Alumnos sin Calif
+		</th>
+		<th class="azull4" width="20">
+			Alumnos Reprobados
+		</th>
+		<th class="azull4" width="20">
+			Alumnos Aprobados
+		</th>
+	</tr>
+	<?
+	for( $i = 0; $i < count($clavecurso); $i ++ ){
+	?>
+	<tr>
+		<td class="bordee">
+			<h4><? echo $clavecurso[$i]; ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? echo $materia[$i]; ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? echo $maestro[$i]; ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? echo $horasClase[$i]; ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? echo $totalAlumnos[$i]; ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? if( isSet($np[$i])  ){ echo $np[$i]; }else{ echo "-"; } ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? if( isSet($sinCalif[$i])  ){ echo $sinCalif[$i]; }else{ echo "-"; } ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? if( isSet($reprobados[$i])  ){ echo $reprobados[$i]; }else{ echo "-"; } ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? if( isSet($aprobados[$i])  ){ echo $aprobados[$i]; }else{ echo "-"; } ?></h4>
+		</td>
+	</tr>
+	<?
+	}
+	?>
+</table>
+</div>
+<br />
+<br />

@@ -1,0 +1,31 @@
+			<select name="materias" id="materias" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccione una Materia - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $materias as $materia ){
+				?>
+					<option value="<?php echo $materia -> clave ?>">
+						<?php echo $materia -> clave." - ".utf8_encode($materia -> nombre) ?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+			<br /><br />
+			
+<?php
+	print "<script type=\"text/javascript\">
+	new Event.observe(\"materias\", \"change\", function(){
+		var materias = document.getElementById('materias').value;
+		if( materias != -1 )
+			document.getElementById('submitir').disabled=false;
+		else
+			document.getElementById('submitir').disabled=true;
+	});
+	</script>";
+?>

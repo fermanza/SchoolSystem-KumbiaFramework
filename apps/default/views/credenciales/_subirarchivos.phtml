@@ -1,0 +1,42 @@
+</br>
+</br>
+</br>
+</br>
+<div style="font-size:14px;"><b>Solo es posible cargar 11 archivos a la vez</b></div>
+</br>
+<?php echo form_tag('credenciales/enviarfotos','enctype: multipart/form-data');?>
+<table>
+	<tr>
+		<td>
+			Fotografias de Alumnos: 
+		</td>
+		<td>
+			<input type="file" id="fotos" name="fotos[]" multiple="true"><br/>
+		</td>
+		<td>
+			<?php echo submit_tag('Subir');?>
+		</td>
+	</tr>
+</table>
+<?php echo end_form_tag(); ?>
+</br>
+</br>
+</br>
+<?php echo form_tag('credenciales/enviarfirmas','enctype: multipart/form-data');?>
+<table>
+	<tr>
+		<td>
+			Firmas de Alumnos: 
+		</td>
+		<td>
+			<input type="file" id="firmas" name="firmas[]" multiple="true"><br/>
+		</td>
+		<td>
+			<?php echo submit_tag('Subir');?>
+		</td>
+	</tr>
+</table>
+<?php echo end_form_tag(); ?>
+</br>
+</br>
+</br>

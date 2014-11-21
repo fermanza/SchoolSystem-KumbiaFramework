@@ -1,0 +1,75 @@
+<h2 class="centrar">INTERSEMESTRALES</h2>
+<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" class="centrar">
+	<tr bgcolor="#FFCA5B">
+		<th width="100" height="25"  align="center">No.</th>
+		<th width="100" align="center">No. Curso</th>
+		<th width="200" align="center">Materia</th>
+		<th width="150" align="center">Captura</th>
+	</tr>
+	<?php
+	$i = 0;
+	foreach( $icursos as $icurso ){
+	if( $i % 2 == 0 ) $bg = "#EEEEEE";
+	else $bg = "#FFFFFF";
+	?>
+		<tr>
+			<td width="100" height="20" align="center" bgcolor="<?= $bg ?>"><?php echo ($i + 1)?></td>
+			<td width="100" align="center" bgcolor="<?= $bg ?>"><?= $icurso -> clavecurso ?></td>
+			<td width="200" align="center" bgcolor="<?= $bg ?>"><?= $icurso -> nombre ?></td>
+			<td width="150" align="center" bgcolor="<?= $bg ?>"><br />
+			<?php
+			if($icurso -> activo ==0){
+			?>
+				<form method="POST" action="capturando_intersemestral/<?= $icurso -> clavecurso ?>">
+					<input type="submit" value="CAPTURAR" style="color: #FFFFFF; background: #CCCCCC;" disabled>
+			<?php 
+			}
+			else{
+				if( ($icurso -> fin > time()) && ($icurso -> ncapturas == 0) ){
+				?>
+					<form method="POST" action="capturando_intersemestral/<?= $icurso -> clavecurso ?>">
+						<input type="submit" value="CAPTURAR" style="color: #000000;background: #FFCA5B;">
+				<?				
+				}
+				else if( ($icurso -> inicio < time()) && ($icurso -> fin > time())){
+					if($icurso -> ncapturas < $icurso -> maxcapturas){ ?>
+						<form method="POST" action="capturando_intersemestral/<?= $icurso -> clavecurso ?>">
+							<input type="submit" value="CAPTURAR" style="color: #000000;background: #FFCA5B;">
+				<?php
+					}
+					else{
+				?>
+						<form method="POST" action="acta_intersemestral/<?= $icurso -> clavecurso ?>">
+							<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+				<?php	
+					}
+				}
+				else{
+					if($icurso -> ncapturas > 0){
+				?>
+						<form method="POST" action="acta_intersemestral/<?= $icurso -> clavecurso ?>">
+							<input type="submit" value="IMPRIMIR" style="color: #000000;background: #FFCA5B;">
+				<?php
+					}
+					else{
+					?>
+							<form method="POST" action="capturando_intersemestral/<?= $icurso -> clavecurso ?>">
+								<input type="submit" value="CAPTURAR" style="color: #FFFFFF;background: #CCCCCC;" disabled>
+					<?php
+					}
+				}
+				?>
+			<?php
+			}
+			?>
+			<input type="hidden" name="clave" value="<?= $curso -> materia ?>">
+			<input type="hidden" name="clavecurso" value="<?= $icurso -> clavecurso ?>">
+			<input type="hidden" name="parcial" value="1">
+			</form>
+			</td>
+		</tr>
+	<?php
+	$i++;
+	}
+	?>
+</table>

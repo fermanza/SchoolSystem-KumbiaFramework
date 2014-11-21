@@ -1,0 +1,251 @@
+ <?php 
+ //header("content-disposition: attachment;filename=programa_trabajo_academico.xls"); 
+ ?>
+ <center><br><br>
+<style type="text/css">	
+	.gris th{
+		background: #999999;
+		font-weight: bold;
+		text-align: center;
+		border: solid #000000;
+	}
+	.gris td{		
+		border: solid #000000;
+	}
+	
+	.borde td{
+		border: solid #000000;
+	}
+	
+	.borde th{
+		border: solid #000000;
+	}
+	
+	.lineaAbajo{
+		border-bottom: solid #000000;
+	}
+	
+	.centrado{
+		text-align: center;
+	}	
+	
+	table{
+		padding: 0px;
+		margin: 0px;
+		font-size:7px;
+		text-transform: uppercase;
+	}
+	td, th {
+		vertical-align: top;
+	}
+</style>
+<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td colspan="29" bgcolor="#f9ac42" style="color:#000000">
+			<img width="120" src="http://ase.ceti.mx/tecnologo/public/img/cira/logo.jpg"><center><h2>CENTRO DE ENSEÑANZA TÉCNICA INDUSTRIAL</h2></center>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="29" bgcolor="#003399" style="color:#ffffff">
+			<center><h3>PROGRAMA DE TRABAJO ACADÉMICO</h3></center>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="29">&nbsp;</td>
+	</tr>
+	<tr class="gris">
+		<th colspan="2">
+			PLANTEL:
+		</th>
+		<td colspan="1">
+			&nbsp;
+		</td>
+		<th>
+			DIVISION:
+		</th>
+		<td colspan="12">
+			&nbsp;
+		</td>
+		<th colspan="3">
+			ACADEMIA:
+		</th>
+		<td colspan="6">
+			&nbsp;
+		</td>
+		<th colspan="2">
+			PERIODO:
+		</th>
+		<td colspan="2">
+			&nbsp;
+		</td>		
+	</tr>
+	<tr class="gris">
+		<th colspan="2">
+			PROFESOR
+		</th>
+		<td colspan="12">
+			&nbsp;
+		</td>
+		<th colspan="4">
+			NOMINA
+		</th>
+		<td colspan="5">
+			&nbsp;
+		</td>
+		<th colspan="4">
+			HORAS NOMBRAMIENTO
+		</th>
+		<td colspan="2">
+			&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td colspan="29">&nbsp;</td>
+	</tr>
+	<tr class="gris">
+		<th rowspan="2"  width="35">
+			CLAVE
+		</th>
+		<th rowspan="2" width="60">
+			ACTIVIDAD
+		</th>
+		<th rowspan="2"  width="60">
+			OBJETIVO
+		</th>
+		<th rowspan="2"  width="60">
+			META
+		</th>
+		<th colspan="18">
+			SEMANA
+		</th>
+		<th rowspan="2">
+			TOTAL<BR>HORAS			
+		</th>
+		<th rowspan="2">
+			EVALUACION<BR>
+			1er PARCIAL
+		</th>
+		<th rowspan="2">
+			%<BR>
+			AVANCE
+		</th>
+		<th rowspan="2">
+			EVALUACION<BR>
+			2do PARCIAL
+		</th>
+		<th rowspan="2">
+			%<BR>
+			AVANCE
+		</th>
+		<th rowspan="2">
+			EVALUACION<BR>
+			3ro PARCIAL
+		</th>
+		<th rowspan="2">
+			%<BR>
+			AVANCE
+		</th>
+	</tr>
+	<tr class="gris">
+		<?php for($i=1;$i<19;$i++){ ?><th><?= $i ?></th><?php } ?>
+	</tr>
+	<?php
+	$Actividad = new Actividades();
+	$ActividadesMaestro = new ActividadMaestro();
+	$ActividadesMaestroEspecial = new ActividadMaestroEspecial();
+	
+	if($actividadesMaestro = $ActividadesMaestro -> find("maestro_id = ".$nomina)){
+		foreach($actividadesMaestro as $am){ 
+			if($Actividad -> find_first("id = ".$am -> actividad_id)){
+	?>
+	<tr class="borde">
+		<td  class="centrado"><?= $Actividad -> numero ?></td>
+		<td><?= $Actividad -> categoria." - ".$Actividad -> actividad ?></td>
+		<td><?= utf8_decode($am -> objetivo) ?></td>
+		<td><?= utf8_decode($am -> meta) ?></td>		
+		<?php 
+		$totalHrs=0;
+		for($i=1;$i<19;$i++){ 
+			$var = "s".$i;
+			$totalHrs = $totalHrs + $am -> $var;
+		?>
+		<td class="centrado"><?= $am -> $var ?></td>
+		<?php } ?>
+		<td class="centrado"><?= $totalHrs ?></td>
+		<td><?= $am -> autoevaluacion ?></td>
+		<td class="centrado"><?= $am -> avance ?></td>
+		<td><?= $am -> autoevaluacion ?></td>
+		<td class="centrado"><?= $am -> avance ?></td>
+		<td><?= $am -> autoevaluacion ?></td>
+		<td class="centrado"><?= $am -> avance ?></td>
+	</tr>
+	<?php 
+			}
+		}
+	} 
+	
+	if($actividadesMaestro = $ActividadesMaestroEspecial -> find("maestro_id = ".$nomina)){
+		foreach($actividadesMaestro as $am){ 		
+	?>
+	<tr class="borde">
+		<td  class="centrado"><?= $am -> id ?></td>
+		<td><?= utf8_decode($am -> nombre) ?></td>
+		<td><?= utf8_decode($am -> objetivo) ?></td>
+		<td><?= utf8_decode($am -> meta) ?></td>		
+		<?php 
+		$totalHrs=0;
+		for($i=1;$i<19;$i++){ 
+			$var = "s".$i;
+			$totalHrs = $totalHrs + $am -> $var;
+		?>
+		<td class="centrado"><?= $am -> $var ?></td>
+		<?php } ?>
+		<td class="centrado"><?= $totalHrs ?></td>
+		<td><?= $am -> autoevaluacion ?></td>
+		<td class="centrado"><?= $am -> avance ?></td>
+		<td><?= $am -> autoevaluacion ?></td>
+		<td class="centrado"><?= $am -> avance ?></td>
+		<td><?= $am -> autoevaluacion ?></td>
+		<td class="centrado"><?= $am -> avance ?></td>
+	</tr>
+	<?php 
+		}
+	} ?>
+	<tr>
+		<td colspan="29">&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="29">&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="29">&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<th colspan="3">ELABORÓ</th>
+		<td colspan="5">&nbsp;</td>
+		<th colspan="12">Vo.Bo.</th>
+		<td colspan="3">&nbsp;</td>		
+		<th colspan="4">AUTORIZÓ</th>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td colspan="3" class="lineaAbajo">&nbsp;</td>		
+		<td colspan="5">&nbsp;</td>
+		<td colspan="12" class="lineaAbajo">&nbsp;</td>
+		<td colspan="3">&nbsp;</td>
+		<td colspan="4" class="lineaAbajo">&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<th colspan="3">PROFESOR</th>
+		<td colspan="5">&nbsp;</td>
+		<th colspan="12">COORDINACIÓN DE DIVISIÓN</th>
+		<td colspan="3">&nbsp;</td>
+		<th colspan="4">JEFATURA DE NIVEL</th>
+		<td>&nbsp;</td>
+	</tr>
+</table>
+</center>

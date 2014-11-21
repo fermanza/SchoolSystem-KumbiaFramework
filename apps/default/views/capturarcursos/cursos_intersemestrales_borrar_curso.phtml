@@ -1,0 +1,32 @@
+<?= render_partial("capturarcursos/info"); ?>
+
+<br />
+<br />
+<?= render_partial("menuintersemestrales"); ?>
+<br />
+<br />
+
+<div class="centrar">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+	ADMINISTRACIÓN DE CURSOS INTERSEMESTARLES: "<?php echo $periodoCompleto ?>"
+</div>
+<br />
+<br />
+<?php
+if( isset($exito_en_borrar) ){
+?>
+<div class="centrar">
+	<p class="letraAzul">Curso borrado exit&oacute;samente</p>
+</div>
+</form>
+<?php
+}
+else{
+?>
+<div class="centrar">
+	<p class="letraRoja11px">El Curso no se puede borrar debido a que hay alumnos inscritos en el.</p>
+</div>
+<br />
+<?php
+}
+?>

@@ -1,0 +1,55 @@
+<?= javascript_library_tag('jquery-1.7.2'); ?>
+<?= javascript_library_tag('jquery.ui.core'); ?>
+<?= javascript_library_tag('jquery.ui.widget'); ?>
+<?= javascript_library_tag('jquery.ui.accordion'); ?>
+
+<?= stylesheet_link_tag('themes/demos'); ?>
+<?= stylesheet_link_tag('themes/ui-lightness/jquery.ui.all'); ?>
+
+
+<div class="demo">
+  <div id="accordion">
+<?php
+  $count = 1;
+  $showComentarios = comentariosActualizacionDatos::ver_comentarios();
+   
+  foreach($showComentarios AS $value){
+  
+    $fechaComentario = comentariosActualizacionDatos::getFullDateTime($value -> fecha, false);
+
+    echo "<h3><a href='#section".$count."'>".$value -> registro."&nbsp;&nbsp;-&nbsp;&nbsp;".utf8_encode($value -> nombre_completo)."&nbsp;<div style='float:right;'>".$fechaComentario."</div></a></h3>
+	      <div> 
+		    <p>".utf8_encode($value -> comentario)."</p>
+			<input type='button' value='MARCAR COMO LEIDO' class='common_button' style='float:right; margin-top:10px;' onclick=' updateComentarios(".$value -> idComentario.")'/>
+		  </div>";
+  
+    ++$count;
+  }
+?> 
+  </div>
+</div>
+
+<script type='text/javascript'>
+  //Funcion que crea el acordioon de comentarios
+  $q(function() {
+	$q( "#accordion" ).accordion({
+		autoHeight: false,
+		navigation: true
+	});
+  });
+  
+  //Funcion que modifica el estatus de los comentarios
+  function updateComentarios(comentario){
+
+	var param = 'comentario=' + comentario;
+      
+    new AJAX.viewRequest(
+	  {
+	    action: "ventanilla/updateStatusComentario",
+	    container: "comentariosM",
+        parameters: param,
+	  }
+	)
+  }
+  
+</script>

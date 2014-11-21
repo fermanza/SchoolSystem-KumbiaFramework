@@ -1,0 +1,129 @@
+<?= stylesheet_link_tag('ventana/ventanaPopUp', true); ?>
+<div id="dialog-mask"></div>
+<div id="exAlumnoVentana" style="z-index:200;">
+  <div id="fijo"  style="height:500px;" >
+    <div id="headerTittle">AGREGAR EX-ALUMNO</div>
+	  <div id="contenido" style="height:430px;" >
+	     <?= form_remote_tag('caja/guardarExAlumno','update: viewExAlumnos', 'success: cerrarVentanaExAl();') ?>
+		 <center>
+		   <table style="font-family: arial; font-size: 13px; margin-top: 30px" border=1>
+		     <tr height="50px;">
+			   <td class="naranja" style="font-weight:bold;" align="right">
+			     <font style="color:#FC1414;">*&nbsp;</font>Nombre Completo&nbsp;:&nbsp;&nbsp;
+			   </td>
+			   <td align="center">
+			     &nbsp;&nbsp;<input type="text" id="nameComplete" name="nameComplete" style="width: 350px; margin-left:5px;" maxlength="80"/>&nbsp;&nbsp;
+			   </td>
+			 </tr>
+			 <tr height="35px;">
+			   <td class="naranja" style="font-weight:bold;" align="right">
+			     <font style="color:#FC1414;">*&nbsp;</font>Genero&nbsp;:&nbsp;&nbsp;
+			   </td>
+			   <td align="center">
+			     &nbsp;&nbsp;&nbsp;Femenino&nbsp;&nbsp;<input type="radio" id="F" name="genero" value="F"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Masculino&nbsp;&nbsp;<input type="radio" id="M" value="M" name="genero" />
+			   </td>
+			 </tr>
+			 <tr height="35px;">
+			   <td class="naranja" style="font-weight:bold;" align="right">
+			     <font style="color:#FC1414;">*&nbsp;</font>Fecha Nacimiento&nbsp;:&nbsp;&nbsp; 
+			   </td>
+			   <td align="center">
+			   <?php
+			     $optionDia = "DÍA";
+			     echo select_tag("dia", "style: width:95px; margin-left:6px;");
+			     echo option_tag("0", utf8_encode($optionDia), "selected: true");
+				 for($i=1; $i <= 31; $i++){
+				   echo option_tag($i,$i);
+				 }
+			   ?>
+			     </select>
+				 <select id="mes" name="mes" style="width:125px;">
+				   <option value="0">MES</option>
+				   <option value="01">Enero</option>
+				   <option value="02">Febrero</option>
+				   <option value="03">Marzo</option>
+				   <option value="04">Abril</option>
+				   <option value="05">Mayo</option>
+				   <option value="06">Junio</option>
+				   <option value="07">Julio</option>
+				   <option value="08">Agosto</option>
+				   <option value="09">Septiembre</option>
+				   <option value="10">Octubre</option>
+				   <option value="11">Noviembre</option>
+				   <option value="12">Diciembre</option>
+				 </select>
+			   <?php
+			     $optionAnio = "AÑO";
+			     echo select_tag("anio", "style: width:120px;");
+			     echo option_tag("0", utf8_encode($optionAnio), "selected: true");
+				 for($i=1900; $i <= date('Y'); $i++){
+				   echo option_tag($i,$i);
+				 }
+			   ?>
+			     </select>
+			   </td>
+			 </tr>
+			 <tr height="35px;">
+			   <td class="naranja" style="font-weight:bold;" align="right">
+			     <font style="color:#FC1414;">*&nbsp;</font>CURP&nbsp;:&nbsp;&nbsp;
+			   </td>
+			   <td align="center">
+			     &nbsp;&nbsp;<input type="text" id="curp" name="curp" style="width: 350px; margin-left:5px; text-transform: uppercase;" maxlength="18"/>&nbsp;&nbsp;
+			   </td>
+			 </tr>
+			 <tr height="35px;">
+			   <td class="naranja" style="font-weight:bold;" align="right">
+			     <font style="color:#FC1414;">*&nbsp;</font>Registro&nbsp;:&nbsp;&nbsp;
+			   </td>
+			   <td align="center">
+			     &nbsp;&nbsp;<input type="text" id="registro" name="registro" style="width: 350px; margin-left:5px;" maxlength="10"/>&nbsp;&nbsp;
+			   </td>
+			 </tr>
+			 <tr height="35px;">
+			   <td class="naranja" style="font-weight:bold;" align="right">
+			     <font style="color:#FC1414;">*&nbsp;</font>Especialidad&nbsp;:&nbsp;&nbsp;
+			   </td>
+			   <td align="center">
+			     &nbsp;&nbsp;
+			     <?php 
+				       $especialidad = new Especialidades();
+					   $result = $especialidad -> find('idtiEsp != 21 ORDER BY vcNomEsp ASC');
+
+				       echo select_tag("vcNomEsp", "style: width: 350px;");
+				       echo option_tag("0", "SELECCIONAR ESPECIALIDAD", "selected: true");
+			           foreach($result AS $value)
+					     echo option_tag($value -> siNumEsp, utf8_encode($value -> vcNomEsp));
+				  ?>
+				  </select>&nbsp;&nbsp;
+			   </td>
+			 </tr>
+			 <tr height="35px;">
+			   <td class="naranja" style="font-weight:bold;" align="right">
+			     <font style="color:#FC1414;">*&nbsp;</font>Plantel&nbsp;:&nbsp;&nbsp;
+			   </td>
+			   <td align="center">
+			     <select style="width: 350px; margin-left:5px;" id="plantel" name="plantel">
+				   <option value="C">Colomos</option>
+				   <option value="N">Tonal&aacute;</option>
+				 </select>
+			   </td>
+			 </tr>
+			 <tr height="35px;">
+			   <td class="naranja" style="font-weight:bold;" align="right">
+			     Periodo&nbsp;:&nbsp;&nbsp;
+			   </td>
+			   <td align="center">
+                 <input type="text" id="periodo" name="periodo" style="width:350px; margin-left:15px;" maxlength="5" onkeypress="javascript: return ValidNum(event)"/>
+			   </td>
+			 </tr>
+		   </table>
+		   <div style="margin-top:50px;">
+		     <?= submit_tag('GUARDAR','id: boton','class: common_button') ?>
+		     <input type="button" class="common_button"  style="width:150px;" id="cerrar" name="cerrar" value="Cerrar" onclick="cerrarVentanaExAl()"/>
+		   </div>
+		 </center>
+	     <?= end_form_tag() ?>
+	  </div>
+
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<!--Tabla de busqueda-->
+<?php echo form_remote_tag('caja/imprimeFichas','update: muestraFichas', 'name: formImprimirFichas')?>
+<table width="98%" style="height:38px;">
+  <tr style="background:#F9B240; color:#FFFFFF;font-weight:bold; font-family:arial; height:50px;">
+    <td colspan="3" align="center">
+      <select id="typePerson" name="typePerson" style="width:150px;">
+	    <option value="0">Tipo de usuario</option>
+	    <option value="1">Alumnos</option>
+	    <option value="2">Aspirantes</option>
+	    <option value="3">Otros</option>
+	  </select>
+    </td>
+  </tr>
+  <tr style="background: #D6D4D4; text-align:center; line-height:40px;">
+    <td>
+	  Registro&nbsp;:&nbsp;<input type="text" id="registro" name="registro" maxlength="10" onkeypress="javascript:return ValidNum(event)"/>
+	</td>
+	<td>
+	  Nombre&nbsp;:&nbsp;<input type="text" id="nombre" name="nombre" onkeyPress="javascript:return validLetters(event)"/>
+	</td>
+	<td>
+	  Apellido P.&nbsp;:&nbsp;<input type="text" id="apellidoP" name="apellidoP" onkeyPress="javascript: return validLetters(event)"/>
+	</td>
+	<td>
+	  Apellido M.&nbsp;:&nbsp;<input type="text" id="apellidoM" name="apellidoM" onkeyPress="javascript: return validLetters(event)"/>
+	</td>
+	<td>
+	  <?php echo submit_tag('Buscar Fichas', 'id: boton', 'onclick: selectOption();', 'class: common_button')?>
+	</td>
+  </tr>
+</table>
+<?php echo end_form_tag()?>
+
+<!--Div que muestra las fichas a imprimir-->
+<div id="muestraFichas" name="muestraFichas">
+</div>
+
+<script type='text/javascript'>
+//funcion que valida que solo se puedan ingresar numeros
+function ValidNum(e)
+{
+  var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+    return ((tecla > 47 && tecla < 58) || tecla == 8);
+}
+
+//Funcion que valida que solo se puedan ingresar letras
+function validLetters(e)
+{
+  var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+      
+  if(tecla == 8)
+    return true;
+    
+    var patron = /[A-Za-z\s]/;
+	var x = String.fromCharCode(tecla);
+	
+  return patron.test(x)
+}
+	
+//Valida que se seleccione un tipo de persona
+function selectOption()
+{
+  if(document.getElementById('typePerson').value == 0)
+    alert('Es necesario seleccionar un tipo de usuario');
+}
+</script> 

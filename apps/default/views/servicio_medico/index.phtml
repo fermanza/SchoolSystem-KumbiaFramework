@@ -1,0 +1,44 @@
+<style type="text/css">	
+	.infoalumno{
+		text-align:justify;
+		font-size:13px;
+	}
+	.infoalumno td{
+		padding:0 10px 0 10px;
+	}
+	.infoalumno th{
+		padding:0 10px 0 10px;
+		font-size:14px;
+	}
+</style>
+
+<center>
+<table>
+	<tr>
+		<td width="1184" bgcolor="#FFFFFF"><div align="justify">
+			<br /><br />
+           	<div style="font-size: 14px; margin-left: 30px; margin-right: 30px"><div style="color: #1569C7;"><?= img_tag("adorno.gif","border: 0") ?>
+			<b>Bienvenido al Servicio M&eacute;dico</b></div>
+			<br /><br />
+			
+			<?= img_tag("adorno.gif","border: 0") ?><a href="<?=KUMBIA_PATH?>servicio_medico/buscar_alumnos_seguro_medico">Cambiar el Seguro Medico</a>
+			
+			<br /><br />
+			
+			<?php
+			$Usuarios = new Usuarios();
+			if($usuario == $Usuarios->get_registro_jefe_departamento() || Session::get('registro')==2286  || Session::get('registro') == 1833){
+			?>
+				<?= img_tag("adorno.gif","border: 0") ?><a href="<?=KUMBIA_PATH?>servicio_medico/buscar_alumnos_actualizar_datos">Actualizar Datos Alumno</a>
+			<?php
+			}
+			?>
+			
+			<br /><br /><br />
+			<hr><br>
+            
+			</div>
+		</td>
+	</tr>
+</table>
+</center>

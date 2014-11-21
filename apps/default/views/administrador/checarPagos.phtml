@@ -1,0 +1,121 @@
+		<table border="0" cellpadding="0" cellspacing="0" width="770">
+			<tr>
+				<td style="font-family: Verdana;">
+					<br>
+					<div style="color: #1569C7; font-size: 14px;" align="left"><b><?= img_tag("adorno.gif","border: 0") ?> Pagos</b></div>
+					<div style="color: #000000; font-size: 11px;" align="justify">
+						<br>
+						Favor de escoger el periodo que desee checar los pagos
+						<br><br>
+						<br>
+					</div>
+			</tr>
+			<tr>
+				<td>
+					<div style="color: #000000; font-size: 11px;" align="center">
+					<form action="<?= KUMBIA_PATH ?>administrador/checarPagos" method="POST">						
+						<select name="periodo" id="periodo" class="lista" onChange="cambiar(this.value)";>
+							<option value="0">- - Periodo - -</option>
+							<option value="32009">- - 32009 - -</option>
+							<option value="12010">- - 12010 - -</option>
+							<option value="32010">- - 32010 - -</option>
+							<option value="12011">- - 12011 - -</option>
+							<option value="32011">- - 32011 - -</option>
+							<option value="12012">- - 12012 - -</option>
+						</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td class="centrar">
+						<input type='image' src="<?= KUMBIA_PATH ?>img/search.gif" name='buscar'/>
+					</form>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<br />
+				</td>
+			</tr>
+			<?
+			if ( $registro ){
+				$k = 0;
+				$i = 0;
+			?>
+			<tr>
+				<td align="center">
+					<table border="1" cellpadding="1" cellspacing="1" width="650">
+							<tr>
+								<th class="centrar" height="25" width="100" bgcolor="<?= $bg ?>">
+									Registro
+								</th>
+								<th class="centrar" height="25" width="100" bgcolor="<?= $bg ?>">
+									Concepto
+								</th>
+								<th class="centrar" height="25" width="100" bgcolor="<?= $bg ?>">
+									Pago
+								</th>
+								<th class="centrar" height="25" width="250" bgcolor="<?= $bg ?>">
+									Nombre
+								</th>
+								<th class="centrar" height="25" width="100" bgcolor="<?= $bg ?>">
+									Lugar
+								</th>
+								
+							</tr>
+						<?php
+							foreach($registro  as $reg){
+								$k++;
+								if( $k % 2 == 0){
+									$bg="#FFFFFF";
+								}else{
+									$bg="#DDDDDD";
+								}
+						?>
+							<tr>
+								<td class="centrar" height="25" width="100" bgcolor="<?= $bg ?>">
+									<?= $registro[$i] ?>
+								</td>
+								<td class="centrar" height="25" width="100" bgcolor="<?= $bg ?>">
+									<?= $concepto[$i] ?>
+								</td>
+								<td class="centrar" height="25" width="100" bgcolor="<?= $bg ?>">
+									<?= $pago[$i] ?>
+								</td>
+								<td class="centrar" height="25" width="250" bgcolor="<?= $bg ?>">
+									<?= $nombre[$i] ?>
+								</td>
+								<td class="centrar" height="25" width="100" bgcolor="<?= $bg ?>">
+									<?= $lugar[$i] ?>
+								</td>
+							</tr>
+						<?php
+							$i++;
+							}
+						?>
+						</table>
+						
+					</div>
+				</td>
+			</tr>
+			<?
+			}
+			else{
+				if ( $flag == 1 ){
+			?>
+					<tr>
+						<td class="centrar">
+							<h1>No hay pagos hechos en este periodo</h1>
+						</td>
+					</tr>
+			<?
+				}
+			}
+			?>
+		</table>
+	
+		<br><br>

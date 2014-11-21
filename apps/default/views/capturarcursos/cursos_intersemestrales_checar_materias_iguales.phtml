@@ -1,0 +1,56 @@
+<?= render_partial("capturarcursos/info"); ?>
+
+<br />
+<br />
+<?= render_partial("menuintersemestrales"); ?>
+<br />
+<br />
+<!--
+<script src="<?= KUMBIA_PATH ?>javascript/kumbia/jquery.js"></script>
+<script src="<?= KUMBIA_PATH ?>javascript/kumbia/cursos_nivelacion_inscripcion_alumnos.js"></script>
+-->
+<!--
+<script src="<?= KUMBIA_PATH ?>javascript/kumbia/cursos_intersemestrales_inscripcion_alumnos.js"></script>
+-->
+
+<table class="centrar">
+	<tr>
+		<td colspan="3" valign="center" class="encabezadoo">
+			<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+			ADMINISTRACIÓN DE CURSOS INTERSEMESTARLES: "<?php echo $periodoCompleto ?>"
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<br />
+			<p style="font-size: 13px; color: blue;"><?php echo $mensaje ?></p>
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="centrar">
+				<div style="float: left; margin-left: 33%">
+					<form action="<?= KUMBIA_PATH ?>capturarcursos/cursos_intersemestrales_creando" 
+							method = "post" name="Formulario_Confirmacion" id="Formulario_Confirmacion">
+						<input type="hidden" id="profesor" name="profesor" value="<?php echo $profesor ?>" />
+						<input type="hidden" id="materias" name="materias" value="<?php echo $materia ?>" />
+						<input type="hidden" id="carreras" name="carreras" value="<?php echo $carrera ?>" />
+						
+						<input type="hidden" id="crearcurso" name="crearcurso" value="1" />
+						<!-- crearcurso -->
+						<input id="submitir" name="submitir" type="submit" value="Confirmar" />
+					</form>
+				</div>
+				<div style="float: left; margin-left: 30px">
+					<form action="<?= KUMBIA_PATH ?>capturarcursos/cursos_intersemestrales" 
+							method = "post" name="Formulario_Confirmacion" id="Formulario_Confirmacion">
+						<input id="cancelar" name="cancelar" type="submit" value="Cancelar" />
+					</form>
+				</div>
+				<div class="salto_div"></div>
+			</div>
+		</td>
+	</tr>
+</table>
+<br /><br />

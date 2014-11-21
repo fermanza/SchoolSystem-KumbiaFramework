@@ -1,0 +1,25 @@
+<tr>
+	<td>
+		<br>
+		<br>
+		<br>
+		<center>
+		<?php
+			if ($prof ==1){
+				echo "<h1>Eres profesor, por favor presiona el boton de continuar</h1>";
+			}
+			else{
+				echo "<h1>El Cuestionario ya fue completado.</h1>";	
+			}
+		?>
+		<form method="post" action="<?= KUMBIA_PATH ?>seguridad/iniciarsesion">
+			<input type="hidden" value="<?= $registroForm ?>" name="registro">
+			<input type="hidden" value="<?= $passwordForm ?>" name="password">
+			<input type="submit" value="Continuar" name="Continuar">
+		</form>
+		</center>
+		<br>
+		<br>
+		<br>
+	</td>
+</tr>

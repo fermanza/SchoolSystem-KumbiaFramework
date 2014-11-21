@@ -1,0 +1,178 @@
+<style type="text/css">
+	.nada{
+		padding-left:10px;
+	}
+	select{
+		width:500px;
+	}
+</style>
+<center>
+<table>
+	<tr>
+		<td width="900"><div align="justify">
+			<br>
+			<div style="font-size: 14px;">
+			<?= img_tag("adorno.gif","border: 0") ?><b style="color: #1569C7;">SELECCIÓN DE CURSOS: </b>
+			<i style="color:#FF0000;"><b>PASO 2</b>, SELECCIÓN DE MATERIAS</i>
+			<hr><br>
+			<div style="font-size: 11px;">
+				El <b>SEGUNDO PASO</b>
+                para realizar la selección de cursos para este periodo escolar, es 
+                seleccionar las materias que vas a cursar este semestre, en este paso solo seleccionas la materia, 
+                en un paso posterior seleccionarás el grupo al que deseas asistir.
+                <br>
+                <br>
+                Si tienes alguna materia irregular, esta ya estará registrada tomando en cuenta que el reglamento 
+                indica que es <b>obligatorio</b>
+                cursar las materias irregulares para no ir a examen de titulo de suficiencia.
+                <br>
+                <br>
+                Las materias posibles a seleccionar son las que de acuerdo al plan de estudios de tu carrera son seleccionables, 
+                si alguna materia no aparecierá quiza sea por que te falta alguna materia en kardex, y es necesaria solicitarla 
+                en el paso 1.
+                <br>
+                <br>
+                Las materias que selecciones deben sumar un <b>mínimo de 30 créditos</b>
+                y como <b>máximo 64 créditos</b>, 
+                si estas por terminar la carrera registra los créditos de las materias que tienes pendientes.
+			</div>			
+			<br><br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;">
+				<tr>
+					<td width="150" height="25" bgcolor="#FFCA5B">&nbsp;<b>Nombre del alumno: </b></td>
+					<td width="400" colspan="3" bgcolor="#EEEEEE">&nbsp;<?= $alumno ?> (<?= $registro ?>)</td>
+					<td width="150" height="25" bgcolor="#FFCA5B"><b>&nbsp;Promedio: </b></td>
+					<td width="100" bgcolor="#EEEEEE">&nbsp;<?= $promedio ?></td>
+				</tr>
+				<tr>
+					<td width="150" height="25" bgcolor="#FFCA5B"><b>&nbsp;Especialidad: </b></td>
+					<td width="400" colspan="3" bgcolor="#EEEEEE">&nbsp;<?= $especialidad ?></td>
+					<td width="150" height="25" bgcolor="#FFCA5B"><b>&nbsp;Número de créditos: </b></td>
+					<td width="100" bgcolor="#EEEEEE">&nbsp;<?= $ncreditos ?></td>
+				</tr>
+			</table>
+			<br>
+			<center>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr>
+					<td class="fondoazul" style="font-size:14px; font-weight:bold;">Créditos Acumulados hasta el momento</td>
+				</tr>
+				<tr>
+					<td class="fondoamarillo">
+						<?php 
+						if ($creditos>=30 && $creditos<=64){?>
+							<div id="verde" style="font-size:18px; text-align:center;"><b><?= $creditos ?></b></div>	
+						<?php
+						}
+						else{?>
+							<div id="rojo" style="font-size:18px; text-align:center;"><b><?= $creditos ?></b></div>	
+						<?	
+						}
+						?>
+					</td>
+				</tr>
+			</table>
+			</center>
+			<br>
+			<?php 
+				$tipoarr= array('ORDINARIO','EXTRAORDINARIO','REGULARIZACION','TITULO','ACREDITACION','REVALIDACION','EXAMEN GLOBAL','NIVELACION'); 
+				$tipoarrl= array('D','E','R','T','A','V','G','N');
+			 ?>
+			 <center>
+			<form action="<?= KUMBIA_PATH ?>alumnoselecc/pseleccionT" method="post">
+				<table  border="1" cellpadding="1" cellspacing="1" style="font-size: 10px;">
+				<tr class="fondoazul">
+					<th colspan="3" align="center" height="25">
+						SELECCIONAR MATERIAS
+					</th>
+				</tr>
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B"><b>&nbsp;Materias</b></td>
+					<td width="400" align="center">
+						<select style="font-size: 11px;" name="materia">
+						<?php				
+							$n=0;
+							if($pmaterias){
+								foreach ($pmaterias as $m){	$n++;					
+									echo '<option value="'.$m->clavemateria.'" style="font-size: 10px;">'.$matitas[$n-1].'</option>';												
+								}
+							}
+						?>
+						</select>
+					</td>																			
+					<td>
+						<input type="submit" value="Agregar" class="boton">
+					</td>
+				</tr>
+				
+				</form>
+				<?php 
+				if ($pendientes){ ?>
+				</table>
+				
+				<br>	
+				<table border="1" cellpadding="1" cellspacing="1" style="font-size: 10px; width:750px">
+					<tr class="fondoazul">
+						<th colspan="3" align="center" height="25">MATERIAS SELECCIONADAS</th></tr>
+					<tr class="fondonaranja">
+						<th height="25" align="center" colspan="2">Materia</th>
+						<th height="25">&nbsp;</th>
+					</tr>
+					<?php
+						$i = 0;
+						foreach($pendientes as $pendiente){
+						$i++;
+						?>
+					<tr>
+						<td style="padding-left:50px; width:620px; text-aling:left;" align="left"><?= $matelocas[$i-1] ?></td>																			
+						<td style="padding-left:10px; width:100px; text-aling:left;" align="left"><b>REGISTRADA</b></td>
+						<form method="post" action="<?= KUMBIA_PATH ?>alumnoselecc/epseleccionT">
+						<td style="width:30px">
+								<input type="submit" value="Eliminar" class="boton" style="vertical-align:middle;">
+								<input type="hidden" name="id" value="<?= $pendiente-> id; ?>">
+						</td>
+						</form>
+					</tr>
+					<?php
+						}
+				}
+				?>			
+			</table>
+			<br />
+			<table>
+				<tr>
+					<form method="post" action="<?= KUMBIA_PATH ?>alumnoselecc/seleccion1T">
+					<td width="50">
+						<input type="submit" value="<< Paso 1" class="boton">
+					</td>
+					</form>
+					
+					<td width="220">&nbsp;</td>
+					
+					<form method="post" action="<?= KUMBIA_PATH ?>alumnoselecc/seleccion3T">
+					<td width="100" align ="center" valign="top">
+					<?php if ($creditos<30){ ?>
+						Este botón es para los alumnos que no alcancen 30 créditos, es único y exlusivo
+						para los alumnos de 8tavo semestre.
+						<input type="submit" value="No completo 30 creditos >>" name="boton4" id="boton4" class="boton">
+					<?php } ?>
+					</td>
+					</form>
+					
+					<td width="220">&nbsp;</td>
+					
+					<form method="post" action="<?= KUMBIA_PATH ?>alumnoselecc/seleccion3T">
+					<td width="50">						
+					<?php if ($creditos>=30 && $creditos<=64){ ?>
+						<input type="submit" value="Paso 3 >>" name="boton3" id="boton3" class="boton">
+					<?php } ?>
+					</td>
+					</form>
+				</tr>
+			</table>
+			</center>			
+		</td>
+	</tr>
+</table>
+</center>
+<br />&nbsp;

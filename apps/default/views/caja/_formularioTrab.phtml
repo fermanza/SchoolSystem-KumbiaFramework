@@ -1,0 +1,125 @@
+<style type="text/css">    
+    #listadoConceptos{
+        font-size: 12px;
+        width: 100%;
+        height: 370px;
+        overflow: auto;
+        background-color: #FFFFFF;
+    }
+    #listadoConceptos table{
+        font-size: 12px;
+    }
+    #listadoConceptos td{
+        border-bottom: 1px solid #CCCCCC;
+		height:35px;
+    }
+    #listadoConceptos tr:hover{
+        background-color: #13539B;
+        color: #ffffff;
+    }
+    #listadoConceptos img{
+        border: 0px;
+    }
+    #complementario{
+        padding: 3px;
+        font-size: 12px;
+        /*background-color: #FFFFFF;*/
+        height: 150px;
+        overflow: auto;
+    }
+    #pagos{
+        padding: 3px;
+        font-size: 12px;
+        min-height: 400px;
+        background-color: #FFFFFF;
+    }
+</style>
+
+<br /><br />
+<div class="formulario" style="width: 100%">
+    <div id="contenido">
+        <table>
+            <tr>
+                <td bgcolor="#055AB7" style="text-align:center; color:#FFFFFF; font-weight:bold; width:50px; font-size: 13px;">NOMBRE</td>
+                <td><?= text_field_tag('folio', 'value: '.utf8_encode($nombre), 'id: texto_chico', 'disabled: DISABLED','style: width:330px;') ?></td>
+                <td bgcolor="#055AB7" bgcolor="#055AB7" style="text-align:center; color:#FFFFFF; font-weight:bold; width:50px; font-size: 13px;">&nbsp;NOMINA&nbsp;</td>
+                <td><?= text_field_tag('fecha', 'value: '.$registro, 'id: texto_chico', 'disabled: DISABLED','style: text-align:center;') ?></td>
+                <td bgcolor="#055AB7" style="text-align:center; color:#FFFFFF; font-weight:bold; width:50px; font-size: 13px;">&nbsp;PLANTEL&nbsp;</td>
+                <td><?= text_field_tag('nivel', 'value: '.utf8_encode($plantel), 'id: texto_chico','disabled: DISABLED','style: text-align:center;') ?></td>
+            </tr>
+       
+            <tr>
+                <td height="40" colspan="6">&nbsp;</td>
+            </tr>
+	    </table>
+		    <?= form_remote_tag('caja/buscarConceptos','update: listadoConceptos') ?>
+			  <table width="100%" border=1 cellspacing=0 cellpadding=2 bordercolor="#1E5EA8">
+			    <tr>
+				  <td bgcolor="#2462AB" style="height:30px; text-align:center; color:#FFFFFF; font-weight:bold; font-size: 13px;" colspan="4">
+				    &nbsp;&nbsp;BUSCAR  CONCEPTOS&nbsp;&nbsp;
+				  </td>
+				</tr>
+			    <tr>
+			      <td  bgcolor="#FFFFFF" style="text-align:center; font-weight:bold; font-size: 13px;">
+				    &nbsp;&nbsp;Por No. Concepto&nbsp;&nbsp;<input type="radio" id="busquedaNoCon" name="tipoBusqueda"  onclick="typeSearch();"/>
+				  </td>
+				  <td  bgcolor="#FFFFFF" style="text-align:center; font-weight:bold; font-size: 13px;">
+				   &nbsp;&nbsp;Por nombre concepto&nbsp;&nbsp;<input type="radio" id="busquedaNomCon" name="tipoBusqueda" onclick="typeSearch();"/>
+				  </td>
+			      <td align="center" bgcolor="#FFFFFF">
+				    <?= text_field_tag('concepto', 'id: concepto',"style: width:320px;") ?>
+					<input type="hidden" id="activoBusqueda" name="activoBusqueda" readonly="readonly"/>
+			      </td>
+			      <td align="center">
+				    <?= submit_tag('BUSCAR CONCEPTO','id: boton','class: common_button') ?>
+			      </td>
+			    </tr>
+		      </table>
+		    <?= end_form_tag() ?>
+		    <div id="listadoConceptos">
+              <?= render_partial('listadoConceptos') ?>
+            </div>
+
+		
+        <div id="complementario" style="margin-top:-35px; border:1px solid #FFFFFF; display:none; ">
+            Se agrega el concepto y su costo.
+        </div>
+		<?php echo form_remote_tag('caja/guardarConcepto','update: muestraAqui', 'name: formConceptos')?>
+		
+		<div id="contenedor" style="margin-top:35px; border:1px solid #FFFFFF; display:none;">
+		  <table class="formulario" width="100%" style="margin-top:4px;" border="0" class="conceptos">
+			<tr style=" background-color: #13539B;  color: #FFFFFF;  font-weight: bold; text-align: center;">
+			  <td width="400px" align="center">
+				CONCEPTO
+			  </td>
+			  <td align="center">
+				CANTIDAD
+			  </td>
+			  <td colspan="2" align="center">
+				COSTO
+			  </td>
+			  <td align="center">
+				TOTAL
+			  </td>
+			  <td align="center">
+				ACCI&Oacute;N
+			  </td>
+			</tr>
+	      </table>
+		  <input type="hidden" readonly="readonly" name="registro" id="registro" value="<?php echo $registro; ?>"/>
+		  <input type="hidden" readonly="readonly" name="typeP" id="typeP"/>
+		</div>
+		<div id="buttoSave" style="display:none;">
+		   <?php echo  submit_tag('Guardar','id: boton');?>
+		</div>
+		<?php echo end_form_tag() ?>
+    </div>
+</div>
+
+<div id="muestraAqui">
+</div>
+
+<script type='text/javascript'>
+document.getElementById('typeP').value = document.getElementById('tipoper').value;
+
+</script>

@@ -1,0 +1,38 @@
+<?= form_remote_tag("tgoprofesor/agregarEvaluacionSemanal/".$tipo."/".$id, "update: semanasClase") ?>
+<table width="100%" class="bordeazul" style="font-size:10px;">
+	<tr>
+		<th colspan="3" class="naranja">Registrar Horas/Semana <!--<?= $tipo." - ".$id ?>--></th>
+	</tr>
+	<tr>
+		<th class="azul">No. de Semana</th>
+		<th class="azul">Horas</th>
+		<th class="azul">&nbsp;</th>
+	</tr>
+	<tr>
+		<td>
+			<select name="semana" style="width:100%">
+				
+				<?php 
+				//aqui se modifican las semanas quese quieran que aparescan en la evaluacion semanal
+				for($i=13;$i<19;$i++){ ?>
+					<option value="<?= $i ?>">Semana <?= $i ?></option>
+				<?php } ?>
+			</select>
+						
+		</td>
+		<td>
+			<select name="horas" style="width:100%">
+				<?php for($i=1;$i<41;$i++){ ?>
+					<option value="<?= $i ?>"><?= $i ?> hrs.</option>
+				<?php } ?>
+			</select>
+		</td>
+		<td>
+			<input  style="width:100%" type="submit" value="GUARDAR" />
+		</td>
+	</tr>
+</table>
+<?= end_form_tag() ?>
+<br>
+<br>
+<?= render_partial("semana") ?>

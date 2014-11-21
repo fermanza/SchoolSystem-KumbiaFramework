@@ -1,0 +1,107 @@
+<form action="<?= KUMBIA_PATH ?>npreseleccion/terminarPreseleccion"
+		method = "post" onSubmit="return validateFields();" name="Formulario1" id="Formulario1">
+	<div id="centrar">
+	<h1>Bienvenido a la Preselecci&oacute;n de Materias</h1>
+	
+	<h2>Seleccione las Materias, que le gustar&iacute;a tomar el siguiente semestre. Los resultados
+	de la preselecci&oacute;n servir&aacute;n para ver la demanda de las materias y as&iacute;
+	abrir las materias con mayor demanda para el siguiente semestre.</h2>
+	
+	<h3>Se deber&aacute; escoger un m&iacute;nimo de 30 cr&eacute;ditos y un m&aacute;ximo de 64.</h3>
+	<br />
+	<div id="ppal">
+		<div id="side-a">
+			<h3 id="navi3">Materias Seleccionadas</h3>
+			<ul id="navi">
+				<?
+				if( isset($preseleccionadas) )
+				for( $i = 0; $i < count($preseleccionadas); $i++ ){
+				?>
+					<li>
+						<input type="radio" name="seleccionadas<?= $i ?>" 
+							id="seleccionadas<?= $i ?>"
+								value="<?= $preseleccionadas[$i]-> clavemat ?>" >
+						<? echo $preseleccionadas[$i] -> clavemat." ".$nombremat[$i] -> nombre; ?>
+					</li>
+					<?
+						print "<script type=\"text/javascript\">
+						var seleccionadas".$i." = document.Formulario1.seleccionadas".$i.".value;
+						new Event.observe(\"seleccionadas".$i."\", \"click\", function(){
+						new AJAX.viewRequest({
+							action: \"npreseleccion/quitando/".$miReg.
+								"/\"+".seleccionadas."$i"."+\"\",
+							container: \"ppal\"
+						})
+						})
+						</script>";
+					?>
+				<?
+				}
+				?>
+			</ul>
+		</div>
+		<div id="side-b">
+		<?
+		if( $creditos >= 64 || count($materiasQuePuedeSeleccionar) == 0 ){
+		?>
+			<br />
+			<?= $mensajeTerminarPreselecc ?>
+			<br />
+			<form action="<?= KUMBIA_PATH ?>npreseleccion/terminarPreseleccion" 
+					method = "post" name="Formulario2" id="Formulario2">
+				<input type="submit" name="terminarPre" id="terminarPre" value="Terminar Preselecci&oacute;n" >
+				<input type="hidden" name="registro" id="registro" value="<?= $miReg ?>">
+			</form>
+		<?
+		}
+		else{
+		?>
+			<h3 id="navi3">Materias Restantes</h3>
+			<ul id="navi2">
+				<?
+				for( $i = 0; $i < count($materiasQuePuedeSeleccionar); $i++ ){
+				?>
+					<li>
+						<input type="radio" name="rest<?= $i ?>"
+							id="rest<?= $i ?>"
+								value="<?= $materiasQuePuedeSeleccionar[$i]-> clave ?>" >
+						<? echo $materiasQuePuedeSeleccionar[$i] -> clave." ".$materiasQuePuedeSeleccionar[$i] -> nombre; ?>
+					</li>
+					<?
+						print "<script type=\"text/javascript\">
+						var rest".$i." = document.Formulario1.rest".$i.".value;
+						new Event.observe(\"rest".$i."\", \"click\", function(){
+						new AJAX.viewRequest({
+							action: \"npreseleccion/capturando/".$miReg.
+								"/\"+".rest."$i"."+\"\",
+							container: \"ppal\"
+						})
+						})
+						</script>";
+					?>
+				<?
+				}
+				?>
+			</ul>
+		</div>
+			<?
+			if( $creditos > 28 || $octavos == 1 ){
+			?>
+				<br />
+				<br />
+				<form action="<?= KUMBIA_PATH ?>npreseleccion/terminarPreseleccion" 
+						method = "post" name="Formulario2" id="Formulario2">
+					<input type="submit" name="terminarPre" id="terminarPre" value="Terminar Preselecci&oacute;n" >
+					<input type="hidden" name="registro" id="registro" value="<?= $miReg ?>">
+				</form>
+			<?
+			}
+			?>
+		<?
+		}
+		?>
+	</div>
+	<br />
+	<br />
+	<br />
+</form>

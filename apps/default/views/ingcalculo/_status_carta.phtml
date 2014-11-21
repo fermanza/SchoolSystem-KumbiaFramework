@@ -1,0 +1,29 @@
+<?php echo form_remote_tag("ingcalculo/status_carta","update: materias", "name: Formulario1") ?>
+<!-- default, registro, procede, 32012, 0, 0 -->
+<table cellspacing="1" cellpadding="1" style="font-size: 12px;" align="center">
+	<tr class="azul">
+		<th class="bordeAzul2">
+			Favor de indicar si su carta procede o no procede.
+		</td>
+	</tr>
+	<tr>
+		<td  class="centrar">
+			<select id="procede" name="procede">
+					<option value="1">- - Procede - -</option>
+					<option value="2">- - No Procede - -</option>
+			</select>
+		</td>
+	</tr>
+	<tr align="center">
+		<input type="hidden" id="registro" name="registro" value="<?= $alumno->miReg ?>" />
+		<td colspan="2"><input type="submit" value="Guardar" /></td>
+	</tr>
+</table>
+</form>
+<br />
+
+<?
+	print "<script type=\"text/javascript\">
+			document.getElementById('materias').innerHTML = '';
+	</script>";
+?>

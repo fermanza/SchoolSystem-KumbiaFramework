@@ -1,0 +1,78 @@
+<div id="actividadesParaAsignatura" name="actividadesParaAsignatura">
+	<?= render_partial("horasComplementariasParaAsignatura2"); ?>
+</div>
+<?php
+if( $horasParaCompletarComoAsignatura > 0 ){
+?>
+<form action="<?= KUMBIA_PATH ?>profesor/guardarActividadAsignatura" method="post"  name="FormularioAsignatura" id="FormularioAsignatura">
+<table>
+	<tr class="naranja">
+		<th class="bordeAzul2" colspan="3">
+			Lista de Actividades Disponibles
+		</td>
+	</tr>
+	<tr class="naranja">
+		<td class="bordeAzul2" colspan="3">
+			<select name="listaactividades" id="listaactividades" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccionar Actividad - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $listaActividades as $lista ){
+				?>
+					<option value="<?= $lista -> clave ?>">
+					<?
+						echo htmlentities( $lista -> clave." - ".$lista -> actividad );
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+			Horas Para Actividad
+			<input type="text" value="<?= $horasParaCompletarComoAsignatura ?>" name="horasParaCompletarComoAsignatura2" 
+				id="horasParaCompletarComoAsignatura2" onBlur="validarHorasAsignatura()" maxlength="3" size="3" />
+			<input type="hidden" id="horasParaCompletarComoAsignatura" 
+				name="horasParaCompletarComoAsignatura" value="<?= $horasParaCompletarComoAsignatura ?>" />
+			&nbsp;
+		</td>
+	</tr>
+	<tr class="naranja">
+		<td class="bordeAzul2" align='center'>
+			Objetivo<br />
+			<input type="text" value="" name="objetivo" id="objetivo" size='35' maxlength='100'>
+		</td>
+		<td class="bordeAzul2" align='center'>
+			Meta<br />
+			<input type="text" value="" name="meta" id="meta" size='35' maxlength='100'>
+		</td>
+		<td class="bordeAzul2" align='center'>
+			Evidencia<br />
+			<input type="text" value="" name="evidencia" id="evidencia" size='35' maxlength='100'>
+		</td>
+	</tr>
+	<tr class="naranja">
+		<td class="bordeAzul2" align="center" colspan="3">
+			<input type="submit" value="Asignar Actividad" />
+		</td>
+	</tr>
+</table>
+</form>
+<br />
+<?
+}
+?>
+<form action="<?= KUMBIA_PATH ?>profesor/terminarHorarioAsignatura" method="post" name="FormularioTerminarAsignatura" id="FormularioTerminarAsignatura">
+<?php
+	//render_partial("horasTutoriasAsignatura");
+?>
+	<input type="submit" value="Terminar Horario" class="centrar" />
+	<br />
+	<br />
+</form>

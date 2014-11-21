@@ -1,0 +1,47 @@
+<ul>
+	<li class="li_inicio"><a>Inicio</a>
+		<ul>
+			<li><a href="<?=KUMBIA_PATH?>servicio_medico/index">Servicio Medico</a></li>
+		</ul>
+	</li>
+	<li class="li_inicio"><a>Seguro Facultativo</a>
+		<ul>
+			<li><a href="<?=KUMBIA_PATH?>servicio_medico/imprimirSeguro">Imprimir</a></li>
+			<li><a href="<?=KUMBIA_PATH?>servicio_medico/reporteSeguro">Reporte Seguro Facultativo</a></li>
+		</ul>
+	</li>
+	<li class="floatright">
+		<a href="<?=KUMBIA_PATH?>profesor/salir">
+			<image src="<?=KUMBIA_PATH?>img/log_off.jpg" class="log_off" />
+		</a>
+	</li>
+</ul>
+<?php
+/*if( Session::get_data('SERVICIOMEDICO') == "SERVICIOMEDICO"){
+?>
+<ul>
+	<li class="li_inicio"><a>Inicio</a>
+		<ul>
+<?
+}
+?>
+	<li><a>Servicio Medico</a>
+		<ul>
+			<li><a href="<?=KUMBIA_PATH?>servicio_medico/index">Servicio Medico</a></li>
+		</ul>
+	</li>
+
+	
+<?php
+if( Session::get_data('SERVICIOMEDICO') == "SERVICIOMEDICO"){
+?>
+</ul>
+	<li class="floatright">
+		<a href="<?=KUMBIA_PATH?>profesor/salir">
+			<image src="<?=KUMBIA_PATH?>img/log_off.jpg" class="log_off" />
+		</a>
+	</li>
+</ul>
+<?
+}*/
+?>

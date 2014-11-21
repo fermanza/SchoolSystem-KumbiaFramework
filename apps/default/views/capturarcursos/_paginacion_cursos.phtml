@@ -1,0 +1,31 @@
+<div class="alinearDerechaPaginacion">
+<table align="center" cellspacing="4">
+	<tr>
+		<td colspan="2">
+			<?= $num_cursos ?> Cursos
+		</td>
+	</tr>
+	<tr>
+		<td>
+			&nbsp;Anterior&nbsp;
+		</td>
+		<td>
+			Siguiente
+		</td>
+	</tr>
+	<tr>
+		<td align="center" class="azull2">
+		<?= link_to_remote
+			("capturarcursos/cursos_ajax/".$p1,
+			'<img src="'.KUMBIA_PATH.'public/img/left.gif" border=0>',
+				 "update: cursostodos"); ?>
+		</td>
+		<td align="center" class="azull2">
+		<?= link_to_remote
+			("capturarcursos/cursos_ajax/".$p2,
+			'<img src="'.KUMBIA_PATH.'public/img/right.gif" border=0>',
+				"update: cursostodos"); ?>
+		</td>
+	</tr>
+</table>
+</div>

@@ -1,0 +1,283 @@
+<?php
+header("content-disposition: attachment;filename=calificaciones".$Alumno -> registro.".xls"); 
+
+function validarCali($cali){
+	switch($cali){
+		case 300:	$cali = "NR";
+					break;
+		case 500:	$cali = "NP";
+					break;
+		case 999:	$cali = "PD";
+					break;		
+	}
+	return $cali;
+}
+
+function periodo($p){
+	if(substr($p,0,1)==1){
+		$p = "FEB - JUN ".substr($p,1,4);
+	}else{
+		$p = "AGO - DIC ".substr($p,1,4);
+	}
+	return $p;
+}
+
+function especialidad($e){
+	$Especialidad = new Especialidades();
+	$Especialidad -> find_first($e);
+	return $Especialidad -> nombre;
+}
+?>
+<table cellpadding="0" cellspacing="0" style="font-size: 7px; font-family: times;">
+	<tr>
+		<td colspan="13" height="30" style="background-color: #ffca5b; color:#333333">
+			<img width="80" src="http://ase.ceti.mx/tecnologo/public/img/cira/logo.jpg" align="left" >
+			<center>
+				<h3>CENTRO DE ENSEÑANZA TÉCNICA INDUSTRIAL</h3>				
+			</center>
+		</td>
+	</tr>
+	<tr>
+		<td style="background-color: #1569c7; font-size: 8px">
+			<b>Nombre:</b>
+		</td>
+		<td colspan="4" style="background-color: #1569c7; color: #FFFFFF; font-size: 8px">
+			<b><?= $Alumno -> nombre_completo ?></b>
+		</td>	
+		<td colspan="2" style="background-color: #1569c7; font-size: 8px">
+			<b>Especialidad:</b>
+		</td>
+		<td colspan="6" style="background-color: #1569c7; color: #FFFFFF; font-size: 8px">
+			<b><?= especialidad($Alumno -> especialidad) ?></b>
+		</td>		
+	</tr>
+	<tr>
+		<td style="background-color: #1569c7; font-size: 8px">
+			<b>Registro:</b>	
+		</td>
+		<td colspan="4" style="text-align: left; background-color: #1569c7; color: #FFFFFF; font-size: 8px">
+			<b><?= $Alumno -> registro ?></b>
+		</td>		
+		<td colspan="2" style="background-color: #1569c7; font-size: 8px">
+			<b>Periodo:</b> 
+		</td>
+		<td colspan="6" style="text-align: left; background-color: #1569c7; color: #FFFFFF; font-size: 8px">
+			<b><?= periodo($periodo) ?></b>
+		</td>
+		
+	</tr>	
+	<tr>		
+		<td colspan="13">
+			&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<th rowspan="2" style="background-color: #808080; border: thin solid #000000; color: #FFFFFF;" width="80">MATERIA</th>
+		<th rowspan="2" style="background-color: #808080; border: thin solid #000000; color: #FFFFFF;" width="80">PROFESOR</th>
+		<th colspan="2" style="background-color: #808080; border: thin solid #000000; color: #FFFFFF;">1ER PARCIAL</th>		
+		<th colspan="2" style="background-color: #808080; border: thin solid #000000; color: #FFFFFF;">2D0 PARCIAL</th>		
+		<th colspan="2" style="background-color: #808080; border: thin solid #000000; color: #FFFFFF;">3ER PARCIAL</th>		
+		<th colspan="2" style="background-color: #808080; border: thin solid #000000; color: #FFFFFF;">FINAL</th>		
+		<th rowspan="2" style="background-color: #808080; border: thin solid #000000; color: #FFFFFF;">SITUACION</th>
+		<th rowspan="2" style="background-color: #808080; border: thin solid #000000; color: #FFFFFF;">TIPO DE <BR>EXAMEN</th>
+		<th rowspan="2" style="background-color: #808080; border: thin solid #000000; color: #FFFFFF;">CALIF<br />EXTRA Ò<BR> TITULO</th>
+	</tr>
+	<tr>		
+		<th style="border: thin solid #000000;">CALIF.</th>
+		<th style="border: thin solid #000000;">FALTAS</th>
+		<th style="border: thin solid #000000;">CALIF.</th>
+		<th style="border: thin solid #000000;">FALTAS</th>
+		<th style="border: thin solid #000000;">CALIF.</th>
+		<th style="border: thin solid #000000;">FALTAS</th>
+		<th style="border: thin solid #000000;">CALIF.</th>
+		<th style="border: thin solid #000000;">FALTAS</th>
+	</tr>
+	<?php
+	$Extra = new Extras();
+	$Maestro = new Maestros();
+	$Horario = new Horarios();	
+	$Materia = new MateriasHorarios();
+	foreach($calificaciones as $c){
+		if($Horario -> find_first($c -> horario_id)){					
+			if($Maestro -> find_first($Horario -> maestro_id)){
+				if($Materia-> find_first($Horario -> materia_id)){
+					echo '<tr>';
+						echo '<td style="background-color: #DDDDDD; border: thin solid #000000;">'.$Materia -> nombre.'</td>';
+						echo '<td style="background-color: #DDDDDD; border: thin solid #000000;">'.$Maestro -> nombre.'</td>';
+						echo '<td style="background-color: #DDDDDD; border: thin solid #000000; text-align: center; font-weight: bold;">'.validarCali($c -> calificacion1).'</td>';
+						echo '<td style="background-color: #DDDDDD; border: thin solid #000000; text-align: center; font-weight: bold;">'.$c -> faltas1.'</td>';
+						echo '<td style="background-color: #DDDDDD; border: thin solid #000000; text-align: center; font-weight: bold;">'.validarCali($c -> calificacion2).'</td>';
+						echo '<td style="background-color: #DDDDDD; border: thin solid #000000; text-align: center; font-weight: bold;">'.$c -> faltas2.'</td>';
+						echo '<td style="background-color: #DDDDDD; border: thin solid #000000; text-align: center; font-weight: bold;">'.validarCali($c -> calificacion3).'</td>';
+						echo '<td style="background-color: #DDDDDD; border: thin solid #000000; text-align: center; font-weight: bold;">'.$c -> faltas3.'</td>';
+						echo '<td style="background-color: #DDDDDD; border: thin solid #000000; text-align: center; font-weight: bold;">'.validarCali($c -> calificacion).'</td>';
+						echo '<td style="background-color: #DDDDDD; border: thin solid #000000; text-align: center; font-weight: bold;">'.$c -> faltas.'</td>';
+						echo '<td style="background-color: #DDDDDD; border: thin solid #000000; text-align: center; font-weight: bold;">'.$c -> situacion.'</td>';
+						if($c -> situacion != 'OR' && $c -> situacion != 'RE'){
+							if($Extra -> find_first("horario_id = ".$Horario -> id." and registro = ".$Alumno -> registro)){
+								echo '<td style="background-color: #BBBBBB; border: thin solid #000000; text-align: center; font-weight: bold;">'.$Extra -> tipo.'</td>';
+								echo '<td style="background-color: #BBBBBB; border: thin solid #000000; text-align: center; font-weight: bold;">'.validarCali($Extra -> calificacion).'</td>';
+							}else{
+								echo '<td style="background-color: #DDDDDD; border: thin solid #000000;">&nbsp;</td>';
+								echo '<td style="background-color: #DDDDDD; border: thin solid #000000;">&nbsp;</td>';
+							}							
+						}else{
+							echo '<td style="background-color: #DDDDDD; border: thin solid #000000;">&nbsp;</td>';
+							echo '<td style="background-color: #DDDDDD; border: thin solid #000000;">&nbsp;</td>';
+						}						
+					echo '</tr>';
+				}
+			}
+		}		
+	}
+	?>
+	<tr>		
+		<td colspan="13">
+			&nbsp;
+		</td>
+	</tr>
+	<tr>		
+		<td colspan="13">
+			&nbsp;
+		</td>
+	</tr>
+	<tr>		
+		<td colspan="13">
+			&nbsp;
+		</td>
+	</tr>
+	<tr>		
+		<td colspan="13">
+			&nbsp;
+		</td>
+	</tr>
+	<tr>		
+		<td colspan="13">
+			&nbsp;
+		</td>
+	</tr>
+	<tr>		
+		<td colspan="13">
+			&nbsp;
+		</td>
+	</tr>
+	<tr>		
+		<td colspan="3">
+			&nbsp;
+		</td>
+		<td colspan="6" style=" border-top: 1px solid #000000;">
+			&nbsp;
+		</td>
+		<td colspan="4">
+			&nbsp;
+		</td>
+	</tr>	
+	<tr>				
+		<td colspan="13" style="text-align: center;">
+			<!-- CRISTINA GUADALUPE ARREOLA VEL&Aacute;ZQUEZ -->
+			ALEJANDRO TER&Aacute;N PEREYRA
+		</td>		
+	</tr>
+	<tr>				
+		<td colspan="13" style="text-align: center;">
+			JEFATURA DE APOYO ACAD&Eacute;MICO
+		</td>		
+	</tr>
+	<tr>				
+		<td colspan="13" style="text-align: center;">
+			PLANTEL COLOMOS
+		</td>		
+	</tr>
+	<tr>		
+		<td colspan="13">
+			&nbsp;
+		</td>
+	</tr>
+	<tr>		
+		<td colspan="13">
+			&nbsp;
+		</td>
+	</tr>
+	<tr>		
+		<td colspan="13">
+			::ABREVIACIONES::;
+		</td>
+	</tr>
+	<tr>		
+		<td>
+			NR
+		</td>
+		<td>
+			NO REPORTADA
+		</td>
+		<td colspan="11">
+			&nbsp;
+		</td>
+	</tr>
+<tr>		
+		<td>
+			NP
+		</td>
+		<td>
+			NO PRESENTO
+		</td>
+		<td colspan="11">
+			&nbsp;
+		</td>
+	</tr>
+<tr>		
+		<td>
+			PD
+		</td>
+		<td>
+			PENDIENTE
+		</td>
+		<td colspan="11">
+			&nbsp;
+		</td>
+	</tr>
+	<tr>		
+		<td>
+			EC
+		</td>
+		<td>
+			EXTRAORDINARIO POR CALIFICACION
+		</td>
+		<td colspan="11">
+			&nbsp;
+		</td>
+	</tr>
+	<tr>		
+		<td>
+			EF
+		</td>
+		<td>
+			EXTRAORDINARIO POR FALTAS
+		</td>
+		<td colspan="11">
+			&nbsp;
+		</td>
+	</tr>
+	<tr>		
+		<td>
+			TC
+		</td>
+		<td>
+			TITULO POR CALIFICACION
+		</td>
+		<td colspan="11">
+			&nbsp;
+		</td>
+	</tr>
+	<tr>		
+		<td>
+			TF
+		</td>
+		<td>
+			TITULO POR FALTAS
+		</td>
+		<td colspan="11">
+			&nbsp;
+		</td>
+	</tr>	
+</table>

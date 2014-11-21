@@ -1,0 +1,478 @@
+<center><br><br>
+<script language="JavaScript1.2">
+	function validarHorasTutoriasAsignatura(){
+		var horasTutorias = document.getElementById('horasTutorias').value;
+		
+		// Solo horas de tutoria entre 1 y 0 son aceptables, también valida si metió algún caracter que no sea número
+		if( horasTutorias > 2  || horasTutorias < 0 || isNaN(horasTutorias) ){
+			document.getElementById("horasTutorias").value = '2';
+			alert( "Para profesores de Asignatura solo se permite un máximo de dos horas para Tutorías..." );
+			return false;
+		}
+		
+	} // function validarHorasTutoriasAsignatura()
+	
+	function validarActividadesSustantivas(){
+		var objetivo = document.getElementById('objetivoActSust').value;
+		var meta = document.getElementById('metaActSust').value;
+		var evidencia = document.getElementById('evidenciaActSust').value;
+		
+		var err = "";
+		
+		if( objetivo == null || objetivo == "" ){
+			err = err + "Favor de ingresar un Objetivo\n";
+		}
+		if( meta == null || meta == "" ){
+			err = err + "Favor de ingresar una Meta\n";
+		}
+		if( evidencia == null || evidencia == "" ){
+			err = err + "Favor de ingresar una Evidencia Entregable\n";
+		}
+		if( err == "" ){
+			document.getElementById('divActComplementarias').innerHTML="";
+			return true;
+		}
+		alert(err);
+		return false;
+		
+	}
+	function validarNuevaActividad(){
+		var err = "";
+		if ( document.FormularioCrearNuevaActividad.nuevaActividad.value == "" ){
+			err +="Favor de ingresarle un nombre a la nueva actividad\n";
+		}
+		if ( document.FormularioCrearNuevaActividad.actividadespecial.value == -1 ){
+			err +="Favor de indicar el tipo de actividad para la nueva actividad\n";
+		}
+		if( err != "" ){
+			alert(err);
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
+	function limpiar(){
+		document.getElementById("editarActividad").innerHTML="";
+	}
+	function agregarSubmitDeAsignarActividad(id, horas){
+		document.getElementById("asignandoNuevaActividad").innerHTML=
+		"<table>"+
+			"<tr class=\"naranja\">"+
+				"<td class=\"bordeAzul2\" align='center'>"+
+					"Objetivo"+
+				"</td>"+
+				"<td class=\"bordeAzul2\" align='center'>"+
+					"Meta"+
+				"</td>"+
+				"<td class=\"bordeAzul2\" align='center'>"+
+					"Evidencia Entregable"+
+				"</td>"+
+			"</tr>"+
+			"<tr class=\"naranja\">"+
+				"<td class=\"bordeAzul2\" align='center'>"+
+					"<input type=\"text\" value=\"\" name=\"objetivoActSust\" id=\"objetivoActSust\" size='35' maxlength='100'>"+
+				"</td>"+
+				"<td class=\"bordeAzul2\" align='center'>"+
+					"<input type=\"text\" value=\"\" name=\"metaActSust\" id=\"metaActSust\" size='35' maxlength='100'>"+
+				"</td>"+
+				"<td class=\"bordeAzul2\" align='center'>"+
+					"<input type=\"text\" value=\"\" name=\"evidenciaActSust\" id=\"evidenciaActSust\" size='35' maxlength='100'>"+
+				"</td>"+
+			"</tr>"+
+			"<tr class=\"naranja\">"+
+				"<td class=\"bordeAzul2\" colspan='3' align='center'>"+
+					"<input type=\"hidden\" value=\""+id+"\" name=\"actividadID\" id=\"actividadID\">"+
+					"<input type=\"hidden\" value=\""+horas+"\" name=\"horasActComplementaria\" id=\"horasActComplementaria\">"+
+					"<input type=\"submit\" id=\"idsubmit\" name=\"idsubmit\" value=\"Asignar Nueva Actividad\">"+
+				"</td>"+
+			"</tr>"+
+		"</table>";
+	}
+	function quitarSubmitDeAsignarActividad(){
+		document.getElementById("asignandoNuevaActividad").innerHTML="";
+	}
+	
+	function preguntarSiTerminaHorario(){
+		var listaactividades = document.getElementById("listaactividades").value;
+		var listaactividades2 = document.getElementById("listaactividades2").value;
+		var horasRestantesParaLaSegundaParte = document.getElementById("horasRestantesParaLaSegundaParte").value;
+		var horasTutorias = document.getElementById("horasTutorias").value;
+		var horasParaPreparacionClase = document.getElementById("horasParaPreparacionClase").value;
+		var horasParaCursosAparte = document.getElementById("horasParaCursosAparte").value;
+		var horasParaCursosAparte2 = document.getElementById("horasParaCursosAparte2").value;
+		var horasParaCursosAparte3 = document.getElementById("horasParaCursosAparte3").value;
+		
+		var objetivoComp1 = document.getElementById("objetivoActComp1").value;
+		var metaComp1 = document.getElementById("metaActComp1").value;
+		var evidenciaComp1 = document.getElementById("evidenciaActComp1").value;
+		
+		var objetivoComp2 = document.getElementById("objetivoActComp2").value;
+		var metaComp2 = document.getElementById("metaActComp2").value;
+		var evidenciaComp2 = document.getElementById("evidenciaActComp2").value;
+		
+		
+		if( listaactividades == -1 ){
+			alert("Favor de Seleccionar una actividad");
+			return false;
+		}
+		if( listaactividades == -1 && parseFloat(horasParaCursosAparte) > 0 ){
+			alert("Favor de Seleccionar una actividad");
+			return false;
+		}
+		if( objetivoComp1 == "" || metaComp1 == "" || evidenciaComp1 == "" ){
+			alert("El objetivo, meta y evidencia de su primer actividad no pueden estar vacios");
+			return false;
+		}
+		if( listaactividades2 != -1 && parseFloat(horasParaCursosAparte3) == 0 ){
+			alert("Favor de agregar horas para su segunda actividad");
+			return false;
+		}
+		if( listaactividades2 == -1 && parseFloat(horasParaCursosAparte3) > 0 ){
+			alert("Favor de seleccionar una actividad para su segunda lista de actividades");
+			return false;
+		}
+		if( listaactividades2 == listaactividades ){
+			alert("La primer actividad no puede ser igual a la segunda actividad");
+			return false;
+		}
+		if( parseFloat(horasParaCursosAparte3) > 0 && 
+				(objetivoComp2 == "" || metaComp2 == "" || evidenciaComp2 == "") ){
+			alert("Debido a que selecciono más de 0 horas para su segunda actividad\n"+
+			"El objetivo, meta y evidencia de su segunda actividad no pueden estar vacios");
+			return false;
+		}
+		if( !confirm("¿Desea terminar su horario?\n"+
+				"¡Una vez que haya terminado su horario no podrá volver a hacer cambios!") ){
+			return false;
+		}
+		
+		var sumarTodo = 0;
+		sumarTodo = (parseFloat(horasParaPreparacionClase) + parseFloat(horasTutorias) 
+				+ parseFloat(horasParaCursosAparte2) + parseFloat(horasParaCursosAparte3));
+		if( ( sumarTodo == horasRestantesParaLaSegundaParte ) ){
+			alert("¡Horario Terminado!");
+			return true;
+		}
+		alert("Favor de completar las "+horasRestantesParaLaSegundaParte+" horas faltantes con\n"+
+		"Horas de Prepación de cursos ó Actividades Complementarias");
+		return false;
+	}
+	function validarHoras(){
+		var maxHorasDisp = document.getElementById("horasParaCursosAparte").value;
+		var horasSubmitted = document.getElementById("horasParaCursosAparte2").value;
+		var horasSubmitted2 = document.getElementById("horasParaCursosAparte3").value;
+		
+		var listaactividades2 = document.getElementById("listaactividades2");
+		if( listaactividades2 != -1 ){
+			
+			if( (parseInt(horasSubmitted) + parseInt(horasSubmitted2)) > parseInt(maxHorasDisp) ){
+				alert("La suma de actividades no puede ser más de "+maxHorasDisp+" horas.\n"+
+				"Solo podrá agregar igual o menos horas para las actividades.\n\n");
+				document.getElementById("horasParaCursosAparte2").value = '0';
+				document.getElementById("horasParaCursosAparte3").value = '0';
+			}
+		}
+		
+		if( parseInt(maxHorasDisp) < parseInt(horasSubmitted) ){
+			alert("No puede agregar más de "+maxHorasDisp+" a dicha actividad.\n"+
+			"Solo podrá agregar igual o menos horas para esta actividad.\n\n"+
+			"En el caso de agregar menos horas, se le pedirá que siga agregando\n"+
+			"más actividades hasta completar las "+maxHorasDisp+" horas.");
+			document.getElementById("horasParaCursosAparte2").value = '0';
+		}
+		if( parseInt(maxHorasDisp) < parseInt(horasSubmitted2) ){
+			alert("No puede agregar más de "+maxHorasDisp+" a dicha actividad.\n"+
+			"Solo podrá agregar igual o menos horas para esta actividad.\n\n"+
+			"En el caso de agregar menos horas, se le pedirá que siga agregando\n"+
+			"más actividades hasta completar las "+maxHorasDisp+" horas.");
+			document.getElementById("horasParaCursosAparte3").value = '0';
+		}
+	}
+	function validarHorasAsignatura(){
+		var maxHorasDisp = document.getElementById("horasParaCompletarComoAsignatura").value;
+		var horasSubmitted = document.getElementById("horasParaCompletarComoAsignatura2").value;
+		
+		if( parseInt(horasSubmitted) > parseInt(maxHorasDisp) ){
+			alert("No puede agregar más de "+maxHorasDisp+" a dicha actividad.\n"+
+			"Solo podrá agregar igual o menos horas para esta actividad.\n\n"+
+			"En el caso de agregar menos horas, se le pedirá que siga agregando\n"+
+			"más actividades hasta completar las "+maxHorasDisp+" horas.");
+			document.getElementById("horasParaCompletarComoAsignatura2").value = maxHorasDisp;
+		}
+	}
+	function validarHorasPreparacion(){
+		//var body = document.getElementById("td["+i+"]["+j+"]");
+		var maxHorasPrepHidden = document.getElementById("horasParaPreparacionClaseHidden").value;
+		var maxHorasPrep = document.getElementById("horasParaPreparacionClase").value;
+		if( maxHorasPrep > maxHorasPrepHidden ){
+			alert("No puede escoger más de "+maxHorasPrepHidden+" horas para\n"+
+			"la preparación de cursos.");
+			document.getElementById("horasParaPreparacionClase").value = maxHorasPrepHidden;
+		}
+	}
+	
+	function validar(){
+		var err = "";
+		var check;
+		
+		//if ( document.getElementById("horas").value < 0 ){
+			//err +="Favor de seleccionar números enteros mayores a 0 en el campo horas\n";
+		//}
+		//if ( document.getElementById("horas").value == "" ){
+			//err +="Favor de llenar el campo horas\n";
+		//}
+		//check = document.getElementById("horas").value.length;
+		//for ( var i = 0; i < check; i++ ){
+			//if ( document.FormularioEditar.horas.value[i] == "." ){
+				//err +="Las horas no pueden contener decimales\n";
+				//break;
+			//}
+		//}
+		//if ( document.FormularioEditar.objetivo.value == "" ){
+			//err +="Favor de llenar un objetivo para dicha actividad\n";
+		//}
+		//if ( document.FormularioEditar.meta.value == "" ){
+			//err +="Favor de llenar una meta para dicha actividad\n";
+		//}
+		//if ( document.FormularioEditar.horasreales.value < 0 ){
+			//err +="Favor de seleccionar horas enteras mayores a 0 en el campo Horas Reales\n";
+		//}
+		//check = document.FormularioEditar.horasreales.value.length;
+		//for ( var i = 0; i < check; i++ ){
+			//if ( document.FormularioEditar.horasreales.value[i] == "." ){
+				//err +="No se aceptan horas con decimales en Horas\n";
+				//break;
+			//}
+		//}
+		if ( document.FormularioEditar.semana.value == -1 ){
+			err +="Favor de seleccionar una semana para dicha actividad\n";
+		}
+		/*
+		if ( document.FormularioEditar.autoevaluacion1.value < 0 ||
+				document.FormularioEditar.autoevaluacion1.value == -1 ){
+			err +="Favor de seleccionar números enteros mayores a 0 en el campo Autoevaluacion1\n";
+		}
+		check = document.FormularioEditar.autoevaluacion1.value.length;
+		for ( var i = 0; i < check; i++ ){
+			if ( document.FormularioEditar.autoevaluacion1.value[i] == "." ){
+				err +="La autoevaluacion 1 no puede contener decimales\n";
+				break;
+			}
+		}
+		*/
+		if ( document.getElementById("avance1").value < 0 ){
+			err +="Favor de seleccionar números enteros mayores a 0 en el campo Avance1\n";
+		}
+		check = document.getElementById("avance1").value.length;
+		for ( var i = 0; i < check; i++ ){
+			if ( document.getElementById("avance1").value[i] == "." ){
+				err +="El avance 1 no puede contener decimales\n";
+				break;
+			}
+		}
+		/*
+		if ( document.FormularioEditar.autoevaluacion2.value < 0 ){
+			err +="Favor de seleccionar números enteros mayores a 0 en el campo Autoevaluacion2\n";
+		}
+		check = document.FormularioEditar.autoevaluacion2.value.length;
+		for ( var i = 0; i < check; i++ ){
+			if ( document.FormularioEditar.autoevaluacion2.value[i] == "." ){
+				err +="La autoevaluacion 2 no puede contener decimales\n";
+				break;
+			}
+		}
+		*/
+		
+		if ( document.getElementById("avance2").value < 0 ){
+			err +="Favor de seleccionar números enteros mayores a 0 en el campo Avance2\n";
+		}
+		check = document.getElementById("avance2").value.length;
+		for ( var i = 0; i < check; i++ ){
+			if ( document.getElementById("avance2").value[i] == "." ){
+				err +="El avance 2 no puede contener decimales\n";
+				break;
+			}
+		}
+		/*
+		if ( document.FormularioEditar.autoevaluacion3.value < 0 ){
+			err +="Favor de seleccionar números enteros mayores a 0 en el campo Autoevaluacion3\n";
+		}
+		check = document.FormularioEditar.autoevaluacion3.value.length;
+		for ( var i = 0; i < check; i++ ){
+			if ( document.FormularioEditar.autoevaluacion3.value[i] == "." ){
+				err +="La autoevaluacion 3 no puede contener decimales\n";
+				break;
+			}
+		}
+		*/
+		if ( document.getElementById("avance3").value < 0 ){
+			err +="Favor de seleccionar números enteros mayores a 0 en el campo Avance3\n";
+		}
+		check = document.getElementById("avance3").value.length;
+		for ( var i = 0; i < check; i++ ){
+			if ( document.getElementById("avance3").value[i] == "." ){
+				err +="El avance 3 no puede contener decimales\n";
+				break;
+			}
+		}
+		
+		if( err != "" ){
+			alert(err);
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
+	function eliminar(){
+		
+		if( window.confirm( "¿Estás seguro de que deseas eliminar dicha actividad?" ) ){
+			return true;
+		}
+		
+		return false;
+	}
+</script>
+<div class="centrar">
+	<h2>M&oacute;dulo para crear y asignar actividades complentarias al Programa de Trabajo y horario de Profesor.</h2>
+</div>
+<br />
+<h3 class="centrar">
+	Usted es un profesor de&nbsp;
+<?
+	switch ($infoMaestro -> nombramiento){
+		case 1: echo "Tiempo Completo"; break;
+		case 2: echo "3/4 de Tiempo"; break;
+		case 3: echo "Medio Tiempo"; break;
+		case 4: echo "Asignatura"; break;
+	}
+?>
+&nbsp; y actualmente tiene <span class='letraRoja'><?= $horasClase ?> horas</span> clase.</h3>
+
+
+<?php
+if( isset($horarioTerminado) && $horarioTerminado ){
+	echo "¡Usted ha completado su horario!<br /><br />";
+	render_partial("editarAvanceDeActividades");
+?>
+	<div id ="verActividad" name="verActividad">
+	</div>
+	<div id ="editarActividad" name="editarActividad">
+	</div>
+<?
+	render_partial("horarioExportarPDF");
+} // if( isset($horarioTerminado) && $horarioTerminado )
+else
+if( isset($IrConCoordinadorParaAsignacionDeHorario) &&
+		$IrConCoordinadorParaAsignacionDeHorario == 1 ){
+	// Acudir con coordinador
+	echo "<h3>Usted no tiene horas clase asignadas, favor de acudir con el coordinador
+	de su área para que pueda asignarle un horario</h3>";
+}
+else if( $infoMaestro -> nombramiento == 4 ){
+	// Maestro por asignatura.
+	//render_partial("horarioExportarPDF");
+	// Puede capturar cuantas horas quiera, de horas complementaria.
+	// Bueno de hecho solo 37.5 - horas actuales.
+	render_partial("horasComplementariasParaAsignatura");
+}
+// Si actividadComplementaria == 1 es necesario completar horario con
+//actividades complementarias.
+else if( isset($actividadComplementaria) && $actividadComplementaria == 1 ){
+		echo "<h3>Sus horas clase deber&iacute;an ser del 60% de su nombramiento, si no es así usted deberá contar<br />
+		con una descarga de horas clase respaldada por una comisión oficial.</h3>";
+		echo "<h3>Usted debe justificar <span class='letraRoja'>$horasParaActComplementarias horas</span>, con una actividad de la siguiente lista para<br />
+		completar su carga frente a grupo indicando Objetivo, Meta y Evidencia Entregable.</h3>";
+	?>
+
+	<?
+	if( !isset($horasClaseActComplementaria) ){
+		render_partial("actividadesCapturadas");
+	} // if( !isset($horasClaseActComplementaria ) )
+}
+if( (isset($horasClaseActComplementaria ) && $horasClaseActComplementaria == 1) || 
+		$actividadComplementaria == 0 ){
+	if( $horasClaseActComplementaria == 1 ){
+		render_partial("actividadesCapturadas");
+		echo "<h3>Actualmente cuenta con la comisión: ".
+		$actividadMaestro -> actividad." con ".$actividadMaestro -> horas." descarga frente a grupo.</h3>";
+	}
+
+?>
+
+<div id ="verActividad" name="verActividad">
+</div>
+<div id ="editarActividad" name="editarActividad">
+</div>
+
+</center>
+
+<form action="<?= KUMBIA_PATH ?>profesor/terminarHorario" method="post"
+	name="FormularioAsigNueva3" id="FormularioAsigNueva3" onSubmit="return preguntarSiTerminaHorario()">
+<?
+// Segunda parte del horario
+echo "<h3>Usted ya ha completado su primer 60% de horas para el siguiente periodo.<br />
+Ahora procederá a completar su otro 40%</h3>";
+echo "<h3>Este 40% se reparté en:<br /><br />";
+?>
+<div style="margin-right: 64%">
+* Horas de Tutoría.
+</div>
+<div style="margin-right: 1%">
+* Horas para ACTIVIDADES SUSTANTIVAS RELATIVAS AL PROCESO DE APRENDIZAJE, EVALUACIÓN Y GESTIÓN ACADÉMICA(No deberá exceder el 40% de sus horas clase).
+</div>
+<div style="margin-right: 27.7%">
+* Actividades complementarias (seleccionadas de la lista de acitividades).
+</div>
+</h3>
+
+<br />
+<?
+echo "<h3>Usted aún debe completar $horasRestantesParaLaSegundaParte horas entre las actividades mencionadas con anterioridad</h3>";
+
+echo "<input type=\"hidden\" id=\"horasRestantesParaLaSegundaParte\" name=\"horasRestantesParaLaSegundaParte\" value=\"$horasRestantesParaLaSegundaParte\" />";
+
+echo "<h3>Debido a que por normatividad (Manual de la función docente DI-MN-200-04-04 REVB<br />
+Capitulo I Inciso 1.2.1.3 y Capitulo IV Inciso 4.3) el docente de ";
+	switch ($infoMaestro -> nombramiento){
+		case 1: echo "Tiempo Completo"; break;
+		case 2: echo "3/4 de Tiempo"; break;
+		case 3: echo "Medio Tiempo"; break;
+		case 4: echo "Asignatura"; break;
+	}
+echo " participa<br />en el programa de tutorías del plantel se le asignarán automáticamente 4 hrs <br />
+a esta actividad siempre y cuando tenga horas disponibles, si no se asignarán según sea el caso.</h3>";
+echo "<h4 class='letraRoja'>Horas de Tutorías asignadas: ".$horasTutorias."</h4>";
+echo "<input type=\"hidden\" id=\"horasTutorias\" name=\"horasTutorias\" value=\"$horasTutorias\" />";
+
+echo "<h3>Usted puede dedicar hasta: $maximoHorasPreparacion horas en ACTIVIDADES SUSTANTIVAS RELATIVAS AL PROCESO DE APRENDIZAJE, EVALUACIÓN Y GESTIÓN ACADÉMICA, las cuáles se
+asignarán automáticamente, siempre y cuando tenga horas disponibles, pero podrá reducir el número de horas de acuerdo a su planeación.</h3>";
+
+echo "<h4 class='letraRoja'>Horas para Preparación de Clase asignadas: &nbsp;".
+"<input type='text' value='$horasParaPreparacionClase' name='horasParaPreparacionClase' 
+		id='horasParaPreparacionClase' onBlur='validarHorasPreparacion()' maxlength='4' size='4' /></h4>";
+echo "<input type=\"hidden\" id=\"horasParaPreparacionClaseHidden\" name=\"horasParaPreparacionClaseHidden\" value=\"$horasParaPreparacionClase\" />";
+
+echo "<h3>&iexcl;Usted aún tiene $horasParaCursosAparte horas por asignar con actividades complementarias,
+favor de capturarlas indicando Objetivo, Meta y Evidencia Entregable.</h3>";
+
+?>
+<div id="divActComplementarias">
+	<?
+	if( $horasParaCursosAparte > 0 ){
+		render_partial("divActComplementarias2");
+	}
+	?>
+</div>
+
+<table><tr class="naranja"><td class="bordeAzul2">
+<input type="submit" id="idsubmit" name="idsubmit" value="Terminar Horario"></tr></td></table>
+</form>
+<br />
+<br />
+
+<?
+} // else

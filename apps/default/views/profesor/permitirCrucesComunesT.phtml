@@ -1,0 +1,92 @@
+<script language="JavaScript1.2">
+function validar( Objeto ){	
+	var err = "";
+	if (document.Formulario4.curso1.value==-1) {
+		err += "Favor de seleccionar un curso en el primer listado de cursos\n";
+  	}
+	if (document.Formulario4.curso2.value==-1) {
+		err += "Favor de seleccionar un curso en el segundo listado de cursos\n";
+  	}
+	if( err != "" ){
+		alert(err);
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+</script>
+
+<?= render_partial("autorizarCruces"); ?>
+
+<center>
+<form method="post" action="permitiendoCrucesComunes/"
+	 name ="Formulario4" id="Formulario4" onSubmit="return validar()">
+<? // form_remote_tag("profesor/cursosComunes","update: listado3", "name: Formulario3") ?>
+<table class="bordeAzul2" style="font-size:11px;">
+	<br />
+	<tr class="naranja">
+		<th colspan="2" class="bordeAzul2">Cursos en Com&uacute;n</th>
+	</tr>
+	<tr class="azul">
+		<th class="bordeAzul2">
+			<select name="curso1" id="curso1" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccionar Curso - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $xtcursos2 as $xcc ){
+				?>
+					<option value="<?= $xcc -> clavecurso ?>">
+					<?
+						echo $xcc -> clavecurso."&nbsp;-&nbsp;";
+						echo "Materia: ".$xcc -> materia."&nbsp;&nbsp;&nbsp;";
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+		</th>
+		<th class="bordeAzul2">
+			<select name="curso2" id="curso2" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccionar Curso - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $xtcursos2 as $xcc ){
+				?>
+					<option value="<?= $xcc -> clavecurso ?>">
+					<?
+						echo $xcc -> clavecurso."&nbsp;-&nbsp;";
+						echo "Materia: ".$xcc -> materia."&nbsp;&nbsp;&nbsp;";
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+		</th>
+	<tr class="grisClaro">
+		<td colspan="3" class="bordeAzul2" align="center">
+			<?php echo submit_tag("Cursos en Común"); ?>
+		</td>
+	</tr>
+</table>
+</form>
+</center>
+<br />
+<br />
+<br />&nbsp;

@@ -1,0 +1,1249 @@
+<?php
+ //Alumno desde su sesion
+ $tipoPersona = 5;
+?>
+<?= stylesheet_link_tag('dialog_box'); ?>
+<?= javascript_library_tag('dialog_box'); ?>
+
+<style type="text/css">    
+    #listadoConceptos{
+        font-size: 12px;
+        width: 100%;
+        height: 370px;
+        overflow: auto;
+        background-color: #FFFFFF;
+    }
+    #listadoConceptos table{
+        font-size: 12px;
+    }
+    #listadoConceptos td{
+        border-bottom: 1px solid #CCCCCC;
+		height:35px;
+    }
+    #listadoConceptos tr:hover{
+        background-color: #13539B;
+        color: #ffffff;
+    }
+    #listadoConceptos img{
+        border: 0px;
+    }
+    #complementario{
+        padding: 3px;
+        font-size: 12px;
+        /*background-color: #FFFFFF;*/
+        height: 150px;
+        overflow: auto;
+    }
+    #pagos{
+        padding: 3px;
+        font-size: 12px;
+        min-height: 400px;
+        background-color: #FFFFFF;
+    }
+</style>
+<?= render_partial("caja/solicitarPagos"); ?>
+<br /><br />
+<div class="formulario" style="width: 100%">
+    <div id="contenido">
+		<div id="listadoConceptos">
+          <?= render_partial('listadoConceptosAlumno') ?>
+        </div>
+        <div id="complementario" style="margin-top:-35px; border:1px solid #FFFFFF; display:none; ">
+          Se agrega el concepto y su costo.
+        </div>
+		<?php echo form_remote_tag('caja/guardarConcepto','update: muestraAqui', 'name: formConceptos', 'success: redirectPagos();')?>
+		
+		<div id="contenedor" style="border:1px solid #FFFFFF; display:none;">
+		  <table class="formulario" width="98%" style="margin-top:85px;" border="0" class="conceptos">
+			<tr style=" background-color: #13539B;  color: #FFFFFF;  font-weight: bold; text-align: center; font-size: 13px; height:26px;">
+			  <td width="400px" align="center">
+				CONCEPTO
+			  </td>
+			  <td align="center">
+				CANTIDAD
+			  </td>
+			  <td colspan="2" align="center">
+				COSTO
+			  </td>
+			  <td align="center">
+				TOTAL
+			  </td>
+			  <td align="center">
+				ACCI&Oacute;N
+			  </td>
+			</tr>
+	      </table>
+		  <input type="hidden" readonly="readonly" name="registro" id="registro" value="<?php echo isset($registro); ?>"/>
+		  <input type="hidden" readonly="readonly" name="typeP" id="typeP" value="<?php echo $tipoPersona; ?>"/>
+		  <input type="hidden" readonly="readonly" name="nombrePost" id="nombrePost"/>
+		</div>
+		<div id="buttoSave" style="display:none;">
+		   <?php echo  submit_tag('Guardar','id: boton', 'class: common_button', 'style: margin-right:900px; margin-top:20px;');?>
+		</div>
+		<?php echo end_form_tag() ?>
+    </div>
+</div>
+
+<div id="muestraAqui">
+</div>
+
+<!--Se coloca el formulario-->
+<div id="formu">
+</div>
+
+<!--Se muestran los extraordinarios del alumno-->
+<div id="extras" name="extras">
+</div>
+
+<!--Se muestran los titulos del alumno-->
+<div id="titulos" name="titulos">
+</div>
+
+<!--Se muestran los cursos de nivelacion-->
+<div id="cursosNIV" name="cursosNIV">
+</div>
+
+<!--Se muestran los cursos de acreditacion-->
+<div id="cursosACR" name="cursosACR">
+</div>
+
+<!--Se muestran los los examenes globales-->
+<div id="examGlobal" name="examGlobal">
+</div>
+
+<!--Se muestran los derechos de pasante-->
+<div id="derechoPasante1" name="derechoPasante1">
+</div>
+
+<script type='text/javascript'>
+
+function redirectPagos() {
+  if(document.getElementById('msgMuestra').innerHTML == "TRUE"){
+    //setTimeout("location.href = 'http://localhost/ControlEscolarOnLine/ingenieria/caja/tramites';",2000);
+    setTimeout("location.href = 'http://ase.ceti.mx/ingenieria/caja/tramites';",2000);
+    showDialog('MENSAJE','Los conceptos fueron guardados','success',2000);
+  }
+ 
+  if(document.getElementById('msgMuestra').innerHTML == "FALSE"){
+    //setTimeout("location.href = 'http://localhost/ControlEscolarOnLine/ingenieria/caja/alumnoConcepto';",2000);
+    setTimeout("location.href = 'http://ase.ceti.mx/ingenieria/caja/alumnoConcepto';",2000);
+    showDialog('ERROR','Es necesario que agregues conceptos','error',2000);
+  }
+}
+ 
+//variable que guarda el nombre de los input creados dinamicamente para los extras
+var miArray = new Array(50) 
+//Contador para extras
+var count = 0;
+//Variable que guarda el nombre de los inputs creados dinamicamente para los titulos
+var miArrayT = new Array(50)
+//Contador para titulos
+var countT = 0;
+//Variable que guarda el nombre de los inputs creados dinamicamente para los cursos de nivelacion
+var miArrayCN = new Array(50)
+//Contador para cursos de nivelacion
+var countNV = 0;
+//Variable que guarda el nombre de los inputs creados dinamicamente para los cursos de acreditacion
+var miArrayACR = new Array(50)
+//Contador para cursos de acreditacion
+var countACR = 0;
+//Contador para examenes globales
+var countExamGlobal = 0;
+//Variable que guarda el nombre de los inputs creados dinamicamente para los derechos de pasante
+var miArrayDP = new Array(50)
+//Contador para derecho pasante
+var countDP = 0;
+
+//Funcion que limpia inút de busqueda
+function clear(){
+  document.getElementById("formu").reset();
+}
+
+//Muestra la ventana con los extraordinarios del alumno
+function muestraExtras()
+{
+    new AJAX.viewRequest({ 
+    action: "caja/extrasAlumno", 
+	container: "extras" 
+   }); 
+}
+
+//Muestra la ventana con los titulos del alumno
+function muestraTitulos()
+{
+    new AJAX.viewRequest({ 
+    action: "caja/titulosAlumno", 
+	container: "titulos" 
+   }); 
+}
+
+//Muestra la ventana con los cursos de nivelacion del alumno
+function muestraCursosNIV()
+{
+    new AJAX.viewRequest({ 
+    action: "caja/cursosNIVAlumno", 
+	container: "cursosNIV" 
+   }); 
+}
+
+//Muestra la ventana con los cursos de acreditacion del alumno
+function muestraCursosACR()
+{
+    new AJAX.viewRequest({ 
+    action: "caja/cursosACRAlumno", 
+	container: "cursosACR" 
+   }); 
+}
+
+//Muestra la ventana con los examenes globales del alumno
+function muestraExamenGlobal()
+{
+    new AJAX.viewRequest({ 
+    action: "caja/examGlobalAlumno", 
+	container: "examGlobal" 
+   }); 
+}
+
+//Muestra la ventana con los derechos de pasante del alumno
+function muestraderechoPas()
+{
+    new AJAX.viewRequest({ 
+    action: "caja/derechoPasante", 
+	container: "derechoPasante1" 
+   }); 
+}
+
+
+//Cierra la ventana de los extras
+function cerrarVentanaExtras(){
+  document.getElementById("fijo").style.display = "none";
+  document.getElementById("dialog-mask").style.display = "none";
+}
+
+//Cierra la ventana de los titulos
+function cerrarVentanaTitulos(){
+  document.getElementById("tipoTitulos").style.display = "none";
+  //document.getElementById("dialog-mask").style.display = "none";
+}
+
+//Cierra la ventana de los cursos de acreditacion
+function cerrarVentanaCursosACR(){
+  document.getElementById("tipoCursosACR").style.display = "none";
+  //document.getElementById("dialog-mask").style.display = "none";
+}
+
+//Cierra la ventana de los cursos de nivelacion
+function cerrarVentanaCursosNIV(){
+  document.getElementById("tipoCursosNIV").style.display = "none";
+  //document.getElementById("dialog-mask").style.display = "none";
+}
+
+//Cierra la ventana de los cursos de nivelacion
+function cerrarVentanaGlobales(){
+  document.getElementById("tipoExamGlobales").style.display = "none";
+  //document.getElementById("dialog-mask").style.display = "none";
+}
+
+//Cierra la ventana de los derechos de pasante
+function cerrarVentanaDP(){
+  document.getElementById("tipoDP").style.display = "none";
+  document.getElementById("dialog-mask").style.display = "none";
+}
+
+
+//Funcion que sirve para agregar los extraordinarios
+function AgregarExamGlobales(concepto,costo,id) { 
+      
+  if(document.getElementById('global'+id).checked == false)
+  {
+	 var pos = miArray.indexOf( id );
+	 var x = pos > -1 && miArray.splice( pos, 1 );
+	 countExamGlobal = countExamGlobal - 1;
+     deleteGlobal(id);
+  }
+   
+  if(document.getElementById('global'+id).checked == true)
+  { 
+    miArray[countExamGlobal] = id;
+    //Nombre del extraordinario a pagar
+    var nombre = document.getElementById('nombre'+id).innerHTML;
+	
+		miCapa = document.getElementById('contenedor');
+        miTabla = document.createElement("table");
+		miTabla.id = "table"+id;
+        miTabla.setAttribute("width", "98%");       
+		
+		tbBody = document.createElement("tbody");
+       		
+        tr = document.createElement("tr");  
+		tr.bgColor = "#FFFFFF";
+		tr.style.fontSize = "13px";
+		
+	    //Input de con
+		inputCon = document.createElement("input");
+		inputCon.id = "con["+concepto+"]";
+		inputCon.name = "con["+concepto+"]";
+		inputCon.style.width = "70px";
+		inputCon.style.textAlign = "center";
+		inputCon.style.display = "none";
+		inputCon.setAttribute('readonly',true);
+        inputCon.value = concepto;
+		
+	    //Input con el global a pagar
+		inputGlobal = document.createElement("input");
+		inputGlobal.id = "global["+id+"]";
+		inputGlobal.name = "global["+id+"]";
+		inputGlobal.style.width = "70px";
+		inputGlobal.style.textAlign = "center";
+		inputGlobal.style.display = "none";
+		inputGlobal.setAttribute('readonly',true);
+        inputGlobal.value = id;
+		
+	    //Input de con
+		inputNameCheck = document.createElement("input");
+		inputNameCheck.id = "nombreCheck"+id;
+		inputNameCheck.name = "nombreCheck"+id;
+		inputNameCheck.style.width = "70px";
+		inputNameCheck.style.textAlign = "center";
+		inputNameCheck.style.display = "none";
+		inputNameCheck.setAttribute('readonly',true);
+        inputNameCheck.value = "global"+id;
+		
+		//Input de costo por concepto
+		inputCost = document.createElement("input");
+		inputCost.id = "costo"+concepto;
+		inputCost.name = "costo"+concepto;
+		inputCost.style.width = "70px";
+		inputCost.style.textAlign = "center";
+		inputCost.style.display = "none";
+		inputCost.setAttribute('readonly',true);
+        inputCost.value = costo;
+        
+		//Input de cantidad
+		inputCantidad = document.createElement("input");
+		inputCantidad.id = "cantidad"+concepto;
+		inputCantidad.name = "cantidad"+concepto;
+		inputCantidad.style.width = "60px";
+		inputCantidad.style.textAlign = "center";
+		inputCantidad.style.display = "none";
+		inputCantidad.setAttribute('readonly',true);
+        inputCantidad.value = "1";	
+		
+		//Input de total
+		inputTotal = document.createElement("input");
+		inputTotal.id = "total"+concepto;
+		inputTotal.name = "total"+concepto;
+		inputTotal.style.width = "80px";
+		inputTotal.style.textAlign = "center";
+		inputTotal.style.display = "none";
+		inputTotal.setAttribute('readonly',true);
+        inputTotal.value = costo;	
+        
+		//Input de total
+		inputMateria = document.createElement("input");
+		inputMateria.id = "materiaG"+concepto;
+		inputMateria.name = "materiaG"+concepto;
+		inputMateria.style.width = "80px";
+		inputMateria.style.textAlign = "center";
+		inputMateria.style.display = "none";
+		inputMateria.setAttribute('readonly',true);
+        inputMateria.value = nombre;	
+		
+        td1 = document.createElement("td");
+        td1.setAttribute("align", "center");
+        td1.setAttribute("width", "375px");
+        td1.innerHTML = "Examen Global -"+nombre;
+		
+        td2 = document.createElement("td");
+        td2.setAttribute("align", "center");
+        td2.setAttribute("width", "172px");
+        td2.innerHTML = "1";
+			
+        td3 = document.createElement("td");
+        td3.setAttribute("align", "center");
+        td3.setAttribute("width", "112px");
+        td3.innerHTML = "$ "+costo;
+		
+        td4 = document.createElement("td");
+        td4.setAttribute("align", "center");
+        td4.setAttribute("width", "105px");
+        td4.innerHTML = '$ ' + costo;
+
+        var boton = document.createElement("input");
+        boton.setAttribute("type", "button");
+        boton.setAttribute("name", "boton");
+        boton.setAttribute("value", "Eliminar");
+		boton.onclick =  function(){deleteGlobal(id)};
+       
+        td5 = document.createElement("td");
+        td5.setAttribute("align", "center");
+  		td5.setAttribute("width", "125px");
+        td5.appendChild(boton);
+
+		
+			tr.appendChild(td1);
+			tr.appendChild(td2);                   
+			tr.appendChild(td3);                  
+			tr.appendChild(td4);                  
+			tr.appendChild(td5);   
+			td2.appendChild(inputCantidad);		
+			td2.appendChild(inputCon);		
+			td2.appendChild(inputGlobal);		
+			td2.appendChild(inputNameCheck);		
+			td3.appendChild(inputCost);		
+			td4.appendChild(inputTotal);		
+			td4.appendChild(inputMateria);		
+
+			tbBody.appendChild(tr);
+
+			miTabla.appendChild(tbBody);
+
+			miCapa.appendChild(miTabla); 
+			count++;
+  }		
+		    document.getElementById('contenedor').style.display = "block";
+		    document.getElementById('buttoSave').style.display = "block";  
+}
+  
+  
+
+//Funcion que sirve para agregar los extraordinarios
+function AgregarExtras(concepto,costo,id) { 
+      
+  if(document.getElementById('extra'+id).checked == false)
+  {
+	 var pos = miArray.indexOf( id );
+	 var x = pos > -1 && miArray.splice( pos, 1 );
+	 count = count - 1;
+     deleteExtras(id);
+  }
+   
+  if(document.getElementById('extra'+id).checked == true)
+  { 
+    miArray[count] = id;
+    //Nombre del extraordinario a pagar
+    var nombre = document.getElementById('nombre'+id).innerHTML;
+	
+		miCapa = document.getElementById('contenedor');
+        miTabla = document.createElement("table");
+		miTabla.id = "table"+id;
+        miTabla.setAttribute("width", "98%");       
+		
+		tbBody = document.createElement("tbody");
+       		
+        tr = document.createElement("tr");  
+		tr.bgColor = "#FFFFFF";
+		tr.style.fontSize = "13px";
+		
+	    //Input de con
+		inputCon = document.createElement("input");
+		inputCon.id = "con["+concepto+"]";
+		inputCon.name = "con["+concepto+"]";
+		inputCon.style.width = "70px";
+		inputCon.style.textAlign = "center";
+		inputCon.style.display = "none";
+		inputCon.setAttribute('readonly',true);
+        inputCon.value = concepto;
+		
+	    //Input con el extra a pagar
+		inputExtra = document.createElement("input");
+		inputExtra.id = "extra["+id+"]";
+		inputExtra.name = "extra["+id+"]";
+		inputExtra.style.width = "70px";
+		inputExtra.style.textAlign = "center";
+		inputExtra.style.display = "none";
+		inputExtra.setAttribute('readonly',true);
+        inputExtra.value = id;
+		
+	    //Input de con
+		inputNameCheck = document.createElement("input");
+		inputNameCheck.id = "nombreCheck"+id;
+		inputNameCheck.name = "nombreCheck"+id;
+		inputNameCheck.style.width = "70px";
+		inputNameCheck.style.textAlign = "center";
+		inputNameCheck.style.display = "none";
+		inputNameCheck.setAttribute('readonly',true);
+        inputNameCheck.value = "extra"+id;
+		
+		//Input de costo por concepto
+		inputCost = document.createElement("input");
+		inputCost.id = "costo"+concepto;
+		inputCost.name = "costo"+concepto;
+		inputCost.style.width = "70px";
+		inputCost.style.textAlign = "center";
+		inputCost.style.display = "none";
+		inputCost.setAttribute('readonly',true);
+        inputCost.value = costo;
+        
+		//Input de cantidad
+		inputCantidad = document.createElement("input");
+		inputCantidad.id = "cantidad"+concepto;
+		inputCantidad.name = "cantidad"+concepto;
+		inputCantidad.style.width = "60px";
+		inputCantidad.style.textAlign = "center";
+		inputCantidad.style.display = "none";
+		inputCantidad.setAttribute('readonly',true);
+        inputCantidad.value = "1";	
+		
+		//Input de total
+		inputTotal = document.createElement("input");
+		inputTotal.id = "total"+concepto;
+		inputTotal.name = "total"+concepto;
+		inputTotal.style.width = "80px";
+		inputTotal.style.textAlign = "center";
+		inputTotal.style.display = "none";
+		inputTotal.setAttribute('readonly',true);
+        inputTotal.value = costo;	
+        
+		//Input de total
+		inputMateria = document.createElement("input");
+		inputMateria.id = "materiaE"+concepto;
+		inputMateria.name = "materiaE"+concepto;
+		inputMateria.style.width = "80px";
+		inputMateria.style.textAlign = "center";
+		inputMateria.style.display = "none";
+		inputMateria.setAttribute('readonly',true);
+        inputMateria.value = nombre;	
+		
+        td1 = document.createElement("td");
+        td1.setAttribute("align", "center");
+        td1.setAttribute("width", "375px");
+        td1.innerHTML = "Extra -"+nombre;
+		
+        td2 = document.createElement("td");
+        td2.setAttribute("align", "center");
+        td2.setAttribute("width", "172px");
+        td2.innerHTML = "1";
+			
+        td3 = document.createElement("td");
+        td3.setAttribute("align", "center");
+        td3.setAttribute("width", "112px");
+        td3.innerHTML = "$ "+costo;
+		
+        td4 = document.createElement("td");
+        td4.setAttribute("align", "center");
+        td4.setAttribute("width", "105px");
+        td4.innerHTML = '$ ' + costo;
+
+        var boton = document.createElement("input");
+        boton.setAttribute("type", "button");
+        boton.setAttribute("name", "boton");
+        boton.setAttribute("value", "Eliminar");
+		boton.onclick =  function(){deleteExtras(id)};
+       
+        td5 = document.createElement("td");
+        td5.setAttribute("align", "center");
+  		td5.setAttribute("width", "125px");
+        td5.appendChild(boton);
+
+		
+			tr.appendChild(td1);
+			tr.appendChild(td2);                   
+			tr.appendChild(td3);                  
+			tr.appendChild(td4);                  
+			tr.appendChild(td5);   
+			td2.appendChild(inputCantidad);		
+			td2.appendChild(inputCon);		
+			td2.appendChild(inputExtra);		
+			td2.appendChild(inputNameCheck);		
+			td3.appendChild(inputCost);		
+			td4.appendChild(inputTotal);		
+			td4.appendChild(inputMateria);		
+
+			tbBody.appendChild(tr);
+
+			miTabla.appendChild(tbBody);
+
+			miCapa.appendChild(miTabla); 
+			count++;
+  }		
+		    document.getElementById('contenedor').style.display = "block";
+		    document.getElementById('buttoSave').style.display = "block";  
+  }
+  
+
+//Funcion que sirve para agregar los titulos
+function AgregarTitulos(concepto,costo,id) { 
+
+  if(document.getElementById('titulo'+id).checked == false)
+  {
+	 var pos = miArrayT.indexOf( id );
+	 var x = pos > -1 && miArrayT.splice( pos, 1 );
+	 countT = countT - 1;
+     deleteTitulos(id);
+  }
+   
+  if(document.getElementById('titulo'+id).checked == true)
+  { 
+    miArrayT[countT] = id;
+    //Nombre del extraordinario a pagar
+    var nombre = document.getElementById('nombre'+id).innerHTML;
+	
+		miCapa = document.getElementById('contenedor');
+        miTabla = document.createElement("table");
+		miTabla.id = "table"+id;
+        miTabla.setAttribute("width", "98%");       
+		
+		tbBody = document.createElement("tbody");
+       		
+        tr = document.createElement("tr");  
+		tr.bgColor = "#FFFFFF";
+		tr.style.fontSize = "13px";
+		
+	    //Input de con
+		inputCon = document.createElement("input");
+		inputCon.id = "con["+concepto+"]";
+		inputCon.name = "con["+concepto+"]";
+		inputCon.style.width = "70px";
+		inputCon.style.textAlign = "center";
+		inputCon.style.display = "none";
+		inputCon.setAttribute('readonly',true);
+        inputCon.value = concepto;
+		
+	    //Input de con
+		inputTitulo = document.createElement("input");
+		inputTitulo.id = "titulo["+id+"]";
+		inputTitulo.name = "titulo["+id+"]";
+		inputTitulo.style.width = "70px";
+		inputTitulo.style.textAlign = "center";
+		inputTitulo.style.display = "none";
+		inputTitulo.setAttribute('readonly',true);
+        inputTitulo.value = id;
+		
+	    //Input de con
+		inputNameCheck = document.createElement("input");
+		inputNameCheck.id = "nombreCheck"+id;
+		inputNameCheck.name = "nombreCheck"+id;
+		inputNameCheck.style.width = "70px";
+		inputNameCheck.style.textAlign = "center";
+		inputNameCheck.style.display = "none";
+		inputNameCheck.setAttribute('readonly',true);
+        inputNameCheck.value = "titulo"+id;
+		
+		//Input de costo
+		inputCost = document.createElement("input");
+		inputCost.id = "costo"+concepto;
+		inputCost.name = "costo"+concepto;
+		inputCost.style.width = "70px";
+		inputCost.style.textAlign = "center";
+		inputCost.style.display = "none";
+		inputCost.setAttribute('readonly',true);
+        inputCost.value = costo;
+        
+		//Input de cantidad
+		inputCantidad = document.createElement("input");
+		inputCantidad.id = "cantidad"+concepto;
+		inputCantidad.name = "cantidad"+concepto;
+		inputCantidad.style.width = "60px";
+		inputCantidad.style.textAlign = "center";
+		inputCantidad.style.display = "none";
+		inputCantidad.setAttribute('readonly',true);
+        inputCantidad.value = "1";	
+		
+		//Input de total
+		inputTotal = document.createElement("input");
+		inputTotal.id = "total"+concepto;
+		inputTotal.name = "total"+concepto;
+		inputTotal.style.width = "80px";
+		inputTotal.style.textAlign = "center";
+		inputTotal.style.display = "none";
+		inputTotal.setAttribute('readonly',true);
+        inputTotal.value = costo;	
+		
+		//Input de nombre materia
+		inputMateria = document.createElement("input");
+		inputMateria.id = "materiaT"+concepto;
+		inputMateria.name = "materiaT"+concepto;
+		inputMateria.style.width = "80px";
+		inputMateria.style.textAlign = "center";
+		inputMateria.style.display = "none";
+		inputMateria.setAttribute('readonly',true);
+        inputMateria.value = nombre;	
+ 
+        td1 = document.createElement("td");
+        td1.setAttribute("align", "center");
+        td1.setAttribute("width", "375px");
+        td1.innerHTML = "Titulo - "+nombre;
+		
+        td2 = document.createElement("td");
+        td2.setAttribute("align", "center");
+        td2.setAttribute("width", "172px");
+        td2.innerHTML = "1";
+			
+        td3 = document.createElement("td");
+        td3.setAttribute("align", "center");
+        td3.setAttribute("width", "112px");
+        td3.innerHTML = "$ "+costo;
+		
+        td4 = document.createElement("td");
+        td4.setAttribute("align", "center");
+        td4.setAttribute("width", "105px");
+        td4.innerHTML = '$ ' + costo;
+
+        var boton = document.createElement("input");
+        boton.setAttribute("type", "button");
+        boton.setAttribute("name", "boton");
+        boton.setAttribute("value", "Eliminar");
+		boton.onclick =  function(){deleteTitulos(id)};
+       
+        td5 = document.createElement("td");
+        td5.setAttribute("align", "center");
+  		td5.setAttribute("width", "125px");
+        td5.appendChild(boton);
+
+		
+			tr.appendChild(td1);
+			tr.appendChild(td2);                   
+			tr.appendChild(td3);                  
+			tr.appendChild(td4);                  
+			tr.appendChild(td5);   
+			td2.appendChild(inputCantidad);		
+			td2.appendChild(inputCon);		
+			td2.appendChild(inputTitulo);		
+			td2.appendChild(inputNameCheck);		
+			td3.appendChild(inputCost);		
+			td4.appendChild(inputTotal);		
+			td4.appendChild(inputMateria);		
+
+			tbBody.appendChild(tr);
+
+			miTabla.appendChild(tbBody);
+
+			miCapa.appendChild(miTabla); 
+			countT++;
+  }		
+		    document.getElementById('contenedor').style.display = "block";
+		    document.getElementById('buttoSave').style.display = "block";  
+  }
+  
+
+//Funcion que sirve para agregar los cursos de nivelacion
+function AgregarCursoNIV(concepto,costo,id) { 
+      
+  if(document.getElementById('cursoNivelacion'+id).checked == false)
+  {
+	 var pos = miArrayCN.indexOf( id );
+	 var x = pos > -1 && miArrayCN.splice( pos, 1 );
+	 countNV = countNV - 1;
+     deleteCursoNV(id);
+  }
+   
+  if(document.getElementById('cursoNivelacion'+id).checked == true)
+  { 
+    miArrayCN[countNV] = id;
+    //Nombre del extraordinario a pagar
+    var nombre = document.getElementById('nombre'+id).innerHTML;
+	
+		miCapa = document.getElementById('contenedor');
+        miTabla = document.createElement("table");
+		miTabla.id = "table"+id;
+        miTabla.setAttribute("width", "98%");       
+		
+		tbBody = document.createElement("tbody");
+       		
+        tr = document.createElement("tr");  
+		tr.bgColor = "#FFFFFF";
+		tr.style.fontSize = "13px";
+		
+	    //Input de con
+		inputCon = document.createElement("input");
+		inputCon.id = "con["+concepto+"]";
+		inputCon.name = "con["+concepto+"]";
+		inputCon.style.width = "70px";
+		inputCon.style.textAlign = "center";
+		inputCon.style.display = "none";
+		inputCon.setAttribute('readonly',true);
+        inputCon.value = concepto;
+		
+	    //Input con el curso a pagar
+		inputCursoNV = document.createElement("input");
+		inputCursoNV.id = "cursoNV["+id+"]";
+		inputCursoNV.name = "cursoNV["+id+"]";
+		inputCursoNV.style.width = "70px";
+		inputCursoNV.style.textAlign = "center";
+		inputCursoNV.style.display = "none";
+		inputCursoNV.setAttribute('readonly',true);
+        inputCursoNV.value = id;
+		
+	    //Input de con
+		inputNameCheck = document.createElement("input");
+		inputNameCheck.id = "nombreCheck"+id;
+		inputNameCheck.name = "nombreCheck"+id;
+		inputNameCheck.style.width = "70px";
+		inputNameCheck.style.textAlign = "center";
+		inputNameCheck.style.display = "none";
+		inputNameCheck.setAttribute('readonly',true);
+        inputNameCheck.value = "cursoNV"+id;
+		
+		//Input de costo por concepto
+		inputCost = document.createElement("input");
+		inputCost.id = "costo"+concepto;
+		inputCost.name = "costo"+concepto;
+		inputCost.style.width = "70px";
+		inputCost.style.textAlign = "center";
+		inputCost.style.display = "none";
+		inputCost.setAttribute('readonly',true);
+        inputCost.value = costo;
+        
+		//Input de cantidad
+		inputCantidad = document.createElement("input");
+		inputCantidad.id = "cantidad"+concepto;
+		inputCantidad.name = "cantidad"+concepto;
+		inputCantidad.style.width = "60px";
+		inputCantidad.style.textAlign = "center";
+		inputCantidad.style.display = "none";
+		inputCantidad.setAttribute('readonly',true);
+        inputCantidad.value = "1";	
+		
+		//Input de total
+		inputTotal = document.createElement("input");
+		inputTotal.id = "total"+concepto;
+		inputTotal.name = "total"+concepto;
+		inputTotal.style.width = "80px";
+		inputTotal.style.textAlign = "center";
+		inputTotal.style.display = "none";
+		inputTotal.setAttribute('readonly',true);
+        inputTotal.value = costo;	
+        
+		//Input de total
+		inputMateria = document.createElement("input");
+		inputMateria.id = "materiaE"+concepto;
+		inputMateria.name = "materiaE"+concepto;
+		inputMateria.style.width = "80px";
+		inputMateria.style.textAlign = "center";
+		inputMateria.style.display = "none";
+		inputMateria.setAttribute('readonly',true);
+        inputMateria.value = nombre;	
+		
+        td1 = document.createElement("td");
+        td1.setAttribute("align", "center");
+        td1.setAttribute("width", "375px");
+        td1.innerHTML = "Curso Nivelacion -"+nombre;
+		
+        td2 = document.createElement("td");
+        td2.setAttribute("align", "center");
+        td2.setAttribute("width", "172px");
+        td2.innerHTML = "1";
+			
+        td3 = document.createElement("td");
+        td3.setAttribute("align", "center");
+        td3.setAttribute("width", "112px");
+        td3.innerHTML = "$ "+costo;
+		
+        td4 = document.createElement("td");
+        td4.setAttribute("align", "center");
+        td4.setAttribute("width", "105px");
+        td4.innerHTML = '$ ' + costo;
+
+        var boton = document.createElement("input");
+        boton.setAttribute("type", "button");
+        boton.setAttribute("name", "boton");
+        boton.setAttribute("value", "Eliminar");
+		boton.onclick =  function(){deleteCursoNV(id)};
+       
+        td5 = document.createElement("td");
+        td5.setAttribute("align", "center");
+  		td5.setAttribute("width", "125px");
+        td5.appendChild(boton);
+
+		
+			tr.appendChild(td1);
+			tr.appendChild(td2);                   
+			tr.appendChild(td3);                  
+			tr.appendChild(td4);                  
+			tr.appendChild(td5);   
+			td2.appendChild(inputCantidad);		
+			td2.appendChild(inputCon);		
+			td2.appendChild(inputCursoNV);		
+			td2.appendChild(inputNameCheck);		
+			td3.appendChild(inputCost);		
+			td4.appendChild(inputTotal);		
+			td4.appendChild(inputMateria);		
+
+			tbBody.appendChild(tr);
+
+			miTabla.appendChild(tbBody);
+
+			miCapa.appendChild(miTabla); 
+			countNV++;
+  }		
+		    document.getElementById('contenedor').style.display = "block";
+		    document.getElementById('buttoSave').style.display = "block";  
+  }
+  
+//Funcion que sirve para agregar los cursos de acreditacion
+function AgregarCursoACR(concepto,costo,id) { 
+      
+  if(document.getElementById('cursoAcreditacion'+id).checked == false)
+  {
+	 var pos = miArrayACR.indexOf( id );
+	 var x = pos > -1 && miArrayACR.splice( pos, 1 );
+	 countACR = countACR - 1;
+     deleteCursoACR(id);
+  }
+   
+  if(document.getElementById('cursoAcreditacion'+id).checked == true)
+  { 
+    miArrayACR[countACR] = id;
+    //Nombre del extraordinario a pagar
+    var nombre = document.getElementById('nombre'+id).innerHTML;
+	
+		miCapa = document.getElementById('contenedor');
+        miTabla = document.createElement("table");
+		miTabla.id = "table"+id;
+        miTabla.setAttribute("width", "98%");       
+		
+		tbBody = document.createElement("tbody");
+       		
+        tr = document.createElement("tr");  
+		tr.bgColor = "#FFFFFF";
+		tr.style.fontSize = "13px";
+		
+	    //Input de con
+		inputCon = document.createElement("input");
+		inputCon.id = "con["+concepto+"]";
+		inputCon.name = "con["+concepto+"]";
+		inputCon.style.width = "70px";
+		inputCon.style.textAlign = "center";
+		inputCon.style.display = "none";
+		inputCon.setAttribute('readonly',true);
+        inputCon.value = concepto;
+		
+	    //Input con el curso a pagar
+		inputCursoNV = document.createElement("input");
+		inputCursoNV.id = "cursoAC["+id+"]";
+		inputCursoNV.name = "cursoAC["+id+"]";
+		inputCursoNV.style.width = "70px";
+		inputCursoNV.style.textAlign = "center";
+		inputCursoNV.style.display = "none";
+		inputCursoNV.setAttribute('readonly',true);
+        inputCursoNV.value = id;
+		
+	    //Input de con
+		inputNameCheck = document.createElement("input");
+		inputNameCheck.id = "nombreCheck"+id;
+		inputNameCheck.name = "nombreCheck"+id;
+		inputNameCheck.style.width = "70px";
+		inputNameCheck.style.textAlign = "center";
+		inputNameCheck.style.display = "none";
+		inputNameCheck.setAttribute('readonly',true);
+        inputNameCheck.value = "cursoAC"+id;
+		
+		//Input de costo por concepto
+		inputCost = document.createElement("input");
+		inputCost.id = "costo"+concepto;
+		inputCost.name = "costo"+concepto;
+		inputCost.style.width = "70px";
+		inputCost.style.textAlign = "center";
+		inputCost.style.display = "none";
+		inputCost.setAttribute('readonly',true);
+        inputCost.value = costo;
+        
+		//Input de cantidad
+		inputCantidad = document.createElement("input");
+		inputCantidad.id = "cantidad"+concepto;
+		inputCantidad.name = "cantidad"+concepto;
+		inputCantidad.style.width = "60px";
+		inputCantidad.style.textAlign = "center";
+		inputCantidad.style.display = "none";
+		inputCantidad.setAttribute('readonly',true);
+        inputCantidad.value = "1";	
+		
+		//Input de total
+		inputTotal = document.createElement("input");
+		inputTotal.id = "total"+concepto;
+		inputTotal.name = "total"+concepto;
+		inputTotal.style.width = "80px";
+		inputTotal.style.textAlign = "center";
+		inputTotal.style.display = "none";
+		inputTotal.setAttribute('readonly',true);
+        inputTotal.value = costo;	
+        
+		//Input de total
+		inputMateria = document.createElement("input");
+		inputMateria.id = "materiaE"+concepto;
+		inputMateria.name = "materiaE"+concepto;
+		inputMateria.style.width = "80px";
+		inputMateria.style.textAlign = "center";
+		inputMateria.style.display = "none";
+		inputMateria.setAttribute('readonly',true);
+        inputMateria.value = nombre;	
+		
+        td1 = document.createElement("td");
+        td1.setAttribute("align", "center");
+        td1.setAttribute("width", "375px");
+        td1.innerHTML = "Curso Acreditacion -"+nombre;
+		
+        td2 = document.createElement("td");
+        td2.setAttribute("align", "center");
+        td2.setAttribute("width", "172px");
+        td2.innerHTML = "1";
+			
+        td3 = document.createElement("td");
+        td3.setAttribute("align", "center");
+        td3.setAttribute("width", "112px");
+        td3.innerHTML = "$ "+costo;
+		
+        td4 = document.createElement("td");
+        td4.setAttribute("align", "center");
+        td4.setAttribute("width", "105px");
+        td4.innerHTML = '$ ' + costo;
+
+        var boton = document.createElement("input");
+        boton.setAttribute("type", "button");
+        boton.setAttribute("name", "boton");
+        boton.setAttribute("value", "Eliminar");
+		boton.onclick =  function(){deleteCursoACR(id)};
+       
+        td5 = document.createElement("td");
+        td5.setAttribute("align", "center");
+  		td5.setAttribute("width", "125px");
+        td5.appendChild(boton);
+
+		
+			tr.appendChild(td1);
+			tr.appendChild(td2);                   
+			tr.appendChild(td3);                  
+			tr.appendChild(td4);                  
+			tr.appendChild(td5);   
+			td2.appendChild(inputCantidad);		
+			td2.appendChild(inputCon);		
+			td2.appendChild(inputCursoNV);		
+			td2.appendChild(inputNameCheck);		
+			td3.appendChild(inputCost);		
+			td4.appendChild(inputTotal);		
+			td4.appendChild(inputMateria);		
+
+			tbBody.appendChild(tr);
+
+			miTabla.appendChild(tbBody);
+
+			miCapa.appendChild(miTabla); 
+			countACR++;
+  }		
+		    document.getElementById('contenedor').style.display = "block";
+		    document.getElementById('buttoSave').style.display = "block";  
+  }
+  
+  
+//Funcion que sirve para agregar los derechos de pasante
+function AgregarDerechoPas(concepto,costo,id) { 
+      
+  if(document.getElementById('derechoPas'+id).checked == false)
+  {
+	 var pos = miArrayDP.indexOf( id );
+	 var x = pos > -1 && miArrayDP.splice( pos, 1 );
+	 countDP = countDP - 1;
+     deleteDP(id);
+  }
+   
+  if(document.getElementById('derechoPas'+id).checked == true)
+  { 
+    miArrayDP[countDP] = id;
+    //Nombre del extraordinario a pagar
+    var nombre = document.getElementById('nombre'+id).innerHTML;
+	
+		miCapa = document.getElementById('contenedor');
+        miTabla = document.createElement("table");
+		miTabla.id = "table"+id;
+        miTabla.setAttribute("width", "98%");       
+		
+		tbBody = document.createElement("tbody");
+       		
+        tr = document.createElement("tr");  
+		tr.bgColor = "#FFFFFF";
+		tr.style.fontSize = "13px";
+		
+	    //Input de con
+		inputCon = document.createElement("input");
+		inputCon.id = "con["+concepto+"]";
+		inputCon.name = "con["+concepto+"]";
+		inputCon.style.width = "70px";
+		inputCon.style.textAlign = "center";
+		inputCon.style.display = "none";
+		inputCon.setAttribute('readonly',true);
+        inputCon.value = concepto;
+		
+	    //Input con el curso a pagar
+		inputDP = document.createElement("input");
+		inputDP.id = "DP["+id+"]";
+		inputDP.name = "DP["+id+"]";
+		inputDP.style.width = "70px";
+		inputDP.style.textAlign = "center";
+		inputDP.style.display = "none";
+		inputDP.setAttribute('readonly',true);
+        inputDP.value = id;
+		
+	    //Input de con
+		inputNameCheck = document.createElement("input");
+		inputNameCheck.id = "nombreCheck"+id;
+		inputNameCheck.name = "nombreCheck"+id;
+		inputNameCheck.style.width = "70px";
+		inputNameCheck.style.textAlign = "center";
+		inputNameCheck.style.display = "none";
+		inputNameCheck.setAttribute('readonly',true);
+        inputNameCheck.value = "DP"+id;
+		
+		//Input de costo por concepto
+		inputCost = document.createElement("input");
+		inputCost.id = "costo"+concepto;
+		inputCost.name = "costo"+concepto;
+		inputCost.style.width = "70px";
+		inputCost.style.textAlign = "center";
+		inputCost.style.display = "none";
+		inputCost.setAttribute('readonly',true);
+        inputCost.value = costo;
+        
+		//Input de cantidad
+		inputCantidad = document.createElement("input");
+		inputCantidad.id = "cantidad"+concepto;
+		inputCantidad.name = "cantidad"+concepto;
+		inputCantidad.style.width = "60px";
+		inputCantidad.style.textAlign = "center";
+		inputCantidad.style.display = "none";
+		inputCantidad.setAttribute('readonly',true);
+        inputCantidad.value = "1";	
+		
+		//Input de total
+		inputTotal = document.createElement("input");
+		inputTotal.id = "total"+concepto;
+		inputTotal.name = "total"+concepto;
+		inputTotal.style.width = "80px";
+		inputTotal.style.textAlign = "center";
+		inputTotal.style.display = "none";
+		inputTotal.setAttribute('readonly',true);
+        inputTotal.value = costo;	
+        
+		//Input de total
+		inputMateria = document.createElement("input");
+		inputMateria.id = "materiaE"+concepto;
+		inputMateria.name = "materiaE"+concepto;
+		inputMateria.style.width = "80px";
+		inputMateria.style.textAlign = "center";
+		inputMateria.style.display = "none";
+		inputMateria.setAttribute('readonly',true);
+        inputMateria.value = nombre;	
+		
+        td1 = document.createElement("td");
+        td1.setAttribute("align", "center");
+        td1.setAttribute("width", "375px");
+        td1.innerHTML = "Derecho Pasante -"+nombre;
+		
+        td2 = document.createElement("td");
+        td2.setAttribute("align", "center");
+        td2.setAttribute("width", "172px");
+        td2.innerHTML = "1";
+			
+        td3 = document.createElement("td");
+        td3.setAttribute("align", "center");
+        td3.setAttribute("width", "112px");
+        td3.innerHTML = "$ "+costo;
+		
+        td4 = document.createElement("td");
+        td4.setAttribute("align", "center");
+        td4.setAttribute("width", "105px");
+        td4.innerHTML = '$ ' + costo;
+
+        var boton = document.createElement("input");
+        boton.setAttribute("type", "button");
+        boton.setAttribute("name", "boton");
+        boton.setAttribute("value", "Eliminar");
+		boton.onclick =  function(){deleteDP(id)};
+       
+        td5 = document.createElement("td");
+        td5.setAttribute("align", "center");
+  		td5.setAttribute("width", "125px");
+        td5.appendChild(boton);
+
+		
+			tr.appendChild(td1);
+			tr.appendChild(td2);                   
+			tr.appendChild(td3);                  
+			tr.appendChild(td4);                  
+			tr.appendChild(td5);   
+			td2.appendChild(inputCantidad);		
+			td2.appendChild(inputCon);		
+			td2.appendChild(inputDP);		
+			td2.appendChild(inputNameCheck);		
+			td3.appendChild(inputCost);		
+			td4.appendChild(inputTotal);		
+			td4.appendChild(inputMateria);		
+
+			tbBody.appendChild(tr);
+
+			miTabla.appendChild(tbBody);
+
+			miCapa.appendChild(miTabla); 
+			countNV++;
+  }		
+		    document.getElementById('contenedor').style.display = "block";
+		    document.getElementById('buttoSave').style.display = "block";  
+  }
+  
+  
+  //Esta funcion sirve para eliminar una fila de la tabla de los extras
+  function deleteExtras(param)
+  {
+    var pos = miArray.indexOf( param );
+	var x = pos > -1 && miArray.splice( pos, 1 );
+
+    var tabla = document.getElementById('table'+param);
+    var elimina = tabla.parentNode;
+    elimina.removeChild(tabla); 
+  }
+  
+  //Esta funcion sirve para eliminar una fila de la tabla de globales
+  function deleteGlobal(param)
+  {
+    var pos = miArray.indexOf( param );
+	var x = pos > -1 && miArray.splice( pos, 1 );
+
+    var tabla = document.getElementById('table'+param);
+    var elimina = tabla.parentNode;
+    elimina.removeChild(tabla);
+  }
+  
+  //Esta funcion sirve para eliminar una fila de la tabla de los derechos de pasante
+  function deleteDP(param)
+  {
+    var pos = miArrayDP.indexOf( param );
+	var x = pos > -1 && miArrayDP.splice( pos, 1 );
+	
+	var tabla = document.getElementById('table'+param);
+	var elimina = tabla.parentNode;
+	elimina.removeChild(tabla);
+  }
+
+  //Esta funcion sirve para eliminar una fila de la tabla de los titulos
+  function deleteTitulos(param)
+  {
+    var pos = miArrayT.indexOf( param );
+	var x = pos > -1 && miArrayT.splice( pos, 1 );
+	
+	var tabla = document.getElementById('table'+param);
+	var elimina = tabla.parentNode;
+	elimina.removeChild(tabla);
+  }
+  
+  //Esta funcion sirve para eliminar una fila de la tabla de los cursos de nivelacion
+  function deleteCursoNV(param)
+  {
+    var pos = miArrayCN.indexOf( param );
+	var x = pos > -1 && miArrayCN.splice( pos, 1 );
+	
+	var tabla = document.getElementById('table'+param);
+	var elimina = tabla.parentNode;
+	elimina.removeChild(tabla);
+  }
+  
+  //Esta funcion sirve para eliminar una fila de la tabla de los cursos de acreditacion
+  function deleteCursoACR(param)
+  {
+    var pos = miArrayACR.indexOf( param );
+	var x = pos > -1 && miArrayACR.splice( pos, 1 );
+	
+	var tabla = document.getElementById('table'+param);
+	var elimina = tabla.parentNode;
+	elimina.removeChild(tabla);
+  }
+</script>

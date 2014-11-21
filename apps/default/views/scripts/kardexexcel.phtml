@@ -1,0 +1,23 @@
+<?php header("content-disposition: attachment;filename=kardex.xls"); ?>
+<center>
+<table>
+			<?php if($kardexs>0){ ?>
+			<?php foreach($periodos as $periodo){ $i++; $bg = "#FFFFFF"; if(!$kardex[$i]) { break; }?>
+				<tr bgcolor="#CCCCCC">
+					<th align="center" height="25" colspan="4">PERIODO (<?php if($periodo[0]==1){ echo "FEB - JUN ".substr($periodo,1,4); } else { echo "AGO - DIC ".substr($periodo,1,4); } ?>)</th>
+				</tr>
+				<?php $j=0; foreach($kardex[$i] as $k){ ?>
+				<tr style="font-size: 10px;" bgcolor="<?= $bg ?>"> 
+					<td width="300" align="left" bgcolor="<?= $bg ?>">&nbsp;<?= $materias[$i][$j] ?>&nbsp;</td>
+					<td width="200" align="left" bgcolor="<?= $bg ?>">&nbsp;<?= $kardex[$i][$j] -> promedio ?> - <?= $calificaciones[$i][$j] ?>&nbsp;</td>
+					<td width="150" align="center" bgcolor="<?= $bg ?>">
+						<?= $kardex[$i][$j] -> tipo_de_ex ?>
+					</td>
+					<td width="50" align="center" bgcolor="<?= $bg ?>"><?= $creditos[$i][$j] ?></td>
+				</tr>
+				<?php $j++; } ?>
+			<?php } ?>
+			
+			<?php } ?>
+</table>
+</center>

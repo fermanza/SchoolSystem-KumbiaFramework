@@ -1,0 +1,168 @@
+<script>
+var MensajeDeError="Todos los campos son requeridos!\n"
+		    function pepote(f){
+		        marcado=false;
+		        var nombre;
+		        for(a=0;a<f.elements.length;a++){
+		            if(f[a].type=="radio"){
+						//alert(f[a].name);
+		                if(nombre!=f[a].name){
+		                    nombre=f[a].name;					
+		                    for(aa=0;f[a+aa].name==f[a].name;aa++){
+		                        if(f[a+aa].checked){
+									marcado=true;
+								}
+		                    }
+		                    if(marcado==false){
+								alert(MensajeDeError);
+								return false;
+							}
+		                }
+		           
+		            }
+					 marcado=false;
+		        }
+				return true;
+		    }
+  </script>
+
+<center>
+<? if ($n>0){?>
+<div style="width:900px; height:500px;">
+<br />
+<br>
+
+<center><h2>Gracias por contestar la encuesta</h2><br /><br /><h3> Te recordamos que si eres posible egresado pases por favor a Ventanilla de Octavos con Cinthya en horario de 14:00 a 19:00 horas para comenzar los tramites de egreso y además hagas la revisión de kardex </center><br /><br /><br />
+<center><a href="informacion">IR A MI SESION DE ALUMNO</a></center></h3>
+</div>
+<?
+}else{
+?>
+	<div style="width:900px;">
+		<h2>ENCUESTA DE SATISFACCIÓN DE ALUMNOS DE 8VO. SEMESTRE</h2>
+		<h4>Para mejorar los servicios que ofrece el Centro de Enseñanza Técnica Industrial, necesitamos conocer tu opinión, te agradecemos contestes  con Honestidad y Responsabilidad el siguiente cuestionario, el cual es confidencial.</h4>
+	</div>
+<form method="POST" action="<?= KUMBIA_PATH ?>alumno/registrarencuesta/<?= $registro ?>" onsubmit="
+							if (pepote(this)== true){
+								return true;
+							}
+							else{
+								return false
+							}">	
+	<table border="1">
+		<tr>
+			<th rowspan="2" width="50">No.</th>
+			<th rowspan="2" width="350">Pregunta</th>
+			<th colspan="4">Respuesta</th>
+		</tr>
+		<tr>
+			<th width="75">Excelente</th>
+			<th width="75">Bueno</th>
+			<th width="75">Regular</th>
+			<th width="75">Malo</th>
+		</tr>
+		<tr>
+			<th>1.-</th>
+			<td width="450">&nbsp;¿Cómo calificas la atención brindada en el Gabinete de Orientación Educativa (GOE)?</td>
+			<th><input type="radio" name="p1" value="4"></th>
+			<th><input type="radio" name="p1" value="3"></th>
+			<th><input type="radio" name="p1" value="2"></th>
+			<th><input type="radio" name="p1" value="1"></th>
+		</tr>
+		<tr>
+			<th>2.-</th>
+			<td width="450">&nbsp;¿Cómo calificas la disposición y oportunidad con que se te atendió en el GOE?</td>
+			<th><input type="radio" name="p2" value="4"></th>
+			<th><input type="radio" name="p2" value="3"></th>
+			<th><input type="radio" name="p2" value="2"></th>
+			<th><input type="radio" name="p2" value="1"></th>
+		</tr>
+		<tr>
+			<th>3.-</th>
+			<td width="450">&nbsp;¿Cómo clasificas el servicio ofrecido en Biblioteca?</td>
+			<th><input type="radio" name="p3" value="4"></th>
+			<th><input type="radio" name="p3" value="3"></th>
+			<th><input type="radio" name="p3" value="2"></th>
+			<th><input type="radio" name="p3" value="1"></th>
+		</tr>
+		<tr>
+			<th>4.-</th>
+			<td width="450">&nbsp;¿Cómo calificas la calidad en el servicio ofrecido en los talleres y laboratorios de tu carrera?</td>
+			<th><input type="radio" name="p4" value="4"></th>
+			<th><input type="radio" name="p4" value="3"></th>
+			<th><input type="radio" name="p4" value="2"></th>
+			<th><input type="radio" name="p4" value="1"></th>
+		</tr>
+		<tr>
+			<th>5.-</th>
+			<td width="450">&nbsp;¿Cómo calificas el servicio que recibiste por parte de la caja de plantel?</td>
+			<th><input type="radio" name="p5" value="4"></th>
+			<th><input type="radio" name="p5" value="3"></th>
+			<th><input type="radio" name="p5" value="2"></th>
+			<th><input type="radio" name="p5" value="1"></th>
+		</tr>
+		<tr>
+			<th>6.-</th>
+			<td width="450">&nbsp;¿Cómo consideras la atención que recibiste por parte del personal de la Ventanilla del Departamento de Servicios de Apoyo Académico (Control Escolar)?</td>
+			<th><input type="radio" name="p6" value="4"></th>
+			<th><input type="radio" name="p6" value="3"></th>
+			<th><input type="radio" name="p6" value="2"></th>
+			<th><input type="radio" name="p6" value="1"></th>
+		</tr>
+		<tr>
+			<th>7.-</th>
+			<td width="450">&nbsp;¿Cómo calificas la oportunidad con que recibiste los servicios brindados por el Departamento de Servicios de Apoyo Académico (Control Escolar)?</td>
+			<th><input type="radio" name="p7" value="4"></th>
+			<th><input type="radio" name="p7" value="3"></th>
+			<th><input type="radio" name="p7" value="2"></th>
+			<th><input type="radio" name="p7" value="1"></th>
+		</tr>
+		<tr>
+			<th>8.-</th>
+			<td width="450">&nbsp;¿Cómo consideras los canales de comunicación a través de los cuales se difunden las normas y lineamientos del Plantel?</td>
+			<th><input type="radio" name="p8" value="4"></th>
+			<th><input type="radio" name="p8" value="3"></th>
+			<th><input type="radio" name="p8" value="2"></th>
+			<th><input type="radio" name="p8" value="1"></th>
+		</tr>
+		<tr>
+			<th>9.-</th>
+			<td width="450">&nbsp;¿Cómo calificas la disposición del personal docente  para la atención de tus solicitudes?</td>
+			<th><input type="radio" name="p9" value="4"></th>
+			<th><input type="radio" name="p9" value="3"></th>
+			<th><input type="radio" name="p9" value="2"></th>
+			<th><input type="radio" name="p9" value="1"></th>
+		</tr>
+		<tr>
+			<th>10.-</th>
+			<td width="450">&nbsp;¿Cómo calificas  la disposición del personal de prefectura?</td>
+			<th><input type="radio" name="p10" value="4"></th>
+			<th><input type="radio" name="p10" value="3"></th>
+			<th><input type="radio" name="p10" value="2"></th>
+			<th><input type="radio" name="p10" value="1"></th>
+		</tr>
+		<tr>
+			<th>11.-</th>
+			<td width="450">&nbsp;¿Cómo calificas la oportunidad  con que se te proporcionó la atención por parte de prefectura?</td>
+			<th><input type="radio" name="p11" value="4"></th>
+			<th><input type="radio" name="p11" value="3"></th>
+			<th><input type="radio" name="p11" value="2"></th>
+			<th><input type="radio" name="p11" value="1"></th>
+		</tr>
+		<tr>
+			<th>12.-</th>
+			<td width="450">&nbsp;¿Cómo calificas los servicios de limpieza y vigilancia con que cuenta la escuela?</td>
+			<th><input type="radio" name="p12" value="4"></th>
+			<th><input type="radio" name="p12" value="3"></th>
+			<th><input type="radio" name="p12" value="2"></th>
+			<th><input type="radio" name="p12" value="1"></th>
+		</tr>
+	</table>
+	<br/>
+	<input type="submit" value="Enviar Encuesta">
+	<br/><br/>
+</center>
+</form>
+<?
+}
+?>

@@ -1,0 +1,101 @@
+<center><br />
+<script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+<?
+if( isset($maestro) )
+if( $maestro -> correo == "" ){
+	echo javascript_library_tag("correo");
+	echo stylesheet_link_tag("correo");
+}
+?>
+<input type="hidden" value="<?= $nomina ?>" name="nomina" id="nomina">
+<br />
+
+<!--
+<div style="font-size: 14px; color: #FF0000; float: right; margin-right: 20px;"><b>Evidencia Captura Tardía </b></div>
+<div class="salto_div"></div>
+<div style="font-size: 14px; color: #FF0000; float: right; margin-right: 20px;">
+<?php
+	$Xccursos = new Xccursos();
+	$evidencias = $Xccursos->find_all_by_sql("select *
+				from xlogcalificacion xlog
+				join xccursos xcc on xlog.clavecurso = xcc.clavecurso
+				and xcc.periodo = 32012
+				where accion = 'ACTUALIZAR CALIFICACIONES PARCIAL 3'
+				order by fecha
+				limit 3");
+?>
+<table style="font-size:11px;" class="bordeAzul2">
+	<tbody>
+	<tr class="azul">
+		<th class="bordeAzul2">CLAVECURSO</th>
+		<th class="bordeAzul2">NOMINA</th>
+		<th class="bordeAzul2">FECHA</th>
+	</tr>
+	<?php
+	foreach($evidencias as $evidencia){
+	?>
+	<tr>
+		<td class="bordeAzul2"><?= $evidencia -> clavecurso ?></td>
+		<td class="bordeAzul2"><?= $evidencia -> nomina ?></td>
+		<td class="bordeAzul2"><?= date("j, n, Y", $evidencia -> fecha) ?></td>
+	</tr>
+	<?php
+	}
+	?>
+</tbody></table>
+</div>
+-->
+<div class="salto_div"></div>
+<table>
+	<tr>
+		<td width="900"><div align="justify">
+			<div style="font-size: 14px;"><div style="color: #FF0000;"><b>MODULO DE PROFESORES: </b></div>
+				<br>
+				Bienvenidos al nuevo modulo de profesores, el cual ofrece al personal académico una
+				interfaz en la cual podrá consultar los grupos que tiene asignados, sus listas de
+				asistencia, así como la posiblidad de capturar las calificaciones de sus alumnos.
+				<br><br>
+				Este nuevo modulo pretende mejorar la experiencia anterior en nuestro sistema de control escolar,
+				cualquier comentario o sugerencia acerca de nuevo modulo, favor de comunicarlo al Departamento de
+				Apoyo Académico.
+			</div>
+			<br>
+			<div style="font-size: 14px;"><div style="color: #FF0000;"><b>CAPTURA DE CALIFICACIONES: </b></div>
+				<br>
+				El periodo de captura de calificaciones para el Ciclo Feb - Jun 2012 estará disponible para todos 
+				los profesores del nivel de Ingeniería en las siguientes fechas:
+				<br><br>
+				<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;">
+					<tr>
+						<th bgcolor="#FFCA5B" colspan="2" align="center"><b>Primer Parcial</b></th>
+						<th bgcolor="#FFCA5B" colspan="2" align="center"><b>Segundo Parcial</b></th>
+						<th bgcolor="#FFCA5B" colspan="2" align="center"><b>Tercer Parcial</b></th>
+					</tr>
+					<tr>
+						<td bgcolor="#FFCA5B" width="150" height="20"><b>&nbsp;Inicio del periodo:</b></td>
+						<td width="200" height="20">&nbsp;Viernes, 9 de Marzo del 2012</td>
+						<td bgcolor="#FFCA5B" width="150" height="20"><b>&nbsp;Inicio del periodo:</b></td>
+						<td width="200" height="20">&nbsp;Viernes, 4 de Mayo del 2012</td>
+						<td bgcolor="#FFCA5B" width="150" height="20"><b>&nbsp;Inicio del periodo:</b></td>
+						<td width="200" height="20">&nbsp;Viernes, 15 de Junio del 2012</td>
+					</tr>
+					<tr>
+						<td bgcolor="#FFCA5B" width="150" height="20"><b>&nbsp;Fin del periodo:</b></td>
+						<td width="200" height="20">&nbsp;Mi&eacute;rcoles, 14 de Marzo del 2012</td>
+						<td bgcolor="#FFCA5B" width="150" height="20"><b>&nbsp;Fin del periodo:</b></td>
+						<td width="200" height="20">&nbsp;Mi&eacute;rcoles, 9 de Mayo del 2012</td>
+						<td bgcolor="#FFCA5B" width="150" height="20"><b>&nbsp;Fin del periodo:</b></td>
+						<td width="200" height="20">&nbsp;Mi&eacute;rcoles, 20 de Junio del 2012</td>
+					</tr>
+					
+				</table>
+				<br>
+				Las calificaciones pueden capturarse o incluso corregirse dentro de ese rango de fechas, si
+				por alguna razón no se hubiese capturado alguna calificación será necesario ponerse en
+				contacto con el <b>Jefe del Departamento Estudios Nivel Licenciatura</b>
+			</div>
+		</div></td>
+	</tr>
+</table>
+<br>
+</center>

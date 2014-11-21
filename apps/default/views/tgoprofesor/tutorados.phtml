@@ -1,0 +1,62 @@
+<style type="text/css">
+	.tutorados a{
+		color: #3333DD;
+		text-decoration: none;
+		display: block;
+		padding: 0 0 0 10px;
+	}
+	
+	.tutorados a:hover{		
+		text-decoration: underline
+	}
+</style>
+<?= render_partial("info"); ?>
+<br>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp; Tutorias
+</div>
+<div class="tutorados">
+<center>
+<table style="width: 650px; font-size:11px;" class="bordeazul">
+<tr class="naranja">
+	<th>Foto</th>
+	<th>Registro</th>
+	<th>Nombre</th>
+	<th>Semestre</th>
+	<th>Grupo</th>
+	<th>Tipo</th>
+</tr>
+ <?php
+ $Alumnos = new Alumnos();
+ foreach($tutorias as $t){
+	$Alumnos -> find_first("registro = ".$t-> registro);
+	
+	echo tr_color('#EEEDDD','#FFFDFD');
+	echo "<td><center>";
+	$entro=0;
+	$foto = "fotos/".$t -> registro.".JPG";
+	$foto1 = "fotos/".$t -> registro.".jpg";					
+	if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto)){					
+		echo img_tag($foto, "width: 100");
+		$entro=1;
+	}
+	if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto1)){					
+		echo img_tag($foto1, "width: 100");
+		$entro=1;
+	}
+	if ($entro == 0){
+		echo "Sin Foto";
+	}
+	echo "</center></td>";
+	echo '<th>'.$t -> registro.'</th>';
+	echo '<td><b>'.link_to("tgoprofesor/convertirAAlumno/".$t -> registro,$Alumnos -> nombre_completo).'</b></td>';
+	echo '<th>'.$Alumnos -> semestre.'</th>';
+	echo '<th>'.$Alumnos -> grupo.'</th>';
+	echo '<th>'.$Alumnos -> tipo.'</th>';
+ }
+ 
+ ?>
+ </table>
+ 
+ </center>
+ </div>

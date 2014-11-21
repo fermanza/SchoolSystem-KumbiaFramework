@@ -1,0 +1,47 @@
+<table border="1" cellpadding="1" cellspacing="1" style="font-size:11px;">
+<?php
+	if ($seguridad_social == "SI"){
+?>
+		<tr>
+			<td width="200" bgcolor="#FFCA5B" align="left"><b>&nbsp;&iquest;Por cu&aacute;l dependencia tienes seguro? </b></td>
+			<td width="280" align="left">
+			<select name="dependencia_seguro" id="dependencia_seguro">
+				<option value="IMSS" <?php if ($dependencia_seguro=="IMSS") echo "SELECTED"; ?>>IMSS</option>
+				<option value="ISSSTE" <?php if ($dependencia_seguro=="ISSSTE") echo "SELECTED"; ?>>ISSSTE</option>
+				<option value="SEMAR" <?php if ($dependencia_seguro=="SEMAR") echo "SELECTED"; ?>>SEMAR</option>
+				<option value="SEDENA" <?php if ($dependencia_seguro=="SEDENA") echo "SELECTED"; ?>>SEDENA</option>
+				<option value="SEDENA" <?php if ($dependencia_seguro=="SEGURO FACULTATIVO") echo "SELECTED"; ?>>SEGURO FACULTATIVO</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td width="200" bgcolor="#FFCA5B" align="left"><b>&nbsp;&iquest;Por parte de qui&eacute;n tienes el seguro? </b></td>
+			<td width="280" align="left">
+			<select name="parte_de_quien_seguro" id="parte_de_quien_seguro">
+				<option value="PADRES" <?php if($parte_de_quien_seguro=="PADRES") echo "SELECTED"; ?>>PADRES</option>
+				<option value="TRABAJO" <?php if($parte_de_quien_seguro=="TRABAJO") echo "SELECTED"; ?>>TRABAJO</option>
+				<option value="CONYUGE" <?php if($parte_de_quien_seguro=="CONYUGE") echo "SELECTED"; ?>>C&Oacute;NYUGE</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td width="200" bgcolor="#FFCA5B" align="left"><b>&nbsp;&iquest;Anota tu n&uacute;mero de seguridad social? </b></td>
+			<td width="280" align="left">
+			<input type="text" id="numero_seguro_social" name="numero_seguro_social" size="30" value="<?= $numero_seguro_social ?>" />
+			</td>
+		</tr>
+<?
+	}
+	else{
+		?>
+		<tr>
+			<td width="480" align="left" colspan="2">
+				<b>Tr&aacute;mita tu seguro facultativo. (Entra a la p&aacute;gina 
+				<a href="http://www.colomos.ceti.mx">http://www.colomos.ceti.mx</a> llena tu solicitud
+				y llevala al Servicio M&eacute;dico)</b>
+			</td>
+		</tr>
+		<?php
+	}
+?>
+</table>

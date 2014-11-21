@@ -1,0 +1,239 @@
+<?php
+ 
+ if(count($result) > 0){
+ 
+   foreach($result AS $value){
+     $ficha = $value -> ficha;
+     $registro = $value -> registro;
+     $periodo = $value -> periodo;
+	 $carrera = $value -> carrera;
+	 $nombreAspirante = $value -> nombre." ".$value -> paterno." ".$value -> materno;
+	 $fotos = $value -> fotos;
+	 $certificadoo = $value -> certificadoo;
+	 $acta = $value -> acta;
+	 $ficha_pago = $value -> ficha_pago;
+	 $certificadom = $value -> certificadom;
+	 $reglamento = $value -> reglamento;
+	 $antidoping = $value -> antidoping;
+	 $no_antecedentes_penales = $value -> antecedentes_penales;
+	 $facultativo = $value -> carta_compromiso;
+	 $extranjero = $value -> cuota_extranjero;
+	 $fechaProrroga = $value -> fechaProrroga;
+	 $motivoProrroga = $value -> motivoProrroga;
+	 
+	 $prorroga = $value -> prorroga;
+	 if($prorroga != null || $prorroga != ""){
+	   $check = split(',', $prorroga);
+
+	   $prorrogaSol = "si";
+	   
+	   if(strlen($check[1]) > 0){
+	     echo "<script type='text/javascript'> 
+	             document.getElementById('".$check[0]."').checked = true;
+	             document.getElementById('".$check[1]."').checked = true;
+	             muestraOpcionesPro(); 
+	          </script>";
+	   }
+	   else{
+	     echo "<script type='text/javascript'> 
+	             document.getElementById('".$check[0]."').checked = true;
+	             muestraOpcionesPro(); 
+	          </script>";
+	   }
+	 }
+	 else{
+	   $prorrogaSol = "";
+	 }
+	 
+	 $aspirante = $value -> aspirante;
+	 $plantelAl = $value -> plantel;
+  
+     if($plantelAl = "C")
+	   $plantel = "Colomos";
+	 
+	 else
+	   $plantel = "Tonala";
+	 
+	 
+	 if($value -> nivel == "T")
+	   $nivel = "TECNOLOGO";
+	 
+	  else
+	    $nivel = "INGENIERIA";
+
+   }
+
+ }
+ else{
+   $ficha = "";
+   $registro = "";
+   $periodo = "";
+ }
+?>
+
+<?= stylesheet_link_tag('formularios2'); ?>
+
+
+<div class="formulario2">
+<center>
+<?= form_remote_tag('ventanilla/guardarDocs','update: muestraMensaje','name: formularioAsp')?>
+    <table width="900" border="0" cellpadding="0" cellspacing="0" id="contenido">      
+        <tr>
+            <td style="background:#FFCA5B;">
+                <center><b>Datos Academicos</b></center>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" id="contenido">
+                    <tr>
+                        <td>
+                            <?= text_field_tag('registro', 'id: texto_chico', 'disabled: disabled', 'value: '.$registro) ?> 
+                            <div style="font-weight:bold;" id="texto_abajoi">Registro</div>   
+                        </td>
+                        <td>
+                            <?= text_field_tag('ficha', 'id: texto_chico','disabled: disabled', 'value: '.$ficha) ?>
+                            <div style="font-weight:bold;" id="texto_abajoi">Ficha </div>  
+                            <?= hidden_field_tag('aspirante', 'value: '.$aspirante) ?>
+                        </td>
+                        <td>
+                            <?= text_field_tag('periodo', 'id: texto_chico', 'value: '.$periodo,'disabled: disabled') ?> 
+                            <div style="font-weight:bold;" id="texto_abajoi">Periodo</div>   
+                        </td> 
+                        <td>
+                            <?= text_field_tag('nivel', 'id: texto_chico', 'value: '.$nivel,'disabled: disabled') ?> 
+                            <div style="font-weight:bold;" id="texto_abajoi">Nivel</div>   
+                        </td> 
+                        <td>
+                            <?= text_field_tag('plantel', 'id: texto_chico', 'value: '.$plantel,'disabled: disabled') ?> 
+                            <div id="texto_abajoi" style="font-weight:bold;" >Plantel</div>   
+                        </td> 						
+                    </tr>
+                    <tr>
+                        <td colspan="5">
+                            <table width="900" border="0" cellpadding="0" cellspacing="0" >
+                                <tr>
+									<td width="375px">
+										<?= text_field_tag('nombreAs', 'id: texto_chico', 'value: '.utf8_encode($nombreAspirante),'disabled: disabled', 'style: width: 435px;') ?> 
+										<div id="texto_abajoi" style="font-weight:bold;" >Nombre Aspirante</div>   
+									</td> 
+									<td>
+									    &nbsp;&nbsp;&nbsp;
+										<?= text_field_tag('carrera', 'id: texto_chico', 'value: '.utf8_encode($carrera),'disabled: disabled', 'style: width: 412px;') ?> 
+										<div id="texto_abajoi" style="margin-left:26px; font-weight:bold; " >Carrera</div>   
+									</td> 
+                                </tr>   
+                            </table>
+                        </td>
+                    </tr>                    
+                </table>
+            </td>        
+        </tr> 
+        
+        <tr>
+            <td style="background:#FFCA5B;">
+                <center><b>Documentacion</b></center>
+            </td>
+        </tr>
+        <tr>
+            <td>
+               <table width="100%" border="0" cellpadding="5" cellspacing="3" id="contenido">
+                    <tr> 
+                		<th class="fondonaranja" style="text-align: left;"> 
+                			<font style="color:#DD3700;">*&nbsp;</font><input type="checkbox" name="acta" id="acta" <?php if($acta == 'si'){ echo 'checked'; } ?> /> Original del Acta de Nacimiento (apostillada si eres extranjero) o Carta de Naturalizaci&oacute;n o FM2 o FM3.
+						</th>
+					</tr> 
+					<tr>
+                		<th class="fondonaranja" style="text-align: left;"> 
+                            <font style="color:#DD3700; float:left; margin-top:15px;">*&nbsp;</font><input type="checkbox" name="certificadoo" id="certificadoo" <?php if($certificadoo == 'si'){ echo 'checked'; }?> style="float:left; margin-top:15px" /> <div style="float: left; text-align: justify; width: 682px; margin-left: 5px;">Original del certificado de preparatoria, o bien, Resoluci&oacute;n de Equivalencia de Estudios o Resoluci&oacute;n de Revalidaci&oacute;n de Estudios si cursaste la educaci&oacute;n preparatoria en el extranjero, as&iacute; como el documento que sirvi&oacute; de antecedente para la emisi&oacute;n de la resoluci&oacute;n.</div>                              
+                		</th>	
+					</tr>
+					<tr>
+                		<th class="fondonaranja" style="text-align: left;"> 
+                			<font style="color:#DD3700;">*&nbsp;</font><input type="checkbox" name="ficha_pago" id="ficha_pago" <?php if($ficha_pago == 'si'){ echo 'checked'; }?> /> Copia fotost&aacute;tica del pago de inscripci&oacute;n sellado por el Banco (Orden de Pago).
+                		</th>	               		
+                	</tr> 
+					<tr>
+                		<th class="fondonaranja" style="text-align: left;"> 
+                            <font style="color:#DD3700; float:left; margin-top:15px;">*&nbsp;</font><input type="checkbox" name="certificadom" <?php if($certificadom == 'si'){ echo 'checked'; }?> style="float:left; margin-top:15px" /> <div style="float: left; text-align: justify; width: 682px; margin-left: 5px;">Certificado m&eacute;dico original, expedido por una Instituci&oacute;n oficial del Sector Salud (IMSS, ISSSTE, Cruz Roja, Cruz Verde, SSA, PENSIONES, SEDENA, Secretar&iacute;a de Marina, Seguro Popular, etc.) con vigencia de 180 d&iacute;as m&aacute;ximo y que especifique tu tipo de sangre.</div>                              
+                		</th>	
+					</tr>
+					<tr>
+                        <th class="fondonaranja" style="text-align: left;"> 
+                			<font style="color:#DD3700;">*&nbsp;</font><input type="checkbox" name="facultativo" <?php if($facultativo == 'si'){ echo 'checked'; }?> /> Carta compromiso para tr&aacute;mite del seguro facultativo.
+                		</th>                		
+                	</tr> 
+					<tr>
+                        <th class="fondonaranja" style="text-align: left;"> 
+                			<font style="color:#DD3700;">*&nbsp;</font><input type="checkbox" name="reglamento" <?php if($reglamento == 'si'){ echo 'checked'; }?> /> Carta de cumplimiento del reglamento escolar.
+                		</th>                		
+                	</tr> 
+					<tr>
+                        <th class="fondonaranja" style="text-align: left;"> 
+                			<font style="color:#DD3700;">*&nbsp;</font><input type="checkbox" name="antidoping" <?php if($antidoping == 'si'){ echo 'checked'; }?> /> Resultado del examen de detecci&oacute;n de uso de drogas il&iacute;citas.
+                		</th>                		
+                	</tr> 
+					<tr>
+                        <th class="fondonaranja" style="text-align: left;"> 
+                		  <input type="checkbox" style="margin-left:18px;" name="extranjero" <?php if($extranjero == 'si'){ echo 'checked'; }?> /> En caso de ser extranjero, copia fotost&aacute;tica del pago de Cuota de Inscripci&oacute;n Alumno Extranjero sellado por el Banco.
+                		</th>                		
+                	</tr> 
+					<tr>
+                        <th class="fondonaranja" style="text-align: left;"> 
+                			<input type="checkbox" style="margin-left:18px;" id="prorroga" name="prorroga" <?php if($prorrogaSol == 'si'){ echo 'checked'; }?>  onclick="muestraOpcionesPro()" /> Prorroga
+                		</th>                		
+                	</tr> 
+					<tr>
+                        <th id="opcionesPro" class="fondonaranja" style="text-align: left; background: #FFCA5B; color:#000000; display:none;"> 
+                			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" style="margin-left:18px;" value="actaPro," id="actaPro" name="actaPro" onclick="countCheckBox(this)" <?php ?> /> Acta Nacimiento (original)<br/>
+                			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" style="margin-left:18px;" value="certificadoPro," id="certificadoPro" name="certificadoPro" onclick="countCheckBox(this)" <?php ?> /> Certificado Estudios (original y copia)<br/>
+                			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" style="margin-left:18px;" value="fichaPagoPro," id="fichaPagoPro" name="fichaPagoPro" onclick="countCheckBox(this)" <?php ?> /> Pago De Inscripci&oacute;n (copia) <br/>
+                			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" style="margin-left:18px;" value="certificadoMedPro," id="certificadoMedPro" name="certificadoMedPro" onclick="countCheckBox(this)" <?php ?> /> Certificado M&eacute;dico (original)<br/>
+                			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" style="margin-left:18px;" value="cartaComPro," id="cartaComPro" name="cartaComPro" onclick="countCheckBox(this)" <?php ?> /> Carta Compromiso (seguro facultativo)<br/>
+                			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" style="margin-left:18px;" value="reglamentoPro," id="reglamentoPro" name="reglamentoPro" onclick="countCheckBox(this)" <?php ?> /> Carta de cumplimiento del reglamento <br/>
+                			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" style="margin-left:18px;" value="antidopingPro," id="antidopingPro" name="antidopingPro" onclick="countCheckBox(this)" <?php ?> /> Resultado del examen de detecci&oacute;n de uso de drogas<br/>
+                			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" style="margin-left:18px;" value="extranjeroPro," id="extranjeroPro" name="extranjeroPro" onclick="countCheckBox(this)" <?php ?> /> Cuota de Inscripci&oacute;n Alumno Extranjero <br/>
+                		</th>                		
+                	</tr> 
+					<tr>
+                        <th id="fechaPro" class="fondonaranja" style="text-align: left; display:none;"> 
+                			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha Prorroga&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="fechaProrroga" name="fechaProrroga" readonly="readonly" style="width:269px;" value="<?php echo $fechaProrroga; ?>" /> 
+                		</th>                		
+                	</tr> 
+					<tr>
+                        <th id="motivosPro" class="fondonaranja" style="text-align: left; display:none; "> 
+                			<div style="margin-top:40px; float: left; margin-left: 45px;">Motivos Prorroga</div>&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="motivosProrroga" name="motivosProrroga" style="min-width:708px; max-width:708px; min-height:100px; max-height:100px;" ><?php echo $motivoProrroga; ?></textarea>
+                		</th>                		
+                	</tr> 
+                </table>
+            </td>        
+        </tr>
+        <tr>
+            <td>
+                <div style="text-align: right;">
+				    <?php echo link_to('ventanilla/fichaPDF/'.$aspirante,'Imprimir');  ?>
+				    <!--<input type="button" value="Imprimir" id="imprimirPDF" name="imprimirPDF" style="height:26px;"/>-->
+                    <? echo  submit_tag('Guardar','id: boton');
+                    ?>
+                </div>
+            </td>
+        </tr>       
+    </table>
+<?= end_form_tag() ?>
+
+<!--En la siguiente div se mostrra los mensajes de alerta-->
+<div id="muestraMensaje" name="muestraMensaje">
+</div>
+
+</center>
+</div>
+
+<script type='text/javascript'>
+  //Funcion que crea el calendario de fecha prorroga
+  $q(function() {
+	$q( "#fechaProrroga" ).datepicker({
+		changeMonth: true,
+		changeYear: true
+	});
+  });
+</script>

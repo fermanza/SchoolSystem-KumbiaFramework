@@ -1,0 +1,137 @@
+<br/>
+<?
+if( !isset($areadeformacion) ){
+?>
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center">
+	<tr>
+		<th class="azull4" width="50">
+			Num
+		</th>
+		<th class="azull4" width="150">
+			Registro
+		</th>
+		<th class="azull4" width="300">
+			Nombre del Alumno
+		</th>
+		<th class="azull4" width="150">
+			Carrera
+		</th>
+		<th class="azull4" width="200">
+			Asignaci&oacute;n de Especialidad
+		</th>
+	</tr>
+	<tr>
+		<td class="bordee">1</td>
+		<td class="bordee">
+			<?= $alumno -> miReg ?>
+		</td>
+		<td class="bordee">
+			<? echo utf8_encode($alumno -> vcNomAlu) ?>
+		</td>
+		<td class="bordee">
+			<? echo utf8_encode($carrera -> nombre) ?>
+		</td>
+		<td class="bordee">
+			<?= form_remote_tag("asignarEspecialidad/asignandoEsp","update: asignadoEsp", "name: FormularioBuscarAlumno") ?>
+				<input type="hidden" name="registro" id="registro" value="<?= $alumno -> miReg ?>" />
+				<input type="submit" value="Asignar Especialidad" />
+			</form>
+		</td>
+	</tr>
+</table>
+<?
+}
+else{
+?>
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center">
+	<tr>
+		<th class="azull4" width="50">
+			Num
+		</th>
+		<th class="azull4" width="100">
+			Registro
+		</th>
+		<th class="azull4" width="250">
+			Nombre del Alumno
+		</th>
+		<th class="azull4" width="125">
+			Carrera
+		</th>
+		<th class="azull4" width="200">
+			Especialidad Asignada
+		</th>
+		<th class="azull4" width="150">
+			Ver m&aacute;s Info
+		</th>
+	</tr>
+	<tr>
+		<td class="bordee">1</td>
+		<td class="bordee">
+			<?= $alumno -> miReg ?>
+		</td>
+		<td class="bordee">
+			<? echo utf8_encode($alumno -> vcNomAlu) ?>
+		</td>
+		<td class="bordee">
+			<? echo utf8_encode($carrera -> nombre) ?>
+		</td>
+		<td class="bordee">
+			<? echo utf8_encode($areadeformacion -> nombreareaformacion) ?>
+		</td>
+		<td class="bordee">
+			<?= form_remote_tag("asignarEspecialidad/mostrandoAlumnosConEsp","update: asignadoEsp", "name: FormularioBuscarAlumno") ?>
+				<input type="hidden" name="registro" id="registro" value="<?= $alumno -> miReg ?>" />
+				<input type="image" src="<?= KUMBIA_PATH ?>img/SpyGlass.png" border="0" alt="Ver Alumno" width="35">
+			</form>
+		</td>
+	</tr>
+</table>
+<?
+}
+?>
+<br />
+<br />
+<?
+if( isset($logcambiosespecialidades) ){
+?>
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center">
+	<tr>
+		<th class="azull4" width="200">
+			Persona que hizo el Movimiento
+		</th>
+		<th class="azull4" width="125">
+			Carrera
+		</th>
+		<th class="azull4" width="200">
+			Especialidad Asignada
+		</th>
+		<th class="azull4" width="150">
+			Fecha Del Movimiento
+		</th>
+	</tr>
+<?
+	$i = 0;
+	foreach($logcambiosespecialidades as $log){
+?>
+	<tr>
+		<td class="bordee">
+			<? echo utf8_encode($quienHizoMov[$i]) ?>
+		</td>
+		<td class="bordee">
+			<? echo utf8_encode($carreras[$i] -> nombre) ?>
+		</td>
+		<td class="bordee">
+			<? echo utf8_encode($areasdeformacion[$i] -> nombreareaformacion) ?>
+		</td>
+		<td class="bordee">
+			<? echo date ("Y-m-d H:i:s", $log -> fecha); ?>
+		</td>
+	</tr>
+<?
+	$i++;
+	}
+?>
+</table>
+<?
+}
+?>

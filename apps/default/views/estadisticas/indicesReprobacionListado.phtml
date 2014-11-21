@@ -1,0 +1,111 @@
+<table>
+	<tr>
+		<td>
+			&nbsp;
+		</td>
+	<tr>
+</table>
+<br />
+<br />
+<?php render_partial("menuestadisticas"); ?>
+<br />
+<br />
+<br />
+
+<form action="<?= KUMBIA_PATH ?>alumno/cambiandoContrasena"
+		method="post" name="Formulario1" id="Formulario1">
+<select name="parcial" id="parcial" class="listaParcial">
+	<option value="1">Primer Parcial</option>
+	<option value="2">Segundo Parcial</option>
+	<option value="3">Tercer Parcial</option>
+</select>
+</form>
+<br />
+<div id="infoToda">
+<form action="<?= KUMBIA_PATH ?>estadisticas/exportarAExcel/<?= $parcialNum ?>"
+	method="post" name="Formulario2" id="Formulario2">
+<input type="image" src="<?= KUMBIA_PATH ?>img/exportarexcel.jpg"
+		width="55" title="Exportar a Excel" class="exportarExcel" />
+</form>
+<h3 align="center"><?= $parcial ?></h3>
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center" width="80%">
+	<tr>
+		<th class="azull4" width="100">
+			Clave Curso
+		</th>
+		<th class="azull4" width="300">
+			Materia
+		</th>
+		<th class="azull4" width="300">
+			Maestro
+		</th>
+		<th class="azull4" width="20">
+			Horas Clase
+		</th>
+		<th class="azull4" width="20">
+			Total Alumnos
+		</th>
+		<th class="azull4" width="20">
+			Alumnos con NP
+		</th>
+		<th class="azull4" width="20">
+			Alumnos sin Calif
+		</th>
+		<th class="azull4" width="20">
+			Alumnos Reprobados
+		</th>
+		<th class="azull4" width="20">
+			Alumnos Aprobados
+		</th>
+	</tr>
+	<?
+	for( $i = 0; $i < count($clavecurso); $i ++ ){
+	?>
+	<tr>
+		<td class="bordee">
+			<h4><? echo $clavecurso[$i]; ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? echo $materia[$i]; ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? echo $maestro[$i]; ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? echo $horasClase[$i]; ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? echo $totalAlumnos[$i]; ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? if( isSet($np[$i])  ){ echo $np[$i]; }else{ echo "-"; } ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? if( isSet($sinCalif[$i])  ){ echo $sinCalif[$i]; }else{ echo "-"; } ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? if( isSet($reprobados[$i])  ){ echo $reprobados[$i]; }else{ echo "-"; } ?></h4>
+		</td>
+		<td class="bordee">
+			<h4><? if( isSet($aprobados[$i])  ){ echo $aprobados[$i]; }else{ echo "-"; } ?></h4>
+		</td>
+	</tr>
+	<?
+	}
+	?>
+</table>
+</div>
+
+<br />
+<br />
+<?
+	print "<script type=\"text/javascript\">
+	new Event.observe(\"parcial\", \"change\", function(){
+	var parcial = document.Formulario1.parcial.value;
+	new AJAX.viewRequest({
+		action: \"estadisticas/indicesReprobacionListado2/\"+".parcial."+\"\",
+		container: \"infoToda\"
+	})
+	})
+	</script>";
+?>

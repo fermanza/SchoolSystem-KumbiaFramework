@@ -1,0 +1,108 @@
+<center><br><br>
+<table>
+	<tr>
+		<td width="900" align="left">
+			<div style="font-size: 14px;"><b>Horario del alumno (<?= $periodo ?>)</b></div>
+			<hr><br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr>
+					<th width="140" height="25" bgcolor="#FFCA5B">&nbsp;Nombre del alumno:</th>
+					<th width="500" colspan="3" bgcolor="#EEEEEE">&nbsp;<?= $alumno -> vcNomAlu ?> (<?= $alumno -> miReg ?>)</th>
+					<th width="150" height="25" bgcolor="#FFCA5B">&nbsp;Promedio:</th>
+					<th width="100" bgcolor="#EEEEEE">&nbsp;<?= $promedio ?></th>
+				</tr>
+				<tr>
+					<th width="140" height="25" bgcolor="#FFCA5B">&nbsp;Especialidad:</th>
+					<th width="300" bgcolor="#EEEEEE">&nbsp;
+					<?php
+					if( $alumno -> areadeformacion_id != 0 )
+						echo $career -> nombre." ".$career -> nombreareaformacion;
+					else
+						echo $career -> nombre;
+					?>
+					</th>
+					<th width="100" height="25" bgcolor="#FFCA5B">&nbsp;Plantel:</th>
+					<th width="100" bgcolor="#EEEEEE">&nbsp;<?= $plantel ?></th>
+					<th width="150" height="25" bgcolor="#FFCA5B"><b>&nbsp;N&uacute;mero de cr&eacute;ditos:</th>
+					<th width="100" bgcolor="#EEEEEE">&nbsp;<?= $ncreditos ?></th>
+				</tr>
+			</table>
+			<br /><br />
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 10px;" >
+				<?
+				$i = 0;
+				foreach( $xccur as $xcc ){
+				?>
+				<tr>
+					<td width="120" bgcolor="#FFCA5B" align="center">&nbsp;Clave del Curso:</td>
+					<td width="100" bgcolor="#EEEEEE" align="center">
+						&nbsp;<?= $xcc -> clavecurso ?>
+					</td>
+					<td width="100" bgcolor="#FFCA5B" align="center">&nbsp;Materia:</td>
+					<td width="300" bgcolor="#EEEEEE">
+						&nbsp;<? echo (substr($materias[$i] -> nombre, 0, 32))."&nbsp;-&nbsp;".$materias[$i] -> clave; ?>
+					</td>
+					<td width="100" bgcolor="#FFCA5B" align="center">&nbsp;Profesor:</td>
+					<td width="240" bgcolor="#EEEEEE">
+						&nbsp;<? echo (substr($maestros[$i] -> nombre, 0, 32)) ?>
+					</td>
+				</tr>
+				<?
+				$i ++;
+				}
+				?>
+			</table>
+			<br />
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 10px;" >
+				<tr>
+					<th width="85" height="25" bgcolor="#FFCA5B">&nbsp;Hora/D&iacute;as</th>
+					<th width="150" height="25" bgcolor="#FFCA5B">&nbsp;Lunes</th>
+					<th width="150" height="25" bgcolor="#FFCA5B">&nbsp;Martes</th>
+					<th width="150" height="25" bgcolor="#FFCA5B">&nbsp;Mi&eacute;rcoles</th>
+					<th width="150" height="25" bgcolor="#FFCA5B">&nbsp;Jueves</th>
+					<th width="150" height="25" bgcolor="#FFCA5B">&nbsp;Viernes</th>
+				</tr>
+				<?
+				for( $j = $inicioHora; $j <= $finHora; $j++ ){
+					echo "<tr>";
+					for( $i = 0; $i <= 5; $i++ ){
+						if(	$i == 0 ){
+						?>
+							<th width="85" height="25" bgcolor="#FFCA5B" align="center">
+								<? echo $j.":00 - ".($j + 1).":00";  ?>
+							</td>
+						<?
+						}
+						else if( isset($horarios[$i][$j]) ){
+						?>
+							<td width="175" height="50" align="center"
+								<? if( ($j % 2) == 0 ) echo "bgcolor='#C3C3C3'"; else echo "bgcolor='#EEEEEE'"; ?>>
+								<? echo substr($horarios[$i][$j] -> nombre, 0, 22)."<br />".
+										$horarios[$i][$j] -> clavecurso."<br />".
+										$horarios[$i][$j] -> edificio.":".$horarios[$i][$j] -> nombreSalon;
+									if( isset($horarios[1][$i][$j]) ){
+										echo "<br /><br />".substr($horarios[1][$i][$j] -> nombre, 0, 18)."<br />".
+										$horarios[1][$i][$j] -> clavecurso."<br />".
+										$horarios[1][$i][$j] -> edificio.":".$horarios[1][$i][$j] -> nombreSalon;
+									}
+								?>
+							</td>
+						<?
+						}
+						else{
+						?>
+							<td width="175" height="25" 
+								<? if( ($j % 2) == 0 ) echo "bgcolor='#C3C3C3'"; else echo "bgcolor='#EEEEEE'"; ?>>
+							</td>
+						<?
+						}
+					}
+					echo "</tr>";
+				}
+				?>
+			</table>
+		</td>
+	</tr>
+</table>
+<br />
+</center>

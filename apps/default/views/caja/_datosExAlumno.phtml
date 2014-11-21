@@ -1,0 +1,47 @@
+<?= stylesheet_link_tag('ventana/ventanaPopUp', true); ?>
+<center>
+  <table style="width:100%; font-family:arial; font-size:13px; margin-top:0px;">
+    <tr style="font-weight:bold; color:#FFFFFF; height:30px; text-align:center; background:#2462AB;">
+	  <td colspan="6">
+		EX-ALUMNOS ENCONTRADOS
+	  </td>
+	</tr>
+	<tr style="font-weight:bold; color:#FFFFFF; height:30px; text-align:center; background:#2462AB;">
+	  <td width="50">REGISTRO</td>
+	  <td width="329">NOMBRE</td>
+	  <td width="459">CARRERA</td>
+	  <td width="33">PERIODO</td>
+	  <td width="103">PLANTEL</td>
+	  <td width="103">VER</td>
+	</tr>
+<?php
+
+if(count($resultEA) <= 0 || $resultEA == "")
+{
+  echo tr_color('#FFFFFF','#E5E3E3');
+  echo '<td height="40px"  width="50" align="center" colspan="6" style="font-weight:bold;">NO SE ENCONTRARON REGISTROS</td>';
+}
+
+else
+{
+  foreach($resultEA AS $value){
+	
+    echo tr_color('#FFFFFF','#E5E3E3');
+	echo '<td height="40px"  width="50" align="center">'.$value -> reg.'</td>';
+	echo '<td height="40px" width="329">&nbsp;'.utf8_encode($value -> nomExAlumno).'&nbsp;</td>';
+	echo '<td height="40px" width="459">&nbsp;'.utf8_encode($value -> especialidad).'&nbsp;</td>';
+	echo '<td height="40px" width="33" align="center" >'.$value -> periodo.'</td>';
+	if($value -> plantel == "C")
+	  echo '<td height="40px" width="103" align="center" >Colomos</td>';
+	
+	else
+	  echo '<td height="40px" width="103" align="center" >Tonal&aacute;</td>';
+	  
+	echo '<td height="40px" width="103" align="center" ><img src="../img/SpyGlass.png" id="view" name="view" onclick="viewDataExAlum('.$value -> reg.')"  style="cursor: pointer; width: 50px; height: 60px;"></td>';
+	echo '</tr>';
+  } 
+}
+?>
+  </table>
+</center>
+

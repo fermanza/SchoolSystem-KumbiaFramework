@@ -1,0 +1,78 @@
+<script language="JavaScript">
+	
+	function eliminar(){
+		
+		if( window.confirm( "¿Estás Seguro de que deseas eliminar dicho curso?" ) ){
+			return true;
+		}
+		
+		return false;
+	}
+
+</script>
+
+<?= render_partial("info"); ?>
+
+<br />
+<br />
+<br />
+<br />
+<?= render_partial("menucursost"); ?>
+<br />
+<br />
+<br />
+
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center">
+	<br />
+	<br />
+	<tr>
+		<th class="azull4" width="20" colspan="6">
+			Clavecurso <?= $cursoClave ?>
+		</th>
+	</tr>
+	<tr>
+		<th class="azull4" width="50">
+			No.
+		</th>
+		<th class="azull4" width="75">
+			Registro
+		</th>
+		<th class="azull4" width="75">
+			Plan 00 &oacute; 07
+		</th>
+		<th class="azull4" width="125">
+			Nombre
+		</th>
+		<th class="azull4" width="150">
+			Materia
+		</th>
+		<th class="azull4" width="125">
+			Carrera
+		</th>
+	</tr>
+	<!--
+	$this -> registroAlumno[$i]		= $xalumncur -> registro;
+	$this -> nombreAlumno[$i]		= $alumno -> vcNomAlu;
+	$this -> materiaAlumno[$i]		= $mat -> nombre;
+	$this -> carreraAlumno[$i]		= $carrera -> vcNomEsp;
+	-->
+	<?
+	$i = 0;
+	foreach( $registroAlumno as $registro ){
+	?>
+		<tr>
+			<td width="50" align="center"><? echo $i + 1; ?></td>
+			<td width="75" align="center"><?= $registro ?></td>
+			<td width="75" align="center"><?= $planAlumno[$i] ?></td>
+			<td width="125" align="center"><?= $nombreAlumno[$i] ?></td>
+			<td width="150" align="center"><?= $materiaAlumno[$i] ?></td>
+			<td width="125" align="center"><?= $carreraAlumno[$i] ?></td>
+		</tr>
+	<?
+		$i++;
+	}
+	?>
+</table>
+</div>
+<br />
+<br />

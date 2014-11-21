@@ -1,0 +1,181 @@
+<?
+if( isSet($mensaje) ){
+?>
+<table cellspacing="1" cellpadding="1" style="font-size: 12px;" border="0" align="center">
+	<tr>
+		<th>
+			<? echo $mensaje; ?>
+		</th>
+	</tr>
+</table>
+<?
+}
+else{
+?>
+	<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="0" align="center">
+		<br />
+		<br />
+		<tr>
+			<th class="azull4" width="20">
+				Borrar
+			</th>
+			<th class="azull4" width="20">
+				Editar
+			</th>
+			<th class="azull4" width="20">
+				Curso
+			</th>
+			<th class="azull4" width="300">
+				Materia
+			</th>
+			<th class="azull4" width="180">
+				Profesor
+			</th>
+			<th class="azull4" width="50">
+				Cupo
+			</th>
+			<th class="azull4" width="50" colspan="6">
+				Horario
+			</th>
+		</tr>
+		<tr>
+			<td class="bordee" rowspan="2">
+				<form action="<?= KUMBIA_PATH ?>capturarcursos/borrarCursoT"
+						method="post" onSubmit="return delete1();">
+					<input type="image" src="<?= KUMBIA_PATH ?>img/delete2.gif" border="0">
+					<input type="hidden" id="deleteID" name="deleteID"
+							value="<? echo $cursos -> clavecurso; ?>">
+				</form>
+			</td>
+			<td class="bordee" rowspan="2">
+				<form action="<?= KUMBIA_PATH ?>capturarcursos/editarCursoT" method="post">
+					<input type="image" src="<?= KUMBIA_PATH ?>img/edit.gif" border="0">
+					<input type="hidden" id="editID" name="editID"
+							value="<? echo $cursos -> clavecurso; ?>">
+				</form>
+			</td>
+			<td class="bordee" rowspan="2">
+				<h5><a href="#" ><? echo $cursos -> clavecurso; ?></a></h5>
+			</td>
+			<td class="bordee" rowspan="2">
+				<?
+				if( isSet( $materias -> clave ) ){
+					echo "Plan2007";
+					echo htmlentities( $materias -> clave." - ".$materias -> nombre );
+				}
+			/*
+				if( isSet( $materias -> clave ) ){
+					echo htmlentities("Plan 2007: ".
+							$materias -> clave." - ".$materias -> nombre)."<br />";
+					//echo $mat07."<br />";
+				}
+			*/
+				?>
+			</td>
+			<td class="bordee" rowspan="2">
+				<? echo "(".$maestros -> nomina.") ".$maestros -> nombre; ?>
+			</td>
+			<td class="bordee" rowspan="2">
+				<? echo $cursos -> cupo; ?>
+			</td>
+			<th class="azull2" width="30">
+				Lunes
+			</td>
+			<th class="azull2" width="30">
+				Martes
+			</td>
+			<th class="azull2" width="30">
+				Mi&eacute;rcoles
+			</td>
+			<th class="azull2" width="30">
+				Jueves
+			</td>
+			<th class="azull2" width="30">
+				Viernes
+			</td>
+			<th class="azull2" width="30">
+				S&aacute;bado
+			</td>
+		</tr>
+		<tr>
+				<?
+				
+				for( $k = 1; $k < 7; $k++ ){
+					$dia[$k] = 0;
+				}
+				if( !isSet($horas[$cursos -> id]) ){
+					echo "<td class='bordee' colspan='6'><h2>Curso no presencial</h2></td>";
+				}
+				else{
+					for( $j = 0; $j < count($horas[$cursos -> id]); $j ++ ){
+						
+						// Así accedo al dia del curso
+						//$horas[$cursos -> id][$j] -> dia
+						
+						// Así accedo a la hora del curso
+						//$horas[$cursos -> id][$j] -> hora
+						
+						// Así accedo al curso, que estoy viendo actualmente
+						//$cursos -> id]
+						
+						// Dia del curso
+						//$horas[$cursos -> id][$j] -> dia
+						
+						for( $k = 1; $k < 7; $k++ ){
+							if( $dia[$k] == 0 ){
+								if( $k >= $horas[$cursos -> id][$j] -> dia ){
+									break;
+								}
+								else if( $k != $horas[$cursos -> id][$j] -> dia ){
+									echo "<td class='bordee'>&nbsp;</td>";
+									$dia[$k] = 1;
+								}
+							}
+						}
+						
+						if( $dia[$horas[$cursos -> id][$j] -> dia] == 0 ){
+							// Pongo en la variable auxiliar el número del día de
+							//la semana, de este curso, para saber si pongo un nuevo <td> o no...
+							$dia[$horas[$cursos -> id][$j] -> dia] = 1;
+							echo "<td class='bordee'>";
+						}
+						
+						if( !isSet($horas[$cursos -> id][$j+1]) ){
+							echo $horas[$cursos -> id][$j] -> hora."-".
+									($horas[$cursos -> id][$j] -> hora + 1)."<br />".
+											$salon[$cursos -> id][$j] -> edificio.":".
+													$salon[$cursos -> id][$j] ->nombre."<br />";
+							echo "</td>";
+						}
+						else if( $horas[$cursos -> id][$j] != null ){
+							
+							if( $horas[$cursos -> id][$j+1] != null ){
+								echo $horas[$cursos -> id][$j] -> hora."-".
+										($horas[$cursos -> id][$j] -> hora + 1)."<br />".
+												$salon[$cursos -> id][$j] -> edificio.":".
+														$salon[$cursos -> id][$j] ->nombre."<br />";
+							}
+							else{
+								echo $horas[$cursos -> id][$j] -> hora."-".
+										($horas[$cursos -> id][$j] -> hora + 1)."<br />".
+												$salon[$cursos -> id][$j] -> edificio.":".
+														$salon[$cursos -> id][$j] ->nombre."<br />";
+								echo "</td>";
+							}
+						}
+						
+						if( !isSet($horas[$cursos -> id][$j+1]) ){
+							for( $k = 1; $k < 7; $k++ ){
+								if( $dia[$k] == 0 ){
+									echo "<td class='bordee'>&nbsp;</td>";
+								}
+							}
+						}
+					}
+				}
+				?>
+		</tr>
+	</table>
+<?
+}
+?>

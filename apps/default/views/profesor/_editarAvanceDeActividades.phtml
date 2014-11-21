@@ -1,0 +1,49 @@
+<table>
+	<tr class="naranja">
+		<th class="bordeAzul2" colspan="17">
+			Actividades Asignadas Actualmente
+		</td>
+	</tr>
+	<tr class="naranja">
+		<th class="bordeAzul2">Informar % Avance</th>
+		<th class="bordeAzul2">Actividad</th>
+		<th class="bordeAzul2">Horas Estimadas</th>
+		<th class="bordeAzul2">Objetivo</th>
+		<th class="bordeAzul2">Meta</th>
+		<th class="bordeAzul2">Periodo</th>
+		<th class="bordeAzul2">% Avance 1</th>
+		<th class="bordeAzul2">% Avance 2</th>
+		<th class="bordeAzul2">% Avance 3</th>
+		<th class="bordeAzul2">Fecha Creaci&oacute;n</th>
+		<th class="bordeAzul2">Fecha &uacute;ltima modifiaci&oacute;n</th>
+	</tr>
+	<?
+	if( isset($actividadMaestro) ){
+	foreach( $actividadMaestro as $act ){
+	?>
+		<tr>
+			<th class="bordeAzul2">
+			<?= form_remote_tag("profesor/editarActividad","update: editarActividad", "name: Formulario") ?>
+				<input type="image" src="<?= KUMBIA_PATH ?>img/edit.gif" border="0" alt="Editar Actividad">
+				<input type="hidden" id="editID" name="editID"
+						value="<? echo $act -> id; ?>">
+			</form>
+			</th>
+			<th class="bordeAzul2"><?= $act -> actividad ?></th>
+			<th class="bordeAzul2"><?= $act -> horas ?></th>
+			<th class="bordeAzul2"><?= $act -> objetivo ?></th>
+			<th class="bordeAzul2"><?= $act -> meta ?></th>
+			<th class="bordeAzul2"><?= $act -> periodo ?></th>
+			<th class="bordeAzul2"><?= $act -> avance1 ?></th>
+			<th class="bordeAzul2"><?= $act -> avance2 ?></th>
+			<th class="bordeAzul2"><?= $act -> avance3 ?></th>
+			<th class="bordeAzul2"><?= $act -> creado_at ?></th>
+			<th class="bordeAzul2"><?= $act -> modificado_in ?></th>
+		</tr>
+	<?
+	}
+	}
+	?>
+</table>
+<br />
+<br />

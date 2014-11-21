@@ -1,0 +1,337 @@
+
+<style type="text/css">
+    .cielo{
+        background:#EFEFEF;
+        text-transform:uppercase;
+        font-weight:bold;
+    }
+</style>
+<script type='text/javascript'>
+    function modificacion(folio, tipoAspirante) {
+        window.location.href = '<?= KUMBIA_PATH ?>aspirantes/modificacion/'+folio+'/'+tipoAspirante;
+    }
+    function ficha(folio, tipoAspirante) {
+        window.location.href = '<?= KUMBIA_PATH ?>aspirantes/ficha/'+folio+'/'+tipoAspirante;
+    }
+    function registrarNuevoAsp() {
+        window.location.href = '<?= KUMBIA_PATH ?>ventanilla/aspirantes/';
+    }
+</script><center>
+    <table border="1" align="center">
+        <br />
+        <tr>
+            <th colspan="5" class="fondoazul" height="25" style="font-size:14px;">DATOS ACAD�MICOS</font></th>
+        </tr>
+        <tr>
+            <th class="fondonaranja">
+                Folio
+            </th>
+            <th class="fondonaranja">
+                Ficha
+            </th>
+            <th class="fondonaranja">
+                Periodo
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <input type="text" style="width:75px; text-align:center; color:#000;" name="folio" value="<?= $folio ?>" class="cielo" disabled>
+            </th>
+            <th>
+                <input type="text" style="width:75px; text-align:center; color:#000;" name="ficha" value="<?= $ficha ?>" class="cielo" disabled>
+            </th>
+            <th>
+                <input type="text" style="width:75px; text-align:center; color:#000;" name="periodo" value="<?= $periodo ?>" class="cielo" disabled>
+            </th>
+        </tr>
+        <tr>
+            <th class="fondonaranja">
+                Carrera Opc1
+            </th>
+            <th colspan="2">
+                <select name="carrera" style="width:440px; font-weight:none;" class="cielo" disabled>
+                    <!--
+                    <optgroup label="NIVEL TECNOLOGO">
+                    <option value="T:200" <?php if ($carrera == 200 && $nivel == 'T') echo "SELECTED"; ?>>200 - TECNOLOGO EN INFORM�TICA Y COMPUTACI�N</option>
+                    <option value="T:400" <?php if ($carrera == 400 && $nivel == 'T') echo "SELECTED"; ?>>400 - TECNOLOGO EN CONTROL AUTOM�TICO E INSTRUMENTACI�N</option>
+                    <option value="T:500" <?php if ($carrera == 500 && $nivel == 'T') echo "SELECTED"; ?>>500 - TECNOLOGO EN CONTRUCCI�N</option>
+                    <option value="T:600" <?php if ($carrera == 600 && $nivel == 'T') echo "SELECTED"; ?>>600 - TECNOLOGO EN ELECTR�NICA Y COMUNICACIONES</option>
+                    <option value="T:700" <?php if ($carrera == 700 && $nivel == 'T') echo "SELECTED"; ?>>700 - TECNOLOGO EN ELECTROTECNIA</option>
+                    <option value="T:800" <?php if ($carrera == 800 && $nivel == 'T') echo "SELECTED"; ?>>800 - TECNOLOGO EN M�QUINAS HERRAMIENTA</option>
+                    <option value="T:801" <?php if ($carrera == 801 && $nivel == 'T') echo "SELECTED"; ?>>801 - TECNOLOGO EN MEC�NICA AUTOMOTRIZ</option>
+                    <option value="T:804" <?php if ($carrera == 804 && $nivel == 'T') echo "SELECTED"; ?>>804 - TECNOLOGO EN MANUFACTURA DE PL�STICOS</option>
+                    -->
+                    <optgroup label="NIVEL INGENIER�A">
+                        <option value="0" <?php if ($opc1 == 0 && $nivel == 'I') echo "SELECTED"; ?>></option>
+                        <option value="1" <?php if ($opc1 == 1 && $nivel == 'I') echo "SELECTED"; ?>>400 - INGENIERIA INDUSTRIAL - COLOMOS - VESPERTINO</option>
+                        <option value="2" <?php if ($opc1 == 2 && $nivel == 'I') echo "SELECTED"; ?>>400 - INGENIERIA INDUSTRIAL - COLOMOS - MATUTINO</option>
+                        <option value="3" <?php if ($opc1 == 3 && $nivel == 'I') echo "SELECTED"; ?>>600 - INGENIERIA EN ELECTR�NICA</option>
+                        <option value="4" <?php if ($opc1 == 4 && $nivel == 'I') echo "SELECTED"; ?>>801 - INGENIERIA EN MECATR�NICA - COLOMOS</option>
+                        <option value="5" <?php if ($opc1 == 5 && $nivel == 'I') echo "SELECTED"; ?>>801 - INGENIERIA EN MECATR�NICA - TONALA</option>
+                </select>
+            </th>
+        </tr>
+        <tr>
+            <th class="fondonaranja">
+                Carrera Opc2
+            </th>
+            <th colspan="2">
+                <select name="carrera" style="width:440px; font-weight:none;" class="cielo" disabled>
+                    <optgroup label="NIVEL INGENIER�A">
+                        <option value="0" <?php if ($opc2 == 0 && $nivel == 'I') echo "SELECTED"; ?>></option>
+                        <option value="1" <?php if ($opc2 == 1 && $nivel == 'I') echo "SELECTED"; ?>>400 - INGENIERIA INDUSTRIAL - COLOMOS - VESPERTINO</option>
+                        <option value="1" <?php if ($opc2 == 1 && $nivel == 'I') echo "SELECTED"; ?>>400 - INGENIERIA INDUSTRIAL - COLOMOS - VESPERTINO</option>
+                        <option value="2" <?php if ($opc2 == 2 && $nivel == 'I') echo "SELECTED"; ?>>400 - INGENIERIA INDUSTRIAL - COLOMOS - MATUTINO</option>
+                        <option value="3" <?php if ($opc2 == 3 && $nivel == 'I') echo "SELECTED"; ?>>600 - INGENIERIA EN ELECTR�NICA</option>
+                        <option value="4" <?php if ($opc2 == 4 && $nivel == 'I') echo "SELECTED"; ?>>801 - INGENIERIA EN MECATR�NICA - COLOMOS</option>
+                        <option value="5" <?php if ($opc2 == 5 && $nivel == 'I') echo "SELECTED"; ?>>801 - INGENIERIA EN MECATR�NICA - TONALA</option>
+                </select>
+            </th>
+        </tr>
+        <tr>
+            <th class="fondonaranja">
+                Carrera Opc3
+            </th>
+            <th colspan="2">
+                <select name="carrera" style="width:440px; font-weight:none;" class="cielo" disabled>
+                    <optgroup label="NIVEL INGENIER�A">
+                        <option value="0" <?php if ($opc3 == 0 && $nivel == 'I') echo "SELECTED"; ?>></option>
+                        <option value="1" <?php if ($opc3 == 1 && $nivel == 'I') echo "SELECTED"; ?>>400 - INGENIERIA INDUSTRIAL - COLOMOS - VESPERTINO</option>
+                        <option value="2" <?php if ($opc3 == 2 && $nivel == 'I') echo "SELECTED"; ?>>400 - INGENIERIA INDUSTRIAL - COLOMOS - MATUTINO</option>
+                        <option value="3" <?php if ($opc3 == 3 && $nivel == 'I') echo "SELECTED"; ?>>600 - INGENIERIA EN ELECTR�NICA</option>
+                        <option value="4" <?php if ($opc3 == 4 && $nivel == 'I') echo "SELECTED"; ?>>801 - INGENIERIA EN MECATR�NICA - COLOMOS</option>
+                        <option value="5" <?php if ($opc3 == 5 && $nivel == 'I') echo "SELECTED"; ?>>801 - INGENIERIA EN MECATR�NICA - TONALA</option>
+                </select>
+            </th>
+        </tr>
+    </table><br><br>
+    <table border="1" align="center">
+        <tr>
+            <th colspan="5" class="fondoazul" height="25" style="font-size:14px;">DATOS PERSONALES</font></th>
+        </tr>
+        <tr>
+            <td rowspan="2" width="150" class="fondoazul">
+                <b>&nbsp;Nombre:</b>
+            </td>
+            <th class="fondonaranja">
+                Apellido paterno
+            </th>
+            <th class="fondonaranja">
+                Apellido materno
+            </th>
+            <th colspan="2" class="fondonaranja">
+                Nombre(s)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <input type="text" style="width:125px" name="paterno" class="cielo" value="<?= $paterno ?>" disabled>
+            </th>
+            <th>
+                <input type="text" style="width:125px" name="materno" class="cielo" value="<?= $materno ?>" disabled>
+            </th>
+            <th colspan="2">
+                <input type="text" style="width:260px" name="nombre" class="cielo" value="<?= $nombre ?>" disabled>
+            </th>
+        </tr>
+        <tr>
+            <td rowspan="6" class="fondoazul">
+                <b>&nbsp;Domicilio:</b>
+            </td>
+            <th colspan="2" class="fondonaranja">
+                Calle
+            </th>
+            <th class="fondonaranja">
+                N�mero Exterior
+            </th>
+            <th class="fondonaranja">
+                N�mero Interior
+            </th>
+
+        </tr>
+        <tr>
+            <th colspan="2">
+                <input type="text" style="width:262px;" name="calle" class="cielo" value="<?= $calle ?>" disabled>
+            </th>
+            <th>
+                <input type="text" style="width:125px" name="exterior" class="cielo" value="<?= $exterior ?>" disabled>
+            </th>
+            <th>
+                <input type="text" style="width:125px" name="interior" class="cielo" value="<?= $interior ?>" disabled>
+            </th>
+        </tr>
+        <tr>
+            <th class="fondonaranja">
+                Colonia
+            </th>
+            <th class="fondonaranja">
+                C�digo postal
+            </th>
+            <th class="fondonaranja">
+                Municipio
+            </th>
+            <th class="fondonaranja">
+                Estado
+            </th>
+
+        </tr>
+        <tr>
+            <th>
+                <input type="text" style="width:125px" name="colonia" class="cielo" value="<?= $colonia ?>" disabled>
+            </th>
+            <th>
+                <input type="text" style="width:125px" name="cp" class="cielo" value="<?= $cp ?>" disabled>
+            </th>
+            <th>
+                <input type="text" style="width:125px" name="municipio" class="cielo" value="<?= $municipio ?>" disabled>
+            </th>
+            <th>
+                <input type="text" style="width:125px" name="estado" class="cielo" value="<?= $estado ?>" disabled>
+            </th>
+        </tr>
+        <tr>
+            <th class="fondonaranja" colspan="2">
+                Lugar Nacimiento
+            </th>
+            <th class="fondonaranja" colspan="2">
+                Fecha Nacimiento
+            </th>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <input type="text" style="width:258px" name="lugarNacimiento" class="cielo" value="<?= $lugarNacimiento ?>" disabled>
+            </th>
+            <th class="fondonaranja" colspan="2">
+                <select name="d" style="width:60px" class="cielo" disabled>
+                    <?php for ($i = 1; $i < 32; $i++) { ?>
+                        <option value="<?= $i ?>"  <?php if ($d == $i) echo "SELECTED"; ?>><?= $i ?></option>
+                    <?php } ?>
+                </select>
+                <select name="m" style="width:130px" class="cielo" disabled>
+                    <option value="1" <?php if ($m == "01") echo "SELECTED"; ?>>Enero</option>
+                    <option value="2" <?php if ($m == "02") echo "SELECTED"; ?>>Febrero</option>
+                    <option value="3" <?php if ($m == "03") echo "SELECTED"; ?>>Marzo</option>
+                    <option value="4" <?php if ($m == "04") echo "SELECTED"; ?>>Abril</option>
+                    <option value="5" <?php if ($m == "05") echo "SELECTED"; ?>>Mayo</option>
+                    <option value="6" <?php if ($m == "06") echo "SELECTED"; ?>>Junio</option>
+                    <option value="7" <?php if ($m == "07") echo "SELECTED"; ?>>Julio</option>
+                    <option value="8" <?php if ($m == "08") echo "SELECTED"; ?>>Agosto</option>
+                    <option value="9" <?php if ($m == "09") echo "SELECTED"; ?>>Septiembre</option>
+                    <option value="10" <?php if ($m == "10") echo "SELECTED"; ?>>Octubre</option>
+                    <option value="11" <?php if ($m == "11") echo "SELECTED"; ?>>Noviembre</option>
+                    <option value="12" <?php if ($m == "12") echo "SELECTED"; ?>>Diciembre</option>
+                </select>
+                <select name="a" style="width:68px" class="cielo" disabled>
+                    <?php
+                    for ($i = 1940; $i < 2012; $i++) {
+                        ?>
+                        <option value="<?= $i ?>" <?php if ($a == $i) echo "SELECTED"; ?>><?= $i ?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
+            </th>
+        </tr>
+        <tr>
+            <td rowspan="2" class="fondoazul">
+                <b>&nbsp;Contacto:</b>
+            </td>
+            <th class="fondonaranja">
+                Tel�fono
+            </th>
+            <th class="fondonaranja">
+                Celular
+            </th>
+            <th colspan="2" class="fondonaranja">
+                E-mail
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <input type="text" style="width:125px" name="telefono" class="cielo" value="<?= $telefono ?>" disabled>
+            </th>
+            <th>
+                <input type="text" style="width:125px" name="celular" class="cielo" value="<?= $celular ?>" disabled>
+            </th>
+            <th colspan="2">
+                <input type="text" style="width:260px" name="correo" class="cielo" value="<?= $correo ?>" disabled>
+            </th>
+        </tr>
+        <tr>
+            <td rowspan="2" class="fondoazul">
+                <b>&nbsp;Informaci�n:</b>
+            </td>
+            <th colspan="2" class="fondonaranja">
+                Genero
+            </th>
+            <th colspan="2" class="fondonaranja">
+                Estado civil
+            </th>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <select name="sexo" style="width:265px" class="cielo" disabled>
+                    <option value="H" <?php if ($sexo == 'H') echo "SELECTED"; ?>>Hombre</option>
+                    <option value="M" <?php if ($sexo == 'M') echo "SELECTED"; ?>>Mujer</option>
+                </select>
+            </th>
+            <th colspan="2">
+                <select name="estadocivil" style="width:265px" class="cielo" disabled>
+                    <option value="SOLTERO" <?php if ($estadocivil == "SOLTERO") echo "SELECTED"; ?>>Soltero(a)</option>
+                    <option value="CASADO" <?php if ($estadocivil == "CASADO") echo "SELECTED"; ?>>Casado(a)</option>
+                    <option value="DIVORCIADO" <?php if ($estadocivil == "DIVORCIADO") echo "SELECTED"; ?>>Divorciado(a)</option>
+                    <option value="VIUDO" <?php if ($estadocivil == "VIUDO") echo "SELECTED"; ?>>Viudo(a)</option>
+                    <option value="UNION LIBRE" <?php if ($estadocivil == "UNION LIBRE") echo "SELECTED"; ?>>Uni�n libre</option>
+                </select>
+            </th>
+        </tr>
+        <tr>
+            <td class="fondoazul">
+                <b>&nbsp;Curp:</b>
+            </td>
+            <th colspan="2">
+                <input type="text" style="width:200px; font-size:20px;" name="curp" maxlength="18" class="cielo" value="<?= $curp ?>" disabled>
+            </th>
+            <td class="fondoazul">
+                <b>&nbsp;Promedio Bachillerato:</b>
+            </td>
+            <th colspan="2">
+                <input type="text" style="width:180px; font-size:20px;" name="promedioprepa" class="cielo" value="<?= $promedioprepa ?>" disabled>
+            </th>
+        </tr>
+        <tr>
+            <td class="fondoazul">
+                <b>&nbsp;Tipo Aspirante:</b>
+            </td>
+            <th class="fondonaranja" colspan="4" style="width:532px; font-size:16px;">
+                <b>
+                    <?
+                    unset($aspirantee);
+                    if ($tipoAspirante == 1)
+                        echo $aspirantee = "Pago de Derecho";
+                    else if ($tipoAspirante == 2)
+                        echo $aspirantee = "Continuaci&oacute;n de Estudios";
+                    ?>
+                </b>
+            </th>
+        </tr>
+    </table>
+    <br>
+    <div align="center">
+        <form method="POST" 
+        action="<?= KUMBIA_PATH ?>aspirantes/ficha">
+            <input type="button" value="Registrar Nuevo Asp"
+                style="text-transform:uppercase; background:#EEE;" onClick="registrarNuevoAsp()">
+            <input type="button" value="Modificar"
+                style="text-transform:uppercase; background:#EEE;" onClick="modificacion(<?= $folio ?>, <?= $tipoAspirante ?>)">
+        
+            <input type="submit" value="consultar" style="text-transform:uppercase; background:#EEE;">
+            <input type="hidden" value="<?= $folio ?>" name="folio" id="folio">
+            <input type="hidden" value="<?= $tipoAspirante ?>" name="tipoAspirante" id="tipoAspirante">
+            <input type="hidden" value="<?= $periodo ?>" name="periodo_aspirante" id="periodo_aspirante">
+        </form>
+    </div>
+    <br><br>
+<?php
+    render_partial("regresar");
+?>

@@ -1,0 +1,33 @@
+<script language="JavaScript1.2">
+function validateFieldPreguntaIntersemestral(){
+	var intersemestral = document.Formulario.elements['intersemestral'];
+	var flag = 0;
+	var radioLength = intersemestral.length;
+	
+	var err = "";
+	for(var i = 0; i < radioLength; i++) {
+		if(intersemestral[i].checked) {
+			flag = 1;
+		}
+	}
+	if (flag == 0){	
+		err+="Favor de especificar si desea tomar un intersemestral\n";
+	}
+	else{
+		alert("¡Gracias por su cooperación!");
+	}
+	if (err.length != 0){
+		alert (err);
+		return false;
+	}
+	return true;
+}
+</script>
+
+<form action="<?= KUMBIA_PATH ?>npreseleccion/guardandoPreguntaIntersemestral" 
+	method = "post" onSubmit="return validateFieldPreguntaIntersemestral();" name="Formulario" id="Formulario">
+	<h3 class="letraRoja">Para medios informativos, nos gustaría saber, si usted planea tomar un intersemestral?
+	<input type="radio" id="intersemestral" name="intersemestral" value="si" />Si
+	<input type="radio" id="intersemestral" name="intersemestral" value="no" />No</h3>
+	<input type="submit" value="Seleccionar"><br />
+</form>

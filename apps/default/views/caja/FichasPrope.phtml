@@ -1,0 +1,166 @@
+<!--Se llaman los archivos css y js-->
+<?= javascript_library_tag('jquery-1.4.4.min'); ?>
+<?= javascript_library_tag('complete'); ?>
+<?= javascript_library_tag('jquery.DataTables.min'); ?>
+<?= javascript_library_tag('jquery.ui.core'); ?>
+<?= javascript_library_tag('jquery.ui.widget'); ?>
+<?= javascript_library_tag('jquery.ui.datepicker'); ?>
+<?= javascript_library_tag('dialog_box'); ?>
+
+<?= stylesheet_link_tag('demo_page'); ?>
+<?= stylesheet_link_tag('demo_table'); ?>
+<?= stylesheet_link_tag('demo_table_jui'); ?>
+<?= stylesheet_link_tag('smoothness/jquery-ui-1.7.2.custom'); ?>
+<?= stylesheet_link_tag('themes/demos', true); ?>
+<?= stylesheet_link_tag('dialog_box'); ?>
+<!--Termina llamado de archivos-->
+
+<!--En la siguiente div se mostraran los tramites solicitados de propedeutico-->
+<div id="muestraTramites" name="muestraTramites">
+</div>
+
+<div class="full_width">
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+	<thead>
+	  <tr>
+	    <th>Nombre Solicitante</th> 
+		<th>Tel&eacute;fono</th>
+		<th>No. Concepto</th> 
+		<th>Concepto</th> 
+		<th>Importe</th> 
+		<th>Fecha Tramite</th> 
+		<th>Periodo</th>
+		<!--<th>Estatus</th>-->
+		<th>Imprimir</th> 
+	  </tr>
+	</thead>
+
+	<tbody>
+<?php
+$contador = 0;
+  $showTramites = CajaTramites::tramites_propedeutico();
+
+  foreach($showTramites as $value)
+  {
+
+    //Se valida la cantidad de digitos del concepto
+	if(strlen($value -> concepto) == 1)
+	  $concepto = "000".$value -> concepto;
+	  
+	else if(strlen($value -> concepto) == 2)
+	  $concepto = "00".$value -> concepto;
+	  
+	else if(strlen($value -> concepto) == 3)
+	  $concepto = "0".$value -> concepto;
+	  
+	else
+	  $concepto = $value -> concepto;
+	 
+
+	//Se valida el estatus del pago
+	if($value -> status_pago == 0)
+	{
+	  $statusPago = "Sin Pagar";
+	  $disabledP = "disabled='disabled'";
+	  $disabledE = "disabled='disabled'";
+	  $disabledR = "disabled='disabled'";
+	}
+	
+	else
+	{
+	  $statusPago = "Pagado";
+	  $disabledP = "";
+	  $disabledE = "";
+	  $disabledR = "";
+	}  
+	 
+	
+	  //Obtiene el nombre del periodo
+	  $Periodos = new Periodos();
+	  if($value -> periodo != null | $value -> periodo != "")
+	    $nombrePeriodo = Periodos::nombre_periodo($value -> periodo);
+			
+	  else
+	    $nombrePeriodo = "";
+		
+		 
+	  //Variables para imprimir PDF
+	  $filePDF = "public/files/pdfs/caja/Referencia_".$value -> referencia.".pdf"; 
+	  $tramite = $value -> id;
+	 
+	  //Se valida el link para imprimir ficha o comprobante d epago
+	  if($value -> status_pago == 1)
+	    $linkImpresion = '<b>PAGADO</b>';//link_to("caja/comprobante_pagoPDF/$tramite/$tipoUsuario","".img_tag("documento-en-papel-verde-g948-icono-5382-48.png","style: margin-top:5px;","cursor:pointer;","title: IMPRIMIR COMPROBANTE DE PAGO"));
+	  
+	  else
+	    $linkImpresion = "<a style='color:#000000;' href='".KUMBIA_PATH.$filePDF."' target='_blank' ><img src='../public/img/Printer.png' style='width:50px; height:55px;' title='IMPRIMIR FICHA DE PAGO'/></a>";
+      
+
+
+      echo "<tr id=".$contador."> 
+	          <td width='auto' align='center'>".utf8_encode(strtoupper($value -> nombre_solicitante))."</td> 
+			  <td width='auto' align='center'>".$value -> telefono_solicitante."</td> 
+              <td width='auto' align='center'>".$concepto."</td> 
+			  <td width='auto' align='center'>".utf8_encode($value -> nombre)."</td> 
+			  <td width='auto' align='left'>&nbsp;$&nbsp;".number_format($value -> costo,2)."</td> 
+			  <td width='auto' align='center'>".substr($value -> fecha_tramite,0,11)."</td> 
+			  <td width='auto' align='center'>".$nombrePeriodo."</td> 
+              <td width='auto' align='center'>".$linkImpresion."</td> 
+            </tr>"; 
+      //<td width='auto' align='center'>".$statusPago."</td> 
+	  ++$contador;
+	
+	}
+
+?>
+
+	</tbody>
+</table>
+</div>
+
+<script type='text/javascript'>
+//Funcion que sirve para generar un DataTable
+$q(document).ready( function () {
+  var id = -1;//simulation of id
+  $q('#example').dataTable({ bJQueryUI: true,
+                            "sPaginationType": "full_numbers"
+                          })		
+});
+
+//funcion que valida que solo se puedan ingresar numeros
+function ValidNum(e)
+{
+  var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+    return ((tecla > 47 && tecla < 58) || tecla == 8);
+}
+
+//Funcion que muestra el campo de busqueda
+function muestraBusqueda()
+{
+  if(document.getElementById('tipoPersona').value == 1)
+    document.getElementById('busqueda').style.display = "block";
+	
+  else
+    document.getElementById('busqueda').style.display = "none";
+}
+
+//Se mandan los parametros a modificar
+function updateTramite(tipoTram,idTram)
+{ 
+  var param = tipoTram + "," + idTram;
+  
+  new AJAX.viewRequest({ 
+    action: "caja/updateTramite/"+param, 
+	container: "muestraTramites" 
+  }); 
+}
+
+
+//Funcion que muestra el mensaje de alerta
+function mensajeAlerta(){
+	if(document.getElementById('status').value == "FALSE"){
+	  showDialog('ERROR',document.getElementById('msg').value,'error',2);
+	}
+}
+
+</script> 

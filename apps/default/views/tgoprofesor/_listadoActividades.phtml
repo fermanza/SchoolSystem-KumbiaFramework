@@ -1,0 +1,135 @@
+<style type="text/css">
+	.extras th{
+		background:#FFCA5B;
+	}
+	.extras a{
+		text-decoration: none;	
+		color: #1569C7;
+	}
+	
+	.extras a:hover{
+		text-decoration:underline;
+	}
+</style>
+<table width="100%" cellpadding="1" cellspacing="1" class="bordeazul" style="font-size:10px;">
+    <tr>
+        <th class="naranja" colspan="3">
+            Actividades Programaticas Asignadas
+        </th>
+    </tr>
+    <tr>
+        <th class="azul" width="85%">
+            Actividad
+        </th>
+        <th class="azul" width="10%">
+            Horas
+        </th>
+        <th class="azul" width="5%">&nbsp;
+            
+        </th>
+    </tr>	
+
+	<tr style="background: #EEEEEE">
+		<td>
+			<center style="font-size:12px">
+				<b><?= $primeraActividad -> categoria."</b> - ".$primeraActividad -> actividad ?></b></center><br />
+				<b>Objetivo:</b> ATENDER CON CALIDAD, ETICA Y PROFESIONALISMO LOS GRUPOS ASIGNADOS EN EL HORARIO OFICIAL DE CLASES RESPETANDO LOS LINEAMIENTOS ESTABLECIDOS POR LA ACADEMIA EN CADA ASIGNATURA</br>
+				<b>Meta:</b> CUBRIR CON EL 100% DE LOS CONTENIDOS TEMATICOS, CON EL 0% DE INCIDENCIAS EN CLASES.</br>
+			&nbsp;			
+			<?php 
+			$Periodo = new Periodos();			
+			$ActividadClase = new ActividadClase();
+			if($ac = $ActividadClase -> find_first("periodo = 32009 and maestro_id = ".Session::get_data('registro'))){
+				$aid = $ac -> id;
+			?>
+			<table width="100%" style="font-size:10px;" class="extras">
+				<tr>
+					<th width="45%">&nbsp;</th>						
+					<th width="45%">&nbsp;<!--<?= link_to_remote("tgoprofesor/autoevaluacionFinal/0/".$aid."/1", "Autoevaluacion 1er Parcial", "update: accionActividad") ?>--></th>
+				</tr>
+				<tr>						
+					<th width="45%"><!-- <?= link_to_remote("tgoprofesor/autoevaluacionFinal/0/".$aid."/2", "Autoevaluacion 2do Parcial", "update: accionActividad") ?> --> </th>
+					<th width="45%"> <?= link_to_remote("tgoprofesor/autoevaluacionFinal/0/".$aid."/3", "Autoevaluacion 3er Parcial", "update: accionActividad") ?>  &nbsp;</th>
+				</tr>					
+			</table>								
+			<?php } ?>
+			<br />
+		</td>
+		<td><center><?= $horasPrimeraActividad ?></center></td>
+		<td>&nbsp;</td>
+	</tr>
+	<?php 	
+	$totalHoras = $horasPrimeraActividad;
+	foreach($actividadMaestro as $a) {
+		$Actividades = new Actividades();
+		$actividades = $Actividades -> find_first("id = ".$a -> actividad_id);				
+		echo tr_color('#CCCCCC', '#EEEEEE');
+			?>
+			<td>
+				<br>
+				<center style="font-size:12px"><b><?= $actividades -> categoria."</b> - ".$actividades -> actividad ?></center><br />
+				<b>OBJETIVO: </b><?= utf8_decode($a -> objetivo) ?><br />
+				<b>META: </b><?= utf8_decode($a -> meta) ?><br /><br />
+				<table width="100%" style="font-size:10px;" class="extras">
+					<tr>
+						<th width="45%"> <?= link_to_remote("tgoprofesor/evaluacionSemanal/1/".$a->id, "Registrar Horas/Semana", "update: accionActividad") ?> </th>						
+						<th width="45%"><!--<?= link_to_remote("tgoprofesor/autoevaluacionFinal/1/".$a->id."/1", "Autoevaluacion 1er Parcial", "update: accionActividad") ?>--> </th>
+					</tr>
+					<tr>						
+						<th width="45%"><!-- <?= link_to_remote("tgoprofesor/autoevaluacionFinal/1/".$a->id."/2", "Autoevaluacion 2do Parcial", "update: accionActividad") ?> --> </th>
+						<th width="45%"> <?= link_to_remote("tgoprofesor/autoevaluacionFinal/1/".$a->id."/3", "Autoevaluacion 3er Parcial", "update: accionActividad") ?> </th>
+					</tr>					
+				</table>								
+				<br />
+				<center>				
+				<br>
+			</td>			
+			<?php			
+			echo "<td><center>";
+				echo $a -> horas;
+			echo "</center></td>";
+			echo "<td><center>";
+				echo link_to_remote("tgoprofesor/eliminarActividad/".$a -> id."/1",img_tag("delete.png"),"listadoActividades"); 
+			echo "</center></td>";	
+		$totalHoras = $totalHoras + $a -> horas;
+	}
+	foreach($actividadMaestroEspecial as $a) {		
+		echo tr_color('#CCCCCC', '#EEEEEE');
+			?>
+			<td>
+				<br>
+				<center style="font-size:12px"><b><?= $a -> nombre ?></b></center><br />
+				<b>OBJETIVO: </b><?= utf8_decode($a -> objetivo) ?><br />
+				<b>META: </b><?= utf8_decode($a -> meta) ?><br /><br />
+				<table width="100%" style="font-size:10px;" class="extras">
+					<tr>
+						<th width="45%"> <?= link_to_remote("tgoprofesor/evaluacionSemanal/2/".$a->id, "Registrar Horas/Semana", "update: accionActividad") ?> </th>						
+						<th width="45%"><!-- <?= link_to_remote("tgoprofesor/autoevaluacionFinal/2/".$a->id."/1", "Autoevaluacion 1er Parcial", "update: accionActividad") ?>--> </th>
+					</tr>
+					<tr>						
+						<th width="45%"><!-- <?= link_to_remote("tgoprofesor/autoevaluacionFinal/2/".$a->id."/2", "Autoevaluacion 2do Parcial", "update: accionActividad") ?> --> </th>
+						<th width="45%"> <?= link_to_remote("tgoprofesor/autoevaluacionFinal/2/".$a->id."/3", "Autoevaluacion 3er Parcial", "update: accionActividad") ?> </th>
+					</tr>
+				</table>								
+				<br />
+				<center>				
+				<br>
+			</td>			
+			<?php
+			echo "<td><center>";
+				echo $a -> horas;
+			echo "</center></td>";
+			echo "<td><center>";
+				echo link_to_remote("tgoprofesor/eliminarActividad/".$a -> id."/2",img_tag("delete.png"),"listadoActividades"); 
+			echo "</center></td>";
+		echo "</tr>";		
+		$totalHoras = $totalHoras + $a -> horas;
+	}
+	?>
+	
+	<tr>
+		<th class="gris" style="text-align:right">TOTAL DE HORAS&nbsp;&nbsp;</th>
+		<th class="gris" ><?= $totalHoras ?></th>
+		<th>&nbsp;</th>
+	</tr>
+</table>

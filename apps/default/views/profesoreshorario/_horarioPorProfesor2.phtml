@@ -1,0 +1,147 @@
+<script language="JavaScript1.2">
+function setIt( Objeto ){
+	if( Objeto.value == "" )
+		Objeto.value = "Nómina";	
+}
+function clearIt( Objeto ){
+	if( Objeto.value == "Nómina" )
+		Objeto.value = "";
+}
+
+function setIt2( Objeto ){
+	if( Objeto.value == "" )
+		Objeto.value = "Nombre";	
+}
+function clearIt2( Objeto ){
+	if( Objeto.value == "Nombre" )
+		Objeto.value = "";
+}
+</script>
+
+<?php
+if(isset($horasTotal) && $horasTotal > 0){
+?>
+
+<form action="<?= KUMBIA_PATH ?>profesoreshorario/horarioExportarPDF/"
+	method="post" name="Formulario2" id="Formulario2">
+	<div style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; margin: 0 0 0 80%; padding-right: 6%;">
+		<input type="hidden" id="nomina" name="nomina" value="<?= $xccursos[0] -> nomina ?>" />
+		<input type="hidden" id="periodo_post" name="periodo_post" value="<?= $periodo_post ?>" />
+		<input type="image" src="<?= KUMBIA_PATH ?>img/exportaradobe.jpg" 
+				width="55" title="Horario a PDF" class="exportarExcel" />
+		Horario Profesor
+	</div>
+</form>
+<form action="<?= KUMBIA_PATH ?>profesoreshorario/actividadExportarPDF/"
+	method="post" name="Formulario3" id="Formulario3">
+	<div style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; margin: 0 0 0 80%; padding-right: 0%;">
+		<input type="hidden" id="nomina" name="nomina" value="<?= $xccursos[0] -> nomina ?>" />
+		<input type="hidden" id="periodo_post" name="periodo_post" value="<?= $periodo_post ?>" />
+		Actividades Profesor
+		<input type="image" src="<?= KUMBIA_PATH ?>img/exportaradobe.jpg" 
+			width="55" title="Actividades a PDF" />
+	</div>
+</form>
+<br />
+	<table border="1" align="center">
+		<tr>
+			<td class="naranjaa" width="50">N&oacute;mina:&nbsp;</td>
+			<td class="azull" width="50" align="center"><?= $xccursos[0] -> nomina ?></td>
+			
+			<td class="naranjaa" width="50">Profesor:&nbsp;</td>
+			<td class="azull" width="300" align="center"><? echo utf8_encode(substr($xccursos[0] -> nombreProf, 0, 30)); ?></td>
+		</tr>
+		<tr>
+			<td class="naranjaa" width="50">Periodo:&nbsp;</td>
+			<td class="azull" width="100" align="center"><?= $periodo ?></td>
+			
+			<td class="naranjaa" width="115">Horas por Semana:&nbsp;</td>
+			<td class="azull" width="50" align="center"><?= $horasTotal ?></td>
+		</tr>
+	</table>
+	<br />
+	<table border="1" align="center">
+		<?
+		foreach( $xccursos as $xccurso ){
+		?>
+		<tr>
+			<td class="naranjaa" width="75">Clave Curso:&nbsp;</td>
+			<td class="azull" width="75" align="center"><?= $xccurso -> clavecurso ?></td>
+			<td class="naranjaa" width="50">Materia:&nbsp;</td>
+			<td class="azull" width="365" align="center"><? echo utf8_encode(substr($xccurso -> nombre, 0, 30)." - ".$xccurso -> materia); ?></td>
+		</tr>
+		<?
+		}
+		?>
+	</table>
+	<br /><br />
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center" width="80%">
+	<tr>
+		<th class="azull4" width="85">
+			Hora/D&iacute;as
+		</th>
+		<th class="azull4" width="175">
+			Lunes
+		</th>
+		<th class="azull4" width="175">
+			Martes
+		</th>
+		<th class="azull4" width="175">
+			Mi&eacute;rcoles
+		</th>
+		<th class="azull4" width="175">
+			Jueves
+		</th>
+		<th class="azull4" width="175">
+			Viernes
+		</th>
+	</tr>
+	<?
+	for( $j = 8; $j <= 21; $j++ ){
+		echo "<tr>";
+		for( $i = 0; $i <= 5; $i++ ){
+			if(	$i == 0 ){
+			?>
+				<td class="azull4" width="85" height="25" align="center">
+					<? echo $j.":00 - ".($j + 1).":00";  ?>
+				</td>
+			<?
+			}
+			else if( isset($horarios[$i][$j]) ){
+			?>
+				<td width="175" height="50" 
+					<? if( ($j % 2) == 0 ) echo "class='bordee'"; else echo "class='bordeegriss'"; ?>>
+					<? echo utf8_encode(substr($horarios[$i][$j] -> nombre, 0, 18))."<br />".
+							$horarios[$i][$j] -> clavecurso."<br />".
+							$horarios[$i][$j] -> edificio.":".$horarios[$i][$j] -> nombreSalon;
+						if( isset($horarios[1][$i][$j]) ){
+							echo "<br /><br />".utf8_encode(substr($horarios[1][$i][$j] -> nombre, 0, 18))."<br />".
+							$horarios[1][$i][$j] -> clavecurso."<br />".
+							$horarios[1][$i][$j] -> edificio.":".$horarios[1][$i][$j] -> nombreSalon;
+						}
+					?>
+				</td>
+			<?
+			}
+			else{
+			?>
+				<td width="175" height="25" 
+					<? if( ($j % 2) == 0 ) echo "class='bordee'"; else echo "class='bordeegriss'"; ?>>
+				</td>
+			<?
+			}
+		}
+		echo "</tr>";
+	}
+	?>
+</table>
+<?php
+}
+else{
+?>
+	<h4 class="letraRoja">El profesor no tiene carga de materias en el periodo <?= $periodo ?></h4>
+<?php
+}
+?>
+<br />
+<br />

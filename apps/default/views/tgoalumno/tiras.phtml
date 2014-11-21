@@ -1,0 +1,60 @@
+<?php
+$validacion = 1;
+if ($validacion == 0 ){
+		echo '<center><h2 class="naranja">Esta información estara disponible hasta el dia 13 de Agosto de 2009 a partir de las 3:00 PM</h2></center>';
+}else{
+?>
+<style type="text/css">
+	#tira *{
+		font-size: 11px;
+	}
+	#tira td{
+		padding-left: 10px;		
+	}
+</style>
+<?= render_partial("info"); ?>
+<br>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp; TIRA DE MATERIAS
+</div>
+<br>
+<div id="tira">
+	<center>
+	<table class="bordeazul" width="700">
+		<tr>
+			<th class="azul" width="50">ACTA</th>
+			<th class="azul" width="50">CLAVE</th>
+			<th class="azul">MATERIA</th>
+			<th class="azul">PROFESOR</th>
+			<th class="azul" width="50">GRUPO</th>
+			<th class="azul" width="50">TIPO</th>
+		</tr>
+		
+		<?php 
+		$MateriasHorarios = new MateriasHorarios();		
+		$Horarios = new Horarios();
+		$Grupos = new Grupos();
+		$Maestros = new Maestros();
+		
+		foreach($calificaciones as $c){
+									
+			if($h = $Horarios -> find_first("id = ".$c -> horario_id)){
+			$m = $MateriasHorarios -> find_first("id = '".$h -> materia_id."'");
+			$ma = $Maestros -> find_first("id = ".$h -> maestro_id);
+			$g = $Grupos -> find_first("id = ".$h -> grupo_id);
+			
+			echo tr_color('#DDDDDD', '#FFFFFF');
+			?>
+			<td><?= $h -> id ?></tdd>
+			<td><?= $m -> clave ?></td>
+			<td><?= $m -> nombre ?></td>
+			<td><?= $ma -> nombre /*." - ".$ma -> id*/ ?></td>
+			<td><?= $g -> nombre ?></td>
+			<td><?= $c -> tipo ?></td>
+		<?php
+			}
+		} ?>		
+	</table>
+	</center>
+</div>
+<?php } ?>

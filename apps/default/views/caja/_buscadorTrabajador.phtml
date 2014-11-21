@@ -1,0 +1,142 @@
+<?php
+$title = "Coloca la nomina o nombre en el campo correspondiente para realizar la busqueda";
+?>
+<table width="900" class="formulario" style="margin-top:40px;">
+    <tr> 
+      <td height="25" > 
+        <span id="subtitulo">
+          <?php echo $title;?>
+        </span>
+      </td> 
+    </tr>  
+    <tr>
+      <td>
+        <div id="contenido">
+            <table width="100%">
+                <tr>
+                    <td>
+					  <?= form_remote_tag('caja/llenado','update: formu') ?>
+                        <table>
+                            <tr>
+                                <td colspan="2">
+                                <div id="texto_arriba">
+                                    Nomina <span id="asterisco">*</span>
+                                </div>     
+                                  <?= text_field_tag('nomina','id: nomina', 'onkeypress: javascript:return ValidNum(event)', 'style: width:200px;', 'maxlength: 30px;') ?>
+                                </td>
+								<td colspan="2">
+                                  <div id="texto_arriba">
+                                    Ingresar  Nombre <span id="asterisco">*</span>
+                                  </div>     
+                                  <?= text_field_tag('nombre','id: nombre', 'onkeypress: javascript:return validLetters(event)','style: width:300px;', 'maxlength: 50px;') ?>
+                                </td>
+                                <td>
+                                  <?= submit_tag('Buscar', 'id: boton', 'class: common_button', 'style: float:left; margin-top: 15px;') ?>
+                                </td>
+                            </tr>
+                        </table>
+					  <?= end_form_tag() ?>
+                    </td>
+                </tr>
+            </table>
+        </div>
+      </td>
+    </tr>
+</table>
+
+<style type="text/css">    
+    #listadoConceptos{
+        font-size: 12px;
+        width: 100%;
+        height: 370px;
+        overflow: auto;
+        background-color: #FFFFFF;
+    }
+    #listadoConceptos table{
+        font-size: 12px;
+    }
+    #listadoConceptos td{
+        border-bottom: 1px solid #CCCCCC;
+		height:35px;
+    }
+    #listadoConceptos tr:hover{
+        background-color: #13539B;
+        color: #ffffff;
+    }
+    #listadoConceptos img{
+        border: 0px;
+    }
+    #complementario{
+        padding: 3px;
+        font-size: 12px;
+        /*background-color: #FFFFFF;*/
+        height: 150px;
+        overflow: auto;
+    }
+    #pagos{
+        padding: 3px;
+        font-size: 12px;
+        min-height: 400px;
+        background-color: #FFFFFF;
+    }
+</style>
+<br /><br />
+<div class="formulario" style="width: 100%">
+    <div id="contenido">
+		    <div id="listadoConceptos">
+              <?= render_partial('listadoConceptos') ?>
+            </div>
+		
+        <div id="complementario" style="margin-top:-35px; border:1px solid #FFFFFF; display:none; ">
+            Se agrega el concepto y su costo.
+        </div>
+		<?php echo form_remote_tag('caja/guardarConcepto','update: muestraAqui', 'name: formConceptos')?>
+		
+		<div id="contenedor" style="margin-top:-35px; border:1px solid #FFFFFF; display:none;">
+		  <table class="formulario" width="100%" style="margin-top:4px;" border="0" class="conceptos">
+			<tr style=" background-color: #13539B;  color: #FFFFFF;  font-weight: bold; text-align: center;">
+			  <td width="400px" align="center">
+				CONCEPTO
+			  </td>
+			  <td align="center">
+				CANTIDAD
+			  </td>
+			  <td colspan="2" align="center">
+				COSTO
+			  </td>
+			  <td align="center">
+				TOTAL
+			  </td>
+			  <td align="center">
+				ACCI&Oacute;N
+			  </td>
+			</tr>
+	      </table>
+		  <input type="hidden" readonly="readonly" name="registro" id="registro" value="<?php echo $registro; ?>"/>
+		  <input type="hidden" readonly="readonly" name="typeP" id="typeP" value="<?php echo $tipoPersona; ?>"/>
+		  <input type="hidden" readonly="readonly" name="nombrePost" id="nombrePost"/>
+		</div>
+		<div id="buttoSave" style="display:none;">
+		   <?php echo  submit_tag('Guardar','id: boton', 'class: common_button');?>
+		</div>
+		<?php echo end_form_tag() ?>
+    </div>
+</div>
+
+<div id="muestraAqui">
+</div>
+
+<!--Se coloca el formulario-->
+<div id="formu">
+
+</div>
+
+<script type='text/javascript'>
+//Funcion que limpia inút de busqueda
+function clear(){
+  document.getElementById("formu").reset();
+}
+
+</script>
+
+

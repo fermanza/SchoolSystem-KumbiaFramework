@@ -1,0 +1,56 @@
+<style type="text/css">
+	.envoltura{
+		font-size: 10px;
+	}
+	.bordeAzul input{
+		font-size: 10px;
+		width: 100%;
+	}
+</style>
+<script language="javascript">  
+function validar(){
+	var F=document.getElementById("nuevaSituacion").value;
+	var REF=document.getElementById("referencia").value;
+
+if (REF=="" && F==1){
+alert("Se debe poner referencia del tramite");
+return false;
+}
+if (REF=="" && F==2){
+alert("Se debe poner referencia del tramite");
+return false;
+}
+
+
+}
+
+</script>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;Cambiar Estado del Alumno
+</div>
+<br>
+<div clas="envolvura">
+	<center>
+		<?php echo form_remote_tag("apoyo/buscar", "update: resultado") ?>
+		<table class="bordeAzul" style="font-size: 10px; width:400px;">
+			<tr class="naranja">
+				<th colspan="3">Buscador de Alumnos</th>
+			</tr>
+			<tr class="azul">
+				<th>Registro</th>
+				<th width="200">Nombre</th>
+				<th>&nbsp;</th>
+			</tr>
+			<tr class="grisClaro">
+				<th><input type="text" name="registro"></th>
+				<th><input type="text" name="nombre"></th>
+				<th><input type="submit" value="BUSCAR"></th>
+			</tr>
+		</table>
+		<?php echo end_form_tag() ?>
+	</center>
+	<div id="resultado">
+	&nbsp;
+	</div>
+</div>
+</td>

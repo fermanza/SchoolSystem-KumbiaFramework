@@ -1,0 +1,49 @@
+<style type="text/css">
+	.aaa{
+		font-size: 16px;
+		padding:20px;
+	}
+	.bbb{
+		background-color: #BBBBBB;
+	}
+</style>
+<tr>
+	<td>
+		<div class="aaa">
+			<div class="bbb">
+				<center>
+				<h3>Uso exclusivo Area de Cálculo</h3>
+				<form name="forma1" method="post" action="<?= KUMBIA_PATH ?>encuestas/index">
+					<input type="text" name="registro">
+					<input type="passowrd" name="password">
+					<input type="submit" value="Continuar" name="Continuar">
+				</form>
+				</center>
+					<br>
+			</div>
+			<br>
+			<br>
+			<br>
+			<b>Han entrado a ver el cuestionario <span style="color:red"><?= $cuantos ?></span> alumnos</b><br>
+			<b>Han terminado de contestarlo <span style="color:red"><?= $contestaron ?></span> alumnos</b><br>
+			<br>
+			<br>
+			<h2>Ver graficas</h2>
+			<form method="post" action="<?= KUMBIA_PATH ?>encuestas/grafica">
+				<?php 
+				$Secciones = new Secciones(); 
+				$secciones = $Secciones -> find("order: id asc");
+				?>
+				Sección
+				<select name="seccion"> 
+				<?php
+				foreach($secciones as $s){?>
+					<option value="<?= $s -> id ?>"><?= $s -> id." - ".$s -> nombre ?></option>
+				<?php	
+				} ?>
+				</select>
+				<input type="submit" value="Graficar">
+			</form>
+		</div>
+	</td>
+</tr>

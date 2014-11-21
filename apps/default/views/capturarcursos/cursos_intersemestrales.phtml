@@ -1,0 +1,103 @@
+<?= render_partial("capturarcursos/info"); ?>
+
+<br />
+<br />
+<?= render_partial("menuintersemestrales"); ?>
+<br />
+<br />
+<!--
+<script src="<?= KUMBIA_PATH ?>javascript/kumbia/jquery.js"></script>
+<script src="<?= KUMBIA_PATH ?>javascript/kumbia/cursos_nivelacion_inscripcion_alumnos.js"></script>
+-->
+<!--
+<script src="<?= KUMBIA_PATH ?>javascript/kumbia/cursos_intersemestrales_inscripcion_alumnos.js"></script>
+-->
+
+<form action="<?= KUMBIA_PATH ?>capturarcursos/cursos_intersemestrales_creando" 
+	method = "post" name="Formulario1" id="Formulario1">
+<table class="centrar">
+	<tr>
+		<td colspan="3" valign="center" class="encabezadoo">
+			<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+					ADMINISTRACIÓN DE CURSOS INTERSEMESTARLES: "<?php echo $periodoCompleto ?>"
+					<div id="content"></div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<br />
+			<select name="profesor" id="profesor" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Profesor que Impartirá el Curso - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $maestros as $maestro ){
+				?>
+					<option value="<?= $maestro -> nomina ?>">
+						<? echo $maestro -> nomina." - ".$maestro -> nombre ?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<br />
+			<select name="plan_de_estudios" id="plan_de_estudios" class="lista">
+				<option value="-1">
+					- - Plan de Estudios - -
+				</option>
+				<option value="2000">
+					- - Plan 2000 - -
+				</option>
+				<option value="2007">
+					- - Plan 2007 - -
+				</option>
+			</select>
+			<br /><br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" id="td_carreras" name="td_carreras">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" id="td_materias" name="td_materias">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input id="submitir" name="submitir" type="submit" value="Registrar Curso" disabled>
+		</td>
+	</tr>
+</table>
+</form>
+
+<?php
+	print "<script type=\"text/javascript\">
+	new Event.observe(\"plan_de_estudios\", \"change\", function(){
+		var plan_de_estudios = document.getElementById('plan_de_estudios').value;
+		document.getElementById('td_carreras').innerHTML = '';
+		document.getElementById('td_materias').innerHTML = '';
+		document.getElementById('submitir').disabled=true;
+		if( plan_de_estudios > 1 ){
+			new AJAX.viewRequest({
+				action: \"capturarcursos/get_carreras_cursos_intersemestrales/\"+".plan_de_estudios."+\"\",
+				container: \"td_carreras\"
+			})
+		}
+		else{
+			document.getElementById('submitir').disabled=true;
+		}
+	})
+	</script>";
+?>

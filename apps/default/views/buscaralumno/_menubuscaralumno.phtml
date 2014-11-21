@@ -1,0 +1,79 @@
+<center>
+	<h3><? echo $reg; ?></h3>
+	
+
+
+	<div id="centrar">
+	
+	<br />
+		Periodo
+		<select name="periodoo" id="periodoo" class="lista">
+			<?php
+			foreach($periodos as $periodo){
+			?>
+				<option value="<?= $periodo ?>">- - <?= $periodo ?> - -</option>
+			<?php
+			}
+			?>
+		</select>
+	</div>
+	<table border="0" align="center">
+		<br />
+		<tr>
+			<br />
+			<td class="azull2" width="150px" align="center">
+				Horario
+				<input type="radio" name="horario"
+					id="horario" value="<?= $reg ?>">
+			</td>
+			
+			<td class="azull2" width="150px" align="center">
+				Calificaci&oacute;n
+				<input type="radio" name="calificacion"
+					id="calificacion" value="<?= $reg ?>">
+			</td>
+			
+			<td class="azull2" width="150px" align="center">
+				Kardex
+				<input type="radio" name="kardex"
+					id="kardex" value="<?= $reg ?>">
+			</td>
+		</tr>
+		<br />
+		<br />
+	</table>
+	
+<?
+	print "<script type=\"text/javascript\">
+	new Event.observe(\"horario\", \"click\", function(){
+	var periodo = document.getElementById('periodoo').value;
+	new AJAX.viewRequest({
+		action: \"buscaralumno/determinarPlantelHorario/".$reg."/\"+".periodo."+\"\",
+		container: \"datos\"
+	})
+	})
+	</script>";
+	print "<script type=\"text/javascript\">
+	new Event.observe(\"calificacion\", \"click\", function(){
+	var periodo = document.getElementById('periodoo').value;
+	new AJAX.viewRequest({
+		action: \"buscaralumno/determinarPlantelCalificacion/".$reg."/\"+".periodo."+\"\",
+		container: \"datos\"
+	})
+	})
+	</script>";
+	
+	print "<script type=\"text/javascript\">
+	new Event.observe(\"kardex\", \"click\", function(){
+	new AJAX.viewRequest({
+		action: \"buscaralumno/kardex/".$reg."\",
+		container: \"datos\"
+	})
+	})
+	</script>";
+?>
+</form>
+<div id="datos">
+</div>
+
+</center>

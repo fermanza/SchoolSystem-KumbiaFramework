@@ -1,0 +1,56 @@
+<center>
+<br />
+<br />
+<table style="font-size:11px;" class="bordeAzul2" width="50%">
+	<tr class="azul" >
+		<th class="bordeAzul2">CURSOS <?= $actual ?></th>
+	</tr>
+	<tr>
+		<th class="bordeAzul2">
+		<select name="curso" id="curso" class="lista">
+			<option value="-99">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			- - Seleccione un curso - -
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</option>
+	<?
+		$i = 0;
+		foreach( $xccursos as $xcc ){
+	?>	
+			<option value="<?= $xcc -> clavecurso ?>">
+				<?php	echo utf8_encode( $xcc -> clavecurso." ".
+						$xcc -> clavemat."&nbsp;&nbsp;".
+						$xcc -> nombre."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".
+						$xcc -> nomina."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".
+						$xcc -> nomprof ) ?>
+			</option>
+	<?
+			$i++;
+		}
+	?>
+		</select>
+	</tr>
+</table>
+<div id ="alumnos" name="alumnos">
+</div>
+<?
+	print "<script type=\"text/javascript\">
+	new Event.observe(\"curso\", \"change\", function(){
+	var curso = document.Formulario1.curso.value;
+	var plantel = document.Formulario1.plantel.value;
+	new AJAX.viewRequest({
+		action: \"profesor/alumnosCapturaEsp/\"+".curso."+\"/\"+".plantel."+\"\",
+		container: \"alumnos\"
+	})
+	})
+	</script>";
+	
+?>
+<br />
+</center>

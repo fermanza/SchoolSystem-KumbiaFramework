@@ -1,0 +1,36 @@
+<center>
+<table style="font-size: 11px" border="1">
+<tr>
+	<th colspan="4" class="naranja">LISTADO DE PROFESORES CON SU CANTIDAD DE TUTORADOS</th>	
+</tr>
+<tr>
+	<th class="azul">Nomina</th>
+	<th class="azul">Nombre</th>
+	<th class="azul">No. Tutorados</th>
+</tr>
+<?php
+$Tutorias = new Tutorias();
+$Maestro = new Maestros();
+$tutorias = $Tutorias -> distinct("nomina", "ORDER: nomina ASC");
+foreach($tutorias as $t){
+$Maestro -> find_first("nomina = ".$t);
+$cuantos = $Tutorias -> count("nomina = ".$t);
+//echo tr_color('#EEEDDD','#FFFDFD');
+?>
+		<tr>
+		<td><center><?= $t ?></center></td>
+		<td><b><?= utf8_encode($Maestro -> nombre) ?></b></td>		
+		<?php
+		if ($cuantos < 11){
+			$color='style="color: #BB0000"';
+		}else{
+			$color='';
+		}
+		?>
+		<td><b><center <?= $color ?>><?= $cuantos ?></center></b></td>
+		</tr>
+<?php
+}
+?>
+</table>
+</center>

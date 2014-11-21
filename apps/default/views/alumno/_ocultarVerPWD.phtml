@@ -1,0 +1,21 @@
+<br />
+<input type="hidden" value="<?= $valor ?>" id="flag" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?= $usuario ?>
+&nbsp;&nbsp;&nbsp;
+<img id="ocultando" name="ocultando"
+		src="<?= KUMBIA_PATH ?>/img/SpyGlass.png" width="30"
+			align="right" valign="central"
+				title="Ocultar/Ver Contrase&ntilde;a" />
+<?
+	print "<script type=\"text/javascript\">
+	new Event.observe(\"ocultando\", \"click\", function(){
+	var flag = document.Formulario1.flag.value;
+	new AJAX.viewRequest({
+		action: \"alumno/ocultarVerPWD/\"+".flag."+\"\",
+		container: \"ocultarPWD\"
+	})
+	})
+	</script>";
+?>

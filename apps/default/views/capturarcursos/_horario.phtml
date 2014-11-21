@@ -1,0 +1,75 @@
+			<table border="1" class="azull3">
+				<tr>
+					<th colspan="7" align="center" class="azull2">
+						<? echo $nombreSalon -> edificio.":".$nombreSalon -> nombre ?>
+					</th>
+				</tr>
+				<tr>
+					<th width="330" align="center" class="azull2">Horas</th>
+					<th width="200" align="center" class="azull2">Lunes</th>
+					<th width="200" align="center" class="azull2">Martes</th>
+					<th width="200" align="center" class="azull2">Miercoles</th>
+					<th width="200" align="center" class="azull2">Jueves</th>
+					<th width="200" align="center" class="azull2">Viernes</th>
+					<th width="200" align="center" class="azull2">S&aacute;bado</th>
+				</tr>
+				<?
+				for( $i = 7; $i < 15; $i++ ){
+				?>
+					<tr>
+						<th align="center" valign="center" class="naranjaa2" height="25">
+							<? echo $i.":00 -".($i + 1).":00" ?>
+						</th>
+				<?
+					for( $j = 1; $j < 7; $j++ ){
+				?>
+						<td align="center" class="azull3">
+						<?
+							if( $horas[$j][$i] != null )
+								echo $horas[$j][$i] -> clavecurso;
+							else
+								echo "&nbsp;-&nbsp";
+						?>
+						</td>
+				<?
+					}
+					echo "</tr>";
+				}
+				?>
+			</table>
+			<br />
+			<br />
+			<table border="1" class="azull3">
+				<tr>
+					<th width="330" align="center" class="azull2">Horas</th>
+					<th width="200" align="center" class="azull2">Lunes</th>
+					<th width="200" align="center" class="azull2">Martes</th>
+					<th width="200" align="center" class="azull2">Miercoles</th>
+					<th width="200" align="center" class="azull2">Jueves</th>
+					<th width="200" align="center" class="azull2">Viernes</th>
+					<th width="200" align="center" class="azull2">S&aacute;bado</th>
+				</tr>
+				<?
+				for( $i = 15; $i < 22; $i++ ){
+				?>
+					<tr>
+						<th align="center" valign="center" class="naranjaa2" height="25">
+							<? echo $i.":00 -".($i + 1).":00" ?>
+						</th>
+				<?
+					for( $j = 1; $j < 7; $j++ ){
+				?>
+						<td align="center" class="azull3">
+						<?
+							if( $horas[$j][$i] != null )
+								echo $horas[$j][$i] -> clavecurso;
+							else
+								echo "&nbsp;-&nbsp";
+						?>
+						</td>
+				<?
+					}
+					echo "</tr>";
+				}
+				?>
+			</table>

@@ -1,0 +1,71 @@
+<?php 
+  
+ if(count($result) <= 0 || $result == NULL){
+    $pago = "";
+ }
+ 
+ else{
+  foreach($result AS $value){
+
+    $pagoPeriodo = new pagoPeriodo();
+	$nombrePeriodo = new Periodos();
+
+    $ultimoPeriodo = $pagoPeriodo -> find_first('registro ='.$value -> reg);
+	
+	if($ultimoPeriodo != null || $ultimoPeriodo != "" || $ultimoPeriodo != false){
+	  $periodonombre = $nombrePeriodo -> find_first("periodo =".$ultimoPeriodo -> periodoUltimoInscrito);
+	   $pago = "<STRONG>ULTIMO PERIODO INSCRITO&nbsp;&nbsp;&nbsp; ".$periodonombre -> nombre." &nbsp;(".$ultimoPeriodo -> periodoUltimoInscrito.") </STRONG>";
+    }	  
+	
+	else{
+	  $pago = "<STRONG>ULTIMO PERIODO INSCRITO&nbsp;&nbsp;&nbsp;----&nbsp;(-----) </STRONG>";
+	}
+	
+  }
+ }
+
+?>
+<center>
+  <table style="width:80%; font-family:arial; font-size:12px; margin-left:100px; margin-top:10px; float:left; margin-bottom:80PX;">
+    <tr style="text-align:center; background:#E3E5E8; height:35px;">
+	  <td colspan="3" >
+	    <?php echo $pago; ?>&nbsp;&nbsp;&nbsp;&nbsp;
+	  </td>
+	</tr>
+    <tr style="font-weight:bold; color:#FFFFFF; text-align:center;">
+	  <td bgcolor="#F7B64C" height="35px">
+		REGISTRO
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px">
+		PERIODO
+	  </td>
+	  <td bgcolor="#F7B64C" height="35px">
+		SITUACI&Oacute;N
+	  </td>
+	</tr>
+
+<?php 
+
+	if(count($result) == 0 || $result == NULL)
+	{
+	   echo tr_color('#E5E3E3','#FFFFFF'); 
+	   echo '<td  width="50" align="center" colspan="3" style="font-weight:bold;" height="35px;">NO SE ENCONTRARON REGISTROS</td>';
+	   echo "</tr>";
+	}
+	
+	else
+	{
+	    //Iniciamos la variable montoTotal en 0
+
+		foreach($result AS $value)
+		{
+		  echo tr_color('#FFFFFF','#E5E3E3'); 
+		  echo '<td align="center" height="35px;">'.$value -> reg.'</td>';
+		  echo '<td align="center" height="35px;">'.$value -> periodo.'</td>';
+		  echo '<td align="center" height="35px;">'.$value -> stsist.'</td>';
+		  echo "</tr>";
+		}
+    }
+?>
+  </table>
+</center>

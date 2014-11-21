@@ -1,0 +1,72 @@
+<script type='text/javascript' src='<?= KUMBIA_PATH ?>javascript/kumbia/ventana_emergente/js/jquery.js'></script>
+<script type='text/javascript' src='<?= KUMBIA_PATH ?>javascript/kumbia/ventana_emergente/js/jquery.simplemodal.js'></script>
+<script type='text/javascript' src='<?= KUMBIA_PATH ?>javascript/kumbia/ventana_emergente/js/basic.js'></script>
+	
+<!-- Page styles -->
+<link type='text/css' href='<?= KUMBIA_PATH ?>javascript/kumbia/ventana_emergente/css/demo.css' rel='stylesheet' media='screen' />
+<!-- Contact Form CSS files -->
+<link type='text/css' href='<?= KUMBIA_PATH ?>javascript/kumbia/ventana_emergente/css/basic.css' rel='stylesheet' media='screen' />
+<br />
+
+<div float="left">
+	<?php
+	$i = 0;
+	foreach($cursos as $curso){
+		if(($i%3) == 0){
+			echo "<div class='salto_div'></div><br />";
+		}
+	?>
+	<table align="left" style="margin-left: 9px; font-size:10px;">
+		<tr>
+			<th class="bordeAzul2 azul" colspan="6">
+				<?= $salones[$i]->nombre_salon ?>
+			</th>
+			<td>
+				<img src="<?= KUMBIA_PATH ?>img/search2.gif" 
+					class="pointer basic floatright" width="15px" onclick="view_alumnos_by_salon_id(<?= $salones[$i]->salon_id ?>)" />
+			</td>
+		</tr>
+		<tr class="azul">
+			<th class="bordeAzul2">Clavecurso</th>
+			<th class="bordeAzul2">Materia</th>
+			<th class="bordeAzul2">N&oacute;mina</th>
+			<th class="bordeAzul2">Cupo</th>
+			<th class="bordeAzul2">Disp</th>
+			<th class="bordeAzul2" style="font-size:9px;">Inscritos</th>
+			<th class="bordeAzul2">Ver</th>
+		</tr>
+			<?php
+			foreach($curso as $c){
+			?>
+			<tr>
+				<td><?= $c->clavecurso ?></td>
+				<td><?= $c->materia ?></td>
+				<td><?= $c->nomina ?></td>
+				<td><?= $c->cupo ?></td>
+				<td><?= $c->disponibilidad ?></td>
+				<td><?= $c->inscritos ?></td>
+				<td>
+					<img src="<?= KUMBIA_PATH ?>img/search2.gif" 
+						class="pointer basic" width="15px" onclick="view_alumnos_by_xccurso_id(<?= $c->curso_id ?>)" />
+				</td>
+			</tr>
+			<?php
+			}
+			?>
+	</table>
+	<?php
+		$i++;
+	}
+	?>
+</div>
+<div class='salto_div'></div>
+<br /><br />
+
+<input type="hidden" id="path" name="path" value"<?= KUMBIA_PATH ?>" />
+
+<!-- modal content -->
+<div id="basic-modal-content">
+</div>
+
+<div id="basic-modal-content2">
+</div>

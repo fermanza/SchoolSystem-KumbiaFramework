@@ -1,0 +1,107 @@
+<script language="JavaScript1.2">
+function validar( Objeto ){	
+	var err = "";
+	if (document.Formulario2.registro.value==-1) {
+		err += "Favor de seleccionar un registro\n";
+  	}
+	if (document.Formulario2.horas.value==-1) {
+		err += "Favor de seleccionar una hora\n";
+  	}
+	if (document.Formulario2.curso.value==-1) {
+		err += "Favor de seleccionar un curso\n";
+  	}
+	if( err != "" ){
+		alert(err);
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+</script>
+
+
+<?= render_partial("autorizarCruces"); ?>
+
+<center>
+<form method="post" action="permitiendoCruces/" name ="Formulario2" id="Formulario2" onSubmit="return validar()" >
+
+<table class="bordeAzul2" style="font-size:11px;">
+	<br />
+	<tr class="naranja">
+		<th colspan="2" class="bordeAzul2">Permitir cruces de una hora Tonala</th>
+	</tr>
+	<tr class="azul">
+		<th class="bordeAzul2">
+			<select name="registro" id="registro" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccionar Alumno - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $talumn as $tal ){
+				?>
+					<option value="<?= $tal -> miReg ?>">
+					<?
+						echo $tal -> miReg."&nbsp;-&nbsp;".$tal -> enPlan.
+								"&nbsp;-&nbsp;".htmlentities
+										(substr( $tal -> vcNomAlu, 0, 30));
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+		</th>
+		<th class="bordeAzul2">
+			<select name="curso" id="curso" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Clave Curso - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $xtcursos as $xtc ){
+				?>
+					<option value="<?= $xtc -> clavecurso ?>">
+					<?
+						echo $xtc -> clavecurso."&nbsp;-&nbsp;";
+						echo "Materia Plan2007: ".$xtc -> materia."&nbsp;&nbsp;&nbsp;";
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+		</th>
+	</tr>
+	<tr class="naranja">
+		<th class="bordeAzul2">¿Cu&aacute;ntas Horas?</th>
+		<td class="bordeAzul2" align="center">
+			<select name="horas" id="horas" class="lista">
+				<option value="-1">&nbsp;- - Hora - -&nbsp;
+				<option value="1">&nbsp;- - 1 - -&nbsp;</option>
+				<option value="6">&nbsp;- - Cruce Especial - -&nbsp;</option>
+			</select>
+		</td>
+	</tr>
+	<tr class="grisClaro">
+		<td colspan="3" class="bordeAzul2" align="center">
+			<?php echo submit_tag("Permitir Cruce") ?>
+		</td>
+	</tr>
+</table>
+</form>
+<br />
+<br />&nbsp;
+</center>
+<br />

@@ -1,0 +1,36 @@
+<div class="menu">	
+	<a href="<?= KUMBIA_PATH ?>tgoprofesor/informacion" onmouseover="toolTip('Aquí encontraras avisos importantes para<br> todos los profesores',this)">Información</a>
+	&nbsp;&nbsp;<span style="color:F27822">|</span>&nbsp;&nbsp;
+	<a href="<?= KUMBIA_PATH ?>tgoprofesor/listas" onmouseover="toolTip('Listas de asistencia para todos los<br> grupos asigandos para este periodo',this)">Listas de Asistencia</a>
+	&nbsp;&nbsp;<span style="color:F27822">|</span>&nbsp;&nbsp;
+	<a href="<?= KUMBIA_PATH ?>tgoprofesor/horario" onmouseover="toolTip('Horario de clases',this)">Horario</a>
+	&nbsp;&nbsp;<span style="color:F27822">|</span>&nbsp;&nbsp;
+	<a href="<?= KUMBIA_PATH ?>tgoprofesor/calificaciones" onmouseover="toolTip('Módulo para calificar los<br> grupos correspondientes',this)">Calificaciones</a>
+	&nbsp;&nbsp;<span style="color:F27822">|</span>&nbsp;&nbsp;
+	<a href="<?= KUMBIA_PATH ?>tgoprofesor/tutorados" onmouseover="toolTip('Tutorias asignadas para este periodo',this)">Tutorados</a>
+	&nbsp;&nbsp;<span style="color:F27822">|</span>&nbsp;&nbsp;
+	<a href="<?= KUMBIA_PATH ?>tgoprofesor/actividades" onmouseover="toolTip('Asignación Actividades Programaticas',this)">Actividades</a>
+	&nbsp;&nbsp;<span style="color:F27822">|</span>&nbsp;&nbsp;
+	<a href="<?= KUMBIA_PATH ?>tgoprofesor/apoyo" onmouseover="toolTip('Buscador de Tickets de alumnos',this)">Apoyo Académico</a>
+	&nbsp;&nbsp;<span style="color:F27822">|</span>&nbsp;&nbsp;
+	<a href="<?= KUMBIA_PATH ?>tgoprofesor/salir" onmouseover="toolTip('Salir del Sistema de Control Escolar',this)">Salir</a>
+<div>
+
+<?php
+	if(Session::get("tipo")=="COORDINADOR"){
+?>
+<div>
+	<h2 style="color: #FFFFFF"><?php echo link_to("tgocoordinador/index","Volver a Modulo Coordinador")?></h2>
+</div>
+<?php
+	}
+	
+	if(Session::get("tipo")=="TUTOR"){
+?>
+<div>
+	<br>
+	<h2 style="color: #FFFFFF"><?php echo link_to("tgotutor/index","Volver a Modulo Tutor")?></h2>
+</div>
+<?php
+	}
+?>

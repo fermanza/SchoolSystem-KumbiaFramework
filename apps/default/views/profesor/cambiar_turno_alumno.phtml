@@ -1,0 +1,69 @@
+<center>
+<br />
+
+<form method="post" action="<?=KUMBIA_PATH?>profesor/cambiando_turno_alumno" name ="Formulario2" id="Formulario2">
+<table class="bordeAzul2" style="font-size:11px;">
+	<br />
+	<tr class="naranja">
+		<th colspan="2" class="bordeAzul2">Cambiar a un alumno de Vespertino a Matutino</th>
+	</tr>
+	<tr class="azul">
+		<th class="bordeAzul2">
+			<select name="registro" id="registro" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccionar Alumno - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $alumnos as $al ){
+				switch($al -> enTurno){ case "V": $tmp_turno = "VESPERTINO"; break; default: $tmp_turno = "MATUTINO"; break; }
+				?>
+					<option value="<?= $al -> miReg ?>">
+					<?
+						echo $al -> miReg."&nbsp;-&nbsp;".$tmp_turno.
+								"&nbsp;-&nbsp;".htmlentities
+										(substr( $al -> vcNomAlu, 0, 30));
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+		</th>
+		<th class="bordeAzul2">
+			<select name="nuevo_turno" id="nuevo_turno" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccione Turno - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $turnos_disponibles as $turno ){
+				?>
+					<option value="<?= $turno -> clave ?>">
+					<?
+						echo $turno -> nombre;
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+		</th>
+	</tr>
+	<tr class="grisClaro">
+		<td colspan="3" class="bordeAzul2" align="center">
+			<?php echo submit_tag("Cambiar Turno") ?>
+		</td>
+	</tr>
+</table>
+</form>
+<br />
+<br />&nbsp;
+</center>
+<br />

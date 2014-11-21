@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php include("public/utilerias.php"); ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>CETI - Centro de Enseñanza Técnica Industrial</title>
+<?= stylesheet_link_tag('style', true) ?>
+<? kumbia::javascript_base() ?>
+<? kumbia::javascript_use_drag() ?>  
+<script language="JavaScript1.2" type="text/javascript">
+<!--
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+</script>
+
+<script language="JavaScript1.2" type="text/javascript">
+	function seleccionaMateria(seleccion){
+		window.location.href = 'ccapturagrupos/'+seleccion.value;
+	}
+	
+	function seleccionaMaestro(materia,seleccion){
+		window.location.href = materia+'/'+seleccion.value;
+	}
+	function modificaMateria(id,seleccion){
+		window.location.href = id+"/"+seleccion.value;
+	}
+	
+	function modificaMaestro(materia,seleccion){
+		window.location.href = materia+'/'+seleccion.value;
+	}
+	
+</script>
+<style type="text/css">
+	#menu a{
+		display: block; 
+		width: 100px; 
+		height: 30px;
+	}
+	
+	.boton{
+		color: #000000;
+		background: #FFCA5B;
+		font-size: 10px;
+		font-weight: bold;
+		height: 20px;
+		text-transform: uppercase;
+	}
+	.botonDesactivado{
+		color: #000000;
+		background: #EEEEEE;
+		font-size: 10px;
+		font-weight: bold;
+		height: 20px;
+		text-transform: uppercase;
+	}
+	
+	.cuadrotexto{
+		color: #000000;
+		background: #FFCA5B;
+		font-size: 9px;
+		height: 15px;
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+	
+	.cuadrotextocentrado{
+		color: #000000;
+		background: #FFCA5B;
+		font-size: 9px;
+		height: 15px;
+		text-transform: uppercase;
+		font-weight: bold;
+		text-align: center;
+	}
+	
+	.fondoazul{
+		color: #FFFFFF;
+		background: #195AA2;
+	}
+	
+	.fondonaranja{
+		color: #000000;
+		background: #FFCA5B;
+	}
+	
+	BODY{
+		color: #000000;
+		font-family: Verdana;
+		font-size:10px;
+	}
+	.info {
+        font-size: 14px;
+    }
+    
+    .info td {
+        font-weight: bold;
+        font-size: 15px;
+        text-align: left;
+        padding: 0 10px 0 10px;
+    }
+    
+    .fondoamarillo {
+        background-color: #FFCA5B;
+    }
+    
+    #rojo {
+        color: #CC0000;
+    }
+    
+    #verde {
+        color: #006600;
+    }
+	</style>
+</head>
+<body bgcolor="#CCCCCC">
+<table width="800" border="1" bordercolor="#0559B7" bgcolor="#FFFFFF" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #FFFFFF">
+      <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="196" valign="top" height="120"><a href="http://www.ceti.mx">
+				<?= img_tag("logo.jpg","border: 0","width: 196","height: 120") ?>
+			</a></td>
+            <td width="474" valign="top"><table border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td height="62">
+					<?= img_tag("cabeceraNaranja.jpg","border: 0","width: 474","height: 65") ?>
+				</td>
+              </tr>
+              <tr>
+                <td height="35" bgcolor="#404040"><div align="center" style="color: #FFF; font-size: 12px;"><strong>CENTRO DE ENSEÑANZA TÉCNICA INDUSTRIAL</strong></div></td>
+              </tr>
+			   <tr>
+                <td height="30" bgcolor="#0559B7"><div align="center" style="color: #FFF; font-size: 12px;"><strong>CENTRO DE INFORMACIÓN DE RECURSOS ADMINISTRATIVOS</strong></div></td>
+              </tr>
+			
+            </table></td>
+            <td valign="top">
+			<table border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+
+                <td><a href="http://www.sep.gob.mx">
+					<?= img_tag("logoSEP.jpg","border: 0","height: 65") ?>
+				</a></td>
+              </tr>
+              <tr>
+                <th height="65" valign="middle" bgcolor="#666666" style="color: #FFF">
+					INGENIER&Iacute;A
+				</th>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+	  <tr>
+		<td>
+		</td>
+	  </tr>
+      <?= content(); ?>
+      <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="2">
+          <tr>
+            <td><table width="100%" border="0" align="center" cellpadding="5" cellspacing="0" bgcolor="#F27822">
+              <tr>
+                <td>
+				<div align="center" style="family-font: Verdana; font-size: 10px; color: #FFF;">
+				<b>
+				<?= fecha() ?> <?= hora() ?><br>
+				©2011 CETI - CENTRO DE ENSE&Ntilde;ANZA TÉCNICA INDUSTRIAL
+				</div></td>
+				  </b>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+    </table></td>
+  </tr>
+
+</table>
+</body>
+</html>
+,

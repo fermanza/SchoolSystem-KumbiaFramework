@@ -1,0 +1,105 @@
+<style type="text/css">
+	select{
+		font-size: 11px;
+		max-width: 300px;
+	}
+</style>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;Becas
+</div>
+<br>
+<div>
+<center>
+<?= form_remote_tag("apoyo/agregar", "update: midiv") ?>
+<table style="font-size: 11px; width: 900px" class="bordeAzul">
+	<tr class="naranja">
+		<th colspan="5">AGREGAR BECA A ALUMNO</th>
+	</tr>
+	<tr class="azul">
+		<th>ALUMNO</th>
+		<th>TIPO DE BECA</th>
+		<th>PUNTAJE</th>
+		<th>PERIODO</th>		
+		<th>&nbsp;</th>
+	</tr>
+<tr class="grisClaro">
+		<th>
+			<select name="registro">
+			<option value="0" selected >Selecciona un Alumno</option>
+			<?php foreach($alumnos as $a){ ?>				
+				<option value="<?= $a -> miReg ?>"><?= trim($a -> miReg." - ".$a -> vcNomAlu) ?></option>
+			<? } ?>
+			</select>
+		</th>
+		<th>
+			<select name="beca">
+			<option value="0" selected >Selecciona una Beca</option>
+			<?php foreach($becas as $b){ ?>
+				<option value="<?= $b -> id ?>"><?= $b -> categoria." - ".$b -> tipo ?></option>
+			<? } ?>
+			</select>
+		</th>
+		<th>
+			<input type="text" name="puntaje" value="0" />
+		</th>
+		<th>
+			<select name="periodo">
+				<option value="0" selected >Selecciona un Periodo</option>
+				<option value="12007">FEB - JUN 2007</option>
+				<option value="32007">AGO - DIC 2007</option>
+				<option value="12008">FEB - JUN 2008</option>
+				<option value="32008">AGO - DIC 2008</option>
+				<option value="12009">FEB - JUN 2009</option> 
+				<option value="32009">AGO - DIC 2009</option>
+				<option value="12010">FEB - JUN 2010</option>
+				<option value="32010">AGO - DIC 2010</option>
+				<option value="12011">FEB - JUN 2011</option>
+			</select>
+		</th>
+		<th><?= submit_tag("Agregar") ?></th>
+	</tr>	
+</table>
+<?= end_form_tag() ?>
+<div id="midiv">&nbsp;</div>
+<br><br>
+<?= form_remote_tag("apoyo/listadoBecas", "update: midiv2") ?>
+<table style="font-size: 11px; width: 600px" class="bordeAzul">
+	<tr class="naranja">
+		<th colspan="3">LISTADO DE BECAS</th>
+	</tr>
+	<tr class="azul">
+		<th>TIPO DE BECA</th>
+		<th>PERIODO</th>
+		<th>&nbsp;</th>
+	</tr>
+	<tr class="grisClaro">
+		<th>
+			<select name="beca">
+			<option value="0" selected >Selecciona una Beca</option>
+			<?php foreach($becas as $b){ ?>
+				<option value="<?= $b -> id ?>"><?= $b -> categoria." - ".$b -> tipo ?></option>				
+			<? } ?>
+			</select>
+		</th>
+		<th>		
+			<select name="periodo">
+				<option value="0" selected >Selecciona un Periodo</option>
+				<option value="12007">FEB - JUN 2007</option>
+				<option value="32007">AGO - DIC 2007</option>
+				<option value="12008">FEB - JUN 2008</option>
+				<option value="32008">AGO - DIC 2008</option>
+				<option value="12009">FEB - JUN 2009</option>
+				<option value="32009">AGO - DIC 2009</option>
+				<option value="12010">FEB - JUN 2010</option>
+				<option value="32010">AGO - DIC 2010</option>
+				<option value="12011">FEB - JUN 2011</option>
+			</select>
+		</th>
+		<th><input type="submit" value="BUSCAR"></th>
+	</tr>
+</table>
+<?= end_form_tag() ?>
+<div id="midiv2">&nbsp;</div>
+</center>
+</div>
+</td>

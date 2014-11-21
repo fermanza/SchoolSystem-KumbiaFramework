@@ -1,0 +1,29 @@
+<?php echo form_remote_tag("tgocoordinador/asignarCambioMateria", "update: infoCambio") 
+?>
+ <select name="horario_id">
+<?php
+	$Materias = new MateriasHorarios();
+	$Grupos = new Grupos();
+	foreach($horarios as $h){
+		$materia = $Materias -> find_first("id = ".$h -> materia_id);
+		$grupo = $Grupos -> find_first("id = ".$h -> grupo_id);
+?>
+	<option value="<?= $h -> id ?>"><?= utf8_encode($materia -> nombre." - ".$grupo -> nombre)?></option>	
+ <?php 
+	}
+?>
+ </select> 
+ <select name="maestroNuevo_id">
+<?php
+	$Maestros = new Maestros();
+	foreach($md as $m){
+		$maestro = $Maestros -> find_first("id = ".$m -> maestro_id);
+?>
+	<option value="<?= $maestro -> id ?>"><?= $maestro -> nombre." - ".$maestro -> id  ?></option>
+ <?php 
+	}
+?>
+ </select>
+ 
+<input type="submit" value="enviar" >
+ <?php echo end_form_tag() ?>

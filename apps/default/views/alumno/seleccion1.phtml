@@ -1,0 +1,164 @@
+<style type="text/css">
+	.nada{
+		padding-left:10px;
+	}
+</style>
+<center>
+<table width="900">
+	<tr>
+		<td width="900"><div align="justify">
+			<br>
+			<div style="font-size: 14px;">
+			<?= img_tag("adorno.gif","border: 0") ?><b style="color: #1569C7;">SELECCIÓN DE CURSOS: </b>
+			<i style="color:#FF0000;"><b>PASO 1</b>, KARDEX DEL ALUMNO</i>
+			<hr><br>
+			<div style="font-size: 11px;">
+				El <b>primer paso</b> para realizar la selección de cursos para este periodo escolar, es verificar
+				que las calificaciones en tu kardex esten completas, para esto deberías revisar que esten
+				registradas todas tus materias ya que si faltará alguna podrías tener problemas en la selección
+				de cursos.
+				<br><br>
+				Si te falta por registrar alguna materia, agregala en el formulario que esta a continuación, esto
+				servirá para agilizar el proceso de actualización de tu kardex, si tu kardex esta completo no es
+				necesario agregar ninguna materia y puedes pasar al paso número 2.
+				<br><br>
+				Este proceso <b>no aplica</b> para los alumnos de <b>primer ingreso</b> ya que aun no han generado
+				historial en kardex. En este caso pasa directamente al paso número 2.
+			</div>
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr>
+					<td width="150" height="25" bgcolor="#FFCA5B">&nbsp;<b>Nombre del alumno: </b></td>
+					<td width="400" colspan="3" bgcolor="#EEEEEE">&nbsp;<?= $alumno ?> (<?= $registro ?>)</td>
+					<td width="150" height="25" bgcolor="#FFCA5B"><b>&nbsp;Promedio: </b></td>
+					<td width="100" bgcolor="#EEEEEE">&nbsp;<?= $promedio ?></td>
+				</tr>
+				<tr>
+					<td width="150" height="25" bgcolor="#FFCA5B"><b>&nbsp;Especialidad: </b></td>
+					<td width="400" colspan="3" bgcolor="#EEEEEE">&nbsp;<?= $especialidad ?></td>
+					<td width="150" height="25" bgcolor="#FFCA5B"><b>&nbsp;Número de créditos: </b></td>
+					<td width="100" bgcolor="#EEEEEE">&nbsp;<?= $ncreditos ?></td>
+				</tr>
+			</table>
+			<br>
+			<?php 
+				$tipoarr= array('ORDINARIO','EXTRAORDINARIO','REGULARIZACION','TITULO','ACREDITACION','REVALIDACION','EXAMEN GLOBAL','NIVELACION'); 
+				$tipoarrl= array('D','E','R','T','A','V','G','N');
+			 ?>
+			 <center>
+			<form action="<?= KUMBIA_PATH ?>alumno/pkardex" method="post">
+				<table  border="1" cellpadding="1" cellspacing="1" style="font-size: 10px;">
+				<tr class="fondoazul">
+					<th colspan="6" align="center" height="25">
+						MATERIA A SOLICITAR
+					</th>
+				</tr>
+				<tr>
+					<td width="100" height="25" bgcolor="#FFCA5B"><b>&nbsp;Materias</b></td>
+					<td>
+						<select style="font-size: 11px;" name="materia">
+						<?php				
+							$n=0;
+							if($pmaterias){
+								foreach ($pmaterias as $m){	$n++;					
+									echo '<option value="'.$m->clavemateria.'" style="font-size: 10px;">'.$matitas[$n-1].'</option>';												
+								}
+							}
+						?>
+						</select>
+					</td>
+					<td height="25" bgcolor="#FFCA5B" width="100"><b>&nbsp;Ciclo</b></td>
+					<td>
+						<select style="font-size: 11px;" name="periodo">
+						<?php				
+							foreach($periodos as $periodo){
+								echo '<option value='.$periodo.'>';
+								if($periodo[0]==1){ 
+									echo "FEB - JUN ".substr($periodo,1,4); } 
+								else { 
+									echo "AGO - DIC ".substr($periodo,1,4); 
+								}
+								echo '</option>';				
+							}								
+						?>
+						</select>
+					</td>
+					
+					<td>
+						<select style="font-size: 11px;" name="tipo">							
+								<?php 
+									for($k=0;$k<8;$k++){
+										echo '<option value='.$tipoarrl[$k].'>'.$tipoarr[$k].' ('.$tipoarrl[$k].')</option>';
+									} 
+								?>								
+						</select>
+					</td>
+					<td>
+						<?php if($ingreso==$actual){ ?>
+							<input type="submit" value="Agregar" class="boton" style="background: #CCCCCC; color:#EEEEEE;" disabled>
+						<?php } else { ?>
+							<input type="submit" value="Agregar" class="boton">
+						<?php } ?>
+					</td>
+				</tr>
+				</form>
+				<?php
+					if ($pendientes){
+						echo '</table><br>';
+						echo '<table border="1" cellpadding="1" cellspacing="1" style="font-size: 10px;">';
+						echo '<tr class="fondoazul"><th colspan="4" align="center" height="25">MATERIAS POR REGISTAR</th></tr>';
+						echo '<tr class="fondonaranja" align="center">';
+							echo '<th width="380" height="25">Materia</th>';
+							echo '<th width="155" height="25">Periodo</th>';
+							echo '<th width="155" height="25">Tipo</th>';
+							echo '<th width="50" height="25">&nbsp;</th>';
+						echo  '</tr>';
+						foreach($pendientes as $pendiente){ 
+						$i++;
+					 	echo '<tr>';
+							echo '<td style="padding-left:10px;">'.$matelocas[$i-1].'</td>';
+							echo '<td style="text-align:center;">';
+								if($pendiente->periodo[0]==1)
+									echo "FEB - JUN ".substr($pendiente->periodo,1,4);
+								else
+									echo "AGO - DIC ".substr($pendiente->periodo,1,4); 				
+							echo '</td>';
+							echo '<td style="text-align:center;">';
+								for ($x=0;$x<8;$x++){
+									if($pendiente->tipo==$tipoarrl[$x])
+										echo $tipoarr[$x]." ($tipoarrl[$x])";
+								}
+							echo '</td>';							
+							?>
+							<form method="post" action="<?= KUMBIA_PATH ?>alumno/epkardex">
+							<td>
+									<input type="submit" value="Eliminar" class="boton">
+									<input type="hidden" name="id" value="<?= $pendiente-> id; ?>">
+							</td>
+							</form>
+							<?php
+						echo '</tr>';
+						}
+					}
+				?>				
+			</table>
+			<br />
+			<table>
+				<tr>
+			
+					<td width="50">&nbsp;</td>
+					<td width="650">&nbsp;</td>
+					
+					<form method="post" action="<?= KUMBIA_PATH ?>alumno/seleccion2">
+					<td width="50">						
+						<input type="submit" value="Paso 2 >>" class="boton">
+					</td>
+					</form>
+				</tr>
+			</table>
+			</center>			
+		</td>
+	</tr>
+</table>
+</center>
+<br />&nbsp;

@@ -1,0 +1,103 @@
+<center><?= $pre ?>
+<table>
+	<tr>
+		<td width="900" bgcolor="#FFFFFF"><div align="justify">
+			<br>
+			<div style="font-size: 14px;"><div style="color: #1569C7;"><?= img_tag("adorno.gif","border: 0") ?><b>PRESELECCIÓN DE CURSOS</b></div>
+			<hr><br>
+			<div style="font-size: 11px;">
+			La preselección de cursos a cursar el próximo semestre será realizada por los alumnos en el tiempo establecido por el <b>Departamento de Apoyo Académico</b>.
+			<br><br>
+			<b style="font-size:14px;">La preselección es obligatoria</b> para todos los alumnos, y esto ayudará a una mejor organización de los cursos que serán impartidos el próximo ciclo en base a la demanda de cada uno de ellos.
+			<h3 style="color:#F00; font-size:15px;text-align:center;">ES NECESARIO REALIZAR LA PRESELECCION PARA PODER VER TUS CALIFICACIONES</h3>
+			</div>
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#999999" style="font-size: 11px;" >
+				<tr>
+					<td width="175" height="25" bgcolor="#FFCA5B"><b>&nbsp;Número de registro: </b></td>
+					<td width="75" bgcolor="#EEEEEE">&nbsp;<?= $registro ?></td>
+					<td width="200" height="25" bgcolor="#FFCA5B"><b>&nbsp;Especialidad: </b></td>
+					<td width="300" bgcolor="#EEEEEE">&nbsp;<?= $carrera ?></td>
+				</tr>
+				<tr>
+					<td width="175" height="25" bgcolor="#FFCA5B">&nbsp;<b>Nombre del alumno: </b></td>
+					<td width="500" colspan="3" bgcolor="#EEEEEE">&nbsp;<?= $nombre ?></td>
+				</tr>
+			</table>
+			
+			<?php if($cursos){ ?><br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#999999" style="font-size: 10px;" width="750">
+				<tr>
+					<td height="20" align="center" class="fondoazul" colspan="4"><b>PRESELECCIÓN</b></td>
+				</tr>
+					<tr bgcolor="#FFCA5B">
+						<th width="100" height="20" align="center">Curso</th>
+						<th width="350" height="20" align="center">Materia</th>
+						<th width="175" height="20" align="center">Fecha de captura</th>
+						<th width="125" height="20" align="center">&nbsp;</th>
+					</tr>
+				</tr>
+			
+							<?php foreach($cursos as $curso){ $i++; if($i%2==0){ $bg = "#EEEEEE"; }else{ $bg = "#FFFFFF"; } 
+									
+							?>
+							<tr>
+								<td width="100" height="30" align="center" bgcolor="<?= $bg ?>"><b><?= $i ?></b></td>
+								<td width="350" height="30" align="center" bgcolor="<?= $bg ?>">
+								<?php if($modelo == 2000){ ?>
+									<?= substr($curso -> clavemateria,0,3) ?>
+								<?php } else { ?> 
+									<?= $curso -> clavemateria ?>
+								<?php } ?> 
+								- 
+								<?= $materia[$i-1] -> nombre ?></td>
+								<td width="175" height="30" align="center" bgcolor="<?= $bg ?>"><?= date("d/m/Y",$curso -> fecha) ?></td>
+								<form method="POST" action="<?= KUMBIA_PATH ?>alumno/despreseleccionarcurso">
+									<input type="hidden" name="materia" value="<?= $curso -> clavemateria ?>">
+									<th width="125" height="30" align="center"><input type="submit" value="Eliminar" class="boton"></th>
+								</form>
+							</tr>
+							<?php } ?>
+						
+			</table><br>
+			<?php } else { ?>
+				<center><h3>NO EXISTE NINGUN CURSO PRESELECCIONADO</h3></center>
+			<?php } ?>
+			
+			<form method="POST" action="<?= KUMBIA_PATH ?>alumno/preseleccionarcurso">
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#999999" style="font-size: 10px;" width="750">
+				<tr>
+					<td height="20" align="center" class="fondoazul" colspan="10"><b>AGREGAR CURSOS A LA PRESELECCIÓN</b></td>
+				</tr>
+					<tr bgcolor="#DDDDDD">
+						<th width="200" height="20" align="center" class="fondonaranja">Materia: </th>
+						<th width="300" height="20" align="center">
+							<select name="materia" style="font-size:10px;">
+								<option value="">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								</option>
+								<?php $i=0; if($pmaterias) foreach($pmaterias as $p){ $i++;	?>	
+									<option value="<?= $p -> clavemateria ?>">
+										<?php if($modelo == 2000){ ?>
+											<?= substr($p -> clavemateria,0,3) ?>
+										<?php } else { ?> 
+											<?= $p -> clavemateria ?>
+										<?php } ?> 
+										- <?= $pnombres[$i-1] ?>
+									</option>
+								<?php }	?>
+							</select>
+						</th>
+						<th width="110" height="20" align="center"><input type="submit" value="Continuar" class="boton"></th>
+					</tr>
+		
+			</table>
+			</form>
+			<br>
+			</div>
+		</div></td>
+	</tr>
+</table>
+</center>

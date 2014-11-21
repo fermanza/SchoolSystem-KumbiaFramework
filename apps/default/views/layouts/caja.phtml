@@ -1,0 +1,242 @@
+<?php
+if ( Session::get_data('plantel') == 'C' ){
+	$plantel="";
+}
+else
+	$plantel ="T";
+?>
+<?= stylesheet_link_tag('menu/menu_style', true); ?>
+<tr>
+	<th>
+	<div class="menu">
+		 <ul>
+		 <?php
+		 
+		  if(Session::get('statusAlumno') == "SinAcceso" || Session::get('statusAlumno') == "SinPago")
+		  {
+		    
+		 ?>
+		   	<li>
+			  <a>Caja</a>
+			  <ul>
+				<li><a href="<?= KUMBIA_PATH ?>caja/alumnoConcepto">Solicitar Pagos</a></li>
+				<li><a href="<?= KUMBIA_PATH ?>caja/tramites">Consultar Pagos</a></li>
+			  </ul>
+			</li>
+			
+ <?php
+		   }
+		   else if(Session::get("tipousuario") == "FINANZAS")
+		   {   
+?>		
+		<li><a>CAJA</a>
+			<ul>
+				<li><a href="<?= KUMBIA_PATH ?>caja/reportes">Reporte Caja</a></li>
+			</ul>
+		</li>   
+ <?php
+          }
+		   else if(Session::get("tipousuario") == "PROPEDEUTICO")
+		   {
+?>
+		<li><a>CAJA</a>
+			<ul>
+				<li><a href="<?=KUMBIA_PATH?>caja/propedeutico">Solicitar Pagos</a></li>
+				<li><a href="<?=KUMBIA_PATH?>caja/FichasPrope">Fichas Solicitadas</a></li>
+			</ul>
+		</li>
+<?php
+		   }		   
+ else if(Session::get('registro') == 2374 || Session::get('registro') == 8108 || Session::get('registro') == 2307 || Session::get('registro') == 1833 || Session::get('registro') == 2448 || Session::get('registro') == 9131){?>	
+<ul>
+	<li class="li_inicio"><a>Inicio</a>
+		<ul>
+			<li><a href="<?=KUMBIA_PATH?>administrador/index">Inicio</a></li>
+		</ul>
+	</li>
+	
+	<li><a>Administraci&oacute;n General</a>
+		<ul>
+			<li><a href="<?=KUMBIA_PATH?>administrador/planteles">Planteles</a></li>
+			<li><a href="<?=KUMBIA_PATH?>administrador/carreras">Carreras</a></li>
+			<li><a href="<?=KUMBIA_PATH?>administrador/materias">Materias</a></li>
+			<li><a href="<?=KUMBIA_PATH?>administrador/planes">Planes de Estudio</a></li>
+		</ul>
+	</li>
+	<li><a>Aspirantes</a>
+		<ul>
+			<li><a href="<?=KUMBIA_PATH?>ventanilla/aspirantes/">Aspirantes</a></li>
+			<li><a href="<?=KUMBIA_PATH?>aspirantes/listaConsulta">Consultar Expediente</a></li>
+		</ul>
+	</li>
+	<li><a href="<?=KUMBIA_PATH?>profesor/informacion">Administraci&oacute;n Alumnos</a>
+		<ul>
+			<li><a href="<?=KUMBIA_PATH?>administrador/buscarAlumno">Buscar Alumno</a></li>
+			<li><a href="<?=KUMBIA_PATH?>ventanilla/checarContra">Ver Contrase&ntilde;a</a></li>
+			<li><a href="<?=KUMBIA_PATH?>ventanilla/checarEstado">Checar Estado</a></li>
+			<li><a href="<?=KUMBIA_PATH?>calificaciones/buscar">Ver Calificaciones</a></li>
+			<li><a href="<?=KUMBIA_PATH?>administrador/checarPagos">Checar Pagos</a></li>
+			<li><a href="<?=KUMBIA_PATH?>apoyo/cambiarEstado">Cambiar Estado</a></li>
+			<li><a href="<?=KUMBIA_PATH?>apoyo/becas">Becas</a></li>
+		</ul>
+	</li>
+	<li><a href="<?=KUMBIA_PATH?>profesor/informacion">Configuraci&oacute;n</a>
+		<ul>
+			<li><a href="<?=KUMBIA_PATH?>administrador/cambiar_contrasena">Cambiar Contrase&ntilde;a</a></li>
+		</ul>
+	</li>
+	<?php if(Session::get('registro') == 2374 || Session::get('registro') == 2307 || Session::get('registro') == 1833 || Session::get('registro') == 9131 || Session::get('registro') == 9124 || Session::get('registro') == 9192 || Session::get('registro') == 2465){?> 
+		<li><a>CAJA</a>
+			<ul>
+				<li><a href="<?=KUMBIA_PATH?>caja/index">Solicitar Pagos</a></li>
+				<li><a href="<?=KUMBIA_PATH?>caja/periodosAlumnos">Periodos Alumnos</a></li>
+			</ul>
+		</li>
+	<?php }?>
+	
+	<?php if(Session::get('registro') == 8108){?>
+		<li><a>CAJA</a>
+			<ul>
+				<li><a href="<?=KUMBIA_PATH?>caja/actualizarPagos">Actualizar Pagos</a></li>
+				<li><a href="<?=KUMBIA_PATH?>caja/adminConceptos">Cambiar Conceptos</a></li>
+				<li><a href="<?=KUMBIA_PATH?>caja/fechasConceptos">Fechas Conceptos</a></li>
+				<li><a href="<?=KUMBIA_PATH?>caja/guardarReferencia">Guardar Referencia</a></li>
+				<li><a href="<?=KUMBIA_PATH?>caja/periodosAlumnos">Periodos Alumnos</a></li>
+				<li><a href="<?= KUMBIA_PATH ?>caja/reportes">Reporte Caja</a></li>
+				<li><a href="<?=KUMBIA_PATH?>caja/index">Solicitar Pagos</a></li>
+			</ul>
+		</li>
+	<?php }?>
+</ul>
+
+<?php 
+	}
+   else if(Session::get("tipousuario") == "VENTANILLA"){
+?>
+<ul>
+	<li class="li_inicio"><a>Inicio</a>
+		<ul>
+			<li><a href="<?=KUMBIA_PATH?>administrador/index">Inicio</a></li>
+		</ul>
+	</li>
+	
+	<li><a>Administraci&oacute;n General</a>
+		<ul>
+			<li><a href="<?=KUMBIA_PATH?>administrador/planteles">Planteles</a></li>
+			<li><a href="<?=KUMBIA_PATH?>administrador/carreras">Carreras</a></li>
+			<li><a href="<?=KUMBIA_PATH?>administrador/materias">Materias</a></li>
+			<li><a href="<?=KUMBIA_PATH?>administrador/planes">Planes de Estudio</a></li>
+		</ul>
+	</li>
+	<li><a>Aspirantes</a>
+		<ul>
+			<li><a href="<?=KUMBIA_PATH?>ventanilla/aspirantes/">Aspirantes</a></li>
+			<li><a href="<?=KUMBIA_PATH?>aspirantes/listaConsulta">Consultar Expediente</a></li>
+		</ul>
+	</li>
+	<li><a href="<?=KUMBIA_PATH?>profesor/informacion">Administraci&oacute;n Alumnos</a>
+		<ul>
+			<li><a href="<?=KUMBIA_PATH?>administrador/buscarAlumno">Buscar Alumno</a></li>
+			<li><a href="<?=KUMBIA_PATH?>ventanilla/checarContra">Ver Contrase&ntilde;a</a></li>
+			<li><a href="<?=KUMBIA_PATH?>ventanilla/checarEstado">Checar Estado</a></li>
+			<li><a href="<?=KUMBIA_PATH?>calificaciones/buscar">Ver Calificaciones</a></li>
+			<li><a href="<?=KUMBIA_PATH?>administrador/checarPagos">Checar Pagos</a></li>
+			<li><a href="<?=KUMBIA_PATH?>apoyo/cambiarEstado">Cambiar Estado</a></li>
+			<li><a href="<?=KUMBIA_PATH?>apoyo/becas">Becas</a></li>
+		</ul>
+	</li>
+	<li><a href="<?=KUMBIA_PATH?>profesor/informacion">Configuraci&oacute;n</a>
+		<ul>
+			<li><a href="<?=KUMBIA_PATH?>administrador/cambiar_contrasena">Cambiar Contrase&ntilde;a</a></li>
+		</ul>
+	</li>
+	<li><a>CAJA</a>
+		<ul>
+		    <li><a href="<?=KUMBIA_PATH?>caja/index">Solicitar Pagos</a></li>
+		    <li><a href="<?=KUMBIA_PATH?>caja/periodosAlumnos">Periodos Alumnos</a></li>
+			<?php if(Session::get('registro') == 1861){?>
+			  <li><a href="<?=KUMBIA_PATH?>caja/fechasConceptos">Fechas Conceptos</a></li>
+			  <li><a href="<?= KUMBIA_PATH ?>caja/reportes">Reporte Caja</a></li>
+			  <li><a href="<?=KUMBIA_PATH?>caja/index">Solicitar Pagos</a></li>
+			  <li><a href="<?=KUMBIA_PATH?>caja/verTramites">Ver Tramites</a></li>
+			<?php } ?>
+		</ul>
+	</li>
+	<?php if(Session::get('registro') == 2551 || Session::get('registro') == 1861  || Session::get('registro') == 'aherrera'){?>
+		<li><a>Credenciales</a>
+			<ul>
+				<li><a href="<?=KUMBIA_PATH?>credenciales/actualizarDatos">Actualizar Datos</a></li>
+				<li><a href="<?=KUMBIA_PATH?>credenciales/generarReporte">Generar Reporte</a></li>
+				<li><a href="<?=KUMBIA_PATH?>credenciales/imprimirProvicional">Imprimir Provisional</a></li>
+			</ul>
+		</li>
+	<?php }?>
+	<?php if(Session::get('registro') == 1861){?>
+		<li><a>Servicio Medico</a>
+			<ul>
+				<li><a href="<?=KUMBIA_PATH?>servicio_medico/index">Servicio Medico</a></li>
+			</ul>
+		</li>
+	<?php }?>
+
+<?php
+}	
+	else
+		   {
+?>
+			<li class="li_inicio"><a>Inicio</a>
+				<ul>
+					<li><a href="<?=KUMBIA_PATH?>alumno/informacion">Informaci&oacute;n</a></li>
+					<li><a href="<?=KUMBIA_PATH?>alumno/actualizacion">Actualizar Datos</a></li>
+				</ul>
+			</li>
+			
+			<li><a href="<?=KUMBIA_PATH?>alumno/horario<?=$plantel?>">Horario</a></li>
+			
+			<li><a href="<?=KUMBIA_PATH?>alumnoselecc/index">Selecci&oacute;n</a></li>
+			
+			<li><a href="<?=KUMBIA_PATH?>alumno/calificaciones<?=$plantel?>">Calificaciones</a></li>
+			
+			<li><a href="<?=KUMBIA_PATH?>alumno/kardex">Kardex</a></li>
+			
+			<li><a href="<?=KUMBIA_PATH?>alumno/cambiarContrasena">Cambiar Contrase&ntilde;a</a></li>
+		
+		   	<li>
+			  <a>Caja</a>
+			  <ul>
+				<li><a href="<?= KUMBIA_PATH ?>caja/alumnoConcepto">Solicitar Pagos</a></li>
+				<li><a href="<?= KUMBIA_PATH ?>caja/tramites">Consultar Pagos</a></li>
+			  </ul>
+			</li>
+	
+	
+	      <!--  <li>
+			  <a>Caja</a>
+			  <ul>
+				<li><a href="<?//= KUMBIA_PATH ?>caja/alumnoConcepto">Solicitar Pagos</a></li>
+				<li><a href="<?//= KUMBIA_PATH ?>caja/tramites">Consultar Pagos</a></li>
+			  </ul>
+			</li>-->
+	<?php //}?>		
+
+		 <?php
+		  }
+		 ?>
+			<li class="floatright">
+				<a href="<?=KUMBIA_PATH?>profesor/salir">
+					<image src="<?=KUMBIA_PATH?>img/log_off.jpg" class="log_off" />
+				</a>
+			</li>
+		</ul>
+	</div>
+	</th>
+</tr>
+<tr>
+<td height="1">
+</td>
+</tr>
+<tr>
+<td align="center">
+<?= content(); ?>
+</td>
+</tr>

@@ -1,0 +1,229 @@
+<?= form_remote_tag('caja/agregarPagoConcepto','update: pagos') ?>
+<?= stylesheet_link_tag('formularios'); ?>
+<table class="formulario" width="100%" style="margin-top:4px;" border=0 class="conceptos">
+    <tr style=" background-color: #13539B;  color: #FFFFFF;  font-weight: bold; text-align: center;">
+	  <td colspan="2"  align="center">
+	    CONCEPTO
+	  </td>
+	  <td align="center">
+	    CANTIDAD
+	  </td>
+	  <td colspan="2" align="center">
+	    COSTO
+	  </td>
+	  <td align="center">
+	    TOTAL
+	  </td>
+	  <td align="center">
+	    ACCI&Oacute;N
+	  </td>
+	</tr>
+	
+    <tr  style="background-color: #FFFFFF; font-weight: bold; text-align: center;">
+
+	  <input type="text" readonly="readonly" id="cantidadConcep" name="cantidadConcep" value="<?php echo $concepto_id;?>"/>
+	     <?php $addConceptos = CajaConceptos::nombre($concepto_id);?>
+	    <input type="hidden" readonly="readonly" id="Montoconcepto" name="Montoconcepto" value="<?php echo $addConceptos -> costo;?>"/>
+	    <input type="hidden" readonly="readonly" id="nameCon" name="nameCon" value="<?php echo utf8_encode($addConceptos -> nombre);?>"/>
+        <td colspan="2"  align="center">
+            <span style="color: #6F6F7A;  font-weight:bold; font-family:arial;">
+              &nbsp;&nbsp;&nbsp;<?= utf8_encode($addConceptos -> nombre) ?>
+            </span>
+        </td>
+		<td align="center">
+		  <div id="cantidadCon" name="cantidadCon" style="color: #6F6F7A;  font-weight:bold; font-family:arial;"><!--Se agrega la cantidad de conceptos solicitados--></div>
+		</td>
+        <td colspan="2"  align="center">
+          <span style="color: #6F6F7A; font-family:arial;">
+                &nbsp;&nbsp;&nbsp;$&nbsp;<?= $addConceptos -> costo ?>
+          </span>
+        </td>
+		<td align="center">
+            <div id="totalCosto" name="totalCosto" style="color: #6F6F7A; font-family:arial;">
+			  <!--Se muestra la suma de los conceptos solicitados-->
+            </div>  
+		</td>
+    </tr>
+  <!--<tr>
+        <th>&nbsp;Cantidad</th>
+        <td>
+            <?= text_field_tag('cuantos', 'id: texto_chico') ?>
+            <?= hidden_field_tag('concepto_id', 'value: '.$concepto_id) ?>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2"><center><?= submit_tag('Agregar') ?></center></td>
+    </tr>-->
+</table>
+<?= end_form_tag() ?>
+        
+
+<script type='text/javascript'>
+var concepto = document.getElementById('cantidadConcep').value;
+var Montoconcepto = document.getElementById('Montoconcepto').value;
+
+//Imprime el la cantidad de conceptos solicitadoas
+document.getElementById('cantidadCon').innerHTML = document.getElementById('conceptCan'+concepto).value;
+//Obtiene el total a pagar del concepto segun la cantidad solicitada
+var total = Montoconcepto * document.getElementById('conceptCan'+concepto).value;
+
+//Funcion que sirve para dar formato de moneda
+function formatoMoneda()
+{
+    total = total.toString().replace(/\$|\,/g,'');
+	
+	if (isNaN(total))
+	total = '0';
+
+	var signo = (total == (total = Math.abs(total)));
+	total = Math.floor(total * 100 + 0.50000000001);
+	centavos = total % 100;
+	total = Math.floor(total / 100).toString();
+
+	if (centavos < 10)
+	centavos = '0' + centavos;
+
+	for (var i = 0; i < Math.floor((total.length - (1 + i)) / 3); i++)
+	total = total.substring(0, total.length - (4 * i + 3)) + ',' + total.substring(total.length - (4 * i + 3));
+
+	document.getElementById('totalCosto').innerHTML = (((signo) ? '' : '-') + total + '.' + centavos);
+}
+
+formatoMoneda();
+
+var countConcepto = 1;
+
+function crearTabla(){
+        		
+		miCapa = document.getElementById('contenedor');
+        miTabla = document.createElement("table");
+		miTabla.id = "table"+concepto;
+        miTabla.setAttribute("width", "98%");       
+		
+		tbBody = document.createElement("tbody");
+       		
+        tr = document.createElement("tr");  
+		tr.bgColor = "#FFFFFF";
+		tr.style.fontSize = "13px";
+		
+	    //Input de con
+		inputCon = document.createElement("input");
+		inputCon.id = "con["+concepto+"]";
+		inputCon.name = "con["+concepto+"]";
+		inputCon.style.width = "70px";
+		inputCon.style.textAlign = "center";
+		inputCon.style.display = "none";
+		inputCon.setAttribute('readonly',true);
+        inputCon.value = concepto;
+	
+		//Input de costo
+		inputCost = document.createElement("input");
+		inputCost.id = "costo"+concepto;
+		inputCost.name = "costo"+concepto;
+		inputCost.style.width = "70px";
+		inputCost.style.textAlign = "center";
+		inputCost.style.display = "none";
+		inputCost.setAttribute('readonly',true);
+        inputCost.value = Montoconcepto;
+        
+		//Input de cantidad
+		inputCantidad = document.createElement("input");
+		inputCantidad.id = "cantidad"+concepto;
+		inputCantidad.name = "cantidad"+concepto;
+		inputCantidad.style.width = "60px";
+		inputCantidad.style.textAlign = "center";
+		inputCantidad.style.display = "none";
+		inputCantidad.setAttribute('readonly',true);
+        inputCantidad.value = document.getElementById('conceptCan'+concepto).value;	
+		
+		//Input de total
+		inputTotal = document.createElement("input");
+		inputTotal.id = "total"+concepto;
+		inputTotal.name = "total"+concepto;
+		inputTotal.style.width = "80px";
+		inputTotal.style.textAlign = "center";
+		inputTotal.style.display = "none";
+		inputTotal.setAttribute('readonly',true);
+        inputTotal.value = document.getElementById('totalCosto').innerHTML.replace(",", "");	
+ 
+        td1 = document.createElement("td");
+        td1.setAttribute("align", "center");
+        td1.setAttribute("width", "375px");
+        td1.innerHTML = document.getElementById('nameCon').value;
+		
+        td2 = document.createElement("td");
+        td2.setAttribute("align", "center");
+        td2.setAttribute("width", "172px");
+        td2.innerHTML = document.getElementById('conceptCan'+concepto).value;
+			
+        td3 = document.createElement("td");
+        td3.setAttribute("align", "center");
+        td3.setAttribute("width", "112px");
+		td3.innerHTML = "$ "+Montoconcepto;
+		
+        td4 = document.createElement("td");
+        td4.setAttribute("align", "center");
+        td4.setAttribute("width", "105px");
+        td4.innerHTML = '$ ' + document.getElementById('totalCosto').innerHTML;
+
+        var boton = document.createElement("input");
+        boton.setAttribute("type", "button");
+        boton.setAttribute("name", "boton");
+        boton.setAttribute("value", "Eliminar");
+		boton.onclick =  function(){deleteRow(concepto)};
+       
+        td5 = document.createElement("td");
+        td5.setAttribute("align", "center");
+  		td5.setAttribute("width", "125px");
+        td5.appendChild(boton);
+
+	    if(document.getElementById('typeP').value == 2 && (document.getElementById('nombre').value == "" || document.getElementById('nombre').value.length < 6))
+		{
+		  showDialog('ALERTA','El nombre del aspirante debe de ser mayor de 6 caracteres','error',3);
+		}
+		
+		else if(document.getElementById('typeP').value == 4 && document.getElementById('typeOtherP').value == 1 && (document.getElementById('nombrePrope').value == "" || document.getElementById('nombrePrope').value.length < 6))
+		{
+		  showDialog('ALERTA','El nombre debe de ser mayor de 6 caracteres','error',3);
+		}
+		
+		else if(document.getElementById('typeP').value == 4 && document.getElementById('typeOtherP').value == 1 && (document.getElementById('telefonoPrope').value == "" || document.getElementById('telefonoPrope').value.length < 8))
+		{
+		  showDialog('ALERTA','El tel&eacute;fono debe tener m&iacute;nimo 8 caracteres','error',3);
+		}
+		
+		else
+		{
+			tr.appendChild(td1);
+			tr.appendChild(td2);                   
+			tr.appendChild(td3);                  
+			tr.appendChild(td4);                  
+			tr.appendChild(td5);   
+			td2.appendChild(inputCantidad);		
+			td2.appendChild(inputCon);		
+			td3.appendChild(inputCost);		
+			td4.appendChild(inputTotal);		
+
+			tbBody.appendChild(tr);
+
+			miTabla.appendChild(tbBody);
+
+			miCapa.appendChild(miTabla); 
+			
+		    document.getElementById('contenedor').style.display = "block";
+		    document.getElementById('buttoSave').style.display = "block";
+			countConcepto++;
+        }		
+  }
+
+crearTabla();
+
+//Esta funcion sirve para eliminar una fila de la tabla
+function deleteRow(param)
+{
+  var tabla = document.getElementById('table'+param);
+  var elimina = tabla.parentNode;
+  elimina.removeChild(tabla);
+}
+
+</script> 

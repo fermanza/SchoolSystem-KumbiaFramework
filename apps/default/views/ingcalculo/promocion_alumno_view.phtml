@@ -1,0 +1,25 @@
+<!-- Este formulario sólo se puso para poder acceder desde JavaScript a los valores de los campos -->
+<center><br /><br />
+<h2>Promoci&oacute;n Alumnos</h2>
+
+<table>
+	<tr>
+		<th class="bordeAzul2">
+			<?= form_remote_tag("ingcalculo/promocion_alumno_plan_creditos","update: promocion_alumno", "name: Formulario0") ?>
+				<input type="submit" value="Promoci&oacute;n Alumnos Plan Cr&eacute;dtios">
+				</form>
+		</th>
+		<th class="bordeAzul2">
+			<?= form_remote_tag("ingcalculo/promocion_alumno_plan_rigido","update: promocion_alumno", "name: Formulario1") ?>
+				<input type="submit" value="Promoci&oacute;n Alumnos Plan Rigido">
+			</form>
+		</th>
+	</tr>
+</table>
+
+<br /><br />
+
+<div id ="promocion_alumno" name="promocion_alumno">
+</div>
+
+</center>

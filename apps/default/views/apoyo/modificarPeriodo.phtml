@@ -1,0 +1,212 @@
+<style type="text/css">
+	select{
+		width: 100%;
+	}
+	input[type="text"]{
+		width: 95%;
+		font-size:11px;
+	}
+	td{
+		font-weight:bold;
+	}
+</style>
+<span style="font-size: 10px;">* Ejemplo fecha:  2009-03-17 00:00:00 <br /> a&ntilde;o - mes - dia &nbsp;&nbsp;&nbsp; hora - min - seg</span>
+<br />&nbsp;<br />
+<?php echo form_remote_tag("apoyo/guardarPeriodo", "update: contenido") ?>
+<center>
+<table class="bordeAzul"  style="font-size:10px; width: 550px;" >
+	<tr>
+		<th colspan="4" class="naranja">
+		<?= $Periodo -> periodo." - ".$Periodo -> nombre ?>
+		</th>
+	</tr>
+	<tr>
+		<td class="azul" width="150">
+			Activo
+		</td>
+		<td class="grisClaro">
+			<center>
+			<select name="activo">			
+			<?php 
+				if($Periodo -> activo == 0){
+					$s ="selected";
+					$s1 ="";
+				}else{
+					$s ="";
+					$s1 ="selected";
+				}
+			?>
+				<option <?= $s ?> value="0">NO</option>
+				<option <?= $s1 ?> value="1">SI</option>				
+			</select>
+			</center>
+		</td>
+		<td class="azul" width="150">
+			Inicio Evaluacion Semanal
+		</td>
+		<td class="grisClaro">
+			<select name="inicioEvaluacionSemanal">
+				<option selected value="<?= $Periodo -> inicioEvaluacionSemanal ?>"><?= $Periodo -> inicioEvaluacionSemanal ?> Semana</option>
+				<?php for($i=1; $i<25; $i++) { ?>
+				<option value="<?= $i ?>"><?= $i ?> Semana</option>
+				<?php } ?>
+			</select>			
+		</td>
+	</tr>
+	<tr>
+		<td class="azul">
+			Periodo
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="periodo" value="<?= $Periodo -> periodo ?>" />
+		</td>
+		<td class="azul">
+			Fin Evaluacion Semanal
+		</td>
+		<td class="grisClaro">
+			<select name="finEvaluacionSemanal">
+				<option selected value="<?= $Periodo -> finEvaluacionSemanal ?>"><?= $Periodo -> finEvaluacionSemanal ?> Semana</option>
+				<?php for($i=1; $i<25; $i++) { ?>
+				<option value="<?= $i ?>"><?= $i ?> Semana</option>
+				<?php } ?>
+			</select>			
+		</td>
+	</tr>
+	<tr>
+		<td class="azul">
+			Nombre
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="nombre" value="<?= $Periodo -> nombre ?>" />
+		</td>
+		<td class="azul">
+			Inicio AutoEvaluacion
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="inicioAutoevaluacion1" value="<?= $Periodo -> inicioAutoevaluacion1 ?>" />			
+		</td>
+	</tr>
+	<tr>
+		<td class="azul">
+			Inicio Primer Parcial
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="inicio1parcial" value="<?= $Periodo -> inicio1parcial ?>" />			
+		</td>
+		<td class="azul">
+			Fin AutoEvaluacion
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="finAutoevaluacion1" value="<?= $Periodo -> finAutoevaluacion1 ?>" />			
+		</td>
+	</tr>
+	<tr>
+		<td class="azul">
+			Fin Primer Parcial
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="fin1parcial" value="<?= $Periodo -> fin1parcial ?>" />			
+		</td>
+		<td class="azul">
+			Inicio AutoEvaluacion 2
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="inicioAutoevaluacion2" value="<?= $Periodo -> inicioAutoevaluacion2 ?>" />			
+		</td>		
+	</tr>
+	<tr>
+		<td class="azul">
+			Inicio Segundo Parcial
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="inicio2parcial" value="<?= $Periodo -> inicio2parcial ?>" />			
+		</td>
+		<td class="azul">
+			Fin AutoEvaluacion 2
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="finAutoevaluacion2" value="<?= $Periodo -> finAutoevaluacion2 ?>" />			
+		</td>
+	</tr>
+	<tr>
+		<td class="azul">
+			Fin Segundo Parcial
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="fin2parcial" value="<?= $Periodo -> fin2parcial ?>" />			
+		</td>
+		<td class="azul">
+			Inicio AutoEvaluacion 3
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="inicioAutoevaluacion3" value="<?= $Periodo -> inicioAutoevaluacion3 ?>" />			
+		</td>
+	</tr>
+	<tr>
+		<td class="azul">
+			Inicio Tercer Parcial
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="inicio3parcial" value="<?= $Periodo -> inicio3parcial ?>" />			
+		</td>
+		<td class="azul">
+			Fin AutoEvaluacion 3
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="finAutoevaluacion3" value="<?= $Periodo -> finAutoevaluacion3 ?>" />
+		</td>
+	</tr>
+	<tr>
+		<td class="azul">
+			Fin Tercer Parcial
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="fin3parcial" value="<?= $Periodo -> fin3parcial ?>" />			
+		</td>
+		<td class="azul">
+			Inicio Evaluacion Docente
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="inicioEvaluacionDocente" value="<?= $Periodo -> inicioEvaluacionDocente ?>" />			
+		</td>
+	</tr>
+	<tr>
+		<td class="azul">
+			Recargo
+		</td>
+		<td class="grisClaro">
+			<select name="activo">			
+			<?php 
+				$s = NULL; $s1 = NULL; $s2 = NULL; $s3 = NULL;
+				if($Periodo -> recargo == 0)
+					$s = "selected";
+				if($Periodo -> recargo == 1)
+					$s1 = "selected";
+				if($Periodo -> recargo == 2)
+					$s2 = "selected";
+				if($Periodo -> recargo == 3)
+					$s3 = "selected";
+			?>
+				<option <?= $s ?> value="0">Ninguno</option>
+				<option <?= $s1 ?> value="1">Recargo No.1</option>
+				<option <?= $s2 ?> value="0">Recargo No.2</option>
+				<option <?= $s3 ?> value="1">Recargo No.3</option>
+			</select>		
+		</td>
+		<td class="azul">
+			Fin Evaluacion Docente
+		</td>
+		<td class="grisClaro">
+			<input type="text" name="finEvaluacionDocente" value="<?= $Periodo -> finEvaluacionDocente ?>" />			
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4" class="grisClaro">
+			<center>					
+				<input type="submit" value="Guardar">			
+			<center>
+		</td>
+	</tr>
+</table>
+</form>
+</center>

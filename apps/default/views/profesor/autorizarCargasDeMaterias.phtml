@@ -1,0 +1,106 @@
+<!-- Este formulario sólo se puso para poder acceder desde JavaScript a los valores de los campos -->
+<form action="<?= KUMBIA_PATH ?>profesor/autorizarCargasDeMaterias"
+		method = "post" name="Formulario1" id="Formulario1"><form name="Formulario1" id=
+<center><br><br>
+<table>
+	<tr class="naranja">
+		<th class="bordeAzul2">
+			Alumnos que NO est&aacute;n condicionados
+		</td>
+	</tr>
+	<tr class="naranja">
+		<td class="bordeAzul2">
+			<select name="alumno" id="alumno" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccionar Alumno - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $noCondicionados as $noCond ){
+				?>
+					<option value="<?= $noCond -> registroo ?>">
+					<?
+						echo $noCond -> registroo."&nbsp;-&nbsp;".$noCond -> enPlan.
+								"&nbsp;-&nbsp;".htmlentities
+										(substr( $noCond -> vcNomAlu, 0, 30));
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+		</td>
+	</tr>
+</table>
+
+<br />
+<br />
+<table>
+	<tr class="naranja">
+		<th class="bordeAzul2">
+			Alumnos CONDICIONADOS
+		</td>
+	</tr>
+	<tr class="naranja">
+		<td class="bordeAzul2">
+			<select name="condAlumno" id="condAlumno" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccionar Alumno - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $condicionados as $cond ){
+				?>
+					<option value="<?= $cond -> registroo ?>">
+					<?
+						echo $cond -> registroo."&nbsp;-&nbsp;".$cond -> enPlan.
+								"&nbsp;-&nbsp;".htmlentities
+										(substr( $cond -> vcNomAlu, 0, 30));
+					?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+		</td>
+	</tr>
+</table>
+</form>
+<br />
+<br />
+
+<div id ="datos" name="datos">
+</div>
+
+</center>
+<?
+		print "<script type=\"text/javascript\">
+		new Event.observe(\"alumno\", \"change\", function(){
+			var registro = document.Formulario1.alumno.value;
+			new AJAX.viewRequest({
+				action: \"profesor/opcionesCargarMateria/"."\"+".registro."+\"/1\",
+				container: \"datos\"
+			})
+		})
+		</script>";
+		
+		print "<script type=\"text/javascript\">
+		new Event.observe(\"condAlumno\", \"change\", function(){
+			var registro = document.Formulario1.condAlumno.value;
+			new AJAX.viewRequest({
+				action: \"profesor/opcionesCargarMateria/"."\"+".registro."+\"/2\",
+				container: \"datos\"
+			})
+		})
+		</script>";
+?>

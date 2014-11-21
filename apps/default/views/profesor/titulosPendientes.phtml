@@ -1,0 +1,86 @@
+<center>
+<table class="bordeAzul2" style="font-size:11px;">
+	<br />
+	<tr class="naranja">
+		<th colspan="9" class="azull4">
+			<h3>
+			Materias que se reprobaron en <?= $antesAnterior ?>
+			&nbsp;y se debieron cargar en <?= $pasado ?>, pero se dejaron pasar
+			por lo que se deben de tomar en T&iacute;tulo en el <?= $pasado ?>
+			</h3>
+		</th>
+	</tr>
+	<tr class="naranja">
+		<th class="azull4">
+			N°
+		</th>
+		<th class="azull4">
+			ClAVECURSO <?= $antesAnterior ?>
+		</th>
+		<th class="azull4">
+			REGISTRO
+		</th>
+		<th class="azull4">
+			NOMBRE ALUMNO
+		</th>
+		<th class="azull4">
+			CALIFICACI&Oacute;N
+		</th>
+		<th class="azull4">
+			¿REALIZO PAGO?
+		</th>
+		<th class="azull4">
+			TIPO DE EXAMEN
+		</th>
+		<th class="azull4">
+			MATERIA
+		</th>
+		<th class="azull4">
+			NOMBRE DE LA MATERIA
+		</th>
+	</tr>
+	<?
+	$i = 0;
+	foreach( $infoTitulos as $infT ){
+	?>
+		<tr class="naranja">
+			<th class="bordeAzul2">
+				<?php $i++; echo $i; ?>
+			</th>
+			<th class="bordeAzul2">
+				<?= $infT -> clavecurso ?>
+			</th>
+			<th class="bordeAzul2">
+				<?= $infT -> registro ?>
+			</th>
+			<th class="bordeAzul2">
+				<?= $infT -> vcNomAlu ?>
+			</th>
+			<th class="bordeAzul2">
+				<?= $infT -> calificacion ?>
+			</th>
+			<th class="bordeAzul2">
+			<?
+				if( $infT -> estado == "OK" )
+					echo "SI";
+				else
+					echo "NO";
+			?>
+			</th>
+			<th class="bordeAzul2">
+				<?= $infT -> tipo ?>
+			</th>
+			<th class="bordeAzul2">
+				<?= $infT -> materia ?>
+			</th>
+			<th class="bordeAzul2">
+				<?= $infT -> nombre ?>
+			</th>
+		</tr>
+		<?
+		}
+		?>
+</table>
+
+<br />
+<br />&nbsp;

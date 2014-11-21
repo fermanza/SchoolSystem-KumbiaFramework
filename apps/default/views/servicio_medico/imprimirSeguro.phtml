@@ -1,0 +1,102 @@
+<!--Se llaman los archivos css y js-->
+<?//= javascript_library_tag('jquery-1.7.2'); ?> 
+<?= javascript_library_tag('jquery-1.4.4.min'); ?>
+<?= javascript_library_tag('complete'); ?>
+<?= javascript_library_tag('jquery.DataTables.min'); ?>
+<?//= javascript_library_tag('jquery-ui'); ?>
+<?= javascript_library_tag('jquery.ui.core'); ?>
+<?= javascript_library_tag('jquery.ui.widget'); ?>
+
+
+<?= stylesheet_link_tag('demo_page'); ?>
+<?= stylesheet_link_tag('demo_table'); ?>
+<?= stylesheet_link_tag('demo_table_jui'); ?>
+<?//= stylesheet_link_tag('jquery-ui'); ?>
+<?= stylesheet_link_tag('smoothness/jquery-ui-1.7.2.custom'); ?>
+<?= stylesheet_link_tag('themes/demos', true); ?>
+<!--Termina llamado de archivos-->
+
+
+  <table style="margin-top:50px; margin-right:170px; margin-bottom:30px; font-size:16px; font-weight:bold; font-family:arial;">
+    <tr>
+	  <td colspan="3">
+	    <?= img_tag("adorno.gif","border: 0") ?> Muestra listado de los alumnos que ya imprimieron el Seguro Facultativo
+	  </td>
+	</tr>
+  </table>
+  <br/><br/>
+  
+<center>
+  <table id="tablaSeguro" style="width:100%; font-family:arial; font-size:12px; margin-top:10px; float:left;">
+    <thead>
+	  <tr>
+	    <th>Nombre Completo</th> 
+	    <th>Registro</th> 
+		<th>CURP</th> 
+		<th>SEGURO</th> 
+		<th>CARRERA</th> 
+		<th>IMPRIMIR</th>
+	  </tr>
+	</thead>
+<?php 
+    //Variable que se incrementa, se utiliza para el id del DataTable
+	$idCount = 1;
+	
+	//Se traen los datos obtenidos en la consulta
+	$seguroMedico = new ServicioMedico();
+	
+	$seguroF = ServicioMedico::alumnos_seguroFacultativo();
+
+	foreach($seguroF AS $value)
+	{
+	  //Validacion del numero de seguro
+	  if(strlen($value -> seguro) < 5)
+		$nss = "SIN NUMERO DE SEGURO";
+		  
+	  else
+	    $nss = $value -> seguro;
+		  
+		  
+	  //Validacion del numero de CURP
+	  if(strlen($value -> curp) < 10)
+		$curp = "SIN CURP";
+		  
+	  else
+	    $curp = $value -> curp;
+		
+	  //Variable nombre completo del alumnno	  
+      $nombreAlumno =  htmlentities($value -> nombres)." ". htmlentities($value -> a_paterno)." ". htmlentities($value -> a_materno);
+
+	if(file_exists("/var/www/htdocs/calculo/ingenieria/public/files/pdfs/seguroFacultativo/SeguroFacultativo".$value -> registro.".pdf")){
+	    //$filePDF = "public/files/pdfs/seguroFacultativo/SeguroFacultativo".$value -> registro.".pdf";
+        //$linkImpresion = "<a style='color:#000000;' href='".KUMBIA_PATH.$filePDF."'><img src='../public/img/Printer.png' style='width:50px; height:55px; cursor:pointer;' title='IMPRIMIR SEGURO FACULTATIVO'/></a>";	  
+	    $linkImpresion = link_to("alumno/solicitudSeguroPDFAL/".$value -> registro,"".img_tag("Printer.png","style: width:50px; height:55px;","cursor:pointer;","target: _blank","title: IMPRIMIR SEGURO FACULTATIVO"));
+		
+	  echo "<tr id=".$idCount."> 
+	          <td width='auto' align='center'>".$nombreAlumno."</td> 
+              <td width='auto' align='center'>".$value -> registro."</td> 
+              <td width='auto' align='center'>".$curp."</td> 
+			  <td width='auto' align='center'>".$nss."</td> 
+			  <td width='auto' align='center'>".$value -> carrera."</td> 
+              <td width='auto' align='center'>".$linkImpresion."</td> 
+            </tr>"; 
+	}
+	  $idCount++;
+	}
+
+?>
+  </table>
+</center>
+  
+<script type='text/javascript'>
+//Funcion que sirve para generar un DataTable
+$q(document).ready( function () {
+  var id = -1;
+  $q('#tablaSeguro').dataTable({ bJQueryUI: true,
+                            "sPaginationType": "full_numbers",
+							bRetrieve : true,
+							bDestroy : true
+                          })		
+});
+</script>
+  

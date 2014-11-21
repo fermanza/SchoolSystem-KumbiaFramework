@@ -1,0 +1,350 @@
+			<table cellspacing="1" cellpadding="1" style="font-size: 8px;">
+				<br />
+				<tr>
+					<th width="100px" class="tablaOrange" rowspan="2">
+						<b>&nbsp;&nbsp;&nbsp;&nbsp;Salon&nbsp;&nbsp;&nbsp;&nbsp;</b>
+					</th>
+					<th class="tablaOrange" colspan="7" width="18px">
+						<b>Lunes</b>
+					</th>
+					<th></th>
+					<th class="tablaOrange" colspan="7" width="18px">
+						<b>Martes</b>
+					</th>
+					<th></th>
+					<th class="tablaOrange" colspan="7" width="18px">
+						<b>Miercoles</b>
+					</th>
+					<th></th>
+					<th class="tablaOrange" colspan="7" width="18px">
+						<b>Jueves</b>
+					</th>
+					<th></th>
+					<th class="tablaOrange" colspan="7" width="18px">
+						<b>Viernes</b>
+					</th>
+					<th></th>
+					<th class="tablaOrange" colspan="7" width="18px">
+						<b>Sábado</b>
+					</th>
+				</tr>
+				<tr>
+				<?
+				for( $i = 0; $i < 6; $i ++ ){
+				?>
+					<th class="tablaOrange" width="2px">
+						<b>15</b>
+					</th>
+					<th class="tablaOrange" width="2px">
+						<b>16</b>
+					</th>
+					<th class="tablaOrange" width="2px">
+						<b>17</b>
+					</th>
+					<th class="tablaOrange" width="2px">
+						<b>18</b>
+					</th>
+					<th class="tablaOrange" width="2px">
+						<b>19</b>
+					</th>
+					<th class="tablaOrange">
+						<b>20</b>
+					</th>
+					<th class="tablaOrange">
+						<b>21</b>
+					</th>
+					<?
+					if( $i+1 != 6 ){
+					?>
+						<th></th>
+					<?
+					}
+					?>
+				<?
+				}
+				?>
+				</tr>
+				<?
+				foreach( $salones as $salon ){
+				?>
+				<tr>
+					<td colspan="1" class="tablaOrange">
+						<?
+						echo $salon -> edificio." ".$salon -> nombre;
+						?>
+					</td>
+					<td colspan="47" class="tablaOrange">
+						&nbsp;
+					</td>
+				</tr>
+				<?
+				}
+				?>
+			</table>
+
+
+
+
+
+
+
+<center><br><br>
+<table>
+	<tr>
+		<td width="900"><div align="justify">
+			
+			<div style="font-size: 14px;"><div style="color: #FF0000;"><b>LISTADO DE AULAS Y DISTRIBUCIÓN DE CURSOS</b></div>
+				<br>
+				<center>
+				<table border="0" cellpadding="0" cellspacing="0" width="400">
+					<tr>
+						<td><a href="<?= KUMBIA_PATH ?>profesor/cgrupos" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('coordinador_r1_c3','','<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c3_f2.gif',1);"><img name="coordinador_r1_c3" src="<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c3.gif" width="100" height="30" border="0" id="coordinador_r1_c3" alt="" /></a></td>
+						<td><a href="<?= KUMBIA_PATH ?>profesor/csalones" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('coordinador_r1_c4','','<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c4_f2.gif',1);"><img name="coordinador_r1_c4" src="<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c4.gif" width="100" height="30" border="0" id="coordinador_r1_c4" alt="" /></a></td>
+					</tr>
+				</table>
+				<br><br>
+				
+				<table border="1" cellspacing="1" cellpadding="1" style="font-size: 8px;">
+					<tr>
+						<th width="50" class="fondonaranja" rowspan="2">
+							<b>Salon</b>
+						</th>
+						<th class="fondonaranja" colspan="7">
+							<b>Lunes</b>
+						</th>
+						<th></th>
+						<th class="fondonaranja" colspan="7">
+							<b>Martes</b>
+						</th>
+						<th></th>
+						<th class="fondonaranja" colspan="7">
+							<b>Miercoles</b>
+						</th>
+						<th></th>
+						<th class="fondonaranja" colspan="7">
+							<b>Jueves</b>
+						</th>
+						<th></th>
+						<th class="fondonaranja" colspan="7">
+							<b>Viernes</b>
+						</th>
+						<th></th>
+						<th class="fondonaranja" colspan="7">
+							<b>Sábado</b>
+						</th>
+					</tr>
+					<tr>
+						<th class="fondonaranja">
+							<b>15</b>
+						</th>
+						<th class="fondonaranja">
+							<b>16</b>
+						</th>
+						<th class="fondonaranja">
+							<b>17</b>
+						</th>
+						<th class="fondonaranja">
+							<b>18</b>
+						</th>
+						<th class="fondonaranja">
+							<b>19</b>
+						</th>
+						<th class="fondonaranja">
+							<b>20</b>
+						</th>
+						<th class="fondonaranja">
+							<b>21</b>
+						</th>
+						<th></th>
+						<th class="fondonaranja">
+							<b>15</b>
+						</th>
+						<th class="fondonaranja">
+							<b>16</b>
+						</th>
+						<th class="fondonaranja">
+							<b>17</b>
+						</th>
+						<th class="fondonaranja">
+							<b>18</b>
+						</th>
+						<th class="fondonaranja">
+							<b>19</b>
+						</th>
+						<th class="fondonaranja">
+							<b>20</b>
+						</th>
+						<th class="fondonaranja">
+							<b>21</b>
+						</th>
+						<th></th>
+						<th class="fondonaranja">
+							<b>15</b>
+						</th>
+						<th class="fondonaranja">
+							<b>16</b>
+						</th>
+						<th class="fondonaranja">
+							<b>17</b>
+						</th>
+						<th class="fondonaranja">
+							<b>18</b>
+						</th>
+						<th class="fondonaranja">
+							<b>19</b>
+						</th>
+						<th class="fondonaranja">
+							<b>20</b>
+						</th>
+						<th class="fondonaranja">
+							<b>21</b>
+						</th>
+						<th></th>
+						<th class="fondonaranja">
+							<b>15</b>
+						</th>
+						<th class="fondonaranja">
+							<b>16</b>
+						</th>
+						<th class="fondonaranja">
+							<b>17</b>
+						</th>
+						<th class="fondonaranja">
+							<b>18</b>
+						</th>
+						<th class="fondonaranja">
+							<b>19</b>
+						</th>
+						<th class="fondonaranja">
+							<b>20</b>
+						</th>
+						<th class="fondonaranja">
+							<b>21</b>
+						</th>
+						<th></th>
+						<th class="fondonaranja">
+							<b>15</b>
+						</th>
+						<th class="fondonaranja">
+							<b>16</b>
+						</th>
+						<th class="fondonaranja">
+							<b>17</b>
+						</th>
+						<th class="fondonaranja">
+							<b>18</b>
+						</th>
+						<th class="fondonaranja">
+							<b>19</b>
+						</th>
+						<th class="fondonaranja">
+							<b>20</b>
+						</th>
+						<th class="fondonaranja">
+							<b>21</b>
+						</th>
+						<th></th>
+						<th class="fondonaranja">
+							<b>15</b>
+						</th>
+						<th class="fondonaranja">
+							<b>16</b>
+						</th>
+						<th class="fondonaranja">
+							<b>17</b>
+						</th>
+						<th class="fondonaranja">
+							<b>18</b>
+						</th>
+						<th class="fondonaranja">
+							<b>19</b>
+						</th>
+						<th class="fondonaranja">
+							<b>20</b>
+						</th>
+						<th class="fondonaranja">
+							<b>21</b>
+						</th>
+					</tr>
+					<?php $i=0; if($xsalones) foreach($xsalones as $xsalon){ $i++; if($i%2==0) $bg='bgcolor="#CCCCCC"'; else $bg='bgcolor="#FFFFFF"'; ?>
+					<tr>
+						<th class="fondonaranja">
+							<b><?= $xsalon -> edificio ?>:<?= $xsalon -> nombre ?></b>
+						</th>
+						
+						<?php
+							for($i=15;$i<=21;$i++){
+								$tmp = "l".$i;
+						?>
+						<th <?php if($xsalon -> $tmp == 1) echo 'bgcolor=#CCCCCC'; else echo 'bgcolor=#FFFFFF'; ?>>&nbsp;
+							
+						</th>
+						<?php
+							}
+						?>
+						<th bgcolor="#000000" width="1"></th>
+						<?php
+							for($i=15;$i<=21;$i++){
+								$tmp = "m".$i;
+						?>
+						<th <?php if($xsalon -> $tmp == 1) echo 'bgcolor=#CCCCCC'; else echo 'bgcolor=#FFFFFF'; ?>>&nbsp;
+							
+						</th>
+						<?php
+							}
+						?>
+						<th bgcolor="#000000" width="1"></th>
+						<?php
+							for($i=15;$i<=21;$i++){
+								$tmp = "i".$i;
+						?>
+						<th <?php if($xsalon -> $tmp == 1) echo 'bgcolor=#CCCCCC'; else echo 'bgcolor=#FFFFFF'; ?>>&nbsp;
+							
+						</th>
+						<?php
+							}
+						?>
+						<th bgcolor="#000000" width="1"></th>
+						<?php
+							for($i=15;$i<=21;$i++){
+								$tmp = "j".$i;
+						?>
+						<th <?php if($xsalon -> $tmp == 1) echo 'bgcolor=#CCCCCC'; else echo 'bgcolor=#FFFFFF'; ?>>&nbsp;
+							
+						</th>
+						<?php
+							}
+						?>
+						<th bgcolor="#000000" width="1"></th>
+						<?php
+							for($i=15;$i<=21;$i++){
+								$tmp = "v".$i;
+						?>
+						<th <?php if($xsalon -> $tmp == 1) echo 'bgcolor=#CCCCCC'; else echo 'bgcolor=#FFFFFF'; ?>>&nbsp;
+							
+						</th>
+						<?php
+							}
+						?>
+						<th bgcolor="#000000" width="1"></th>
+						<?php
+							for($i=15;$i<=21;$i++){
+								$tmp = "s".$i;
+						?>
+						<th <?php if($xsalon -> $tmp == 1) echo 'bgcolor=#CCCCCC'; else echo 'bgcolor=#FFFFFF'; ?>>&nbsp;
+							
+						</th>
+						<?php
+							}
+						?>
+					</tr>
+					<?php } ?>
+				</table>
+				<br>
+				</center>
+				<br>
+			</div>
+		</div></td>
+	</tr>
+</table>
+</center>

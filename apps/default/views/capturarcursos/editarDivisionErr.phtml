@@ -1,0 +1,23 @@
+<?= render_partial("info"); ?>
+
+<br />
+<br />
+<?= render_partial("menucursos"); ?>
+<br />
+<br />
+<table align="center">
+	<tr>
+		<td colspan="3" valign="center" class="encabezadoo">
+			<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+					ADMINISTRACIÓN DE HORARIOS: "<?= $periodoCompleto ?>"
+					<div id="content"></div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" valign="center" class="encabezadoo">
+			<?php
+				echo $error;
+			?>
+		</td>
+	</tr>
+</table>

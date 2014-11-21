@@ -1,0 +1,42 @@
+<td>
+<div class="centrar">
+<form action="<?= KUMBIA_PATH ?>subirarchivos/subirControlador" method="post" name="Formulario1" enctype="multipart/form-data">
+    <br> 
+    <b>Subir un archivo controlador al servidor: </b> 
+    <br> 
+    <input name="controlador" type="file"> 
+    <br> 
+    <input type="submit" value="Enviar"> 
+</form>
+
+<br />
+<br />
+
+<form action="<?= KUMBIA_PATH ?>subirarchivos/subirVista" method="post" name="Formulario2" enctype="multipart/form-data">
+    <b>Indique el nombre de la vista:</b> 
+    <br> 
+    <input type="text" name="nombreVista" size="50" maxlength="100"> 
+    <input type="hidden" name="MAX_FILE_SIZE" value="100000"> 
+    <br> 
+    <br>
+    <br> 
+    <b>Subir un archivo vista al servidor: </b> 
+    <br> 
+    <input name="vista" type="file"> 
+    <br> 
+    <input type="submit" value="Enviar"> 
+</form> 
+
+<br />
+<br />
+
+<form action="<?= KUMBIA_PATH ?>subirarchivos/subirModelo" method="post" name="Formulario3" enctype="multipart/form-data">
+    <br> 
+    <b>Subir un archivo modelo al servidor: </b> 
+    <br> 
+    <input name="modelo" type="file"> 
+    <br> 
+    <input type="submit" value="Enviar"> 
+</form> 
+</div>
+</td>

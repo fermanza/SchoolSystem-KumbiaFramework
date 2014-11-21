@@ -1,0 +1,125 @@
+<center>
+<table style="font-size:11px;" class="bordeAzul2" width="80%">
+	<tr class="naranja" >
+		<th colspan="7" class="bordeAzul2">
+			ALUMNOS ENCONTRADOS
+		</th>
+	</tr>
+	<tr class="azul" >
+	  <th width="20%" height="17" class="bordeAzul2">FOTO</th>
+	  <th width="15%" class="bordeAzul2">FIRMA</th>
+		<th width="15%" class="bordeAzul2">REGISTRO</th>
+		<th width="15%" class="bordeAzul2">NOMBRE</th>
+		<th width="15%" class="bordeAzul2">CARRERA</th>
+		<th width="15%" class="bordeAzul2">TIPO ALUMNO</th>
+		<th width="15%" class="bordeAzul2">M&Aacute;S INFO</th>
+	</tr>
+	<?
+		$i = 0;
+		foreach($alumnos as $a){
+	?>
+    <?php
+			echo "<tr>";
+			echo "<th class='bordeAzul2'><center>";
+			$entro=0;
+			$foto = "fotos/".$a -> miReg.".JPG";
+			$foto1 = "fotos/".$a -> miReg.".jpg";
+			if(file_exists("/var/www/htdocs/calculo/ingenieria/public/img/".$foto)){
+				echo img_tag($foto, "width: 100");
+				$entro=1;
+			}
+			if(file_exists("/var/www/htdocs/calculo/ingenieria/public/img/".$foto1)){
+				echo img_tag($foto1, "width: 100");
+				$entro=1;
+			}
+			if ($entro == 0){
+				echo "Sin Foto";
+			}
+			echo "</center></th>";
+			
+			
+			echo "<th class='bordeAzul2'><center>";
+			$entro=0;
+			$foto = "firmas/F".$a -> miReg.".JPG";
+			$foto1 = "firmas/F".$a -> miReg.".jpg";
+			$foto2 = "firmas/f".$a -> miReg.".JPG";
+			$foto3 = "firmas/f".$a -> miReg.".jpg";
+			if(file_exists("/var/www/htdocs/calculo/ingenieria/public/img/".$foto)){
+				echo img_tag($foto, "width: 100");
+				$entro=1;
+			}
+			if(file_exists("/var/www/htdocs/calculo/ingenieria/public/img/".$foto1)){
+				echo img_tag($foto1, "width: 100");
+				$entro=1;
+			}
+			if(file_exists("/var/www/htdocs/calculo/ingenieria/public/img/".$foto2)){
+				echo img_tag($foto2, "width: 100");
+				$entro=1;
+			}
+			if(file_exists("/var/www/htdocs/calculo/ingenieria/public/img/".$foto3)){
+				echo img_tag($foto3, "width: 100");
+				$entro=1;
+			}
+			if ($entro == 0){
+				echo "Sin Foto";
+			}
+			echo "</center></th>";
+	?>
+		  <th class="bordeAzul2"><?= $a -> miReg ?></th>
+		<th class="bordeAzul2">
+			<? echo utf8_encode($a -> vcNomAlu) ?>
+		</th>
+		<th class="bordeAzul2"><?
+		
+			$Areaformacion= new Areadeformacion();
+			$Carrera = new Carrera();
+			$nombrecarrera=$Carrera->find_first("id=".$a->carrera_id);
+			
+		if( $a -> areadeformacion_id != 0 ){
+			
+			$nombrearea=$Areaformacion->find_first("carrera_id=".$a->carrera_id." and idareadeformacion=".$a->areadeformacion_id);
+			setlocale(LC_ALL,'es_MX');
+			echo utf8_encode($nombrecarrera -> nombre." ".$nombrearea -> nombreareaformacion);
+			//echo $nombrecarrera -> nombre." ".$nombrearea -> nombreareaformacion;
+			//echo $career -> nombre." ".$career -> nombreareaformacion;
+		}
+		else{
+			echo utf8_encode($nombrecarrera -> nombre);
+			//echo $nombrecarrera -> nombre;
+		}
+		?>
+		</th>
+        <? if ($a->stSit=='OK'){
+			$estatus=$a->enTipo;
+			}else{
+			$estatus=$a->stSit;
+			}
+			?>
+        <th class="bordeAzul2"><?= $estatus ?></th>
+		<th class="bordeAzul2">
+			<input type="radio" name="verReg<?= $a->miReg ?>"
+					id="verReg<?= $a->miReg ?>" value="<?= $a -> miReg ?>">
+		</th>
+	</tr>
+	<?
+			$i++;
+		}
+	?>
+	<tr>
+</table>
+<div id ="masInfo" name="masInfo">
+</div>
+<?
+	foreach($alumnos as $a){
+		print "<script type=\"text/javascript\">
+		new Event.observe(\"verReg".$a->miReg."\", \"click\", function(){
+		new AJAX.viewRequest({
+			action: \"buscaralumno/menubuscaralumno/".$a -> miReg."\",
+			container: \"masInfo\"
+		})
+		})
+		</script>";
+	}
+?>
+<br />
+</center>

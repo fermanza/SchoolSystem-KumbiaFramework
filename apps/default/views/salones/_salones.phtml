@@ -1,0 +1,17 @@
+<?php 
+echo form_tag('salones/horarioPDF');
+$Salones = new Salones();
+$salones = $Salones -> find("divisiones_id = ".$divisiones_id, "order: corto ASC");
+
+?>
+<select name="salon">
+<?php
+	foreach($salones as $salon){
+		$Divisiones = new Divisiones();
+		$Divisiones -> find_first($salon -> divisiones_id);
+		echo '<option value="'.$salon -> id.'">'.$salon -> corto.' - '.$salon -> nombre.' - '.$Divisiones -> nombre.'</option>';
+	}
+	echo submit_tag('Ver');
+?>	
+</select>
+</form>

@@ -1,0 +1,23 @@
+<?php
+$Materias = new MateriasHorarios();
+$Grupos = new Grupos();
+echo form_remote_tag('tgocoordinador/asignarHorario/'.$maestro,'update: horario'.$tmp);
+	echo '<input type="hidden" name="tmp" value="'.$tmp.'">';
+	echo '<select name="horario_id" style="width:110px;">';
+		echo '<option value="0"> </option>';
+		foreach($horarios as $horario){			
+			$Materias -> find_first($horario -> materia_id);
+			$Grupos -> find_first($horario -> grupo_id);
+			echo '<option value="'.$horario -> id.'"> '.$Grupos -> nombre.' - '.utf8_encode($Materias -> nombre).' </option>';	
+		}
+	echo '</select><br /><br />';
+	echo '<select name="salon_id" style="width:45px;">';
+		echo '<option value="0"> </option>';
+		foreach($salones as $salon){
+			echo '<option value="'.$salon -> id.'">'.$salon -> nombre.'</option>';
+		}
+	echo '</select><br /><br />';	
+	echo submit_tag("Actualizar");
+echo end_form_tag();
+	//echo render_partial("abrirhora"); 
+?>

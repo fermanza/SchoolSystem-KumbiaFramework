@@ -1,0 +1,32 @@
+			<select name="carreras" id="carreras" class="lista">
+				<option value="-1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					- - Seleccione una Carrera - -
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</option>
+				<?
+				foreach( $carreras as $carrera ){
+				?>
+					<option value="<?php echo $carrera -> id ?>">
+						<?php echo utf8_encode($carrera -> nombre) ?>
+					</option>
+				<?
+				}
+				?>
+			</select>
+			<br /><br />
+			
+<?php
+	print "<script type=\"text/javascript\">
+	new Event.observe(\"carreras\", \"change\", function(){
+		var carrera_id = document.getElementById('carreras').value;
+		document.getElementById('submitir').disabled=true;
+		new AJAX.viewRequest({
+			action: \"capturarcursos/get_materias_cursos_intersemestrales/\"+".carrera_id."+\"\",
+			container: \"td_materias\"
+		})
+	})
+	</script>";
+?>

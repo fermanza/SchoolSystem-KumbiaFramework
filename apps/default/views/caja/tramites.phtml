@@ -1,0 +1,97 @@
+<?= render_partial("caja/imprimirFichasIntro"); ?>
+<script type='text/javascript'>
+//Se mandan los parametros a modificar
+function tramitesStatus()
+{ 
+  var param = document.getElementById('statusPago').value;
+
+  return param;
+}
+</script> 
+<div>
+</div>
+<table style="width:98%; font-family:arial; font-size:12px;">
+  <tr>
+    <td colspan="19" bgcolor="#F5B353" style="font-weight:bold; font-size:16px;">
+	  <!--<select id="statusPago" name="statusPago" onchange="tramitesStatus();" style="float:left;">
+	    <option value="2">Todos</option>
+	    <option value="0">Sin Pagar</option>
+	    <option value="1">Pagados</option>
+	  </select>-->
+	  <center>
+	    LISTADO DE TRAMITES GENERADOS
+	  </center>
+	</td>
+  </tr> 
+  <tr style="font-weight:bold; color:#FFFFFF; text-align:center;">			
+    <td  bgcolor="#115199" width="50px">No. Concepto</td>
+	<td  bgcolor="#115199">Concepto</td>
+	<td  bgcolor="#115199">Importe</td>
+	<td  bgcolor="#115199">Referencia</td>
+	<td  bgcolor="#115199">Fecha Tramite</td>
+	<td  bgcolor="#115199">Periodo</td>
+	<td  bgcolor="#115199">Estatus</td>
+  </tr>
+
+
+<?php
+$cajaTramites = new CajaTramites();
+
+$fichas = cajaTramites::show_Fichas_Alumno();
+
+  if(count($fichas) == 0)
+  {
+    echo "<tr style='background-color: #E5E3E3; height:40px;'>"; 
+	echo "<td colspan='7' align='center' ><b>No se encontraron fichas a pagar</b></td>";
+	echo "</tr>";
+  }
+  foreach($fichas as $value){
+   
+   //Validacion de digitos de los conceptos
+   	if(strlen($value -> concepto) == 1)
+	  $concepto = "000".$value -> concepto;
+	  
+	else if(strlen($value -> concepto) == 2)
+	  $concepto = "00".$value -> concepto;
+	  
+	else if(strlen($value -> concepto) == 3)
+	  $concepto = "0".$value -> concepto;
+	  
+	else
+	  $concepto = $value -> concepto;
+	  
+	$filePDF = "public/files/pdfs/caja/Referencia_".$value -> referencia.".pdf"; 
+
+	$fechaTramite = cajaTramites::getFullDateTime($value -> fecha_tramite);
+	
+	//Se obtiene el nombre corto del periodo en el cual se solicito la ficha
+	$Periodo = new Periodos();
+	$PeriodoNom = $Periodo -> find_first("periodo = ".$value -> periodo);	
+	
+	  if(($value -> status_pago == 1) || (substr($value -> fecha_tramite,0,4) == date('Y') && strtotime($value -> fecha_tramite) > strtotime('2013-01-04 13:03:00'))){
+         echo tr_color('#E5E3E3','#FFFFFF'); 
+         echo "<td align='center'>".$concepto."</td>";
+	     if(($value -> concepto == 6 || $value -> concepto == 5) && $value -> status_pago == 0)
+           echo "<td>&nbsp;".$value -> nombre."<font style='font-weight:bold; color:#F91702'><br>ES OBLIGATORIO PAGAR EL RECARGO</font></td>";
+		
+		 else
+		   echo "<td>&nbsp;".$value -> nombre."</td>";
+		   
+         echo "<td align='left'>&nbsp;$&nbsp;".$value->costo."</td>";
+         echo "<td align='center'>".$value -> referencia."</td>";
+         echo "<td align='center'>".$fechaTramite."</td>";
+         echo "<td align='center'>".$PeriodoNom -> nombre_corto."</td>";
+		 
+		 if($value -> status_pago == 0)
+           echo "<td align='center' bgcolor='#BC2112'><a style='color:#000000;' href='".KUMBIA_PATH.$filePDF."'><img src='../public/img/Printer.png' style='width:50px; height:55px;' alt='Imprime Ficha'/></a></td>";
+        
+		
+		else
+		 echo "<td align='center' bgcolor='#719B3D' height='55px' width='50px'><font style='color:#FFFFFF; font-weight: bold;'>PAGADO</font></td>";
+		 
+		echo "</tr>";
+	  }	
+   }
+?>
+
+</table>

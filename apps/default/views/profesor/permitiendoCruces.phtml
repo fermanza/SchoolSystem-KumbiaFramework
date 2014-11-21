@@ -1,0 +1,39 @@
+<?= render_partial("autorizarCruces"); ?>
+
+<center>
+<table>
+	<?
+	if( $autorizacion == 1 ){
+	?>
+	<tr class="naranja"  width="200">
+		<th class="bordeAzul2"><h2>Cruce Autorizado</h2>
+		<?
+		if( $horas > 2 ){
+			echo $registro." ".$curso." Cruce Especial";
+		}
+		else{
+			echo $registro." ".$curso." ".$horas." hora";
+		}
+		?>
+		</th>
+	</tr>
+	<?
+	}
+	else{
+	?>
+		<tr class="naranja" width="200">
+			<th class="bordeAzul2">
+				<h2>Cruce NO Autorizado</h2>
+				Debido ah que ya se le hab&iacute;a autorizado un cruce a dicho<br />
+				alumno, y no se puede autorizar m&aacute;s de un cruce.
+			</th>
+		</tr>
+	<?
+	}
+	?>
+</table>
+<br />
+<?= render_partial("regresarAutorizarCruces"); ?>
+<br />
+<br />
+</center>

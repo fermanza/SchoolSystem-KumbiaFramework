@@ -1,0 +1,6 @@
+<?= render_partial("semana") ?><br>
+<?php if ($v == 1){ ?>
+	<span style="background: #BBFFBB; border: 1px solid #99CC99"><b><?= img_tag("ok.gif") ?> <?= $msj ?></b></span>
+<?php }else{ ?>
+	<span style="background: #FFBBBB; border: 1px solid #CC9999"><b> <?= $msj ?></b></span>	
+<?php } ?>

@@ -1,0 +1,70 @@
+<script src="<?= KUMBIA_PATH ?>javascript/kumbia/cursos_intersemestrales_inscripcion_alumnos2.js"></script>
+
+<?
+if( isset($mensaje) ){
+?>
+<table cellspacing="1" cellpadding="1" style="font-size: 12px;" border="0" align="center">
+	<tr>
+		<th>
+			<? echo $mensaje; ?>
+		</th>
+	</tr>
+</table>
+<?
+}
+else{
+?>
+	<div class="fondonaranja" style="width: 75px; float: left; margin-right: 5px; margin-left: 35px;">
+		Eliminar
+	</div>
+	<div class="fondonaranja" style="width: 75px; float: left; margin-right: 5px; margin-left: 3px;">
+		Editar
+	</div>
+	<div class="fondonaranja" style="width: 250px; float: left; margin-right: 5px; margin-left: 3px;">
+		Materia
+	</div>
+	<div class="fondonaranja" style="width: 100px; float: left; margin-right: 5px; margin-left: 3px;">
+		Cupo
+	</div>
+	<div class="fondonaranja" style="width: 250px; float: left; margin-right: 5px; margin-left: 3px;">
+		Profesor
+	</div>
+	<div class="fondonaranja" style="width: 150px; float: left; margin-right: 5px; margin-left: 3px;">
+		Fecha Creaci&oacute;n
+	</div>
+	
+	<div class="grisClaro margin2pxArribaAbajo" style="width: 75px; height: 38px;; float: left; margin-right: 5px; margin-left: 35px;">
+		<div class='centrar' style='width: 60px; float: left; margin-right: 2px'> 
+			<form action="<?= KUMBIA_PATH ?>capturarcursos/cursos_intersemestrales_borrar_curso" 
+					method = "post" name="Formulario1" id="Formulario1" onsubmit="return cursos_intersemestrales_validar_eliminar_curso();">
+				<input type="hidden" id="delete_clavecurso" name="delete_clavecurso" value="<?php echo $curso -> clavecurso; ?>" />
+				<input type='image' src='<?= KUMBIA_PATH ?>img/delete.gif' />
+			</form>
+		</div>
+	</div>
+	<div class="grisClaro margin2pxArribaAbajo" style="width: 75px; height: 38px;; float: left; margin-right: 5px; margin-left: 3px;">
+		<div class='centrar' style='width: 60px; float: left; margin-right: 2px'>
+			<form action="<?= KUMBIA_PATH ?>capturarcursos/cursos_intersemestrales_inscribir_alumno"
+					method = "post" name="Formulario2" id="Formulario2">
+				<input type="hidden" id="clavecurso" name="clavecurso" value="<?php echo $curso -> clavecurso; ?>" />
+				<input type='image' src='<?= KUMBIA_PATH ?>img/edit.gif' />
+			</form>
+		</div>
+	</div>
+	<div class="grisClaro margin2pxArribaAbajo" style="width: 250px; height: 38px;; float: left; margin-right: 5px; margin-left: 3px;">
+		<?php echo $curso -> clavecurso."<br />".$curso -> clave." - ".utf8_encode($curso -> nombre_materia) ?>
+	</div>
+	<div class="grisClaro margin2pxArribaAbajo" style="width: 100px; height: 38px; float: left; margin-right: 5px; margin-left: 3px;">
+			<?php echo "<div style='font-size: 9px;'>Cupo: ".$curso -> cupo."<br />Disponibilidad: ".$curso -> disponibilidad.
+					"<br />Inscritos: ".($curso -> cupo - $curso -> disponibilidad )."</div>" ?>
+	</div>
+	<div class="grisClaro margin2pxArribaAbajo" style="width: 250px; height: 38px;; float: left; margin-right: 5px; margin-left: 3px;">
+		<?php echo $curso -> nomina." - ".utf8_encode($curso -> nombre_maestro) ?>
+	</div>
+	<div class="grisClaro margin2pxArribaAbajo" style="width: 150px; height: 38px;; float: left; margin-right: 5px; margin-left: 3px;">
+		<?php echo $curso -> creado_at ?>
+	</div>
+	<div class="clear: both"></div>
+<?
+}
+?>

@@ -1,0 +1,280 @@
+<!--Se llaman los archivos css y js-->
+<?= javascript_library_tag('jquery-1.7.2'); ?> 
+<?= javascript_library_tag('jquery.ui.core'); ?>
+<?= javascript_library_tag('jquery.ui.widget'); ?>
+<?= javascript_library_tag('jquery.ui.tabs'); ?>
+<?= javascript_library_tag('jquery.maskedinput.min'); ?>
+<?= javascript_library_tag('dialog_box'); ?>
+
+<?= stylesheet_link_tag('themes/base/jquery.ui.all'); ?>
+<?= stylesheet_link_tag('themes/demos', true); ?>
+<?= stylesheet_link_tag('dialog_box'); ?>
+<!--Termina llamado de archivos-->
+
+</br>
+</br>
+</br>
+<?php echo form_remote_tag('actualizacioning/buscar','update: informacion');?>
+<fieldset style="background-color:#DDDDDD; font-size: 11px; font-family:'Verdana'; font-weight: bold;">
+	<legend style="background-color:#DDDDDD; font-size: 11px;font-family:'Verdana'; font-weight: bold;">Modificacion de datos de alumno</legend>
+	<table>
+		<tr>
+			<td>Registro: </td>
+			<td><?php echo text_field_tag('registro','onkeypress: javascript:return ValidNum(event)'); ?></td>
+			<td><?php echo submit_tag('BUSCAR'); ?></td>
+		</tr>
+	</table>
+</fieldset>
+<?php echo end_form_tag(); ?>
+
+<div id="informacion" class="informacion"></div>
+</br>
+</br>
+
+<script type="text/javascript">
+	//funcion que valida que solo se puedan ingresar numeros
+	function ValidNum(e)
+	{
+		var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+			return ((tecla > 45 && tecla < 58) || tecla == 8);
+	}
+	
+	//Funcion que muestra y oculta la tabla de trabajo
+	function mostrarDatos(){
+		if( document.getElementById('trabaja').value == "SI" ){
+			document.getElementById('datosTrabajo').style.display = "block";
+		}
+		else{
+			document.getElementById('datosTrabajo').style.display = "none";
+		}
+	}
+	
+	//Funcion que desbloquea los txt
+	function habilitarTxt( componente,cambio ){
+		
+		if(cambio == 0){
+			document.getElementById(componente).readOnly = true;
+			document.getElementById(componente).style.backgroundColor = '#CCCCCC';
+			document.getElementById(componente).value = "";
+		}
+		else{
+			document.getElementById(componente).readOnly = false;
+			document.getElementById(componente).style.backgroundColor = '#FFFFFF';
+		}
+		
+	}
+	
+	//Funcion que desbloquea los txt
+	function habilitarTxtOtro( componente, otro, fecha ){
+		
+		if( document.getElementById(componente).value == "OTRO"){
+			document.getElementById(otro).readOnly = false;
+			document.getElementById(otro).style.backgroundColor = '#FFFFFF';
+		}
+		else if( document.getElementById(componente).value == "IMSS SEGURO FACULTATIVO"){
+			document.getElementById(fecha).readOnly = false;
+			document.getElementById(fecha).style.backgroundColor = '#FFFFFF';
+		}
+		else{
+			document.getElementById(otro).readOnly = true;
+			document.getElementById(otro).style.backgroundColor = '#CCCCCC';
+			document.getElementById(otro).value = "";
+
+			document.getElementById(fecha).readOnly = true;
+			document.getElementById(fecha).style.backgroundColor = '#CCCCCC';
+			document.getElementById(fecha).value = "";
+		}
+		
+	}
+	
+	//Funcion que desbloquea los txt
+	function mostrar( componente, otro ){
+		
+		if( document.getElementById(componente).value == "OTRO"){
+			document.getElementById(otro).readOnly = false;
+			document.getElementById(otro).style.backgroundColor = '#FFFFFF';
+		}
+		else{
+			document.getElementById(otro).readOnly = true;
+			document.getElementById(otro).style.backgroundColor = '#CCCCCC';
+			document.getElementById(otro).value = "";
+		}
+		
+	}
+	
+	//Funcion que oculta la tabla de seguro social
+	function seguroAlm(){
+		if( document.getElementById('seguroSi').checked == true ){
+			document.getElementById('tablaSeguro').style.display = "block";
+		}
+		else{
+			document.getElementById('tablaSeguro').style.display = "none";
+		}
+	}
+	
+	//Funcion que valida los datos obligatorios
+	function validaDatos(){
+		var valida = 0;
+		//datos personales
+		if( document.getElementById('curp') != null ){
+			if( document.getElementById('curp').value == "" || document.getElementById('curp').value == "" || document.getElementById('domicilio').value == "" || 
+				document.getElementById('numExterior').value == "" || document.getElementById('colonia').value == "" || document.getElementById('ciudad').value == "" || 
+				document.getElementById('estado').value == "" || document.getElementById('cp').value == "" || document.getElementById('telCasa').value == "" || 
+				document.getElementById('estadoCivil').value == "" || document.getElementById('nacionalidad').value == "" || document.getElementById('correoPersonal').value == "" || 
+				document.getElementById('fechaNacimiento').value == "" || document.getElementById('ciudadNacimiento').value == "" || 
+				document.getElementById('estadoNac').value == "" || document.getElementById('paisNacimiento').value == "" || document.getElementById('correoIntitucional').value == "" ){
+
+				valida = 1;
+			}
+			if(valida == 1){
+				document.getElementById('btnpersonal').style.display = "block";
+				document.getElementById('modPersonal').style.display = "none";
+				document.getElementById('Gpersonal').value = "0";
+			}else{
+				document.getElementById('btnpersonal').style.display = "none";
+				document.getElementById('modPersonal').style.display = "block";
+				document.getElementById('Gpersonal').value = "1";
+			}
+		}
+		
+		valida = 0;
+		//datos de los aspirantes
+		if( document.getElementById('continuidadSi') != null ){
+			if( document.getElementById('continuidadSi').checked == true ){
+				if( document.getElementById('periodoEgreso').value == "" || document.getElementById('registro_tecnologo').value == "" ||
+					document.getElementById('plantel').value == "" || document.getElementById('carreraEgreso').value == "" ){
+				
+					valida = 1;
+				}
+			}
+			if(valida == 1){
+				document.getElementById('btnaspirante').style.display = "block";
+				document.getElementById('modAspirante').style.display = "none";
+				document.getElementById('Gaspirante').value = "0";
+			}else{
+				document.getElementById('btnaspirante').style.display = "none";
+				document.getElementById('modAspirante').style.display = "block";
+				document.getElementById('Gaspirante').value = "1";
+			}
+		}
+		
+		valida = 0;
+		//datos personales de los padres
+		if( document.getElementById('nombreFamiliar') != null ){
+			if( document.getElementById('nombreFamiliar').value == "" || document.getElementById('nombreFamiliar2').value == "" || 
+				document.getElementById('apellido_paterno').value == "" || document.getElementById('apellido_paterno2').value == "" || 
+				document.getElementById('apellido_materno').value == "" || document.getElementById('apellido_materno2').value == "" || 
+				document.getElementById('parentesco').value == "" || document.getElementById('parentesco2').value == "" || 
+				document.getElementById('nacionalidadFamiliar').value == "" || document.getElementById('nacionalidadFamiliar2').value == "" || 
+				document.getElementById('paisFamiliar').value == "" || document.getElementById('paisFamiliar2').value == "" || 
+				document.getElementById('gradoEstudios').value == "" || document.getElementById('gradoEstudiosFamiliar').value == "" || 
+				document.getElementById('calleNumeroFamiliar').value == "" || document.getElementById('calleNumeroFamiliar2').value == "" || 
+				document.getElementById('coloniaFamiliar').value == "" || document.getElementById('coloniaFamiliar2').value == "" ||
+				document.getElementById('ciudadFamiliar').value == "" || document.getElementById('ciudadFamiliar2').value == "" ||
+				document.getElementById('estadoFamiliar').value == "" || document.getElementById('estadoFamiliar2').value == "" ||
+				document.getElementById('telefonoFamiliar').value == "" || document.getElementById('telFamiliar2').value == "" ||
+				document.getElementById('celularFamiliar').value == "" || document.getElementById('celFamiliar').value == "" ||
+				document.getElementById('ocupacionFamiliar').value == "" || document.getElementById('ocupacionFamiliar2').value == "" ){
+
+				valida = 1;
+			}
+			if(valida == 1){
+				document.getElementById('btnTutores').style.display = "block";
+				document.getElementById('modTutores').style.display = "none";
+				document.getElementById('GTutores').value = "0";
+			}else{
+				document.getElementById('btnTutores').style.display = "none";
+				document.getElementById('modTutores').style.display = "block";
+				document.getElementById('GTutores').value = "1";
+			}
+		}
+		
+		valida = 0;
+		//datos del trabajo del alumno
+		if( document.getElementById('trabaja') != null ){
+			if( document.getElementById('trabaja').value == "SI" ){
+				if( document.getElementById('empresa').value == "" || document.getElementById('DomicilioEmpresa').value == "" || 
+					document.getElementById('coloniaEmpresa').value == "" || document.getElementById('ciudadEmpresa').value == "" ||
+					document.getElementById('estadoEmpresa').value == "" || document.getElementById('cpEmpresa').value == "" ||
+					document.getElementById('telefonoEmpresa').value == "" || document.getElementById('horarioEntrada').value == "" ||
+					document.getElementById('horarioSalida').value == "" || document.getElementById('puesto').value == "" ){
+
+					valida = 1;
+				}
+			}
+			if(valida == 1){
+				document.getElementById('btnTrabajo').style.display = "block";
+				document.getElementById('modTrabajo').style.display = "none";
+				document.getElementById('GTrabajo').value = "0";
+			}else{
+				document.getElementById('btnTrabajo').style.display = "none";
+				document.getElementById('modTrabajo').style.display = "block";
+				document.getElementById('GTrabajo').value = "1";
+			}
+		}
+		
+		valida = 0;
+		//datos del seguro
+		if( document.getElementById('seguroSi') != null ){
+			if( document.getElementById('seguroSi').checked == true ){
+				if( document.getElementById('numAfiliacion').value == "" || document.getElementById('numeroClinica').value == "" ||
+					document.getElementById('vigenciaSeguro').value == "" || document.getElementById('tipoSangre').value == "" ||
+					document.getElementById('tipoSeguro').value == "" || document.getElementById('padresSeguro').value == "" ){
+				
+					valida = 1;
+				}
+				if( document.getElementById('EnfermedadSi').checked == true & document.getElementById('especificar_enfermedad').value == "" ){
+					valida = 1;
+				}
+				if( document.getElementById('alergiasSi').checked == true & document.getElementById('especifica_alergias').value == "" ){
+					valida = 1;
+				}
+				if( document.getElementById('capacidad_diferenteSi').checked == true & document.getElementById('especifica_capacidad').value == "" ){
+					valida = 1;
+				}
+				if( document.getElementById('protesisSi').checked == true & document.getElementById('especifica_protesis').value == "" ){
+					valida = 1;
+				}
+			}
+			if(valida == 1){
+				document.getElementById('btnMedico').style.display = "block";
+				document.getElementById('modMedico').style.display = "none";
+				document.getElementById('GMedico').value = "0";
+			}else{
+				document.getElementById('btnMedico').style.display = "none";
+				document.getElementById('modMedico').style.display = "block";
+				document.getElementById('GMedico').value = "1";
+			}
+		}
+		return valida;
+	}
+
+	//funcion que checa los input bloqueados
+	function checarInput(){
+		habilitarTxtOtro('tipoSeguro','otroSeguro','fechaMovimiento');
+		if( document.getElementById('alergiasNo').checked == true )
+			habilitarTxt('especifica_alergias','0');
+		else{
+			habilitarTxt('especifica_alergias','1');
+		}
+		
+		if( document.getElementById('protesisNo').checked == true )
+			habilitarTxt('especifica_alergias','0');
+		else{
+			habilitarTxt('especifica_alergias','1');
+		}
+		
+		if( document.getElementById('EnfermedadNo').checked == true )
+			habilitarTxt('especifica_alergias','0');
+		else{
+			habilitarTxt('especifica_alergias','1');
+		}
+		
+		if( document.getElementById('capacidad_diferenteNo').checked == true )
+			habilitarTxt('especifica_alergias','0');
+		else{
+			habilitarTxt('especifica_alergias','1');
+		}
+	}
+	
+</script>

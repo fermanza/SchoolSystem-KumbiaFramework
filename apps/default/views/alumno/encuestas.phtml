@@ -1,0 +1,221 @@
+<tr>
+	<td>
+		<style type="text/css">
+			.contenido{
+				font-size:12px;
+				width:1000px;
+				margin:0 auto 0 auto;
+			}
+			.pregunta{
+				background: #EEEEEE;
+				font-size:14px;
+			}
+			.seccion{
+				background: #CCCCCC;
+			}
+			.resaltado{
+				font-size:16px;
+			}
+		</style>
+		<script>
+		var MensajeDeError="Todos los campos son requeridos!\n"
+		    function pepote(f){
+		        marcado=false;
+		        var nombre;
+		        for(a=0;a<f.elements.length;a++){
+		            if(f[a].type=="radio"){
+						//alert(f[a].name);
+		                if(nombre!=f[a].name){
+		                    nombre=f[a].name;					
+		                    for(aa=0;f[a+aa].name==f[a].name;aa++){
+		                        if(f[a+aa].checked){
+									marcado=true;
+								}
+		                    }
+		                    if(marcado==false){
+								alert(MensajeDeError);
+								return false;
+							}
+		                }
+		           
+		            }
+					 marcado=false;
+		        }
+				return true;
+		    }
+			
+			function QuitarTexto( src ){
+				document.getElementById(src).innerHTML="";
+			}
+			
+			function PonerTexto( src, id ){
+				document.getElementById(src).innerHTML="<textarea name='opctexto"+id+"' id='opctexto"+id+"' cols='35' rows='1'></textarea>";
+			}
+			/*
+	var PRequired = document.getElementById("product").value;
+	var RadioRequired = document.Formulario1.elements['group1'];
+	PRequired = Trim2 (PRequired);
+	
+	
+	var flag = 0;
+	var radioLength = RadioRequired.length;
+	for(var i = 0; i < radioLength; i++) {
+		if(RadioRequired[i].checked) {
+			flag = 1;
+		}
+	}
+	if (flag == 0){
+		err+="Type product is Required\n";
+	}
+	if (PRequired.length == 0){
+		MensajeDeError+="Product Required can not be Void\n";
+		document.getElementById("product").value="";
+	}
+	*/
+		</script> 
+		<?php 
+		if($activarFormulario==1){
+			echo render_partial('formulario');
+			return;
+		}
+		?>
+		<div class="contenido">
+				<?php
+				for( $i = 1; $i < 14; $i++ ){
+					if ( isset($preguntas[$i]) ){
+					?>
+				<div id="seccion<?= $i ?>">
+					<form action="<?= KUMBIA_PATH ?>alumno/guardar" method="post"
+							onsubmit="
+							if (pepote(this)== true){
+								return ajaxRemoteForm(this, &quot;<?= "seccion".$i ?>&quot;, {  });
+							}
+							else{
+								return false
+							}">
+					<?php 
+						//echo form_remote_tag('encuestas/guardar', 'update: seccion'.$i )
+					?>
+					<table  width="100%" border="0">				
+						<tr>
+							<td class="seccion" colspan="6">
+								<?php
+								$Secciones = new Secciones();
+								$Secciones -> find_first("id = $i");
+								echo "<h2>".$Secciones -> nombre."<h2>";
+								?>
+								<input type="hidden" name="seccionNombre" value="<?= $Secciones -> nombre ?>">
+								<input type="hidden" name="seccionNumero" value="<?= $Secciones -> id ?>">
+								<input type="hidden" name="registroAlumno" value="<?= $registroAlumno ?>">
+							</td>					
+						</tr>
+						<?php
+						foreach ($preguntas[$i] as $p){
+						?>
+							<tr>
+								<td class="pregunta" colspan="6"><b><?= $p -> pregunta ?></b></td>
+							</tr>
+							<?
+							if ( $p -> tipo == 0 ){ // Escoger de las opciones
+							?>
+								<tr>
+									<td>N/A</td>
+									<td>6</td>
+									<td>7</td>
+									<td>8</td>
+									<td>9</td>
+									<td>10</td>
+								</tr>
+								<tr>
+									<td><input type="radio" name="r<?= $p -> id ?>" value="5"></td>
+									<td><input type="radio" name="r<?= $p -> id ?>" value="6"></td>
+									<td><input type="radio" name="r<?= $p -> id ?>" value="7"></td>
+									<td><input type="radio" name="r<?= $p -> id ?>" value="8"></td>
+									<td><input type="radio" name="r<?= $p -> id ?>" value="9"></td>
+									<td><input type="radio" name="r<?= $p -> id ?>" value="10"></td>
+								</tr>
+								<tr>
+									<td>NO APLICA</td>
+									<td>P&Eacute;SIMO</td>
+									<td>REGULAR</td>
+									<td>BUENO</td>
+									<td>MUY BUENO</td>
+									<td>EXCELENTE</td>
+								</tr>
+							<?
+							} // if ( $p -> tipo == 0 )
+							else if ( $p -> tipo == 1 ){ // Escribir Comentario
+							?>
+								<tr>
+									<td colspan="6">
+										<textarea name="comentario<?= $p -> id ?>" cols="45" rows="1"></textarea>
+									</td>
+								</tr>
+							<?
+							} // else if ( $p -> tipo == 1 )
+							else if ( $p -> tipo == 2 ){ // Si, No
+							?>
+								<tr>
+									<td colspan="3" align="center">Si</td>
+									<td colspan="3" align="center">No</td>
+								</tr>
+								<tr>
+									<td colspan="3" align="center">
+										<input type="radio" name="sino<?= $p -> id ?>" id="sino<?= $p -> id ?>" value="1">
+									</td>
+									<td colspan="3" align="center">
+										<input type="radio" name="sino<?= $p -> id ?>" id="sino<?= $p -> id ?>" value="2">
+									</td>
+								</tr>
+							<?
+							} // else if ( $p -> tipo == 1 )
+							else if ( $p -> tipo == 3 ){ // Escoger de las opciones o escribir Comentario
+								echo "<tr>";
+								for ( $l = 1; $l <= $opciones[$p -> id] -> cuantasopciones; $l++ ){
+									$tmp = "opcion".$l;
+							?>
+									<td>&nbsp;<? echo $opciones[$p -> id] -> $tmp ?>&nbsp;&nbsp;</td>
+							<?
+								}
+								$cuantoscolspan = 6 - $opciones[$p -> id] -> cuantasopciones;
+							?>
+									<td colspan="<?= $cuantoscolspan ?>">
+										<div id="texto<?= $p -> id ?>" name="texto<?= $p -> id ?>"></div>
+									</td>
+								</tr>
+								<tr>
+							<?
+								for ( $l = 1; $l <= $opciones[$p -> id] -> cuantasopciones-1; $l++ ){
+							?>
+									<td><input type="radio" name="opc<?= $p -> id ?>"
+											value="<?= $l ?>" onClick="QuitarTexto('texto<?= $p -> id ?>');"></td>
+							<?
+								}
+							?>
+								<td><input type="radio" name="opc<?= $p -> id ?>"
+										value="<?= $l ?>" onClick="PonerTexto('texto<?= $p -> id ?>', <?= $p -> id ?>);"></td>
+								</tr>
+								<tr>
+							<?
+							} // else if ( $p -> tipo == 3 )
+							?>
+							
+						<input type="hidden" id="tipo<?= $p -> id ?>" name="tipo<?= $p -> id ?>" value="<?= $p -> tipo ?>">
+						<?php
+						}
+						?>
+						<tr>	
+							<td align="center" colspan="6"><?= submit_tag("ENVIAR") ?></td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>				
+					</table>
+					<?= end_form_tag() ?>
+				</div>
+				<?php
+				}		
+				}?>
+		</div>
+	</td>
+</tr>

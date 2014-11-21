@@ -1,0 +1,49 @@
+<?php
+$Materias = new MateriasHorarios(); 
+if ($horarios){
+?>
+	<table class="bordeazul" style="font-size:11px">
+	<tr class="naranja">
+		<th>No. Acta</th>
+		<th>Clave</th>
+		<th>Materia</th>
+		<th>Plan</th>
+		<th>Registrados</th>		
+		<th>Tipo</th>		
+	<tr>
+	<?php
+	$Calificaciones = new Calificaciones();
+	
+	foreach($horarios as $h){
+		$m = $Materias -> find_first("id = ".$h -> materia_id);
+		$cuantosR=0;
+		echo tr_color('#CCDEFF', '#FFFFFF');
+		echo '<td>'.$h -> id.'</td>';
+		echo '<td>'.$m -> clave.'</td>';
+		echo '<td>'.utf8_encode($m -> nombre).'</td>';
+		echo '<th>'.$m -> plan.'</th>';
+		if($cuantosR = $Calificaciones -> count("horario_id = ".$h -> id)){
+		}else{
+			$cuantosR=0;
+		}
+		echo '<th>'.$cuantosR.'</th>';
+		
+		?>
+		
+		<td>
+			<?= form_remote_tag("irregular/agregarMateria", "update: listadoMaterias") ?>		
+				<select name="tipo">
+					<option value="R">Regular</option>
+					<option value="I">Irregular</option>
+					<option value="C">Condicionado</option>
+				</select>
+				<input type="hidden" value="<?= $registro ?>" name="registro">
+				<input type="hidden" value="<?= $h -> id ?>" name="horarioId">	
+				<input type="submit" value="Agregar Materia">
+			</form>
+		</td>
+		<?php			
+	}
+	?>
+	</table>
+<? } ?>

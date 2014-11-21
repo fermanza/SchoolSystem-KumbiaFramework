@@ -1,0 +1,15 @@
+<div>
+<?php 
+echo form_tag("ventanilla/calificacionesEXEL");
+echo 'Registro: ';
+echo text_field_tag('registro');
+echo '<br/>Perido: ';
+echo select_tag('periodo');
+	echo option_tag('12009', '12009', 'selected: true');
+	echo option_tag('32009', '32009');
+echo '</select>';
+echo '<br />';
+echo submit_tag('Imprimir');
+echo end_form_tag(); 
+?>
+</div>

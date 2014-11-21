@@ -1,0 +1,91 @@
+<?php
+if ( Session::get_data('plantel') == 'C' ){
+	$plantel="";
+}
+else
+	$plantel ="T";
+?>
+<?= stylesheet_link_tag('menu/menu_style', true); ?>
+<tr>
+	<th>
+	<div class="menu">
+		 <ul>
+		 <?php
+		
+		  if(Session::get('statusAlumno') == "SinAcceso" || Session::get('statusAlumno') == "SinPago" )
+		  {
+		    
+		 ?>
+		   	<li>
+			  <a>Caja</a>
+			  <ul>
+				<li><a href="<?= KUMBIA_PATH ?>caja/alumnoConcepto">Solicitar Pagos</a></li>
+				<li><a href="<?= KUMBIA_PATH ?>caja/tramites">Consultar Pagos</a></li>
+			  </ul>
+			</li>
+			
+			<li class="floatright">
+				<a href="<?=KUMBIA_PATH?>profesor/salir">
+					<image src="<?=KUMBIA_PATH?>img/log_off.jpg" class="log_off" />
+				</a>
+			</li>
+		 <?php
+		   }
+		   else if(Session::get('statusAlumno') == "SinActualizacion")
+		   {
+?>
+	        <li><a href="<?=KUMBIA_PATH?>alumno/actualizarDatos">Actualizar Datos</a></li>
+			
+			<li class="floatright">
+				<a href="<?=KUMBIA_PATH?>profesor/salir">
+					<image src="<?=KUMBIA_PATH?>img/log_off.jpg" class="log_off" />
+				</a>
+			</li>
+<?php
+		   }
+		   else
+		   {
+		 ?>
+		 
+			<li><a href="<?=KUMBIA_PATH?>alumno/informacion">Informaci&oacute;n</a></li>
+			<!-- <li><a href="<?=KUMBIA_PATH?>alumno/actualizacion">Actualizar Datos</a></li> -->
+			
+			<li><a href="<?=KUMBIA_PATH?>alumno/horario">Horario</a></li>
+			
+			<li><a href="<?=KUMBIA_PATH?>alumnoselecc/index">Selecci&oacute;n</a></li>
+			
+			<li><a href="<?=KUMBIA_PATH?>alumno/calificaciones">Calificaciones</a></li>
+			
+			<li><a href="<?=KUMBIA_PATH?>alumno/kardex">Kardex</a></li>
+			
+			<li><a href="<?=KUMBIA_PATH?>alumno/cambiarContrasena">Cambiar Contrase&ntilde;a</a></li>
+			
+			<li>
+			  <a>Caja</a>
+			  <ul>
+				<li><a href="<?= KUMBIA_PATH ?>caja/alumnoConcepto">Solicitar Pagos</a></li>
+				<li><a href="<?= KUMBIA_PATH ?>caja/tramites">Consultar Pagos</a></li>
+			  </ul>
+			</li>
+			
+			<li class="floatright">
+				<a href="<?=KUMBIA_PATH?>profesor/salir">
+					<image src="<?=KUMBIA_PATH?>img/log_off.jpg" class="log_off" />
+				</a>
+			</li>
+		 <?php
+		  }
+		 ?>
+		</ul>
+	</div>
+	</th>
+</tr>
+<tr>
+<td height="1">
+</td>
+</tr>
+<tr>
+<td align="center">
+<?= content(); ?>
+</td>
+</tr>

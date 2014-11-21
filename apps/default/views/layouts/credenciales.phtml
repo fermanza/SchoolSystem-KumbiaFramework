@@ -1,0 +1,20 @@
+<?= stylesheet_link_tag('menu/menu_style', true); ?>
+<tr>
+	<th>
+	<div class="menu">
+		<?php
+		if( Session::get_data('tipousuario') == "VENTANILLA"){
+			include("menu_credenciales.phtml");
+		}
+		?>
+	</div>
+	</th>
+</tr>
+<tr>
+	<td height="1"></td>
+</tr>
+<tr>
+	<td align="center">
+		<?= content(); ?>
+	</td>
+</tr>

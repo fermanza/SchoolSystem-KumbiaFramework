@@ -1,0 +1,25 @@
+<style type="text/css">
+	#demos{
+		width:800px;
+		margin:10px auto 0 auto;
+		padding:30px;
+		border:1px solid #DFDFDF;
+		font:normal 12px Arial, Helvetica, sans-serif
+	}
+	#demos h3{
+		border-bottom:1px solid #DFDFDF;
+		padding-bottom:7px;
+		margin:10px 0
+	}
+
+</style>
+<div id="demos">
+    <h3>Seleccionar archivo</h3>
+    <?php echo form_tag('caja/updateConceptos','update:updateCon','enctype: multipart/form-data'); ?>
+        <input type="file" name="file" /> &nbsp; &nbsp; &nbsp; <input type="submit" value=" IMPORTAR ARCHIVO " />
+   <?php echo end_form_tag(); ?>
+
+</div>
+
+<div id="updateCon">
+</div>

@@ -1,0 +1,71 @@
+<tr>
+
+<th background="../../ingenieria/public/img/cira/barraIng.jpg" class="barra_menu">
+<!--
+<div id="store_menu" class="store_menucentrar" class="menu">
+	<ul>
+	<li><a href="<?= KUMBIA_PATH ?>general/aspirantes">Aspirantes</a><span></span></li>
+	<li><a href="<?= KUMBIA_PATH ?>general/calendario">Calendario</a><span></span></li>
+	<li><a href="<?= KUMBIA_PATH ?>general/reglamentos">Reglamentos</a><span></span></li>
+	<li><a href="<?= KUMBIA_PATH ?>general/carreras">Carreras</a><span></span></li>
+	<li><a href="<?= KUMBIA_PATH ?>general/descargas">Descargas</a><span></span></li>
+	<li><a href="<?= KUMBIA_PATH ?>general/contactanos">Contactanos</a><span></span></li>
+	<li><a href="<?= KUMBIA_PATH ?>general/inicio">Inicio</a><span></span></li>
+	</ul>
+-->
+<?php
+  if(Session::get('statusAlumno') == "SinAcceso")
+  {
+?>
+<?= stylesheet_link_tag('menu/menu_style', true); ?>
+<tr>
+	<th>
+	<div class="menu">
+		<ul>
+		  	<li>
+			  <a>Caja</a>
+			  <ul>
+				<li><a href="<?= KUMBIA_PATH ?>caja/alumnoConcepto">Solicitar Pagos</a></li>
+				<li><a href="<?= KUMBIA_PATH ?>caja/tramites">Consultar Pagos</a></li>
+			  </ul>
+			</li>
+			<li class="floatright">
+				<a href="<?=KUMBIA_PATH?>profesor/salir">
+					<image src="<?=KUMBIA_PATH?>img/log_off.jpg" class="log_off" />
+				</a>
+			</li>
+		</ul>
+	</div>
+	</th>
+</tr>
+<?php
+  }
+  else if(Session::get('statusAlumno') == "SinDocumentos"){
+?>
+  <?= link_to('general/inicio','Inicio') ?>
+<?php
+}
+	else
+	{
+?>
+      <?= link_to('general/aspirantes','Aspirantes') ?> <span style="color: rgb(242, 120, 34);">|</span>
+      <?= link_to('general/calendario','Calendario') ?> <span style="color: rgb(242, 120, 34);">|</span>
+      <?= link_to('general/reglamentos','Reglamentos') ?> <span style="color: rgb(242, 120, 34);">|</span>
+      <?= link_to('general/carreras','Carreras') ?> <span style="color: rgb(242, 120, 34);">|</span>
+      <?= link_to('general/descargas','Descargas') ?> <span style="color: rgb(242, 120, 34);">|</span>
+      <?= link_to('general/contactanos','Contactanos') ?> <span style="color: rgb(242, 120, 34);">|</span>
+      <?= link_to('general/inicio','Inicio') ?>
+<?php
+	}
+?>
+<!--
+</div>
+-->
+</th>
+</tr>
+<tr>
+<tr>
+<td align="center">
+<?= content(); ?>
+</td>
+</tr>

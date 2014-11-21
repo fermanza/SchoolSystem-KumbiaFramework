@@ -1,0 +1,59 @@
+<center>
+<table>
+	<tr>
+		<td width="750"><div align="justify">
+		<?
+		if ( !1 ){
+			$periodo = 12009;
+			
+			$xalumnocursos = new Xalumnocursos();
+			
+			foreach ($xalumnocursos -> find("periodo = ".$periodo." and situacion = 'EXTRAORDINARIO' ")as $xalumnocurso){
+			
+				$xextraordinarios = new Xextraordinarios ();
+				$xpermisoscaptura = new Xpermisoscaptura ();
+				
+				foreach ($xpermisoscaptura -> find( "curso_id = '".$xalumnocurso -> curso_id."'") as $xpermcaptura){
+					//$temp = "";
+					$xpermcaptura -> find = 1247896799;
+					if ( $xpermcaptura -> ncapturas4 == $xpermcaptura -> maxcapturas4 ){
+						$xpermcaptura -> maxcapturas4 += 1;
+					}
+					
+					if ( $xpermcaptura -> activa4 == 0 )
+						$xpermcaptura -> activa4 = 1;
+						
+					if ( $xpermcaptura -> save () )
+						echo "Si se pudo";
+					else
+						echo "No se pudo";
+				}
+				
+				if ( $xextraordinarios -> find ("clavecurso = '".$xalumnocurso -> curso."'
+													and registro = ".$xalumnocurso -> registro."
+													and periodo = ".$periodo) ){
+					continue;
+				}
+				
+				$xextraordinarios -> calificacion = 300;
+				$xextraordinarios -> estado = '?';
+				$xextraordinarios -> clavecurso = $xalumnocurso -> curso;
+				$xextraordinarios -> registro = $xalumnocurso -> registro;
+				$xextraordinarios -> tipo = 'E';
+				$xextraordinarios -> periodo = 12009;
+				$xextraordinarios -> save ();
+				
+				echo "<br />".$xalumnocurso -> curso;
+				echo "<br />".$xalumnocurso -> registro;
+				
+			}
+			
+			echo "<br /><br />Se llenaron los Extras correctamente";
+		}
+		else
+			echo "Checar if para poder ejecutar script";
+		?>
+		</td>
+	</tr>
+</table>
+</center>

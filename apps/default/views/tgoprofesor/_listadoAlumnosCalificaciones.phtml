@@ -1,0 +1,153 @@
+<style type="text/css">
+	.listadoGAlumnos td{
+		padding: 2px;
+	}
+	
+	.listadoGAlumnos th{
+		padding: 2px;
+	}
+	
+	.listadoGAlumnos input[type="text"]{
+		width: 40px;
+	}
+	.avanceHoras select{
+		width: 80%;
+		font-size:11px;
+	}
+	.info{
+		text-align: left;
+		font-size:11px;
+	}
+</style>
+
+<div class="info">
+<b>NR - No Reportada <br>NP - No Presento <br>PD - Pendiente</b>
+</div>
+<br>
+<div class="listadoGAlumnos">
+<?php
+	//$a = Session::get_data('registro');
+	//if ($a == 2118 ){
+		if($listas){
+			echo form_remote_tag("tgoprofesor/calificar", "update: listadoAlumnos", "success: new Effect.BlindDown('listadoAlumnos', { duration: 4.0 })");
+			?>			
+			<table class="bordeazul" width="100%" style="font-size:10px;">
+			<tr class="naranja">
+				<th colspan="8">ALUMNOS PARA CALIFICAR DEL PARCIAL NUMERO <?= $parcial ?></th>			
+			</tr>
+			<tr class="azul">
+				<th>&nbsp;</th>
+				<th>Foto</th>
+				<th>Registro</th>
+				<th>Nombre</th>
+				<th>Tipo</th>
+				<th>Especialidad</th>
+				<th width="20">Calificaci&oacute;n</th>
+				<th width="20">Faltas</th>
+			</tr>
+			<?php				
+				$Alumnos = new Alumnos();		
+				$Especialidades = new Especialidades();
+				$cc=0;
+				$idcal= null;
+				$cal = "calificacion".$parcial;
+				$fal = "faltas".$parcial;
+				foreach($listas as $li){
+					if($alumno = $Alumnos -> find_first("registro = ".$li -> registro)){
+						$cc++;
+						echo tr_color('#CCDEFF', '#FFFFFF');
+						echo '<td><b>'.$cc.'</b></td>';
+						echo "<td><center>";
+						$entro=0;
+						$foto = "fotos/".$li -> registro.".JPG";
+						$foto1 = "fotos/".$li -> registro.".jpg";					
+						if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto)){					
+							echo img_tag($foto, "width: 75");
+							$entro=1;
+						}
+						if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto1)){					
+							echo img_tag($foto1, "width: 75");
+							$entro=1;
+						}
+						if ($entro == 0){
+							echo "Sin Foto";
+						}						
+						$idcal[$cc] = $li -> registro;
+						echo '<td>'.$li -> registro.'</td>';
+						echo '<td><b>'.utf8_encode($alumno -> nombre_completo).'</b></td>';
+						echo '<td><b>'.$li -> tipo.'</b></td>';
+						if($esp = $Especialidades -> find_first("id = ".$alumno ->especialidad)){
+							$nomEsp = $esp -> nombre;
+						}else{
+							$nomEsp ="";
+						}						
+						
+						$calif = $li -> $cal;
+						
+						if($li -> $cal == 300){
+							$calif='NR';
+						}
+						if($li -> $cal == 999){
+							$calif='NP';
+						}
+						if($li -> $cal == 500){
+							$calif='PD';
+						}	
+						
+						echo '<td>'.$nomEsp.'</td>';?>
+						<td><center><input type="text" name="calf<?= $li -> id ?>" value="<?= $calif ?>"></center></td>
+						<td><center><input type="text" name="faltas<?= $li -> id ?>" value="<?= $li -> $fal ?>" onChange="validarSiNumero(this.value);"></center></td>
+						<?php
+					}
+				}
+			?>			
+			<tr>				
+				<td colspan="5">
+				<?php 
+					$avanceParcial ="avance".$parcial;
+					$horasParcial = "horas".$parcial;
+					$Horario = new Horarios();
+					$Horario -> find_first("id = ".$acta);
+				?>
+					<table width="100%" style="font-size:10px;" class="avanceHoras">
+						<tr>
+							<th class="naranja">Avance Program&aacute;tico</th>
+							<td class="azul">
+								<select name="avance">
+										<option select="selected" value="<?= $Horario -> $avanceParcial ?>"><?= $Horario -> $avanceParcial ?></option>
+									<?php for($i=0; $i<=100; $i++){ ?>
+										<option value="<?= $i ?>"><?= $i ?></option>
+									<?php } ?>
+								</select>
+								%
+							</td>
+							<th class="naranja">Horas Clase Impartidas</th>
+							<td class="azul">
+								<select name="horas">
+									<option select="selected" value="<?= $Horario -> $horasParcial ?>"><?= $Horario -> $horasParcial ?></option>
+									<?php for($i=0; $i<=100; $i++){ ?>
+										<option value="<?= $i ?>"><?= $i ?></option>
+									<?php } ?>
+								</select>
+								hrs.
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td colspan="3">					
+					<input type="hidden" value="<?= $acta ?>" name="acta">
+					<input type="hidden" value="<?= $parcial ?>" name="parcial">
+					<?php echo submit_tag("Guardar Calificaciones") ?></td>
+			</tr>
+			</table>
+			<?php echo end_form_tag() ?>
+			<?php
+		}else{
+			echo "<h2>No hay alumnos asignados aun</h2>";
+		}
+	/*}else{
+		echo "<h3>No es fecha oficial para realizar la captura de calificaciones de el parcial ".$parcial."</h3>";
+	}*/
+?>
+</div>
+<br><br>

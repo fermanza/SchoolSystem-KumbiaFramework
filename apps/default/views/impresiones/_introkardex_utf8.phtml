@@ -1,0 +1,35 @@
+<table align="center">
+	<tr>
+		<td width="900"><div align="justify">
+			<br>
+			<div style="font-size: 14px;"><div style="color: #1569C7;"><?= img_tag("adorno.gif","border: 0") ?><b>KARDEX DEL ALUMNO</b></div>
+			<hr><br>
+			<div style="font-size: 11px;">
+				El kardex es un reporte donde se muestran todas las materias acreditadas por el alumno,
+				as&iacute; como la calificaci&oacute;n obtenida y la modalidad en que fue acreditada.
+			</div>
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" align="center">
+				<tr>
+					<th width="150" height="25" bgcolor="#FFCA5B">&nbsp;Nombre del alumno:</th>
+					<th width="300" colspan="5" bgcolor="#EEEEEE" colspan="3">&nbsp;
+					<?php echo utf8_encode($alumno -> vcNomAlu) ?> (<?= $alumno -> miReg ?>)</th>
+					<td width="100" height="25" bgcolor="#FFCA5B"><b>&nbsp;Promedio: </b></td>
+					<td width="100" bgcolor="#EEEEEE">&nbsp;<?echo $promedio; ?></td>
+				</tr>
+				<tr>
+					<th width="150" height="25" bgcolor="#FFCA5B">&nbsp;Carrera:</th>
+					<th width="300" bgcolor="#EEEEEE">&nbsp;<?php echo utf8_encode($carrera -> nombre) ?>
+						<? if( isset($areadeformacion) ) echo "en&nbsp;".utf8_encode($areadeformacion -> nombreareaformacion); ?>
+					</th>
+					<th width="50" height="25" bgcolor="#FFCA5B">&nbsp;Turno:</th>
+					<td width="30" bgcolor="#EEEEEE" class="centrar"><?php echo $alumno -> enTurno ?></td>
+					<th width="100" height="25" bgcolor="#FFCA5B">&nbsp;Plantel:</th>
+					<th width="100" bgcolor="#EEEEEE">&nbsp;
+						<?php if( strtoupper($alumno -> enPlantel) == "C" ) echo "Colomos"; else echo "Tonala"; ?></th>
+					<td width="100" height="25" bgcolor="#FFCA5B"><b>N&uacute;mero de<br />cr&eacute;ditos: </b></td>
+					<td width="100" bgcolor="#EEEEEE">&nbsp;<?= $ncreditos ?></td>
+				</tr>
+			</table>
+	</tr>
+</table>

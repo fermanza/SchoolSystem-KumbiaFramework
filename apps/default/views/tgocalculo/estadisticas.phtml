@@ -1,0 +1,27 @@
+<style type="text/css">
+	.estadisticas a{
+		text-decoration: none;
+		color:#000000;
+		font-size:12px;
+		display:: block;
+	}
+	.estadisticas a:hover{
+		text-decoration: underline;
+		color:#0066CC;
+	}
+</style>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp; Estadisticas de Fin de Curso
+</div>
+
+<div class="estadisticas">
+	<br>
+	<?= link_to_remote("tgocalculo/estadisticasRegulares","Estado de Alumnos Finales","update: info") ?>
+	<?= link_to("tgocalculo/estadisticasRegulares/1",img_tag('excel.png','width: 25px')) ?>
+	<br /><br />
+    <div id="info">
+    
+    </div>
+</div>
+<br />
+<br />

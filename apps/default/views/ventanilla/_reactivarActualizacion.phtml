@@ -1,0 +1,120 @@
+<style type="text/css">
+	#datos_personales{
+		font-size: 11px;
+	}
+	
+	#datos_personales th{
+		text-align: left;
+		padding-left:5px;		
+	}
+	
+	#datos_personales td{
+		text-align: left;
+		padding-left:0px;
+		color: #000000;
+		font-weight: bold;
+	}
+	
+	#datos_personales input{
+		width: 100%;
+		text-transform: uppercase;
+	}
+	
+	.boton_link{
+		background-color:#FFCA5B;
+		padding: 5px;
+		border: solid 2px #003399;
+		display: block;
+	}
+	
+	.boton_link a{
+		text-decoration: none;
+		color:#000000;
+		font-weight:bold;		
+	}
+	
+	.boton_link a:hover {
+		text-decoration: underline;
+		color: #003399;
+	}
+</style>
+<?php
+  //Informacion del alumno
+  if(count($result) == 0 || $result == NULL)
+  {
+	echo "<script type='text/javascript'> showDialog('ERROR','El registro <strong>".$registroB."</strong> no fue encontrado, favor de verificar la informaci&oacute;n','error',4); </script>";
+  }
+  
+  else
+  {
+    $activoForm = new comentariosActualizacionDatos();
+  
+    foreach($result AS $value){
+	  $nombreCompleto = $value -> nombre_completo;
+	  $registro = $value -> registro;
+	  $carrera = $value -> carrera;
+	}
+	
+	$verForm = $activoForm -> find_first('registro = '.$registro);
+	
+	if($verForm -> activar == "1" )
+	  $checked = "checked = 'true'";
+	  
+	else
+	  $checked = "";
+	  
+	//var_dump($verForm -> activar); die();
+?>
+
+<center>
+ <?php echo form_remote_tag('ventanilla/activarForm','update: muestraDatosAlumno')?>
+  <table width="70%" class="bordeazul" cellpadding="1" cellspacing="1" style="font-size:13px;" >
+    <tr align="center" style="font-weight:bold; background:#003399; color:#FFFFFF; font-size:15px;" >
+	  <td colspan="2">
+	    INFORMACI&Oacute;N DEL ALUMNO
+	  </td>
+	</tr>
+    <tr>
+      <th class="naranja" width="167" align="right">
+        NOMBRE COMPLETO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;               
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<?php echo utf8_encode($nombreCompleto);?>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right">
+        REGISTRO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<?php echo $registro;?> 
+        <input type="hidden" maxlength="0" readOnly="readonly" value="<?php echo $registro;?>" id="registroAlumno" name="registroAlumno" />		
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        CARRERA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<?php echo utf8_encode($carrera);?>          
+	  </td>
+    </tr>
+	<tr>
+	  <th class="naranja" width="167" align="right">
+	    ACTIVAR &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  </th>
+	  <td width="267" class="gris">
+	    &nbsp;&nbsp;&nbsp;<input type="checkbox" id="activa" name="activa" <?php echo $checked; ?> />
+	  </td>
+	</tr>
+    <tr align="center" >
+	  <td colspan="2">
+	    <?php echo submit_tag('  ACTIVAR FORMULARIO  ','id: boton','class: common_button', 'style: margin-top:15px; margin-bottom:10px;');?>
+	  </td>
+	</tr>
+  </table>
+ <?php echo end_form_tag()?>
+</center>
+<?php
+  }
+?>

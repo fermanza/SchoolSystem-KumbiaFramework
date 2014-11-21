@@ -1,0 +1,198 @@
+		<style type="text/css">
+			.linknegrita a:hover{
+				font-weight: bold;
+				text-decoration: none;
+				color:#000000;
+			}
+			.linknegrita a{
+				font-weight: none;
+				text-decoration: none;
+				color:#000000;
+			}
+		</style>
+<script type='text/javascript'>
+function registro() {
+	var folio = prompt("Introduce el número de FOLIO de la solicitud de aspirante");
+	window.location.href = '<?= KUMBIA_PATH ?>aspirantes/registro/'+folio;
+}
+function modificacion() {
+	var folio = prompt("Introduce el número de FOLIO de la solicitud de aspirante");
+	window.location.href = '<?= KUMBIA_PATH ?>aspirantes/modificacion/'+folio;
+}
+function consulta() {
+	var folio = prompt("Introduce el número de FOLIO de la solicitud de aspirante");
+	window.location.href = '<?= KUMBIA_PATH ?>aspirantes/consulta/'+folio;
+}
+
+</script>
+
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td style="font-family: Verdana;">
+					<br>
+					<div style="color: #1569C7; font-size: 14px;" align="left">
+					<?= img_tag("adorno.gif","border: 0") ?> <b>ASPIRANTES - CONFIGURACION DE FECHAS EXANI</b></div>
+					<div style="color: #000000; font-size: 11px;" align="justify">
+					<br>
+						Esta sección servirá para manejar toda la configuración y la
+						organización de las fechas, horas y lugares para el llenado
+						de la Hoja EXANI, los grupos serán de 40, una vez lleno alguno
+						de ellos, el sistema comenzará a asignar a los aspirantes al
+						siguiente grupo en base a su fecha.
+						<br/><br/>
+						<div style="color: #000000; font-size: 20px;" align="center"><b><?= $periodoo ?></b></div>
+						<br/>
+						<center>
+						<form method="POST" action="<?= KUMBIA_PATH.$controller_name ?>/registrar_exani">
+						<table border="1" style="font-size:12px;">
+						<tr>
+							<th colspan="6" height="20" class="fondoazul">
+								<b>AGREGAR NUEVA FECHA</b>
+							</th>
+						</tr>
+						<tr style="font-size:11px;">
+							<th width="100" height="20" class="fondonaranja">
+								Nivel
+							</th>
+							<th width="100" height="20" class="fondonaranja">
+								Plantel
+							</th>
+							<th width="160" height="20" class="fondonaranja">
+								Fecha
+							</th>
+							<th width="200" height="20" class="fondonaranja">
+								Lugar
+							</th>
+							<th width="75" height="20" class="fondonaranja">
+								Alumnos
+							</th>
+							<th width="90" height="20" class="fondonaranja">&nbsp;
+								
+							</th>
+						</tr>
+						<tr style="font-size:11px;">
+							<th width="100" height="20" class="fondonaranja">
+								<select style="width:95px; font-size:10px;" name="nivel">
+									<option value="I">INGENIER&Iacute;A</option>
+								</select>
+							</th>
+							<th width="100" height="20" class="fondonaranja">
+								<select style="width:95px; font-size:10px;" name="plantel">
+									<option value="C">COLOMOS</option>
+								</select>
+							</th>
+							<th width="160" height="20" class="fondonaranja">
+								<input type="text" style="width:150px" 
+										name="fecha" value="<?= date("Y-m-d H",time()+3600).":00:00" ?>">
+							</th>
+							<th width="200" height="20" class="fondonaranja">
+								<input type="text" style="width:190px" name="lugar" value="Aula IBM">
+							</th>
+							<th width="75" height="20" class="fondonaranja">
+								20
+								<input type="hidden" style="width:70px" name="alumnos" value="20">
+							</th>
+							<th width="90" height="20" class="fondonaranja">
+								<input type="submit" style="width:70px" value="Agregar">
+							</th>
+						</tr>
+						</table>
+						</form>
+						<br>
+						<table border="0" style="font-size:12px;">
+						<tr>
+							<th colspan="5" width="700" height="20" class="fondoazul">
+								<b>NIVEL INGENIER&Iacute;A</b>
+							</th>
+						</tr>
+						<tr style="font-size:11px;">
+							<th width="75" height="20" class="fondonaranja">
+								Nivel
+							</th>
+							<th width="75" height="20" class="fondonaranja">
+								Plantel
+							</th>
+							<th width="275" height="20" class="fondonaranja">
+								Fecha
+							</th>
+							<th width="200" height="20" class="fondonaranja">
+								Lugar
+							</th>
+							<th width="75" height="20" class="fondonaranja">
+								Alumnos
+							</th>
+						</tr>
+						<?php
+						if($rojas2) foreach($rojas2 as $roja){
+							$bg="style=\"background:#990000;color:#FFFFFF;\"";
+						?>
+						<tr style="font-size:11px;">
+							<th width="75" height="20" <?= $bg ?>>
+								<?= $roja -> nivel ?>
+							</th>
+							<th width="75" height="20" <?= $bg ?>>
+								<?= $roja -> plantel ?>
+							</th>
+							<th width="275" height="20" <?= $bg ?>>
+								<?= $roja -> fecha ?>
+							</th>
+							<th width="200" height="20" <?= $bg ?>>
+								<?= $roja -> lugar ?>
+							</th>
+							<th width="75" height="20" <?= $bg ?>>
+								<?= $roja -> alumnos ?>
+							</th>
+						</tr>
+						<?php
+						}
+						?>
+						<?php 
+						if($verde2){
+						$bg="style=\"background:#009900;color:#FFFFFF;\""; ?>
+						<tr style="font-size:11px;">
+							<th width="75" height="20" <?= $bg ?>>
+								<?= $verde2 -> nivel ?>
+							</th>
+							<th width="75" height="20" <?= $bg ?>>
+								<?= $verde2 -> plantel ?>
+							</th>
+							<th width="275" height="20" <?= $bg ?>>
+								<?= $verde2 -> fecha ?>
+							</th>
+							<th width="200" height="20" <?= $bg ?>>
+								<?= $verde2 -> lugar ?>
+							</th>
+							<th width="75" height="20" <?= $bg ?>>
+								<?= $verde2 -> alumnos ?>
+							</th>
+						</tr>
+						<?php
+						}
+						if($azules2) foreach($azules2 as $azul){ 
+							$bg="style=\"background:#000099;color:#FFFFFF;\"";
+						?>
+						<tr style="font-size:11px;">
+							<th width="75" height="20" <?= $bg ?>>
+								<?= $azul -> nivel ?>
+							</th>
+							<th width="75" height="20" <?= $bg ?>>
+								<?= $azul -> plantel ?>
+							</th>
+							<th width="275" height="20" <?= $bg ?>>
+								<?= $azul -> fecha ?>
+							</th>
+							<th width="200" height="20" <?= $bg ?>>
+								<?= $azul -> lugar ?>
+							</th>
+							<th width="75" height="20" <?= $bg ?>>
+								<?= $azul -> alumnos ?>
+							</th>
+						</tr>
+						<?php } ?>
+						</table>
+						</center>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<br><br>

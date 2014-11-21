@@ -1,0 +1,80 @@
+<form action="<?= KUMBIA_PATH ?>profesor/editandoActividad" method="post" onSubmit="return validar();"
+	name="FormularioEditar" id="FormularioEditar">
+<table>
+	<tr class="naranja">
+		<th class="bordeAzul2" colspan="3">
+		<h2>Editando Actividad: <? echo utf8_encode($actividadMaestro -> actividad) ?></h2>
+		</th>
+	</tr>
+	<tr class="naranja">
+		<th class="bordeAzul2" colspan="3">Periodo</th>
+	</tr>
+	<tr>
+		<th class="bordeAzul2" colspan="3">
+			<input type="text" id="periodo" name="periodo" value="<?= $actividadMaestro -> periodo ?>" disabled>
+		</th>
+	</tr>
+	<tr class="naranja">
+		<th class="bordeAzul2">Avance 1</th>
+		<th class="bordeAzul2">Avance 2</th>
+		<th class="bordeAzul2">Avance 3</th>
+	</tr>
+	<tr>
+		<th class="bordeAzul2">
+			<?php if( $actualunixtime > $unixtimestampparcial1 && $actividadMaestro -> avance1 == 0 ){
+			?>
+			<select id="avance1" name="avance1">
+			<?
+				for( $i = 10; $i <= 100; $i = $i + 10  ){
+			?>
+					<option value="<?= $i ?>" <? if( $actividadMaestro -> avance1 == $i ) echo "SELECTED"; ?>><?= $i ?></option>
+			<?php
+				}
+			?>
+			</select>
+			<?php }else{ ?>
+				<input type="text" id="avance1" name="avance1" value="<?= $actividadMaestro -> avance1 ?>" disabled>
+			<?php } ?>
+		</th>
+		<th class="bordeAzul2">
+			<?php if( $actualunixtime > $unixtimestampparcial2 && $actividadMaestro -> avance2 == 0 ){
+			?>
+			<select id="avance2" name="avance2">
+			<?
+				for( $i = 10; $i <= 100; $i = $i + 10  ){
+			?>
+					<option value="<?= $i ?>" <? if( $actividadMaestro -> avance2 == $i ) echo "SELECTED"; ?>><?= $i ?></option>
+			<?php
+				}
+			?>
+			</select>
+			<?php }else{ ?>
+				<input type="text" id="avance2" name="avance2" value="<?= $actividadMaestro -> avance2 ?>" disabled>
+			<?php } ?>
+		</th>
+		<th class="bordeAzul2">
+			<?php if( $actualunixtime > $unixtimestampparcial3 && $actividadMaestro -> avance3 == 0 ){
+			?>
+			<select id="avance3" name="avance3">
+			<?
+				for( $i = 10; $i <= 100; $i = $i + 10  ){
+			?>
+					<option value="<?= $i ?>" <? if( $actividadMaestro -> avance3 == $i ) echo "SELECTED"; ?>><?= $i ?></option>
+			<?php
+				}
+			?>
+			</select>
+			<?php }else{ ?>
+				<input type="text" id="avance3" name="avance3" value="<?= $actividadMaestro -> avance3 ?>" disabled>
+			<?php } ?>
+		</th>
+	</tr>
+	<tr>
+		<th class="bordeAzul2" colspan="3">
+				<input type="submit" value="Guardar">
+				<input type="hidden" id="actividadid" name="actividadid" value="<?= $actividadMaestro -> id ?>">
+				<input type="button" value="Cancelar" onClick="limpiar();">
+		</th>
+	</tr>
+</table>
+</form>

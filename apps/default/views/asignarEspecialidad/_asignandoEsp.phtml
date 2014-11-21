@@ -1,0 +1,77 @@
+<br />
+<br />
+<br />
+<table border="1" align="center">
+	<tr>
+		<td class="azull2" width="150px" align="center">
+			<a class="linksobreazul" href="<?= KUMBIA_PATH ?>asignarEspecialidad/alumnosSinEsp"><? echo "Regresar" ?></a>
+		</td>
+	</tr>
+</table>
+<h2 class="centrar">
+	Asignando especialidad al alumno <?= $alumno -> vcNomAlu ?>&nbsp;<?= $alumno -> miReg ?>.
+</h2>
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center">
+	<tr>
+		<th class="azull4" width="200">
+			Registro
+		</th>
+		<th class="azull4" width="200">
+			Nombre del Alumno
+		</th>
+		<th class="azull4" width="200">
+			Carrera
+		</th>
+	</tr>
+	<tr>
+		<td class="bordee">
+			<?= $alumno -> miReg ?>
+		</td>
+		<td class="bordee">
+			<?= $alumno -> vcNomAlu ?>
+		</td>
+		<td class="bordee">
+			<? echo utf8_encode($carrera -> nombre) ?>
+		</td>
+	</tr>
+</table>
+<br />
+<form action="<?= KUMBIA_PATH ?>asignarEspecialidad/asignarEsp" 
+		method = "post" onSubmit="return validar();" name="Formulario1" id="Formulario1">
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center">
+	<tr>
+		<th class="azull4" width="300">
+			Area de Formaci&oacute;n
+		</th>
+		<th class="azull4" width="200">
+			Cr&eacute;ditos del Area de Formaci&oacute;n
+		</th>
+		<th class="azull4" width="200">
+			Asignar Especialidad
+		</th>
+	</tr>
+	<?
+	foreach( $areadeformacion as $area ){
+	?>
+	<tr>
+		<td class="bordee">
+			<? echo utf8_encode($area -> nombreareaformacion) ?>
+		</td>
+		<td class="bordee">
+			<?= $area -> creditos ?>
+		</td>
+		<td class="bordee">
+			<input type="hidden" name="registro" id="registro" value="<?= $alumno -> miReg ?>" />
+			<input type="radio" name="areadeformacion_id" 
+				id="areadeformacion_id" value="<?= $area -> idareadeformacion ?>" />
+		</td>
+	</tr>
+	<?
+	}
+	?>
+</table>
+<br />
+<input type="submit" value="Asignar Especialidad">
+</form>
+<br />
+<br />

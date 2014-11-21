@@ -1,0 +1,285 @@
+		<table border="0" cellpadding="0" cellspacing="0" width="770">
+			<tr>
+				<td style="font-family: Verdana;">
+					<?php if($edicion==1 || $edicion==0){ ?>
+					<br><center>
+					<table border="1" cellpadding="1" cellspacing="1" width="300">						
+							<form action="<?= KUMBIA_PATH ?>administrador/agregarMateria" method="POST">
+							<tr>
+								<th colspan="4" align="center" height="25" class="fondonaranja">
+									AGREGAR NUEVA MATERIA
+								</th>
+							</tr>
+							<tr>
+								<th align="center" width="300" height="20" class="fondoazul">
+									Materia
+								</th>
+							</tr>
+							<tr>
+								<th align="center" width="300" height="25" class="fondonaranja" style="">
+									<?php if($materias) { ?>
+									<select name="clave">
+										<option value="<?= $materia -> clave ?>">&nbsp;</option>
+										<?php foreach($materias  as $materia){ ?>
+											<option value="<?= $materia -> clave ?>"><?= $materia -> nombre ?></option>
+										<?php } ?>
+									</select>
+									<?php } ?>
+								</th>
+							</tr>
+							<tr>
+								<th align="center" width="300" height="20" class="fondoazul">
+									Créditos
+								</th>
+							</tr>
+							<tr>
+								<th align="center" width="300" height="25" class="fondonaranja" style="">
+									<input type="text" name="creditos" size="47" maxlength="2" style="text-align: center;">
+								</th>
+							</tr>
+							<tr>
+								<th align="center" width="300"  height="20" class="fondoazul">
+									Prerrequisito
+								</th>
+							</tr>
+							<tr>
+								<th align="center" width="300" height="25" class="fondonaranja">
+									<?php if($materias) { ?>
+									<select name="prerrequisito">
+										<option value="-">&nbsp;</option>
+										<?php foreach($materias  as $materia){ ?>
+											<option value="<?= $materia -> clave ?>"><?= $materia -> nombre ?></option>
+										<?php } ?>
+									</select>
+									<?php } ?>
+								</th>
+							</tr>
+							<tr>
+								<th align="center" width="50" height="20" class="fondoazul">
+									Tipo
+								</th>
+							</tr>
+							<tr>
+								<th align="center" width="150" height="25" class="fondonaranja">
+									<select name="tipo">
+										<option value="0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	</option>
+										<option value="1">OBLIGATORIA</option>
+										<option value="2">ESPECIALIZANTE</option>
+										<option value="3">OPTATIVA</option>
+									</select>
+								</th>
+							</tr>
+							<tr>
+								<th colspan="4" align="center" height="30" bgcolor="<?= $bg ?>" class="fondonaranja">
+									<input type="submit" value="Agregar materia" class="boton">
+									<input type="hidden" name="plan" value="<?= $plan -> id ?>">
+									<input type="hidden" name="modelo" value="<?= $obligatorias[0] -> plan ?>">
+									<?= $obligatorias[0] -> plan -> nombre ?>
+								</th>
+							</tr>
+							</form>
+						</table>
+					<br>
+					<?php } ?>
+						<br>
+						<div style="color: #FF0000; font-size: 18px;" align="center"><b><?php if($carrera -> clavenivel == 'I'){ ?>INGENIERÍA<?php } else { ?>TECNÓLOGO EN<?php } ?> <?= $carrera -> nombre ?></b></div>
+						<br>
+						<div style="color: #000000; font-size: 18px;" align="center"><b>PLAN <?= $plan -> nombre ?></b></div>
+						<br>
+						<center>
+						<table width="650"><tr><td>
+						<div style="color: #1569C7; font-size: 14px;" align="left"><b>OBJETIVO DE LA CARRERA</b></div>
+						<br>
+						<div style="color: #000000; font-size: 11px;" align="justify">
+							<?= $plan -> objetivo; ?>
+						</div>
+						<br>
+						<div style="color: #1569C7; font-size: 14px;" align="left"><b>PERFIL DEL EGRESADO</b></div>
+						<br>
+						<div style="color: #000000; font-size: 11px;" align="justify">
+							<?= $plan -> perfil; ?>
+						</div>
+						<br>
+						<div style="color: #1569C7; font-size: 14px;" align="left"><b>CAMPO DE ACCIÓN</b></div>
+						<br>
+						<div style="color: #000000; font-size: 11px;" align="justify">
+							<?= $plan -> campo; ?>
+						</div>
+						</td></tr></table>
+						<br>
+					</div>
+					<?php if($mensaje){ ?>
+						<div style="color: #FF0000; font-size: 18px;" align="center"><b><?= $mensaje ?><br><br></b></div>
+					<?php } ?>
+					<div style="color: #000000; font-size: 11px;" align="center">
+						<?php if($obligatorias) { ?>
+						<table border="1" cellpadding="1" cellspacing="1" width="650">
+							<tr>
+								<th colspan="6" align="center" height="25" class="fondoazul">
+									MATERIAS OBLIGATORIAS
+								</th>
+							</tr>
+							<tr>
+								<th align="center" height="25" class="fondonaranja">
+									Clave
+								</th>
+								<th align="center" height="25" class="fondonaranja">
+									Nombre
+								</th>
+								<th align="center" height="25" class="fondonaranja">
+									Créditos
+								</th>
+								<th align="center" height="25" class="fondonaranja">
+									Prerrequisito
+								</th>
+								<th colspan="2" align="center" height="25" class="fondonaranja">
+									&nbsp;
+								</th>
+							</tr>
+							
+							<?php $k=0; foreach($obligatorias  as $materia){ $k++; if( $k % 2 == 0){ $bg="#FFFFFF"; } else{ $bg="#DDDDDD"; } ?>
+							<tr>
+								<th align="center" height="25" width="50" bgcolor="<?= $bg ?>">
+									<a href="<?= KUMBIA_PATH ?>administrador/vercursos/<?= $materia -> clave ?>"><?php if($modelo==2000){ ?><?= substr($materia -> clave,0,3) ?><?php } else { ?><?= $materia -> clave ?><?php } ?></a>
+								</th>
+								<th align="left" height="25" width="350" bgcolor="<?= $bg ?>">
+									&nbsp;<?= $materia -> nombre ?>
+								</th>
+								<th align="center" height="25" width="100" bgcolor="<?= $bg ?>">
+										<?= $pobligatorias[$k-1] -> creditos ?>
+								</th>
+								<th align="center" height="25" width="100" bgcolor="<?= $bg ?>">
+										<?php if($modelo==2000){ ?><?= substr($pobligatorias[$k-1] -> prerrequisito,0,3) ?><?php } else { ?><?= $pobligatorias[$k-1] -> prerrequisito ?><?php } ?>
+								</th>
+								<form action="<?= KUMBIA_PATH ?>administrador/quitarMateria" method="POST">
+								<th align="center" height="25" bgcolor="#FFFFFF">
+									<input type="hidden" name="clave" value="<?= $materia -> clave ?>">
+									<input type="hidden" name="plan" value="<?= $plan -> id ?>">
+									<input type="hidden" name="modelo" value="<?= $plan -> nombre ?>">
+									<input type="image" src="<?= KUMBIA_PATH ?>public/img/delete.jpg" width="25" height="25" border="0">
+								</th>
+								</form>
+								
+							</tr>
+							<?php } ?>
+						</table>
+						<br>
+						<?php } ?>
+						
+						<?php if($especializantes) { ?>
+						<table border="1" cellpadding="1" cellspacing="1" width="650">
+							<tr>
+								<th colspan="6" align="center" height="25" class="fondoazul">
+									MATERIAS OPTATIVAS DE ESPECIALIDAD
+								</th>
+							</tr>
+							<tr>
+								<th align="center" height="25" class="fondonaranja">
+									Clave
+								</th>
+								<th align="center" height="25" class="fondonaranja">
+									Nombre
+								</th>
+								<th align="center" height="25" class="fondonaranja">
+									Créditos
+								</th>
+								<th align="center" height="25" class="fondonaranja">
+									Prerrequisito
+								</th>
+								<th colspan="2" align="center" height="25" class="fondonaranja">
+									&nbsp;
+								</th>
+							</tr>
+							
+							<?php $k=0; foreach($especializantes  as $materia){ $k++; if( $k % 2 == 0){ $bg="#FFFFFF"; } else{ $bg="#DDDDDD"; } ?>
+							<tr>
+								<th align="center" height="25" width="50" bgcolor="<?= $bg ?>">
+									<a href="<?= KUMBIA_PATH ?>administrador/vercursos/<?= $materia -> clave ?>">
+										<?php if($modelo==2000){ ?><?= substr($materia -> clave,0,3) ?><?php } else { ?><?= $materia -> clave ?><?php } ?>
+									</a>
+								</th>
+								<th align="left" height="25" width="350" bgcolor="<?= $bg ?>">
+									&nbsp;<?= $materia -> nombre ?>
+								</th>
+								<th align="center" height="25" width="100" bgcolor="<?= $bg ?>">
+										<?= $pespecializantes[$k-1] -> creditos ?>
+								</th>
+								<th align="center" height="25" width="100" bgcolor="<?= $bg ?>">
+										<?php if($modelo==2000){ ?><?= substr($pespecializantes[$k-1] -> prerrequisito,0,3) ?><?php } else { ?><?= $pespecializantes[$k-1] -> prerrequisito ?><?php } ?>
+								</th>
+								<form action="<?= KUMBIA_PATH ?>administrador/quitarMateria" method="POST">
+								<th align="center" height="25" bgcolor="#FFFFFF">
+									<input type="hidden" name="clave" value="<?= $materia -> clave ?>">
+									<input type="hidden" name="plan" value="<?= $plan -> id ?>">
+									<input type="hidden" name="modelo" value="<?= $plan -> nombre ?>">
+									<input type="image" src="<?= KUMBIA_PATH ?>public/img/delete.jpg" width="25" height="25" border="0">
+								</th>
+								</form>
+								
+							</tr>
+							<?php } ?>
+						</table>
+						<br>
+						<?php } ?>
+						<?php if($optativas) { ?>
+						<table border="1" cellpadding="1" cellspacing="1" width="650">
+							<tr>
+								<th colspan="6" align="center" height="25" class="fondoazul">
+									MATERIAS OPTATIVAS GENERALES
+								</th>
+							</tr>
+							<tr>
+								<th align="center" height="25" class="fondonaranja">
+									Clave
+								</th>
+								<th align="center" height="25" class="fondonaranja">
+									Nombre
+								</th>
+								<th align="center" height="25" class="fondonaranja">
+									Créditos
+								</th>
+								<th align="center" height="25" class="fondonaranja">
+									Prerrequisito
+								</th>
+								<th colspan="2" align="center" height="25" class="fondonaranja">
+									&nbsp;
+								</th>
+							</tr>
+							
+							<?php $k=0; foreach($optativas  as $materia){ $k++; if( $k % 2 == 0){ $bg="#FFFFFF"; } else{ $bg="#DDDDDD"; } ?>
+							<tr>
+								<th align="center" height="25" width="50" bgcolor="<?= $bg ?>">
+								<a href="<?= KUMBIA_PATH ?>administrador/vercursos/<?= $materia -> clave ?>">
+									<?php if($modelo==2000){ ?><?= substr($materia -> clave,0,3) ?><?php } else { ?><?= $materia -> clave ?><?php } ?>
+								</a>
+								</th>
+								<th align="left" height="25" width="350" bgcolor="<?= $bg ?>">
+									&nbsp;<?= $materia -> nombre ?>
+								</th>
+								<th align="center" height="25" width="100" bgcolor="<?= $bg ?>">
+										<?= $poptativas[$k-1] -> creditos ?>
+								</th>
+								<th align="center" height="25" width="100" bgcolor="<?= $bg ?>">
+										<?php if($modelo==2000){ ?><?= substr($poptativas[$k-1] -> prerrequisito,0,3) ?><?php } else { ?><?= $poptativas[$k-1] -> prerrequisito ?><?php } ?>
+								</th>
+								<form action="<?= KUMBIA_PATH ?>administrador/quitarMateria" method="POST">
+								<th align="center" height="25" bgcolor="#FFFFFF">
+									<input type="hidden" name="clave" value="<?= $materia -> clave ?>">
+									<input type="hidden" name="plan" value="<?= $plan -> id ?>">
+									<input type="hidden" name="modelo" value="<?= $plan -> nombre ?>">
+									<input type="image" src="<?= KUMBIA_PATH ?>public/img/delete.jpg" width="25" height="25" border="0">
+								</th>
+								</form>
+								
+							</tr>
+							<?php } ?>
+						</table>
+						<?php } ?>
+						<br>
+						
+					</div>
+				</td>
+			</tr>
+		</table>
+	
+		<br><br>

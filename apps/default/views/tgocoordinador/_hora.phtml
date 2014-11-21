@@ -1,0 +1,96 @@
+<?= form_remote_tag("tgocoordinador/abrirhorario/".$tmp,"update: horario".$tmp) ?>
+	<?php if(materia($maestro -> id, $tmp)=="-"){	?>
+		&nbsp;
+	<?php } else { ?>
+		<?= utf8_encode(materia($maestro -> id, $tmp)); ?><br><br><?= utf8_encode(grupo($maestro -> id, $tmp)); ?> - <?= utf8_encode(salon($maestro -> id, $tmp)); ?><br><br>
+	<?php }	?>
+	<input type="submit" name="boton" value="Modificar">
+<?= end_form_tag() ?>
+							
+<?php
+	function horario($maestro, $auxiliar){
+		$horarios = new Horarios();
+		
+		if($horarios -> count("maestro_id=".$maestro." AND auxiliar=".$auxiliar)==0){
+			return '';
+		}
+		else{
+			$horario = $horarios -> find_first("maestro_id=".$maestro." AND auxiliar=".$auxiliar);
+			return $horario;
+		}
+	}
+	
+	function materia($maestro, $auxiliar){
+		$horarios = new Horarios();
+		$Periodo = new Periodos();
+		if($Periodo -> find_first("activo = 1")){			
+			$periodo = $Periodo -> periodo;
+		}else{ echo "No se encontro ningun periodo activo<br />"; }
+		
+		if($horarios -> count("maestro_id=".$maestro." AND periodo=".$periodo)>0){
+			$horarios = $horarios -> find("maestro_id=".$maestro." AND periodo=".$periodo);
+			if($horarios) foreach($horarios as $horario){
+				$horas = new Horas();
+				if($horas -> count("horario_id=".$horario -> id." AND auxiliar=".$auxiliar)){
+					$hora = $horas -> find_first("horario_id=".$horario -> id." AND auxiliar=".$auxiliar);
+					
+					$materias = new MateriasHorarios();
+					$materia = $materias -> find_first("id=".$hora -> materia_id);
+					
+					return $materia -> nombre;
+				}
+			}
+		}
+		
+		return '-';
+	}
+	
+	function grupo($maestro, $auxiliar){
+		$horarios = new Horarios();
+		$Periodo = new Periodos();
+		if($Periodo -> find_first("activo = 1")){			
+			$periodo = $Periodo -> periodo;
+		}else{ echo "No se encontro ningun periodo activo<br />"; }
+		
+		if($horarios -> count("maestro_id=".$maestro." AND periodo=".$periodo)>0){
+			$horarios = $horarios -> find("maestro_id=".$maestro." AND periodo=".$periodo);
+			if($horarios) foreach($horarios as $horario){
+				$horas = new Horas();
+				if($horas -> count("horario_id=".$horario -> id." AND auxiliar=".$auxiliar)){
+					$hora = $horas -> find_first("horario_id=".$horario -> id." AND auxiliar=".$auxiliar);
+					
+					$grupos = new Grupos();
+					$grupo = $grupos -> find_first("id=".$hora -> grupo_id);
+					return $grupo -> nombre;
+				}
+			}
+		}
+		
+		return '-';
+	}
+	
+	function salon($maestro, $auxiliar){
+		$horarios = new Horarios();
+		$Periodo = new Periodos();
+		if($Periodo -> find_first("activo = 1")){			
+			$periodo = $Periodo -> periodo;
+		}else{ echo "No se encontro ningun periodo activo<br />"; }
+		
+		if($horarios -> count("maestro_id=".$maestro." AND periodo=".$periodo)>0){
+			$horarios = $horarios -> find("maestro_id=".$maestro." AND periodo=".$periodo);
+			if($horarios) foreach($horarios as $horario){
+				$horas = new Horas();
+				if($horas -> count("horario_id=".$horario -> id." AND auxiliar=".$auxiliar)){
+					$hora = $horas -> find_first("horario_id=".$horario -> id." AND auxiliar=".$auxiliar);
+					
+					$salones = new Salones();
+					$salon = $salones -> find_first("id=".$hora -> salon_id);
+					return $salon -> corto;
+				}
+			}
+		}
+		
+		return '-';
+	}
+	
+?>

@@ -1,0 +1,39 @@
+<center>
+
+<br />
+<br />
+<?= render_partial("regresarAlCambioDeContrasena"); ?>
+<br />
+<br />
+<table>
+	<tr>
+		<td width="900" align="left">
+			<br>
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" align="center" >
+				<tr>
+					<th width="250" height="25" bgcolor="#FFCA5B" align="center">Nombre del profesor:</th>
+					<th width="250" align="center"><?= $maestro -> nombre ?></th>
+				</tr>
+				<tr>
+					<th width="250" height="25" bgcolor="#FFCA5B" align="center">N&oacute;mina:</th>
+					<th width="250" align="center"><?= $maestro -> nomina ?></th>
+				</tr>
+				<tr>
+					<th width="250" height="25" bgcolor="#FFCA5B" align="center">Contrase&ntilde;a Actual:</th>
+					<th width="250" align="center"><?= $usuario -> clave ?></th>
+				</tr>
+				<?
+				if( $exito == 1 )
+					$mensaje = "&iexcl;La contrase&ntilde;a se cambio satisfactoriamente!";
+				else
+					$mensaje = "La contrase&ntilde;a no se pudo cambiar int&eacute;ntelo de nuevo";
+				?>
+					<tr bgcolor="#FFCA5B">
+						<th width="100" height="25" colspan="2" align="center"><?= $mensaje ?></th>
+					</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+<br><br>
+</center>

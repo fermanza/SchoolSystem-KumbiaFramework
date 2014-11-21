@@ -1,0 +1,26 @@
+<?php
+	if(Session::get_data('coordinador')=="OK"){
+		include("profesor.phtml");
+	}
+	else{
+?>
+<?= stylesheet_link_tag('menu/menu_style', true); ?>
+<tr>
+	<th>
+	<div class="menu">
+		<?php include("menu_ingcalculo.phtml"); ?>
+	</div>
+</tr>
+<tr>
+	<td height="1"></td>
+	
+	
+</tr>
+<tr>
+	<td align="center">
+		<?= content(); ?>
+	</td>
+</tr>
+<?php
+}
+?>

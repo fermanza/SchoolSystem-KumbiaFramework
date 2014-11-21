@@ -1,0 +1,334 @@
+<center><br><br>
+<table>
+	<tr>
+		<td width="900"><div align="justify">
+			
+			<div style="font-size: 14px;"><div style="color: #FF0000;"><b>CURSOS QUE PERTENECEN A ESTA COORDINACION: </b></div>
+				<br>
+				Los cursos listados a continuación son aquellos en los que se imparte alguna materia de la coordinación de <b><?= $coordinacion ?></b>. Estos cursos solo podrán ser modificados en el periodo de captura por el coordinador correspondiente o en su defecto el jefe de nivel o el personal de calculo.
+				<br><br>
+				<center>
+				<table border="0" cellpadding="0" cellspacing="0" width="400">
+					<tr>
+						<td><a href="<?= KUMBIA_PATH ?>profesor/cgrupos" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('coordinador_r1_c3','','<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c3_f2.gif',1);"><img name="coordinador_r1_c3" src="<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c3.gif" width="100" height="30" border="0" id="coordinador_r1_c3" alt="" /></a></td>
+						<td><a href="<?= KUMBIA_PATH ?>profesor/csalones" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('coordinador_r1_c4','','<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c4_f2.gif',1);"><img name="coordinador_r1_c4" src="<?= KUMBIA_PATH ?>/public/img/coordinador/coordinador_r1_c4.gif" width="100" height="30" border="0" id="coordinador_r1_c4" alt="" /></a></td>
+					</tr>
+				</table>
+				<?php if($error==1){ ?>
+					<br><br><font color="#FF0000"><b>ERROR EN LA CAPTURA: </b></font>Existe un cruce de horarios.
+				<?php } ?>
+					<br>
+				<form action="<?= KUMBIA_PATH ?>profesor/cagregargrupo" method="POST">
+				<table border="1" cellspacing="1" cellpadding="1" style="font-size: 10px;">
+					<tr>
+						<th width="300" class="fondoazul" align="center" height="20">
+							<b>Materia</b>
+						</th>
+						<th width="50" class="fondoazul">
+							<b>Cupo</b>
+						</th>
+						<th colspan="6" class="fondoazul">
+							Horario
+						</th>
+					</tr>
+					<tr>
+						<th width="300" class="fondonaranja" height="20">
+							<?php
+								if(isset($xmateria)){
+									echo $xmateria;
+									?>
+									<input type="hidden" name="materia" value="<?= $xclave ?>">
+									<?php
+								}
+								else{
+							?>
+							<select name="materia" style="font-size:9px;" onChange="seleccionaMateria(this);">
+							<option value="">&nbsp;</option>
+								<?php foreach($xmaterias as $materia){ if($materia -> clave != ""){ ?>
+									<option value="<?= $materia -> clave ?>"><?= $materia -> clave ?> - <?= $materia -> nombre ?></option>
+								<?php  } } ?>
+							</select>
+							<?php } ?>
+						</th>
+						<th width="50" class="fondonaranja">
+							<select name="cupo" style="font-size:9px;">
+								<?php for($i=10;$i<=50;$i++){ ?>
+									<?php if($i==40){ ?>
+										<option value="<?= $i ?>" SELECTED><?= $i ?></option>
+									<?php } else { ?>
+										<option value="<?= $i ?>"><?= $i ?></option>
+									<?php } ?>
+								<?php } ?>
+							</select>
+						</th>
+						<th width="30" class="fondonaranja">
+							Lunes
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="lunesi" style="font-size:9px;">
+								<option value="" SELECTED>&nbsp;</option>
+								<?php for($i=15;$i<=21;$i++){ ?>
+									<option value="<?= $i ?>"><?= $i ?></option>
+								<?php } ?>
+							</select>
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="lunesf" style="font-size:9px;">
+								<option value="" SELECTED>&nbsp;</option>
+								<?php for($i=16;$i<=22;$i++){ ?>
+									<option value="<?= $i ?>"><?= $i ?></option>
+								<?php } ?>
+							</select>
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="luness" style="font-size:9px;">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+								<?php if($xsalones) foreach($xsalones as $salon){ ?>
+									<option value="<?= $salon -> id ?>"><?= $salon -> edificio ?>:<?= $salon -> nombre ?></option>
+								<?php } ?>
+							</select>
+						</th>
+					</tr>
+					<tr>
+						<th width="300" class="fondoazul">
+							<b>Profesor</b>
+						</th>
+						<th width="50" class="fondoazul">
+							<b>Mínimo</b>
+						</th>		
+						<th width="30" class="fondonaranja">
+							Martes
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="martesi" style="font-size:9px;">
+								<option value="" SELECTED>&nbsp;</option>
+								<?php for($i=15;$i<=21;$i++){ ?>
+									<option value="<?= $i ?>"><?= $i ?></option>
+								<?php } ?>
+							</select>
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="martesf" style="font-size:9px;">
+								<option value="" SELECTED>&nbsp;</option>
+								<?php for($i=16;$i<=22;$i++){ ?>
+									<option value="<?= $i ?>"><?= $i ?></option>
+								<?php } ?>
+							</select>
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="martess" style="font-size:9px;">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+								<?php if($xsalones) foreach($xsalones as $salon){ ?>
+									<option value="<?= $salon -> id ?>"><?= $salon -> edificio ?>:<?= $salon -> nombre ?></option>
+								<?php } ?>
+							</select>
+						</th>
+					</tr>
+					<tr>
+						<th width="300" class="fondonaranja">
+							<?php
+								if(isset($xmaestro)){
+									echo $xmaestro;
+									?>
+									<input type="hidden" name="maestro" value="<?= $xnomina ?>">
+									<?php
+								}
+								else{
+							?>
+							<select name="maestro" style="font-size:9px;" onChange="seleccionaMaestro('<?= $xclave ?>',this);">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+								<?php if($maestros){ ?>
+									<option value="9999">MAESTRO POR DESIGNAR</option>
+								<?php foreach($maestros as $maestro){ ?>
+									<option value="<?= $maestro -> nomina ?>">
+										<? echo $maestro -> paterno." ".$maestro -> materno." ".$maestro -> nombre." (".$maestro -> nomina.")"; ?>
+									</option>
+								<?php } } ?>
+							</select>
+							<?php } ?>
+						</th>
+						<th width="50" class="fondonaranja">
+							<select name="minimo" style="font-size:9px;">
+								<?php for($i=10;$i<=50;$i++){ ?>
+									<?php if($i==10){ ?>
+										<option value="<?= $i ?>" SELECTED><?= $i ?></option>
+									<?php } else { ?>
+										<option value="<?= $i ?>"><?= $i ?></option>
+									<?php } ?>
+								<?php } ?>
+							</select>
+						</th>
+						<th width="30" class="fondonaranja">
+							Miercoles
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="miercolesi" style="font-size:9px;">
+								<option value="" SELECTED>&nbsp;</option>
+								<?php for($i=15;$i<=21;$i++){ ?>
+									<option value="<?= $i ?>"><?= $i ?></option>
+								<?php } ?>
+							</select>
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="miercolesf" style="font-size:9px;">
+								<option value="" SELECTED>&nbsp;</option>
+								<?php for($i=16;$i<=22;$i++){ ?>
+									<option value="<?= $i ?>"><?= $i ?></option>
+								<?php } ?>
+							</select>
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="miercoless" style="font-size:9px;">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+								<?php if($xsalones) foreach($xsalones as $salon){ ?>
+									<option value="<?= $salon -> id ?>"><?= $salon -> edificio ?>:<?= $salon -> nombre ?></option>
+								<?php } ?>
+							</select>
+						</th>
+					</tr>
+					<tr>
+						<th class="fondonaranja" rowspan="3" colspan="2" align="left">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="submit" value="Registrar curso">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							Compartir la materia con: <br />
+							Enlazar con el curso de: 
+							<select name="enlazar" style="font-size:9px;">
+								<option value ="0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+								<?
+								$xcursos = new Xcursos();
+								foreach ( $xcursos -> find_all_by_sql("
+										Select * from xcursos where periodo = 32009
+										") as $xcur ){
+									if ( $xcID != $xcur -> id ){
+								?>
+										<option value="<?= $xcur -> id ?>"><?= $xcur -> clavecurso ?></option>
+								<?
+									}
+								}
+								?>
+							</select>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<?
+						if ( Session::get_data('coordinacion') != "TCB" ){
+							if ( Session::get_data('coordinacion') != "IIM" ){
+					?>
+							IIM
+							<input type="checkbox" name="compartir1" value="1">
+					<?
+							}
+							if ( Session::get_data('coordinacion') != "IEC" ){
+					?>
+							IEC
+							<input type="checkbox" name="compartir2" value="1">
+					<?
+							}
+							if ( Session::get_data('coordinacion') != "MCT" ){
+					?>
+							MCT
+							<input type="checkbox" name="compartir3" value="1">
+					<?
+							}
+						}
+					?>
+						</th>
+						<th width="30" class="fondonaranja">
+							Jueves
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="juevesi" style="font-size:9px;">
+								<option value="" SELECTED>&nbsp;</option>
+								<?php for($i=15;$i<=21;$i++){ ?>
+									<option value="<?= $i ?>"><?= $i ?></option>
+								<?php } ?>
+							</select>
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="juevesf" style="font-size:9px;">
+								<option value="" SELECTED>&nbsp;</option>
+								<?php for($i=16;$i<=22;$i++){ ?>
+									<option value="<?= $i ?>"><?= $i ?></option>
+								<?php } ?>
+							</select>
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="juevess" style="font-size:9px;">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+								<?php if($xsalones) foreach($xsalones as $salon){ ?>
+									<option value="<?= $salon -> id ?>"><?= $salon -> edificio ?>:<?= $salon -> nombre ?></option>
+								<?php } ?>
+							</select>
+						</th>
+					</tr>
+					<tr>
+						<th width="30" class="fondonaranja">
+							Viernes
+						</th>
+						
+						<th width="30" class="fondonaranja">
+							<select name="viernesi" style="font-size:9px;">
+								<option value="" SELECTED>&nbsp;</option>
+								<?php for($i=15;$i<=21;$i++){ ?>
+									<option value="<?= $i ?>"><?= $i ?></option>
+								<?php } ?>
+							</select>
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="viernesf" style="font-size:9px;">
+								<option value="" SELECTED>&nbsp;</option>
+								<?php for($i=16;$i<=22;$i++){ ?>
+									<option value="<?= $i ?>"><?= $i ?></option>
+								<?php } ?>
+							</select>
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="vierness" style="font-size:9px;">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+								<?php if($xsalones) foreach($xsalones as $salon){ ?>
+									<option value="<?= $salon -> id ?>"><?= $salon -> edificio ?>:<?= $salon -> nombre ?></option>
+								<?php } ?>
+							</select>
+						</th>
+					</tr>
+					<tr>
+						<th width="30" class="fondonaranja">
+							Sábado
+						</th>
+						
+						<th width="30" class="fondonaranja">
+							<select name="sabadoi" style="font-size:9px;">
+								<option value="" SELECTED>&nbsp;</option>
+								<?php for($i=15;$i<=21;$i++){ ?>
+									<option value="<?= $i ?>"><?= $i ?></option>
+								<?php } ?>
+							</select>
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="sabadof" style="font-size:9px;">
+								<option value="" SELECTED>&nbsp;</option>
+								<?php for($i=16;$i<=22;$i++){ ?>
+									<option value="<?= $i ?>"><?= $i ?></option>
+								<?php } ?>
+							</select>
+						</th>
+						<th width="30" class="fondonaranja">
+							<select name="sabados" style="font-size:9px;">
+							<option value="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+								<?php if($xsalones) foreach($xsalones as $salon){ ?>
+									<option value="<?= $salon -> id ?>"><?= $salon -> edificio ?>:<?= $salon -> nombre ?></option>
+								<?php } ?>
+							</select>
+						</th>
+					</tr>
+				</table>
+				</form>
+				
+				<br>
+				</center>
+				<br>
+			</div>
+		</div></td>
+	</tr>
+</table>
+</center>

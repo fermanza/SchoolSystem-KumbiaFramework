@@ -1,0 +1,42 @@
+<br />
+<br />
+<br />
+<h2 class="centrar">
+	El alumno <?= $alumno -> vcNomAlu ?>&nbsp;<?= $alumno -> miReg ?>&nbsp;
+	ahora pertenece a la especialidad de <?= $areadeformacion -> nombreareaformacion ?>.
+</h2>
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center">
+	<tr>
+		<th class="azull4" width="150">
+			Registro
+		</th>
+		<th class="azull4" width="300">
+			Nombre del Alumno
+		</th>
+		<th class="azull4" width="200">
+			Carrera
+		</th>
+	</tr>
+	<tr>
+		<td class="bordee">
+			<?= $alumno -> miReg ?>
+		</td>
+		<td class="bordee">
+			<?= $alumno -> vcNomAlu ?>
+		</td>
+		<td class="bordee">
+			<?= $carrera -> nombre ?>
+		</td>
+	</tr>
+</table>
+<br />
+	<table border="1" align="center">
+		<tr>
+			<td class="azull2" width="150px" align="center">
+				<a class="linksobreazul" href="<?= KUMBIA_PATH ?>asignarEspecialidad/alumnosSinEsp"><? echo "Regresar" ?></a>
+			</td>
+		</tr>
+	</table>
+<br />
+<br />
+<br />

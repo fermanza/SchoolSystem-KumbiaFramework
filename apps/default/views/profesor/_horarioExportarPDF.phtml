@@ -1,0 +1,20 @@
+<form action="<?= KUMBIA_PATH ?>profesoreshorario/actividadExportarPDF/"
+	method="post" name="FormularioActividadExportarPDF" id="FormularioActividadExportarPDF">
+<input type="hidden" id="nomina" name="nomina" value="<?= Session::get_data('registro') ?>" />
+<div style="margin-left: 40%; float: left"><h3>Imprimir Programa de Trabajo Acad&eacute;mico&nbsp;
+<input type="image" src="<?= KUMBIA_PATH ?>img/exportaradobe.jpg" 
+		width="55" title="Exportar a PDF" />
+</h3>
+</div>
+</form>
+
+<form action="<?= KUMBIA_PATH ?>profesoreshorario/horarioExportarPDF/" 
+	method="post" name="horarioExportarPDF" id="horarioExportarPDF">
+<input type="hidden" id="nomina" name="nomina" value="<?= Session::get_data('registro') ?>" />
+<div style="margin-left: 60%"><h3>Imprimir horario&nbsp;
+<input type="image" src="<?= KUMBIA_PATH ?>img/exportaradobe.jpg" 
+		width="55" title="Exportar a PDF" />
+</h3>
+</div>
+</form>
+<br />

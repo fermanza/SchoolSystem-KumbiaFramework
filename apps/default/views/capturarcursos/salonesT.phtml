@@ -1,0 +1,188 @@
+<script language="JavaScript1.2">
+
+function dibujar(valor, i, j){
+	
+	//document.getElementById(td).innerHTML=this.style.backgroundColor='#333333'=; //return value
+	var body = document.getElementById("td["+i+"]["+j+"]");
+	if( valor > 0 ){
+        body.addClassName("griss");
+	}
+	else{
+		body.removeClassName("griss");
+	}
+}
+
+
+
+</script>
+
+<?= render_partial("info"); ?>
+
+<br />
+<br />
+<br />
+<br />
+<?= render_partial("menucursost"); ?>
+<br />
+<br />
+
+<table>
+	<tr>
+		<td width="1%">
+			&nbsp;
+		</td>
+		<td width="35%">
+		<div id="listasalones" >
+			<table align="center" border="1" cellspacing="4">
+				<tr>
+					<th colspan="4" align="center" class="naranjaa2">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						AULAS, LABORATORIOS Y TALLERES DISPONIBLES
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</th>
+				</tr>
+				<tr>
+					<td align="center" class="azull2">
+						Edificio
+					</td>
+					<td align="center" class="azull2" width="45%">
+						Nombre
+					</td>
+					<td align="center" class="azull2">
+						<?= link_to_remote
+								("capturarcursos/salonesajaxT/".$p1,
+								'<img src="'.KUMBIA_PATH.'public/img/left.gif" border=0>',
+									 "update: listasalones"); ?>
+					</td>
+					<td align="center" class="azull2">
+						<?= link_to_remote
+								("capturarcursos/salonesajaxT/".$p2,
+								'<img src="'.KUMBIA_PATH.'public/img/right.gif" border=0>',
+									"update: listasalones"); ?>
+					</td>
+				</tr>
+					
+					<?
+						for( $i = 0; $i < 3; $i++ ){
+							echo "<tr><td class=\"azull3\">";
+							echo $salones[$i] -> edificio;
+							echo "</td><td class=\"azull3\">";
+							echo $salones[$i] -> nombre;
+							echo "</td><td colspan=\"2\" class=\"azull3\" align=\"center\">";
+					?>
+							<?= link_to_remote("capturarcursos/jornadasalont/".$salones[$i] -> id,
+									'<img src="'.KUMBIA_PATH.'public/img/calendar.gif" border=0>', 
+										"update: horas"); ?>
+							</td></tr>
+					<!--
+							<input type="image" src="<?= KUMBIA_PATH ?>public/img/calendar.gif"></td></tr>
+					-->
+					<?
+						}
+					?>
+			</table>
+			</div>
+		</td>
+		<td width="5%">
+			&nbsp;
+		</td>
+		<td width="59%">
+		<div id = "horas">
+			<table border="1" class="azull3">
+				<tr>
+					<th colspan="7" align="center" class="azull2">
+						<? echo $salones[0] -> edificio.":".$salones[0] -> nombre ?>
+					</th>
+				</tr>
+				<tr>
+					<th width="330" align="center" class="azull2">Horas</th>
+					<th width="200" align="center" class="azull2">Lunes</th>
+					<th width="200" align="center" class="azull2">Martes</th>
+					<th width="200" align="center" class="azull2">Miercoles</th>
+					<th width="200" align="center" class="azull2">Jueves</th>
+					<th width="200" align="center" class="azull2">Viernes</th>
+					<th width="200" align="center" class="azull2">S&aacute;bado</th>
+				</tr>
+				<?
+				for( $i = 7; $i < 15; $i++ ){
+				?>
+					<tr>
+						<th align="center" valign="center" class="naranjaa2" height="25">
+							<? echo $i.":00 -".($i + 1).":00" ?>
+						</th>
+				<?
+					for( $j = 1; $j < 7; $j++ ){
+				?>
+						<td align="center" class="azull3">
+						<?
+							if( $horas[$j][$i][$salones[0] -> id] != null )
+								echo $horas[$j][$i][$salones[0] -> id] -> clavecurso;
+							else
+								echo "&nbsp;-&nbsp";
+						?>
+						</td>
+				<?
+					}
+					echo "</tr>";
+				}
+				?>
+			</table>
+			<br />
+			<br />
+			<table border="1" class="azull3">
+				<tr>
+					<th width="330" align="center" class="azull2">Horas</th>
+					<th width="200" align="center" class="azull2">Lunes</th>
+					<th width="200" align="center" class="azull2">Martes</th>
+					<th width="200" align="center" class="azull2">Miercoles</th>
+					<th width="200" align="center" class="azull2">Jueves</th>
+					<th width="200" align="center" class="azull2">Viernes</th>
+					<th width="200" align="center" class="azull2">S&aacute;bado</th>
+				</tr>
+				<?
+				for( $i = 15; $i < 22; $i++ ){
+				?>
+					<tr>
+						<th align="center" valign="center" class="naranjaa2" height="25">
+							<? echo $i.":00 -".($i + 1).":00" ?>
+						</th>
+				<?
+					for( $j = 1; $j < 7; $j++ ){
+				?>
+						<td align="center" class="azull3">
+						<?
+							if( $horas[$j][$i][$salones[0] -> id] != null )
+								echo $horas[$j][$i][$salones[0] -> id] -> clavecurso;
+							else
+								echo "&nbsp;-&nbsp";
+						?>
+						</td>
+				<?
+					}
+					echo "</tr>";
+				}
+				?>
+			</table>
+			</div>
+		</td>
+		<td width="1%">
+		</td>
+	</tr>
+</table>
+<br />
+<br />
+<?
+
+	print "<script type=\"text/javascript\">
+	new Event.observe(\"profesor\", \"change\", function(){
+	new AJAX.viewRequest({
+		action: \"capturarcursos/prueba/\",
+		container: \"content\"
+	})
+	})
+	</script>";
+
+
+
+?>
+</form>

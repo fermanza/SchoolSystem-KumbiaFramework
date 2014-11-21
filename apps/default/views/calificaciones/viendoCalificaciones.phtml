@@ -1,0 +1,91 @@
+<style type="text/css">
+    .contenido {
+        margin: 10px;
+        font-size: 12px;
+    }
+    .titulo{
+    	font-size: 20px;
+		font-weight: bold;
+		color: #333333;
+		background: #FFCA5B;
+		padding: 5px 15px 5px 15px;		
+		text-align: center;
+    }
+	input[type="text"]{
+		width:150px;
+	}
+	select{
+		width:150px;
+	}
+</style>
+<div class="titulo">
+Administrador de Calificaciones	
+</div>
+<div class="contenido">
+    <?= form_tag("calificaciones/viendoCalificaciones") ?>
+    <table>
+        <tr>
+            <th colspan="2">
+                <?= $registro; ?>
+            </th>
+            <td colspan="2">
+                <?= $nombre; ?>
+            </td>
+        </tr>
+    </table>
+    <table>
+            <?
+            $i = 0;
+            echo $ingreso1;
+//             while( $actual != $ingreso1 && $ingreso1 <= 32010 ){
+            while( 1 ){
+            ?>
+             <tr>
+                <td width="250" height="25" bgcolor="#FFCA5B" align="center">
+                    <?= $primerparcial[$ingreso1][$i]; ?>
+                </td>
+                <td width="250" height="25" bgcolor="#FFCA5B" align="center">
+                    <?= $segundoparcial[$ingreso1][$i]; ?>
+                </td>
+                <td width="250" height="25" bgcolor="#FFCA5B" align="center">
+                    <?= $tercerparcial[$ingreso1][$i]; ?>
+                </td>
+                <td width="250" height="25" bgcolor="#FFCA5B" align="center">
+                    <?= $calificacion[$ingreso1][$i]; ?>
+                </td>
+             </tr>
+            <?
+                $ingreso1 = incrementaPeriodo( $ingreso1 );
+                $i++;
+                break;
+            }
+            ?>
+        <tr>
+            <td colspan="2">
+                <?= submit_tag("Buscar") ?>
+            </td>
+        </tr>
+    </table>
+    <?
+    function incrementaPeriodo($periodo){
+
+        if(date("m",time())<7){
+                $actual = "1".date("Y",time());
+        }
+        else{
+                $actual = "3".date("Y",time());
+        }
+
+        $tmp = $periodo;
+
+        if( substr($periodo,0,1) == 1){
+                $periodo = "3".substr($periodo,1,4);
+        }
+        else{
+                $periodo = "1".(substr($periodo,1,4) + 1);
+        }
+
+        return $periodo;
+    }
+    ?>
+</div>

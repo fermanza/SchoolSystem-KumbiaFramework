@@ -1,0 +1,23 @@
+<?= stylesheet_link_tag('menu/menu_style', true); ?>
+<tr>
+	<th>
+	<div class="menu">
+		<?php
+		if( Session::get_data('tipousuario') == "VENTANILLA"){
+			include("menu_ventanilla.phtml");
+		}
+		if( Session::get_data('SERVICIOMEDICO') == "SERVICIOMEDICO" && Session::get('registro') != 1861){
+			include("menu_servicio_medico.phtml");
+		}
+		?>
+	</div>
+	</th>
+</tr>
+<tr>
+	<td height="1"></td>
+</tr>
+<tr>
+	<td align="center">
+		<?= content(); ?>
+	</td>
+</tr>

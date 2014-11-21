@@ -1,0 +1,120 @@
+<style type="text/css">
+	.cielo{
+		background:#EFEFEF;
+		text-transform:uppercase;
+		font-weight:bold;
+	}
+</style>
+<table border="0" cellpadding="0" cellspacing="0" width="770">
+			<tr>
+				<td style="font-family: Verdana;">
+					<br>
+					<div style="color: #1569C7; font-size: 14px;" align="left">
+					<?= img_tag("adorno.gif","border: 0") ?> <b>ASPIRANTES - DICTAMEN DE ADMITIDOS</b></div>
+					<div style="color: #000000; font-size: 11px;" align="justify">
+					<br>
+						&nbsp;&nbsp;En esta sección una secretaría podrá dar de alta y consultar cada uno de los aspirantes,
+						así como consultar distintos reportes y &nbsp;estadísticas sobre este rubro.
+						<br/><br/>
+						<div style="color: #000000; font-size: 20px;" align="center"><b><?= $periodoo ?></b></div>
+						<br/>
+						<center>
+				<table>
+					<tr>
+						<!--
+						<td colspan="8" align="center" width="25" height="20" bgcolor="#F9B240"><b>TECNÓLOGO</b></a></td>
+						-->
+						<td colspan="3" align="center" width="100" height="20" bgcolor="#F9B240"><b>INGENIERÍA</b></a></td>
+					</tr>
+					
+					<tr>
+						
+						<!--
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/admitidos/tgo/200" style="font-size:10px;text-decoration: none; color:#FFFFFF;">200</b></a></td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/admitidos/tgo/400" style="font-size:10px;text-decoration: none; color:#FFFFFF;">400</b></a></td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/admitidos/tgo/500" style="font-size:10px;text-decoration: none; color:#FFFFFF;">500</b></a></td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/admitidos/tgo/600" style="font-size:10px;text-decoration: none; color:#FFFFFF;">600</b></a></td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/admitidos/tgo/700" style="font-size:10px;text-decoration: none; color:#FFFFFF;">700</b></a></td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/admitidos/tgo/800" style="font-size:10px;text-decoration: none; color:#FFFFFF;">800</b></a></td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/admitidos/tgo/801" style="font-size:10px;text-decoration: none; color:#FFFFFF;">801</b></a></td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/admitidos/tgo/804" style="font-size:10px;text-decoration: none; color:#FFFFFF;">804</b></a></td>
+						-->
+						
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8">
+							<b><a href="<?= KUMBIA_PATH ?>aspirantes/admitidos/ing/400"
+									style="font-size:10px;text-decoration: none; color:#FFFFFF;">400</b></a>
+						</td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8">
+							<b><a href="<?= KUMBIA_PATH ?>aspirantes/admitidos/ing/600"
+									style="font-size:10px;text-decoration: none; color:#FFFFFF;">600</b></a>
+						</td>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8">
+							<b><a href="<?= KUMBIA_PATH ?>aspirantes/admitidos/ing/801"
+									style="font-size:10px;text-decoration: none; color:#FFFFFF;">801</b></a>
+						</td>
+					</tr>
+				</table>
+				<br>
+				
+				
+				<table>
+					<tr>
+				<?php
+					for($i=0;$i<$total;$i++){ 
+				?>
+					<?php if($i!=$actual/10){ ?>
+						<td align="center" width="25" height="25" bgcolor="#1E5FA8"><b><a href="<?= KUMBIA_PATH ?>aspirantes/admitidos/<?= $nivel ?>/<?= $carrerita ?>/<?= $i*10 ?>" style="font-size:10px;text-decoration: none; color:#FFFFFF;"><?= $i+1 ?></b></a></td>
+					<?php } else { ?>
+						<td align="center" width="25" height="25" bgcolor="#F9B240" style="font-size:10px;text-decoration: none; color:#000000;"><b><?= $i+1 ?></b></td>
+					<?php } ?>
+				<?php
+					}
+				?>
+				</tr>
+				</table>
+				<br/>
+	<?php if($aspirantes){ ?>
+<table border="1">
+	<tr>
+		<th colspan="5" height="25" class="fondoazul" height="25" style="font-size:14px;"><?= $carrera ?></font></th>
+	</tr>
+	<tr>
+		<th class="fondonaranja" height="25">
+			Folio
+		</th>
+		<th class="fondonaranja" height="25">
+			Ficha
+		</th>
+		<th class="fondonaranja" height="25">
+			Nombre
+		</th>
+		<th class="fondonaranja" height="25">
+			Fecha de registro
+		</th>
+	</tr>
+	<?php foreach($aspirantes as $aspirante){ ?>
+	<tr>
+		<th width="75" height="25">
+			<a href="<?= KUMBIA_PATH ?>aspirantes/consulta/<?= $aspirante -> folio ?>"><?= $aspirante -> folio ?></a>
+		</th>
+		<th width="75">
+			<?= $aspirante -> ficha ?>
+		</th>
+		<th width="350" align="left">
+			&nbsp;<?= $aspirante -> paterno ?> <?= $aspirante -> materno ?> <?= $aspirante -> nombre ?>
+		</th>
+		<th width="200">
+			<?= $aspirante -> fecha_at ?>
+		</th>
+	</tr>
+	<?php } ?>
+</table>
+<br/><br/>
+<b>ASPIRANTES ADMITIDOS: <?= $total*25 ?></b>
+<?php } else { ?>
+	<B>NO SE HA REGISTRADO EL DICTAMEN DE ADMITIDOS PARA ESTA CARRERA</B>
+<?php } ?>
+</td>
+			</tr>
+		</table>
+		<br><br>

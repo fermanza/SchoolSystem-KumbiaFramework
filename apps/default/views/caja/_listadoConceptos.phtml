@@ -1,0 +1,129 @@
+<table width="100%" style="font-size: 12px;" >
+  <tr>
+    <td align="center" bgcolor="#13539B" width="10%"><font color="#FFFFF">No. Concepto</font></td>
+	<td align="center" bgcolor="#13539B" width="70%"><font color="#FFFFF">Conepto</font></td>
+	<td align="center" bgcolor="#13539B"><font color="#FFFFF">&nbsp;&nbsp;Cantidad&nbsp;&nbsp;</font></td>
+	<td align="center" bgcolor="#13539B"><font color="#FFFFFF">Observaciones</font></td>
+	<td align="center" bgcolor="#13539B" width="20%"><font color="#FFFFF">Agregar</font></td>
+  </tr>
+<?php 
+$search = CajaConceptos::status();
+
+if(isset($result) == false && $search == "Sin busqueda"){
+
+if($tipoPersona == 2)
+  $registro = "";
+  
+if($tipoPersona == 4 && $otroTipoPer == 1)
+  $registro = "";
+  
+  if($conceptos = CajaConceptos::reporte($registro, $tipoPersona, $otroTipoPer)){
+
+    foreach($conceptos as $c){
+	
+	if(strlen($c -> id) == 1)
+	  $concepto = "000".$c -> id;
+	  
+	else if(strlen($c -> id) == 2)
+	  $concepto = "00".$c -> id;
+	  
+	else if(strlen($c -> id) == 3)
+	  $concepto = "0".$c -> id;
+	  
+	else
+	  $concepto = $c -> id;
+	
+ if( $c -> id == 93)
+  {
+?>
+    <tr>
+	    <td width="20%" align="center">&nbsp;&nbsp;<?= $concepto?></td>
+        <td width="50%">&nbsp;&nbsp;<?= utf8_encode($c -> nombre)?></td>
+		<td>
+		  <select id="conceptCan<?= $c -> id?>" name="conceptCan<? $c -> id?>">
+		    <option value="1">1</option>
+		  </select>
+		</td>
+		<td width="40%" align="LEFT"><?= htmlentities($c -> observaciones) ?>&nbsp;</td>
+        <td width="30%" align="center"><?= link_to_remote('caja/complementario/'.$c -> id,img_tag('icons/add.png','width: 20px'),'update: complementario') ?></td>
+    </tr>
+<?php
+  }
+  else
+  {
+?>
+    <tr>
+	    <td width="11%" align="center">
+		  &nbsp;&nbsp;<?= $concepto ?>
+		</td>
+        <td width="20%">&nbsp;&nbsp;<?= utf8_decode($c -> nombre) ?></td>
+		<td>
+		  <select id="conceptCan<?= $c -> id?>" name="conceptCan<?= $c -> id?>">
+		    <option value="1">1</option>
+		    <option value="2">2</option>
+		    <option value="3">3</option>
+		    <option value="4">4</option>
+		    <option value="5">5</option>
+		  </select>
+		</td>
+		<td width="40%" align="center" >&nbsp;<?= htmlentities($c -> observaciones) ?>&nbsp;</td>
+        <td width="40%" align="center"><?= link_to_remote('caja/complementario/'.$c -> id,img_tag('icons/add.png','width: 20px'),'update: complementario') ?></td>
+    </tr>
+
+<?php
+     }
+    }
+  } 
+}
+
+else{
+
+ if(count($result) > 0){
+    foreach($result as $c){
+
+	if(strlen($c -> id) == 1)
+	  $concepto = "000".$c -> id;
+	  
+	else if(strlen($c -> id) == 2)
+	  $concepto = "00".$c -> id;
+	  
+	else if(strlen($c -> id) == 3)
+	  $concepto = "0".$c -> id;
+	  
+	else
+	  $concepto = $c -> id;
+	
+?>
+    <tr>
+	    <td width="20%" align="center">&nbsp;&nbsp;<?= $concepto?></td>
+        <td width="50%">&nbsp;&nbsp;<?= utf8_encode($c -> nombre)?></td>
+		<td>
+		  <select id="conceptCan<?= $c -> id?>" name="conceptCan<? $c -> id?>">
+		    <option value="1">1</option>
+		    <option value="2">2</option>
+		    <option value="3">3</option>
+		    <option value="4">4</option>
+		    <option value="5">5</option>
+		  </select>
+		</td>
+		<td width="40%" align="center" >&nbsp;<?= htmlentities($c -> observaciones) ?>&nbsp;</td>
+        <td width="30%" align="center"><?= link_to_remote('caja/complementario/'.$c -> id,img_tag('icons/add.png','width: 20px'),'update: complementario') ?></td>
+    </tr>
+<?php
+    }
+  }
+  
+  else{
+?> 
+    <tr>
+	    <td width="20%" align="center">&nbsp;&nbsp;</td>
+        <td width="50%" align="center">&nbsp;&nbsp;No se encontraron registros&nbsp;&nbsp;</td>
+        <td width="30%" align="center">&nbsp;&nbsp;</td>
+    </tr>
+<?php
+  }  
+
+ $result = NULL;
+}
+?>
+</table>

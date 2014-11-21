@@ -1,0 +1,59 @@
+<tr>
+        <td style="background-color: #0559b7; color: #FFFFFF;" class="menu">
+        	<center>
+            <?= link_to('alumno/informacion','INFORMACION') ?> | 
+			<?
+			if ( Session::get_data('plantel') == 'C' ){
+			?>
+				<?= link_to('alumno/horario','HORARIO') ?> | 
+			<?
+			}
+			else{
+			?>
+				<?= link_to('alumno/horarioT','HORARIO') ?> |
+			<?
+			}
+			?>
+            <?= link_to('alumno/oferta','CURSOS') ?> | 
+            <?= link_to('alumnoselecc/','SELECCION') ?> | 
+			<?
+			if ( Session::get_data('plantel') == 'C' ){
+			?>
+				<?= link_to('alumno/calificaciones','CALIFICACIONES') ?> | 
+			<?
+			}
+			else{
+			?>
+				<?= link_to('alumno/calificacionesT','CALIFICACIONES') ?> | 
+			<?
+			}
+			?>
+            <?= link_to('alumno/kardex','KARDEX') ?> | 
+			<?= link_to('alumno/cambiarContrasena','CAMBIAR CONTRASE&Ntilde;A') ?> | 
+            <?= link_to('alumno/salir','SALIR') ?><!--
+			<table border="0" cellpadding="0" cellspacing="0" width="800">
+				<tr>
+                
+					<td><a href="<?= KUMBIA_PATH ?>alumno/informacion" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('alumnos_r1_c1','','<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c1_f2.gif',1);"><img name="alumnos_r1_c1" src="<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c1.gif" width="99" height="30" border="0" id="alumnos_r1_c1" alt="" /></a></td>
+					<td><a href="<?= KUMBIA_PATH ?>alumno/horarioooooo" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('alumnos_r1_c2','','<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c2_f2.gif',1);"><img name="alumnos_r1_c2" src="<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c2.gif" width="100" height="30" border="0" id="alumnos_r1_c2" alt="" /></a></td>
+					<td><a href="<?= KUMBIA_PATH ?>alumno/oferta" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('alumnos_r1_c3','','<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c3_f2.gif',1);"><img name="alumnos_r1_c3" src="<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c3.gif" width="100" height="30" border="0" id="alumnos_r1_c3" alt="" /></a></td>
+					<td><a href="<?= KUMBIA_PATH ?>alumno/seleccion" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('alumnos_r1_c4','','<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c4_f2.gif',1);"><img name="alumnos_r1_c4" src="<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c4.gif" width="100" height="30" border="0" id="alumnos_r1_c4" alt="" /></a></td>
+					<td><a href="<?= KUMBIA_PATH ?>alumno/calificaciones" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('alumnos_r1_c5','','<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c5_f2.gif',1);"><img name="alumnos_r1_c5" src="<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c5.gif" width="100" height="30" border="0" id="alumnos_r1_c5" alt="" /></a></td>
+					<td><a href="<?= KUMBIA_PATH ?>alumno/kardex" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('alumnos_r1_c6','','<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c6_f2.gif',1);"><img name="alumnos_r1_c6" src="<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c6.gif" width="100" height="30" border="0" id="alumnos_r1_c6" alt="" /></a></td>
+					<td><a href="<?= KUMBIA_PATH ?>alumno/evaluacion" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('alumnos_r1_c7','','<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c7_f2.gif',1);"><img name="alumnos_r1_c7" src="<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c7.gif" width="100" height="30" border="0" id="alumnos_r1_c7" alt="" /></a></td>
+					<td><a href="<?= KUMBIA_PATH ?>alumno/salir" onmouseout="MM_swapImgRestore();" onmouseover="MM_swapImage('alumnos_r1_c8','','<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c8_f2.gif',1);"><img name="alumnos_r1_c8" src="<?= KUMBIA_PATH ?>public/img/alumno/alumnos_r1_c8.gif" width="101" height="30" border="0" id="alumnos_r1_c8" alt="" /></a></td>
+				</tr>
+			</table>-->
+            </center>
+		</td>
+      </tr>
+	  <tr>
+		<td height="1">
+		</td>
+	  </tr>
+	  <tr>
+		<td align="center">
+		<?= content(); ?>
+		</td>
+	  </tr>
+	  

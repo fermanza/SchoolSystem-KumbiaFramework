@@ -1,0 +1,1966 @@
+------------------------------------------------------------------------
+r739 | deivinsontejeda | 2009-01-01 12:47:53 -0430 (Thu, 01 Jan 2009) | 1 line
+
+arreglos varios en la clase Kumbia
+------------------------------------------------------------------------
+r738 | deivinsontejeda | 2009-01-01 12:42:34 -0430 (Thu, 01 Jan 2009) | 1 line
+
+arreglos varios en la clase Kumbia
+------------------------------------------------------------------------
+r737 | deivinsontejeda | 2009-01-01 12:29:16 -0430 (Thu, 01 Jan 2009) | 1 line
+
+solventando bug reportado bajo tickect #50
+------------------------------------------------------------------------
+r736 | deivinsontejeda | 2009-01-01 12:19:13 -0430 (Thu, 01 Jan 2009) | 1 line
+
+arreglos varios en la clase Kumbia
+------------------------------------------------------------------------
+r735 | deivinsontejeda | 2009-01-01 12:15:38 -0430 (Thu, 01 Jan 2009) | 1 line
+
+agregando Driver para el cacheo a nivel de Archivo y arreglos a la class Cache
+------------------------------------------------------------------------
+r734 | joanhey | 2008-12-31 08:24:13 -0430 (Wed, 31 Dec 2008) | 1 line
+
+Eliminado ultima linea en blanco del exception.php
+------------------------------------------------------------------------
+r733 | joanhey | 2008-12-31 08:19:40 -0430 (Wed, 31 Dec 2008) | 1 line
+
+Pequeñas optimizaciones en el utils.php
+------------------------------------------------------------------------
+r732 | joanhey | 2008-12-31 08:17:53 -0430 (Wed, 31 Dec 2008) | 1 line
+
+Pequeñas optimizaciones en la clase filter
+------------------------------------------------------------------------
+r731 | joanhey | 2008-12-31 08:15:30 -0430 (Wed, 31 Dec 2008) | 1 line
+
+Pequeñas optimizaciones en el tags.php
+------------------------------------------------------------------------
+r730 | deivinsontejeda | 2008-12-30 11:28:37 -0430 (Tue, 30 Dec 2008) | 1 line
+
+arreglando ruta...
+------------------------------------------------------------------------
+r729 | deivinsontejeda | 2008-12-30 11:01:23 -0430 (Tue, 30 Dec 2008) | 1 line
+
+solventado bug con el helper upload_image_tag
+------------------------------------------------------------------------
+r728 | joanhey | 2008-12-21 16:30:33 -0430 (Sun, 21 Dec 2008) | 1 line
+
+Pequeño cambio para mejorar velocidad y de paso poder quitar esta funcion de utils mas adelante
+------------------------------------------------------------------------
+r727 | joanhey | 2008-12-20 10:00:55 -0430 (Sat, 20 Dec 2008) | 1 line
+
+Get_params más rápido, que lo usamos consistentemente en el framework
+------------------------------------------------------------------------
+r726 | joanhey | 2008-12-18 13:41:01 -0430 (Thu, 18 Dec 2008) | 1 line
+
+Pasados los valores por defecto al iniciar las variables
+------------------------------------------------------------------------
+r725 | joanhey | 2008-12-18 13:30:18 -0430 (Thu, 18 Dec 2008) | 1 line
+
+cambio de los valores por defecto que son array a array()
+------------------------------------------------------------------------
+r724 | joanhey | 2008-12-18 12:38:11 -0430 (Thu, 18 Dec 2008) | 3 lines
+
+Cambiado en index.php por $_GET  el $_REQUEST de la url para evitar conflicos
+Mejorado el router rewrite y mejorado el if_routed
+El if_routed se sigue mejorando cuando este lo subo
+------------------------------------------------------------------------
+r723 | joanhey | 2008-12-17 08:17:06 -0430 (Wed, 17 Dec 2008) | 2 lines
+
+solución al bug del get_kumbia_url  y link_to al final solucionado
+con pequeña modificación
+------------------------------------------------------------------------
+r722 | joanhey | 2008-12-16 05:32:59 -0430 (Tue, 16 Dec 2008) | 1 line
+
+solución al bug del get_kumbia_url  y link_to al final solucionado
+------------------------------------------------------------------------
+r721 | deivinsontejeda | 2008-12-15 16:02:32 -0430 (Mon, 15 Dec 2008) | 1 line
+
+solucionando bug reportado bajo ticket #14
+------------------------------------------------------------------------
+r720 | deivinsontejeda | 2008-12-15 16:01:58 -0430 (Mon, 15 Dec 2008) | 1 line
+
+quitando parametro que sobraba...
+------------------------------------------------------------------------
+r719 | joanhey | 2008-12-15 15:54:08 -0430 (Mon, 15 Dec 2008) | 1 line
+
+cambio de private a protected
+------------------------------------------------------------------------
+r718 | joanhey | 2008-12-15 15:34:46 -0430 (Mon, 15 Dec 2008) | 1 line
+
+solución al bug del get_kumbia_url 
+------------------------------------------------------------------------
+r717 | emilio.rst | 2008-12-15 14:58:16 -0430 (Mon, 15 Dec 2008) | 1 line
+
+correccion en button_to_remote_action
+------------------------------------------------------------------------
+r716 | emilio.rst | 2008-12-15 14:32:13 -0430 (Mon, 15 Dec 2008) | 1 line
+
+arreglos en router
+------------------------------------------------------------------------
+r715 | deivinsontejeda | 2008-12-15 12:04:29 -0430 (Mon, 15 Dec 2008) | 1 line
+
+actualizando librerias de JS...
+------------------------------------------------------------------------
+r714 | deivinsontejeda | 2008-12-15 12:00:24 -0430 (Mon, 15 Dec 2008) | 1 line
+
+actualizando librerias de JS...
+------------------------------------------------------------------------
+r713 | deivinsontejeda | 2008-12-15 11:19:41 -0430 (Mon, 15 Dec 2008) | 1 line
+
+Arreglo de bug reportado bajo ticket #42
+------------------------------------------------------------------------
+r712 | deivinsontejeda | 2008-12-14 12:14:49 -0430 (Sun, 14 Dec 2008) | 1 line
+
+Solventado bug al momento de serializar objectos PDO reportado bajo ticket #23
+------------------------------------------------------------------------
+r711 | joanhey | 2008-12-10 12:40:45 -0430 (Wed, 10 Dec 2008) | 1 line
+
+solución al bug #44 con el datetime y MySQL
+------------------------------------------------------------------------
+r710 | emilio.rst | 2008-12-10 00:36:42 -0430 (Wed, 10 Dec 2008) | 3 lines
+
+Correccion en Router debido a parametros nulos  y por defecto en las acciones.
+
+Caso: controller/action/
+------------------------------------------------------------------------
+r709 | deivinsontejeda | 2008-12-01 14:34:46 -0430 (Mon, 01 Dec 2008) | 1 line
+
+arreglo de enlace ya que el mismo estaba apuntando hacia un dominio incorrecto...
+------------------------------------------------------------------------
+r708 | deivinsontejeda | 2008-11-26 09:34:26 -0430 (Wed, 26 Nov 2008) | 1 line
+
+arreglo bug reportado bajo ticket #30
+------------------------------------------------------------------------
+r707 | deivinsontejeda | 2008-11-26 09:25:52 -0430 (Wed, 26 Nov 2008) | 1 line
+
+arreglo bug reportado bajo ticket #38
+------------------------------------------------------------------------
+r706 | deivinsontejeda | 2008-11-26 09:21:18 -0430 (Wed, 26 Nov 2008) | 1 line
+
+arreglo bug reportado bajo ticket #31
+------------------------------------------------------------------------
+r705 | deivinsontejeda | 2008-11-26 09:16:44 -0430 (Wed, 26 Nov 2008) | 1 line
+
+arreglo bug reportado bajo ticket #34
+------------------------------------------------------------------------
+r704 | deivinsontejeda | 2008-11-26 08:54:42 -0430 (Wed, 26 Nov 2008) | 1 line
+
+arreglo bug reportado bajo ticket #39
+------------------------------------------------------------------------
+r703 | joanhey | 2008-11-18 01:44:22 -0430 (Tue, 18 Nov 2008) | 1 line
+
+El link_to_action no tenia en cuenta si el controller estaba dentro de un modulo
+------------------------------------------------------------------------
+r702 | deivinsontejeda | 2008-11-16 23:08:13 -0430 (Sun, 16 Nov 2008) | 1 line
+
+encapsulando datos de la conexion a la BD, ya que PHP por su propia naturaleza muestra los atributos private, protected de un Objeto
+------------------------------------------------------------------------
+r701 | deivinsontejeda | 2008-11-14 09:42:32 -0430 (Fri, 14 Nov 2008) | 1 line
+
+agregando Kumbia::get_active_app_charset() para tomar el charset colocado en el archivo config.ini
+------------------------------------------------------------------------
+r700 | joanhey | 2008-11-10 11:26:01 -0430 (Mon, 10 Nov 2008) | 1 line
+
+solución al bug #29 con el img_tag
+------------------------------------------------------------------------
+r699 | deivinsontejeda | 2008-11-01 22:40:12 -0430 (Sat, 01 Nov 2008) | 1 line
+
+agregando validacion para cuando no se tiene permiso de escritura en un directorio, bug reportado #9
+------------------------------------------------------------------------
+r695 | deivinsontejeda | 2008-10-30 11:20:13 -0430 (Thu, 30 Oct 2008) | 1 line
+
+Solventando Bug reportado bajo Ticket #27
+------------------------------------------------------------------------
+r694 | deivinsontejeda | 2008-10-29 14:38:38 -0430 (Wed, 29 Oct 2008) | 1 line
+
+ordenando funcionalidad set_size_browser(), soporta parametro con nombre ejemplo:
+------------------------------------------------------------------------
+r693 | deivinsontejeda | 2008-10-29 09:15:30 -0430 (Wed, 29 Oct 2008) | 1 line
+
+Solventando Bug del ticket #25 y agregando metodo set_size_browse() para el manejo personalizado del size de las tablas cuando se visualizan registros muy largos...
+------------------------------------------------------------------------
+r681 | joanhey | 2008-10-22 01:44:24 -0430 (Wed, 22 Oct 2008) | 2 lines
+
+Añadido funcion is_ajax().
+
+------------------------------------------------------------------------
+r659 | joanhey | 2008-10-18 13:20:56 -0430 (Sat, 18 Oct 2008) | 10 lines
+
+Ejemplo para el index.phtml
+Quitado el enter en la creacion del final de tags.
+El codigo queda mas bonito y compacto.
+Si queremos separarlo en lineas lo hacemos en el view.
+
+En los layouts, templates y views al final del php:
+<?= stylesheet_link_tag('estilo') ?>sin espacio despues de cerrar el php = sigue en la misma linea
+<?= stylesheet_link_tag('estilo') ?> con espacio depues de cerrar el php = \r\n
+lo mismo para render view, partial, content().
+Viene por defecto asi en php. 
+------------------------------------------------------------------------
+r658 | joanhey | 2008-10-18 13:17:29 -0430 (Sat, 18 Oct 2008) | 9 lines
+
+Quitado el enter en la creacion del final de tags.
+El codigo queda mas bonito y compacto.
+Si queremos separarlo en lineas lo hacemos en el view.
+
+En los layouts, templates y views al final del php:
+<?= stylesheet_link_tag('estilo') ?>sin espacio despues de cerrar el php = sigue en la misma linea
+<?= stylesheet_link_tag('estilo') ?> con espacio depues de cerrar el php = \r\n
+lo mismo para render view, partial, content().
+Viene por defecto asi en php. 
+------------------------------------------------------------------------
+r656 | emilio.rst | 2008-10-15 00:51:27 -0430 (Wed, 15 Oct 2008) | 1 line
+
+corregido helper select_tag y asimismo updater_select
+------------------------------------------------------------------------
+r651 | deivinsontejeda | 2008-10-13 13:02:48 -0430 (Mon, 13 Oct 2008) | 1 line
+
+cambio sin efecto...
+------------------------------------------------------------------------
+r649 | deivinsontejeda | 2008-10-13 09:41:31 -0430 (Mon, 13 Oct 2008) | 1 line
+
+Bug con la inclusion de los estilos ya que los mismo no se colocaban en el head del documento XHTML y no cumplia con el standard.
+------------------------------------------------------------------------
+r635 | joanhey | 2008-10-09 08:56:03 -0430 (Thu, 09 Oct 2008) | 1 line
+
+Pequeña modificacion
+------------------------------------------------------------------------
+r634 | joanhey | 2008-10-09 08:47:40 -0430 (Thu, 09 Oct 2008) | 1 line
+
+Pequeña modificacion
+------------------------------------------------------------------------
+r633 | joanhey | 2008-10-07 19:56:52 -0430 (Tue, 07 Oct 2008) | 1 line
+
+Test para la clase flash
+------------------------------------------------------------------------
+r632 | joanhey | 2008-10-07 19:55:11 -0430 (Tue, 07 Oct 2008) | 1 line
+
+Cambios para la modificacion de la clase flash
+------------------------------------------------------------------------
+r631 | joanhey | 2008-10-07 19:43:52 -0430 (Tue, 07 Oct 2008) | 1 line
+
+Refactoring y nuevo metodo añadido flash::show. Cambio id kumbiadisplay a clase flash_show. Ya que puede haber mas de un mensaje flash, pero el html solo permite tener un id con el mismo nombre. Ahora emplea un sistema de doble clase class=flash_show xxxxx_message. Cuidado con vuestros CSS.
+------------------------------------------------------------------------
+r630 | joanhey | 2008-10-07 19:06:12 -0430 (Tue, 07 Oct 2008) | 1 line
+
+Cerrado el tag php ?>
+------------------------------------------------------------------------
+r629 | deivinsontejeda | 2008-10-06 23:45:20 -0430 (Mon, 06 Oct 2008) | 1 line
+
+solventando Bug en las librerias Libchart ya modificaban el header.
+------------------------------------------------------------------------
+r628 | joanhey | 2008-10-06 20:20:01 -0430 (Mon, 06 Oct 2008) | 1 line
+
+Cambios para validar el xhtml y css
+------------------------------------------------------------------------
+r627 | joanhey | 2008-10-06 19:54:22 -0430 (Mon, 06 Oct 2008) | 1 line
+
+Añadido error 404 Not found cuando no se encuentra el controlador o la accion en modo interactive off
+------------------------------------------------------------------------
+r626 | deivinsontejeda | 2008-10-04 11:55:49 -0430 (Sat, 04 Oct 2008) | 1 line
+
+Bug con index que no existia al momento de validar los campos NOT NULL
+------------------------------------------------------------------------
+r625 | joanhey | 2008-10-04 10:14:52 -0430 (Sat, 04 Oct 2008) | 1 line
+
+Cambios para validar CSS 
+------------------------------------------------------------------------
+r624 | banny | 2008-09-29 14:13:04 -0430 (Mon, 29 Sep 2008) | 1 line
+
+solulcion a bug de funcionamiento del helper  Autocomplete
+------------------------------------------------------------------------
+r622 | deivinsontejeda | 2008-09-29 11:01:41 -0430 (Mon, 29 Sep 2008) | 1 line
+
+Solucionando Bug relacionado con la generacion de reporte de los formularios StandardForm
+------------------------------------------------------------------------
+r621 | deivinsontejeda | 2008-09-27 15:50:36 -0430 (Sat, 27 Sep 2008) | 2 lines
+
+solventando bug relacionado con las rutas en el javascript de la ruta del calendar, deben existir otros bug's de esta caracterisca.
+Bug reportado por el IRC..
+------------------------------------------------------------------------
+r620 | deivinsontejeda | 2008-09-27 15:18:24 -0430 (Sat, 27 Sep 2008) | 3 lines
+
+Bug con declaracion de atributo para los mensajes, reportando en el foro[1]
+
+[1]->http://kumbiaphp.com/foro/viewtopic.php?p=3006#p3006
+------------------------------------------------------------------------
+r618 | deivinsontejeda | 2008-09-23 14:40:47 -0430 (Tue, 23 Sep 2008) | 1 line
+
+Solucionando Bug con el nombre del adaptador...
+------------------------------------------------------------------------
+r610 | anthemfor182 | 2008-09-21 17:37:28 -0430 (Sun, 21 Sep 2008) | 1 line
+
+Agregando componente date
+------------------------------------------------------------------------
+r609 | anthemfor182 | 2008-09-21 16:08:59 -0430 (Sun, 21 Sep 2008) | 1 line
+
+Solucionando posibles problemas de seguridad en controladores
+------------------------------------------------------------------------
+r608 | anthemfor182 | 2008-09-21 16:01:56 -0430 (Sun, 21 Sep 2008) | 1 line
+
+Corrigiendo que los callbacks se llamen correctamente al indicarlos por el nombre de atributo
+------------------------------------------------------------------------
+r607 | anthemfor182 | 2008-09-21 15:57:08 -0430 (Sun, 21 Sep 2008) | 1 line
+
+Corrigiendo que los callbacks se llamen correctamente al indicarlos por el nombre de atributo
+------------------------------------------------------------------------
+r606 | anthemfor182 | 2008-09-21 15:52:11 -0430 (Sun, 21 Sep 2008) | 1 line
+
+Corrigiendo application.php
+------------------------------------------------------------------------
+r605 | anthemfor182 | 2008-09-21 15:50:02 -0430 (Sun, 21 Sep 2008) | 1 line
+
+Corrigiendo que los callbacks se llamen correctamente al indicarlos por el nombre de atributo
+------------------------------------------------------------------------
+r593 | deivinsontejeda | 2008-09-17 09:20:42 -0430 (Wed, 17 Sep 2008) | 2 lines
+
+Solucionado Bug's que se presentaba cuando se hacia uso del hepers set_combo_static()
+[1]->http://kumbiaphp.com/foro/viewtopic.php?p=2920#p2920
+------------------------------------------------------------------------
+r584 | deivinsontejeda | 2008-09-15 10:30:49 -0430 (Mon, 15 Sep 2008) | 1 line
+
+Bug que se presentaba al momento de hacer uso del cache...
+------------------------------------------------------------------------
+r582 | anthemfor182 | 2008-09-14 22:27:16 -0430 (Sun, 14 Sep 2008) | 1 line
+
+Validando que sys_getloadavg se use solo en linux
+------------------------------------------------------------------------
+r581 | anthemfor182 | 2008-09-14 21:39:39 -0430 (Sun, 14 Sep 2008) | 1 line
+
+Arreglando acentos
+------------------------------------------------------------------------
+r580 | deivinsontejeda | 2008-09-14 18:45:55 -0430 (Sun, 14 Sep 2008) | 1 line
+
+agregando vista de bienvenida
+------------------------------------------------------------------------
+r579 | deivinsontejeda | 2008-09-14 18:44:36 -0430 (Sun, 14 Sep 2008) | 1 line
+
+ahora se renderiza una vista de bienvenida...
+------------------------------------------------------------------------
+r578 | anthemfor182 | 2008-09-14 17:25:48 -0430 (Sun, 14 Sep 2008) | 1 line
+
+Resolviendo problemas de seguridad potenciales
+------------------------------------------------------------------------
+r577 | anthemfor182 | 2008-09-14 17:21:47 -0430 (Sun, 14 Sep 2008) | 1 line
+
+Resolviendo problemas de seguridad potenciales
+------------------------------------------------------------------------
+r569 | deivinsontejeda | 2008-09-13 10:19:33 -0430 (Sat, 13 Sep 2008) | 1 line
+
+Actualizando la version de Smarty 2.6.20
+------------------------------------------------------------------------
+r568 | deivinsontejeda | 2008-09-12 20:50:29 -0430 (Fri, 12 Sep 2008) | 1 line
+
+agregando constante que indica la version del framework...
+------------------------------------------------------------------------
+r567 | deivinsontejeda | 2008-09-12 16:12:16 -0430 (Fri, 12 Sep 2008) | 2 lines
+
+arreglos en el metodo set_combo_dynamic(), se presentaba un bug que no se generaba correctamente el combo box...
+NOTA: sigue en observacion...
+------------------------------------------------------------------------
+r566 | deivinsontejeda | 2008-09-11 08:34:26 -0430 (Thu, 11 Sep 2008) | 3 lines
+
+solventado Bug reportado[1] con problema en el boton Volver de la vista Browser del Componente StandardForm
+
+[1]->http://kumbiaphp.com/foro/viewtopic.php?p=2856#p2856
+------------------------------------------------------------------------
+r565 | deivinsontejeda | 2008-09-10 16:10:19 -0430 (Wed, 10 Sep 2008) | 1 line
+
+Actualizando las Librerias del framework
+------------------------------------------------------------------------
+r564 | deivinsontejeda | 2008-09-10 15:58:10 -0430 (Wed, 10 Sep 2008) | 1 line
+
+Actualizando las Librerias del framework
+------------------------------------------------------------------------
+r563 | deivinsontejeda | 2008-09-07 19:32:12 -0430 (Sun, 07 Sep 2008) | 1 line
+
+arreglo de Bug que se presenta al momento de validar que la clave de un formulario StandardForm...
+------------------------------------------------------------------------
+r440 | anthemfor182 | 2008-08-03 19:57:47 -0430 (Sun, 03 Aug 2008) | 1 line
+
+Codificacion de caracteres
+------------------------------------------------------------------------
+r383 | emilio.rst | 2008-07-21 21:31:15 -0430 (Mon, 21 Jul 2008) | 1 line
+
+correccione en ActiveRecord debido a los problemas con assembla de la ultima vez
+------------------------------------------------------------------------
+r382 | emilio.rst | 2008-07-21 19:26:43 -0430 (Mon, 21 Jul 2008) | 1 line
+
+correccion en age, perdida por los problemas anteriores con assembla
+------------------------------------------------------------------------
+r381 | emilio.rst | 2008-07-21 13:07:00 -0430 (Mon, 21 Jul 2008) | 1 line
+
+estandarizacion en clase Filter
+------------------------------------------------------------------------
+r380 | emilio.rst | 2008-07-21 13:06:35 -0430 (Mon, 21 Jul 2008) | 1 line
+
+estandarizacion y correccion en object
+------------------------------------------------------------------------
+r379 | emilio.rst | 2008-07-21 10:48:05 -0430 (Mon, 21 Jul 2008) | 1 line
+
+correccion en destroyer para controller
+------------------------------------------------------------------------
+r378 | emilio.rst | 2008-07-15 09:42:19 -0430 (Tue, 15 Jul 2008) | 1 line
+
+adicionado not_found.phtml al constructor de aplicacion por linea de comandos
+------------------------------------------------------------------------
+r377 | emilio.rst | 2008-07-14 12:32:38 -0430 (Mon, 14 Jul 2008) | 2 lines
+
+adicionados utils
+file_extension, mirror_range, get_server_url
+------------------------------------------------------------------------
+r376 | emilio.rst | 2008-07-13 11:35:07 -0430 (Sun, 13 Jul 2008) | 1 line
+
+adicionado helper month_field_tag
+------------------------------------------------------------------------
+r375 | emilio.rst | 2008-07-12 02:05:13 -0430 (Sat, 12 Jul 2008) | 1 line
+
+modificada manera de capturar DispatcherException, para que se comporte igual que el anterior en caso de modo interactivo
+------------------------------------------------------------------------
+r374 | emilio.rst | 2008-07-12 01:54:05 -0430 (Sat, 12 Jul 2008) | 1 line
+
+modificado kumbia.php y dispatcher.php, ahora el error 404 es manejado capturando la excepcion DispatcherException en la clase Kumbia, metodo main. :)
+------------------------------------------------------------------------
+r373 | deivinsontejeda | 2008-07-11 23:25:43 -0430 (Fri, 11 Jul 2008) | 1 line
+
+Solventando Bug, el mismo se presentaba al momento de cambiar el texto a los botones debido que no se definian unos indices del arreglo $form..
+------------------------------------------------------------------------
+r372 | emilio.rst | 2008-07-11 23:05:00 -0430 (Fri, 11 Jul 2008) | 1 line
+
+not_found sin layout
+------------------------------------------------------------------------
+r371 | deivinsontejeda | 2008-07-11 22:32:11 -0430 (Fri, 11 Jul 2008) | 1 line
+
+Humanizando Código con PHP_Beautifier
+------------------------------------------------------------------------
+r370 | deivinsontejeda | 2008-07-10 13:42:21 -0430 (Thu, 10 Jul 2008) | 1 line
+
+Agregando el charset de la salida XML de acuerdo al que este colocado en el archivo config.ini charset = utf-8
+------------------------------------------------------------------------
+r369 | emilio.rst | 2008-07-09 23:27:55 -0430 (Wed, 09 Jul 2008) | 1 line
+
+corregido metodo send en clase Object
+------------------------------------------------------------------------
+r368 | deivinsontejeda | 2008-07-09 23:21:10 -0430 (Wed, 09 Jul 2008) | 1 line
+
+corrigiendo el Modificador de acceso al metodo is_model()
+------------------------------------------------------------------------
+r367 | emilio.rst | 2008-07-09 23:15:19 -0430 (Wed, 09 Jul 2008) | 1 line
+
+corregido redirect_to_action en base.js
+------------------------------------------------------------------------
+r366 | deivinsontejeda | 2008-07-09 23:01:16 -0430 (Wed, 09 Jul 2008) | 2 lines
+
+1->Humanizando el Codigo
+2->Se agrega validacion para los campos notNulls
+------------------------------------------------------------------------
+r365 | deivinsontejeda | 2008-07-09 22:53:33 -0430 (Wed, 09 Jul 2008) | 1 line
+
+agregano validacion en caso que a la funcion render_view() no se le pase un controlador
+------------------------------------------------------------------------
+r364 | deivinsontejeda | 2008-07-09 22:51:28 -0430 (Wed, 09 Jul 2008) | 1 line
+
+agregando vista que se mostrara al momento de cargar una vista que no exista dentro del controlador
+------------------------------------------------------------------------
+r363 | deivinsontejeda | 2008-07-09 22:43:52 -0430 (Wed, 09 Jul 2008) | 1 line
+
+agregando logo que se mostrara al momento de cargar una vista que no exista dentro del controlador
+------------------------------------------------------------------------
+r362 | deivinsontejeda | 2008-07-09 22:40:39 -0430 (Wed, 09 Jul 2008) | 1 line
+
+Mejorando la forma como se genera la excepcion en caso que no exista un accion, ahora se genera una pagina con error 404.
+------------------------------------------------------------------------
+r361 | deivinsontejeda | 2008-07-09 22:33:51 -0430 (Wed, 09 Jul 2008) | 5 lines
+
+1-> Se cambio el Modificador de acceso al metodo javascript_baes(), ya que se utiliza en otra instancia de la class kumbia...
+
+2->Se le quita la validacion que tenia el metodo _create_cache_dir() y se deja la logica al metodo main()
+
+3->Se cambia el modificador de acceso al metodo is_model()
+------------------------------------------------------------------------
+r360 | deivinsontejeda | 2008-07-05 21:53:22 -0430 (Sat, 05 Jul 2008) | 2 lines
+
+Humanizando el Codigo de la clase Kumbia...
+Separando logica del metodo main() al momento de crear los directorios de cache, se crea el metodo _create_cache_dir() que se encargara de esta tarea
+------------------------------------------------------------------------
+r359 | deivinsontejeda | 2008-07-05 21:30:04 -0430 (Sat, 05 Jul 2008) | 1 line
+
+cambiando modificadores de acceso en los metodos ya que estos se utilizan en otras instancias de la class Kumbia...
+------------------------------------------------------------------------
+r358 | deivinsontejeda | 2008-07-05 11:49:02 -0430 (Sat, 05 Jul 2008) | 1 line
+
+Agregando LICENSE
+------------------------------------------------------------------------
+r357 | deivinsontejeda | 2008-07-05 11:35:39 -0430 (Sat, 05 Jul 2008) | 2 lines
+
+Humanizando el Codigo de la clase Kumbia...
+Colocando modificadores de acceso de acuerdo al ambito de los metodos...
+------------------------------------------------------------------------
+r356 | emilio.rst | 2008-07-05 09:42:41 -0430 (Sat, 05 Jul 2008) | 13 lines
+
+actualizada clase Object, ahora aporta funciones:
+
+to_string() : convierte a representacion de cadena, utiliza internamente print_r
+
+equals($s) : compara el $s con el objeto y verifica si son iguales
+
+serialize() : retorna la representacion serializada.
+
+to_json() : retorna la representacion JSON del objeto
+
+send($m [, $args]): invoca al metodo $m del objeto, pasando como argumentos los elementos del array $args. Esta es homologa a send en ruby ;)
+
+Es verdaderament util, asi uno se evita escribir el call_user_func_array que es bastante largo :)
+------------------------------------------------------------------------
+r355 | deivinsontejeda | 2008-07-05 01:08:20 -0430 (Sat, 05 Jul 2008) | 1 line
+
+limpiando caracteres extranos
+------------------------------------------------------------------------
+r354 | deivinsontejeda | 2008-07-05 01:07:14 -0430 (Sat, 05 Jul 2008) | 1 line
+
+limpiando caracteres extranos
+------------------------------------------------------------------------
+r353 | deivinsontejeda | 2008-07-05 01:02:19 -0430 (Sat, 05 Jul 2008) | 2 lines
+
+Humanizando el Codigo de la clase Kumbia...
+Colocando modificadores de acceso de acuerdo al ambito de la variable
+------------------------------------------------------------------------
+r352 | emilio.rst | 2008-07-05 00:24:03 -0430 (Sat, 05 Jul 2008) | 1 line
+
+remplazado foreach por extract
+------------------------------------------------------------------------
+r351 | deivinsontejeda | 2008-07-05 00:18:22 -0430 (Sat, 05 Jul 2008) | 3 lines
+
+Humanizando el Codigo de la clase Kumbia...
+1-> Se cambia foreach por extract
+2-> Colocando modificadores de acceso al metodo _init_models();
+------------------------------------------------------------------------
+r350 | emilio.rst | 2008-07-04 17:32:23 -0430 (Fri, 04 Jul 2008) | 1 line
+
+se cambio load_library_kumbia por _load_library_kumbia y asimismo la manera de invocarlo en el main por self::_load_library_kumbia
+------------------------------------------------------------------------
+r349 | deivinsontejeda | 2008-07-04 17:23:35 -0430 (Fri, 04 Jul 2008) | 1 line
+
+Humanizando el Codigo de la clase Kumbia en el metodo main separando la carga de las librerias del framework...
+------------------------------------------------------------------------
+r348 | deivinsontejeda | 2008-07-04 15:39:14 -0430 (Fri, 04 Jul 2008) | 1 line
+
+incluyendo el componente Benchmark al inicio del framework
+------------------------------------------------------------------------
+r347 | deivinsontejeda | 2008-07-04 15:38:04 -0430 (Fri, 04 Jul 2008) | 1 line
+
+Agregando la clase para el manejo de las excepciones del Componente Benchmark
+------------------------------------------------------------------------
+r346 | deivinsontejeda | 2008-07-04 15:34:34 -0430 (Fri, 04 Jul 2008) | 12 lines
+
+Agregando Componente Benchmark, el mismo nos permite saber el tiempo y la carga de memoria un script...
+Forma de Uso:
+//iniciamos el reloj
+Benchmark::start_clock("main");
+
+//Obtenemos el tiempo de ese script
+Benchmark::time_execute("main");
+
+//Carga en memoria
+Benchmark::memory_usage("main");
+
+NOTA: importante el nombre que le damos al inicio del Benchmark ya que con ese lo recuperamos esto nos permite hacer varios Benchmark, sin caer en colisiones...
+------------------------------------------------------------------------
+r345 | deivinsontejeda | 2008-06-29 22:10:15 -0430 (Sun, 29 Jun 2008) | 1 line
+
+arreglo de la URL del sitio actual
+------------------------------------------------------------------------
+r344 | deivinsontejeda | 2008-06-29 22:08:45 -0430 (Sun, 29 Jun 2008) | 1 line
+
+Estandarizacion de Codigo con phpcs y php_beautifier
+------------------------------------------------------------------------
+r343 | deivinsontejeda | 2008-06-29 15:15:19 -0430 (Sun, 29 Jun 2008) | 1 line
+
+Estandarizacion de Codigo con phpcs y php_beautifier
+------------------------------------------------------------------------
+r342 | deivinsontejeda | 2008-06-29 10:27:42 -0430 (Sun, 29 Jun 2008) | 1 line
+
+Estandarizacion de Codigo con phpcs y php_beautifier
+------------------------------------------------------------------------
+r341 | emilio.rst | 2008-06-29 08:11:47 -0430 (Sun, 29 Jun 2008) | 1 line
+
+humanizado codigo fuente kumbia.php, por el beutifier, algunas llaves estaban desalineadas, se dejo solo separacion de linea en metodos que no tienen comentarios iniciales
+------------------------------------------------------------------------
+r340 | emilio.rst | 2008-06-29 08:07:34 -0430 (Sun, 29 Jun 2008) | 1 line
+
+humanizado codigo fuente kumbia.php, por el beutifier, algunas llaves estaban desalineadas y no habia separacion de linea entre los metodos, es bueno que optemos de ahora en adelante programar con el formato similar a como se vee este codigo fuente
+------------------------------------------------------------------------
+r339 | deivinsontejeda | 2008-06-28 22:43:43 -0430 (Sat, 28 Jun 2008) | 1 line
+
+Estandarizacion de Codigo con phpcs y php_beautifier
+------------------------------------------------------------------------
+r338 | deivinsontejeda | 2008-06-28 22:15:42 -0430 (Sat, 28 Jun 2008) | 1 line
+
+Estandarizacion de Codigo...
+------------------------------------------------------------------------
+r337 | deivinsontejeda | 2008-06-28 21:26:47 -0430 (Sat, 28 Jun 2008) | 1 line
+
+Estandarizacion a nivel de codigo utilizando php_beautifier y phpcs extensiones de PEAR para tal fin...
+------------------------------------------------------------------------
+r336 | emilio.rst | 2008-06-28 10:00:21 -0430 (Sat, 28 Jun 2008) | 1 line
+
+estandarizados atributos y metodos privados de activerecord, se les adiciono el prefijo _
+------------------------------------------------------------------------
+r335 | emilio.rst | 2008-06-27 14:44:46 -0430 (Fri, 27 Jun 2008) | 8 lines
+
+estandarizado y optimizado validadores en activerecord, asimismo ahora soportan parametros message y field.
+
+Ejemplo:
+$this->validates_uniqueness_of('nombre', 'message: Alguien ya tiene tu nombre')
+
+o
+
+$this->validates_uniqueness_of('fecha_nac', 'field: fecha de nacimiento')
+------------------------------------------------------------------------
+r334 | emilio.rst | 2008-06-27 10:35:37 -0430 (Fri, 27 Jun 2008) | 1 line
+
+adicionado md5 filter
+------------------------------------------------------------------------
+r333 | deivinsontejeda | 2008-06-24 14:06:16 -0430 (Tue, 24 Jun 2008) | 1 line
+
+modificaciones para que se pueda obtener el mensaje personalizado...
+------------------------------------------------------------------------
+r332 | deivinsontejeda | 2008-06-24 13:54:59 -0430 (Tue, 24 Jun 2008) | 1 line
+
+agregando metodo para personalizar el mensaje a los campos not_null esto servira cuando se haga uso del metodo show_not_nulls
+------------------------------------------------------------------------
+r331 | deivinsontejeda | 2008-06-22 14:19:51 -0430 (Sun, 22 Jun 2008) | 1 line
+
+agregando class para manejar los estilos de la leyenda que se mostrara cuando se haga uso del metodo show_not_null 
+------------------------------------------------------------------------
+r330 | deivinsontejeda | 2008-06-22 14:17:29 -0430 (Sun, 22 Jun 2008) | 1 line
+
+agregando leyenda para los campos not null cuando se haga uso del metodo show_not_null
+------------------------------------------------------------------------
+r329 | deivinsontejeda | 2008-06-22 14:11:14 -0430 (Sun, 22 Jun 2008) | 1 line
+
+agregando validacion al momento de construir un formulario standardForm para que cuando un campo sea de tipo hidden y se haga uso del metodo show_not_null este no muestre el "*" 
+------------------------------------------------------------------------
+r328 | deivinsontejeda | 2008-06-22 14:08:59 -0430 (Sun, 22 Jun 2008) | 1 line
+
+solventando Bug que se generaba al momento de crear la informacion para crear los formularios StandardForm el error se presentaba cuando se utilizaba el metodo $this->show_not_null() cuando existia en nuestra tabla un campo de tipo text a este no se le asociaba un valueType por ende cuando se queria obtener ese valor de ese campo no existia...
+------------------------------------------------------------------------
+r327 | emilio.rst | 2008-06-19 07:56:37 -0430 (Thu, 19 Jun 2008) | 10 lines
+
+Adicionado metodo filter_value a la clase Filter, este permite aplicar filtros a valores. Ej:
+$val = $filter->filter_value('<b>abc</b>', 'htmlspecialchars');
+
+
+
+Adicionado metodo filter a la clase Controller. De esta manera para filtrar algo en el controlador no es necesario crear una instancia de Filter, Kumbia lo hará por ti :)
+
+$val = $this->filter('<b>abc</b>', 'htmlspecialchars');
+
+Por dentro utiliza un objeto singleton, de tal manera que consume menos recursos
+------------------------------------------------------------------------
+r326 | deivinsontejeda | 2008-06-17 16:13:12 -0430 (Tue, 17 Jun 2008) | 4 lines
+
+Bugs:
+1-> Cuando existia una class llamada quiero_un_auto no creaba bien la instancia de la class
+2-> No se asignaban los valores a los campos null de la manera correcta entonces cuando se hacia uso del metodo $this->show_not_nulls generaba problema...
+
+------------------------------------------------------------------------
+r325 | emilio.rst | 2008-06-17 01:51:07 -0430 (Tue, 17 Jun 2008) | 18 lines
+
+modificado en la clase controller:
+
+metodos: has_post, has_get, has_request, post, get, request
+ahora asi como se envian los datos con los helpers de la manera form.field
+EJ: text_field_tag('usuario.nombre')
+se puede acceder a ese parametro de la siguiente manera $this->post('usuario.nombre')
+y verificar que se recibe $this->has_post('usuario.nombre')
+
+una de las ventajas que ofrece el formato form.field para los campos, es el uso de filtros al momento de recibir los datos y utilizarlos por ejemplo en activerecord.
+Ej:
+$usuario = new Usuario($this->post('usuario', 'trim'));
+$usuario->save();
+
+Adicionados parametro new_name, para indicar el nuevo nombre con que se guardara el archivo en upload_file y upload_image
+
+Ej:
+$this->upload_file('archivo', 'public/files', "$i.dot");
+$this->upload_image('archivo', "$i.jpg");
+------------------------------------------------------------------------
+r324 | emilio.rst | 2008-06-13 22:47:36 -0430 (Fri, 13 Jun 2008) | 1 line
+
+adicionados filter addslashes y stripslashes
+------------------------------------------------------------------------
+r323 | emilio.rst | 2008-06-12 01:22:47 -0430 (Thu, 12 Jun 2008) | 1 line
+
+correccion en router, se elimino un echo de prueba que habia quedado en el olvido :)
+------------------------------------------------------------------------
+r322 | emilio.rst | 2008-06-11 00:12:33 -0430 (Wed, 11 Jun 2008) | 13 lines
+
+reorganizados application_controller y controller.
+
+adionados metodos has_get, has_post, has_request al controlador.
+
+el objectivo de estos metodos es validar si se enviaron los campos indicados por el metodo especificado, en terminos sencillos
+
+if(isset($_POST['nombre'], $_POST['apellido'], $_POST['cedula']))) {
+}
+
+equivale a
+
+if($this->has_post('nombre', 'apellido', 'cedula')) {
+}
+------------------------------------------------------------------------
+r321 | emilio.rst | 2008-06-11 00:07:16 -0430 (Wed, 11 Jun 2008) | 1 line
+
+correccion en time_field_tag
+------------------------------------------------------------------------
+r320 | emilio.rst | 2008-06-10 01:00:34 -0430 (Tue, 10 Jun 2008) | 1 line
+
+adicionado filter trim
+------------------------------------------------------------------------
+r319 | emilio.rst | 2008-06-10 00:59:58 -0430 (Tue, 10 Jun 2008) | 1 line
+
+adicionado filter trim
+------------------------------------------------------------------------
+r318 | emilio.rst | 2008-06-04 23:58:33 -0430 (Wed, 04 Jun 2008) | 1 line
+
+correccion en filter
+------------------------------------------------------------------------
+r317 | emilio.rst | 2008-06-04 23:57:54 -0430 (Wed, 04 Jun 2008) | 1 line
+
+adicionado filter nl2br
+------------------------------------------------------------------------
+r316 | emilio.rst | 2008-06-04 23:56:59 -0430 (Wed, 04 Jun 2008) | 5 lines
+
+adicionada capacidad al constructor de ActiveRecord
+ahora permite construir el objeto apartir de parametros de un array.
+
+EJ:
+$usuario = new Usuario($this->post('usuario'));
+------------------------------------------------------------------------
+r315 | emilio.rst | 2008-06-04 00:58:02 -0430 (Wed, 04 Jun 2008) | 16 lines
+
+adicionados helpers:
+
+time_field_tag: permite generar un campo hora
+Ej:  <?= time_field_tag('compra.hora', 'format: %h:%m', 'value: 02:30:30') ?>
+%h = horas
+%m = minutos
+%s = segundos
+
+js_execute:
+genera un tag <script type="text/javascript"></script> con codigo a ejecutar
+Ej:  <?= js_execute('alert("hola")') ?>
+La productividad de este helper se vee mas cuando hay que escribir javascript en una accion del controlador.
+
+js_alert:
+genera un alert de javascript
+Ej: <?= js_alert('hola') ?>
+------------------------------------------------------------------------
+r314 | emilio.rst | 2008-06-04 00:51:51 -0430 (Wed, 04 Jun 2008) | 1 line
+
+correccion en util "h"
+------------------------------------------------------------------------
+r313 | emilio.rst | 2008-06-04 00:50:26 -0430 (Wed, 04 Jun 2008) | 16 lines
+
+adicionado util "h"
+
+su funcion es bastante simple, nos ahorra el trabajo de escribir:
+$a='<hola>';
+$filter = Filter::get_instance();
+$filter->apply_filter($a, 'htmlspecialchars');
+
+en una sola linea
+
+$a = h($a);
+
+Es bastante util para filtrar campos para mostrar en la vista
+
+Ejemplo:
+
+Nombre: <?= h($usuario->nombre) ?>
+------------------------------------------------------------------------
+r312 | emilio.rst | 2008-06-04 00:44:34 -0430 (Wed, 04 Jun 2008) | 11 lines
+
+adicionado util object_from_params
+
+este util, es capaz de crear un objeto stdClass apartir de una serie de parametros con nombre
+
+Ejemplo:
+$a = new stdClass();
+$a->campo1 = '1';
+$a->campo2 = '2';
+
+Equivale a:
+$a = object_from_params('campo1: 1', 'campo2: 2');
+------------------------------------------------------------------------
+r311 | emilio.rst | 2008-06-04 00:39:06 -0430 (Wed, 04 Jun 2008) | 9 lines
+
+Adicionado metodo nullify a ApplicationController.
+
+Este metodo permite aligerar el trabajo de asignar valor "null" a atributos del controlador.
+
+Es decir en vez de hacer:
+$this->campo1 = $this->campo2 = $this-campo3 = null;
+
+Se reduce a
+$this->nullify('campo1', 'campo2', 'campo3');
+------------------------------------------------------------------------
+r310 | emilio.rst | 2008-06-04 00:35:34 -0430 (Wed, 04 Jun 2008) | 1 line
+
+solucionado bug en metodo query del adaptador para mysql
+------------------------------------------------------------------------
+r309 | emilio.rst | 2008-06-03 00:51:32 -0430 (Tue, 03 Jun 2008) | 1 line
+
+correccion en textarea_tag, asimismo se añade soporte para radio_field_tag y checkbox_field_tag, en el cual estos toman el valor con get_value_from_action pero adecuado a sus requerimientos, es decir en vez de asignarse un atributo value, se asigna un atributo checked si el valor pasado desde el controlador corresponde al atributo value del campo.
+------------------------------------------------------------------------
+r308 | deivinsontejeda | 2008-06-02 22:21:58 -0430 (Mon, 02 Jun 2008) | 1 line
+
+mejorando consulta en la que se obtiene los metadatos de una tabla en Postgres.
+------------------------------------------------------------------------
+r307 | emilio.rst | 2008-06-02 09:55:54 -0430 (Mon, 02 Jun 2008) | 1 line
+
+estandarizacion en el uso de $this->db->quotes a lo largo de activerecord
+------------------------------------------------------------------------
+r306 | deivinsontejeda | 2008-06-02 09:55:20 -0430 (Mon, 02 Jun 2008) | 1 line
+
+cambiando orden de la validacion para solventar un bugs...
+------------------------------------------------------------------------
+r305 | emilio.rst | 2008-06-02 09:45:09 -0430 (Mon, 02 Jun 2008) | 1 line
+
+estandarizacion en el uso de $this->db->quotes a lo largo de activerecord y correccion en __call, le faltaba el $this->connect
+------------------------------------------------------------------------
+r304 | emilio.rst | 2008-06-02 09:25:01 -0430 (Mon, 02 Jun 2008) | 1 line
+
+correccion en find_by y find_all_by
+------------------------------------------------------------------------
+r303 | emilio.rst | 2008-06-02 09:13:17 -0430 (Mon, 02 Jun 2008) | 1 line
+
+correccion en xhtml_tag
+------------------------------------------------------------------------
+r302 | emilio.rst | 2008-06-02 09:08:40 -0430 (Mon, 02 Jun 2008) | 1 line
+
+correccion en componentes builder y destroyer
+------------------------------------------------------------------------
+r301 | emilio.rst | 2008-05-31 23:39:31 -0430 (Sat, 31 May 2008) | 1 line
+
+adicionada funcionalidad a select_tag y a updater_select
+------------------------------------------------------------------------
+r300 | emilio.rst | 2008-05-31 23:37:46 -0430 (Sat, 31 May 2008) | 1 line
+
+arreglado problema con get_kumbia_url en base.js y kumbia.js
+------------------------------------------------------------------------
+r299 | deivinsontejeda | 2008-05-29 22:52:47 -0430 (Thu, 29 May 2008) | 1 line
+
+Solucionando Bug...
+------------------------------------------------------------------------
+r298 | emilio.rst | 2008-05-29 22:05:51 -0430 (Thu, 29 May 2008) | 1 line
+
+correccion en metodo delete_all de activerecord
+------------------------------------------------------------------------
+r297 | emilio.rst | 2008-05-29 22:03:07 -0430 (Thu, 29 May 2008) | 1 line
+
+correccion de metodo update_all en activerecord
+------------------------------------------------------------------------
+r296 | emilio.rst | 2008-05-27 21:38:40 -0430 (Tue, 27 May 2008) | 6 lines
+
+adicion de parametro con nombre partial_view a render_partial, este permite renderizar una vista parcial desde una ubicación cruda, es decir tomando como base el directorio views sin autocompletacion de ruta para modulo y controlador.
+
+Ejemplo:
+render_partial('partial_view: templates/encabezado');
+
+renderiza la vista parcial encabezado ubicada en el directorio views/templates
+------------------------------------------------------------------------
+r295 | emilio.rst | 2008-05-27 21:35:38 -0430 (Tue, 27 May 2008) | 1 line
+
+correccion en get_kumbia_url para el trabajo con modulos
+------------------------------------------------------------------------
+r294 | emilio.rst | 2008-05-27 17:07:07 -0430 (Tue, 27 May 2008) | 1 line
+
+adicionado session_start a public/index.php
+------------------------------------------------------------------------
+r293 | emilio.rst | 2008-05-27 01:42:38 -0430 (Tue, 27 May 2008) | 8 lines
+
+adicionado soporte completo para modulos, ahora tambien las vistas se organizan en modulos igual que los controladores, si un controlador pertenece a un modulo "x", las vistas de ese controlador deben pertenecer a un modulo de vistas "x".
+
+Ejemplo:
+controllers/modulo1/controlador1
+
+las vistas van en:
+
+views/modulo1/controlador1
+------------------------------------------------------------------------
+r292 | emilio.rst | 2008-05-26 23:01:23 -0430 (Mon, 26 May 2008) | 1 line
+
+adicionado atributo $module_name al controlador, el cual permite identificar el modulo actual
+------------------------------------------------------------------------
+r291 | emilio.rst | 2008-05-26 22:22:36 -0430 (Mon, 26 May 2008) | 1 line
+
+correccion en cacheo de css
+------------------------------------------------------------------------
+r290 | emilio.rst | 2008-05-25 00:42:25 -0430 (Sun, 25 May 2008) | 1 line
+
+correccion en el enrutador dinamico, en caso de que se utilicen modulos
+------------------------------------------------------------------------
+r289 | emilio.rst | 2008-05-24 23:42:17 -0430 (Sat, 24 May 2008) | 3 lines
+
+en caso de multiples conexiones, ahora se forza a php a que siempre cree una nueva conexion para mysql, ya que el modulo de  mysql en php, a diferencia de los otros modulos para otros manejadores de bd, selecciona la bd despues de crear la conexion, existe la posibilidad de que los modos de environment.ini apunten al mismo host y por lo tanto se comparte el link de conexion, pero si estos utiliza bd diferentes entonces a lo largo de la ejecucion una se superpondra a la otra.
+
+para solucionar esto, se forza  mysql a que siempre cree un nuevo link de conexion por cada modo en environment.ini que utilice mysql
+------------------------------------------------------------------------
+r288 | deivinsontejeda | 2008-05-24 21:50:51 -0430 (Sat, 24 May 2008) | 1 line
+
+agregando copyright
+------------------------------------------------------------------------
+r287 | deivinsontejeda | 2008-05-24 21:42:45 -0430 (Sat, 24 May 2008) | 1 line
+
+Solucionado Bugs al momento de generar las url con la funcion get_kumbia_url, porq la misma devolvia un url no valido.
+------------------------------------------------------------------------
+r286 | deivinsontejeda | 2008-05-24 21:22:30 -0430 (Sat, 24 May 2008) | 1 line
+
+Quitando validacion para que funcione las campos hide
+------------------------------------------------------------------------
+r285 | deivinsontejeda | 2008-05-22 22:36:14 -0430 (Thu, 22 May 2008) | 1 line
+
+Adicion de la carpeta upload
+------------------------------------------------------------------------
+r284 | emilio.rst | 2008-05-21 15:26:45 -0430 (Wed, 21 May 2008) | 1 line
+
+corregido routes.ini para que tome rutas para la aplicacion default
+------------------------------------------------------------------------
+r283 | deivinsontejeda | 2008-05-21 09:11:02 -0430 (Wed, 21 May 2008) | 1 line
+
+Arreglando Bugs de variable indefinida al momento de generar un Formulario StandardForm
+------------------------------------------------------------------------
+r282 | deivinsontejeda | 2008-05-21 09:09:51 -0430 (Wed, 21 May 2008) | 1 line
+
+Bugs al generar las URL cuando se tenias mas de una Aplicacion...
+------------------------------------------------------------------------
+r281 | deivinsontejeda | 2008-05-21 09:02:34 -0430 (Wed, 21 May 2008) | 1 line
+
+Solucion Bugs al momento de generar Reporte en DOC
+------------------------------------------------------------------------
+r280 | deivinsontejeda | 2008-05-21 09:02:08 -0430 (Wed, 21 May 2008) | 1 line
+
+Solucion Bugs al momento de generar Reporte en HTML
+------------------------------------------------------------------------
+r279 | deivinsontejeda | 2008-05-21 08:53:05 -0430 (Wed, 21 May 2008) | 1 line
+
+Solucion Bugs al momento de generar Reporte en EXCEL
+------------------------------------------------------------------------
+r278 | deivinsontejeda | 2008-05-21 08:50:32 -0430 (Wed, 21 May 2008) | 1 line
+
+Solucion Bug al generar reporte en PDF
+------------------------------------------------------------------------
+r277 | emilio.rst | 2008-05-20 15:16:25 -0430 (Tue, 20 May 2008) | 4 lines
+
+adicion de util paginate_by_sql, permite paginar un modelo atraves de una consulta sql
+
+Ejemplo:
+paginate('usuario', 'SELECT * FROM usuario', "page: $page", 'per_page: 2')
+------------------------------------------------------------------------
+r276 | emilio.rst | 2008-05-20 15:15:01 -0430 (Tue, 20 May 2008) | 4 lines
+
+adicion de metodo paginate_by_sql, permite paginar el modelo atraves de una consulta sql.
+
+Ejemplo:
+$this->Usuario->paginate_by_sql('SELECT * FROM usuario', "page: $page", 'per_page: 2');
+------------------------------------------------------------------------
+r275 | emilio.rst | 2008-05-20 14:58:48 -0430 (Tue, 20 May 2008) | 1 line
+
+correccion en find_first
+------------------------------------------------------------------------
+r274 | emilio.rst | 2008-05-20 01:11:49 -0430 (Tue, 20 May 2008) | 1 line
+
+correccion en count, la subconsulta solo se utiliza cuando se pasan los parametros con nombre group o order, de esta manera se trabaja de forma ideal con el paginador y se ajusta a casos reales donde se necesita contar las filas resultantes despues de ser agrupadas (claro ya que el resultado de un count es una sola fila este no requiere agruparse).
+------------------------------------------------------------------------
+r273 | emilio.rst | 2008-05-20 00:45:32 -0430 (Tue, 20 May 2008) | 1 line
+
+adicion de soporte para distinct en paginate
+------------------------------------------------------------------------
+r272 | emilio.rst | 2008-05-20 00:45:00 -0430 (Tue, 20 May 2008) | 1 line
+
+adicionado soporte para distinct en find y find_first, asimismo se mejoro soporte para distinct en metodo count, ya que en algunos casos cuando en el distinct se indicaban multiples campos y se unian joins y group by, el resultado no era el esperado, esto se corrigio atraves de una subconsulta y tabla derivada.
+------------------------------------------------------------------------
+r271 | emilio.rst | 2008-05-19 21:52:18 -0430 (Mon, 19 May 2008) | 1 line
+
+correccion en kumbia.php
+------------------------------------------------------------------------
+r270 | emilio.rst | 2008-05-19 21:49:55 -0430 (Mon, 19 May 2008) | 1 line
+
+correccion a text_field_with_autocomplete
+------------------------------------------------------------------------
+r269 | emilio.rst | 2008-05-19 21:45:34 -0430 (Mon, 19 May 2008) | 1 line
+
+estandarizacion a xhtml de la carga del objeto javascript $Kumbia
+------------------------------------------------------------------------
+r268 | emilio.rst | 2008-05-19 18:23:24 -0430 (Mon, 19 May 2008) | 11 lines
+
+mega actualizacion de helpers, faltaron algunos por portar a xhtml_tag, pero no es algo tan imperante, se agregaron nuevas funcionalidad.
+
+La ventaja de usar xhtml_tag es que este automaticamente ejecuta el filter htmlspecialchars
+
+Con respecto a las nuevas funcionalidades.
+
+Ahora los helpers se pueden invocar pasando arrays por ejemplo.
+
+text_field_tag(array('text1', 'class'=>'estilo1'))
+
+esto nos ofrece como beneficio que podemos invocar helpers en cadena sin necesidad de andar matandonos con call_user_func_array
+------------------------------------------------------------------------
+r267 | emilio.rst | 2008-05-16 09:13:01 -0430 (Fri, 16 May 2008) | 1 line
+
+adicion de verificacion a $field['Default'] en metodo dump_info de activerecord
+------------------------------------------------------------------------
+r266 | emilio.rst | 2008-05-16 00:41:31 -0430 (Fri, 16 May 2008) | 1 line
+
+correccion en get_params especial para filter
+------------------------------------------------------------------------
+r265 | emilio.rst | 2008-05-16 00:40:16 -0430 (Fri, 16 May 2008) | 1 line
+
+correccion en get_params
+------------------------------------------------------------------------
+r264 | emilio.rst | 2008-05-10 01:55:07 -0430 (Sat, 10 May 2008) | 1 line
+
+correcion en browse
+------------------------------------------------------------------------
+r263 | emilio.rst | 2008-05-10 01:51:42 -0430 (Sat, 10 May 2008) | 1 line
+
+correccion en generator
+------------------------------------------------------------------------
+r262 | emilio.rst | 2008-05-10 01:45:04 -0430 (Sat, 10 May 2008) | 1 line
+
+correcciones varias en standardform, sin embargo aun falta verificar que todos los db::raw_connect utilicen el mode correspondiente al modelo del que se hará standardform
+------------------------------------------------------------------------
+r261 | emilio.rst | 2008-05-09 09:31:40 -0430 (Fri, 09 May 2008) | 12 lines
+
+Adicionado soporte para singleton en Filter.
+
+Ahora filter posee una instancia singleton lista para utilizar.
+
+Por ejemplo:
+
+$filter = Filter::get_instance();
+$filter->apply_filter($var, 'htmlspecialchars');
+
+Esto es util para introducirlo en los helpers y no consumir la memoria del servidor con multiples instancias de Filter.
+
+Estoy trabajando en eso
+------------------------------------------------------------------------
+r260 | emilio.rst | 2008-05-07 01:40:26 -0430 (Wed, 07 May 2008) | 1 line
+
+eliminada excepcion de cuando se accede a un atributo no definido en activerecord. ahora simplemente se retorna null en esos casos.
+------------------------------------------------------------------------
+r259 | emilio.rst | 2008-05-06 22:56:28 -0430 (Tue, 06 May 2008) | 1 line
+
+corregido bug en StandardForm
+------------------------------------------------------------------------
+r258 | deivinsontejeda | 2008-05-05 11:23:53 -0430 (Mon, 05 May 2008) | 1 line
+
+Cambio en el valor de retorno para que la ejecucion sea limpia, ya que con el "continue" no carga la action "not_found" asi esta exista en el controller.
+------------------------------------------------------------------------
+r257 | emilio.rst | 2008-05-05 01:08:17 -0430 (Mon, 05 May 2008) | 1 line
+
+Adicion de soporte de atributo charset en filtros htmlspecialchars y htmlentities, por defecto toma el charset especificado para la aplicacion en config.ini
+------------------------------------------------------------------------
+r256 | emilio.rst | 2008-05-04 23:44:32 -0430 (Sun, 04 May 2008) | 3 lines
+
+Adicionado a config.ini, para cada aplicacion, el atributo de seccion charset, el cual permite establecer el tipo de codificacion de caracteres de manera sencilla y transparente.
+
+Por defecto se utiliza ISO-8859-1 (Latin-1)
+------------------------------------------------------------------------
+r255 | emilio.rst | 2008-05-03 02:05:31 -0430 (Sat, 03 May 2008) | 8 lines
+
+correccion en metodo save de activerecord.
+
+Ahora si se desea indicar que un campo sea nulo, se puede hacer por ejemplo
+$usuario->descripcion = null;
+
+o tambien
+
+$usuario->descripcion = '';
+------------------------------------------------------------------------
+r254 | emilio.rst | 2008-05-03 00:53:03 -0430 (Sat, 03 May 2008) | 1 line
+
+corregido bug en activerecord y adaptado metodo load_record en application_controller al nuevo activerecord
+------------------------------------------------------------------------
+r253 | emilio.rst | 2008-04-29 00:26:36 -0430 (Tue, 29 Apr 2008) | 1 line
+
+
+------------------------------------------------------------------------
+r252 | emilio.rst | 2008-04-29 00:16:12 -0430 (Tue, 29 Apr 2008) | 21 lines
+
+Mejorado activerecord.
+
+Ahora se puede asignar cualquier atributo a un objeto activerecord sin lanzar una excepcion, pero al guardar solamente se toman los campos que corresponden a la tabla. De igual manera ocurre al pasar arrays a los metodos create, update, save, solamente se toman los campos de las tablas y si existiese en el array algun campo que no pertenezca a la tabla, simplemente no se considera. Esto ocurre de igual manera en create_from_request, save_from_request y update_from_request (adicionado recientemente).
+
+Los metodos create_from_request, save_from_request y update_from_request, soportan un parametro adicional $form, el cual equivale a tomar los campos desde $_REQUEST[$form]. Ejemplo:
+
+$usuario->create_from_request('usuario');
+equivale a
+$usuario->create($_REQUEST['usuario']);
+
+Otra consideracion es que, ahora activerecord no inicializa todos los campos antes de un create, update o save, al pasarse un array, esto permite colocar en el metodo initialize, valore por defecto para los campos. Por ejemplo:
+
+<?php
+class Compra extends ActiveRecord {
+   function initialize() {
+      $this->fecha = date('Y-m-d');
+   }
+}
+?>
+
+Funcionara de la manera esperada, tomando siempre para el campo fecha la fecha de hoy. Asimismo otra consecuencia de todo esto, es que ahora si defines un valor por defecto para un campo en la bd, ese valor se respeta si omites el campo al guardar y activerecord no lo sobreescribira con un valor vacio ''. Asimismo ahora se pueden adicionar campos que se calculan atraves de sql y activerecord no lanzara ninguna excepcion
+------------------------------------------------------------------------
+r251 | emilio.rst | 2008-04-26 00:43:07 -0430 (Sat, 26 Apr 2008) | 1 line
+
+corregido uso de Config en ActiveRecord en metodos save y update_all.
+------------------------------------------------------------------------
+r250 | emilio.rst | 2008-04-26 00:41:01 -0430 (Sat, 26 Apr 2008) | 1 line
+
+adicionado metodo estatico get_active_app_mode a la clase Kumbia, el cual permite obtener el mode de la aplicacion activa
+------------------------------------------------------------------------
+r249 | emilio.rst | 2008-04-25 01:01:24 -0430 (Fri, 25 Apr 2008) | 21 lines
+
+adicionado soporte para diferentes modos de conexiones a bd en cada modelo.
+
+se efectua mediante el atributo $mode, el cual indica el nombre del modo a utilizar correspondiente a los establecidos en environment.ini
+
+para facilitar el acceso publico se adicionaron metodos set_mode y get_mode al modelo
+
+Ejemplo:
+
+<?
+class Usuario extends ActiveRecord {
+    public function initialize() {
+        $this->set_mode('prueba');
+    }
+}
+?>
+
+si no se especifica el modo, se considera por defecto el indicado en config.ini para la aplicacion
+
+para poder soportar todo esto, se modifico el metodo estatico raw_connect de la clase DbBase.
+
+ahora se puede pasar al invocarlo, el parametro con nombre mode para asi indicar el environment a utilizar.
+------------------------------------------------------------------------
+r248 | emilio.rst | 2008-04-23 09:22:11 -0430 (Wed, 23 Apr 2008) | 1 line
+
+reescrito Config, DbBase y loader para bd, con el motivo de mas adelante soportar conexiones a multiples bases de datos (Aun en desarrollo).
+------------------------------------------------------------------------
+r247 | emilio.rst | 2008-04-23 08:42:18 -0430 (Wed, 23 Apr 2008) | 1 line
+
+corregido problema al convertir de notacion camelcase a hungara para obtener el nombre de la tabla
+------------------------------------------------------------------------
+r246 | emilio.rst | 2008-04-23 08:21:48 -0430 (Wed, 23 Apr 2008) | 3 lines
+
+corregido bug en el cual no se generaba correctamente el nombre del controlador a cargar.
+
+ahora si en la url se coloca el nombre para controlador "persona_busca_auto", kumbia intentará cargar el controlador PersonaBuscaAutoController
+------------------------------------------------------------------------
+r245 | emilio.rst | 2008-04-19 23:57:36 -0430 (Sat, 19 Apr 2008) | 1 line
+
+correccion en el cacheador de hojas de estilos
+------------------------------------------------------------------------
+r244 | emilio.rst | 2008-04-19 07:15:08 -0430 (Sat, 19 Apr 2008) | 1 line
+
+adicionada proteccion contra inyeccion sql en las relaciones
+------------------------------------------------------------------------
+r243 | emilio.rst | 2008-04-19 00:49:04 -0430 (Sat, 19 Apr 2008) | 1 line
+
+actualizacion y estandarizacion en proceso de relaciones en activerecord
+------------------------------------------------------------------------
+r242 | emilio.rst | 2008-04-19 00:43:16 -0430 (Sat, 19 Apr 2008) | 1 line
+
+actualizacion y estandarizacion en proceso de relaciones en activerecord
+------------------------------------------------------------------------
+r241 | emilio.rst | 2008-04-18 23:56:37 -0430 (Fri, 18 Apr 2008) | 1 line
+
+adicionado a filter, el filtro htmlspecialchars
+------------------------------------------------------------------------
+r240 | emilio.rst | 2008-04-18 23:01:26 -0430 (Fri, 18 Apr 2008) | 1 line
+
+Adicionado parametros con nombres join, group, having, para sus equivalentes en sql en los metodos busqueda, en el paginador sql.
+------------------------------------------------------------------------
+r239 | emilio.rst | 2008-04-18 22:59:46 -0430 (Fri, 18 Apr 2008) | 3 lines
+
+Adicionado parametros con nombres join, group, having, para sus equivalentes en sql en los metodos busqueda.
+
+Asimismo se centralizo el obtener el sql para estas instrucciones sql en el metodo de activerecord convert_params_to_sql.
+------------------------------------------------------------------------
+r238 | emilio.rst | 2008-04-03 00:35:56 -0430 (Thu, 03 Apr 2008) | 34 lines
+
+Adicionado metodo load_record a ApplicationController
+
+	/**
+	 * Carga los campos de un registro activerecord como atributos del controlador
+	 * @param record ActiveRecord o string registro activerecord a cargar, si es un string este debe corresponder al nombre de un modelo
+	 * Soporta argumento variable
+	 * 
+	 * field: campos a cargar separados por coma
+	 * except: campos que no se cargaran separados por coma
+	 * suffix: sufijo para el atributo en el controlador
+	 * preffix: prefijo para el atributo en el controlador
+	 **/
+
+Ejemplo1:
+$usuario = $this->Usuario->find(1);
+$this->load_record($usuario);
+
+Ejemplo2:
+$usuario = $this->Usuario->find(1);
+$this->load_record($usuario, 'except: id, sexo');
+
+Ejemplo3:
+$usuario = $this->Usuario->find(1);
+$this->load_record($usuario, 'field: nombre, apellido');
+
+Ejemplo4:
+$usuario = $this->Usuario->find(1);
+$this->load_record($usuario, 'preffix: c_');
+
+Ejemplo5:
+$this->load_record('Usuario');
+
+Ejemplo6:
+$this->load_record('Usuario', 'field: nombre, apellido');
+------------------------------------------------------------------------
+r237 | emilio.rst | 2008-03-30 14:54:52 -0430 (Sun, 30 Mar 2008) | 25 lines
+
+Adicionado personalizacion de relaciones entre modelos. Atraves de parametros con nombre se pueden indicar que campos relacionan y el tipo de modelo.
+
+*En las relaciones has_one, belongs_to y has_many, se tienen los siguientes parametros con nombre:
+
+model: nombre del tipo de modelo que se retorna en la relacion.
+fk: llave foranea de la relacion
+
+Ejemplos, entre modelos Articulo y Vendedor:
+En el modelo Articulo
+$this->belongs_to('vendedor', 'model: Persona', 'fk: mi_vendedor');
+
+Y se consulta:
+$vendedor = $this->Articulo->find(1)->vendedor;
+
+O tambien:
+$vendedor = $this->Articulo->find(1)->getVendedor();
+
+Para has_and_belongs_to_many:
+
+model: nombre del tipo de modelo que se retorna en la relacion.
+fk: llave foranea de la relacion en la tabla atraves de la cual se relaciona
+key: llave propia que identifica al modelo en la tabla atraves de la cual se relaciona
+through: tabla atraves de la cual se relaciona
+
+El resto de los parametros seran documentados con mayor cantidad de ejemplos en el libro de kumbia.
+------------------------------------------------------------------------
+r236 | emilio.rst | 2008-03-25 22:56:43 -0430 (Tue, 25 Mar 2008) | 1 line
+
+adicionado util lcfirst, este convierte la primera letra de una cadena en minuscula (por lo general utilizado con uncamelize)
+------------------------------------------------------------------------
+r235 | deivinsontejeda | 2008-03-25 12:58:15 -0430 (Tue, 25 Mar 2008) | 1 line
+
+Solventando Bug que se presentaba con las operaciones de los formularios StandardForm ya que get_kumbia_url no obtenia el url real.
+------------------------------------------------------------------------
+r234 | deivinsontejeda | 2008-03-25 12:55:08 -0430 (Tue, 25 Mar 2008) | 1 line
+
+Solventando Bug que se presentaba con las operaciones de los formularios StandardForm ya que get_kumbia_url no obtenia el url real.
+------------------------------------------------------------------------
+r233 | emilio.rst | 2008-03-24 08:59:04 -0430 (Mon, 24 Mar 2008) | 1 line
+
+correccion a select_tag para que el valor seleccionado (selected) pueda tambien tomarlo de get_value_from_action
+------------------------------------------------------------------------
+r232 | emilio.rst | 2008-03-24 08:56:49 -0430 (Mon, 24 Mar 2008) | 1 line
+
+correccion en textarea_tag
+------------------------------------------------------------------------
+r231 | emilio.rst | 2008-03-24 08:51:07 -0430 (Mon, 24 Mar 2008) | 1 line
+
+remplazado helper textarea_tag, por una version optimizada y acorde a los otros helpers
+------------------------------------------------------------------------
+r230 | emilio.rst | 2008-03-23 15:52:08 -0430 (Sun, 23 Mar 2008) | 7 lines
+
+adicionado validador is_empty al objeto javascript $Kumbia
+
+Ejemplo:
+
+if($Kumbia.Validators.is_empty(document.getElementById("nombre"))) {
+    alert("Nombre esta vacio");
+}
+------------------------------------------------------------------------
+r229 | emilio.rst | 2008-03-23 10:37:04 -0430 (Sun, 23 Mar 2008) | 17 lines
+
+Corregido bug en la clase Kumbia.
+
+El bug era el siguiente:
+Se le daba prioridad al template (layout) con el nombre del controlador frente al que se definiese usando la propiedad "template" del controlador.
+
+Ejemplo:
+Si tenemos el controlador:
+<?php
+class PersonaController extends ApplicationController {
+    public $template = 'mi_template';
+}
+?>
+
+Este utilizará el layout "mi_template.phtml"
+Pero si casualmente existe un layout llamado "persona.phtml", este toma la prioridad y los layouts se anidan.
+
+En la correccion, ahora la prioridad la posee la propiedad "template" y se erradica el efecto de anidación de layouts consecuente del bug.
+------------------------------------------------------------------------
+r227 | emilio.rst | 2008-03-22 01:36:47 -0430 (Sat, 22 Mar 2008) | 4 lines
+
+adicionado metodo popup al objeto javascript kumbia.
+permite crear una ventana popup
+Ejemplo: 
+$Kumbia.popup("controller/action", "Mi Popup", "dependent: yes", "width: 500", "height: 200")
+------------------------------------------------------------------------
+r226 | emilio.rst | 2008-03-20 23:39:03 -0430 (Thu, 20 Mar 2008) | 2 lines
+
+adicionado util get_arguments.
+realiza lo funcion inversa de get_params, a partir de un array de parametros con nombre obtenido utilizando get_params, obtiene el array de argumentos que se pasaron a la funcion (es decir el array como si se obtuviera con func_get_args).
+------------------------------------------------------------------------
+r225 | emilio.rst | 2008-03-20 23:36:07 -0430 (Thu, 20 Mar 2008) | 1 line
+
+cambiado use_helper a tags.php
+------------------------------------------------------------------------
+r224 | emilio.rst | 2008-03-17 23:33:00 -0430 (Mon, 17 Mar 2008) | 9 lines
+
+mejorado helper select_tag.
+
+ahora se puede crear un select a partir de la base de datos utilizando activerecord.
+select_tag('modelo_id', 'Modelo', 'conditions: tipo="2"', 'option: descripcion')
+
+se añadio el parametro con nombre include_blank, para poder dejar una opcion en blanco.
+select_tag('sexo', array('M' => 'Masculino', 'F' => 'Femenino'), 'include_blank: true')
+
+para mayor información referirse a la funcion.
+------------------------------------------------------------------------
+r223 | emilio.rst | 2008-03-16 12:18:50 -0430 (Sun, 16 Mar 2008) | 1 line
+
+corregido bug en el paginador
+------------------------------------------------------------------------
+r222 | emilio.rst | 2008-03-16 00:33:48 -0430 (Sun, 16 Mar 2008) | 1 line
+
+corregido link_to y link_to_action en el uso de confirm, para asi evitar notice de php
+------------------------------------------------------------------------
+r221 | emilio.rst | 2008-03-15 22:20:49 -0430 (Sat, 15 Mar 2008) | 1 line
+
+corregida la carga del modulo principal ("main") de helpers de usuario
+------------------------------------------------------------------------
+r220 | emilio.rst | 2008-03-15 01:25:27 -0430 (Sat, 15 Mar 2008) | 4 lines
+
+Adicionado builder para helper.
+
+Ahora desde un terminal se puede hacer:
+php scripts/build helper mi_helper
+------------------------------------------------------------------------
+r219 | emilio.rst | 2008-03-15 01:09:30 -0430 (Sat, 15 Mar 2008) | 11 lines
+
+Adicion de soporte para helpers personalizados de usuario.
+
+Los helpers se almacenan en el directorio "helpers" y se cargan con el util "use_helper" (recibe como parametro el nombre de uno o varios helpers).
+
+Por defecto el modulo de helpers "main" es cargado al iniciar la aplicación, corresponde al archivo main.php y todos los helpers que contenga ese modulo se encuentran disponibles en toda la aplicacion.
+
+Ejemplo:
+En la vista o layout debe colocarse
+<?php use_helper('mi_helper') ?>
+
+Esto carga el modulo de helpers "mi_helper", corresponde al archivo "mi_helper.php" en el directorio de helpers.
+------------------------------------------------------------------------
+r212 | emilio.rst | 2008-03-09 09:52:39 -0430 (Sun, 09 Mar 2008) | 1 line
+
+adicionado validador para fecha en formato Y-m-d
+------------------------------------------------------------------------
+r211 | deivinsontejeda | 2008-03-08 21:18:38 -0430 (Sat, 08 Mar 2008) | 1 line
+
+Cambian nombre a los archivos .css para los theme del componente fecha.
+------------------------------------------------------------------------
+r210 | deivinsontejeda | 2008-03-08 21:17:17 -0430 (Sat, 08 Mar 2008) | 3 lines
+
+Haciendo mas inteligente el helper de la fecha, se podran hacer cosas como esta:
+<?= date_field_tag('date', 'format: %d/%m/%Y', 'languaje: calendar-en', 'theme: theme-1')?>
+en caso que no se pase format, theme y languaje toma valores por defecto. 
+------------------------------------------------------------------------
+r209 | deivinsontejeda | 2008-02-25 21:27:18 -0430 (Mon, 25 Feb 2008) | 1 line
+
+JS para el funcionamiento correcto de la adaptacion del nuevo componente para la fecha
+------------------------------------------------------------------------
+r208 | deivinsontejeda | 2008-02-25 21:25:14 -0430 (Mon, 25 Feb 2008) | 1 line
+
+Actualizando insercion de js
+------------------------------------------------------------------------
+r207 | deivinsontejeda | 2008-02-25 21:22:22 -0430 (Mon, 25 Feb 2008) | 1 line
+
+Themes para el componente fecha
+------------------------------------------------------------------------
+r206 | deivinsontejeda | 2008-02-25 21:21:22 -0430 (Mon, 25 Feb 2008) | 1 line
+
+implementacion de nuevo helper para el componente de fecha
+------------------------------------------------------------------------
+r205 | emilio.rst | 2008-02-18 22:06:28 -0430 (Mon, 18 Feb 2008) | 1 line
+
+corregido para correcta url en la aplicacion
+------------------------------------------------------------------------
+r204 | emilio.rst | 2008-02-18 22:05:50 -0430 (Mon, 18 Feb 2008) | 1 line
+
+modificado la carga de javascript por defecto
+------------------------------------------------------------------------
+r203 | emilio.rst | 2008-02-17 14:59:29 -0430 (Sun, 17 Feb 2008) | 1 line
+
+adicion de kumbia.js, proporciona el helper javascript $Kumbia
+------------------------------------------------------------------------
+r202 | emilio.rst | 2008-02-17 14:58:47 -0430 (Sun, 17 Feb 2008) | 1 line
+
+adicion de carga de kumbia.js en los javascript base
+------------------------------------------------------------------------
+r201 | emilio.rst | 2008-02-06 08:58:16 -0430 (Wed, 06 Feb 2008) | 1 line
+
+Agregando copyright
+------------------------------------------------------------------------
+r200 | emilio.rst | 2008-02-06 08:57:38 -0430 (Wed, 06 Feb 2008) | 1 line
+
+Agregando copyright
+------------------------------------------------------------------------
+r199 | emilio.rst | 2008-02-06 08:55:59 -0430 (Wed, 06 Feb 2008) | 1 line
+
+Correccion de bug en parametros de before_filter y after_filter
+------------------------------------------------------------------------
+r198 | deivinsontejeda | 2008-02-05 13:55:15 -0430 (Tue, 05 Feb 2008) | 1 line
+
+Se modifico el helper tr_color para que funcionara correctamente...
+------------------------------------------------------------------------
+r197 | phillipo | 2008-02-04 20:47:23 -0430 (Mon, 04 Feb 2008) | 1 line
+
+Se añade style en head y se eliminan atributes style en etiquetas.
+------------------------------------------------------------------------
+r196 | phillipo | 2008-02-04 20:46:02 -0430 (Mon, 04 Feb 2008) | 1 line
+
+En función 'stylesheet_link_tag' se coloca &amp; para linea con 'css.php?c=$src&p=$kb'
+------------------------------------------------------------------------
+r192 | emilio.rst | 2008-01-30 09:59:15 -0430 (Wed, 30 Jan 2008) | 5 lines
+
+correcion en el stylesheet_link_tag.
+
+Este debe usarse de la siguiente manera:
+
+<?= stylesheet_link_tag('mi_css', 'use_variables: true') ?>
+------------------------------------------------------------------------
+r191 | emilio.rst | 2008-01-25 13:19:07 -0430 (Fri, 25 Jan 2008) | 1 line
+
+actualizacion index.phtml para aplicacion por defecto
+------------------------------------------------------------------------
+r190 | emilio.rst | 2008-01-25 13:18:30 -0430 (Fri, 25 Jan 2008) | 1 line
+
+actualizacion plantilla para app builder
+------------------------------------------------------------------------
+r189 | emilio.rst | 2008-01-25 13:17:48 -0430 (Fri, 25 Jan 2008) | 1 line
+
+restructurando directorio de builders
+------------------------------------------------------------------------
+r188 | emilio.rst | 2008-01-25 13:16:01 -0430 (Fri, 25 Jan 2008) | 1 line
+
+restructurando directorio de builders
+------------------------------------------------------------------------
+r187 | emilio.rst | 2008-01-25 13:05:15 -0430 (Fri, 25 Jan 2008) | 1 line
+
+actualizado stylesheet_link_tag
+------------------------------------------------------------------------
+r184 | deivinsontejeda | 2008-01-10 08:46:57 -0430 (Thu, 10 Jan 2008) | 1 line
+
+
+------------------------------------------------------------------------
+r183 | emilio.rst | 2008-01-08 13:49:37 -0430 (Tue, 08 Jan 2008) | 5 lines
+
+Actualizado activerecord, se puede ahora utilizar el paginador de la siguiente manera, en el controlador:
+
+function lista($page=1) {
+    $this->page = $this->Model->paginate("page: $page", 'per_page: 10');
+}
+------------------------------------------------------------------------
+r182 | emilio.rst | 2008-01-08 13:46:30 -0430 (Tue, 08 Jan 2008) | 1 line
+
+Remplazado route_to para que utilice array_num_insert
+------------------------------------------------------------------------
+r181 | emilio.rst | 2008-01-08 13:44:58 -0430 (Tue, 08 Jan 2008) | 1 line
+
+Adicionado insert para arrays numericos
+------------------------------------------------------------------------
+r180 | emilio.rst | 2008-01-08 08:04:13 -0430 (Tue, 08 Jan 2008) | 1 line
+
+mejorado paginate
+------------------------------------------------------------------------
+r179 | emilio.rst | 2008-01-07 23:38:27 -0430 (Mon, 07 Jan 2008) | 1 line
+
+corregido builder model
+------------------------------------------------------------------------
+r178 | emilio.rst | 2007-12-22 22:57:20 -0430 (Sat, 22 Dec 2007) | 1 line
+
+Actualizado el router
+------------------------------------------------------------------------
+r177 | emilio.rst | 2007-12-18 16:00:18 -0430 (Tue, 18 Dec 2007) | 1 line
+
+
+------------------------------------------------------------------------
+r175 | emilio.rst | 2007-12-15 23:20:42 -0430 (Sat, 15 Dec 2007) | 1 line
+
+Agregado soporte para .tpl en render_view y render_partial atraves de la constante USE_SMARTY
+------------------------------------------------------------------------
+r174 | emilio.rst | 2007-12-15 23:20:04 -0430 (Sat, 15 Dec 2007) | 1 line
+
+Agregado soporte para .tpl en render atraves de la constante USE_SMARTY
+------------------------------------------------------------------------
+r171 | emilio.rst | 2007-12-03 22:51:23 -0400 (Mon, 03 Dec 2007) | 1 line
+
+Corregido uso de get_params en componente filter
+------------------------------------------------------------------------
+r170 | emilio.rst | 2007-11-25 22:01:00 -0400 (Sun, 25 Nov 2007) | 1 line
+
+Corregido oncomplete en link_to_remote
+------------------------------------------------------------------------
+r169 | emilio.rst | 2007-11-25 00:12:01 -0400 (Sun, 25 Nov 2007) | 6 lines
+
+Corregido y estandarizado select_tag.
+
+Se agrego el parametro con nombre selected, para especificar la opcion seleccionada por defecto en el select.
+
+Ejemplo:
+select_tag('lista', array('a'=>'a','b'=>'b','c'=>'c'), 'selected: b');
+------------------------------------------------------------------------
+r168 | emilio.rst | 2007-11-12 22:41:26 -0400 (Mon, 12 Nov 2007) | 1 line
+
+Adicionado el uso de partial_view en render_partial y la creacion de la variable especial de vista parcial en ese caso.
+------------------------------------------------------------------------
+r167 | emilio.rst | 2007-11-12 22:33:28 -0400 (Mon, 12 Nov 2007) | 1 line
+
+Adicion de parametro con nombre partial_view a render_partial.
+------------------------------------------------------------------------
+r166 | emilio.rst | 2007-11-03 00:22:41 -0400 (Sat, 03 Nov 2007) | 1 line
+
+Nueva implementacion de ActiveRecordBase con soporte para limit y offset.
+------------------------------------------------------------------------
+r165 | emilio.rst | 2007-11-03 00:18:38 -0400 (Sat, 03 Nov 2007) | 1 line
+
+correcion en util paginate
+------------------------------------------------------------------------
+r164 | emilio.rst | 2007-10-31 08:45:21 -0400 (Wed, 31 Oct 2007) | 2 lines
+
+Implementacion de nuevo limit en adaptadores pdo:
+mysql, pgsql, sqlite
+------------------------------------------------------------------------
+r163 | emilio.rst | 2007-10-31 08:43:26 -0400 (Wed, 31 Oct 2007) | 2 lines
+
+Implementacion de nuevo limit en adaptadores:
+mysql, mysqli, firebird, pgsql, postgresql
+------------------------------------------------------------------------
+r162 | emilio.rst | 2007-10-31 08:40:25 -0400 (Wed, 31 Oct 2007) | 1 line
+
+Modificacion de limit en interface
+------------------------------------------------------------------------
+r161 | emilio.rst | 2007-10-31 08:39:39 -0400 (Wed, 31 Oct 2007) | 1 line
+
+Modificacion de limit en interface
+------------------------------------------------------------------------
+r160 | emilio.rst | 2007-10-30 00:27:05 -0400 (Tue, 30 Oct 2007) | 1 line
+
+Adicion del nuevo helper paginate
+------------------------------------------------------------------------
+r159 | emilio.rst | 2007-10-30 00:26:43 -0400 (Tue, 30 Oct 2007) | 1 line
+
+Se elimino el viejo helper paginate
+------------------------------------------------------------------------
+r158 | emilio.rst | 2007-10-19 09:44:31 -0400 (Fri, 19 Oct 2007) | 7 lines
+
+Adicion de soporte a render_view, permitiendo mostrar vistas de cualquier controlador.
+Ejemplos:
+render_view('controller: usuario', 'busqueda');
+render_view('usuario/busqueda');
+
+Para hacer render de una vista no asociada ningun controlador
+render_view('busqueda');
+------------------------------------------------------------------------
+r157 | emilio.rst | 2007-10-19 09:11:59 -0400 (Fri, 19 Oct 2007) | 1 line
+
+Correccion de render_partial en el controlador, para que funcione acorde al nuevo helper render_partial.
+------------------------------------------------------------------------
+r156 | emilio.rst | 2007-10-18 13:56:49 -0400 (Thu, 18 Oct 2007) | 1 line
+
+Correccion en render_partial
+------------------------------------------------------------------------
+r155 | emilio.rst | 2007-10-16 10:29:26 -0400 (Tue, 16 Oct 2007) | 1 line
+
+Correccion en render_partial.
+------------------------------------------------------------------------
+r154 | emilio.rst | 2007-10-16 10:24:32 -0400 (Tue, 16 Oct 2007) | 3 lines
+
+Adicionado soporte para render_partial a partials de otros controladores, en las siguientes formas:
+render_partial('controller: controlador', 'partial')
+render_partial('controlador/partial');
+------------------------------------------------------------------------
+r153 | emilio.rst | 2007-10-16 09:51:56 -0400 (Tue, 16 Oct 2007) | 1 line
+
+Correccion al util get_params.
+------------------------------------------------------------------------
+r152 | emilio.rst | 2007-10-16 09:21:05 -0400 (Tue, 16 Oct 2007) | 1 line
+
+Correccion al ControllerBuilder.
+------------------------------------------------------------------------
+r151 | emilio.rst | 2007-10-15 08:14:37 -0400 (Mon, 15 Oct 2007) | 1 line
+
+Adicion del wrapper para terminal de Destroyers.
+------------------------------------------------------------------------
+r150 | emilio.rst | 2007-10-15 08:13:18 -0400 (Mon, 15 Oct 2007) | 1 line
+
+Adicion de Destroyers al kumbia_loader.php
+------------------------------------------------------------------------
+r149 | emilio.rst | 2007-10-15 08:11:06 -0400 (Mon, 15 Oct 2007) | 1 line
+
+Adicion de todo lo inherente a los Destroyers
+------------------------------------------------------------------------
+r148 | emilio.rst | 2007-10-15 08:08:23 -0400 (Mon, 15 Oct 2007) | 1 line
+
+Agregado util remove_dir. Para eliminar directorios recursivamente.
+------------------------------------------------------------------------
+r147 | emilio.rst | 2007-10-12 22:41:58 -0400 (Fri, 12 Oct 2007) | 1 line
+
+Correccion de comentario.
+------------------------------------------------------------------------
+r146 | emilio.rst | 2007-10-12 18:23:26 -0400 (Fri, 12 Oct 2007) | 1 line
+
+Eliminacion de directorio plugins en template para el builder app.
+------------------------------------------------------------------------
+r145 | emilio.rst | 2007-10-12 18:19:48 -0400 (Fri, 12 Oct 2007) | 1 line
+
+Adicion de builders.
+------------------------------------------------------------------------
+r144 | emilio.rst | 2007-10-12 18:16:29 -0400 (Fri, 12 Oct 2007) | 1 line
+
+Adicion de builders en la carga.
+------------------------------------------------------------------------
+r143 | emilio.rst | 2007-10-12 18:14:21 -0400 (Fri, 12 Oct 2007) | 1 line
+
+Correccion a script de kumbia_loader.php
+------------------------------------------------------------------------
+r142 | emilio.rst | 2007-10-12 18:12:52 -0400 (Fri, 12 Oct 2007) | 1 line
+
+Correccion a script build.
+------------------------------------------------------------------------
+r141 | emilio.rst | 2007-10-12 18:10:27 -0400 (Fri, 12 Oct 2007) | 1 line
+
+Adicion de util age. Sirve para calcular la edad
+------------------------------------------------------------------------
+r140 | emilio.rst | 2007-10-12 18:03:31 -0400 (Fri, 12 Oct 2007) | 1 line
+
+Adicion de util mkpath, crea un directorio de manera recursiva, soporta path a atraves de parametros multiples como se efectua con join_path.
+------------------------------------------------------------------------
+r139 | emilio.rst | 2007-10-12 18:01:37 -0400 (Fri, 12 Oct 2007) | 8 lines
+
+Adicion de util join_path, permite crear rutas apartir de parametros multiples.
+EJ: join_path('a', 'b');
+retorna "a/b".
+
+Cabe destacar que si uno de los parametros al ser evaluado con la funcion "empty" es verdadero, no se incluye en el path.
+
+EJ: join_path('a', '', 'b');
+retorna "a/b".
+------------------------------------------------------------------------
+r138 | emilio.rst | 2007-10-12 17:56:29 -0400 (Fri, 12 Oct 2007) | 1 line
+
+Adicion de util copy_dir, para copiar directorios completos.
+------------------------------------------------------------------------
+r137 | emilio.rst | 2007-10-12 17:55:00 -0400 (Fri, 12 Oct 2007) | 1 line
+
+Correccion de util camelize.
+------------------------------------------------------------------------
+r136 | emilio.rst | 2007-10-12 17:47:18 -0400 (Fri, 12 Oct 2007) | 1 line
+
+Adición de metodo write a la clase Config. Ahora permite escribir archivos .ini
+------------------------------------------------------------------------
+r135 | emilio.rst | 2007-10-05 16:03:11 -0400 (Fri, 05 Oct 2007) | 2 lines
+
+Adicion de wrapper para terminal del componente builder.
+Nota: esto es una version preliminar.
+------------------------------------------------------------------------
+r134 | anthemfor182 | 2007-10-02 11:53:08 -0400 (Tue, 02 Oct 2007) | 1 line
+
+BUg en Button to action
+------------------------------------------------------------------------
+r133 | anthemfor182 | 2007-10-02 11:51:16 -0400 (Tue, 02 Oct 2007) | 1 line
+
+Bug en inspect()
+------------------------------------------------------------------------
+r132 | emilio.rst | 2007-10-02 11:33:02 -0400 (Tue, 02 Oct 2007) | 1 line
+
+adicion de componente builder
+------------------------------------------------------------------------
+r131 | anthemfor182 | 2007-10-01 11:48:19 -0400 (Mon, 01 Oct 2007) | 1 line
+
+Solucionando bug con controladores
+------------------------------------------------------------------------
+r130 | anthemfor182 | 2007-09-27 11:41:53 -0400 (Thu, 27 Sep 2007) | 1 line
+
+Directorio de plugins en config.ini
+------------------------------------------------------------------------
+r129 | anthemfor182 | 2007-09-27 11:38:34 -0400 (Thu, 27 Sep 2007) | 1 line
+
+Adaptacion  para usar modulos y aplicaciones
+------------------------------------------------------------------------
+r128 | anthemfor182 | 2007-09-27 11:35:23 -0400 (Thu, 27 Sep 2007) | 1 line
+
+Adaptacion de Javascript para usar modulos y aplicaciones
+------------------------------------------------------------------------
+r127 | deivinsontejeda | 2007-09-24 13:46:06 -0400 (Mon, 24 Sep 2007) | 1 line
+
+Arreglando archivos
+------------------------------------------------------------------------
+r126 | deivinsontejeda | 2007-09-24 13:43:41 -0400 (Mon, 24 Sep 2007) | 1 line
+
+Modificando el archivo libchart/libchart.php
+------------------------------------------------------------------------
+r125 | deivinsontejeda | 2007-09-24 13:40:50 -0400 (Mon, 24 Sep 2007) | 1 line
+
+Integrando las Librerias libchart...
+------------------------------------------------------------------------
+r124 | anthemfor182 | 2007-09-24 11:51:36 -0400 (Mon, 24 Sep 2007) | 1 line
+
+Agregando plung-in y filter
+------------------------------------------------------------------------
+r123 | anthemfor182 | 2007-09-24 11:48:37 -0400 (Mon, 24 Sep 2007) | 1 line
+
+Multiples mejoras en 0.5x
+------------------------------------------------------------------------
+r122 | anthemfor182 | 2007-09-24 11:47:35 -0400 (Mon, 24 Sep 2007) | 1 line
+
+Arreglos en JavaScript
+------------------------------------------------------------------------
+r121 | anthemfor182 | 2007-09-24 11:45:34 -0400 (Mon, 24 Sep 2007) | 1 line
+
+Verificar version de PHP a >= 5.2
+------------------------------------------------------------------------
+r120 | deivinsontejeda | 2007-09-20 15:55:41 -0400 (Thu, 20 Sep 2007) | 1 line
+
+se agrego el archivo .htaccess en public/
+------------------------------------------------------------------------
+r119 | deivinsontejeda | 2007-09-20 15:54:34 -0400 (Thu, 20 Sep 2007) | 1 line
+
+se arreglo la regla del archivo .htaccess ya que el mismo estaba redireccionando mal
+------------------------------------------------------------------------
+r118 | emilio.rst | 2007-09-19 14:52:26 -0400 (Wed, 19 Sep 2007) | 1 line
+
+nueva implementacion de stylesheet_link_tag
+------------------------------------------------------------------------
+r117 | anthemfor182 | 2007-09-19 14:44:05 -0400 (Wed, 19 Sep 2007) | 1 line
+
+Agregando .htaccess a public
+------------------------------------------------------------------------
+r116 | emilio.rst | 2007-09-15 13:57:46 -0400 (Sat, 15 Sep 2007) | 1 line
+
+correccion de bugs en el util age
+------------------------------------------------------------------------
+r115 | emilio.rst | 2007-09-13 14:52:06 -0400 (Thu, 13 Sep 2007) | 1 line
+
+Correccion de date_field_tag y get_params
+------------------------------------------------------------------------
+r114 | emilio.rst | 2007-09-13 14:51:37 -0400 (Thu, 13 Sep 2007) | 1 line
+
+
+------------------------------------------------------------------------
+r113 | anthemfor182 | 2007-09-13 14:27:17 -0400 (Thu, 13 Sep 2007) | 1 line
+
+Actualizacion adaptadores
+------------------------------------------------------------------------
+r112 | emilio.rst | 2007-09-13 13:15:23 -0400 (Thu, 13 Sep 2007) | 1 line
+
+Adicion del util age para calcular la edad
+------------------------------------------------------------------------
+r111 | emilio.rst | 2007-09-13 13:12:12 -0400 (Thu, 13 Sep 2007) | 1 line
+
+
+------------------------------------------------------------------------
+r110 | anthemfor182 | 2007-09-13 11:54:09 -0400 (Thu, 13 Sep 2007) | 1 line
+
+Actualizacion a 0.5
+------------------------------------------------------------------------
+r109 | rogerjose81 | 2007-09-12 22:15:06 -0400 (Wed, 12 Sep 2007) | 1 line
+
+Optimizaciones y convenciones de codificacion en ActiveRecord 
+------------------------------------------------------------------------
+r104 | anthemfor182 | 2007-09-07 12:55:01 -0400 (Fri, 07 Sep 2007) | 1 line
+
+Actualizando style.css
+------------------------------------------------------------------------
+r103 | anthemfor182 | 2007-09-07 12:53:17 -0400 (Fri, 07 Sep 2007) | 1 line
+
+Actualizando a XHTML
+------------------------------------------------------------------------
+r102 | anthemfor182 | 2007-09-07 12:50:14 -0400 (Fri, 07 Sep 2007) | 1 line
+
+Subiendo componente Auth
+------------------------------------------------------------------------
+r101 | anthemfor182 | 2007-09-07 12:49:34 -0400 (Fri, 07 Sep 2007) | 1 line
+
+Actualizando mejoras a 0.5.x
+------------------------------------------------------------------------
+r100 | emilio.rst | 2007-09-06 16:50:34 -0400 (Thu, 06 Sep 2007) | 1 line
+
+adicion de nuevos order para date_field_tag
+------------------------------------------------------------------------
+r98 | anthemfor182 | 2007-09-05 16:55:02 -0400 (Wed, 05 Sep 2007) | 2 lines
+
+Cambiando application para que vea el info por defecto
+
+------------------------------------------------------------------------
+r97 | anthemfor182 | 2007-09-05 16:51:27 -0400 (Wed, 05 Sep 2007) | 1 line
+
+Agregando archivos nuevos
+------------------------------------------------------------------------
+r96 | anthemfor182 | 2007-09-05 16:42:29 -0400 (Wed, 05 Sep 2007) | 1 line
+
+Agregando adaptadores MySQLi y PDO
+------------------------------------------------------------------------
+r95 | anthemfor182 | 2007-09-05 16:41:28 -0400 (Wed, 05 Sep 2007) | 1 line
+
+Actualizando multples/partes
+------------------------------------------------------------------------
+r94 | anthemfor182 | 2007-09-05 16:39:01 -0400 (Wed, 05 Sep 2007) | 1 line
+
+Agregando directorio test
+------------------------------------------------------------------------
+r93 | anthemfor182 | 2007-09-05 16:33:52 -0400 (Wed, 05 Sep 2007) | 1 line
+
+Actualizando config/
+------------------------------------------------------------------------
+r92 | anthemfor182 | 2007-09-05 16:29:41 -0400 (Wed, 05 Sep 2007) | 1 line
+
+Agregando segunda parte de public
+------------------------------------------------------------------------
+r91 | anthemfor182 | 2007-09-05 16:28:37 -0400 (Wed, 05 Sep 2007) | 1 line
+
+Agregando imagenes en public/img
+------------------------------------------------------------------------
+r90 | anthemfor182 | 2007-09-05 16:27:30 -0400 (Wed, 05 Sep 2007) | 1 line
+
+Agregando directorio public
+------------------------------------------------------------------------
+r89 | anthemfor182 | 2007-09-05 16:25:08 -0400 (Wed, 05 Sep 2007) | 1 line
+
+Cambiando main.php por fpdf.php en library/fpdf
+------------------------------------------------------------------------
+r88 | anthemfor182 | 2007-09-05 16:23:51 -0400 (Wed, 05 Sep 2007) | 1 line
+
+Cambiando main.php por mail.php en library/mail
+------------------------------------------------------------------------
+r87 | anthemfor182 | 2007-09-05 16:22:16 -0400 (Wed, 05 Sep 2007) | 1 line
+
+Creando directorio apps/ con esqueleto de aplicacion por defecto
+------------------------------------------------------------------------
+r86 | anthemfor182 | 2007-09-05 16:20:46 -0400 (Wed, 05 Sep 2007) | 1 line
+
+Eliminando directorio app
+------------------------------------------------------------------------
+r84 | emilio.rst | 2007-09-04 22:16:08 -0400 (Tue, 04 Sep 2007) | 1 line
+
+Nueva implementacion para el helper stylesheet_link_tag
+------------------------------------------------------------------------
+r81 | emilio.rst | 2007-08-31 22:15:33 -0400 (Fri, 31 Aug 2007) | 18 lines
+
+correccion de bug  y nuevas funcionalidades en date_field_tag
+
+Nuevas Funcionalidades:
+-Parametro "order":
+Permite especificar el orden como se mostraran los selects
+Valores para el parametro "order": sigue el formato de la funcion date de php. "d-m-Y", 'Y-m-d', "m-d-Y"
+
+-Parametro "use_month_num":
+En vez de utilizar palabras para representar los meses, se utilizan numeros.
+Valor para "use_month_nums": "true".
+
+-Parametro "start_year":
+Indica la fecha en la que se inicia a generar el select para el año.
+Valor para "start_year": numero entero.
+
+-Parametro "end_year":
+Indica la fecha en la que se termina de generar el select para el año.
+Valor para "end_year": numero entero.
+------------------------------------------------------------------------
+r77 | anthemfor182 | 2007-08-31 10:30:55 -0400 (Fri, 31 Aug 2007) | 1 line
+
+Cambios para el enrutado y otras cosas
+------------------------------------------------------------------------
+r76 | anthemfor182 | 2007-08-31 10:30:16 -0400 (Fri, 31 Aug 2007) | 1 line
+
+Cambios en el core del framework
+------------------------------------------------------------------------
+r75 | anthemfor182 | 2007-08-31 10:29:22 -0400 (Fri, 31 Aug 2007) | 1 line
+
+Cambiando clase exception en db
+------------------------------------------------------------------------
+r74 | anthemfor182 | 2007-08-31 10:27:51 -0400 (Fri, 31 Aug 2007) | 1 line
+
+Agregando mejoras a mysql.php
+------------------------------------------------------------------------
+r73 | anthemfor182 | 2007-08-31 10:27:08 -0400 (Fri, 31 Aug 2007) | 1 line
+
+Cambiando de sitio router y dispatcher
+------------------------------------------------------------------------
+r69 | anthemfor182 | 2007-08-28 09:54:55 -0400 (Tue, 28 Aug 2007) | 1 line
+
+Arreglando nuevamente numeric_field_tag
+------------------------------------------------------------------------
+r68 | anthemfor182 | 2007-08-28 09:51:44 -0400 (Tue, 28 Aug 2007) | 1 line
+
+Arreglando copyright en validations.js
+------------------------------------------------------------------------
+r67 | anthemfor182 | 2007-08-28 09:50:46 -0400 (Tue, 28 Aug 2007) | 1 line
+
+Arreglando validations.js nuevamente
+------------------------------------------------------------------------
+r66 | anthemfor182 | 2007-08-28 09:39:43 -0400 (Tue, 28 Aug 2007) | 1 line
+
+Agregando exception del Router
+------------------------------------------------------------------------
+r65 | anthemfor182 | 2007-08-28 09:39:24 -0400 (Tue, 28 Aug 2007) | 1 line
+
+Agregando exception del Dispatcher
+------------------------------------------------------------------------
+r64 | anthemfor182 | 2007-08-28 09:37:35 -0400 (Tue, 28 Aug 2007) | 1 line
+
+Agregando base para componente filter
+------------------------------------------------------------------------
+r63 | anthemfor182 | 2007-08-28 09:34:03 -0400 (Tue, 28 Aug 2007) | 1 line
+
+Actualizando cargador de la aplicacion
+------------------------------------------------------------------------
+r62 | anthemfor182 | 2007-08-28 09:33:22 -0400 (Tue, 28 Aug 2007) | 1 line
+
+Borrando directorio exceptions
+------------------------------------------------------------------------
+r61 | anthemfor182 | 2007-08-28 09:32:47 -0400 (Tue, 28 Aug 2007) | 1 line
+
+Moviendo exception.php a la raiz
+------------------------------------------------------------------------
+r59 | emilio.rst | 2007-08-27 14:46:48 -0400 (Mon, 27 Aug 2007) | 1 line
+
+agregando copyright
+------------------------------------------------------------------------
+r58 | emilio.rst | 2007-08-27 14:45:11 -0400 (Mon, 27 Aug 2007) | 1 line
+
+correccion de bug en updater select
+------------------------------------------------------------------------
+r57 | deivinsontejeda | 2007-08-25 18:24:30 -0400 (Sat, 25 Aug 2007) | 1 line
+
+Modificando la funcion valNumeric(evt) la cual era llamada por el helper numeric_field_tag de esta manera queda solventado este bug
+------------------------------------------------------------------------
+r56 | deivinsontejeda | 2007-08-25 18:23:06 -0400 (Sat, 25 Aug 2007) | 1 line
+
+Resolviendo el Bug con el Helper numeric_field_tag($name) el cual aceptaba caracteres diferente a numeros 
+------------------------------------------------------------------------
+r53 | emilio.rst | 2007-08-21 16:07:37 -0400 (Tue, 21 Aug 2007) | 1 line
+
+Correccion del helper select_tag
+------------------------------------------------------------------------
+r50 | anthemfor182 | 2007-08-20 18:00:19 -0400 (Mon, 20 Aug 2007) | 1 line
+
+Version 0.5.x
+------------------------------------------------------------------------

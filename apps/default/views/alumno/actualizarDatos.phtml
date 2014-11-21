@@ -1,0 +1,620 @@
+<!--Se llaman los archivos css y js-->
+<?= javascript_library_tag('jquery-1.4.4.min'); ?>
+<?= javascript_library_tag('jquery.ui.core'); ?>
+<?= javascript_library_tag('jquery.ui.datepicker'); ?>
+<?= javascript_library_tag('dialog_box'); ?>
+
+<?= stylesheet_link_tag('smoothness/jquery-ui-1.7.2.custom'); ?>
+<?= stylesheet_link_tag('dialog_box'); ?>
+<!--Termina llamado de archivos-->
+ 
+<style type="text/css">
+	#datos_personales{
+		font-size: 11px;
+	}
+	
+	#datos_personales th{
+		text-align: left;
+		padding-left:5px;		
+	}
+	
+	#datos_personales td{
+		text-align: left;
+		padding-left:0px;
+		color: #000000;
+		font-weight: bold;
+	}
+	
+	#datos_personales input{
+		width: 100%;
+		text-transform: uppercase;
+	}
+	
+	.boton_link{
+		background-color:#FFCA5B;
+		padding: 5px;
+		border: solid 2px #003399;
+		display: block;
+	}
+	
+	.boton_link a{
+		text-decoration: none;
+		color:#000000;
+		font-weight:bold;		
+	}
+	
+	.boton_link a:hover {
+		text-decoration: underline;
+		color: #003399;
+	}
+</style>
+<?php
+    $objeto = new alumnos(); 
+	
+	$result = $objeto -> buscar_registro_alumno(Session::get('registro'));
+
+    foreach($result AS $value){
+	  $nombreCompleto = htmlentities($value -> nombre_completo);
+	  $registro = $value -> registro;
+	  $carrera = htmlentities($value -> carrera);
+	  $direccion = $value -> direccion;
+	  $colonia  = $value -> colonia;
+	  $telefono  = $value -> telefono;
+	  $curp   = $value -> curp;
+	  $cp   = $value -> cp;
+	  $celular   = $value -> celular;
+	  $semestre = $value -> semestre; 
+	  $mail = $value -> email;
+	  $statusAl = $value -> estado;
+	  $periodoIngreso = $value -> periodo_ingreso;
+	  $seguridad_social = $value -> seguridad_social;
+	  $numClinica = $value -> numClinica;
+	  $seguro = $value -> seguro;
+	  $fechaMovimiento = $value -> fechaMovimiento;
+	  $dependencia_seguro = $value -> dependencia_seguro;
+	  $parte_de_quien_seguro = $value -> parte_de_quien_seguro;
+	  $sexo = $value -> sexo;
+	  $municipioNac = $value -> municipioNac;
+	  $estadoNac = $value -> estadoNac;
+	  $municipio = $value -> municipio;
+	  $estado = $value -> estadoAl;
+	  $trabaja = $value -> trabaja;
+
+	  
+		
+	  if(strlen(trim($seguro)) < 5)
+	    $checked = "checked = true";
+		
+	  else
+	    $checked = "";
+		
+	  if($value -> depende_economicamente != "")
+	  {
+	    $depende_economicamente = split(',',$value -> depende_economicamente);
+	    $economicamente = $depende_economicamente[0];
+	    $otroEco = $depende_economicamente[1];
+	  }
+	  else{
+	    $economicamente = "";
+		$otroEco = "";
+	  }
+
+
+	  $nombre_padre = $value -> nombre_padre;
+	  $nombre_madre = $value -> nombre_madre;
+	  $dia = substr($value->fecha_nacimiento,8,2);
+	  $mes = substr($value->fecha_nacimiento,5,2);
+	  $anio = substr($value->fecha_nacimiento,0,4);
+	}
+?>
+ <div style="margin-top:20px; font-weight:bold; font-size:15px; font-family:arial; background: none repeat scroll 0 0 #F7C8B9; border: medium ridge #DD1511; margin-bottom: 15px; text-align: left;">
+   &nbsp;-&nbsp; Es necesario que verifiques y actualices tu informaci&oacute;n debido que con los datos proporcionados se solicitara tu Seguro Facultativo.<BR/><BR/>
+   &nbsp;-&nbsp; Deber&aacute;s imprimir el formato que aparecer&aacute; despu&eacute;s de actualizar tus datos para que posteriormente lo lleves firmado y con una copia de &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tu CURP a Servicio Medico.
+ </div>
+
+<center>
+ 
+ <?php echo form_remote_tag('alumno/updateDatosAlumno','update: muestraDatosAlumno', 'name: formUpdateData', 'success: redirect();')?>
+  <table width="70%" class="bordeazul" cellpadding="1" cellspacing="1" style="font-size:13px; margin-top: 0px; margin-left: 7px;" >
+    <tr align="center" style="font-weight:bold; background:#003399; color:#FFFFFF; font-size:15px;" >
+	  <td colspan="2">
+	    ACTUALIZAR Y VERIFICAR LA INFORMACI&Oacute;N
+		<input type="hidden" name="semA" id="semA" value="<?php echo $semestre;?>" maxlength="0" readonly="readonly"/>
+		<input type="hidden" name="statusA" id="statusA" value="<?php echo $statusAl;?>" maxlength="0" readonly="readonly"/>
+	  </td>
+	</tr>
+    <tr>
+      <th class="naranja" width="167" align="right">
+        NOMBRE COMPLETO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;               
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<?php echo utf8_encode($nombreCompleto);?>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right">
+        REGISTRO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<?php echo $registro;?> 
+        <input type="hidden" maxlength="0" readOnly="readonly" value="<?php echo $registro;?>" id="registroAlumno" name="registroAlumno" />		
+        <input type="hidden" maxlength="0" readOnly="readonly" value="<?php echo $periodoIngreso;?>" id="periodoIngreso" name="periodoIngreso" />		
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        CARRERA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<?php echo utf8_encode($carrera);?>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        CURP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+	  </th>
+	  <td width="267" class="gris">
+	    <?php if($curp == null || $curp == "" || strlen(trim($curp)) < 18){ ?>
+		  &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo $curp; ?> " style="width: 300px; text-transform: uppercase;" id="curp" name="curp" onblur="validaCURP()" maxlength="18"/> 
+		  <input type="hidden" id="validarCurp" value="si" readonly="readonly">
+		<?php } else{?>     
+		  &nbsp;&nbsp;&nbsp;<?php echo $curp;?>  
+		     <input type="hidden" id="validarCurp" value="no" readonly="readonly">
+        <?php }?>  	
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        SEXO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<select id="sexo" name="sexo" style="width:300px;">
+							<option value="0">Seleccionar</option>
+							<option value="M">Femenino</option>
+							<option value="H">Masculino</option>
+						  </select>       
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        FECHA DE NACIMIENTO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td class="gris">
+	  &nbsp;&nbsp;
+	  <?php
+		echo select_tag("dia", "style: width:99px;");
+		echo option_tag("0", "Seleccionar", "selected: true");
+	    for($i=1; $i <= 31; $i++){
+		  if($i <= 9)
+		    $x = "0".$i;
+			
+		  else
+		    $x = $i;
+			
+		  echo option_tag($x,$x);
+	    }
+	  ?>
+	  </select>
+	  <select id="mes" name="mes" style="width:95px;">
+	    <option value="0">Seleccionar</option>
+	    <option value="01">Enero</option>
+		<option value="02">Febrero</option>
+		<option value="03">Marzo</option>
+		<option value="04">Abril</option>
+		<option value="05">Mayo</option>
+		<option value="06">Junio</option>
+		<option value="07">Julio</option>
+		<option value="08">Agosto</option>
+		<option value="09">Septiembre</option>
+		<option value="10">Octubre</option>
+		<option value="11">Noviembre</option>
+		<option value="12">Diciembre</option>
+	  </select>
+	  <?php
+	    echo select_tag("anio", "style: width:96px;");
+		echo option_tag("0", "Seleccionar", "selected: true");
+		for($i='1910'; $i <= date('Y'); $i++){
+		  echo option_tag($i,$i);
+	    }
+	  ?>
+	  </select>	    
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        LUGAR DE NACIMIENTO MUNICIPIO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo $municipioNac;?>" style="width: 300px;" id="municipioNac" name="municipioNac"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        LUGAR DE NACIMIENTO ESTADO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo $estadoNac;?>" style="width: 300px;" id="estadoNac" name="estadoNac"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        NOMBRE COMPLETO PADRE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo $nombre_padre;?>" style="width: 300px;" id="nombre_padre" name="nombre_padre"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        NOMBRE COMPLETO MADRE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo $nombre_madre;?>" style="width: 300px;" id="nombre_madre" name="nombre_madre"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        E-MAIL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo $mail;?>" style="width: 300px;" id="email" name="email" onblur="validarEmail()"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        DIRECCI&Oacute;N&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo htmlentities($direccion);?>" style="width: 300px;" id="direccion" name="direccion"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        COLONIA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo htmlentities($colonia);?>" style="width: 300px;" id="colonia" name="colonia"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        MUNICIPIO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo htmlentities($municipio);?>" style="width: 300px;" id="municipio" name="municipio"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        ESTADO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo htmlentities($estado);?>" style="width: 300px;" id="estado" name="estado"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+       C.P&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo $cp;?>" style="width: 300px;" id="cp" name="cp" onkeypress="javascript:return ValidNum(event)" maxlength="8"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        TEL&Eacute;FONO CASA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo $telefono;?>" style="width: 300px;" id="telefono" name="telefono" onkeypress="javascript:return ValidNum(event)" maxlength="10"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+       CELULAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo $celular;?>" style="width: 300px;" id="celular" name="celular" onkeypress="javascript:return ValidNum(event)" maxlength="15"/>          
+	  </td>
+    </tr>
+<?php if($statusAl == "OK"){?>
+	<tr>
+	  <th class="naranja" width="167" align="right">
+	    APARTE DE ESTUDIAR TRABAJA?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  </th>
+	  <td align="left" width="267" class="gris">
+	    &nbsp;&nbsp;&nbsp; <select id="Qtrabaja" name="Qtrabaja" style="width:300px;">
+		  <option value="1">SI</option>
+		  <option value="2">NO</option>
+	    </select>
+	  </td>
+	</tr>
+	<tr>
+	  <th class="naranja" width="167" align="right">
+	   DE QUIEN DEPENDE ECONOMICAMENTE?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  </th>
+	  <td align="left" width="267" class="gris">
+	    &nbsp;&nbsp;&nbsp; <select id="dependeEco" name="dependeEco" style="width:300px;" onchange="muestraCampo();">
+		  <option value="1">PADRES</option>
+		  <option value="2">CONYUGUE</option>
+		  <option value="3">OTRO</option>
+	    </select>
+		&nbsp;&nbsp;&nbsp; <input type="text" id="otroEco" name="otroEco" maxlength="50" style="width: 180px; display:none; margin-left: 20px;" value="<?= $otroEco ?>" />
+	  </td>
+	</tr>
+    <tr>
+	  <th class="naranja" width="167" align="right">
+	    CUENTAS CON ALG&Uacute;N TIPO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<br/>DE SEGURIDAD SOCIAL?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  </th>
+	  <td align="left" width="267" class="gris">
+	    <input type="radio" name="seguridad_social" id="seguridad_social_SI" value="SI" <? if( $seguridad_social == "SI" ) echo "checked"; ?> style="width:10px; margin-left:25px;" onclick="seguroSocial()"  /> Si
+		<input type="radio" name="seguridad_social" id="seguridad_social_NO" value="NO"  <? if( $seguridad_social == "NO" ) echo "checked"; ?> style="width:10px; margin-left:35px;" onclick="seguroSocial()"  <?php echo $checked; ?> /> No
+	  </td>
+	</tr>
+	<tr id="camposSeg" style="display:none;">
+	  <td colspan="2" >
+		<table align="left" style="font-size:12px;" width="100%">
+		  <tr id="dependencia" style="display:none;">
+			<th class="naranja" style="width:235px;">
+			  &#191;POR CU&Aacute;L DEPENDENCIA TIENES SEGURO&#63; 
+			</th>
+			<td style="width: 420px;">
+			  &nbsp;&nbsp;&nbsp; <select id="dependencia_seguro" name="dependencia_seguro" style="width:300px;">
+			    <option value="NINGUNO">SELECCIONAR</option>
+			    <option value="IMSS">IMSS</option>
+			    <option value="ISSSTE">ISSSTE</option>
+			    <option value="SEMAR">SEMAR</option>
+			    <option value="SEDENA">SEDENA</option>
+			    <option value="SF">SEGURO FACULTATIVO</option>
+			  </select>
+			</td>
+		  </tr>
+		  <tr id="clinica" style="display:none;">
+			<th class="naranja" style="width: 229px;">
+              Numero de cl&iacute;nica
+			</th>
+			<td style="width:410px;">
+			  &nbsp;&nbsp;&nbsp; <input type="text" id="numClinica" name="numClinica" maxlength="5" style="width: 300px;" value="<?= $numClinica ?>" />
+			</td>
+		  </tr>
+		  <tr id="parteQuien" style="display:none;">
+		    <th class="naranja" style="width:229px;">&nbsp;&#191;POR PARTE DE QUI&Eacute;N TIENES EL SEGURO&#63;</th>
+			<td align="left" style="width:409px;">
+			  &nbsp;&nbsp;&nbsp; <select id="parte_de_quien_seguro" name="parte_de_quien_seguro" style="width:300px;">
+				<option value="NINGUNO">SELECCIONAR</option>
+				<option value="PADRES">PADRES</option>
+				<option value="TRABAJO">TRABAJO</option>
+				<option value="CONYUGE">C&Oacute;NYUGE</option>
+				<option value="ESCUELA">ESCUELA CETI</option>
+			  </select>
+			</td>
+		  </tr>
+		  <tr id="numSeg" style="display:none; ">
+		    <th class="naranja" style="width:229px;">
+			  NO. SEGURIDAD SOCIAL O GASTOS MEDICOS                
+			</th>
+			<td  style="width:410px;">
+			  <?php if($seguro == null || $seguro ==  "" || strlen($seguro) <= 6){ ?>
+			   &nbsp;&nbsp;&nbsp;<input type="text" id="seguro" value="<?= $seguro ?>"  name="seguro" style="width: 300px;" />  	   
+              <?php } else{  ?>	
+			   &nbsp;&nbsp;&nbsp;<?php echo $seguro; ?>  	
+              <?php } ?>					  
+			</td>
+		  </tr>
+		  <tr id="fechaMov" style="display:none">
+		    <th class="naranja" style="width:229px;">
+			  Fecha Movimiento
+			</th>
+			<td style="width: 410px;">
+			  &nbsp;&nbsp;&nbsp;<input type="text" id="fechaMovimiento" name="fechaMovimiento" readonly="readonly" style="width:300px;" value="<?= $fechaMovimiento ?>"/>
+			</td>
+		  </tr>
+        </table>
+	  </td>
+    </tr>
+<?php }?>
+    <tr align="center" >
+	  <td colspan="2">
+	    <?php echo submit_tag('  ACTUALIZAR DATOS  ','id: botonActualizar','class: common_button', 'style: margin-top:15px; margin-bottom:10px; display:block;'); ?>
+		<?php if(strlen(trim($seguro)) < 3 && $statusAl == "OK"){ ?>
+		  <div id="pdfSF" style="display:none; width:635px;"><a target="_blank" onclick="imprimePDF(<?php echo $registro; ?>)" href="<?= KUMBIA_PATH?>public/files/pdfs/seguroFacultativo/SeguroFacultativo<?php echo $registro; ?>.pdf"><b>IMPRIMIR PDF SEGURO FACULTATIVO</b></a><br><b><u>ES NECESARIO LLEVARLO FIRMADO CON UNA COPIA DE TU CURP A SERVICIO MEDICO</u></b></div>
+		<?php } ?>
+		<div id="muestraDatosAlumno" name="muestraDatosAlumno" style="float: left; text-align: center; width: 445px; margin-top: 5px; margin-left: 92px;"></div><div id="iconoR"></div>
+	  </td>
+	</tr>
+
+		<input type="hidden" value="<?php echo $dependencia_seguro;?>" name="dependencia_seguro_2" id="dependencia_seguro_2" readonly="readonly">
+		<input type="hidden" value="<?php echo $parte_de_quien_seguro;?>" name="parte_de_quien_seguro_2" id="parte_de_quien_seguro_2" readonly="readonly">
+		<input type="hidden" value="<?php echo $sexo;?>" name="sexo_2" id="sexo_2" readonly="readonly">
+		<input type="hidden" value="<?php echo $dia;?>" name="dia_2" id="dia_2" readonly="readonly">
+		<input type="hidden" value="<?php echo $mes;?>" name="mes_2" id="mes_2" readonly="readonly">
+		<input type="hidden" value="<?php echo $anio;?>" name="anio_2" id="anio_2" readonly="readonly">
+		<input type="hidden" value="<?php echo $trabaja;?>" name="Qtrabaja_2" id="Qtrabaja_2" readonly="readonly">
+		<input type="hidden" value="<?php echo $economicamente;?>" name="economicamente_2" id="economicamente_2" readonly="readonly">
+  </table>
+ <?php echo end_form_tag()?> 
+</center>
+
+<div id="redireccion" name="redireccion">
+</div>
+
+<script type='text/javascript'>
+
+//funcion que valida que solo se puedan ingresar numeros
+function ValidNum(e)
+{
+  var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+    return ((tecla > 47 && tecla < 58) || tecla == 8);
+}
+
+//Funcion que valida que solo se puedan ingresar letras
+function validLetters(e)
+{
+  var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+      
+  if(tecla == 8)
+    return true;
+    
+    var patron = /[A-Za-z\s]/;
+	var x = String.fromCharCode(tecla);
+	 
+  return patron.test(x)
+}
+
+//Funcion que muestra el icono de siguiente
+function redirect(){
+  if(document.getElementById('status').value == "TRUE"){
+    document.getElementById('botonActualizar').style.display = "none";  
+    document.getElementById('iconoR').innerHTML = '<?php echo link_to("alumno/index","".img_tag("siguiente-icono-5491-32.png","cursor:pointer;","title: SIGUIENTE"));?>'; 
+  
+	if(document.getElementById('seguridad_social_NO').checked == true)
+	  document.getElementById('pdfSF').style.display = "block";  
+  }
+}
+ 
+//Funcion que genera el calendario
+  $q(function() {
+	$q( "#fechaMovimiento" ).datepicker({
+		changeMonth: true,
+		changeYear: true
+	});
+  });
+  
+
+//Funcion que muestra las demas preguntas
+function muestra_preguntas(){
+
+  if(document.getElementById('si').checked == true){
+    document.getElementById('trArea').style.display = "";
+    document.getElementById('nomEmpresa').style.display = "";
+	document.getElementById('domicilioEm').style.display = "";
+	document.getElementById('telefonoTrabajo').style.display = "";
+	document.getElementById('puestoTrabajo').style.display = "";
+	document.getElementById('actividadesCarrera').style.display = "";
+	document.getElementById('nombreEmpresa').style.display = "";
+  }
+  
+  if(document.getElementById('si').checked == false){
+    document.getElementById('trArea').style.display = "none";
+    document.getElementById('nomEmpresa').style.display = "none";
+	document.getElementById('domicilioEm').style.display = "none";
+	document.getElementById('telefonoTrabajo').style.display = "none";
+	document.getElementById('puestoTrabajo').style.display = "none";
+	document.getElementById('actividadesCarrera').style.display = "none";
+	document.getElementById('siAC').checked = false;
+	document.getElementById('noAC').checked = false;
+	document.getElementById('area').value = "";
+	document.getElementById('domicilioE').value = "";
+	document.getElementById('telefonoE').value = "";
+	document.getElementById('puesto').value = "";
+	document.getElementById('nombreEmpresa').value = "";
+  }
+  
+}
+
+
+//Muetsra la opcion segun lo que selecicono
+function seguroSocial(){
+
+  if(document.getElementById('seguridad_social_SI').checked == true){
+     document.getElementById('camposSeg').style.display = "";
+     document.getElementById('dependencia').style.display = "block";
+     document.getElementById('parteQuien').style.display = "block";
+     document.getElementById('numSeg').style.display = "block";
+     document.getElementById('fechaMov').style.display = "block";
+     document.getElementById('clinica').style.display = "block";
+  }
+	  
+  else if(document.getElementById('seguridad_social_NO').checked == true){
+     document.getElementById('camposSeg').style.display = "none";
+     document.getElementById('dependencia').style.display = "none";
+     document.getElementById('parteQuien').style.display = "none";
+     document.getElementById('numSeg').style.display = "none";
+     document.getElementById('fechaMov').style.display = "none";
+     document.getElementById('clinica').style.display = "none";
+  }
+}
+
+//Obtiene los datos del select
+function datosSelect(){
+
+  if(document.getElementById("dependencia_seguro_2").value != "")
+    document.getElementById('dependencia_seguro').value = document.getElementById("dependencia_seguro_2").value;
+	
+  if(document.getElementById("parte_de_quien_seguro_2").value != "")
+    document.getElementById('parte_de_quien_seguro').value = document.getElementById("parte_de_quien_seguro_2").value;
+	
+  if(document.getElementById("sexo_2").value != "")
+    document.getElementById('sexo').value = document.getElementById("sexo_2").value;
+	
+  if(document.getElementById("dia_2").value != "")
+    document.getElementById('dia').value = document.getElementById("dia_2").value;
+	
+  if(document.getElementById("mes_2").value != "")
+    document.getElementById('mes').value = document.getElementById("mes_2").value;
+	
+  if(document.getElementById("anio_2").value != "")
+    document.getElementById('anio').value = document.getElementById("anio_2").value; 
+	
+  if(document.getElementById("Qtrabaja_2").value != "")
+    document.getElementById('Qtrabaja').value = document.getElementById("Qtrabaja_2").value; 
+	
+  if(document.getElementById("economicamente_2").value != "")
+    document.getElementById('dependeEco').value = document.getElementById("economicamente_2").value; 
+}
+
+datosSelect();
+
+
+function muestraCampo(){
+  if(document.getElementById('dependeEco').value == "1" || document.getElementById('dependeEco').value == "2"){
+    document.getElementById('otroEco').style.display = "none";
+  }
+  
+  if(document.getElementById('dependeEco').value == "3"){
+    document.getElementById('otroEco').style.display = "block";
+  }
+  
+  if(document.getElementById('seguridad_social_SI').checked == true){
+     document.getElementById('camposSeg').style.display = "";
+  }
+}
+
+if(document.getElementById('statusA').value == "OK")
+  muestraCampo();
+
+//Funcion para imprimir el Seguro Facultativo en PDF
+function imprimePDF(regisAl){
+
+  var param = regisAl;
+  
+  new AJAX.viewRequest({ 
+    action: "alumno/updateServicioMedico/"+param, 
+	container: "redireccion" 
+  }); 
+
+}
+
+//Funcion que valida que el CURP este bien ingresado
+function validaCURP(){
+  var curp=document.forms['formUpdateData'].elements['curp'].value;
+ 
+   //Se valida el que este correcto el CURP
+  if(curp.match(/^([a-z]{4})([0-9]{6})([a-z]{6})([0-9]{2})$/i)){
+    document.getElementById('curp').style.borderColor = "";
+	document.getElementById('curp').style.color = "#000000";
+	document.getElementById('curp').style.background = "";
+	document.getElementById('curp').style.fontWeight = "";
+  }
+  else{
+    document.getElementById('curp').style.borderColor = "#C60916";
+    document.getElementById('curp').style.background = "#E55760";
+    document.getElementById('curp').style.color = "#FFFFFF";
+    document.getElementById('curp').style.fontWeight = "bold";
+	document.getElementById('curp').focus;
+    showDialog('ERROR','CURP incorrecta. Favor de corregirla','error',3);
+  }
+}
+
+
+</script>

@@ -1,0 +1,47 @@
+<div id ="centrar">
+	<h2 class="letrasRojas">
+	<? 
+		if( $vacia == 1 ) echo "No se aceptan contrase&ntilde;as vacias"; 
+		else if( $vacia == 2 ) echo "La contrase&ntilde;a debe ser diferente a su n&uacute;mero de registro";
+		else if( $vacia == 3 ) echo "La contrase&ntilde;a deber ser igual en los dos campos";
+		else if( $vacia == 4 ) echo "El campo del correo no puede estar vacio";
+	?>
+	</h2>
+</div>
+<center>
+<h2 style="color:#0000FF">ACTUALIZACION DE CONTRASEÑA</h2>
+<H3>
+	<table>
+		<tr>
+			<td width="500">
+				<p align="justify">Por cuestiones de seguridad es necesario que cambies inmediatamente tu contraseña y esta no deberá ser la misma que tu registro. Y debe estar conformada solo por números.</p>
+			</td>
+		</tr>
+	</table>
+<form method="post" action="<?= KUMBIA_PATH ?>alumno/cpassword">
+	<table border="1">
+		<tr>
+			<th colspan="2">Captura de datos</th>
+		</tr>
+		<tr>
+			<td>Registro: </td>
+			<td><input type="text" name="registro" value="<?= $registro ?>" disabled  size="40"></td>
+		</tr>
+		<tr>
+			<td>Contraseña nueva: </td>
+			<td><input type="password" name="password" size="40"></td>
+		</tr>
+		<tr>
+			<td>Confirmar contraseña: </td>
+			<td><input type="password" name="cpassword" size="40"></td>
+		</tr>
+		<tr>
+			<td>Correo Electrónico: </td>
+			<td><input type="text" name="correo" size="40"></td>
+		</tr>
+	</table>
+	<br><br>
+	
+		<input type="submit" value="Cambiar contraseña">
+	</form>
+</H3>

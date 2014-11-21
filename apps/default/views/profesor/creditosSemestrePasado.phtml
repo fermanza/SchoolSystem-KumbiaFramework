@@ -1,0 +1,86 @@
+<script language="JavaScript">
+	
+	function eliminar(){
+		
+		if( window.confirm( "¿Estás Seguro de que deseas eliminar dicho curso?" ) ){
+			return true;
+		}
+		
+		return false;
+	}
+
+</script>
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/0"  >1</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/50" >2</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/100">3</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/150">4</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/200">5</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/250">6</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/300">7</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/350">8</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/400">9</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/450">10</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/500">11</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/550">12</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/600">13</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/650">14</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/700">15</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/750">16</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/800">17</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/850">18</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/900">19</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/950">20</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/1050">21</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/1100">22</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/1150">23</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/1200">24</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/1250">25</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/1300">26</a>
+<a href="<?= KUMBIA_PATH ?>profesor/creditosSemestrePasado/1350">27</a>
+
+<table cellspacing="1" cellpadding="1" style="font-size: 8px;" border="1" align="center">
+	<br />
+	<br />
+	<tr>
+		<th class="azull4" width="50">
+			No.
+		</th>
+		<th class="azull4" width="75">
+			Registro
+		</th>
+		<th class="azull4" width="75">
+			Cr&eacute;ditos
+		</th>
+	</tr>
+	<!--
+	$this -> registroAlumno[$i]		= $xalumncur -> registro;
+	$this -> nombreAlumno[$i]		= $alumno -> vcNomAlu;
+	$this -> materiaAlumno[$i]		= $mat -> nombre;
+	$this -> carreraAlumno[$i]		= $carrera -> vcNomEsp;
+	-->
+	<?
+	$i = 0;
+	foreach( $registro as $reg ){
+	?>
+		<tr>
+			<td width="50" align="center"><? echo $i + 1; ?></td>
+			<td width="75" align="center"><?= $reg ?></td>
+			<td width="75" align="center"><?= $creditos[$i] ?></td>
+		</tr>
+	<?
+		$i++;
+	}
+	?>
+</table>
+</div>
+<br />
+<br />

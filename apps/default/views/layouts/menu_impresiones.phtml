@@ -1,0 +1,29 @@
+<?= stylesheet_link_tag('menu/menu_style', true); ?>
+<tr>
+	<th>
+	<div class="menu">
+		 <ul>
+			<li>
+			  <a>Impresiones</a>
+			  <ul>
+				<li><a href="<?= KUMBIA_PATH ?>caja/alumnoConcepto">Imprimir Certificado</a></li>
+			  </ul>
+			</li>
+			<li class="floatright">
+				<a href="<?=KUMBIA_PATH?>seguridad/terminarsesion">
+					<image src="<?=KUMBIA_PATH?>img/log_off.jpg" class="log_off" />
+				</a>
+			</li>
+		</ul>
+	</div>
+	</th>
+</tr>
+<tr>
+<td height="1">
+</td>
+</tr>
+<tr>
+<td align="center">
+<?= content(); ?>
+</td>
+</tr>

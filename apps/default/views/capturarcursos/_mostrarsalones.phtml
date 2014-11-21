@@ -1,0 +1,20 @@
+<br />
+	<input type="hidden" value="1" id="flag1<? echo "[$i][$j]" ?>" />
+	<select name="salon[<?echo $i;?>][<?echo $j;?>]"
+			id="salon[<?echo $i;?>][<?echo $j;?>]" class="lista"
+			onChange="dibujar(this.value, <? echo $i.", ".$j; ?>)">
+		<option value="-1">- - Aula - -</option>
+<?
+		foreach( $salones as $salon ){
+?>
+			<option value="<?= $salon -> id ?>">
+				<?= $salon -> edificio.":".$salon -> nombre ?>
+			</option>
+<?
+		}
+?>
+	</select>
+	<br />
+	Hora Virtual<input type="checkbox" name="horapresencial[<?echo $i;?>][<?echo $j;?>]"
+			id="horapresencial[<?echo $i;?>][<?echo $j;?>]">
+<br />&nbsp;

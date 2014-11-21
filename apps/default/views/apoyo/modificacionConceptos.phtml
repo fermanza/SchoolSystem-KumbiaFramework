@@ -1,0 +1,44 @@
+<style type="text/css">
+	.T form{		
+		padding: 0px;
+		margin: 0px;
+	}
+	.T input{
+		font-size: 11px;
+		width: 100%;
+	}
+</style>
+<br />
+<center>
+<table style="font-size:11px; width:900px;">
+	<tr class="bordeAzul">	
+		<th class="naranja">
+			<table style="font-size:11px;" cellpadding="0" cellspacing="0"><tr>
+			<th width="300">CONCEPTO</th>
+			<th width="150" >COSTO</th>
+			<th width="150" >CUENTA BANCARIA</th>
+			<th width="150" >FECHA VENCIMIENTO</th>	
+			<th width="150" >&nbsp;</th>	
+			</tr></table>
+
+		</th>
+	</tr>
+	<?php foreach($conceptos as $c){ 
+		echo tr_color('#CCDEFF', '#FFFFFF');
+	?>			
+		<th class="T" id="th<?= $c -> id ?>">
+			<?= form_remote_tag("apoyo/guardarConcepto/".$c -> id, "update: th".$c -> id) ?>
+				<table style="font-size:11px; text-align: left"  cellpadding="0" cellspacing="0"><tr>
+				<th width="300"><?= utf8_encode($c -> concepto) ?></th>
+				<th width="150" ><input type="text" name="costo" value="<?= $c -> costo ?>" /></th>
+				<th width="150" ><input type="text" name="cuenta" value="<?= $c -> cuenta ?>" /></th>
+				<th width="150" ><input type="text" name="fecha_vencimiento"value="<?= $c -> fecha_vencimiento ?>" /></th>			
+				<th width="150" ><input type="submit" value="Modificar"</th>	
+				</tr></table>
+			</form>
+		</th>
+	</tr>
+	
+	<?php } ?>
+</table>
+</center>

@@ -1,0 +1,15 @@
+			<select name="<? echo 'carreraa'.$opcion; ?>" id="<? echo 'carreraa'.$opcion; ?>" style="width:340px; font-weight:none;" class="cielo">
+				<option value=""></option>
+				<optgroup label="NIVEL INGENIER&Iacute;A">
+				<?
+				foreach( $carrerasDisp as $carrDisp ){
+				?>
+				<option value="<?= $carrDisp -> id ?>">
+					<?= $carrDisp -> idcarrera ?> - <?=  htmlentities($carrDisp -> nombre) ?> - 
+					<? if( $carrDisp -> plantel == "C" ){ echo "Colomos"; } else{ echo "Tonala"; } ?> - 
+					<? if( $carrDisp -> turno == "V" ){ echo "Verpertino"; } else{ echo "Matutino"; } ?>
+				</option>
+				<?
+				}
+				?>
+			</select>

@@ -1,0 +1,111 @@
+		<table border="0" cellpadding="0" cellspacing="0" width="770">
+			<tr>
+				<td style="font-family: Verdana;">
+					<br>
+					<div style="color: #1569C7; font-size: 14px;" align="left"><b><?= img_tag("adorno.gif","border: 0") ?> MATERIAS</b></div>
+					<div style="color: #000000; font-size: 11px;" align="justify">
+						<br>
+						En esta sección se encuentran todas las materias que se imparten en el CETI, estan clasificadas en diferentes modelos de acuerdo al plan de estudios con el que trabajan, para tecnólogo existen el modelo 1998 y 2007, y para Ingeniería tenemos el 2000 y 2007.
+						<br><br>
+						<div style="color: #FF0000; font-size: 18px;" align="center"><b><?= $mensaje ?></b></div>
+						<br>
+					</div>
+					<div style="color: #000000; font-size: 11px;" align="center">
+					
+						<table border="1" cellpadding="1" cellspacing="1" width="600">						
+							<form action="<?= KUMBIA_PATH ?>administrador/registrarMateria" method="POST">
+							<tr>
+								<th colspan="5" align="center" height="25" class="fondoazul">
+									REGISTRAR NUEVA MATERIA
+								</th>
+							</tr>
+							<tr>
+								<th align="center" width="100" height="20" class="fondonaranja">
+									Clave
+								</th>
+								<th align="center" width="350" height="20" class="fondonaranja">
+									Nombre
+								</th>	
+								<th align="center" height="25" width="50" class="fondonaranja">
+									División
+								</th>
+								<th align="left" width="100" height="20" class="fondonaranja">
+									&nbsp;
+								</th>
+							</tr>
+							<tr>
+								<th align="center" width="100"  height="20" class="fondonaranja">
+									<input type="text" name="clave" size="5" maxlength="10">
+								</th>
+								
+								<th align="center" width="350"  height="20" class="fondonaranja">
+									<input type="text" name="nombre" size="54">
+								</th>
+								<th align="center" height="25" width="50" class="fondonaranja"> 
+									<select name="division">
+										<option value="TCB">TCB</option>
+										<option value="MCT">MCT</option>
+										<option value="IIM">IMM</option>
+										<option value="IEC">IEC</option>
+									</select>
+								</th>
+								<th align="center" height="30" bgcolor="<?= $bg ?>" class="fondonaranja">
+									<input type="submit" value="Registrar" class="boton">
+									<input type="hidden" name="modelo" value="<?= $modelo ?>">
+								</th>
+							</tr>
+							</form>
+						</table>
+						<br><br>
+						
+						<?php if($materias) { ?>
+						<table border="1" cellpadding="1" cellspacing="1" width="600">
+							<tr>
+								<th colspan="4" align="center" height="25" class="fondoazul">
+									MODELO ACADÉMICO <?= $modelo ?>
+								</th>
+							</tr>
+							<tr>
+								<th align="center" width="75" height="25" class="fondonaranja">
+									Clave
+								</th>
+								<th align="center" height="25" class="fondonaranja">
+									Nombre
+								</th>
+								<th align="center" height="25" width="50" class="fondonaranja">
+									División
+								</th>
+								<th align="center" height="25" class="fondonaranja">
+									&nbsp;
+								</th>
+							</tr>
+							
+							<?php foreach($materias  as $materia){ $k++; if( $k % 2 == 0){ $bg="#FFFFFF"; } else{ $bg="#DDDDDD"; } ?>
+							<tr>
+								<th align="center" height="25" width="75" bgcolor="<?= $bg ?>">
+									<a href="<?= KUMBIA_PATH ?>administrador/vercursos/<?= $materia -> clave ?>"><?php if($modelo==2000){ ?><?= substr($materia -> clave,0,3) ?><?php } else { ?><?= $materia -> clave ?><?php } ?></a>
+								</th>
+								<th align="left" height="25" width="400" bgcolor="<?= $bg ?>">
+									&nbsp;<?= $materia -> nombre ?>
+								</th>
+								<th align="center" height="25" width="50" bgcolor="<?= $bg ?>">
+									&nbsp;<?= $materia -> division ?>
+								</th>
+								<form action="<?= KUMBIA_PATH ?>administrador/eliminarMateria" method="POST">
+								<th align="center" height="25" bgcolor="#FFFFFF">
+									<input type="hidden" name="id" value="<?= $materia -> id ?>">
+									<input type="hidden" name="modelo" value="<?= $modelo ?>">
+									<input type="image" src="<?= KUMBIA_PATH ?>public/img/delete.jpg" width="25" height="25" border="0">
+								</th>
+								</form>
+							</tr>
+							<?php } ?>
+						</table>
+						<?php } ?>
+						
+					</div>
+				</td>
+			</tr>
+		</table>
+	
+		<br><br>

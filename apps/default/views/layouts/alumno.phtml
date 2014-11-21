@@ -1,0 +1,12 @@
+<?php
+
+	if(Session::get_data('tipousuario')=="ALUMNO"){
+		include("menu_alumno.phtml");
+	}
+	else if(Session::get_data('tipousuario')=="INGCALCULO"){
+		include("ingcalculo.phtml");
+	}
+	else if(Session::get_data('coordinador')=="OK"){
+		include("profesor.phtml");
+	}
+?>

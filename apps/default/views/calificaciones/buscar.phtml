@@ -1,0 +1,63 @@
+<style type="text/css">
+    .contenido {
+        margin: 10px;
+        font-size: 12px;
+    }
+    .titulo{
+    	font-size: 20px;
+		font-weight: bold;
+		color: #333333;
+		background: #FFCA5B;
+		padding: 5px 15px 5px 15px;		
+		text-align: center;
+    }
+	input[type="text"]{
+		width:150px;
+	}
+	select{
+		width:150px;
+	}
+</style>
+<div class="titulo">
+Administrador de Calificaciones	
+</div>
+
+<div class="contenido">
+    <?= form_tag("calificaciones/calificaciones") ?>
+    <table>
+        <tr>
+            <th>
+            	Registro 
+            </th>
+            <td>
+            	<input type="text" name="registro">
+            </td>
+        </tr>
+        <tr>
+            <th>
+           	    Per&iacute;odo 
+            </th>
+            <td>
+                <select name="periodo">                    
+                    <option value="12008">Feb-Jun 08</option>
+                    <option value="32008">Ago-Dic 08</option>
+					<option value="12009">Feb-Jun 09</option>
+					<option value="32009">Ago-Dic 09</option>
+					<option value="12010">Feb-Jun 10</option>
+					<option value="32010">Ago-Dic 10</option>
+					<option value="12011">Feb-Jun 11</option>
+					<option value="32011">Ago-Dic 11</option>
+					<option value="12012">Feb-Jun 12</option>
+                    <option value="32012" selected="selected">Ago-Dic 12</option>
+                    
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <?=	submit_tag("Buscar") ?>
+            </td>
+        </tr>
+    </table>
+    <?= end_form_tag() ?>
+</div>

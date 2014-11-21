@@ -1,0 +1,42 @@
+<br />
+<h2>Favor de escoger el plantel del cu&aacute;l quiere hacer la correci&oacute;n de calificaci&oacute;n</h2>
+<input type="radio" value="c" id="plantel" name="plantel" checked /> Colomos
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" value="t" id="plantel" name="plantel" /> Tonal&aacute;
+<br />
+<br />
+<br />
+<div id="realizandoBusqueda">
+	Buscar por:
+		<select name="tipoBusqueda" id="tipoBusqueda" class="lista">
+			<option value="0">-- Seleccionar Opcion --</option>
+			<option value="1">Clave de Curso</option>
+			<option value="2">N&oacute;mina de Profesor</option>
+			<option value="3">Nombre de Profesor</option>
+			<option value="4">Clave de Materia</option>
+			<option value="5">Nombre de Materia</option>
+		</select>
+	
+	<div id="mostrandoInfo">
+	</div>
+	
+</div>
+<?
+	print "<script type=\"text/javascript\">
+	new Event.observe(\"tipoBusqueda\", \"change\", function(){
+	var tipoBusqueda = document.getElementById('tipoBusqueda').value;
+		if( tipoBusqueda > 0 ){
+			var plantel = document.getElementById('plantel').value;
+			new AJAX.viewRequest({
+				action: \"ingcalculo/realizandoBusqueda/\"+".tipoBusqueda."+\"/\"+".plantel."+\"\",
+				container: \"mostrandoInfo\"
+			})
+		}
+		else
+			document.getElementById('mostrandoInfo').innerHTML = '';
+	})
+	</script>";
+	
+?>
+<br />
+<br />

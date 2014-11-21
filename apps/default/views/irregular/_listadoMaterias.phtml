@@ -1,0 +1,125 @@
+<center>
+<?php
+	$Calificaciones = new Calificaciones();
+	$Materias = new MateriasHorarios();
+	$Horarios = new Horarios();
+	$Grupos = new Grupos();
+	$Periodo = new Periodos();
+	if($Periodo -> find_first("activo = 1")){			
+		$periodo = $Periodo -> periodo;
+	}else{ echo "No se encontro ningun periodo activo<br />"; }
+	
+	if($materias = $Calificaciones -> find("registro = ".$registro." and periodo = ".$periodo." ORDER BY horario_id ASC")){?>
+	<table class="bordeazul" style="font-size:11px">
+		<tr>
+			<th colspan="10" class="naranja">
+				Eliminador de Materias
+			</th>
+		</tr>
+		<tr  class="azul">
+			<th>No. Acta</th>
+			<th>Grupo</th>
+			<th>Clave</th>
+			<th>Nombre</th>
+			<th>Tipo</th>
+			<td>1er</td>
+			<td>2do</td>
+			<td>3ro</td>			
+			<th>Maestro</th>
+			<th>&nbsp;</th>
+		</tr>
+	<?php
+		foreach($materias as $materia){
+			if($merror==0){
+				if($h = $Horarios -> find_first("id = ".$materia -> horario_id)){
+					if($m = $Materias -> find_first("id = ".$h -> materia_id)){
+						$g = $Grupos -> find_first("id = ".$h -> grupo_id);
+						for($j=1; $j<4; $j++){
+							$cal_num = "calificacion".$j;
+							if($materia -> $cal_num == 300){
+								if($j== 1)
+									$cal1='<span style="background-color:#000066; color: white;">NR</span>';
+								if($j== 2)
+									$cal2='<span style="background-color:#000066; color: white;">NR</span>';
+								if($j== 3)
+									$cal3='<span style="background-color:#000066; color: white;">NR</span>';																		
+							}elseif($materia -> $cal_num == 500){
+									if($j== 1)
+										$cal1='<span style="background-color:#666600; color: white;">PD</span>';
+									if($j== 2)
+										$cal2='<span style="background-color:#666600; color: white;">PD</span>';
+									if($j== 3)
+										$cal3='<span style="background-color:#666600; color: white;">PD</span>';																	
+							}else{
+								if($j == 1)
+									if ($materia -> $cal_num >= 70)
+										$cal1='<span style="color: #006600;">'.$materia -> $cal_num.'</span>';
+									else
+										$cal1='<span style="color: #990000;">'.$materia -> $cal_num.'</span>';									
+								if($j == 2)
+									if ($materia -> $cal_num >= 70)
+										$cal2='<span style="color: #006600;">'.$materia -> $cal_num.'</span>';
+									else
+										$cal2='<span style="color: #990000;">'.$materia -> $cal_num.'</span>';
+								if($j == 3)
+									if ($materia -> $cal_num >= 70)
+										$cal3='<span style="color: #006600;">'.$materia -> $cal_num.'</span>';
+									else
+										$cal3='<span style="color: #990000;">'.$materia -> $cal_num.'</span>';														
+							}
+							
+						}
+						
+						
+						echo tr_color('#CCDEFF', '#FFFFFF');
+						echo '<td>'.$h -> id.'</td>';
+						echo '<td><b>'.$g -> nombre.'</b></td>';
+						echo '<td>'.$m -> clave.'</td>';
+						echo '<td><b>'.$m -> nombre.'</b></td>';
+						echo '<td>'.$materia -> tipo.'</td>';
+						echo '<td><b>'.$cal1.'</b></td>';
+						echo '<td><b>'.$cal2.'</b></td>';
+						echo '<td><b>'.$cal3.'</b></td>';
+						echo '<td><center>'.$h -> maestro_id.'</center></td>';
+						//echo '<td>ll</td>';
+						?>
+						<td>
+							<?= form_remote_tag("irregular/eliminarMateria", "update: listadoMaterias") ?>		
+								<input type="hidden" value="<?= $registro ?>" name="registro">
+								<input type="hidden" value="<?= $h -> id ?>" name="horarioId">	
+								<input type="submit" value="Eliminar Materia">
+							</form>
+						</td>
+			<?php
+					}
+				}
+			}
+			if($merror == 1){
+				$h = $Horarios -> find_first("id = ".$materia -> horario_id);
+				$m = $Materias -> find_first("id = ".$h -> materia_id);
+				$g = $Grupos -> find_first("id = ".$h -> grupo_id);
+
+				echo tr_color('#CCDEFF', '#FFFFFF');
+				echo '<td>'.$h -> id.'</td>';
+				echo '<td>'.$g -> nombre.'</td>';
+				echo '<td>'.$m -> clave.'</td>';
+				echo '<td>'.$m -> nombre.'</td>';
+				echo '<td>'.$materia -> tipo.'</td>';
+				//echo '<td>ll</td>';
+				?>
+				<td>
+					<?= form_remote_tag("irregular/eliminarMateria", "update: listadoMaterias") ?>		
+						<input type="hidden" value="<?= $registro ?>" name="registro">
+						<input type="hidden" value="<?= $h -> id ?>" name="horarioId">	
+						<input type="submit" value="Eliminar Materia">
+					</form>
+				</td>
+			<?php
+			}
+		}
+		?>
+		</table>
+<?php 
+}
+?>
+</center>

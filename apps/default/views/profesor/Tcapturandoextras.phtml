@@ -1,0 +1,108 @@
+<script language="JavaScript">
+	var nav4 = window.Event ? true : false;
+	function acceptNum(evt){   
+		return true;
+	}
+</script>
+
+<script type='text/javascript'>
+function validar( formulario ) {
+  	<?php foreach($alumnado as $a){ ?>
+  	if (formulario.faltas<?= $a["id"] ?>.value >= 0 && formulario.faltas<?= $a["id"] ?>.value <= 100) {
+		if(formulario.faltas<?= $a["id"] ?>.value == ""){
+			formulario.faltas<?= $a["id"] ?>.value = 0;
+		}
+  	} else {
+    	alert("Error en el número de faltas del alumno, tendrás que utilizar un número entre 0 y 100");
+		formulario.faltas<?= $a["id"] ?>.focus();
+    	return false;
+  	}
+  	if (formulario.calificacion<?= $a["id"] ?>.value >= 0 && formulario.calificacion<?= $a["id"] ?>.value <= 100 && formulario.calificacion<?= $a["id"] ?>.value != "") {
+
+  	} else {
+  		if (formulario.calificacion<?= $a["id"] ?>.value == "NP" || formulario.calificacion<?= $a["id"] ?>.value == "np" || formulario.calificacion<?= $a["id"] ?>.value == "nP" || formulario.calificacion<?= $a["id"] ?>.value == "Np" || formulario.calificacion<?= $a["id"] ?>.value == "PD" || formulario.calificacion<?= $a["id"] ?>.value == "pd" || formulario.calificacion<?= $a["id"] ?>.value == "pD" || formulario.calificacion<?= $a["id"] ?>.value == "Pd"){
+
+  		}
+  		else{
+  			alert("La calificación de un alumno debe estar en entre 0 y 100");
+			formulario.calificacion<?= $a["id"] ?>.focus();
+    		return false;
+  		}
+  		return true;
+  	}
+  	<?php } ?>
+	
+	if(formulario.horas.value>0){
+		
+	}
+	else{
+		alert("El número de horas clase debe ser mayor a cero");
+		formulario.horas.focus();
+    	return false;
+	}
+	
+	if(formulario.avance.value>0 && formulario.avance.value<=100){
+		
+	}
+	else{
+		alert("El porcentaje avance programático debe ser mayor a cero y menor a 100");
+		formulario.avance.focus();
+    	return false;
+	}
+}
+</script>
+<center><br><br>
+<table>
+	<tr>
+		<td width="900" align="left">
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B"><b>&nbsp;Número de curso: </b></td>
+					<td width="600" bgcolor="#EEEEEE">&nbsp;<?= $curso ?></td>
+				</tr>
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B"><b>&nbsp;Profesor: </b></td>
+					<td width="600" bgcolor="#EEEEEE">&nbsp;<?= $profesor ?> (<?= $nomina ?>)</td>
+				</tr>
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B">&nbsp;<b>Materia: </b></td>
+					<td width="600" bgcolor="#EEEEEE">&nbsp;<?= $materia ?> (<?= $clave ?>)</td>
+				</tr>
+			</table>
+			<br><center><b>
+				<h2>EXTRAORDINARIOS</h2>
+			</b><center><div align="justify" style="font-size: 11px;">Las calificaciones deberán estar en un rango entre <b>0 y 100</b>, en el caso de que el alumno no merezca calificación podra utilizar <b>NP</b>. Deberá además capturar las faltas que tuvo cada alumno.</div><br>
+			<form method="POST" action="<?= KUMBIA_PATH ?>profesor/Tcapturarextra/<?= $curso ?>" onSubmit="return validar(this);">
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 10px;" >
+				<tr bgcolor="#FFCA5B">
+					<th width="50" height="50" rowspan="2"  align="center">No.</th>
+					<th width="75" rowspan="2" align="center">Registro</th>
+					<th width="300" rowspan="2" align="center">Nombre del alumno</th>
+					<th width="150" colspan="3" align="center">Ordinario</th>
+					<th width="100" rowspan="2" align="center">Extraordinario</th>
+				</tr>
+				<tr bgcolor="#FFCA5B">
+					<th width="50" height="25" align="center">E1</th>
+					<th width="50" align="center">E2</th>
+					<th width="50" align="center">E3</th>
+				</tr>
+				<?php if($alumnado) foreach($alumnado as $a){ $i++; if($i%2==0){$bg = "#EEEEEE";}else{$bg = "#FFFFFF";} ?>
+					<tr bgcolor="<?= $bg ?>">
+						<td width="50" height="25" align="center"><?= $i ?></td>
+						<td width="75" align="center"><?= $a["registro"] ?></td>
+						<td width="300" align="center"><?= $a["nombre"] ?></td>
+						<th width="50"><input disabled type="text" name="calificacion1<?= $a["id"] ?>" size="3" value="<?= $a["c1"] ?>" style="text-align: center;background: #EEEEEE; color:#000000;" maxlength="2"></th>
+						<th width="50"><input disabled type="text" name="calificacion2<?= $a["id"] ?>" size="3"  value="<?= $a["c2"]?>" style="text-align: center;background: #EEEEEE; color:#000000;" maxlength="3"></th>
+						<th width="50"><input disabled type="text" name="calificacion3<?= $a["id"] ?>" size="3"  value="<?= $a["c3"] ?>" style="text-align: center;background: #EEEEEE; color:#000000;" maxlength="3"></th>
+						<th width="50"><input type="text" name="calificacion<?= $a["id"] ?>" size="11"  value="<?= $a["calificacion"] ?>" style="text-align: center;background: #FFCA5B; font-weight:bold;" maxlength="3"></th>
+					</tr>
+				<?php } ?>
+			</table>
+			<input type="hidden" name="parcial" value="<?= $parcialito ?>">
+			<br><input type="submit" value="GUARDAR CALIFICACIONES" style="color: #000000;background: #FFCA5B;">
+			</form>
+			<form method="POST" action="<?= KUMBIA_PATH ?>profesor/captura"><input type="submit" value="CANCELAR" style="color: #000000;background: #FFCA5B;"></form>
+		</td>
+	</tr>
+</table>
+</center>

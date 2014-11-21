@@ -1,0 +1,54 @@
+<?= render_partial("info"); ?>
+<br>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp; KARDEX DEL ALUMNO
+</div>
+<div>
+	<center>
+	<br/>
+	<table border="1" width="90%" class="bordeazul" cellpadding="1" cellspacing="1" style="font-size: 12px;">
+		<tr class="naranja">
+			<!--<th>Nivel</th>-->
+			<th>Clave</th>
+			<th>Nombre</th>
+			<th>Tipo</th>
+			<th>Promedio</th>
+			<th>Periodo</th>
+		</tr>
+		<?php
+		// d = ordinario   r = regularizacion  e = extraordinario  t = titulo
+		$titulo_nivel=-1;
+		foreach ($kardex as $k){
+			$Materias = new Materias();
+			$materias = $Materias -> find_first("clave = '".$k -> clave."'");
+			if ($titulo_nivel < $k -> nivel){
+				echo '<tr><td colspan="5">&nbsp;</td></tr>';
+				echo '<tr><th class="azul" colspan="5">Nivel '.$k -> nivel.'</th></tr>';
+				$titulo_nivel=$k -> nivel;
+			}
+			echo tr_color('#DDDDDD', '#FFFFFF', '#EEEEEE');
+			//echo "<td>".$k -> nivel."</td>";
+			echo "<td>".$k -> clave."</td>";
+			echo "<td><b>".utf8_decode($materias -> nombre)."</b></td>";			
+			switch($k -> tipo_de_examen){
+				case 'D': $examen = "Ordinario"; 
+						break;
+				case 'R': $examen = "Regularización"; 
+						break;
+				case 'E': $examen = "Extraordinario";
+						break;
+				case 'T': $examen = "Titulo";
+						break;
+			}
+			echo "<td><center>".$examen."</center></td>";			
+			echo "<th>".$k -> promedio."</th>";
+			echo "<td><center>".$k -> periodo."</center></td>";						
+		}
+		?>
+	</table>
+	</center>
+	<br/><br/>
+	<center class="naranja">
+	<h3>Los datos aqui mostrados solamente son con motivos de informacion, no tienen ninguna validez oficial.</h3>	
+	</center>
+</div>

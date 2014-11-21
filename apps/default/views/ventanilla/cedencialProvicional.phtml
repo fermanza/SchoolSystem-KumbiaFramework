@@ -1,0 +1,53 @@
+<!--Se llaman los archivos JS y CSS-->
+<?= stylesheet_link_tag('dialog_box'); ?>
+<?= javascript_library_tag('dialog_box'); ?>
+
+<!--Opcion a realizar la busqueda del registro-->
+<div style="text-align:left; margin-top:30px; margin-bottom:100px;">
+<?php echo form_remote_tag('ventanilla/buscarAlumno', 'update: muestraPeriodos', 'name: formReportes', 'success: mensajeAlerta();')?>
+   <table style="margin-top:50px; margin-left:15px; margin-bottom:50px;">
+     <tr>
+	   <td colspan="3">
+	     <?= img_tag("adorno.gif","border: 0") ?> Ingresa el registro del alumno a buscar.
+	   </td>
+	 </tr>
+     <tr>
+	   <td colspan="3">
+	     <br/><br/>
+	   </td>
+	 </tr>
+     <tr>
+	   <td align="right" style="font-weight:bold; font-family:arial; font-size:13px;">
+	     Registro&nbsp;:&nbsp;
+	   </td>
+	   <td align="left">
+	     &nbsp;<input type="text" id="registro" name="registro" maxlength="10" style="width:191px;" onkeypress="javascript:return ValidNum(event)"/>
+	   </td>
+	   <td>
+	     &nbsp;&nbsp;&nbsp;<?php echo submit_tag('BUSCAR','id: boton','class: common_button');?> 
+	   </td>
+	 </tr>
+   </table>
+ <?php echo end_form_tag()?>
+</div>
+
+<!--En la siguiente div se mostrra el reporte seleccionado-->
+<div id="muestraPeriodos" name="muestraPeriodos">
+</div>
+
+
+<script type='text/javascript'>
+//funcion que valida que solo se puedan ingresar numeros
+function ValidNum(e)
+{
+  var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+    return ((tecla > 47 && tecla < 58) || tecla == 8);
+}
+  
+  //Funcion que muestra el mensaje ventana emergente con mensaje
+  function mensajeAlerta(){
+	if(document.getElementById('status').value == "FALSE"){
+	  showDialog('ERROR',document.getElementById('msg').value,'error',2);
+	}
+  }
+</script> 

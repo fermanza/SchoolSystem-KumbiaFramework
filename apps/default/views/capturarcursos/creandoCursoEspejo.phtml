@@ -1,0 +1,23 @@
+<?= render_partial("info"); ?>
+
+<br />
+<br />
+<?= render_partial("menucursos"); ?>
+<br />
+<br />
+<table align="center">
+	<tr>
+		<td colspan="3" valign="center" class="encabezadoo">
+		<?
+			if( $exito == 1 ){
+				echo "<h3>Curso espejo creado exit&oacute;samente. La clave del nuevo curso es: $clavecursoo</h3>";
+			}
+			else{
+				echo "<h3>Error:</h3>";
+				echo "<br /><br /><h3>".$error."</h3>";
+			}
+		?>
+		</td>
+	</tr>
+</table>
+</table>

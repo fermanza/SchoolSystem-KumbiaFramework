@@ -1,0 +1,175 @@
+<!--Se llaman los archivos css y js-->
+<?//= javascript_library_tag('jquery-1.7.2'); ?> 
+<?= javascript_library_tag('jquery-1.4.4.min'); ?>
+<?= javascript_library_tag('complete'); ?>
+<?= javascript_library_tag('jquery.DataTables.min'); ?>
+<?//= javascript_library_tag('jquery-ui'); ?>
+<?= javascript_library_tag('jquery.ui.core'); ?>
+<?= javascript_library_tag('jquery.ui.widget'); ?>
+<?= javascript_library_tag('jquery.ui.datepicker'); ?>
+<?= javascript_library_tag('dialog_box'); ?>
+
+<?= stylesheet_link_tag('demo_page'); ?>
+<?= stylesheet_link_tag('demo_table'); ?>
+<?= stylesheet_link_tag('demo_table_jui'); ?>
+<?//= stylesheet_link_tag('jquery-ui'); ?>
+<?= stylesheet_link_tag('smoothness/jquery-ui-1.7.2.custom'); ?>
+<?= stylesheet_link_tag('themes/demos', true); ?>
+<?= stylesheet_link_tag('dialog_box'); ?>
+<!--Termina llamado de archivos-->
+
+<!--Opciones a elegir para generar los reportes-->
+<div style="text-align:left; margin-top:30px;">
+&nbsp;&nbsp;&nbsp;&nbsp;<?= img_tag("adorno.gif","border: 0") ?>&nbsp;&nbsp;<b style="font-size:14px;" >REPORTE DE CAJA</b>
+<?php echo form_remote_tag('caja/crearReporte', 'update: muestraReporte', 'name: formReportes', 'success: mensajeAlerta();')?>
+   <table style="margin-top:50px; margin-left:15px; margin-bottom:50px;">
+     <tr>
+	   <td align="right" style="font-weight:bold; font-family:arial; font-size:13px;">
+	     Fecha Desde&nbsp;:&nbsp;
+	   </td>
+	   <td align="left">
+	     &nbsp;<input type="text" id="fechaDesde" name="fechaDesde" readonly="readonly" style="width:191px;" />
+	   </td>
+	 </tr>
+     <tr>
+	   <td align="right" style="font-weight:bold; font-family:arial; font-size:13px;">
+	     Fecha Hasta&nbsp;:&nbsp;
+	   </td>
+	   <td align="left">
+	     &nbsp;<input type="text" id="fechaHasta" name="fechaHasta" readonly="readonly" style="width:191px;" />
+	   </td>
+	 </tr>
+     <tr>
+	   <td align="right" style="font-weight:bold; font-family:arial; font-size:13px;">
+	     Nivel&nbsp;:&nbsp;
+	   </td>
+	   <td align="left">
+	     <div style="font-weight:bold; font-family:arial; font-size:13px; float:left; margin-left:7px;" id="titleNivel" name="titleNivel"></div>
+         &nbsp;<select id="tipoNivel" name="tipoNivel" style="width:197px; display:block; float:left; margin-left: 5px;">
+	       <!--<option value="0">Tecn&oacute;logo &#47; Ingenie&iacute;a</option>
+	       <option value="1">Tecn&oacute;logo</option>-->
+	       <option value="2">Ingenie&iacute;a</option>
+	     </select>
+	   </td>
+	 </tr>
+     <tr>
+	   <td align="right" style="font-weight:bold; font-family:arial; font-size:13px;">
+	     <div style="display:none; font-weight:bold; font-family:arial; font-size:13px;" id="titleFolio" name="titleFolio"> Estatus Folio&nbsp;:&nbsp;</div>
+	   </td>
+	   <td align="left">
+        &nbsp;<select id="tipoEstatus" name="tipoEstatus" style="width:197px; display:none; float:left; margin-left:5px;" > 
+	       <option value="2">Pagado &#47; Sin Pagar</option>
+	       <option value="1">Pagado</option>
+	       <option value="0">Sin Pagar</option>
+	     </select>
+	   </td>
+	 </tr>
+     <tr>
+	   <td align="right" style="font-weight:bold; font-family:arial; font-size:13px;">
+	     Tipo de reporte&nbsp;:&nbsp;
+	   </td>
+	   <td align="left">
+        &nbsp;<select id="tipoReporte" name="tipoReporte" style="width:197px;" onchange="muestraOpcion()">
+	       <!--<option value="0">Seleccionar Tipo De Reporte</option>-->
+	       <option value="General">Reporte General</option>
+	       <option value="Desglosado">Reporte Desglosado</option>
+	       <option value="Folio">Reporte Folios</option>
+	     </select>
+	   </td>
+	   <td>
+	     &nbsp;&nbsp;&nbsp;<?php echo  submit_tag('GENERAR REPORTE','id: boton','class: common_button');?> 
+	   </td>
+	 </tr>
+   </table>
+ <?php echo end_form_tag()?>
+</div>
+
+<!--En la siguiente div de muestra los iconos para imprimir el PDF o EXCEL-->
+<div style="float:left;  margin-left:920px;" id="iconoExcel" name="iconoExcel"></div>
+<div name="iconoPDF" id="iconoPDF" style="float:left;  margin-left:860px; margin-top:-42px;"></div>
+
+<!--En la siguiente div se mostrra el reporte seleccionado-->
+<div id="muestraReporte" name="muestraReporte">
+</div>
+
+<script type='text/javascript'>
+  //Funcion que crea el calendario de fecha "Desde"
+  $q(function() {
+	$q( "#fechaDesde" ).datepicker({
+		changeMonth: true,
+		changeYear: true
+	});
+  });
+  
+  //Funcion que crea calendario de fecha "Hasta"
+  $q(function() {
+	$q( "#fechaHasta" ).datepicker({
+		changeMonth: true,
+		changeYear: true
+	});
+  });
+  
+
+  //Funcion que muestra o esconde la opcion de estatus de pago
+  function muestraOpcion(){
+ 
+    if(document.getElementById('tipoReporte').value == "Folio"){
+	  document.getElementById('tipoEstatus').style.display = "block";
+	  document.getElementById('titleFolio').style.display = "block";
+	  document.getElementById('tipoNivel').style.display = "none";
+	  document.getElementById('titleNivel').innerHTML = "INGENIER&Iacute;A";
+	}
+	  
+	else{
+	  document.getElementById('tipoEstatus').style.display = "none";
+	  document.getElementById('titleFolio').style.display = "none";
+	  document.getElementById('tipoNivel').style.display = "block";
+	  document.getElementById('titleNivel').innerHTML = "";
+	}
+  }
+  
+   muestraOpcion();
+   
+  //Funcion que muestra el mensaje ventana emergente con mensaje
+  function mensajeAlerta(){
+	if(document.getElementById('status').value == "FALSE"){
+	  showDialog('ERROR',document.getElementById('msg').value,'error',2);
+	  document.getElementById('iconoExcel').innerHTML = '';
+	  document.getElementById('iconoPDF').innerHTML = '';
+	}
+	
+	else if(document.getElementById('status').value == "TRUE"){
+	
+	  if(document.getElementById('tipoReporte').value == "General")
+	    document.getElementById('iconoExcel').innerHTML = '<?php echo link_to("caja/reporte_caja_EXCEL/1","".img_tag("icono-excel2.jpg","width: 35","border: 0","height: 37px;","cursor:pointer;","title: EXPORTAR REPORTE A EXCEL", "target: _blank"));?>';
+	  
+	  else if(document.getElementById('tipoReporte').value == "Desglosado")
+	    document.getElementById('iconoExcel').innerHTML = '<?php echo link_to("caja/reporte_caja_EXCEL/2","".img_tag("icono-excel2.jpg","width: 35","border: 0","height: 37px;","cursor:pointer;","title: EXPORTAR REPORTE A EXCEL", "target: _blank"));?>';
+	 
+	  else
+	    document.getElementById('iconoExcel').innerHTML = '<?php echo link_to("caja/reporte_caja_EXCEL/3","".img_tag("icono-excel2.jpg","width: 35","border: 0","height: 37px;","cursor:pointer;","title: EXPORTAR REPORTE A EXCEL", "target: _blank"));?>';
+	 	 
+		 
+	  document.getElementById('iconoPDF').innerHTML = '<img src="../public/img/exportaradobe.jpg" target="_blank" style="width:50px; cursor:pointer;" title="EXPORTAR REPORTE A PDF" onclick="reporteCajaPDF();"/>';
+	}
+  }
+ 
+  //Funcion que sirve para generar el reporte en PDF
+  function reporteCajaPDF(){
+
+	var param = 'fechaDesde=' + document.getElementById('fechaDesde').value;
+        param += String.fromCharCode(38)+'fechaHasta=' + document.getElementById('fechaHasta').value;
+        param += String.fromCharCode(38)+'tipoNivel=' + document.getElementById('tipoNivel').value;
+        param += String.fromCharCode(38)+'tipoReporte=' + document.getElementById('tipoReporte').value;
+        param += String.fromCharCode(38)+'tipoEstatus=' + document.getElementById('tipoEstatus').value;
+		
+    new AJAX.viewRequest(
+	  {
+	    action: "caja/reporte_caja_PDF",
+	    container: "muestraReporte",
+        parameters: param,
+	  }
+	)
+  }
+
+</script> 

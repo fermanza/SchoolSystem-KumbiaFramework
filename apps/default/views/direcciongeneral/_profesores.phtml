@@ -1,0 +1,13 @@
+<?php
+$Maestro = new Maestros();
+echo form_tag('tgoprofesor/horarioPDF');
+	echo '<select name="nomina">';
+	foreach($maestros as $maestro){
+		if($Maestro -> find_first($maestro -> maestro_id)){
+			echo '<option value="'.$Maestro -> id.'">'.utf8_encode($Maestro -> nombre).' - '.$Maestro -> id.'</option>';
+		}
+	}
+	echo '</select>';
+	echo submit_tag('Imprimir Horario');
+	echo end_form_tag();
+?>

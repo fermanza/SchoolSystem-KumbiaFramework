@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta http-equiv='Content-type' content='text/html; charset=<?= Kumbia::get_active_app_charset() ?>' />
+  <title>SISTEMA DE CONTROL ESCOLAR CETI COLOMOS</title>
+  <?= stylesheet_link_tag('style', 'use_variables: true') ?> 
+  <?= stylesheet_link_tag('estilo', 'use_variables: true') ?>
+  <?= Kumbia::stylesheet_link_tags() ?> 
+  <?= Kumbia::javascript_base() ?> 
+  <script language="JavaScript1.2" type="text/javascript">
+	function seleccionaMateria(seleccion){
+		window.location.href = 'ccapturagrupos/'+seleccion.value;
+	}
+	
+	function seleccionaMaestro(materia,seleccion){
+		window.location.href = materia+'/'+seleccion.value;
+	}
+	function modificaMateria(id,seleccion){
+		window.location.href = id+"/"+seleccion.value;
+	}
+	
+	function modificaMaestro(materia,seleccion){
+		window.location.href = materia+'/'+seleccion.value;
+	}
+	
+</script>
+<style type="text/css">
+	#menu a{
+		display: block; 
+		width: 100px; 
+		height: 30px;
+	}
+	.menu{
+		border: 1px solid #999999;
+		height: 35px;
+	}
+	
+	.menu a{
+		color:#FFFFFF;
+		padding: 0px 10px;
+		font-weight: bold;
+	}
+	.boton{
+		color: #000000;
+		background: #FFCA5B;
+		font-size: 10px;
+		font-weight: bold;
+		height: 20px;
+		text-transform: uppercase;
+	}
+	.botonDesactivado{
+		color: #000000;
+		background: #EEEEEE;
+		font-size: 10px;
+		font-weight: bold;
+		height: 20px;
+		text-transform: uppercase;
+	}
+	
+	.cuadrotexto{
+		color: #000000;
+		background: #FFCA5B;
+		font-size: 9px;
+		height: 15px;
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+	
+	.cuadrotextocentrado{
+		color: #000000;
+		background: #FFCA5B;
+		font-size: 9px;
+		height: 15px;
+		text-transform: uppercase;
+		font-weight: bold;
+		text-align: center;
+	}
+	
+	.fondoazul{
+		color: #FFFFFF;
+		background: #195AA2;
+	}
+	
+	.fondonaranja{
+		color: #000000;
+		background: #FFCA5B;
+	}
+	
+	BODY{
+		color: #000000;
+		font-family: Verdana;
+		font-size:10px;
+	}
+	.info {
+        font-size: 14px;
+    }
+    
+    .info td {
+        font-weight: bold;
+        font-size: 15px;
+        text-align: left;
+        padding: 0 10px 0 10px;
+    }
+    
+    .fondoamarillo {
+        background-color: #FFCA5B;
+    }
+    
+    #rojo {
+        color: #CC0000;
+    }
+    
+    #verde {
+        color: #006600;
+    }
+	</style>
+ </head>
+<body bgcolor="#CCCCCC">
+<table width="1000" border="1" bordercolor="#0559B7" bgcolor="#FFFFFF" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #FFFFFF">
+      <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="196" valign="top" height="120"><a href="http://www.ceti.mx">
+				<?= img_tag("logo.jpg","border: 0","width: 196","height: 120") ?>
+			</a></td>
+            <td width="474" valign="top"><table border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td height="62">
+					<?= img_tag("cabeceraNaranja.jpg","border: 0","width: 670","height: 65") ?>
+				</td>
+              </tr>
+              <tr>
+                <td height="35" bgcolor="#404040"><div align="center" style="color: #FFF; font-size: 12px;"><strong>CENTRO DE ENSEÑANZA TÉCNICA INDUSTRIAL</strong></div></td>
+              </tr>
+			   <tr>
+                <td height="30" bgcolor="#0559B7"><div align="center" style="color: #FFF; font-size: 12px;"><strong>CENTRO DE INFORMACIÓN DE RECURSOS ADMINISTRATIVOS</strong></div></td>
+              </tr>
+			  
+            </table></td>
+            <td valign="top">
+			<table border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+
+                <td><a href="http://www.sep.gob.mx">
+					<?= img_tag("logoSEP.jpg","border: 0","height: 65") ?>
+				</a></td>
+              </tr>
+              <tr>
+                <th height="65" valign="middle" bgcolor="#666666" style="color: #FFF">
+					INGENIERÍA
+				</th>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+	  <tr>
+		<td>
+			<?php
+				if (Session::get_data('TMPtipousuario')  == "PROFESOR" || Session::get_data('TMPtipousuario')  == "COORDINADOR")	{ ?>
+					<center><h3><?= link_to("profesor/convertirAProfesor","Volver al Modulo Profesor") ?></h3></center>
+				<?php
+				}
+			
+			?>
+		</td>
+	  </tr>
+      <?= content(); ?>
+      <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="2">
+          <tr>
+            <td><table width="100%" border="0" align="center" cellpadding="5" cellspacing="0" bgcolor="#F27822">
+              <tr>
+                <td>
+				<div align="center" style="family-font: Verdana; font-size: 10px; color: #FFF;">
+				<b>
+				<?
+					function fecha(){
+						$d = date("d",time());	
+						$m = date("m",time());
+						$y = date("Y",time());
+						
+						$n = date("N",time());
+					
+						switch($n){
+							case 1: $fecha = "Lunes"; break;
+							case 2: $fecha = "Martes"; break;
+							case 3: $fecha = "Miercoles"; break;
+							case 4: $fecha = "Jueves"; break;
+							case 5: $fecha = "Viernes"; break;
+							case 6: $fecha = "Sábado"; break;
+							case 7: $fecha = "Domingo"; break;
+						}
+						
+						$fecha .= ", ".$d." de ";
+						
+						switch($m){
+							case 1: $fecha .= "Enero"; break;
+							case 2: $fecha .= "Febrero"; break;
+							case 3: $fecha .= "Marzo"; break;
+							case 4: $fecha .= "Abril"; break;
+							case 5: $fecha .= "Mayo"; break;
+							case 6: $fecha .= "Junio"; break;
+							case 7: $fecha .= "Julio"; break;
+							case 8: $fecha .= "Agosto"; break;
+							case 9: $fecha .= "Septiembre"; break;
+							case 10: $fecha .= "Octubre"; break;
+							case 11: $fecha .= "Noviembre"; break;
+							case 12: $fecha .= "Diciembre"; break;
+						}
+						
+						$fecha .= " de ".$y;
+						
+						return $fecha;
+					}
+					
+					function hora(){
+						//$hora = date("(H:i)",time());
+						//$hora = date("(H:i)",time());
+						//$hora = date("(H:i)");
+						$hora = date("H");
+						if( $hora != 0 ) $hora -= 1;
+						else $hora = 23;
+						$hora = date($hora.":i");
+						return $hora;
+					}
+	?>
+				<?= fecha() ?> <?= hora() ?><br>
+				©2011 CETI - CENTRO DE ENSE&Ntilde;ANZA TÉCNICA INDUSTRIAL
+				</div></td>
+				  </b>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+    </table></td>
+  </tr>
+
+</table> 
+ </body>
+</html>

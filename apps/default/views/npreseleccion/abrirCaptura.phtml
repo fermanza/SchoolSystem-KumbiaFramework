@@ -1,0 +1,89 @@
+<center><br><br>
+<table>
+	<tr>
+		<td width="900" align="left">
+			<div style="font-size: 14px;"><div style="color: #FF0000;"><b>Abrir Captura: </b></div>
+			<br />
+			<form action= "abrirCaptura2" method = "post" onSubmit="return validatefields();" name="Form1" id="Form1">
+			<table border="1" cellpadding="1" cellspacing="1" bordercolor="#FF6633" style="font-size: 11px;" >
+				<tr>
+					<td width="300" height="25" bgcolor="#FFCA5B"><b>Cursos del 32009: </b></td>
+					<td width="400" bgcolor="#EEEEEE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<select name="curso" id="curso">
+							<option value="-1" style='text-align:center;'>- - - Seleccione el Curso - - -</option>
+	<?
+								$i = 0;
+								foreach ( $cursos as $curso ){
+	?>
+									<option value="<? echo $curso; ?>">
+										<? echo "Clavecurso: ".$curso." Materia: ".$materia[$i]." Nomina: ".$nominaProf[$i]; ?>
+									</option>
+	<?
+									$i++;
+								}
+	?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B">&nbsp;<b>
+						Fecha en que se cierra el sistema<br />
+						(El sistema s&oacute;lo permite abrirse durante 2 d&iacute;as
+						como m&aacute;ximo y s&oacute;lo 2 veces): </b>
+					</td>
+					<td width="400" bgcolor="#EEEEEE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<select name="fecha" id="fecha">
+							<option value="-1" style='text-align:center;'>- -Seleccione la fecha de cierre- -</option>
+	<?
+								foreach ( $fechas as $fecha ){
+	?>
+									<option value="<? echo $fecha; ?>">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<? echo date ("Y-m-d H:i:s", $fecha); ?>
+									</option>
+	<?
+								}
+	?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td width="200" height="25" bgcolor="#FFCA5B">&nbsp;<b>
+						Seleccione el Parcial<br />
+					</td>
+					<td width="400" bgcolor="#EEEEEE">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<select name="parcial" id="parcial">
+							<option value="-1" style='text-align:center;'>- -Seleccione el parcial- -</option>
+								<option value="1">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									- Primer Parcial -
+								</option>
+								<!--
+								<option value="2">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;
+									- Segundo Parcial -
+								</option>
+								<option value="3">
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									- Tercer Parcial -
+								</option>
+								-->
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<input type="image" src="<?= KUMBIA_PATH ?>img/profesor/abrirCaptura.gif" border="0">
+					</td>
+				</tr>
+			</form>
+			</table>
+		</td>
+	</tr>
+</table>
+<br><br>
+</center>

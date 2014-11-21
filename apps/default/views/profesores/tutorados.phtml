@@ -1,0 +1,83 @@
+<style type="text/css">
+.naranja{
+		background-color: #ffca5b;
+	}
+	.azul{
+		background-color: #1569c7;
+	}
+	.gris{
+		background-color: #BBBBBB;
+	}
+	.bordeazul{
+		border: solid 1px #003399;
+	}
+
+	.bordeazul th{
+		border: solid 1px #003399;
+	}
+
+	.bordeazul td{
+		border: solid 1px #003399;
+	}
+	
+</style>
+<center><br><br>
+<table>
+	<tr>
+		<td width="750"><div align="justify">
+			
+			<div style="font-size: 14px;"><div style="color: #FF0000;"><b>SECCION DE TUTORADOS: </b></div>
+				<br>
+				En esta sección podrás ver un listado con los alumnos de los cuales el profesor funge como tutor, por el momento esta sección esta en construcción, en los próximos días podrá consultar esta sección en caso de tener alguna duda con sus tuturados.
+				<br><br>
+			</div>
+		</div></td>
+	</tr>
+</table>
+<div class="tutorados">
+<center>
+<table style="width: 650px; font-size:11px;" class="bordeazul">
+<tr class="naranja">
+	<th>Foto</th>
+	<th>Registro</th>
+	<th>Nombre</th>
+	<th>Semestre</th>	
+	<th>Tipo</th>
+</tr>
+ <?php
+ $Alumnos = new Alumnos();
+ foreach($tutorias as $t){
+	$Alumnos -> find_first("miReg = ".$t-> registro);	
+	
+	echo "<td><center>";
+	$entro=0;
+	$foto = "fotos/".$t -> registro.".JPG";
+	$foto1 = "fotos/".$t -> registro.".jpg";					
+	if(file_exists("/sitios/htdocs/ingenieria/public/img/".$foto)){					
+		echo img_tag($foto, "width: 100");
+		$entro=1;
+	}
+	if(file_exists("/sitios/htdocs/ingenieria/public/img/".$foto1)){					
+		echo img_tag($foto1, "width: 100");
+		$entro=1;
+	}
+	if ($entro == 0){
+		echo "Sin Foto";
+	}
+	echo "</center></td>";
+	echo '<th>'.$t -> registro.'</th>';
+	echo '<td><b>'.link_to("profesor/convertirAAlumno/".$t -> registro,$Alumnos -> vcNomAlu).'</b></td>';
+	echo '<th>'.$Alumnos -> tiNivel.'</th>';
+	echo '<th>'.$Alumnos -> enTipo.'</th>';
+	echo tr_color('#EEEDDD','#FFFDFD');
+ }
+ 
+ ?>
+ </table>
+ 
+ </center>
+ </div>
+</center>
+<br>
+<br>
+<br>

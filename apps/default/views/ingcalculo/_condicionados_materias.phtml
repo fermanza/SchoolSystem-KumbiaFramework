@@ -1,0 +1,40 @@
+<table cellspacing="1" cellpadding="1" style="font-size: 12px;" align="center">
+	<tr class="azul">
+		<th class="bordeAzul2">
+			Favor de seleccionarle las materias del alumno condicionado.
+		</td>
+	</tr>
+	<tr>
+		<td  class="centrar">
+			<select id="materias" name="materias">
+				<option value="1">- - Seleccione una materia - -</option>
+				<?php
+				foreach($materias as $materia){
+				?>
+					<option value="<?= $materia->id ?>">- - <?php echo $materia->clavemat." ".$materia->nombre ?> - -</option>
+				<?php
+				}
+				?>
+			</select>
+		</td>
+	</tr>
+	<tr align="center">
+		<input type="hidden" id="registro" name="registro" value="<?= $alumno->miReg ?>" />
+		<td colspan="2"><input type="submit" value="Guardar" /></td>
+	</tr>
+</table>
+<br />
+<?php
+print "<script type=\"text/javascript\">
+	function render_status(){
+		aler('render_statusss');
+		var procede = document.getElementById('procede').value;
+		if(procede == 1){
+			document.getElementById('texto_status_carta').innerHTML = 'Aprobada';
+		}
+		else{
+			document.getElementById('texto_status_carta').innerHTML = 'No Aprobada';
+		}
+	}
+</script>";
+?>

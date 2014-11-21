@@ -1,0 +1,57 @@
+<style type="text/css">
+	select{
+		width: 100%;
+	}
+	input[type="text"]{
+		width: 80%;
+	}
+	td{
+		font-weight:bold;
+	}
+</style>
+<br />&nbsp;<br />
+<?php echo form_remote_tag("apoyo/guardarPeriodo", "update: contenido") ?>
+<center>
+<table border="0" style="font-size:10px; width: 950px;" >
+	<tr>
+		<th width="300" valign="top">
+		 <div id="periodos">
+			<table class="bordeAzul" width="100%" style="font-size:10px; width: 100%;">
+				<tr class="naranja">
+					<th colspan="4">PERIODOS</th>					
+				</tr>
+				<tr class="azul">
+					<th>CLAVE</th>
+					<th>NOMBRE</th>
+					<th>ACTIVO</th>
+					<th>&nbsp;</th>
+				</tr>
+				<?php
+			$Periodos = new Periodos();
+			$periodos = $Periodos -> find("order: id ASC");
+			
+			foreach($periodos as $p){
+				echo tr_color('#CCDEFF', '#FFFFFF');
+					echo '<td>'.$p -> periodo.'</td>';
+					echo '<td>'.$p -> nombre.'</td>';
+					if ($p -> activo== 0)
+						echo '<td><center>NO</center></td>';
+					else
+						echo '<td><center>SI</center></td>';					
+					echo '<td>'.link_to_remote("apoyo/modificarPeriodo/".$p -> id,"Modificar","update: infoPeriodo").'</td>';				
+				echo '</tr>';
+			}
+				?>
+			</table>
+		 </div>
+		</th>
+		<th width="20">
+		&nbsp;
+		</th>
+		<th width="580" valign="top">
+		 <div id="infoPeriodo">
+		 
+		 </div>
+		</th>
+	</tr>
+</table>

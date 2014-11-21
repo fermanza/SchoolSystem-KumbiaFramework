@@ -1,0 +1,27 @@
+<?php	
+	$Horarios = new Horarios();
+	$Periodo = new Periodos();
+	$Materias = new MateriasHorarios();
+	$Grupos = new Grupos();
+	
+	$Periodo -> find_first("activo = 1");
+	if($horarios = $Horarios -> find("maestro_id = ".$maestro -> id." and periodo = ".$Periodo -> periodo, "order: id ASC")){
+		echo '<center>';
+		echo '<table cellpading="1" cellspacing="1" width="700" class="bordeAzul" style="font-size: 10px;">';
+		echo '<tr class="naranja"><th colspan="5">Actas asignadas al profesor '.utf8_encode($propietario).'</th></tr>';
+		echo '<tr class="azul"><th>Acta</th><th>Materia</th><th>Plan</th><th>Grupo</th><th>&nbsp;</th></tr>';
+		foreach($horarios as $h){
+			if($Materias -> find_first($h -> materia_id)){}else{$Materias -> nombre = "&nbsp;";}
+			if($Grupos -> find_first($h -> grupo_id)){}else{$Grupos -> nombre = "&nbsp;";}		
+			echo tr_color('#CCCCCC','#EEEEEE');
+			if ($ajax == 1){
+				echo "<td>".$h -> id."</td><td>".utf8_encode($Materias -> nombre)."</td><td>".$Materias -> plan."</td><td>".$Grupos -> nombre.'</td><th>'.link_to_remote('tgocoordinador/borrarActa/'.$h -> id.'/'.$maestro -> id,'Eliminar','update: actasCargadas').'</th>';
+			}else{
+				echo "<td>".$h -> id."</td><td>".$Materias -> nombre."</td><td>".$Materias -> plan."</td><td>".$Grupos -> nombre.'</td><th>NO DISP. ELIMINAR</th>';
+				//echo "<td>".$h -> id."</td><td>".$Materias -> nombre."</td><td>".$Materias -> plan."</td><td>".$Grupos -> nombre.'</td><th>'.link_to_remote('tgocoordinador/borrarActa/'.$h -> id.'/'.$maestro -> id,'Eliminar','update: actasCargadas').'</th>';
+			}
+		}
+		echo '</table>';
+	}
+	echo '</center><br /><br />';
+?>

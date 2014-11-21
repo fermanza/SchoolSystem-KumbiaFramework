@@ -1,0 +1,105 @@
+<?php
+	$Calificaciones = new Calificaciones();
+	$Alumnos = new Alumnos();
+	$Extras = new extras();
+	$reprobadas = 0;
+	$registro = Session::get("registro");
+	
+	if($Alumnos -> find_first('registro = '.$registro.' and (condicionado = 1 or condicionado = 2)')){
+	
+	}else{
+		if($calificaciones = $Calificaciones -> find("registro = ".$registro." and periodo = 12009")){
+			foreach($calificaciones as $c ){			
+				if ($c -> situacion == 'OR' || $c -> situacion == '-'){							
+					//si paso
+				}else{				
+					
+					if ($Extras -> find_first('registro = '.$registro.' and horario_id = '.$c -> horario_id.' and calificacion > 69 and calificacion < 101')){					
+					}else{
+						//echo $c -> horario_id.' - ';
+						$reprobadas++;
+					}
+				}
+				//echo '<br>';
+			}
+		}else{
+			//echo "no tiene carga";
+		}
+	}
+
+	
+	if ($reprobadas > 5){
+		echo '<div class=menu">ESTE ALUMNO REPROBO '.$reprobadas.' MATERIAS <BR /> ALUMNO DADO DE BAJA POR REPROBAR MAS DE 5 MATERIAS</div>';
+	}else{
+	
+	$Alumnos -> find_first('registro = '.$registro);
+?>
+
+<div class="menu">
+	<?php 
+	if($Alumnos -> pago == 0 && $Alumnos -> condonado == 0 ){	
+	?>
+	<a href="https://ase.ceti.mx/tecnologo/pagos/ficha/100/<?= Session::get("registro") ?>" onmouseover="toolTip('Aqui podras Descargar<br> Tu Ficha de Pago',this)">Ficha de Pago</a>
+	&nbsp;<span style="color:F27822">|</span>&nbsp;
+	<?php 
+	}else{
+	
+	?>
+	<?= link_to('tgoalumno/index','Inicio','onmouseover: toolTip("Sección de Inicio del Sistema",this)') ?>	
+	&nbsp;<span style="color:F27822">|</span>&nbsp;
+	<?= link_to('tgoalumno/informacion','Información','onmouseover: toolTip("Aqui encontraras Información personal",this)') ?>		
+	&nbsp;<span style="color:F27822">|</span>&nbsp;		
+	<a href="<?= KUMBIA_PATH ?>tgoalumno/tiras" onmouseover="toolTip('Materias por cursar este semestre',this)">Tira de Materias</a>
+	&nbsp;<span style="color:F27822">|</span>&nbsp;
+	<a href="<?= KUMBIA_PATH ?>tgoalumno/horario" onmouseover="toolTip('Aquí podras verificar el horario<br> de clases que te corresponde asi<br> como la ubicación del salon',this)">Horario</a>
+	&nbsp;<span style="color:F27822">|</span>&nbsp;
+	<a href="<?= KUMBIA_PATH ?>tgoalumno/calificaciones" onmouseover="toolTip('Revisa las calificaciones parciales,<br> final y/o Extraordinarios y/o Titulos',this)">Calificaciones</a>
+	&nbsp;<span style="color:F27822">|</span>&nbsp;
+	<a href="<?= KUMBIA_PATH ?>tgoalumno/kardex" onmouseover="toolTip('Aquí encontraras el Kardex hasta el momento',this)">Kardex</a>
+	&nbsp;<span style="color:F27822">|</span>&nbsp;
+	<!--<a href="<?= KUMBIA_PATH ?>tgoalumno/evaluacion">Evaluación Docente</a>
+	&nbsp;<span style="color:F27822">|</span>&nbsp;-->
+	<a href="<?= KUMBIA_PATH ?>tgoalumno/apoyo" onmouseover="toolTip('Si necesitas ayuda! Mandanos un Ticket<br> y lo resolveremos a la brevedad',this)">Ayuda</a>
+	&nbsp;<span style="color:F27822">|</span>&nbsp;
+	<?php 
+	}
+	?>
+	<a href="<?= KUMBIA_PATH ?>tgoalumno/salir" onmouseover="toolTip('Salir del Sistema de Control Escolar',this)">Salir</a>
+<div>
+<div class="naranja">
+<h2 style="color: #333333;">Atención Alumnos</h2>
+<p style="color: #666666;">El semestre inicia el 17 de Agosto de 2009 y se te recomienda a la brevedad, incorporarte a las materias que tienes asignadas.</p>
+<p style="color: #666666;">Todos los horarios ya se encuentran debidamente estructurados y en el sistema, por lo que las inasistencias empiezan a contar.</p> 
+<center style="color: #333333;">"Intégrate a la Brevedad"</center>
+</div>
+<?php
+	}
+	
+	if((Session::get("tipo")=="GOE")){
+	?>
+	<div>
+		<h2 style="color: #FFFFFF"><?php echo link_to("goe/convertirAGoe","Volver a Modulo GOE")?></h2>
+	</div>
+	<?php
+	}elseif(Session::get("temporal2")==2){ ?>
+	<div>
+		<h2 style="color: #FFFFFF"><?php echo link_to("direcciongeneral/buscar","Volver a Modulo de Dirección General")?></h2>
+	</div>
+	<?php
+	}elseif(Session::get("temporal2")==1){
+	?>
+	<div>
+		<h2 style="color: #FFFFFF"><?php echo link_to("tgoprofesor/convertirAProfesor","Volver a Modulo Coordinador")?></h2>
+	</div>
+	<?php
+	}else{
+		if((Session::get("tipo")=="PROFESOR") || (Session::get("tipo")=="COORDINADOR")){
+	?>
+	<div>
+		<h2 style="color: #FFFFFF"><?php echo link_to("tgoprofesor/convertirAProfesor","Volver a Modulo Profesor")?></h2>
+	</div>
+	<?php
+		}
+	}
+
+?>

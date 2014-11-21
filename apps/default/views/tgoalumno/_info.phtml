@@ -1,0 +1,75 @@
+<center>
+	<table border="1" style="font-size: 10px;" bordercolor="#003399">
+		<tr>
+			<!--<td rowspan="3">
+				<?php
+					$estatus="-";
+					$entro=0;
+					$foto = "fotos/".Session::get_data('registro').".JPG";
+					$foto1 = "fotos/".Session::get_data('registro').".jpg";					
+					if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto)){					
+						echo img_tag($foto, "width: 100");
+						$entro=1;
+					}
+					if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto1)){					
+						echo img_tag($foto1, "width: 100");
+						$entro=1;
+					}
+					if ($entro == 0){
+						echo "Sin Foto";
+					}
+					$Alumnos = new Alumnos();
+					if($alumno = $Alumnos -> find_first("registro = ".Session::get_data('registro'))){
+						switch ($alumno -> tipo){
+							case 'R': $estatus = "REGULAR";
+								break;
+							case 'I': $estatus = "IRREGULAR";
+								break;
+							case 'P': $estatus = "PROCESO";
+								break;
+							default: $estatus = "NI";
+						}
+						if ($alumno -> situacion == 'EGRESADO'){
+							$estatus = "<b>EGRESADO</b>";
+						}
+					}
+				?>
+			</td>-->
+			<td width="75" height="20" class="naranja">&nbsp;Registro: </td>
+			<td width="50" class="gris" align="center">&nbsp;<?= Session::get_data('registro') ?>&nbsp;</td>
+			<td width="75" class="naranja">&nbsp;Nombre: </td>
+			<td width="300" class="gris"  colspan="3" align="center">&nbsp;<?= Session::get_data('nombre') ?>&nbsp;</td>
+			<!-- <td width="75" height="20" class="naranja">&nbsp;Grupo: </td>
+			<td class="gris" align="center">&nbsp;<?php //echo Session::get_data('grupo') 
+			?>&nbsp;</td>-->
+			<td width="75" height="20" class="naranja">&nbsp;Estatus: </td>
+			<th class="gris" align="center">&nbsp;<?= $estatus ?>&nbsp;</th>
+		</tr>
+		<tr>
+			<td width="75" height="20" class="naranja">&nbsp;Turno: </td>
+			<td width="50" class="gris" align="center">&nbsp;<?= Session::get_data('turno') ?>&nbsp;</td>
+			<td width="75" class="naranja">&nbsp;Especialidad: </td>
+			<?php
+				$Especialidades = new Especialidades();
+				$Especialidades -> find_first("id = ".Session::get_data('especialidad'))
+			?>
+			
+			<td width="300" class="gris" align="center">&nbsp;<?= $Especialidades -> nombre ?>&nbsp;</td>
+			<td width="75" height="20" class="naranja">&nbsp;Nivel: </td>
+			<td class="gris" align="center">&nbsp;<?= Session::get_data('nivel') ?>&nbsp;</td>
+			<td width="75" height="20" class="naranja">&nbsp;Plantel: </td>
+			<?php if(Session::get_data('plantel') == 'C'){
+				$plantel='COLOMOS';
+			}else{
+				$plantel='TONALA';
+			} ?>
+			<td class="gris" align="center">&nbsp;<?= $plantel ?>&nbsp;</td>
+		</tr>
+		<tr>
+			<td class="naranja">&nbsp;Tutor: </td>
+			<td colspan="3" class="gris" align="center">&nbsp;<?= Session::get_data('tutor') ?>&nbsp;</td>
+			<td class="naranja">&nbsp;Division del Tutor: </td>
+			<td colspan="3" class="gris" align="center">&nbsp;<?= Session::get_data('division') ?>&nbsp;</td>
+		</tr>
+	</table>
+</center>

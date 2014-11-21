@@ -1,0 +1,295 @@
+<?php
+$validacion = 1;
+if ($validacion == 0 ){
+	echo '<center><h2 class="naranja">Esta información estara disponible hasta el dia 13 de Agosto de 2009 a partir de las 3:00 PM</h2></center>';
+}else{
+?>
+<style type="text/css">
+	.extras *{
+		font-size: 10px;
+	}
+	
+	.extras a{
+		text-decoration: none;
+		font-weight: bold;
+		display: block;
+		color: #333333;
+	}
+
+	.extras a:hover{		
+		background-color: #00aa00;
+		color: #FFFFFF;
+	}
+	
+	#cal *{
+		font-size: 10px;
+	}
+	
+	#cal td{
+		padding-left: 8px;		
+	}
+	
+	.abreviaciones{
+		font-weight: bold;
+		font-size: 10px;
+	}	
+</style>
+<?= render_partial("info"); ?>
+<?php 
+$prom = 0;
+$prom1 = 0;
+$prom2 = 0;
+$prom3 = 0;
+?>
+<br>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp; CALIFICACIONES
+</div>
+<br>
+<div style="background-color: #ffca5b; color: #666666; font-size: 14px; padding:0px 20px;">
+<h2 style="color:#CC0000"><center>URGENTE</center></h2>
+<p>
+Se solicitan prestadores de servicio social para la cl&iacute;nica #1 del <b>ISSSTE</b> y para el <b>CEA</b> (Consejo Estatal del Agua ) para mayores informes con <b>Delia Carvajal</b> al Tel&eacute;fono <b>36429349</b> y <b>36420339</b>, o al correo electr&oacute;nico <b>practicasprofecionales@ceti.mx</b>
+</p>
+&nbsp;
+</div>
+<br />&nbsp;
+<?php if($extras){ 
+	$Calificaciones = new Calificaciones();
+	$Periodo = new Periodos();
+	$Periodo -> find_first('activo = 1');
+	if($Calificaciones -> find_first("registro = ".$registro." and situacion like 'BA' and periodo = ".$Periodo -> periodo)){
+		echo '<center><h3>Tienes una materia como Baja Definitiva.</h3><br> Este estado no te permite presentar ningun tipo de examen Estraordinario o Titulo.</center>';
+	}else{
+?>
+<div class="extras">
+	<center>
+	<table class="bordeAzul" width="800">
+		<tr class="azul">
+			<th colspan="6">EXTRAS, TITULOS Y/0 DERECHOS DE PASANTE POR CURSAR</th>
+		</tr>
+		<tr class="naranja">
+			<th>ACTA</th>
+			<th>MATERIA</th>
+			<th>TIPO DE EXAMEN</th>
+			<th>CALIFICACION</th>
+			<th>IMPRIMIR FICHA</th>
+			<th>ESTADO</th>
+		</tr>
+	<?php
+	foreach($extras as $e){
+		$Horario = new Horarios();		
+		if($Horario -> find_first($e -> horario_id)){
+			
+			if($Calificaciones -> find_first("horario_id = ".$e -> horario_id." and registro = ".$e -> registro)){
+				if($Calificaciones -> situacion != 'RE' && $Calificaciones -> situacion != 'BA'){
+					$Materia = new MateriasHorarios();
+					if($Materia -> find_first($Horario -> materia_id)){
+						echo tr_color('#DDDDDD', '#FFFFFF');
+						echo '<td>'.$e -> horario_id.'</td>';
+						echo '<td>'.$Materia -> nombre.'</td>';
+						if($e -> tipo == 'E'){
+							$tipoExamen = "400";
+							echo "<td><center>EXTRAORDINARIO</center></td>";
+						}else{
+							$tipoExamen = "500";
+							echo "<td><center>TITULO</center></td>";
+						}
+						if($e -> calificacion > 100){
+							echo "<td><center>-</center></td>";
+						}else{
+							echo '<td><center>'.$e -> calificacion.'</center></td>';
+						}				
+						echo '<td><center>';
+							echo link_to('pagos/ficha/'.$tipoExamen.'/'.$registro.'/'.$Horario -> materia_id.'/'.$Horario -> id,'Imprimir Ficha');
+						echo '</center></td>';
+						if($e -> pago > 0){
+							echo '<td>PAGADO</td>';
+						}else{
+							echo '<td>SIN PAGO</td>';
+						}
+						
+					}
+				}
+			}
+		}else{
+			echo "no se encontro el Acta (horario_id)";
+		}
+	}
+	?>
+	</table>
+	<center>
+</div>
+<?php } 
+	} 
+?>
+
+<br/><br/><br/>
+<div id="cal">
+	<center>
+	<table class="bordeazul" width="950">
+		<tr>
+			<th colspan="14" class="naranja">
+				<center>
+					REPORTE DE CALIFICACIONES
+				</center>
+			</th>
+		</tr>
+		<tr>
+			<th rowspan="2" class="azul" width="50">ACTA</th>
+			<th rowspan="2" class="azul" width="50">CLAVE</th>
+			<th rowspan="2" class="azul">MATERIA</th>
+			<th rowspan="2" class="azul">PROFESOR</th>
+			<th rowspan="2" class="azul">ESTATUS</th>
+			<th colspan="2" class="azul" width="50">1ER. PARCIAL</th>
+			<th colspan="2" class="azul" width="50">2DO. PARCIAL</th>
+			<th colspan="2" class="azul" width="50">3RO. PARCIAL</th>
+			<th colspan="2" class="azul" width="50">FINAL</th>
+			<th rowspan="2" class="azul" width="50">SITUACI&Oacute;N</th>			
+		</tr>
+		<tr>
+			<th class="naranja">Faltas</th>
+			<th class="naranja">Calf.</th>
+			<th class="naranja">Faltas</th>
+			<th class="naranja">Calf.</th>
+			<th class="naranja">Faltas</th>
+			<th class="naranja">Calf.</th>
+			<th class="naranja">Faltas</th>
+			<th class="naranja">Calf.</th>
+		</tr>
+		
+		<?php 
+		$MateriasHorarios = new MateriasHorarios();
+		$Horarios = new Horarios();
+		$Grupos = new Grupos();
+		$Maestros = new Maestros();
+		$cont = 0;
+		foreach($calificaciones as $c){			
+			if($h = $Horarios -> find_first("id = ".$c -> horario_id)){
+				$m = $MateriasHorarios -> find_first("id = '".$h -> materia_id."'");
+				$ma = $Maestros -> find_first("id = ".$h -> maestro_id);
+				$g = $Grupos -> find_first("id = ".$h -> grupo_id);
+				$cont++;
+				if($c -> calificacion1 == 300 || $c -> calificacion1 == 500 || $c -> calificacion1 == 999){
+					if($c -> calificacion1 == 300){
+						$cal1 = "NR";
+					}
+					if($c -> calificacion1 == 500){
+						$cal1 = "PD";
+					}
+					if($c -> calificacion1 == 999){
+						$cal1 = "NP";
+					}					
+				}else{
+					$cal1 = $c -> calificacion1;
+					$prom1 = $c -> calificacion1 + $prom1;
+				}
+				
+				
+				if($c -> calificacion2 == 300 || $c -> calificacion2 == 500 || $c -> calificacion2 == 999){
+					if($c -> calificacion2 == 300){
+						$cal2 = "NR";
+					}
+					if($c -> calificacion2 == 500){
+						$cal2 = "PD";
+					}
+					if($c -> calificacion2 == 999){
+						$cal2 = "NP";
+					}
+				}else{
+					$cal2 = $c -> calificacion2;
+					$prom2 = $c -> calificacion2 + $prom2;
+				}
+				
+				
+				if($c -> calificacion3 == 300 || $c -> calificacion3 == 500 || $c -> calificacion3 == 999){
+					if($c -> calificacion3 == 300){
+						$cal3 = "NR";
+					}
+					if($c -> calificacion3 == 500){
+						$cal3 = "PD";
+					}
+					if($c -> calificacion3 == 999){
+						$cal3 = "NP";
+					}
+				}else{
+					$cal3 = $c -> calificacion3;
+					$prom3 = $c -> calificacion3 + $prom3;
+				}
+				
+				if($c -> calificacion == 300 || $c -> calificacion == 500 || $c -> calificacion == 999){
+					if($c -> calificacion == 300){
+						$cal = "NR";
+					}
+					if($c -> calificacion == 500){
+						$cal = "PD";
+					}
+					if($c -> calificacion == 999){
+						$cal = "NP";
+					}
+				}else{
+					$cal = $c -> calificacion;
+					$prom = $c -> calificacion + $prom;
+				}
+								
+				
+				echo tr_color('#DDDDDD', '#FFFFFF');
+				?>
+				<td><?= $h -> id ?></tdd>
+				<td><?= $m -> clave ?></td>
+				<td><?= $m -> nombre ?></td>
+				<td><?= $ma -> nombre ?></td>
+				<td><center><?= $c -> tipo ?></center></td>
+				<td><?= $c -> faltas1 ?></td>
+				<td><?= $cal1 ?></td>
+				<td><?= $c -> faltas2 ?></td>
+				<td><?= $cal2 ?></td>
+				<td><?= $c -> faltas3 ?></td>
+				<td><?= $cal3 ?></td>
+				<td><?= $c -> faltas ?></td>
+				<td><?= $cal ?></td>
+				<td><?= $c -> situacion ?></td>
+			
+		<?php						
+			}
+		} ?>	
+		<tr class="naranja">
+			<td colspan="4">&nbsp;</td>
+			<th class="gris">PROMEDIO</th>
+			<td>&nbsp;</td>
+			<?php if($cont > 0){ ?>
+			<th class="gris"><?= round($prom1/$cont,2) ?></th>
+			<td>&nbsp;</td>
+			<th class="gris"><?= round($prom2/$cont,2) ?></th>
+			<td>&nbsp;</td>
+			<th class="gris"><?= round($prom3/$cont,2) ?></th>
+			<td>&nbsp;</td>
+			<th class="gris"><?= round($prom/$cont,2) ?></th>
+			<?php }else{ ?>
+			<th class="gris">NI</th>
+			<td>&nbsp;</td>
+			<th class="gris">NI</th>
+			<td>&nbsp;</td>
+			<th class="gris">NI</th>
+			<td>&nbsp;</td>
+			<th class="gris">NI</th>
+			<?php }	?>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+	</center>
+	<br/><br/>
+	<h2 style="font-size: 14px;">ABREVIACIONES PARA EL CAMPO DE SITUACION</h2>
+	<div class="abreviaciones">	
+	- = "SIN INFORMACION"<br/>
+	OR = "ORDINARIO"<br/>
+	EF = "EXTRAORDINARIO POR FALTAS"<br/>
+	EC = "EXTRAORDINARIO POR CALIFICACION"<br/>
+	TF = "TITULO POR FALTAS"<br/>
+	TC = "TITULO POR CALIFICACION"<br/>
+	RE = "REGULARIZACION DIRECTA"<br/>
+	BA = "BAJA DEFINITIVA"<br/>
+	</div>
+	<br/><br/>
+</div>
+<?php } ?>

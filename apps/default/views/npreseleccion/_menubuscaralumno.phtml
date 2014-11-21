@@ -1,0 +1,58 @@
+<center>
+	<h3><? echo $reg; ?></h3>
+	<table border="0" align="center">
+		<br />
+		<tr>
+			<br />
+			<td class="azull2" width="150px" align="center">
+				Horario
+				<input type="radio" name="horario"
+					id="horario" value="<?= $reg ?>">
+			</td>
+			
+			<td class="azull2" width="150px" align="center">
+				Calificaci&oacute;n
+				<input type="radio" name="calificacion"
+					id="calificacion" value="<?= $reg ?>">
+			</td>
+			
+			<td class="azull2" width="150px" align="center">
+				Kardex
+				<input type="radio" name="kardex"
+					id="kardex" value="<?= $reg ?>">
+			</td>
+		</tr>
+		<br />
+		<br />
+	</table>
+	
+	<?
+		print "<script type=\"text/javascript\">
+		new Event.observe(\"horario\", \"click\", function(){
+		new AJAX.viewRequest({
+			action: \"buscaralumno/horario/".$reg."\",
+			container: \"datos\"
+		})
+		})
+		</script>";
+		print "<script type=\"text/javascript\">
+		new Event.observe(\"calificacion\", \"click\", function(){
+		new AJAX.viewRequest({
+			action: \"buscaralumno/calificacion/".$reg."\",
+			container: \"datos\"
+		})
+		})
+		</script>";
+		print "<script type=\"text/javascript\">
+		new Event.observe(\"kardex\", \"click\", function(){
+		new AJAX.viewRequest({
+			action: \"buscaralumno/kardex/".$reg."\",
+			container: \"datos\"
+		})
+		})
+		</script>";
+	?>
+	
+	<div id="datos">
+	</div>
+</center>

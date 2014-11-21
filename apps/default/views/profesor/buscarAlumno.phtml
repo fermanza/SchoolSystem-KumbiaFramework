@@ -1,0 +1,32 @@
+<?php // echo form_remote_tag("profesor/buscandoAlumno", "update: listado") ?>
+<form onsubmit="return ajaxRemoteForm(this, &quot;listado&quot;, {  });"
+method="post" action="<?= KUMBIA_PATH ?>buscaralumno/buscandoAlumno/" name="Formulario11" id="Formulario11">
+<center>
+<table class="bordeAzul2" style="font-size:11px;">
+	<br />
+	<tr class="naranja">
+		<th colspan="3" class="bordeAzul2">BUSCADOR DE ALUMNOS</th>
+	</tr>
+	<tr class="azul">
+		<th class="bordeAzul2">REGISTRO</th>
+		<th class="bordeAzul2">y/o</th>
+		<th class="bordeAzul2">NOMBRE</th>
+	</tr>
+	<tr>
+		<th class="bordeAzul2"><?= text_field_tag("registro") ?></th>
+		<th class="grisClaro">&nbsp;</th>
+		<th class="bordeAzul2"><?= text_field_tag("nombre") ?></th>
+	</tr>
+	<tr class="grisClaro">
+		<td colspan="3" class="bordeAzul2">
+			<center>
+				<?php echo submit_tag("Buscar") ?>
+			</center>
+		</td>
+	</tr>	
+</table>
+<?php echo end_form_tag() ?>
+</center>
+<br />
+<div id='listado' >
+</div>

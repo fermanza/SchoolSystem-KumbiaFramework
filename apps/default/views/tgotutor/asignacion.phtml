@@ -1,0 +1,84 @@
+<style type="text/css">
+	.asignacion *{
+		font-size: 11px;
+	}
+</style>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+	Asignación
+</div>
+<br>
+<div class="asignacion">
+<?= form_remote_tag("tgotutor/asignar", "update: info") ?>
+<center>
+<table style="font-size: 11px; width: 800px;" class="bordeazul">
+	<tr class="naranja">		
+		<th colspan="3">ASIGNADOR DE TUTORADOS</th>
+	</tr>
+	<tr class="azul">		
+		<th>Maestro Tutor</th>
+		<th>Alumno</th>
+		<th>&nbsp;</th>
+	</tr>
+	<tr>		
+		<th>
+			<select name="nomina">
+				<?php foreach($maestros as $m){ ?>
+				<option value="<?= $m -> id?>"><?= $m -> id." - ".$m -> nombre ?></option>
+				<? } ?>
+			</select>
+		</th>
+		<th>
+			<select name="registro">
+				<?php foreach($alumnos as $a){ ?>
+					<option value="<?= $a -> registro ?>"><?= $a -> registro." - ".$a -> nombre_completo ?></option>
+				<? } ?>
+			</select>
+		</th>
+		<th>
+			<input type="submit" value="Agregar Alumno">
+		</th>
+	</tr>	
+</table>
+</center>
+<?= end_form_tag() ?>
+</div>
+<br>
+<div class="asignacion">
+<?= form_remote_tag("tgotutor/cambiarTutorados", "update: info") ?>
+<center>
+<table style="font-size: 11px; width: 800px;" class="bordeazul">
+	<tr class="naranja">		
+		<th colspan="3">CAMBIAR TUTORADOS DE UN PROFESOR A OTRO</th>
+	</tr>
+	<tr class="azul">		
+		<th>Maestro Tutor Actual</th>
+		<th>Maestro Tutor Nuevo</th>
+		<th>&nbsp;</th>
+	</tr>
+	<tr>		
+		<th>
+			<select name="nomina">
+				<?php foreach($maestros as $m){ ?>
+				<option value="<?= $m -> id?>"><?= $m -> id." - ".$m -> nombre ?></option>
+				<? } ?>
+			</select>
+		</th>
+		<th>
+			<select name="nomina2">
+				<?php foreach($maestros as $m){ ?>
+				<option value="<?= $m -> id?>"><?= $m -> id." - ".$m -> nombre ?></option>
+				<? } ?>
+			</select>
+		</th>
+		<th>
+			<input type="submit" value="Cambiar Tutorados">
+		</th>
+	</tr>	
+</table>
+</center>
+<?= end_form_tag() ?>
+</div>
+<br><br>
+<div id="info">
+</div>

@@ -1,0 +1,190 @@
+<style type="text/css">
+	#datos_personales{
+		font-size: 11px;
+	}
+	
+	#datos_personales th{
+		text-align: left;
+		padding-left:5px;		
+	}
+	
+	#datos_personales td{
+		text-align: left;
+		padding-left:0px;
+		color: #000000;
+		font-weight: bold;
+	}
+	
+	#datos_personales input{
+		width: 100%;
+		text-transform: uppercase;
+	}
+	
+	.boton_link{
+		background-color:#FFCA5B;
+		padding: 5px;
+		border: solid 2px #003399;
+		display: block;
+	}
+	
+	.boton_link a{
+		text-decoration: none;
+		color:#000000;
+		font-weight:bold;		
+	}
+	
+	.boton_link a:hover {
+		text-decoration: underline;
+		color: #003399;
+	}
+</style>
+<?php
+  if(count($result) == 0 || $result == NULL)
+  {
+	echo "<script type='text/javascript'> showDialog('ALERTA','El registro <strong>".$registroB."</strong> no fue encontrado, favor de verificar la informaci&oacute;n','warning',4); </script>";
+  }
+  
+  else
+  {
+  
+    foreach($result AS $value){
+	  $nombreCompleto = $value -> nombre_completo;
+	  $registro = $value -> registro;
+	  $registro = $value -> registro;
+	  $carrera = $value -> carrera;
+	  $direccion = $value -> direccion;
+	  $colonia  = $value -> colonia;
+	  $telefono  = $value -> telefono;
+	  $telOtro  = $value -> telefono_otro;
+	  $celular = $value -> celular;
+	  $curp   = $value -> curp;
+	  $cp   = $value -> cp;
+	  $sangre   = $value -> sangre;
+	  $hid   = $value -> hid;
+
+	}
+?>
+
+<center>
+ <?php echo form_remote_tag('credenciales/updateDatosAlumno','update: muestraDatosAlumno', 'name: formUpdateData')?>
+  <table width="70%" class="bordeazul" cellpadding="1" cellspacing="1" style="font-size:13px;" >
+    <tr align="center" style="font-weight:bold; background:#003399; color:#FFFFFF; font-size:15px;" >
+	  <td colspan="2">
+	    INFORMACI&Oacute;N DEL ALUMNO
+	  </td>
+	</tr>
+    <tr>
+      <th class="naranja" width="167" align="right">
+        NOMBRE COMPLETO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;               
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<?php echo utf8_encode($nombreCompleto);?>
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right">
+        REGISTRO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;              
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<?php echo $registro;?> 
+        <input type="hidden" maxlength="0" readOnly="readonly" value="<?php echo $registro;?>" id="registroAlumno" name="registroAlumno" />		
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        CARRERA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<?php echo htmlentities(strtr(strtoupper($carrera),"àèìòùáéíóúçñäëïöü","ÀÈÌÒÙÁÉÍÓÚÇÑÄËÏÖÜ"));?>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        DIRECCI&Oacute;N&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo utf8_encode($direccion);?>" style="width: 300px;" id="direccion" name="direccion"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        COLONIA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo utf8_encode($colonia);?>" style="width: 300px;" id="colonia" name="colonia"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+       C.P&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo $cp;?>" style="width: 300px;" id="cp" name="cp" onkeypress="javascript:return ValidNum(event)" maxlength="8"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        TEL&Eacute;FONO CASA&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo $telefono;?>" style="width: 300px;" id="telefono" name="telefono" onkeypress="javascript:return ValidNum(event)" maxlength="10"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" align="right" >TEL&Eacute;FONO CELULAR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+      <td class="gris">&nbsp;&nbsp;
+      <input type="text" value="<?php echo $celular;?>" style="width: 300px;" id="celular" name="celular" onkeypress="javascript:return ValidNum(event)" maxlength="10"/></td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+        TEL&Eacute;FONO OTRO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo $telOtro;?>" style="width: 300px;" id="telOtro" name="telOtro" onkeypress="javascript:return ValidNum(event)" maxlength="20"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+       CURP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo $curp;?>" style="width: 300px;" id="curp" name="curp"/>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+       TIPO DE SANGRE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<select id="sangre" name="sangre" style="width: 306px;">
+		                    <option value="<?php echo $sangre; ?>" selected><?php echo $sangre; ?></option>
+							<option value="O+">O+</option>
+							<option value="O-">O-</option>
+							<option value="A+">A+</option>
+							<option value="A-">A-</option>
+							<option value="B+">B+</option>
+							<option value="B-">B-</option>
+							<option value="AB+">AB+</option>
+							<option value="AB-">AB-</option>
+		                  </select>          
+	  </td>
+    </tr>
+    <tr>
+      <th class="naranja" width="167" align="right" >
+       HID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           
+	  </th>
+	  <td width="267" class="gris">
+        &nbsp;&nbsp;&nbsp;<input type="text" value="<?php echo $hid;?>" style="width: 300px;" id="hid" name="hid"/>          
+	  </td>
+    </tr>
+    <tr align="center" >
+	  <td colspan="2">
+	    <?php echo submit_tag('  MODIFICAR  ','id: boton','class: common_button', 'style: margin-top:15px; margin-bottom:10px;');?>
+	  </td>
+	</tr>
+  </table>
+ <?php echo end_form_tag()?>
+</center>
+<?php
+  }
+?>

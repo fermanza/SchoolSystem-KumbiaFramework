@@ -1,0 +1,10 @@
+<br><br><br><br>   
+<div style="font-size:15px; margin-top:15px; font-weight:bold; font-family:arial;margin-bottom:50px;">GUARDAR REFERENCIA</div>
+   <?php echo form_tag('caja/guardarPagos','enctype: multipart/form-data');
+        echo file_field_tag('miArchivo'); ?><br/>
+        <?php echo submit_tag('Subir');
+    echo end_form_tag(); ?>
+
+<div id="pagosActualizados">
+<!--Aparece mensaje de actualizacion de pagos-->
+</div>

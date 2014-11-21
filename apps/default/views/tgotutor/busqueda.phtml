@@ -1,0 +1,47 @@
+<style type="text/css">
+	.busqueda input[type="text"]{
+		width: 100%;
+	}
+	.busqueda *{
+		font-size: 11px;
+	}
+</style>
+<div id="encabezado">
+	<img src="<?= KUMBIA_PATH ?>public/img/adorno.gif">&nbsp;
+	Busqueda de Alumnos y Profesores
+</div>
+<br>
+<br>
+<div class="busqueda">
+<center>
+<?= form_remote_tag("tgotutor/buscar", "update: buscar") ?>
+<table style="font-size: 11px; width: 500px;" class="bordeazul">
+	<tr class="naranja">
+		<th colspan="4">BUSCADOR DE TUTORADOS</th>
+	</tr>
+	<tr class="azul">
+		<th colspan="2">PROFESOR</th>
+		<th colspan="2">ALUMNO</th>
+	</tr>
+	<tr class="gris">
+		<th>Nomina</th>
+		<th>Nombre</th>
+		<th>Registro</th>
+		<th>Nombre</th>
+	</tr>
+	<tr>
+		<th><input type="text" name="profesorNomina"></th>
+		<th><input type="text" name="profesorNombre"></th>
+		<th><input type="text" name="alumnoRegistro"></th>		
+		<th><input type="text" name="alumnoNombre"></th>
+	</tr>
+	<tr class="grisClaro">
+		<th colspan="4"><input type="submit" value="Buscar"></th>
+	</tr>
+</table>
+<?= end_form_tag() ?>
+</center>
+<br><br>
+<div id="buscar">
+</div>
+</div>

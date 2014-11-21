@@ -1,0 +1,58 @@
+<script language="JavaScript1.2">
+function setIt( Objeto ){
+	if( Objeto.value == "" )
+		Objeto.value = "Nómina";	
+}
+function clearIt( Objeto ){
+	if( Objeto.value == "Nómina" )
+		Objeto.value = "";
+}
+
+function setIt2( Objeto ){
+	if( Objeto.value == "" )
+		Objeto.value = "Nombre";	
+}
+function clearIt2( Objeto ){
+	if( Objeto.value == "Nombre" )
+		Objeto.value = "";
+}
+</script>
+
+<table>
+	<tr>
+		<td>
+			&nbsp;
+		</td>
+	<tr>
+</table>
+<br />
+<br />
+<?php render_partial("menuprofesoreshorario"); ?>
+<br />
+<br />
+<br />
+
+<!--
+<?= form_remote_tag("profesoreshorario/horarioPorProfesor2","update: infoToda", "name: Formulario0") ?>
+<table cellspacing="1" cellpadding="1" style="font-size: 12px;" align="center">
+	<tr>
+		<td align="center">
+			<input type="text" name="nomina" id="nomina" 
+					onblur="setIt(this)" onfocus="clearIt(this)" class="input" value="N&oacute;mina">
+			<input type="text" name="nombreProfesor" id="nombreProfesor"
+					onblur="setIt2(this)" onfocus="clearIt2(this)" class="input" value="Nombre">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="2">
+			<input type="submit" value="Buscar Profesor">
+		</td>
+	</tr>
+</table>
+</form>
+-->
+<div id="infoToda">
+</div>
+
+<br />
+<br />

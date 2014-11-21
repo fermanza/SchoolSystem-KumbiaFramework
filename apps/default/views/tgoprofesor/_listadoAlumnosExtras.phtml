@@ -1,0 +1,186 @@
+<style type="text/css">
+	.listadoGAlumnos td{
+		padding: 2px;
+	} 
+	
+	.listadoGAlumnos th{
+		padding: 2px;
+	}
+	
+	.listadoGAlumnos input[type="text"]{
+		width: 40px;
+	}
+	.avanceHoras select{
+		width: 80%;
+		font-size:11px;
+	}
+	.info{
+		text-align: left;
+		font-size:11px;
+	}
+</style>
+
+<div class="info">
+<b>NR - No Reportada <br>NP - No Presento <br>PD - Pendiente</b>
+</div>
+<br>
+<div class="listadoGAlumnos">
+<?php
+	//$a = Session::get_data('registro');
+	//if ($a == 2118 ){
+		if($listas){
+			echo form_remote_tag("tgoprofesor/calificar", "update: listadoAlumnos", "success: new Effect.BlindDown('listadoAlumnos', { duration: 4.0 })");
+			?>			
+			<table class="bordeazul" width="100%" style="font-size:10px;">
+			<tr class="naranja">
+				<th colspan="8">ALUMNOS PARA CALIFICAR DEL PARCIAL NUMERO <?= $parcial ?></th>			
+			</tr>
+			<tr class="azul">
+				<th>&nbsp;</th>
+				<th>Foto</th>
+				<th>Registro</th>
+				<th>Nombre</th>
+				<th>Tipo</th>
+				<th>Especialidad</th>
+				<th width="20">Calificaci&oacute;n</th>				
+			</tr>
+			<?php				
+				$Alumnos = new Alumnos();		
+				$Especialidades = new Especialidades();
+				$Calificaciones = new Calificaciones();
+				$cc=0;
+				$idcal= null;
+				if($parcial!= 4){
+					$cal = "calificacion".$parcial;
+					$fal = "faltas".$parcial;
+				}else{
+					$cal = "calificacion";
+				}
+				foreach($listas as $li){
+					if($Calificaciones -> find_first("registro = ".$li -> registro." and horario_id = ".$li -> horario_id)){
+						if($Calificaciones -> situacion != 'BA' && $Calificaciones -> situacion != 'RE'){
+							if($alumno = $Alumnos -> find_first("registro = ".$li -> registro)){
+								$cc++;
+								echo tr_color('#CCDEFF', '#FFFFFF');
+								echo '<td><b>'.$cc.'</b></td>';
+								echo "<td><center>";
+								$entro=0;
+								$foto = "fotos/".$li -> registro.".JPG";
+								$foto1 = "fotos/".$li -> registro.".jpg";					
+								if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto)){					
+									echo img_tag($foto, "width: 75");
+									$entro=1;
+								}
+								if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto1)){					
+									echo img_tag($foto1, "width: 75");
+									$entro=1;
+								}
+								if ($entro == 0){
+									echo "Sin Foto";
+								}						
+								$idcal[$cc] = $li -> registro;
+								echo '<td>'.$li -> registro.'</td>';
+								echo '<td><b>'.utf8_encode($alumno -> nombre_completo).'</b></td>';
+								echo '<th>'.$li -> tipo.'</th>';
+								if($esp = $Especialidades -> find_first("id = ".$alumno ->especialidad)){
+									$nomEsp = $esp -> nombre;
+								}else{
+									$nomEsp ="";
+								}						
+								
+								$calif = $li -> $cal;
+								
+								if($li -> $cal == 300){
+									$calif='NR';
+								}
+								if($li -> $cal == 999){
+									$calif='NP';
+								}
+								if($li -> $cal == 500){
+									$calif='PD';
+								}	
+								
+								echo '<td>&nbsp;&nbsp;'.$nomEsp.'</td>';?>
+								<td><center><input type="text" name="calf<?= $li -> id ?>" value="<?= $calif ?>"></center></td>						
+								<?php
+							}
+						}else{
+							if($alumno = $Alumnos -> find_first("registro = ".$li -> registro)){
+								$cc++;
+								echo tr_color('#CCDEFF', '#FFFFFF');
+								echo '<td><b>'.$cc.'</b></td>';
+								echo "<td><center>";
+								$entro=0;
+								$foto = "fotos/".$li -> registro.".JPG";
+								$foto1 = "fotos/".$li -> registro.".jpg";					
+								if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto)){					
+									echo img_tag($foto, "width: 75");
+									$entro=1;
+								}
+								if(file_exists("/var/www/htdocs/calculo/tecnologo/public/img/".$foto1)){					
+									echo img_tag($foto1, "width: 75");
+									$entro=1;
+								}
+								if ($entro == 0){
+									echo "Sin Foto";
+								}						
+								$idcal[$cc] = $li -> registro;
+								echo '<td>'.$li -> registro.'</td>';
+								echo '<td><b>'.utf8_encode($alumno -> nombre_completo).'</b></td>';
+								echo '<th>'.$li -> tipo.'</th>';
+								if($esp = $Especialidades -> find_first("id = ".$alumno ->especialidad)){
+									$nomEsp = $esp -> nombre;
+								}else{
+									$nomEsp ="";
+								}						
+								
+								$calif = $li -> $cal;
+								
+								if($li -> $cal == 300){
+									$calif='NR';
+								}
+								if($li -> $cal == 999){
+									$calif='NP';
+								}
+								if($li -> $cal == 500){
+									$calif='PD';
+								}	
+								
+								echo '<td>&nbsp;&nbsp;'.$nomEsp.'</td>';?>
+								<th>Sin Derecho por<br /> <?= $Calificaciones -> situacion ?></th>						
+								<?php
+							}
+						}						
+					}
+				}
+			?>			
+			<tr>								
+				<td colspan="8">					
+					<input type="hidden" value="<?= $acta ?>" name="acta">
+					<input type="hidden" value="<?= $parcial ?>" name="parcial">
+					<center><?php echo submit_tag("Guardar Calificaciones de Extraordinarios y Titulos") ?></center></td>
+			</tr>
+			</table>
+			<?php echo end_form_tag() ?>
+			<?php
+		}else{
+			echo "<h2>No se encontro ningun alumno con Extraordinario o Titulo para esta Materia con este Grupo</h2>";
+		}
+	/*}else{
+		echo "<h3>No es fecha oficial para realizar la captura de calificaciones de el parcial ".$parcial."</h3>";
+	}*/
+?>
+<br />
+<h2 style="font-size: 14px;">ABREVIACIONES</h2> 
+	<div class="abreviaciones" style="text-align: left; font-weight: bold; font-size:12px;">	
+	- = "SIN INFORMACION"<br/> 
+	RE = "REGULARIZACION DIRECTA"<br/> 
+	BA = "BAJA DEFINITIVA"<br/> 
+	</div> 
+	<br/><br/> 
+		<br/>
+
+</div>
+<br>
+
+<br>

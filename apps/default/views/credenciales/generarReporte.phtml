@@ -1,0 +1,210 @@
+<!--Se llaman los archivos JS y CSS-->
+<?= stylesheet_link_tag('dialog_box'); ?>
+<?= javascript_library_tag('dialog_box'); ?>
+
+
+<!--Opcion a realizar la busqueda del registro-->
+<div style="text-align:left; margin-top:30px; margin-bottom:100px;">
+<?php echo form_remote_tag('credenciales/buscarAlumnoReporte', 'update: muestraAlumnosReporte', 'name: formReporte', 'success: mensajeAlerta();')?>
+   <table style="margin-top:50px; margin-left:15px; margin-bottom:50px;">
+     <tr>
+	   <td colspan="3">
+	     <?= img_tag("adorno.gif","border: 0") ?> Ingresa el registro del alumno que deseas agregar al reporte.
+	   </td>
+	 </tr>
+     <tr>
+	   <td colspan="3">
+	     <br/><br/>
+	   </td>
+	 </tr>
+     <tr>
+	   <td align="right" style="font-weight:bold; font-family:arial; font-size:13px;">
+	     Registro&nbsp;:&nbsp;
+	   </td>
+	   <td align="left">
+	     &nbsp;<input type="text" id="registro" name="registro" maxlength="10" style="width:191px;" onkeypress="javascript:return ValidNum(event)"/>
+	   </td>
+	   <td align="left">
+	     &nbsp;&nbsp;&nbsp;<?php echo submit_tag('BUSCAR REGISTRO','id: boton','class: common_button', 'style: margin-left:-185px', 'onclick: countAgregados();');?> 
+	   </td>
+	 </tr>
+   </table>
+ <?php echo end_form_tag()?>
+</div>
+
+<!--En la siguiente div se mostrra el reporte seleccionado-->
+<div id="muestraAlumnosReporte" name="muestraAlumnosReporte">
+</div>
+
+<!--Contenedor donde se mostrara la tabla dinamica-->
+<center>
+  <?php echo link_to("credenciales/reporteExcel/1","".img_tag("microsoft-office-excel-2007-icono-4436-32.png", "id: iconoExcel", "name: iconoExcel", "style: display:none; margin-top:-152px; margin-left:15px; float:left; cursor:pointer;", "title: EXPORTAR LISTA A EXCEL"));?>
+  <?php echo link_to("credenciales/generarReporte","".img_tag("nueva-hoja-de-calculo-icono-5547-32.png", "id: iconoNew", "name: iconoNew", "style: display:none; margin-left:55px; margin-top:-151px; float:left; cursor:pointer;", "title: CREAR NUEVA LISTA"));?>
+  <div id="imgExcel" name="imgExcel"></div>
+  <div id="contenedor" name="contenedor" style="margin-top: -83px; float:left;" >
+  </div>
+</center>
+<!--Div de listado en excel-->
+<div id="listadoExcel" name="listadoExcel">
+</div>
+
+<script type='text/javascript'>
+//funcion que valida que solo se puedan ingresar numeros
+function ValidNum(e)
+{
+  var tecla = document.all ? tecla = e.keyCode : tecla = e.which;
+    return ((tecla > 47 && tecla < 58) || tecla == 8);
+}
+  
+//Funcion que muestra el mensaje ventana emergente con mensaje
+function mensajeAlerta(){
+  if(document.getElementById('status').value == "FALSE"){
+	  showDialog('ALERTA',document.getElementById('msg').value,'warning',2);
+  }
+}
+
+//Se declara variable en 0
+var countA = 0;
+
+//Funcion que cuenta los registros agregados
+function countAgregados(){
+  countA++;
+}
+
+var registrosArray = Array();
+
+//Funcion que crea la tabla dinamica
+function createTableData(){
+
+  miCapa = document.getElementById('contenedor');
+  miTabla = document.createElement("table");
+  miTabla.id = "table"+countA;
+  miTabla.setAttribute("width", "107%");       
+ // miTabla.style.marginLeft = "-10px";       
+  
+  tbBody = document.createElement("tbody");
+  
+  //INPUT QUE GUARDA LOS REGISTROS
+  inputReg = document.createElement("input");
+  inputReg.id = "registro"+countA;
+  inputReg.name = "registro"+countA;
+  inputReg.style.width = "70px";
+  inputReg.style.textAlign = "center";
+  inputReg.style.display = "none";
+  inputReg.setAttribute('readonly',true);
+  inputReg.value = document.getElementById('reg').value;
+	
+  registrosArray[countA] = 	inputReg.value;
+  
+  tr = document.createElement("tr");  
+  tr.bgColor = "#E0DEDE";
+  tr.style.fontSize = "13px";
+		
+  td1 = document.createElement("td");
+  td1.setAttribute("align", "center");
+  td1.setAttribute("height", "35px");
+  td1.setAttribute("width", "132px");
+  td1.innerHTML = document.getElementById('nombre').value;
+		
+  td2 = document.createElement("td");
+  td2.setAttribute("align", "center");
+  td2.setAttribute("height", "35px");
+  td2.setAttribute("width", "112px");
+  td2.innerHTML = document.getElementById('aPaterno').value;
+		
+  td3 = document.createElement("td");
+  td3.setAttribute("align", "center");
+  td3.setAttribute("height", "35px");
+  td3.setAttribute("width", "112px");
+  td3.innerHTML = document.getElementById('aMaterno').value;
+		
+  td4 = document.createElement("td");
+  td4.setAttribute("align", "center");
+  td4.setAttribute("height", "35px");
+  td4.setAttribute("width", "171px");
+  td4.innerHTML = document.getElementById('curp').value;
+		
+  td5 = document.createElement("td");
+  td5.setAttribute("align", "center");
+  td5.setAttribute("height", "35px");
+  td5.setAttribute("width", "101px");
+  td5.innerHTML = document.getElementById('reg').value;
+		
+  /*td6 = document.createElement("td");
+  td6.setAttribute("align", "center");
+  td6.setAttribute("height", "35px");
+  td6.setAttribute("width", "72px");
+  td6.innerHTML = document.getElementById('semestre').value;*/
+		
+  td7 = document.createElement("td");
+  td7.setAttribute("align", "center");
+  td7.setAttribute("height", "35px");
+  td7.setAttribute("width", "214px");
+  td7.innerHTML = " ING. "+document.getElementById('carrera').value;
+		
+  var boton = document.createElement("img");
+  boton.src = "../public/img/mal.png";
+  boton.id = countA;
+  boton.name = countA;
+  boton.style.cursor = "pointer";
+  boton.setAttribute("title", "QUITAR ALUMNO DE LA LISTA");
+  boton.onclick =  function(){deleteRow(boton.id,2)};
+		
+  td8 = document.createElement("td");
+  td8.setAttribute("align", "center");
+  td8.setAttribute("width", "61px");
+  
+  td5.appendChild(inputReg);
+  td8.appendChild(boton);
+
+  tr.appendChild(td5);
+  tr.appendChild(td1);
+  tr.appendChild(td2);
+  tr.appendChild(td3);
+  tr.appendChild(td4);
+  //tr.appendChild(td6);
+  tr.appendChild(td7);
+  tr.appendChild(td8);
+
+  tbBody.appendChild(tr);
+  miTabla.appendChild(tbBody);
+  miCapa.appendChild(miTabla);
+  
+  //Se pone visible el icono para generar reporte en excel
+  document.getElementById('iconoExcel').style.display = "block";
+  document.getElementById('iconoNew').style.display = "block";
+
+  registrosReporte(inputReg.value,1)
+}
+
+
+//Funcion para eliminar un alumno de la lista
+function deleteRow(tablaNum,tipoAccion)
+{
+  //se elimina de la bd
+  var registroDelete =  document.getElementById("registro"+tablaNum).value;
+  registrosReporte(registroDelete,tipoAccion);
+  //se elimina la tabla
+  var tabla = document.getElementById("table"+tablaNum);
+  var elimina = tabla.parentNode;
+  elimina.removeChild(tabla);
+  
+}
+
+
+//Funcion que sirve para agregar los registros a una tabla temporalmente
+function registrosReporte(registro,tipoAccion){
+
+  var param = 'registro=' + registro;
+      param += String.fromCharCode(38)+'tipoAccion=' + tipoAccion;
+
+    new AJAX.viewRequest(
+	  {
+	    action: "credenciales/agregar_registros",
+	    container: "muestraAlumnosReporte",
+        parameters: param,
+	  }
+	)
+}
+
+</script> 

@@ -1,0 +1,84 @@
+	<div id="divActComplementarias">
+		<?
+		if( !isset($horasClaseActComplementaria) )
+			render_partial("divActComplementarias")
+		?>
+	</div>
+	<form action="<?= KUMBIA_PATH ?>profesor/asignandoNuevaActividadComplementaria" method="post" 
+		name="FormularioAsigNueva2" id="FormularioAsigNueva2" onSubmit="return validarActividadesSustantivas()">
+		<div id="asignandoNuevaActividad" name="asignandoNuevaActividad">
+		</div>
+	</form>
+	<?
+	print "<script type=\"text/javascript\">
+	new Event.observe(\"listaactividades\", \"change\", function(){
+		var listaactividades = document.FormularioAsigNueva.listaactividades.value;
+		var horasActComplementaria = document.FormularioAsigNueva.horasActComplementaria.value;
+		if( listaactividades != -1 )
+			agregarSubmitDeAsignarActividad(listaactividades, horasActComplementaria);
+		else
+			quitarSubmitDeAsignarActividad();
+	})
+	</script>";
+	?>
+<br />
+<br />
+<table>
+	<tr class="naranja">
+		<th class="bordeAzul2" colspan="17">
+			Actividades Asignadas Actualmente
+		</td>
+	</tr>
+	<tr class="naranja">
+		<th class="bordeAzul2">Borrar</th>
+		<th class="bordeAzul2">Editar</th>
+		<th class="bordeAzul2">Actividad</th>
+		<th class="bordeAzul2">Horas Estimadas</th>
+		<th class="bordeAzul2">Objetivo</th>
+		<th class="bordeAzul2">Meta</th>
+		<th class="bordeAzul2">Evidencia</th>
+		<th class="bordeAzul2">Periodo</th>
+		<th class="bordeAzul2">Avance 1</th>
+		<th class="bordeAzul2">Avance 2</th>
+		<th class="bordeAzul2">Avance 3</th>
+		<th class="bordeAzul2">Fecha Creaci&oacute;n</th>
+		<th class="bordeAzul2">Fecha &uacute;ltima modifiaci&oacute;n</th>
+	</tr>
+	<?
+	if( isset($actividadMaestro) ){
+	?>
+		<tr>
+			<th class="bordeAzul2">
+			<form action="<?= KUMBIA_PATH ?>profesor/borrandoActividad"
+					method="post" onSubmit="return delete1();">
+				<input type="image" src="<?= KUMBIA_PATH ?>img/delete2.gif"
+					border="0" onClick="return eliminar()" alt="Eliminar Actividad">
+				<input type="hidden" id="deleteID" name="deleteID" onClick="return eliminar()"
+						value="<? echo $actividadMaestro -> id; ?>">
+			</form>
+			</th>
+			<th class="bordeAzul2">
+			<?= form_remote_tag("profesor/editarActividad","update: editarActividad", "name: Formulario0") ?>
+				<input type="image" src="<?= KUMBIA_PATH ?>img/edit.gif" border="0" alt="Editar Actividad">
+				<input type="hidden" id="editID" name="editID"
+						value="<? echo $actividadMaestro -> id; ?>">
+			</form>
+			</th>
+			<th class="bordeAzul2"><?= $actividadMaestro -> actividad ?></th>
+			<th class="bordeAzul2"><?= $actividadMaestro -> horas ?></th>
+			<th class="bordeAzul2"><?= $actividadMaestro -> objetivo ?></th>
+			<th class="bordeAzul2"><?= $actividadMaestro -> meta ?></th>
+			<th class="bordeAzul2"><?= $actividadMaestro -> evidencia ?></th>
+			<th class="bordeAzul2"><?= $actividadMaestro -> periodo ?></th>
+			<th class="bordeAzul2"><?= $actividadMaestro -> avance1 ?></th>
+			<th class="bordeAzul2"><?= $actividadMaestro -> avance2 ?></th>
+			<th class="bordeAzul2"><?= $actividadMaestro -> avance3 ?></th>
+			<th class="bordeAzul2"><?= $actividadMaestro -> creado_at ?></th>
+			<th class="bordeAzul2"><?= $actividadMaestro -> modificado_in ?></th>
+		</tr>
+	<?
+	}
+	?>
+</table>
+<br />
+<br />

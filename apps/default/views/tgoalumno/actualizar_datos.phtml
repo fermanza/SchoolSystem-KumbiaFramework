@@ -1,0 +1,130 @@
+<style type="text/css">
+	#datos_personales *{
+		font-size: 11px;
+	}
+	#datos_personales th{
+		text-align: left;
+		padding-left:12px;
+	}
+	#datos_personales td{
+		text-align: left;
+		/*padding-left:12px;*/
+		color: #000000;
+		font-weight: bold;		
+	}
+	#datos_personales input[type="text"]{
+		width:100%;
+		font-size: 11px;
+	}
+	.boton_link{
+		background-color:#FFCA5B;
+		padding: 5px;
+		border: solid 2px #003399;
+		display: block;
+	}
+	
+	.boton_link a{
+		text-decoration: none;
+		color:#000000;
+		font-weight:bold;		
+	}
+	
+	.boton_link a:hover {
+		text-decoration: underline;
+		color: #003399;
+	}
+</style>
+<div id="actualizacionDatos">
+	<?php 
+	
+	echo form_remote_tag("tgoalumno/guardarActualizacionDatos", "update: actualizacionDatos");
+	
+	$Alumnos = new Alumnos();
+	$registro = Session::get_data('registro');
+	$alumno = $Alumnos -> find_first("registro = ".$registro);
+	?>
+	<br>
+	
+    <center>
+        <table width="600" class="bordeazul">
+            <tr>
+                <th class="naranja" width="180">
+                	Nombre
+                </th>
+				<td class="gris">
+					<?php if($alumno -> nombre_completo == "") { $info="SIN INFORMACION"; }else{ $info= $alumno -> nombre_completo;}?>
+					<input type="text" value="<?= $info ?>" name="nombre_completo">					
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja">
+                	Fecha de Nacimiento
+                </th>
+				<td class="gris">
+					<?php if($alumno -> fecha_nacimiento == "") { $info="SIN INFORMACION"; }else{ $info= $alumno -> fecha_nacimiento;}?>
+					<input type="text" value="<?= $info ?>" name="fecha_nacimiento">							
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja">
+                	Sexo
+                </th>
+				<td class="gris">
+					<?php if($alumno -> sexo == "") { $info="SIN INFORMACION"; }else{ $info= $alumno -> sexo;}?>
+					<input type="text" value="<?= $info ?>" name="sexo">					
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja">
+                	Telefono
+                </th>
+				<td class="gris">
+					<?php if($alumno -> telefono == "") { $info="SIN INFORMACION"; }else{ $info= $alumno -> telefono;}?>
+					<input type="text" value="<?= $info ?>" name="telefono">
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja">
+                	Celular
+                </th>
+				<td class="gris">
+					<?php if($alumno -> celular == "") { $info="SIN INFORMACION"; }else{ $info= $alumno -> celular;}?>
+					<input type="text" value="<?= $info ?>" name="celular">
+                </td>
+            </tr>			
+			<tr>
+                <th class="naranja">
+                	Email
+                </th>
+				<td class="gris">
+					<?php if($alumno -> email == "") { $info="SIN INFORMACION"; }else{ $info= $alumno -> email;}?>
+					<input type="text" value="<?= $info ?>" name="email">
+                </td>
+            </tr>
+			<tr>
+                <th class="naranja">
+                	CURP
+                </th>
+				<td class="gris">
+					<?php if($alumno -> curp == "") { $info="SIN INFORMACION"; }else{ $info= $alumno -> curp;}?>
+					<input type="text" value="<?= $info ?>" name="curp">	
+                </td>
+            </tr>
+        </table>
+		<br>
+		<table>
+			<tr>
+				<td>					
+					<input type="submit" value="Guardar">					
+				</td>
+				<td>
+					<span class="boton_link" style="width:100px;">
+					<center>
+						<?= link_to("tgoalumno/informacion", " < < REGRESAR") ?>
+					</center>
+					</span>
+				</td>
+			</tr>
+		</table>
+    </center>
+</div>
